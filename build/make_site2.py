@@ -85,7 +85,17 @@ def fix_special(pid, h):
         h = h.replace(a, '<div class="e" id="N01268b"><p class="ep"><span class="hw" lang="he" dir="rtl">נרווד</span><span class="s"><span class="d">, ')
     if pid == "1032":
         h = h.replace('<i class="bn">נִסְתַּר.</i> <span class="bf">הִסְתַּתֵּר</span>', '<span class="bf">נִסְתַּר</span>, <i class="bn">Hithpa.</i> <span class="bf">הִסְתַּתֵּר</span>')
+    # corrections checked against the 1903 printing, one record per change (build/text_fixes.json)
+    for fx in TEXT_FIXES.get(pid, []):
+        assert h.count(fx["old"]) == 1, (pid, fx["old"])
+        h = h.replace(fx["old"], fx["new"])
     return h
+
+TEXT_FIXES = {}
+_tf = os.path.join(os.path.dirname(os.path.abspath(__file__)), "text_fixes.json")
+if os.path.exists(_tf):
+    for fx in json.load(open(_tf, encoding="utf-8")):
+        TEXT_FIXES.setdefault(str(fx["page"]), []).append(fx)
 
 AFTER = {"683": '<div class="after"><span class="sc">End of Volume I.</span></div>',
          "1705": '<div class="after theend"><span>THE END.</span></div>'}
@@ -118,9 +128,13 @@ for p in pages:
         import difflib as _dl, html as _H
         def _pt(h): return "".join(_H.unescape(x) for x in re.split(r"(<[^>]+>)", h) if not x.startswith("<"))
         a_, b_ = _pt(_old), _pt(p["html"]); k = BREAKS[p["id"]]
-        for t_, i1, i2, j1, j2 in _dl.SequenceMatcher(None, a_, b_, autojunk=False).get_opcodes():
+        ops_ = _dl.SequenceMatcher(None, a_, b_, autojunk=False).get_opcodes()
+        for n_, (t_, i1, i2, j1, j2) in enumerate(ops_):
             if i1 <= k < i2 or (k == i2 and t_ == "equal"):
                 BREAKS[p["id"]] = j1 + (k - i1) if t_ == "equal" else j1
+                nx = ops_[n_ + 1] if n_ + 1 < len(ops_) else None
+                if t_ == "equal" and k == i2 and nx and nx[0] == "insert" and re.fullmatch(r"[\s.,;:]+", b_[nx[3]:nx[4]]):
+                    BREAKS[p["id"]] = nx[4]      # punctuation added at the break stays with the first column
                 break
     p["html"] += AFTER.get(p["id"], "")
     newpages.append(p)
