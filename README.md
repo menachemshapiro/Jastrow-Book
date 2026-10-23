@@ -29,7 +29,6 @@ Marcus Jastrow's *A Dictionary of the Targumim, the Talmud Babli and Yerushalmi,
 ## Sources and thanks
 
 - **Text: [Sefaria](https://www.sefaria.org/Jastrow).** The dictionary text is Sefaria's digitization of Jastrow, as Sefaria served it in October 2026. The entry ids, the links to sources and the "Open on Sefaria" links are also Sefaria's. Many thanks to Sefaria for making it freely available.
-- **Page breaks: [Sefaria-Data](https://github.com/Sefaria/Sefaria-Data).** Sefaria's 2018 edition of the same text records where each printed page begins, and that is where the page breaks come from. Where the current text has lost material that the 2018 text has, the 2018 text is used for that entry.
 - **Checked against the book.** Column breaks, title pages and corrections were checked against scans of the 1903 printing from [HebrewBooks.org](https://hebrewbooks.org/).
 - **Public domain.** The dictionary itself (1903) is in the public domain.
 
