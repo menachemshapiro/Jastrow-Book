@@ -1,4 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jastrow Dictionary</title>
+<meta name="description" content="Marcus Jastrow’s Dictionary of the Targumim, the Talmud Babli and Yerushalmi, and the Midrashic Literature (1903), page for page as printed, searchable, with every Talmud citation indexed by daf.">
+<meta name="theme-color" content="#284a7a">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jastrow — ספר המלים">
+<meta property="og:title" content="Jastrow Dictionary — ספר המלים">
+<meta property="og:description" content="The 1903 dictionary, page for page and column for column, searchable, with every Talmud citation indexed by daf.">
+<meta property="og:url" content="https://menachemshapiro.github.io/Jastrow-Book/">
+<meta property="og:image" content="https://menachemshapiro.github.io/Jastrow-Book/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The title page of Jastrow’s Dictionary beside the words “Jastrow, ספר המלים”">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +62,8 @@
   --mark: rgba(230, 180, 30, .55); --chrome: #191c1f; --chrome-line: #2c3035;
   --shadow: 0 1px 2px rgba(0,0,0,.5), 0 8px 28px rgba(0,0,0,.45); --emb: invert(.88); color-scheme: dark;
 }
-html, body { height: 100%; }
+[hidden] { display: none !important; }
+html, body { height: 100%; margin: 0; }
 body { background: var(--desk); color: var(--ink); font-family: var(--f-ui); overflow: hidden; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--chrome); }
 button, input { font: inherit; color: inherit; }
@@ -89,11 +112,23 @@ button { cursor: pointer; }
 .dd mark { background: var(--mark); color: inherit; }
 
 /* hebrew keyboard */
-.kbd { position: absolute; right: 0; top: 40px; width: min(380px, 92vw); background: var(--paper); border: 1px solid var(--chrome-line);
-  border-radius: 8px; box-shadow: var(--shadow); padding: 8px; display: grid; grid-template-columns: repeat(9, 1fr); gap: 4px; direction: rtl; }
-.kbd button { height: 36px; border: 1px solid var(--chrome-line); border-radius: 5px; background: var(--desk); font-family: var(--f-heb); font-size: 20px; }
+.kbd { position: absolute; right: 0; top: 40px; z-index: 6; width: min(440px, calc(100vw - 24px)); background: var(--paper); border: 1px solid var(--chrome-line);
+  border-radius: 8px; box-shadow: var(--shadow); padding: 8px; }
+.kbd button { height: 38px; border: 1px solid var(--chrome-line); border-radius: 5px; background: var(--desk); color: var(--ink); font-family: var(--f-heb); font-size: 20px; padding: 0; }
 .kbd button:hover { border-color: var(--accent); }
-.kbd .wide { grid-column: span 3; font-family: var(--f-ui); font-size: 13px; }
+.kb-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.kb-head .kb-seg { display: inline-flex; border: 1px solid var(--chrome-line); border-radius: 6px; overflow: hidden; }
+.kb-head .kb-seg button { height: 30px; border: 0; border-radius: 0; background: var(--paper); font-family: var(--f-ui); font-size: 13px; padding: 0 10px; }
+.kb-head .kb-seg button + button { border-left: 1px solid var(--chrome-line); }
+.kb-head .kb-seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.kb-head .kb-x { margin-left: auto; width: 32px; height: 30px; font-family: var(--f-ui); font-size: 15px; background: var(--paper); }
+.kb-abc { display: grid; grid-template-columns: repeat(9, 1fr); gap: 4px; direction: rtl; }
+.kb-std { display: flex; flex-direction: column; gap: 4px; direction: ltr; }
+.kb-row { display: flex; gap: 4px; }
+.kb-row button { flex: 1 1 0; min-width: 0; }
+.kb-row.r1 { padding-right: 10%; } .kb-row.r3 { padding: 0 10% 0 5%; }
+.kb-foot { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 4px; margin-top: 4px; }
+.kb-foot button { font-family: var(--f-ui); font-size: 13px; }
 
 /* stage */
 .stage { position: relative; overflow: auto; min-height: 0; overscroll-behavior: contain; }
@@ -250,6 +285,21 @@ button { cursor: pointer; }
 .progress .barx i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
 .scrim { position: fixed; inset: 0; z-index: 7; background: rgba(0,0,0,.25); }
 
+/* Talmud finder */
+.tal-ctl { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: var(--paper); border-bottom: 1px solid var(--chrome-line); }
+.tal-ctl .seg { align-self: flex-start; }
+.tal-ctl .seg button { font-family: var(--f-ui-heb); font-size: 15px; padding: 0 14px; }
+.tal-ctl select { height: 38px; border: 1px solid var(--chrome-line); border-radius: 6px; background: var(--paper); color: var(--ink); font-family: var(--f-ui-heb); font-size: 16px; padding: 0 8px; width: 100%; }
+.tal-daf { display: flex; gap: 6px; }
+.tal-daf select { flex: 1; min-width: 0; }
+.tal-daf .btn { height: 38px; min-width: 38px; }
+.tal-sum { font-size: 13px; color: var(--ink-soft); }
+.tal-sum .heb { font-family: var(--f-ui-heb); color: var(--ink); font-size: 14px; }
+.tal-row .rp .heb { font-family: var(--f-heb); font-size: 17px; }
+.tal-row .ch { font-family: var(--f-ui-heb); }
+.tal-row sup { font-size: .62em; line-height: 0; vertical-align: .55em; }
+.rd-body mark.tal { background: var(--mark); color: inherit; border-radius: 2px; }
+
 /* entry reader */
 .rd-scrim { position: fixed; inset: 0; z-index: 20; background: rgba(0,0,0,.45); }
 .rd { position: fixed; z-index: 21; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(780px, calc(100vw - 32px));
@@ -306,11 +356,14 @@ button { cursor: pointer; }
 }
 @media (prefers-reduced-motion: reduce) { .drawer { transition: none; } .e.hit { transition: none; } }
 </style>
+</head>
+<body>
 
 <div class="app" id="app">
   <div class="bar">
     <div class="brand"><b>Jastrow</b><span lang="he" dir="rtl">ספר המלים</span></div>
     <button class="btn" id="tocBtn" aria-controls="drawer" aria-expanded="false" title="Contents (C)">Contents</button>
+    <button class="btn" id="talBtn" title="Find the entries that cite a daf of the Talmud">Talmud</button>
     <div class="search" id="searchBox">
       <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search a headword, or any English or Hebrew text" aria-label="Search">
       <div class="in-btns"><button class="icon-btn" id="kbBtn" aria-pressed="false" title="Hebrew keyboard" lang="he">א־ב</button></div>
@@ -346,6 +399,7 @@ button { cursor: pointer; }
   <div class="tabs" role="tablist">
     <button role="tab" id="tabToc" aria-selected="true">Pages</button>
     <button role="tab" id="tabRes" aria-selected="false">Text search</button>
+    <button role="tab" id="tabTal" aria-selected="false">Talmud</button>
     <button role="tab" id="tabHelp" aria-selected="false">About</button>
   </div>
   <div id="paneToc" style="display:flex;flex-direction:column;flex:1;min-height:0">
@@ -356,12 +410,26 @@ button { cursor: pointer; }
     <div class="progress" id="resProg">Type in the search box and choose “Search all text”.</div>
     <div class="list" id="resList"></div>
   </div>
+  <div id="paneTal" style="display:none;flex-direction:column;flex:1;min-height:0">
+    <div class="tal-ctl">
+      <div class="seg" role="group" aria-label="Talmud"><button id="talB" aria-pressed="true" lang="he">בבלי</button><button id="talY" aria-pressed="false" lang="he">ירושלמי</button></div>
+      <select id="talM" aria-label="Tractate" dir="rtl" lang="he"></select>
+      <div class="tal-daf">
+        <button class="btn" id="talNext" aria-label="Next daf" title="Next daf">‹</button>
+        <select id="talD" aria-label="Daf" dir="rtl" lang="he"></select>
+        <button class="btn" id="talPrev" aria-label="Previous daf" title="Previous daf">›</button>
+      </div>
+      <div class="tal-sum" id="talSum"></div>
+    </div>
+    <div class="list" id="talList"></div>
+  </div>
   <div id="paneHelp" style="display:none;flex:1;overflow:auto;background:var(--paper)">
     <div class="help">
       <p><b>Marcus Jastrow, <i>A Dictionary of the Targumim, the Talmud Babli and Yerushalmi, and the Midrashic Literature</i></b> (London: Luzac, 1903). Public domain.</p>
       <p>The text is Sefaria’s current digitization (2026), placed on the printed pages using the page breaks recorded in Sefaria’s 2018 data. Every page starts and ends on the same word as the book. Where the 2026 text lost material that the 2018 text has, the 2018 text is used for that entry.</p>
       <p>Column breaks read from scans of the 1903 printing match the book exactly; on other pages the columns are balanced, which puts the break on or within a line or two of the printed one.</p>
       <p>Click any entry to read it in larger type, with its citation and a link to Sefaria; an entry that runs over two columns or pages is shown whole. Dotted words are cross-references within the dictionary; citations of sources open the passage on Sefaria.</p>
+      <p><b>Talmud</b> lists the entries that cite a given daf. Citations are read from Jastrow’s own abbreviations: the Babylonian Talmud by daf and amud (“Ber. 26<sup>b</sup>”), the Jerusalem Talmud by chapter and the folio and column of the Krotoshin edition (“Y. Ber. VIII, 12<sup>c</sup>”). “Ib.” and a bare folio are taken as the tractate cited just before them.</p>
       <p><kbd>←</kbd> <kbd>→</kbd> turn pages · <kbd>/</kbd> search · <kbd>C</kbd> contents · <kbd>+</kbd> <kbd>−</kbd> <kbd>0</kbd> zoom</p>
       <p>Link to a page with <code>#p1087</code> or to an entry with its Sefaria id, e.g. <code>#P00866</code>.</p>
     </div>
@@ -1009,14 +1077,18 @@ function showPane(p) {
   $("paneToc").style.display = p === "toc" ? "flex" : "none";
   $("paneRes").style.display = p === "res" ? "flex" : "none";
   $("paneHelp").style.display = p === "help" ? "block" : "none";
+  $("paneTal").style.display = p === "tal" ? "flex" : "none";
+  $("tabTal").setAttribute("aria-selected", p === "tal");
+  if (p === "tal") talInit();
   $("tabToc").setAttribute("aria-selected", p === "toc");
   $("tabRes").setAttribute("aria-selected", p === "res");
   $("tabHelp").setAttribute("aria-selected", p === "help");
-  $("drawerTitle").textContent = p === "toc" ? "Contents" : p === "res" ? "Search results" : "About this edition";
+  $("drawerTitle").textContent = p === "toc" ? "Contents" : p === "res" ? "Search results" : p === "tal" ? "Talmud citations" : "About this edition";
 }
 $("tabToc").onclick = () => openDrawer("toc");
 $("tabRes").onclick = () => openDrawer("res");
 $("tabHelp").onclick = () => openDrawer("help");
+$("tabTal").onclick = () => openDrawer("tal");
 $("tocBtn").onclick = () => $("drawer").classList.contains("open") ? closeDrawer() : openDrawer("toc");
 $("closeDrawer").onclick = closeDrawer;
 $("scrim").onclick = closeDrawer;
@@ -1103,7 +1175,7 @@ $("q").addEventListener("keydown", (e) => {
   if (e.key === "ArrowDown") { ddSel = Math.min(ddItems.length - 1, ddSel + 1); paintSel(); e.preventDefault(); }
   else if (e.key === "ArrowUp") { ddSel = Math.max(0, ddSel - 1); paintSel(); e.preventDefault(); }
   else if (e.key === "Enter") { clearTimeout(ddTimer); if ($("dd").hidden) showDD().then(() => choose(ddSel)); else choose(ddSel); e.preventDefault(); }
-  else if (e.key === "Escape") { $("dd").hidden = true; $("q").blur(); }
+  else if (e.key === "Escape") { $("dd").hidden = true; hideKbd(); $("q").blur(); }
 });
 $("dd").addEventListener("mousedown", (e) => { const el = e.target.closest("[data-k]"); if (el) { e.preventDefault(); choose(+el.dataset.k); } });
 document.addEventListener("mousedown", (e) => {
@@ -1111,14 +1183,29 @@ document.addEventListener("mousedown", (e) => {
   if (!$("pop").contains(e.target) && !e.target.closest(".hw")) $("pop").hidden = true;
 });
 
-/* hebrew keyboard */
+/* hebrew keyboard: alphabetical, or the standard Israeli layout */
+function hideKbd() { $("kbd").hidden = true; $("kbBtn").setAttribute("aria-pressed", "false"); }
 (function buildKbd() {
-  const keys = "אבגדהוזחטיכךלמםנןסעפףצץקרשת".split("");
-  $("kbd").innerHTML = keys.map(k => '<button type="button" data-c="' + k + '">' + k + "</button>").join("") +
-    '<button type="button" class="wide" data-c="⌫">⌫ Delete</button><button type="button" class="wide" data-c=" ">Space</button><button type="button" class="wide" data-c="✕">Clear</button>';
+  const ABC = "אבגדהוזחטיכךלמםנןסעפףצץקרשת".split("");
+  const STD = [["׳", "ק", "ר", "א", "ט", "ו", "ן", "ם", "פ"], ["ש", "ד", "ג", "כ", "ע", "י", "ח", "ל", "ך", "ף"], ["ז", "ס", "ב", "ה", "נ", "מ", "צ", "ת", "ץ"]];
+  let lay = store.get("kbLayout") === "std" ? "std" : "abc";
+  const key = (k) => '<button type="button" data-c="' + k + '">' + k + "</button>";
+  function paint() {
+    $("kbd").innerHTML =
+      '<div class="kb-head"><div class="kb-seg" role="group" aria-label="Keyboard layout">' +
+      '<button type="button" data-l="abc" aria-pressed="' + (lay === "abc") + '" lang="he">א–ת</button>' +
+      '<button type="button" data-l="std" aria-pressed="' + (lay === "std") + '">Standard layout</button></div>' +
+      '<button type="button" class="kb-x" data-x="1" aria-label="Close keyboard" title="Close">✕</button></div>' +
+      (lay === "abc" ? '<div class="kb-abc">' + ABC.map(key).join("") + "</div>"
+        : '<div class="kb-std">' + STD.map((r, i) => '<div class="kb-row r' + (i + 1) + '">' + r.map(key).join("") + "</div>").join("") + "</div>") +
+      '<div class="kb-foot"><button type="button" data-c="⌫">⌫ Delete</button><button type="button" data-c=" ">Space</button><button type="button" data-c="✕">Clear</button></div>';
+  }
+  paint();
   $("kbd").addEventListener("mousedown", (e) => e.preventDefault());
   $("kbd").addEventListener("click", (e) => {
     const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.x) { hideKbd(); return; }
+    if (b.dataset.l) { lay = b.dataset.l; store.set("kbLayout", lay); paint(); $("q").focus(); return; }
     const q = $("q"); const c = b.dataset.c;
     q.value = c === "⌫" ? q.value.slice(0, -1) : c === "✕" ? "" : q.value + c;
     q.focus(); showDD();
@@ -1288,6 +1375,113 @@ $("rdCopy").onclick = () => {
   try { navigator.clipboard.writeText(t).then(ok, fail); } catch (er) { fail(); }
 };
 
+/* ---------- Talmud finder ---------- */
+const TAL = { idx: null, corp: store.get("talCorp") === "y" ? "y" : "b", key: null, daf: null, files: new Map(), seq: 0 };
+function gem(n) {
+  const U = ["", "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט"], T = ["", "י", "כ", "ל", "מ", "נ", "ס", "ע", "פ", "צ"], C = ["", "ק", "ר", "ש", "ת"];
+  let s = C[Math.floor(n / 100)] || "";
+  const r = n % 100;
+  s += r === 15 ? "טו" : r === 16 ? "טז" : T[Math.floor(r / 10)] + U[r % 10];
+  return s.length > 1 ? s.slice(0, -1) + "״" + s.slice(-1) : s + "׳";
+}
+const AMUD = { a: "א", b: "ב", c: "ג", d: "ד" };
+function dafHeb(d) { const m = /^(\d+)([a-d])$/.exec(d); return "דף " + gem(+m[1]) + " ע״" + AMUD[m[2]]; }
+function talLoadIdx() {
+  if (!TAL.idxP) TAL.idxP = fetch("data/talmud/index.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(j => (TAL.idx = j)).catch(e => { TAL.idxP = null; throw e; });
+  return TAL.idxP;
+}
+function talFile(corp, key) {
+  const k = corp + "_" + key;
+  if (!TAL.files.has(k)) {
+    const p = fetch("data/talmud/" + k + ".json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    p.catch(() => TAL.files.delete(k)); TAL.files.set(k, p);
+  }
+  return TAL.files.get(k);
+}
+function talTract() { return TAL.idx[TAL.corp].find(t => t[0] === TAL.key) || TAL.idx[TAL.corp][0]; }
+function talPaintSelects() {
+  $("talB").setAttribute("aria-pressed", TAL.corp === "b"); $("talY").setAttribute("aria-pressed", TAL.corp === "y");
+  const list = TAL.idx[TAL.corp];
+  if (!list.some(t => t[0] === TAL.key)) TAL.key = list[0][0];
+  $("talM").innerHTML = list.map(t => '<option value="' + t[0] + '"' + (t[0] === TAL.key ? " selected" : "") + ">" + esc(t[1]) + "</option>").join("");
+  const tr = talTract();
+  if (!tr[2].some(d => d[0] === TAL.daf)) TAL.daf = tr[2][0][0];
+  $("talD").innerHTML = tr[2].map(d => {
+    let lab = dafHeb(d[0]);
+    if (TAL.corp === "y" && d[2].length) lab = "פרק " + d[2].map(gem).join("–") + " · " + lab;
+    return '<option value="' + d[0] + '"' + (d[0] === TAL.daf ? " selected" : "") + ">" + lab + " (" + d[1] + ")</option>";
+  }).join("");
+}
+function talSnippet(s) {
+  return esc(s).replace(/\^([a-d])/g, "<sup>$1</sup>").replace(/([֐-׿][֐-׿׳״'"׳״…,.\s]*[֐-׿׳״׳״])/g, '<span class="h" lang="he" dir="rtl">$1</span>');
+}
+async function talShow(push) {
+  const seq = ++TAL.seq;
+  talPaintSelects();
+  const tr = talTract();
+  const name = tr[1], daf = TAL.daf;
+  $("talSum").innerHTML = "Loading…";
+  let rows;
+  try { rows = (await talFile(TAL.corp, TAL.key))[daf] || []; await loadHW(); }
+  catch (e) { if (seq === TAL.seq) $("talSum").textContent = "The list didn’t load. Check the connection and choose the daf again."; return; }
+  if (seq !== TAL.seq) return;
+  const chs = TAL.corp === "y" ? tr[2].find(d => d[0] === daf)[2] : [];
+  const title = (TAL.corp === "y" ? "ירושלמי " : "") + name + (chs.length ? " פרק " + chs.map(gem).join("–") + "," : "") + " " + dafHeb(daf);
+  $("talSum").innerHTML = '<span class="heb" dir="rtl">' + esc(title) + "</span> — " + rows.length + (rows.length === 1 ? " entry" : " entries");
+  $("talList").innerHTML = rows.map(r => {
+    const row = rdRow(r[0]);
+    const hw = row ? row[2].split("|").join(" ") : r[0];
+    const pi = S.entryPage.get(r[0]);
+    return '<div class="res-row tal-row" data-id="' + r[0] + '" tabindex="0" role="button"><div class="rp"><span class="heb" lang="he" dir="rtl">' + esc(hw) + "</span> · p. " +
+      esc(pi != null ? label(pi) : "") + "</div>" + talSnippet(r[2]) + "</div>";
+  }).join("") || '<div class="help">No entries cite this daf.</div>';
+  $("talList").scrollTop = 0;
+  const hash = "#t/" + TAL.corp + "/" + TAL.key + "/" + daf;
+  try { if (location.hash !== hash) history[push ? "pushState" : "replaceState"](history.state, "", hash); } catch (e) {}
+}
+async function talInit(corp, key, daf) {
+  try { await talLoadIdx(); } catch (e) { $("talSum").textContent = "The list didn’t load. Check the connection and open this tab again."; return; }
+  if (corp) TAL.corp = corp;
+  if (key) TAL.key = key;
+  if (daf) TAL.daf = daf;
+  if (!TAL.key) TAL.key = TAL.idx[TAL.corp][0][0];
+  talShow(false);
+}
+function talStep(dir) {
+  const ds = talTract()[2]; const i = ds.findIndex(d => d[0] === TAL.daf);
+  const j = Math.max(0, Math.min(ds.length - 1, i + dir));
+  if (j !== i) { TAL.daf = ds[j][0]; talShow(false); }
+}
+$("talB").onclick = () => { if (TAL.corp !== "b") { TAL.corp = "b"; store.set("talCorp", "b"); TAL.daf = null; talShow(false); } };
+$("talY").onclick = () => { if (TAL.corp !== "y") { TAL.corp = "y"; store.set("talCorp", "y"); TAL.daf = null; talShow(false); } };
+$("talM").onchange = () => { TAL.key = $("talM").value; TAL.daf = null; talShow(false); };
+$("talD").onchange = () => { TAL.daf = $("talD").value; talShow(false); };
+$("talPrev").onclick = () => talStep(-1);
+$("talNext").onclick = () => talStep(1);
+$("talBtn").onclick = () => ($("drawer").classList.contains("open") && paneShown === "tal") ? closeDrawer() : openDrawer("tal");
+function talOpen(el) {
+  const r = el.closest(".tal-row"); if (!r) return;
+  const m = /^(\d+)([a-d])$/.exec(TAL.daf);
+  openReader(r.dataset.id, S.entryPage.get(r.dataset.id)).then(() => markCite($("rdBody"), +m[1], m[2]));
+}
+$("talList").addEventListener("click", (e) => talOpen(e.target));
+$("talList").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); talOpen(e.target); } });
+function markCite(body, fol, side) {
+  // highlight the folio in the reader: a number followed by its side in superscript
+  for (const sup of body.querySelectorAll("sup")) {
+    if (sup.textContent !== side) continue;
+    const prev = sup.previousSibling;
+    const t = prev && prev.nodeType === 3 ? prev.nodeValue : (prev && prev.textContent) || "";
+    if (!new RegExp("(^|\\D)" + fol + "$").test(t)) continue;
+    const a = sup.closest("a") || sup;
+    const mk = document.createElement("mark"); mk.className = "tal";
+    a.parentNode.insertBefore(mk, a); mk.appendChild(a);
+    mk.scrollIntoView({ block: "center" });
+    return;
+  }
+}
+
 /* ---------- controls ---------- */
 $("prev").onclick = () => step(-1);
 $("next").onclick = () => step(1);
@@ -1350,6 +1544,10 @@ function routeHash(push) {
   let m;
   if ((m = /^p(.+)$/.exec(h)) && S.byLabel.has(m[1])) { if (S.byLabel.get(m[1]) !== S.idx || !S.rendered) go(S.byLabel.get(m[1]), { push }); return true; }
   if (/^[A-V]\d{5}$/.test(h)) { gotoEntry(h, push); return true; }
+  if ((m = /^t\/([by])\/(\w+)\/(\d+[a-d])$/.exec(h))) {
+    if (!S.rendered) { const last = store.get("page"); S.idx = last && S.byLabel.has(last) ? S.byLabel.get(last) : S.byLabel.get("1"); render(); }
+    TAL.corp = m[1]; TAL.key = m[2]; TAL.daf = m[3]; openDrawer("tal"); return true;
+  }
   return false;
 }
 
@@ -1371,3 +1569,5 @@ fetch("data/pages.json").then(r => r.json()).then(d => {
 }).catch(() => { $("stage").innerHTML = '<div class="help" style="padding:40px">The page index didn’t load. Reload to try again.</div>'; });
 })();
 </script>
+</body>
+</html>

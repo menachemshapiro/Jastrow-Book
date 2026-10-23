@@ -1,0 +1,12 @@
+{
+  "name": "Jastrow — ספר המלים",
+  "short_name": "Jastrow",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#e3e6e8",
+  "theme_color": "#284a7a",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
