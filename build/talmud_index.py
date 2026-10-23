@@ -16,7 +16,7 @@ SITE = sys.argv[1] if len(sys.argv) > 1 else "."
 # Jastrow's abbreviation -> (Sefaria-style key, Hebrew name); "b" = has Babylonian Gemara, "y" = has Jerusalem Gemara
 TRACT = [
     (["Ber."], "Berakhot", "ברכות", "by"), (["Peah", "Peah."], "Peah", "פאה", "y"), (["Dem."], "Demai", "דמאי", "y"),
-    (["Kil."], "Kilayim", "כלאים", "y"), (["Shebi.", "Sheb."], "Sheviit", "שביעית", "y"), (["Ter."], "Terumot", "תרומות", "y"),
+    (["Kil."], "Kilayim", "כלאים", "y"), (["Shebi.", "Sheb.", "Shebi"], "Sheviit", "שביעית", "y"), (["Ter."], "Terumot", "תרומות", "y"),
     (["Maasr.", "Maas."], "Maasrot", "מעשרות", "y"), (["Maas. Sh.", "Maas Sh.", "Mass. Sh.", "Maass Sh."], "Maaser_Sheni", "מעשר שני", "y"),
     (["Ḥall."], "Challah", "חלה", "y"), (["Orl."], "Orlah", "ערלה", "y"), (["Bicc."], "Bikkurim", "ביכורים", "y"),
     (["Sabb.", "Sab."], "Shabbat", "שבת", "by"), (["Erub."], "Eruvin", "עירובין", "by"), (["Pes."], "Pesachim", "פסחים", "by"),
@@ -61,17 +61,19 @@ def roman(s):
 MODS = r"(?:(?:beg|end|bot|top|middle)\.?,? ?)*"
 P = re.compile(
     r"(?P<y>\bY\. (?P<yt>" + TR + r") ?(?P<yc>" + ROM + r")\b,? " + MODS + r"(?P<yf>\d+)\^(?P<ys>[a-d]))"
+    r"|(?P<y2>(?<!\w)(?P<y2t>" + TR + r") (?P<y2c>" + ROM + r")\b,? " + MODS + r"(?P<y2f>\d+)\^(?P<y2s>[a-d]))"
+    r"|(?P<lc>(?<!\w)(?P<lct>" + TR + r") l\. c\.)"
     r"|(?P<b>(?<!\w)(?:Bab\. )?(?P<bt>" + TR + r") +(?P<bf>\d+)\^(?P<bs>[ab]))"
     r"|(?P<m>(?<!\w)(?P<mt>" + TR + r") (?P<mc>" + ROM + r"),)"
     r"|(?P<bc>(?<!\w)(?P<bct>" + TR + r") (?P<bcf>\d+)(?![\d^]))"
     r"|(?P<yib>\bY\. ib\.,? (?:(?P<yic>" + ROM + r")\b,? " + MODS + r")?(?P<yif>\d+)\^(?P<yis>[a-d]))"
-    r"|(?P<bib>\bBab\. (?:ib\.|ed\.),? (?P<bif>\d+)\^(?P<bis>[ab]))"
+    r"|(?P<bib>\bBabl?\. (?:ib\.|ibid\.|ed\.),? (?P<bif>\d+)\^(?P<bis>[ab]))"
     r"|(?P<tos>\bTosef\. (?P<tt>" + TR + r") ?(?P<tc>" + ROM + r")?)"
     r"|(?P<side>\b[Ii]b\.\^(?P<ss>[a-d]))"
     r"|(?P<par>\((?P<pf>\d+)\^(?P<ps>[ab])\))"
     r"|(?P<ib>\b[Ii]b(?:id)?\.,? (?:(?P<ic>" + ROM + r"),? " + MODS + r")?(?P<if>\d+)\^(?P<is>[a-d]))"
     r"|(?P<cont>(?<=[;,] )(?:(?P<cc>" + ROM + r"),? " + MODS + r")?(?P<cf>\d+)\^(?P<cs>[a-d]))"
-    r"|(?P<other>\b(?:Gen|Ex|Lev|Num|Deut|Cant|Lam|Koh|Esth|Ruth|Esther|Prov) R\.|\b(?:Pesik|Tanḥ|Tanh|Yalk|Midr|Sifra|Sifré|Sifre|Mekh|Tosef|Targ|Pirké|Pirke|Aboth|Ab\. d’R|Tanna|Zohar|Mass|Sefer|Lekah|Yelamd|Seder|Sem|Kall|Der\. Er|Ab\. R)\b)"
+    r"|(?P<other>\b(?:Gen|Ex|Lev|Num|Deut|Cant|Lam|Koh|Esth|Ruth|Esther|Prov)\.? R\.|\bY\. (?!ib\.)[A-Z]\w*\.|\b(?:Dict|Compl|Ant|Levy|Fr|Fl|Sm|Del|Ar)\.|M’bo|\bp\. \d|\b(?:Pesik|Tanḥ|Tanh|Yalk|Midr|Sifra|Sifré|Sifre|Mekh|Tosef|Targ|Pirké|Pirke|Aboth|Ab\. d’R|Tanna|Zohar|Mass|Sefer|Lekah|Yelamd|Seder|Sem|Kall|Der\. Er|Ab\. R)\b)"
 )
 # words that make the citation before them part of something else (e.g. "Targ. Y. Gen.", "Tosef. Sabb.")
 PRE_BAD = re.compile(r"(?:Tosef|Targ|Pesik|Sifra|Sifré|Mekh|Midr|Yalk|Tanḥ|Mass|Yelamd|Seder)\.? (?:\w+\. ){0,2}$")
@@ -128,6 +130,13 @@ def main():
             if g("y"):
                 ctx = ["y", ABBR[g("yt")], roman(g("yc")), g("yf")]
                 hit = ("y", ctx[1], ctx[2], g("yf") + g("ys"))
+            elif g("y2"):                    # "Meg. I, 71^b": a chapter and a folio is the Jerusalem Talmud's form
+                if PRE_BAD.search(t[max(0, m.start() - 24):m.start()]): continue
+                ctx = ["y", ABBR[g("y2t")], roman(g("y2c")), g("y2f")]
+                hit = ("y", ctx[1], ctx[2], g("y2f") + g("y2s"))
+            elif g("lc"):                    # "Bekh. l. c.": the tractate cited above
+                key = ABBR[g("lct")]
+                ctx = ["b" if "b" in HAS[key] else "m", key, None, None]; continue
             elif g("b"):
                 if PRE_BAD.search(t[max(0, m.start() - 24):m.start()]) or t[max(0, m.start() - 3):m.start()] == "Y. ":
                     continue
@@ -188,7 +197,7 @@ def main():
         for d in list(out["b"][key]):
             f = int(d[:-1])
             if not (BMIN.get(key, 2) <= f <= BMAX[key]):
-                dropped += [("b", key, d, r[2]) for r in out["b"][key].pop(d)]
+                dropped += [("b", key, d, r[0], r[2]) for r in out["b"][key].pop(d)]
     for key in list(out["y"]):
         fs = sorted(int(d[:-1]) for d, rows in out["y"][key].items() for r in rows)
         lo, hi = fs[int(len(fs) * .01)], fs[min(len(fs) - 1, int(len(fs) * .99))]
@@ -199,7 +208,7 @@ def main():
         for d in list(out["y"][key]):
             f = int(d[:-1])
             if not (lo - 1 <= f <= hi + 1):
-                dropped += [("y", key, d, r[2]) for r in out["y"][key].pop(d)]; continue
+                dropped += [("y", key, d, r[0], r[2]) for r in out["y"][key].pop(d)]; continue
             for r in out["y"][key][d]:          # chapter missing or out of line with the folio: take the nearest chapter
                 if med and (r[1] not in med or abs(med[r[1]] - f) > 3):
                     r[1] = min(med, key=lambda c: (abs(med[c] - f), c))

@@ -344,6 +344,14 @@ button { cursor: pointer; }
 .pop .cite .h { font-family: var(--f-heb); }
 
 .help { color: var(--ink-soft); font-size: 13px; padding: 10px 14px; line-height: 1.5; }
+.about { color: var(--ink); font-size: 14px; padding: 14px 18px 28px; }
+.about .lead { font-family: var(--f-book); font-size: 16px; line-height: 1.5; margin: 0 0 6px; }
+.about h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); margin: 18px 0 6px; }
+.about ul { margin: 0; padding-left: 18px; }
+.about li { margin: 0 0 6px; }
+.about a { color: var(--accent); }
+.about code { font-size: 12px; background: var(--desk); padding: 0 4px; border-radius: 3px; }
+.about sup { font-size: .7em; line-height: 0; }
 .help kbd { font-family: var(--f-ui); font-size: 12px; border: 1px solid var(--chrome-line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--paper); }
 
 @media (max-width: 720px) {
@@ -364,6 +372,7 @@ button { cursor: pointer; }
     <div class="brand"><b>Jastrow</b><span lang="he" dir="rtl">ספר המלים</span></div>
     <button class="btn" id="tocBtn" aria-controls="drawer" aria-expanded="false" title="Contents (C)">Contents</button>
     <button class="btn" id="talBtn" title="Find the entries that cite a daf of the Talmud">Talmud</button>
+    <button class="btn" id="aboutBtn" title="About this edition and how to use it">About</button>
     <div class="search" id="searchBox">
       <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search a headword, or any English or Hebrew text" aria-label="Search">
       <div class="in-btns"><button class="icon-btn" id="kbBtn" aria-pressed="false" title="Hebrew keyboard" lang="he">א־ב</button></div>
@@ -424,14 +433,39 @@ button { cursor: pointer; }
     <div class="list" id="talList"></div>
   </div>
   <div id="paneHelp" style="display:none;flex:1;overflow:auto;background:var(--paper)">
-    <div class="help">
-      <p><b>Marcus Jastrow, <i>A Dictionary of the Targumim, the Talmud Babli and Yerushalmi, and the Midrashic Literature</i></b> (London: Luzac, 1903). Public domain.</p>
-      <p>The text is Sefaria’s current digitization (2026), placed on the printed pages using the page breaks recorded in Sefaria’s 2018 data. Every page starts and ends on the same word as the book. Where the 2026 text lost material that the 2018 text has, the 2018 text is used for that entry.</p>
-      <p>Column breaks read from scans of the 1903 printing match the book exactly; on other pages the columns are balanced, which puts the break on or within a line or two of the printed one.</p>
-      <p>Click any entry to read it in larger type, with its citation and a link to Sefaria; an entry that runs over two columns or pages is shown whole. Dotted words are cross-references within the dictionary; citations of sources open the passage on Sefaria.</p>
-      <p><b>Talmud</b> lists the entries that cite a given daf. Citations are read from Jastrow’s own abbreviations: the Babylonian Talmud by daf and amud (“Ber. 26<sup>b</sup>”), the Jerusalem Talmud by chapter and the folio and column of the Krotoshin edition (“Y. Ber. VIII, 12<sup>c</sup>”). “Ib.” and a bare folio are taken as the tractate cited just before them.</p>
-      <p><kbd>←</kbd> <kbd>→</kbd> turn pages · <kbd>/</kbd> search · <kbd>C</kbd> contents · <kbd>+</kbd> <kbd>−</kbd> <kbd>0</kbd> zoom</p>
-      <p>Link to a page with <code>#p1087</code> or to an entry with its Sefaria id, e.g. <code>#P00866</code>.</p>
+    <div class="help about">
+      <p class="lead">Marcus Jastrow’s <i>A Dictionary of the Targumim, the Talmud Babli and Yerushalmi, and the Midrashic Literature</i> (London: Luzac, 1903), laid out as the printed book: every page and every column begins and ends on the same word as the 1903 edition, so a page reference to “Jastrow p. 1087” lands on the right page.</p>
+
+      <h3>Reading</h3>
+      <ul>
+        <li><b>Spread</b> shows two facing pages, <b>Page</b> one, and <b>Text</b> the page’s text reflowed for a small screen.</li>
+        <li>Turn pages with ‹ ›, the slider at the bottom, the arrow keys, or a swipe on a phone. Type a page number into the box to jump there; the preface and abbreviations use their Roman numerals (<code>v</code>, <code>xv</code>).</li>
+        <li>Click any entry to read it in larger type, whole even when it runs over two columns or pages. From there: the previous and next entries, A− and A+ for the type size, “Show on the page”, “Open on Sefaria”, and “Copy citation”.</li>
+        <li>Dotted words are cross-references within the dictionary. Citations of sources (“Ber. 26<sup>b</sup>”) open the passage on Sefaria.</li>
+      </ul>
+
+      <h3>Finding</h3>
+      <ul>
+        <li><b>Search</b> matches headwords as you type, in Hebrew (with or without vowel points) or by page number; “Search all text” looks through every entry, English and Hebrew.</li>
+        <li><span lang="he">א־ב</span> opens a Hebrew keyboard, alphabetical or in the standard Israeli layout.</li>
+        <li><b>Contents</b> lists every page by its first and last headword, letter by letter, as in the running heads of the book.</li>
+        <li><b>Talmud</b> lists the entries that cite a chosen daf. Choose <span lang="he">בבלי</span> or <span lang="he">ירושלמי</span>, the tractate and the daf. Citations are read from Jastrow’s own abbreviations: the Bavli by daf and amud (“Ber. 26<sup>b</sup>”), the Yerushalmi by chapter and the folio and column of the Krotoshin edition (“Y. Ber. VIII, 12<sup>c</sup>”); “Ib.” and a bare folio count as the tractate cited just before.</li>
+      </ul>
+
+      <h3>Links</h3>
+      <ul>
+        <li>A page: <code>#p1087</code>. An entry, by its Sefaria id: <code>#P00866</code>. A daf: <code>#t/b/Berakhot/26b</code> or <code>#t/y/Berakhot/12c</code>.</li>
+        <li>Keys: <kbd>←</kbd> <kbd>→</kbd> turn pages · <kbd>/</kbd> search · <kbd>C</kbd> contents · <kbd>+</kbd> <kbd>−</kbd> <kbd>0</kbd> zoom · <kbd>Esc</kbd> closes.</li>
+      </ul>
+
+      <h3>Sources and thanks</h3>
+      <ul>
+        <li>The text of the dictionary is <a href="https://www.sefaria.org/Jastrow" target="_blank" rel="noopener">Sefaria’s digitization of Jastrow</a>, as served by Sefaria in 2026. The entry ids, the links to sources and the “Open on Sefaria” links are Sefaria’s. Our thanks to <a href="https://www.sefaria.org/" target="_blank" rel="noopener">Sefaria</a> for making it freely available.</li>
+        <li>The page breaks come from Sefaria’s earlier edition of the same text in <a href="https://github.com/Sefaria/Sefaria-Data" target="_blank" rel="noopener">Sefaria-Data</a> (2018), which records where each printed page begins. Where the current text has lost material that the 2018 text has, the 2018 text is used for that entry.</li>
+        <li>Column breaks, title pages and corrections were checked against scans of the 1903 printing from <a href="https://hebrewbooks.org/" target="_blank" rel="noopener">HebrewBooks.org</a>. Corrections to the text are listed, each with its reason, in the project’s <a href="https://github.com/menachemshapiro/Jastrow-Book/blob/main/build/text_fixes.json" target="_blank" rel="noopener">text_fixes.json</a>.</li>
+        <li>The dictionary itself (1903) is in the public domain.</li>
+        <li>Source code, data and the history of every change: <a href="https://github.com/menachemshapiro/Jastrow-Book" target="_blank" rel="noopener">github.com/menachemshapiro/Jastrow-Book</a>.</li>
+      </ul>
     </div>
   </div>
 </aside>
@@ -1089,6 +1123,7 @@ $("tabToc").onclick = () => openDrawer("toc");
 $("tabRes").onclick = () => openDrawer("res");
 $("tabHelp").onclick = () => openDrawer("help");
 $("tabTal").onclick = () => openDrawer("tal");
+$("aboutBtn").onclick = () => ($("drawer").classList.contains("open") && paneShown === "help") ? closeDrawer() : openDrawer("help");
 $("tocBtn").onclick = () => $("drawer").classList.contains("open") ? closeDrawer() : openDrawer("toc");
 $("closeDrawer").onclick = closeDrawer;
 $("scrim").onclick = closeDrawer;

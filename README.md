@@ -1,30 +1,64 @@
-# Jastrow-Book
+# Jastrow — ספר המלים
 
-Marcus Jastrow's *Dictionary of the Targumim, the Talmud Babli and Yerushalmi, and the Midrashic Literature* (1903), laid out page for page as in the printed book, two columns per page, with the same first and last words in each column. The text comes from [Sefaria](https://www.sefaria.org/).
+Marcus Jastrow's *A Dictionary of the Targumim, the Talmud Babli and Yerushalmi, and the Midrashic Literature* (London: Luzac, 1903), laid out as the printed book. Every page and every column begins and ends on the same word as the 1903 edition, so a reference to "Jastrow p. 1087" lands on the right page.
 
-The site is a single page (`index.html`) that reads the dictionary from `data/`.
+**Read it at [menachemshapiro.github.io/Jastrow-Book](https://menachemshapiro.github.io/Jastrow-Book/).**
 
-## What's here
+## What you can do
+
+**Read**
+- **Spread** shows two facing pages, **Page** shows one, and **Text** reflows the page's text for a small screen.
+- To turn pages, use ‹ ›, the slider, the arrow keys, or swipe on a phone. Type a page number to jump to it; the preface and abbreviations use their Roman numerals.
+- Click any entry to read it in larger type. The whole entry is shown, even when it runs over two columns or pages. From there you can step to the previous or next entry, change the type size, show the entry on its page, open it on Sefaria, or copy a citation.
+- Dotted words are cross-references within the dictionary. Source citations ("Ber. 26ᵇ") open the passage on Sefaria.
+
+**Find**
+- **Search** matches headwords as you type, in Hebrew with or without vowel points, or by page number. "Search all text" looks through every entry, in English and Hebrew.
+- **א־ב** opens a Hebrew keyboard, either alphabetical or in the standard Israeli layout.
+- **Contents** lists every page by its first and last headword, letter by letter, like the book's running heads.
+- **Talmud** lists the entries that cite a chosen daf of the בבלי or the ירושלמי, with the tractate and daf in Hebrew.
+  - Citations are read from Jastrow's own abbreviations. The Bavli is cited by daf and amud ("Ber. 26ᵇ"), and the Yerushalmi by chapter plus the folio and column of the Krotoshin edition ("Y. Ber. VIII, 12ᶜ").
+  - "Ib." and a bare folio count as the tractate cited just before.
+  - The index holds about 31,900 Bavli and 12,200 Yerushalmi citations. Sefaria links many of the same Bavli citations, and the two agree in all but one case.
+
+**Link**
+- A page: `#p1087`
+- An entry, by its Sefaria id: `#P00866`
+- A daf: `#t/b/Berakhot/26b` or `#t/y/Berakhot/12c`
+
+## Sources and thanks
+
+- **Text: [Sefaria](https://www.sefaria.org/Jastrow).** The dictionary text is Sefaria's digitization of Jastrow, as Sefaria served it in October 2026. The entry ids, the links to sources and the "Open on Sefaria" links are also Sefaria's. Many thanks to Sefaria for making it freely available.
+- **Page breaks: [Sefaria-Data](https://github.com/Sefaria/Sefaria-Data).** Sefaria's 2018 edition of the same text records where each printed page begins, and that is where the page breaks come from. Where the current text has lost material that the 2018 text has, the 2018 text is used for that entry.
+- **Checked against the book.** Column breaks, title pages and corrections were checked against scans of the 1903 printing from [HebrewBooks.org](https://hebrewbooks.org/).
+- **Public domain.** The dictionary itself (1903) is in the public domain.
+
+## Corrections
+
+Changes to Sefaria's text are kept in [`build/text_fixes.json`](build/text_fixes.json). Each record gives the page, the text before and after, and the reason for the change, checked against the 1903 printing. Each correction is its own commit, so the history shows every change.
+
+## What's in the repository
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | The viewer: spread, single-page and text views, search with a Hebrew keyboard, contents by each page's first word, a larger-type reader for any entry, and the Talmud finder |
-| `data/` | The pages (`c000.json`–`c174.json`, ten pages each), the page list with column breaks (`pages.json`) and the headword index (`hw.json`) |
-| `build/build2.py` | Builds the pages from Sefaria's 2026 Jastrow text, using the page breaks in Sefaria's 2018 data |
-| `build/make_site2.py` | Turns the built pages into `data/`, with the title pages, preface footnotes and text repairs |
-| `data/talmud/` | Every Talmud citation, by tractate and daf: the Babylonian Talmud by daf and amud, the Jerusalem Talmud by chapter and Krotoshin folio and column |
-| `build/talmud_index.py` | Builds `data/talmud/` from the entry text, reading Jastrow's own abbreviations |
-| `build/text_fixes.json` | Corrections to Sefaria's text, checked against the 1903 printing: one record per change, with the reason |
-| `build/breaks_all2.json` | The column break on each page, as a character offset into the page's text, checked against scans of the 1903 printing |
+| `index.html` | The whole site: viewer, search, keyboard, contents, entry reader and Talmud finder |
+| `data/c000.json`–`c174.json` | The pages, ten to a file |
+| `data/pages.json` | The page list: labels, first and last headwords, and the column break on each page |
+| `data/hw.json` | The headword index |
+| `data/talmud/` | Every Talmud citation, by tractate and daf |
+| `build/build2.py` | Builds the pages from Sefaria's current text, using the 2018 page breaks |
+| `build/make_site2.py` | Turns the built pages into `data/`, adding the title pages, preface footnotes and text corrections |
+| `build/text_fixes.json` | Corrections to the text, one record per change |
+| `build/breaks_all2.json` | Each page's column break, as a character offset into that page's text |
+| `build/talmud_index.py` | Builds `data/talmud/` from the entry text |
+| `favicon.ico`, `icon-*.png`, `og.png`, `site.webmanifest` | Icons and the image shown in link previews |
 
 ## Rebuilding `data/`
 
-Sources (not in this repository because of their size): Sefaria's current Jastrow export (`jastrow-complete.json`) and the 2018 Sefaria-Data Jastrow XML (`Jastrow-full.xml`), which has the page breaks.
+The two sources aren't in this repository because of their size. They are Sefaria's current Jastrow export (`jastrow-complete.json`, from Sefaria's dictionary API) and the 2018 Sefaria-Data Jastrow XML (`Jastrow-full.xml`).
 
 ```
 python3 build/build2.py Jastrow-full.xml jastrow-complete.json out2
 BREAKS=build/breaks_all2.json python3 build/make_site2.py out2 . jastrow-complete.json
 python3 build/talmud_index.py .
 ```
-
-Links: `#p1087` opens a page, `#P00866` an entry (its Sefaria id), and `#t/b/Berakhot/26b` or `#t/y/Berakhot/12c` the entries citing a daf of the Bavli or the Yerushalmi.
