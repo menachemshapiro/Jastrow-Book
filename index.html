@@ -1,0 +1,1373 @@
+<title>Jastrow Dictionary</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Frank+Ruhl+Libre:wght@400;500;700&family=GFS+Didot&family=Noto+Serif+Hebrew:wght@400;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&display=swap">
+<style>
+/* Layout: a reading desk. Fixed toolbar on top, book pages laid out at the 1903 page size (two columns,
+   running heads) and scaled to the screen; contents and search results slide in from the side. */
+:root {
+  --desk: #e3e6e8;
+  --desk-2: #d6dade;
+  --paper: #fdfdfa;
+  --ink: #1c1b18;
+  --ink-soft: #5d5f62;
+  --rule: #b9bcbf;
+  --accent: #284a7a;
+  --accent-ink: #ffffff;
+  --hit: rgba(255, 214, 90, .55);
+  --mark: rgba(255, 196, 0, .65);
+  --chrome: #f6f7f8;
+  --chrome-line: #cfd3d7;
+  --shadow: 0 1px 2px rgba(20, 30, 40, .10), 0 8px 28px rgba(20, 30, 40, .12);
+  --emb: none;
+  --f-book: "Old Standard TT", "GFS Didot", "Frank Ruhl Libre", "Noto Serif Hebrew", "Noto Serif", Georgia, serif;
+  --f-heb: "Frank Ruhl Libre", "Noto Serif Hebrew", "Times New Roman", serif;
+  --f-ui: "IBM Plex Sans", "IBM Plex Sans Hebrew", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-ui-heb: "IBM Plex Sans Hebrew", "IBM Plex Sans", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --desk: #121417; --desk-2: #0d0f11; --paper: #1f2124; --ink: #e2ded3; --ink-soft: #a3a6aa;
+    --rule: #4a4e53; --accent: #9dbbe6; --accent-ink: #0f1a2a; --hit: rgba(200, 160, 40, .35);
+    --mark: rgba(230, 180, 30, .55); --chrome: #191c1f; --chrome-line: #2c3035;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 8px 28px rgba(0,0,0,.45); --emb: invert(.88); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --desk: #121417; --desk-2: #0d0f11; --paper: #1f2124; --ink: #e2ded3; --ink-soft: #a3a6aa;
+  --rule: #4a4e53; --accent: #9dbbe6; --accent-ink: #0f1a2a; --hit: rgba(200, 160, 40, .35);
+  --mark: rgba(230, 180, 30, .55); --chrome: #191c1f; --chrome-line: #2c3035;
+  --shadow: 0 1px 2px rgba(0,0,0,.5), 0 8px 28px rgba(0,0,0,.45); --emb: invert(.88); color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--desk); color: var(--ink); font-family: var(--f-ui); overflow: hidden; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--chrome); }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.app { height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
+
+/* toolbar */
+.bar { position: relative; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+  padding-block: 8px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--chrome); border-bottom: 1px solid var(--chrome-line); }
+.brand { display: flex; align-items: baseline; gap: 8px; margin-right: 4px; white-space: nowrap; }
+.brand b { font-family: var(--f-book); font-size: 20px; font-weight: 700; letter-spacing: .02em; }
+.brand span { font-family: var(--f-heb); font-size: 17px; color: var(--ink-soft); }
+.search { position: relative; flex: 1 1 280px; min-width: 0; max-width: 560px; display: flex; }
+.search input { width: 100%; min-width: 0; height: 36px; padding: 0 74px 0 12px; border: 1px solid var(--chrome-line);
+  border-radius: 6px; background: var(--paper); font-size: 16px; }
+.search input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+.search .in-btns { position: absolute; right: 4px; top: 4px; display: flex; gap: 2px; }
+.icon-btn { height: 28px; min-width: 32px; padding: 0 7px; border: 0; border-radius: 5px; background: transparent; color: var(--ink-soft); font-size: 13px; }
+.icon-btn:hover, .icon-btn[aria-pressed="true"] { background: var(--desk); color: var(--ink); }
+.nav { display: flex; align-items: center; gap: 6px; }
+.btn { height: 34px; padding: 0 12px; border: 1px solid var(--chrome-line); border-radius: 6px; background: var(--paper); font-size: 14px; white-space: nowrap; }
+.btn:hover { border-color: var(--ink-soft); }
+.btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.pg-input { width: 62px; height: 34px; text-align: center; border: 1px solid var(--chrome-line); border-radius: 6px; background: var(--paper);
+  font-variant-numeric: tabular-nums; font-size: 15px; }
+.seg { display: inline-flex; border: 1px solid var(--chrome-line); border-radius: 6px; overflow: hidden; }
+.seg button { height: 32px; padding: 0 10px; border: 0; background: var(--paper); font-size: 13px; }
+.seg button + button { border-left: 1px solid var(--chrome-line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.of { color: var(--ink-soft); font-size: 13px; font-variant-numeric: tabular-nums; }
+
+/* dropdown */
+.dd { position: absolute; left: 0; right: 0; top: 40px; max-height: min(70vh, 560px); overflow: auto; background: var(--paper);
+  border: 1px solid var(--chrome-line); border-radius: 8px; box-shadow: var(--shadow); padding: 6px 0; }
+.dd .row { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: baseline; padding: 7px 12px; cursor: pointer; }
+.dd .row:hover, .dd .row.sel { background: color-mix(in srgb, var(--accent) 12%, var(--paper)); }
+.dd .hwv { font-family: var(--f-heb); font-size: 20px; direction: rtl; white-space: nowrap; }
+.dd .gl { font-family: var(--f-book); font-size: 14px; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.dd .pp { font-size: 12px; color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dd .act { padding: 9px 12px; font-size: 14px; cursor: pointer; color: var(--accent); border-top: 1px solid var(--chrome-line); margin-top: 4px; }
+.dd .act:hover, .dd .act.sel { background: color-mix(in srgb, var(--accent) 12%, var(--paper)); }
+.dd .none { padding: 10px 12px; font-size: 14px; color: var(--ink-soft); }
+.dd mark { background: var(--mark); color: inherit; }
+
+/* hebrew keyboard */
+.kbd { position: absolute; right: 0; top: 40px; width: min(380px, 92vw); background: var(--paper); border: 1px solid var(--chrome-line);
+  border-radius: 8px; box-shadow: var(--shadow); padding: 8px; display: grid; grid-template-columns: repeat(9, 1fr); gap: 4px; direction: rtl; }
+.kbd button { height: 36px; border: 1px solid var(--chrome-line); border-radius: 5px; background: var(--desk); font-family: var(--f-heb); font-size: 20px; }
+.kbd button:hover { border-color: var(--accent); }
+.kbd .wide { grid-column: span 3; font-family: var(--f-ui); font-size: 13px; }
+
+/* stage */
+.stage { position: relative; overflow: auto; min-height: 0; overscroll-behavior: contain; }
+.spread { display: flex; justify-content: center; align-items: flex-start; gap: 18px; padding: 18px; min-width: min-content; margin: 0 auto; }
+.sheet { flex: none; position: relative; background: var(--paper); box-shadow: var(--shadow); overflow: hidden; }
+.sheet.blank { background: transparent; box-shadow: none; }
+.sheet .loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ink-soft); font-size: 14px; }
+
+/* the book page, at design size 1380 x 1932, scaled by --s */
+.page { position: absolute; top: 0; left: 0; width: 1380px; height: 1932px; padding: 56px 70px 70px; box-sizing: border-box;
+  transform-origin: 0 0; transform: scale(var(--s, .5)); color: var(--ink); font-family: var(--f-book);
+  font-kerning: normal; text-rendering: optimizeLegibility; }
+.rh { height: 48px; margin-bottom: 26px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; }
+.rh .g { font-family: var(--f-heb); font-weight: 500; font-size: 34px; line-height: 1; direction: rtl; }
+.rh .g1 { justify-self: start; } .rh .g2 { justify-self: end; }
+.rh .pn { font-family: var(--f-book); font-size: 32px; letter-spacing: .02em; font-variant-numeric: lining-nums; }
+.cols { height: 1732px; column-count: 2; column-gap: 54px; column-rule: 1px solid var(--rule); column-fill: auto; overflow: hidden;
+  font-size: 23.5px; line-height: 1.2; text-align: justify; hyphens: auto; -webkit-hyphens: auto; overflow-wrap: break-word; }
+.cols.bal { column-fill: balance; }
+.cols.split { display: grid; grid-template-columns: 1fr 1fr; column-gap: 54px; position: relative; column-count: auto; }
+.cols.split::after { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; border-left: 1px solid var(--rule); }
+.cols .col { min-width: 0; align-self: start; }
+.cols.mid { display: block; column-count: auto; overflow: hidden; }
+.cols .sec.bal { column-count: 2; column-gap: 54px; column-rule: 1px solid var(--rule); column-fill: balance; }
+.cols .sec.split { display: grid; grid-template-columns: 1fr 1fr; column-gap: 54px; position: relative; }
+.cols .sec.split::after { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; border-left: 1px solid var(--rule); }
+.cols.mid > h2.letter { margin: 30px 0 30px; font-size: 3.6em; }
+.cols .col > .e:first-child { margin-top: 0; }
+.rh.none { display: none; }
+.rh .rn, .rh .sc { font-family: var(--f-book); font-size: 30px; letter-spacing: .06em; }
+.rh .sc { font-variant: small-caps; font-size: 32px; }
+.lethead { display: block; text-align: center; font-family: var(--f-heb); font-weight: 700; font-size: 85px; line-height: 1; margin-bottom: 30px; }
+.page-x.after { text-align: center; font-size: 34px; margin-top: 70px; letter-spacing: .04em; }
+.sc { font-variant: small-caps; }
+.cols .verse { display: grid; grid-template-columns: 1fr 1.6fr 1fr; gap: 0 .6em; font-family: var(--f-heb); font-size: 1.04em; margin: .05em 0; text-indent: 0; }
+.cols .verse span:nth-child(3n+2) { text-align: center; } .cols .verse span:nth-child(3n) { text-align: left; }
+.cols .verse.v2 { grid-template-columns: 1fr 1fr; } .cols .verse.v2 span:nth-child(2n) { text-align: left; } .cols .verse.v2 span:nth-child(2n+1) { text-align: right; }
+.cols .ep.sub { margin-top: .42em; }
+.page-x.after.theend span { display: inline-block; font-size: 30px; font-weight: 700; letter-spacing: .06em; padding: 0 6px 6px; border-bottom: 2.5px solid var(--ink); }
+.page.pref .fm.sig { display: flex; justify-content: space-between; text-indent: 0; padding: .4em 3em 0 2.5em; }
+.page.pref .fm.sig span + span { letter-spacing: .06em; }
+.page-x.fns { margin-top: 30px; border-top: 1px solid var(--rule); padding-top: 14px; font-size: 22px; line-height: 1.3; text-align: justify; }
+.page-x.fns .fn { margin: 0; text-indent: 1.5em; }
+.page-x.fns sup { font-size: .65em; vertical-align: .5em; line-height: 0; }
+.page.pref .cols { column-count: 1; overflow: hidden; line-height: 1.28; }
+.page.pref .fm { text-indent: 2.2em; margin: 0; }
+.page.pref .pt { font-family: var(--f-book); font-weight: 400; font-size: 2.3em; letter-spacing: .08em; text-align: center; margin: 0 0 .25em; line-height: 1.1; }
+.page.pref .orn { width: 220px; height: 1px; background: var(--ink); margin: 0 auto 1.2em; position: relative; }
+.page.pref .orn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; border: 1.5px solid var(--ink); background: var(--paper); transform: translate(-50%, -50%) rotate(45deg); }
+/* title pages */
+.page.title .cols { height: 1806px; column-count: 1; }
+.tp { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; font-family: var(--f-book); padding: 10px 0 40px; box-sizing: border-box; }
+.tp-a { font-size: 150px; font-weight: 700; letter-spacing: .05em; line-height: 1; white-space: nowrap; }
+.tp-b { font-size: 49px; font-weight: 700; line-height: 1.55; letter-spacing: 0; white-space: nowrap; }
+.tp-c { font-size: 30px; letter-spacing: .12em; }
+.tp-d { font-size: 50px; letter-spacing: .04em; }
+.tp-e { font-size: 26px; letter-spacing: .1em; }
+.tp-ded { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tp-to { font-size: 20px; letter-spacing: .1em; } .tp-wife { font-size: 66px; letter-spacing: .32em; line-height: 1; } .tp-love { font-size: 18px; letter-spacing: .12em; }
+.tp-emb { width: 860px; max-width: none; filter: var(--emb); }
+.tp-pr { font-size: 30px; font-weight: 700; letter-spacing: .03em; }
+.tp-pub { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+.tp-pub > div { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tp-pub > div + div { border-left: 1.5px solid var(--ink); }
+.tp-pub span { font-size: 33px; letter-spacing: .01em; white-space: nowrap; } .tp-pub small { font-size: 19px; letter-spacing: .05em; }
+.tp-yr { font-size: 38px; letter-spacing: .08em; margin-top: -20px; }
+.tp2 { justify-content: flex-start; gap: 0; }
+.tp2 .tp-b { margin-top: 70px; } .tp2 .tp-c { margin-top: 140px; } .tp2 .tp-d { margin-top: 70px; } .tp2 .tp-e { margin-top: 90px; }
+.tp2 .tp-vol { font-size: 56px; letter-spacing: .1em; margin-top: 170px; } .tp2 .tp-let { font-family: var(--f-heb); font-size: 64px; margin-top: 20px; }
+.tp2 .tp-pub { margin-top: auto; } .tp2 .tp-yr { margin-top: 10px; }
+.cols p { margin: 0; }
+.cols .e { margin-top: .42em; }
+.cols .e:first-child { margin-top: 0; }
+.cols .e.cont { margin-top: 0; }
+.cols .ep, .cols .bin { text-indent: 1em; }
+.cols p[data-c] { text-indent: 0; }
+.cols .fm { margin-bottom: .45em; text-indent: 1.2em; }
+.cols .fm:first-child { text-indent: 0; }
+.cols .hw { font-family: var(--f-heb); font-weight: 500; font-size: 1.72em; line-height: .9; cursor: pointer; border-radius: 3px; }
+.cols .hw:hover { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.cols .h, .cols .bf { font-family: var(--f-heb); font-size: 1.04em; }
+.cols .h { direction: rtl; unicode-bidi: isolate; }
+.cols .bf .h { font-size: 1em; }
+.cols sup { font-size: .62em; line-height: 0; vertical-align: .55em; }
+.cols sub { font-size: .62em; line-height: 0; }
+.cols a.x { color: inherit; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, var(--accent) 60%, transparent); }
+.cols a.x:hover { color: var(--accent); border-bottom-style: solid; }
+.cols a.r { color: inherit; text-decoration: none; }
+.cols a.r:hover { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; }
+.cols .letter { text-align: center; font-family: var(--f-heb); font-weight: 700; font-size: 3.4em; line-height: 1; margin: .1em 0 .35em; }
+.cols table { border-collapse: collapse; font-size: .95em; }
+.page.abbr .cols { column-count: 3; column-gap: 40px; }
+.page.back .cols { column-count: 3; column-gap: 34px; column-rule: 1px solid var(--rule); text-align: justify; }
+.page.back .fm > .h:first-child { font-size: 1.45em; font-weight: 500; line-height: .95; }
+.page.abbr .fm, .page.back .fm { text-indent: -1em; padding-inline-start: 1em; margin: 0 0 .12em; }
+.page.abbr .fm:first-child, .page.abbr .fm:nth-child(2) { text-indent: 0; padding-inline-start: 0; text-align: center; margin-bottom: .4em; }
+.page.idx .cols { column-count: 4; column-gap: 34px; text-align: left; }
+.page.idx table, .page.idx tbody, .page.idx tr { display: block; }
+.page.idx tr { padding-left: 1.3em; text-indent: -1.3em; }
+.page.idx td, .page.idx .fm { display: inline; margin: 0; text-indent: 0; padding: 0; }
+.page.idx td + td::before { content: "\2003"; }
+.page.idx .fm b { font-weight: 700; }
+.cols td { padding: 0 .4em; vertical-align: top; }
+.e.hit > p, .e.hit { background: var(--hit); box-shadow: 0 0 0 4px var(--hit); border-radius: 2px; transition: background 1.2s ease, box-shadow 1.2s ease; }
+.e.hit.fade, .e.hit.fade > p { background: transparent; box-shadow: none; }
+.cols mark { background: var(--mark); color: inherit; border-radius: 2px; }
+
+/* text (reflow) view */
+.reflow { background: var(--paper); min-height: 100%; box-sizing: border-box; max-width: 46rem; margin: 0 auto; padding-block: 20px 60px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); font-family: var(--f-book); }
+.reflow .rh2 { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--rule); padding-bottom: 8px; margin-bottom: 14px; }
+.reflow .rh2 .g { font-family: var(--f-heb); font-size: 22px; }
+.reflow .rh2 .pn { font-size: 18px; }
+.reflow .cols { height: auto; column-count: 1; font-size: 18px; line-height: 1.5; text-align: left; hyphens: manual; overflow: visible; }
+.reflow .cols .e { margin-top: .9em; }
+
+/* footer */
+.foot { display: flex; align-items: center; gap: 12px; padding-block: 6px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--chrome); border-top: 1px solid var(--chrome-line); font-size: 13px; color: var(--ink-soft); min-width: 0; }
+.foot input[type=range] { flex: 1; min-width: 80px; accent-color: var(--accent); }
+.foot .where { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46%; }
+.foot .where .heb { font-family: var(--f-heb); font-size: 15px; color: var(--ink); }
+.badge { display: inline-block; padding: 1px 7px; border-radius: 10px; background: color-mix(in srgb, #d08a00 22%, transparent); color: var(--ink); font-size: 12px; margin-left: 6px; }
+.back-chip { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); top: 12px; z-index: 3; }
+
+/* side drawer */
+.drawer { position: fixed; z-index: 8; top: 0; bottom: 0; left: 0; width: min(420px, 100vw); background: var(--chrome); border-right: 1px solid var(--chrome-line);
+  box-shadow: var(--shadow); display: flex; flex-direction: column; transform: translateX(-102%); transition: transform .22s ease;
+  padding-top: env(safe-area-inset-top, 0px); padding-left: env(safe-area-inset-left, 0px); }
+.drawer.open { transform: none; }
+.drawer header { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--chrome-line); }
+.drawer header h2 { font-size: 15px; font-weight: 600; margin: 0; flex: 1; }
+.tabs { display: flex; gap: 4px; padding: 8px 14px 0; }
+.tabs button { border: 0; background: transparent; padding: 6px 10px; border-radius: 6px 6px 0 0; font-size: 14px; color: var(--ink-soft); }
+.tabs button[aria-selected="true"] { background: var(--paper); color: var(--ink); font-weight: 600; }
+.letters { display: flex; flex-wrap: wrap; gap: 4px; padding: 10px 14px; direction: rtl; border-bottom: 1px solid var(--chrome-line); background: var(--paper); }
+.letters button { min-width: 34px; height: 32px; border: 1px solid var(--chrome-line); border-radius: 5px; background: var(--chrome); font-family: var(--f-heb); font-size: 18px; }
+.letters button.ltr { direction: ltr; font-family: var(--f-ui); font-size: 12px; padding: 0 8px; }
+.letters button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.list { flex: 1; overflow: auto; background: var(--paper); }
+.toc-row { display: grid; grid-template-columns: 52px 1fr; gap: 10px; align-items: baseline; padding: 6px 14px; cursor: pointer; border-bottom: 1px solid color-mix(in srgb, var(--chrome-line) 50%, transparent); }
+.toc-row:hover { background: color-mix(in srgb, var(--accent) 10%, var(--paper)); }
+.toc-row.cur { background: color-mix(in srgb, var(--accent) 18%, var(--paper)); }
+.toc-row .n { font-variant-numeric: tabular-nums; color: var(--ink-soft); font-size: 13px; text-align: right; }
+.toc-row .w { font-family: var(--f-heb); font-size: 18px; direction: rtl; text-align: left; display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+.toc-row .w .dash { color: var(--ink-soft); }
+.res-row { padding: 9px 14px; border-bottom: 1px solid color-mix(in srgb, var(--chrome-line) 50%, transparent); cursor: pointer; font-family: var(--f-book); font-size: 15px; line-height: 1.45; }
+.res-row:hover { background: color-mix(in srgb, var(--accent) 10%, var(--paper)); }
+.res-row .rp { font-family: var(--f-ui); font-size: 12px; color: var(--ink-soft); margin-bottom: 2px; }
+.res-row .rp .heb { font-family: var(--f-heb); font-size: 15px; color: var(--ink); }
+.res-row mark { background: var(--mark); color: inherit; }
+.res-row .h { font-family: var(--f-heb); }
+.progress { padding: 8px 14px; font-size: 13px; color: var(--ink-soft); background: var(--paper); border-bottom: 1px solid var(--chrome-line); }
+.progress .barx { height: 3px; background: var(--chrome-line); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+.progress .barx i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+.scrim { position: fixed; inset: 0; z-index: 7; background: rgba(0,0,0,.25); }
+
+/* entry reader */
+.rd-scrim { position: fixed; inset: 0; z-index: 20; background: rgba(0,0,0,.45); }
+.rd { position: fixed; z-index: 21; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(780px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px); display: flex; flex-direction: column; background: var(--paper); color: var(--ink);
+  border: 1px solid var(--chrome-line); border-radius: 10px; box-shadow: var(--shadow); }
+.rd[hidden], .rd-scrim[hidden] { display: none; }
+.rd-bar, .rd-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 10px 12px; font-size: 14px; }
+.rd-bar { border-bottom: 1px solid var(--chrome-line); }
+.rd-foot { border-top: 1px solid var(--chrome-line); }
+.rd-bar .sp { flex: 1; }
+.rd-pg { color: var(--ink-soft); padding: 0 4px; }
+.rd-bar .btn { min-width: 34px; }
+.rd-foot a.btn { display: inline-flex; align-items: center; text-decoration: none; color: inherit; }
+.rd-cite { flex-basis: 100%; color: var(--ink-soft); font-family: var(--f-book); font-size: 14px; user-select: all; }
+.rd-cite .h { font-family: var(--f-heb); }
+.rd-body { overflow: auto; overscroll-behavior: contain; padding: 18px 24px 24px; font-family: var(--f-book); line-height: 1.6; }
+.rd-body p { margin: 0 0 .6em; }
+.rd-body .bin, .rd-body .ep.sub { margin-top: .8em; }
+.rd-body .hw { font-family: var(--f-heb); font-weight: 500; font-size: 1.5em; line-height: 1.2; }
+.rd-body .h, .rd-body .bf { font-family: var(--f-heb); font-size: 1.08em; }
+.rd-body .h { direction: rtl; unicode-bidi: isolate; }
+.rd-body .bf .h { font-size: 1em; }
+.rd-body sup { font-size: .62em; line-height: 0; vertical-align: .55em; }
+.rd-body a.x { color: inherit; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, var(--accent) 60%, transparent); }
+.rd-body a.x:hover { color: var(--accent); border-bottom-style: solid; }
+.rd-body a.r { color: inherit; text-decoration: none; }
+.rd-body a.r:hover { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; }
+@media (hover: hover) { .cols .e:hover { background: color-mix(in srgb, var(--accent) 5%, transparent); border-radius: 2px; cursor: zoom-in; } .cols .e a:hover { cursor: pointer; } }
+@media (max-width: 640px) {
+  .rd { left: 0; right: 0; top: auto; bottom: 0; transform: none; width: auto; max-height: 92dvh; border-radius: 12px 12px 0 0; }
+  .rd-body { padding: 14px 16px 18px; }
+}
+
+/* entry popover */
+.pop { position: fixed; z-index: 9; width: min(320px, calc(100vw - 32px)); background: var(--paper); border: 1px solid var(--chrome-line); border-radius: 8px;
+  box-shadow: var(--shadow); padding: 12px 14px; font-size: 14px; }
+.pop .ph { font-family: var(--f-heb); font-size: 24px; direction: rtl; text-align: right; margin-bottom: 4px; }
+.pop .pg { color: var(--ink-soft); font-size: 13px; margin-bottom: 10px; }
+.pop .acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.pop a.btn { display: inline-flex; align-items: center; text-decoration: none; color: inherit; }
+.pop .cite { margin-top: 10px; padding: 8px; background: var(--desk); border-radius: 6px; font-family: var(--f-book); font-size: 14px; user-select: all; }
+.pop .cite .h { font-family: var(--f-heb); }
+
+.help { color: var(--ink-soft); font-size: 13px; padding: 10px 14px; line-height: 1.5; }
+.help kbd { font-family: var(--f-ui); font-size: 12px; border: 1px solid var(--chrome-line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--paper); }
+
+@media (max-width: 720px) {
+  .brand span { display: none; }
+  .bar { gap: 8px 8px; }
+  .search { order: 3; flex-basis: 100%; max-width: none; }
+  .of { display: none; }
+  #vSpread { display: none; }
+  .foot .where { max-width: 60%; }
+}
+@media (prefers-reduced-motion: reduce) { .drawer { transition: none; } .e.hit { transition: none; } }
+</style>
+
+<div class="app" id="app">
+  <div class="bar">
+    <div class="brand"><b>Jastrow</b><span lang="he" dir="rtl">ספר המלים</span></div>
+    <button class="btn" id="tocBtn" aria-controls="drawer" aria-expanded="false" title="Contents (C)">Contents</button>
+    <div class="search" id="searchBox">
+      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search a headword, or any English or Hebrew text" aria-label="Search">
+      <div class="in-btns"><button class="icon-btn" id="kbBtn" aria-pressed="false" title="Hebrew keyboard" lang="he">א־ב</button></div>
+      <div class="dd" id="dd" hidden></div>
+      <div class="kbd" id="kbd" hidden></div>
+    </div>
+    <div class="nav">
+      <button class="btn" id="prev" title="Previous page (←)" aria-label="Previous page">‹</button>
+      <input class="pg-input" id="pgIn" inputmode="text" aria-label="Page number">
+      <button class="btn" id="next" title="Next page (→)" aria-label="Next page">›</button>
+      <span class="of" id="of"></span>
+    </div>
+    <div class="seg" role="group" aria-label="View">
+      <button id="vSpread" aria-pressed="false" title="Two pages">Spread</button>
+      <button id="vPage" aria-pressed="false" title="One page">Page</button>
+      <button id="vText" aria-pressed="false" title="Plain text of the page, reflowed for small screens">Text</button>
+    </div>
+    <div class="seg" role="group" aria-label="Zoom" id="zoomSeg">
+      <button id="zOut" aria-label="Zoom out" title="Zoom out (−)">−</button>
+      <button id="zFit" title="Fit to window (0)">Fit</button>
+      <button id="zIn" aria-label="Zoom in" title="Zoom in (+)">+</button>
+    </div>
+  </div>
+  <main class="stage" id="stage" tabindex="-1"></main>
+  <div class="foot">
+    <span class="where" id="where"></span>
+    <input type="range" id="scrub" min="0" max="1" value="0" aria-label="Browse pages">
+  </div>
+</div>
+
+<aside class="drawer" id="drawer" aria-label="Contents and search results">
+  <header><h2 id="drawerTitle">Contents</h2><button class="icon-btn" id="closeDrawer" aria-label="Close">✕</button></header>
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tabToc" aria-selected="true">Pages</button>
+    <button role="tab" id="tabRes" aria-selected="false">Text search</button>
+    <button role="tab" id="tabHelp" aria-selected="false">About</button>
+  </div>
+  <div id="paneToc" style="display:flex;flex-direction:column;flex:1;min-height:0">
+    <div class="letters" id="letters"></div>
+    <div class="list" id="tocList"></div>
+  </div>
+  <div id="paneRes" style="display:none;flex-direction:column;flex:1;min-height:0">
+    <div class="progress" id="resProg">Type in the search box and choose “Search all text”.</div>
+    <div class="list" id="resList"></div>
+  </div>
+  <div id="paneHelp" style="display:none;flex:1;overflow:auto;background:var(--paper)">
+    <div class="help">
+      <p><b>Marcus Jastrow, <i>A Dictionary of the Targumim, the Talmud Babli and Yerushalmi, and the Midrashic Literature</i></b> (London: Luzac, 1903). Public domain.</p>
+      <p>The text is Sefaria’s current digitization (2026), placed on the printed pages using the page breaks recorded in Sefaria’s 2018 data. Every page starts and ends on the same word as the book. Where the 2026 text lost material that the 2018 text has, the 2018 text is used for that entry.</p>
+      <p>Column breaks read from scans of the 1903 printing match the book exactly; on other pages the columns are balanced, which puts the break on or within a line or two of the printed one.</p>
+      <p>Click any entry to read it in larger type, with its citation and a link to Sefaria; an entry that runs over two columns or pages is shown whole. Dotted words are cross-references within the dictionary; citations of sources open the passage on Sefaria.</p>
+      <p><kbd>←</kbd> <kbd>→</kbd> turn pages · <kbd>/</kbd> search · <kbd>C</kbd> contents · <kbd>+</kbd> <kbd>−</kbd> <kbd>0</kbd> zoom</p>
+      <p>Link to a page with <code>#p1087</code> or to an entry with its Sefaria id, e.g. <code>#P00866</code>.</p>
+    </div>
+  </div>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+<div class="pop" id="pop" hidden></div>
+<div class="rd-scrim" id="rdScrim" hidden></div>
+<div class="rd" id="rd" role="dialog" aria-modal="true" aria-label="Entry" hidden>
+  <div class="rd-bar">
+    <button class="btn" id="rdBack" hidden>← Back</button>
+    <button class="btn" id="rdPrev" aria-label="Previous entry" title="Previous entry">‹</button>
+    <button class="btn" id="rdNext" aria-label="Next entry" title="Next entry">›</button>
+    <span class="rd-pg" id="rdPg"></span><span class="sp"></span>
+    <button class="btn" id="rdSm" aria-label="Smaller text" title="Smaller text">A−</button>
+    <button class="btn" id="rdLg" aria-label="Larger text" title="Larger text">A+</button>
+    <button class="btn" id="rdClose" aria-label="Close">✕</button>
+  </div>
+  <div class="rd-body" id="rdBody"></div>
+  <div class="rd-foot">
+    <button class="btn" id="rdGo">Show on the page</button>
+    <a class="btn" id="rdSef" target="_blank" rel="noopener">Open on Sefaria ↗</a>
+    <button class="btn" id="rdCopy">Copy citation</button>
+    <div class="rd-cite" id="rdCite"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+"use strict";
+const W = 1380, H = 1932, GAP = 18, PAD = 18, NOMINAL = 23.5;
+const $ = (id) => document.getElementById(id);
+const S = {
+  pages: [], chunk: 10, chunks: new Map(), idx: 0, view: null, zoom: 1, hw: null, hwKeys: null,
+  byLabel: new Map(), history: [], highlight: null, mark: null, textCache: new Map(), entryPage: null,
+};
+const store = {
+  get(k) { try { return localStorage.getItem("jastrow:" + k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem("jastrow:" + k, v); } catch (e) {} },
+};
+
+/* ---------- data ---------- */
+function chunkOf(i) { return Math.floor(i / S.chunk); }
+function loadChunk(c) {
+  if (!S.chunks.has(c)) {
+    const p = fetch("data/c" + String(c).padStart(3, "0") + ".json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    p.catch(() => S.chunks.delete(c));
+    S.chunks.set(c, p);
+  }
+  return S.chunks.get(c);
+}
+async function pageHTML(i) { const arr = await loadChunk(chunkOf(i)); return arr[i % S.chunk]; }
+let hwPromise = null;
+function loadHW() {
+  if (!hwPromise) hwPromise = fetch("data/hw.json").then(r => r.json()).then(rows => {
+    S.hw = rows;
+    S.hwKeys = rows.map(r => r[2].split("|").map(h => norm(h.replace(/\(.*?\)/g, " "))).filter(Boolean));
+    S.entryPage = new Map(rows.map(r => [r[0], r[1]]));
+    return rows;
+  });
+  return hwPromise;
+}
+
+/* ---------- text helpers ---------- */
+const FIN = { "ך": "כ", "ם": "מ", "ן": "נ", "ף": "פ", "ץ": "צ" };
+function norm(s) {
+  return s.normalize("NFD").replace(/[֑-ׇ]/g, "").replace(/[ךםןףץ]/g, c => FIN[c])
+    .toLowerCase().replace(/[^א-תa-z0-9]/g, "");
+}
+const isHeb = (s) => /[א-ת]/.test(s);
+function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function looseRegex(q) {
+  // Hebrew: ignore vowel points and final forms; Latin: ignore case and diacritics loosely
+  const parts = [...q.normalize("NFD").replace(/[֑-ׇ]/g, "")].filter(c => !/[̀-ͯ]/.test(c));
+  const cls = { "כ": "[כך]", "ך": "[כך]", "מ": "[מם]", "ם": "[מם]", "נ": "[נן]", "ן": "[נן]", "פ": "[פף]", "ף": "[פף]", "צ": "[צץ]", "ץ": "[צץ]" };
+  const src = parts.map(c => {
+    if (/\s/.test(c)) return "\\s+";
+    const base = cls[c] || c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return base + (isHeb(c) ? "[\\u0591-\\u05C7]*" : "[\\u0300-\\u036f]*");
+  }).join("");
+  return new RegExp(src, "giu");
+}
+
+/* ---------- page model ---------- */
+function label(i) { return S.pages[i][0]; }
+function section(i) { return S.pages[i][1]; }
+function isNum(i) { return /^\d+$/.test(label(i)); }
+function kindOf(i) { return S.pages[i][5] || ""; }
+function pageClass(i) {
+  const k = kindOf(i);
+  if (k === "title" || k === "vtitle") return "title";
+  return k;
+}
+function romanVal(s) {
+  const v = { i: 1, v: 5, x: 10, l: 50, c: 100 }; let n = 0;
+  for (let k = 0; k < s.length; k++) { const a = v[s[k]], b = v[s[k + 1]] || 0; n += a < b ? -a : a; }
+  return n;
+}
+function spreadFor(i) {
+  if (isNum(i)) {
+    const n = +label(i);
+    const left = n % 2 === 0 ? n : n - 1;
+    return [S.byLabel.get(String(left)), S.byLabel.get(String(left + 1))].map(x => x === undefined ? -1 : x);
+  }
+  const first = S.pages.findIndex(p => /^\d+$/.test(p[0]));
+  const a = i - (i % 2);
+  return [a, a + 1 < first ? a + 1 : -1];
+}
+
+/* ---------- view sizing ---------- */
+function stageBox() { const st = $("stage"); return { w: st.clientWidth - PAD * 2, h: st.clientHeight - PAD * 2 }; }
+function autoView() {
+  const { w, h } = stageBox();
+  const sSpread = Math.min((w - GAP) / (2 * W), h / H);
+  if (sSpread >= 0.40) return "spread";
+  return w < 560 ? "page" : "page";
+}
+function currentView() { return S.view || autoView(); }
+function fitScale(n) {
+  const { w, h } = stageBox();
+  if (n === 2) return Math.min((w - GAP) / (2 * W), h / H);
+  const sPage = Math.min(w / W, h / H);
+  return w < 700 ? w / W : sPage;
+}
+
+/* ---------- fitting the type to the page ---------- */
+const FACES = ['23px "Old Standard TT"', 'italic 23px "Old Standard TT"', 'bold 23px "Old Standard TT"', '23px "Frank Ruhl Libre"',
+  '500 23px "Frank Ruhl Libre"', '23px "GFS Didot"', '23px "Noto Serif Hebrew"', '23px "Noto Serif"'];
+async function fontsFor(text) {
+  if (!document.fonts || !document.fonts.load) return;
+  const t = text.length > 60000 ? text.slice(0, 60000) : text;
+  try { await Promise.race([Promise.all(FACES.map(f => document.fonts.load(f, t))), new Promise(r => setTimeout(r, 4000))]); } catch (e) {}
+  try { await document.fonts.ready; } catch (e) {}
+}
+function overflow(cols) { return cols.scrollWidth > cols.clientWidth + 1 || cols.scrollHeight > cols.clientHeight + 1; }
+const AV_FULL = 1806, RH_H = 74, LETTER_H = 140, COL_GAP = 54;
+function setupPage(art) {
+  // restore the page's own HTML and pull out the parts that sit outside the columns
+  const cols = art.querySelector(".cols");
+  if (art._html !== undefined) cols.innerHTML = art._html;
+  cols.className = "cols"; cols.removeAttribute("style");
+  art.querySelectorAll(":scope > .page-x").forEach(e => e.remove());
+  const kind = art.dataset.kind;
+  let av = art.querySelector(".rh.none") ? AV_FULL : AV_FULL - RH_H;
+  if (kind === "letter") {
+    const h2 = cols.querySelector(":scope > h2.letter");
+    if (h2) {
+      h2.remove();
+      const lh = document.createElement("div"); lh.className = "lethead page-x"; lh.lang = "he"; lh.dir = "rtl"; lh.textContent = h2.textContent;
+      art.insertBefore(lh, cols);
+    }
+    av -= LETTER_H;
+  }
+  art._shift = 0;
+  if (kind === "letter") { const lh = art.querySelector(".lethead"); if (lh) art._shift = lh.textContent.length + 1; }
+  const extras = [];
+  for (const sel of [":scope > .after", ":scope > .fns"]) {
+    const x = cols.querySelector(sel);
+    if (x) { x.remove(); x.classList.add("page-x"); extras.push(x); }
+  }
+  extras.forEach(x => art.appendChild(x));
+  return { cols, av, extras };
+}
+function fitPage(art) {
+  const kind = art.dataset.kind;
+  if (kind === "title" || kind === "vtitle" || !art.querySelector(".cols")) return;
+  const { cols, av, extras } = setupPage(art);
+  const exH = extras.reduce((t, x) => t + x.offsetHeight + parseFloat(getComputedStyle(x).marginTop || 0), 0);
+  const STEP = 0.25;
+  if (kind === "pref") {                       // one column, type sized so the text fills the page
+    const fns = extras.filter(x => x.classList.contains("fns"));
+    let f = 40;
+    while (f > 18) {
+      fns.forEach(x => { x.style.fontSize = (f * 0.8).toFixed(2) + "px"; });
+      const fnH = fns.reduce((t, x) => t + x.offsetHeight + 30, 0);
+      cols.style.height = (av - fnH) + "px";
+      cols.style.fontSize = f + "px";
+      if (!overflow(cols)) break;
+      f -= STEP;
+    }
+    art.dataset.fit = f.toFixed(2);
+    return;
+  }
+  const colsH = av - exH;
+  cols.style.height = colsH + "px";
+  if (kind === "abbr" || kind === "idx" || kind === "back") {      // lists: plain multi-column flow
+    if (kind === "back") cols.classList.add("bal");
+    let f = 25.25;
+    while (f > 12) { cols.style.fontSize = f + "px"; if (!overflow(cols)) break; f -= STEP; }
+    art.dataset.fit = f.toFixed(2);
+    return;
+  }
+  // 1. balanced two-column flow; largest type that fits
+  cols.classList.add("bal");
+  const HI = 25.25;
+  let f = HI, short = false;
+  cols.style.fontSize = HI + "px";
+  if (!overflow(cols)) { short = true; f = NOMINAL; }
+  else { f = HI - STEP; while (f > 14) { cols.style.fontSize = f + "px"; if (!overflow(cols)) break; f -= STEP; } }
+  if (kind === "letter") short = true;
+  const mid = cols.querySelector(":scope > h2.letter");
+  if (mid && kind !== "letter") { midLetterLayout(art, cols, colsH, S.pages[+art.dataset.i] ? S.pages[+art.dataset.i][6] : -1); return; }
+  const known = S.pages[+art.dataset.i] ? S.pages[+art.dataset.i][6] : -1;
+  const html0 = cols.innerHTML;
+  if (known >= 0 && short) {
+    // a page that ends a letter or a volume: the columns are shorter than the page, but still break where the book does
+    const tp = textPos(cols, known - (art._shift || 0));
+    if (tp && known - (art._shift || 0) < cols.textContent.length - 5) {
+      cols.style.fontSize = f + "px";
+      const [c1, c2] = splitAt(cols, tp[0], tp[1]);
+      const T = Math.max(c1.scrollHeight, c2.scrollHeight);
+      if (T <= colsH + 1) {
+        justify(c1, T, f); justify(c2, T, f); cols.style.height = T + "px";
+        const lh = kind === "letter" && art.querySelector(".lethead");
+        if (lh) {
+          lh.style.fontSize = (3.6 * f).toFixed(2) + "px";
+          lh.style.marginTop = Math.max(0, colsH + LETTER_H - (lh.offsetHeight + 30) - T) + "px";
+        }
+        art.dataset.fit = "short scan " + f.toFixed(2); return;
+      }
+      cols.innerHTML = html0; cols.className = "cols bal"; cols.style.height = colsH + "px"; cols.style.fontSize = f + "px";
+      if (kind !== "letter" && knownBreakLayout(art, cols, colsH, known - (art._shift || 0), 0)) return;
+      cols.innerHTML = html0; cols.className = "cols bal"; cols.style.height = colsH + "px"; cols.style.fontSize = f + "px";
+    }
+  }
+  if (known >= 0 && !short) {
+    if (knownBreakLayout(art, cols, colsH, known - (art._shift || 0), f)) return;
+    cols.innerHTML = html0; cols.className = "cols bal"; cols.style.height = colsH + "px"; cols.style.fontSize = f + "px";
+  }
+  for (let attempt = 0; attempt < 40; attempt++) {
+    cols.innerHTML = html0; cols.className = "cols bal"; cols.style.height = colsH + "px"; cols.style.fontSize = f + "px";
+    const sp = splitPoint(cols);
+    if (!sp) break;
+    // 2. split into two real columns at the balanced break
+    const [n, k] = sp;
+    const r1 = document.createRange(); r1.setStart(cols, 0); r1.setEnd(n, k);
+    const r2 = document.createRange(); r2.setStart(n, k); r2.setEnd(cols, cols.childNodes.length);
+    let cont = false;
+    const blk = n.parentElement && n.parentElement.closest("p");
+    if (blk && cols.contains(blk)) { const rr = document.createRange(); rr.setStart(blk, 0); rr.setEnd(n, k); cont = rr.toString().trim().length > 0; }
+    const f1 = r1.cloneContents(), f2 = r2.cloneContents();
+    const c1 = document.createElement("div"), c2 = document.createElement("div");
+    c1.className = c2.className = "col";
+    c1.appendChild(f1); c2.appendChild(f2);
+    if (cont) { const p = c2.querySelector("p"); if (p) p.dataset.c = "1"; const e = c2.querySelector(".e"); if (e) e.classList.add("cont"); }
+    cols.replaceChildren(c1, c2);
+    cols.className = "cols split";
+    cols.style.height = "auto";
+    const h1 = c1.scrollHeight, h2 = c2.scrollHeight;
+    if (Math.max(h1, h2) > colsH + 1 && f > 14) { f -= STEP; continue; }
+    // 3. both columns end on the same line
+    const T = short ? Math.max(h1, h2) : colsH;
+    justify(c1, T, f); justify(c2, T, f);
+    cols.style.height = T + "px";
+    if (kind === "letter") {
+      // same size and spacing as a letter that starts mid-page; the spare room goes above it
+      const lh = art.querySelector(".lethead");
+      if (lh) {
+        lh.style.fontSize = (3.6 * f).toFixed(2) + "px";
+        const lhH = lh.offsetHeight + 30;
+        lh.style.marginTop = Math.max(0, colsH + LETTER_H - lhH - T) + "px";
+      }
+    }
+    break;
+  }
+  art.dataset.fit = (short ? "short " : "") + f.toFixed(2);
+}
+function textPos(root, off) {
+  const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let n, acc = 0;
+  while ((n = tw.nextNode())) { const L = n.nodeValue.length; if (acc + L >= off) return [n, off - acc]; acc += L; }
+  return null;
+}
+function splitAt(cols, n, k, cls) {
+  const r1 = document.createRange(); r1.setStart(cols, 0); r1.setEnd(n, k);
+  const r2 = document.createRange(); r2.setStart(n, k); r2.setEnd(cols, cols.childNodes.length);
+  let cont = false;
+  const blk = n.parentElement && n.parentElement.closest("p");
+  if (blk && cols.contains(blk)) { const rr = document.createRange(); rr.setStart(blk, 0); rr.setEnd(n, k); cont = rr.toString().trim().length > 0; }
+  const c1 = document.createElement("div"), c2 = document.createElement("div");
+  c1.className = c2.className = "col";
+  c1.appendChild(r1.cloneContents()); c2.appendChild(r2.cloneContents());
+  if (cont) { const p = c2.querySelector("p"); if (p) p.dataset.c = "1"; const e = c2.querySelector(".e"); if (e) e.classList.add("cont"); }
+  cols.replaceChildren(c1, c2);
+  cols.className = cls || "cols split";
+  cols.style.height = "auto";
+  return [c1, c2];
+}
+function midLetterLayout(art, cols, colsH, known) {
+  // a letter that begins part-way down the page: two balanced columns above the letter, two below
+  const kids = [...cols.childNodes];
+  const hi = kids.findIndex(k => k.nodeType === 1 && k.matches("h2.letter"));
+  const secA = document.createElement("div"), secB = document.createElement("div");
+  secA.className = secB.className = "sec bal";
+  kids.slice(0, hi).forEach(k => secA.appendChild(k));
+  const h2 = kids[hi];
+  kids.slice(hi + 1).forEach(k => secB.appendChild(k));
+  cols.replaceChildren(secA, h2, secB);
+  cols.className = "cols mid"; cols.style.height = "auto";
+  let f = 25.25;
+  while (f > 14) { cols.style.fontSize = f + "px"; if (cols.scrollHeight <= colsH) break; f -= 0.25; }
+  const short = f >= 25.25 - 1e-9;
+  if (short) { f = NOMINAL; cols.style.fontSize = f + "px"; }
+  const parts = [];
+  for (const sec of [secA, secB]) {
+    if (!sec.textContent.trim()) { parts.push(null); continue; }
+    let sp = splitPoint(sec);
+    if (sec === secA && known > 0 && known < secA.textContent.length - 5) { const tp = textPos(secA, known); if (tp) sp = tp; }
+    parts.push(sp ? splitAt(sec, sp[0], sp[1], "sec split") : null);
+  }
+  const hA = parts[0] ? Math.max(parts[0][0].scrollHeight, parts[0][1].scrollHeight) : secA.scrollHeight;
+  if (parts[0]) { justify(parts[0][0], hA, f); justify(parts[0][1], hA, f); }
+  if (parts[1]) {
+    const room = colsH - hA - h2.offsetHeight - 30;
+    const hB = Math.max(parts[1][0].scrollHeight, parts[1][1].scrollHeight);
+    const T = short ? hB : Math.max(hB, room);
+    justify(parts[1][0], T, f); justify(parts[1][1], T, f);
+  }
+  art.dataset.fit = (short ? "short " : "mid ") + f.toFixed(2);
+}
+function knownBreakLayout(art, cols, colsH, off, fBal) {
+  // the column break read off the 1903 scan: split there, then fit the type to the fuller column
+  const tp = textPos(cols, off);
+  if (!tp) return false;
+  const [c1, c2] = splitAt(cols, tp[0], tp[1]);
+  let f = 25.25;
+  while (f > 14) { cols.style.fontSize = f + "px"; if (c1.scrollHeight <= colsH && c2.scrollHeight <= colsH) break; f -= 0.25; }
+  if (fBal && f < fBal - 1.25) return false;      // the scan reading disagrees badly with the text: don't trust it
+  justify(c1, colsH, f); justify(c2, colsH, f);
+  cols.style.height = colsH + "px";
+  art.dataset.fit = "scan " + f.toFixed(2);
+  return true;
+}
+function splitPoint(cols) {
+  const cr = cols.getBoundingClientRect(), mid = cr.left + cr.width / 2;
+  const tw = document.createTreeWalker(cols, NodeFilter.SHOW_TEXT);
+  const r = document.createRange();
+  let n;
+  while ((n = tw.nextNode())) {
+    if (!n.nodeValue.trim()) continue;
+    r.selectNodeContents(n);
+    const rects = r.getClientRects();
+    if (!rects.length) continue;
+    let right = false;
+    for (const q of rects) if (q.width > 0 && q.left >= mid) { right = true; break; }
+    if (!right) continue;
+    let lo = 0, hi = n.nodeValue.length - 1;
+    while (lo < hi) {
+      const m = (lo + hi) >> 1;
+      r.setStart(n, m); r.setEnd(n, m + 1);
+      const q = r.getBoundingClientRect();
+      if (q.width > 0 && q.left >= mid) hi = m; else lo = m + 1;
+    }
+    let k = lo;
+    while (k > 0 && !/\s/.test(n.nodeValue[k - 1])) k--;
+    return [n, k];
+  }
+  return null;
+}
+function justify(col, T, f) {
+  // spread the leftover space between entries (as the compositor did with leading)
+  let extra = T - col.scrollHeight;
+  if (extra < 1) return;
+  const gaps = [...col.querySelectorAll(":scope > .e, :scope > p.fm, :scope > h2")].slice(1)
+    .filter(e => !e.classList.contains("cont"));
+  const cap = f * 1.1;
+  if (gaps.length) {
+    const per = Math.min(extra / gaps.length, cap);
+    const base = gaps.map(e => parseFloat(getComputedStyle(e).marginTop) || 0);
+    gaps.forEach((e, i) => { e.style.marginTop = (base[i] + per).toFixed(2) + "px"; });
+    extra = T - col.scrollHeight;
+  }
+  if (extra > 1) {
+    const lines = col.scrollHeight / (f * 1.2);
+    const lh = Math.min(1.2 + extra / (lines * f), 1.34);
+    col.style.lineHeight = lh.toFixed(4);
+    if (col.scrollHeight > T + 1) col.style.lineHeight = "";
+  }
+}
+
+/* ---------- rendering ---------- */
+let renderToken = 0;
+async function render(opts = {}) {
+  const tok = ++renderToken;
+  S.rendered = true;
+  const view = currentView();
+  const st = $("stage");
+  updateChrome();
+  if (view === "text") return renderText(tok, opts);
+  const ids = view === "spread" ? spreadFor(S.idx) : [S.idx];
+  const s = fitScale(ids.length) * S.zoom;
+  const wrap = document.createElement("div");
+  wrap.className = "spread";
+  const arts = [];
+  for (const i of ids) {
+    const sh = document.createElement("div");
+    sh.className = "sheet" + (i < 0 ? " blank" : "");
+    sh.style.width = Math.round(W * s) + "px";
+    sh.style.height = Math.round(H * s) + "px";
+    if (i >= 0) {
+      const art = document.createElement("article");
+      art.className = "page " + pageClass(i);
+      art.dataset.kind = kindOf(i);
+      art.lang = "en";
+      art.style.setProperty("--s", s);
+      art.dataset.i = i;
+      art.innerHTML = runningHead(i) + '<div class="cols"></div>';
+      sh.appendChild(art);
+      const ld = document.createElement("div"); ld.className = "loading"; ld.textContent = "Loading page " + label(i) + "…";
+      sh.appendChild(ld);
+      arts.push([i, art, ld]);
+    }
+    wrap.appendChild(sh);
+  }
+  const prevScroll = opts.keepScroll ? [st.scrollLeft, st.scrollTop] : null;
+  st.replaceChildren(wrap);
+  if (S.history.length) st.appendChild(backChip());
+  await Promise.all(arts.map(async ([i, art, ld]) => {
+    let html;
+    try { html = await pageHTML(i); } catch (e) { ld.textContent = "Couldn’t load page " + label(i) + ". Check the connection and turn the page again."; return; }
+    if (tok !== renderToken) return;
+    art.querySelector(".cols").innerHTML = html;
+    art._html = html;
+    ld.remove();
+  }));
+  if (tok !== renderToken) return;
+  await fontsFor(arts.map(([, art]) => art.textContent).join(" "));
+  if (tok !== renderToken) return;
+  arts.forEach(([, art]) => fitPage(art));
+  if (prevScroll) { st.scrollLeft = prevScroll[0]; st.scrollTop = prevScroll[1]; }
+  else { st.scrollTop = 0; st.scrollLeft = Math.max(0, (st.scrollWidth - st.clientWidth) / 2); }
+  applyHighlights(st);
+  prefetch();
+}
+function runningHead(i) {
+  const p = S.pages[i], k = p[5] || "";
+  if (k === "title" || k === "vtitle" || k === "letter" || (k === "pref" && p[0] === "v")) return '<header class="rh none"></header>';
+  if (k === "pref") {
+    const R = p[0].toUpperCase(), even = romanVal(p[0]) % 2 === 0;
+    return '<header class="rh"><span class="g1 rn">' + (even ? R : "") + '</span><span class="pn sc">Preface</span><span class="g2 rn">' + (even ? "" : R) + "</span></header>";
+  }
+  const body = p[1] === "b";
+  const g1 = body ? esc(p[2]) : "", g2 = body ? esc(p[3]) : "";
+  return '<header class="rh"><span class="g g1" lang="he">' + g1 + '</span><span class="pn">' + esc(p[0].toUpperCase()) +
+    '</span><span class="g g2" lang="he">' + g2 + "</span></header>";
+}
+async function renderText(tok) {
+  const st = $("stage");
+  const i = S.idx;
+  const box = document.createElement("div");
+  box.className = "reflow";
+  const p = S.pages[i];
+  box.innerHTML = '<div class="rh2"><span class="g" lang="he" dir="rtl">' + esc(p[1] === "b" ? p[2] : "") + '</span><span class="pn">' + esc(p[0]) +
+    '</span><span class="g" lang="he" dir="rtl">' + esc(p[1] === "b" ? p[3] : "") + '</span></div><div class="cols" lang="en">Loading…</div>';
+  st.replaceChildren(box);
+  if (S.history.length) st.appendChild(backChip());
+  let html;
+  try { html = await pageHTML(i); } catch (e) { box.querySelector(".cols").textContent = "Couldn’t load this page. Check the connection and try again."; return; }
+  if (tok !== renderToken) return;
+  box.querySelector(".cols").innerHTML = html;
+  st.scrollTop = 0;
+  applyHighlights(st);
+  prefetch();
+}
+function prefetch() {
+  const c = chunkOf(S.idx);
+  [c - 1, c + 1].forEach(k => { if (k >= 0 && k * S.chunk < S.pages.length) loadChunk(k); });
+}
+function applyHighlights(root) {
+  if (S.highlight) {
+    const els = root.querySelectorAll('[id="' + S.highlight + '"]');
+    els.forEach(el => el.classList.add("hit"));
+    const first = els[0];
+    if (first) {
+      scrollIntoStage(first);
+      setTimeout(() => els.forEach(el => el.classList.add("fade")), 2200);
+      setTimeout(() => els.forEach(el => el.classList.remove("hit", "fade")), 3600);
+    }
+    S.highlight = null;
+  }
+  if (S.mark) {
+    const re = S.mark; let done = false;
+    root.querySelectorAll(".cols").forEach(cols => {
+      if (done) return;
+      const tw = document.createTreeWalker(cols, NodeFilter.SHOW_TEXT);
+      let n;
+      while ((n = tw.nextNode())) {
+        re.lastIndex = 0;
+        const m = re.exec(n.nodeValue);
+        if (m) {
+          const r = document.createRange();
+          r.setStart(n, m.index); r.setEnd(n, m.index + m[0].length);
+          const mk = document.createElement("mark"); r.surroundContents(mk);
+          scrollIntoStage(mk); done = true; break;
+        }
+      }
+    });
+    S.mark = null;
+  }
+}
+function scrollIntoStage(el) {
+  const st = $("stage");
+  const a = el.getBoundingClientRect(), b = st.getBoundingClientRect();
+  if (a.top < b.top || a.bottom > b.bottom) st.scrollTop += a.top - b.top - b.height / 3;
+  if (a.left < b.left || a.right > b.right) st.scrollLeft += a.left - b.left - 40;
+}
+function backChip() {
+  const b = document.createElement("button");
+  b.className = "btn back-chip";
+  const prev = S.history[S.history.length - 1];
+  b.textContent = "← Back to p. " + label(prev);
+  b.onclick = () => { S.idx = S.history.pop(); render(); };
+  return b;
+}
+
+/* ---------- chrome ---------- */
+function updateChrome() {
+  const i = S.idx, p = S.pages[i];
+  const view = currentView();
+  $("pgIn").value = p[0];
+  $("of").textContent = "of " + S.lastNum;
+  $("scrub").value = i;
+  $("vSpread").setAttribute("aria-pressed", view === "spread");
+  $("vPage").setAttribute("aria-pressed", view === "page");
+  $("vText").setAttribute("aria-pressed", view === "text");
+  $("zoomSeg").style.visibility = view === "text" ? "hidden" : "visible";
+  let w = "";
+  if (view === "spread") {
+    const ids = spreadFor(i).filter(x => x >= 0);
+    w = "pp. " + ids.map(label).join("–");
+  } else w = "p. " + p[0];
+  const a = S.pages[(view === "spread" ? spreadFor(i).filter(x => x >= 0)[0] : i)];
+  const z = S.pages[(view === "spread" ? spreadFor(i).filter(x => x >= 0).slice(-1)[0] : i)];
+  if (a[5] === "vtitle" && a === z) w += " · Title page, Volume II";
+  else if (a[1] === "b") w += ' · <span class="heb" dir="rtl">' + esc(a[2]) + "</span> – " + '<span class="heb" dir="rtl">' + esc(z[3]) + "</span>";
+  else w += " · " + (a[1] === "f" ? "Front matter" : "Addenda and index");
+  const est = (view === "spread" ? spreadFor(i) : [i]).filter(x => x >= 0 && S.pages[x][4]);
+  if (est.length) w += '<span class="badge" title="The source has no marker for where this page begins; its start is estimated from the length of the text.">p. ' + est.map(label).join(", ") + " start estimated</span>";
+  $("where").innerHTML = w;
+  try { history.replaceState(null, "", "#p" + p[0]); } catch (e) {}
+  store.set("page", p[0]);
+  markToc();
+}
+function go(i, opts = {}) {
+  i = Math.max(0, Math.min(S.pages.length - 1, i));
+  if (opts.push && i !== S.idx) { S.history.push(S.idx); if (S.history.length > 30) S.history.shift(); }
+  if (!opts.push && !opts.keepHistory) S.history = [];
+  S.idx = i;
+  render(opts);
+}
+function step(d) {
+  const view = currentView();
+  if (view === "spread") {
+    const ids = spreadFor(S.idx);
+    const edge = d > 0 ? Math.max(...ids) : Math.min(...ids.filter(x => x >= 0));
+    go(edge + d);
+  } else go(S.idx + d);
+}
+function gotoLabel(l) {
+  l = String(l).trim().toLowerCase().replace(/^p\.?\s*/, "");
+  if (S.byLabel.has(l)) { go(S.byLabel.get(l), { push: true }); return true; }
+  return false;
+}
+async function gotoEntry(id, push = true) {
+  await loadHW();
+  const pi = S.entryPage.get(id);
+  if (pi === undefined) return false;
+  S.highlight = id;
+  go(pi, { push });
+  return true;
+}
+
+/* ---------- contents ---------- */
+const LETTERS = "אבגדהוזחטיכלמנסעפצקרשת";
+function buildLetters() {
+  const box = $("letters");
+  const btns = [['f', 'Front'], ...[...LETTERS].map(c => [c, c]), ['x', 'Addenda']];
+  box.innerHTML = btns.map(([k, t]) => '<button data-k="' + k + '"' + (/^[fx]$/.test(k) ? ' class="ltr"' : "") + ">" + t + "</button>").join("");
+  box.onclick = (e) => { const b = e.target.closest("button"); if (b) { showTocGroup(b.dataset.k, true); const s = groupStart(b.dataset.k); if (s >= 0) go(s, { push: true }); } };
+}
+function letterOf(i) {
+  const p = S.pages[i];
+  if (p[5] === "vtitle") return "ל";
+  if (p[1] !== "b") return p[1];
+  const f = norm(p[2])[0] || "";
+  return f;
+}
+function lastLetterOf(i) {
+  const p = S.pages[i];
+  if (p[1] !== "b" || p[5] === "vtitle") return letterOf(i);
+  return norm(p[3])[0] || letterOf(i);
+}
+function inGroup(i, k) {
+  // a page where a letter begins belongs to both letters
+  const p = S.pages[i];
+  if (/^[fx]$/.test(k)) return p[1] === k;
+  return p[1] === "b" && (letterOf(i) === k || lastLetterOf(i) === k);
+}
+function groupStart(k) {
+  for (let i = 0; i < S.pages.length; i++) if (inGroup(i, k)) return i;
+  return -1;
+}
+let tocGroup = null;
+function showTocGroup(k, jump) {
+  tocGroup = k;
+  $("letters").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.k === k));
+  const rows = [];
+  for (let i = 0; i < S.pages.length; i++) {
+    const p = S.pages[i];
+    const inG = inGroup(i, k);
+    if (!inG) continue;
+    const words = p[5] === "vtitle" ? '<span style="font-family:var(--f-ui);font-size:14px;direction:ltr">Title page, Volume II</span>' : p[1] === "b" ? '<span>' + esc(p[2]) + '</span><span class="dash">–</span><span>' + esc(p[3]) + "</span>"
+      : '<span style="font-family:var(--f-ui);font-size:14px;direction:ltr">' + (p[1] === "f" ? (p[5] === "title" ? "Title page" : p[5] === "abbr" ? "Abbreviations" : "Preface") : backName(i)) + "</span>";
+    rows.push('<div class="toc-row" data-i="' + i + '"><span class="n">' + esc(p[0]) + '</span><span class="w">' + words + "</span></div>");
+  }
+  $("tocList").innerHTML = rows.join("");
+  markToc();
+  if (jump) { const s = groupStart(k); if (s >= 0) $("tocList").scrollTop = 0; }
+}
+function backName(i) { return +label(i) >= 1722 ? "Index of scriptural passages" : "Addenda et corrigenda"; }
+function markToc() {
+  const list = $("tocList");
+  if (!list) return;
+  list.querySelectorAll(".toc-row.cur").forEach(r => r.classList.remove("cur"));
+  const r = list.querySelector('.toc-row[data-i="' + S.idx + '"]');
+  if (r) { r.classList.add("cur"); if ($("drawer").classList.contains("open") && paneShown === "toc") r.scrollIntoView({ block: "nearest" }); }
+}
+$("tocList").onclick = (e) => { const r = e.target.closest(".toc-row"); if (r) { go(+r.dataset.i, { push: true }); if (innerWidth < 900) closeDrawer(); } };
+
+let paneShown = "toc";
+function openDrawer(pane) {
+  showPane(pane || paneShown);
+  $("drawer").classList.add("open");
+  $("tocBtn").setAttribute("aria-expanded", "true");
+  if (innerWidth < 900) $("scrim").hidden = false;
+  if (paneShown === "toc") {
+    const k = letterOf(S.idx);
+    if (k !== tocGroup) showTocGroup(k);
+    const r = $("tocList").querySelector(".cur"); if (r) r.scrollIntoView({ block: "center" });
+  }
+}
+function closeDrawer() { $("drawer").classList.remove("open"); $("scrim").hidden = true; $("tocBtn").setAttribute("aria-expanded", "false"); }
+function showPane(p) {
+  paneShown = p;
+  $("paneToc").style.display = p === "toc" ? "flex" : "none";
+  $("paneRes").style.display = p === "res" ? "flex" : "none";
+  $("paneHelp").style.display = p === "help" ? "block" : "none";
+  $("tabToc").setAttribute("aria-selected", p === "toc");
+  $("tabRes").setAttribute("aria-selected", p === "res");
+  $("tabHelp").setAttribute("aria-selected", p === "help");
+  $("drawerTitle").textContent = p === "toc" ? "Contents" : p === "res" ? "Search results" : "About this edition";
+}
+$("tabToc").onclick = () => openDrawer("toc");
+$("tabRes").onclick = () => openDrawer("res");
+$("tabHelp").onclick = () => openDrawer("help");
+$("tocBtn").onclick = () => $("drawer").classList.contains("open") ? closeDrawer() : openDrawer("toc");
+$("closeDrawer").onclick = closeDrawer;
+$("scrim").onclick = closeDrawer;
+
+/* ---------- headword search ---------- */
+let ddSel = -1, ddItems = [];
+function searchHW(q) {
+  const nq = norm(q);
+  if (!nq || !S.hw) return [];
+  const exact = [], pre = [], sub = [];
+  for (let i = 0; i < S.hw.length; i++) {
+    const ks = S.hwKeys[i];
+    let best = 9;
+    for (const k of ks) { if (k === nq) { best = 0; break; } if (k.startsWith(nq)) best = Math.min(best, 1); else if (best > 2 && k.includes(nq)) best = 2; }
+    if (best === 0) exact.push(i); else if (best === 1) pre.push(i); else if (best === 2) sub.push(i);
+    if (exact.length > 60) break;
+  }
+  return [...exact, ...pre, ...sub].slice(0, 60);
+}
+function wherePage(q) {
+  // the page on which q would fall alphabetically, by running heads
+  const nq = norm(q);
+  if (!isHeb(nq)) return -1;
+  let best = -1;
+  for (let i = 0; i < S.pages.length; i++) {
+    const p = S.pages[i];
+    if (p[1] !== "b") continue;
+    const f = norm(p[2]);
+    if (f && f <= nq) best = i; else if (f && f > nq && best >= 0 && f[0] === nq[0]) break;
+  }
+  return best;
+}
+async function showDD() {
+  const q = $("q").value.trim();
+  const dd = $("dd");
+  if (!q) { dd.hidden = true; return; }
+  if (isHeb(q)) await loadHW();
+  if ($("q").value.trim() !== q) return;
+  ddItems = [];
+  let html = "";
+  if (/^\d{1,4}$|^[ivx]{1,5}$/i.test(q) && S.byLabel.has(q.toLowerCase())) {
+    ddItems.push({ t: "page", v: q.toLowerCase() });
+    html += '<div class="act" data-k="0">Go to page ' + esc(q) + "</div>";
+  }
+  if (isHeb(q)) {
+    const res = searchHW(q);
+    if (!res.length) html += '<div class="none">No headword matches “' + esc(q) + "”.</div>";
+    res.forEach(ri => {
+      const r = S.hw[ri];
+      ddItems.push({ t: "entry", v: r[0] });
+      html += '<div class="row" data-k="' + (ddItems.length - 1) + '"><span class="hwv" lang="he">' + esc(r[2].split("|").join(" ")) +
+        '</span><span class="gl">' + esc(r[3]) + '</span><span class="pp">p. ' + esc(label(r[1])) + "</span></div>";
+    });
+    const wp = wherePage(q);
+    if (wp >= 0) { ddItems.push({ t: "where", v: wp }); html += '<div class="act" data-k="' + (ddItems.length - 1) + '">Open the page where <span lang="he" style="font-family:var(--f-heb);font-size:17px">' + esc(q) + "</span> would be, alphabetically (p. " + esc(label(wp)) + ")</div>"; }
+  }
+  ddItems.push({ t: "text", v: q });
+  html += '<div class="act" data-k="' + (ddItems.length - 1) + '">Search all text for “' + esc(q) + "”</div>";
+  dd.innerHTML = html;
+  dd.hidden = false;
+  ddSel = isHeb(q) && ddItems.length > 1 ? ddItems.findIndex(x => x.t === "entry" || x.t === "page") : ddItems.findIndex(x => x.t === "page");
+  if (ddSel < 0) ddSel = ddItems.length - 1;
+  paintSel();
+}
+function paintSel() {
+  $("dd").querySelectorAll("[data-k]").forEach(el => el.classList.toggle("sel", +el.dataset.k === ddSel));
+  const el = $("dd").querySelector('[data-k="' + ddSel + '"]'); if (el) el.scrollIntoView({ block: "nearest" });
+}
+function choose(k) {
+  const it = ddItems[k];
+  if (!it) return;
+  $("dd").hidden = true;
+  $("kbd").hidden = true; $("kbBtn").setAttribute("aria-pressed", "false");
+  if (it.t === "page") gotoLabel(it.v);
+  else if (it.t === "entry") gotoEntry(it.v);
+  else if (it.t === "where") go(it.v, { push: true });
+  else if (it.t === "text") fullText(it.v);
+  $("q").blur();
+}
+let ddTimer = 0;
+$("q").addEventListener("input", () => { clearTimeout(ddTimer); ddTimer = setTimeout(showDD, 110); });
+$("q").addEventListener("focus", () => { loadHW(); if ($("q").value.trim()) showDD(); });
+$("q").addEventListener("keydown", (e) => {
+  if (e.key === "ArrowDown") { ddSel = Math.min(ddItems.length - 1, ddSel + 1); paintSel(); e.preventDefault(); }
+  else if (e.key === "ArrowUp") { ddSel = Math.max(0, ddSel - 1); paintSel(); e.preventDefault(); }
+  else if (e.key === "Enter") { clearTimeout(ddTimer); if ($("dd").hidden) showDD().then(() => choose(ddSel)); else choose(ddSel); e.preventDefault(); }
+  else if (e.key === "Escape") { $("dd").hidden = true; $("q").blur(); }
+});
+$("dd").addEventListener("mousedown", (e) => { const el = e.target.closest("[data-k]"); if (el) { e.preventDefault(); choose(+el.dataset.k); } });
+document.addEventListener("mousedown", (e) => {
+  if (!$("searchBox").contains(e.target)) { $("dd").hidden = true; $("kbd").hidden = true; $("kbBtn").setAttribute("aria-pressed", "false"); }
+  if (!$("pop").contains(e.target) && !e.target.closest(".hw")) $("pop").hidden = true;
+});
+
+/* hebrew keyboard */
+(function buildKbd() {
+  const keys = "אבגדהוזחטיכךלמםנןסעפףצץקרשת".split("");
+  $("kbd").innerHTML = keys.map(k => '<button type="button" data-c="' + k + '">' + k + "</button>").join("") +
+    '<button type="button" class="wide" data-c="⌫">⌫ Delete</button><button type="button" class="wide" data-c=" ">Space</button><button type="button" class="wide" data-c="✕">Clear</button>';
+  $("kbd").addEventListener("mousedown", (e) => e.preventDefault());
+  $("kbd").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    const q = $("q"); const c = b.dataset.c;
+    q.value = c === "⌫" ? q.value.slice(0, -1) : c === "✕" ? "" : q.value + c;
+    q.focus(); showDD();
+  });
+  $("kbBtn").addEventListener("mousedown", (e) => e.preventDefault());
+  $("kbBtn").onclick = () => { const h = !$("kbd").hidden; $("kbd").hidden = h; $("kbBtn").setAttribute("aria-pressed", String(!h)); if (!h) { $("dd").hidden = true; $("q").focus(); loadHW(); } };
+})();
+
+/* ---------- full text search ---------- */
+let ftToken = 0;
+function pageText(html) {
+  const d = document.createElement("div"); d.innerHTML = html;
+  d.querySelectorAll(".hw").forEach(h => h.insertAdjacentText("afterend", " "));
+  return d.textContent.replace(/\s+/g, " ");
+}
+async function fullText(q) {
+  const tok = ++ftToken;
+  openDrawer("res");
+  const re = looseRegex(q);
+  const prog = $("resProg"), list = $("resList");
+  list.innerHTML = "";
+  let hits = 0, done = 0;
+  const N = S.pages.length, nChunks = Math.ceil(N / S.chunk);
+  const cap = 400;
+  const paint = () => { prog.innerHTML = (done < nChunks ? "Searching… " : "") + hits + (hits >= cap ? "+" : "") + " pages with “" + esc(q) + "”" +
+    (done < nChunks ? '<div class="barx"><i style="width:' + Math.round(100 * done / nChunks) + '%"></i></div>' : ""); };
+  paint();
+  const out = new Array(nChunks).fill(null);
+  let next = 0, flushed = 0;
+  const flush = () => {
+    while (flushed < nChunks && out[flushed]) { list.insertAdjacentHTML("beforeend", out[flushed]); flushed++; }
+  };
+  async function worker() {
+    while (next < nChunks && tok === ftToken && hits < cap) {
+      const c = next++;
+      let arr;
+      try { arr = await loadChunk(c); } catch (e) { out[c] = ""; done++; continue; }
+      let h = "";
+      arr.forEach((html, k) => {
+        const i = c * S.chunk + k;
+        if (hits >= cap) return;
+        let t = S.textCache.get(i);
+        if (t === undefined) { t = pageText(html); if (S.textCache.size < 2000) S.textCache.set(i, t); }
+        re.lastIndex = 0;
+        const m = re.exec(t);
+        if (!m) return;
+        hits++;
+        let count = 1; while (re.exec(t) && count < 99) count++;
+        const a = Math.max(0, m.index - 70), b = Math.min(t.length, m.index + m[0].length + 90);
+        const snip = (a > 0 ? "…" : "") + esc(t.slice(a, m.index)) + "<mark>" + esc(m[0]) + "</mark>" + esc(t.slice(m.index + m[0].length, b)) + (b < t.length ? "…" : "");
+        const p = S.pages[i];
+        h += '<div class="res-row" data-i="' + i + '"><div class="rp">p. ' + esc(p[0]) + (p[1] === "b" ? ' · <span class="heb" dir="rtl">' + esc(p[2]) + "</span> – <span class=\"heb\" dir=\"rtl\">" + esc(p[3]) + "</span>" : "") +
+          (count > 1 ? " · " + count + (count >= 99 ? "+" : "") + " matches" : "") + '</div><div dir="auto">' + snip + "</div></div>";
+      });
+      out[c] = h || " ";
+      done++;
+      if (tok === ftToken) { flush(); paint(); }
+    }
+  }
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  if (tok !== ftToken) return;
+  done = nChunks; flush(); paint();
+  if (!hits) list.innerHTML = '<div class="help">Nothing found. Hebrew is matched without vowel points; try fewer letters, or a different spelling.</div>';
+  list.onclick = (e) => { const r = e.target.closest(".res-row"); if (!r) return; S.mark = looseRegex(q); go(+r.dataset.i, { push: true }); if (innerWidth < 900) closeDrawer(); };
+}
+
+/* ---------- headword popover & links ---------- */
+$("stage").addEventListener("click", async (e) => {
+  const a = e.target.closest("a.x");
+  if (a) { e.preventDefault(); const id = a.getAttribute("href").slice(1); if (!(await gotoEntry(id))) {} return; }
+  if (e.target.closest("a")) return;
+  const sel = getSelection && getSelection();
+  if (sel && !sel.isCollapsed && sel.toString().trim()) return;     // selecting text, not opening
+  const ent = e.target.closest(".e[id]");
+  if (!ent) return;
+  const art = ent.closest("article.page");
+  openReader(ent.id, art && art.dataset.i != null ? +art.dataset.i : S.idx);
+});
+
+/* ---------- entry reader: the whole entry, in larger type ---------- */
+const RD = { id: null, page: null, hist: [], size: Math.min(40, Math.max(16, +store.get("rdSize") || 24)) };
+async function entryParts(id, near) {
+  await loadHW();
+  let i = S.entryPage.has(id) ? S.entryPage.get(id) : near;
+  const out = { html: "", first: null, last: null };
+  const box = document.createElement("div");
+  for (let k = 0; k < 8 && i + k < S.pages.length; k++) {
+    const d = document.createElement("div"); d.innerHTML = await pageHTML(i + k);
+    const all = [...d.querySelectorAll(".e[id]")];
+    const e = all.find(x => x.id === id);
+    if (!e) { if (out.first == null && k < 2) continue; break; }
+    if (out.first == null) out.first = i + k;
+    out.last = i + k;
+    [...e.childNodes].forEach((n, j) => {
+      if (j === 0 && n.nodeType === 1 && n.matches("p[data-c]") && box.lastElementChild) {
+        // the paragraph runs on from the previous page
+        const prev = box.lastElementChild.matches("p") ? box.lastElementChild : (box.lastElementChild.querySelector("p:last-of-type") || box.lastElementChild);
+        while (n.firstChild) prev.appendChild(n.firstChild);
+      } else box.appendChild(n);
+    });
+    if (all[all.length - 1] !== e) break;       // the entry ends on this page
+  }
+  box.querySelectorAll("[data-c]").forEach(x => x.removeAttribute("data-c"));
+  out.html = box.innerHTML;
+  return out;
+}
+function rdRow(id) { return S.hw ? S.hw.find(r => r[0] === id) : null; }
+function rdNeighbor(id, dir) {
+  if (!S.hw) return null;
+  let k = S.hw.findIndex(r => r[0] === id);
+  if (k < 0) return null;
+  for (k += dir; k >= 0 && k < S.hw.length; k += dir) if (S.hw[k][0] !== id) return S.hw[k][0];
+  return null;
+}
+async function openReader(id, near, fromLink) {
+  if (fromLink && RD.id) RD.hist.push(RD.id); else if (!fromLink) RD.hist = [];
+  RD.id = id;
+  const body = $("rdBody");
+  body.style.fontSize = RD.size + "px";
+  if ($("rd").hidden) {
+    RD.ret = document.activeElement;
+    $("rd").hidden = false; $("rdScrim").hidden = false; document.body.style.overflow = "hidden";
+  }
+  body.innerHTML = '<p style="color:var(--ink-soft)">Loading…</p>';
+  const ex = await entryParts(id, near);
+  if (RD.id !== id) return;
+  if (!ex.html) { body.innerHTML = "<p>This entry could not be found.</p>"; return; }
+  RD.page = ex.first;
+  body.innerHTML = ex.html; body.scrollTop = 0;
+  const row = rdRow(id);
+  const words = row ? row[2].split("|").join(" ") : "";
+  const first = row ? row[2].split("|")[0].replace(/[,*]/g, "").trim() : "";
+  const pg = label(ex.first) + (ex.last !== ex.first ? "–" + label(ex.last) : "");
+  $("rdPg").textContent = "Jastrow p. " + pg;
+  $("rd").setAttribute("aria-label", "Entry " + words);
+  const sef = ((row && row[4]) || first).replace(/ /g, "_");
+  $("rdSef").href = "https://www.sefaria.org/Jastrow,_" + encodeURIComponent(sef) + ".1";
+  $("rdCite").innerHTML = "Jastrow, <i>Dictionary</i>, p. " + esc(label(ex.first)) + ', s.v. <span class="h" lang="he">' + esc(first) + "</span>";
+  $("rdCopy").textContent = "Copy citation";
+  $("rdBack").hidden = !RD.hist.length;
+  $("rdPrev").disabled = !rdNeighbor(id, -1); $("rdNext").disabled = !rdNeighbor(id, 1);
+  if (!fromLink) $("rdClose").focus({ preventScroll: true });
+}
+function closeReader() {
+  if ($("rd").hidden) return;
+  $("rd").hidden = true; $("rdScrim").hidden = true; document.body.style.overflow = ""; RD.id = null; RD.hist = [];
+  if (RD.ret && RD.ret.focus) RD.ret.focus({ preventScroll: true });
+}
+function rdStep(dir) { const n = RD.id && rdNeighbor(RD.id, dir); if (n) { RD.hist = []; openReader(n, RD.page); } }
+function rdResize(f) { RD.size = Math.min(40, Math.max(16, Math.round(RD.size * f))); $("rdBody").style.fontSize = RD.size + "px"; store.set("rdSize", RD.size); }
+$("rdClose").onclick = closeReader;
+$("rdScrim").onclick = closeReader;
+$("rdPrev").onclick = () => rdStep(-1);
+$("rdNext").onclick = () => rdStep(1);
+$("rdSm").onclick = () => rdResize(1 / 1.15);
+$("rdLg").onclick = () => rdResize(1.15);
+$("rdBack").onclick = () => { const p = RD.hist.pop(); if (p) { const h = RD.hist.slice(); openReader(p, RD.page).then(() => { RD.hist = h; $("rdBack").hidden = !h.length; }); } };
+$("rdGo").onclick = () => { const id = RD.id; closeReader(); if (id) gotoEntry(id); };
+$("rdBody").addEventListener("click", (e) => {
+  const a = e.target.closest("a.x");
+  if (a) { e.preventDefault(); openReader(a.getAttribute("href").slice(1), RD.page, true); }
+});
+$("rdCopy").onclick = () => {
+  const t = $("rdCite").textContent;
+  const ok = () => { $("rdCopy").textContent = "Copied"; };
+  const fail = () => { const rg = document.createRange(); rg.selectNodeContents($("rdCite")); const s = getSelection(); s.removeAllRanges(); s.addRange(rg); $("rdCopy").textContent = "Selected — press Ctrl+C"; };
+  try { navigator.clipboard.writeText(t).then(ok, fail); } catch (er) { fail(); }
+};
+
+/* ---------- controls ---------- */
+$("prev").onclick = () => step(-1);
+$("next").onclick = () => step(1);
+$("pgIn").addEventListener("keydown", (e) => { if (e.key === "Enter") { if (!gotoLabel($("pgIn").value)) $("pgIn").value = label(S.idx); $("pgIn").blur(); } });
+$("pgIn").addEventListener("focus", () => $("pgIn").select());
+function setView(v) { S.view = v; store.set("view", v); S.zoom = 1; render(); }
+$("vSpread").onclick = () => setView("spread");
+$("vPage").onclick = () => setView("page");
+$("vText").onclick = () => setView("text");
+function setZoom(z) { S.zoom = Math.max(0.5, Math.min(4, z)); render({ keepScroll: true }); }
+$("zIn").onclick = () => setZoom(S.zoom * 1.25);
+$("zOut").onclick = () => setZoom(S.zoom / 1.25);
+$("zFit").onclick = () => setZoom(1);
+const scrub = $("scrub");
+scrub.addEventListener("input", () => {
+  const i = +scrub.value, p = S.pages[i];
+  $("where").innerHTML = "p. " + esc(p[0]) + (p[1] === "b" ? ' · <span class="heb" dir="rtl">' + esc(p[2]) + "</span>" : "");
+});
+scrub.addEventListener("change", () => go(+scrub.value));
+document.addEventListener("keydown", (e) => {
+  if (!$("rd").hidden) {
+    if (e.key === "Escape") { closeReader(); e.preventDefault(); }
+    else if (e.key === "ArrowRight" && !e.metaKey && !e.ctrlKey && !e.altKey) { rdStep(1); e.preventDefault(); }
+    else if (e.key === "ArrowLeft" && !e.metaKey && !e.ctrlKey && !e.altKey) { rdStep(-1); e.preventDefault(); }
+    else if (e.key === "Tab") {
+      const f = [...$("rd").querySelectorAll("button:not([hidden]):not([disabled]), a[href]")];
+      if (f.length) { const i = f.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { f[f.length - 1].focus(); e.preventDefault(); } else if (!e.shiftKey && i === f.length - 1) { f[0].focus(); e.preventDefault(); } }
+    }
+    return;
+  }
+  if (e.target.closest("input") && e.target.type !== "range") return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === "ArrowRight" || e.key === "PageDown") { step(1); e.preventDefault(); }
+  else if (e.key === "ArrowLeft" || e.key === "PageUp") { step(-1); e.preventDefault(); }
+  else if (e.key === "/") { $("q").focus(); e.preventDefault(); }
+  else if (e.key === "c" || e.key === "C") { $("drawer").classList.contains("open") ? closeDrawer() : openDrawer("toc"); }
+  else if (e.key === "+" || e.key === "=") setZoom(S.zoom * 1.25);
+  else if (e.key === "-") setZoom(S.zoom / 1.25);
+  else if (e.key === "0") setZoom(1);
+  else if (e.key === "Escape") { closeDrawer(); $("pop").hidden = true; }
+});
+let touchX = null;
+$("stage").addEventListener("touchstart", (e) => { touchX = e.touches.length === 1 && S.zoom === 1 ? [e.touches[0].clientX, e.touches[0].clientY] : null; }, { passive: true });
+$("stage").addEventListener("touchend", (e) => {
+  if (!touchX) return;
+  const dx = e.changedTouches[0].clientX - touchX[0], dy = e.changedTouches[0].clientY - touchX[1];
+  if (Math.abs(dx) > 60 && Math.abs(dx) > 2 * Math.abs(dy)) step(dx < 0 ? 1 : -1);
+  touchX = null;
+}, { passive: true });
+let rsz = 0;
+addEventListener("resize", () => { clearTimeout(rsz); rsz = setTimeout(() => render({ keepScroll: true }), 150); });
+if (document.fonts && document.fonts.addEventListener) {
+  let ft = 0;
+  document.fonts.addEventListener("loadingdone", () => { clearTimeout(ft); ft = setTimeout(() => $("stage").querySelectorAll("article.page").forEach(fitPage), 60); });
+}
+addEventListener("hashchange", () => routeHash(true));
+
+function routeHash(push) {
+  const h = decodeURIComponent(location.hash.slice(1));
+  let m;
+  if ((m = /^p(.+)$/.exec(h)) && S.byLabel.has(m[1])) { if (S.byLabel.get(m[1]) !== S.idx || !S.rendered) go(S.byLabel.get(m[1]), { push }); return true; }
+  if (/^[A-V]\d{5}$/.test(h)) { gotoEntry(h, push); return true; }
+  return false;
+}
+
+window.__jastrow = { S, fitPage, pageHTML, go, fontsFor };
+/* ---------- boot ---------- */
+fetch("data/pages.json").then(r => r.json()).then(d => {
+  S.pages = d.pages; S.chunk = d.chunk;
+  S.pages.forEach((p, i) => S.byLabel.set(p[0], i));
+  S.lastNum = S.pages.filter(p => /^\d+$/.test(p[0])).slice(-1)[0][0];
+  scrub.max = S.pages.length - 1;
+  buildLetters();
+  const sv = store.get("view"); if (sv === "spread" || sv === "page" || sv === "text") S.view = sv;
+  if (!routeHash(false)) {
+    const last = store.get("page");
+    S.idx = last && S.byLabel.has(last) ? S.byLabel.get(last) : S.byLabel.get("1");
+    render();
+  }
+  setTimeout(loadHW, 1500);
+}).catch(() => { $("stage").innerHTML = '<div class="help" style="padding:40px">The page index didn’t load. Reload to try again.</div>'; });
+})();
+</script>
