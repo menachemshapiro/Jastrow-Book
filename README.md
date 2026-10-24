@@ -27,6 +27,9 @@ Marcus Jastrow's *A Dictionary of the Targumim, the Talmud Babli and Yerushalmi,
   - תרגום יונתן על הנביאים: "Targ. Is. XXX, 2", "Targ. I Sam. …". About 4,600.
   - תרגום כתובים: Psalms, Proverbs, Job, the Megillot (and Targum Sheni to Esther, "Targ. II Esth.") and Chronicles. About 6,600.
   - מדרש רבה: on the Torah by section ("Gen. R. s. 19"), on the Megillot by the verse commented on ("Lam. R. to I, 5") or the introduction. About 10,800.
+  - משנה by tractate, chapter and mishnah ("Ber. VII, 1", "Aboth I, 5"). About 8,200 citations.
+  - תוספתא by tractate, chapter and halakha ("Tosef. Sabb. XVI (XVII), 3"); a second chapter number in parentheses is the other numbering, and the first is used. About 4,100.
+  - מדרש תהלים by psalm and verse ("Midr. Till. to Ps. XXII, 4"), about 840; פסיקתא רבתי by section ("Pesik. R. s. 18"), about 750; ילקוט שמעוני by book and remez ("Yalk. Gen. 61"), about 4,000.
   - Where Sefaria links the same citation, the two agree in all but a handful of cases. Most of those are "Targ. Y. ib." right after a "Targ. Y. II" citation: Sefaria reads it as Y. II, and this index, following Jastrow's abbreviations, as Y. I.
 
 **Link**
@@ -56,6 +59,7 @@ Changes to Sefaria's text are kept in [`build/text_fixes.json`](build/text_fixes
 | `data/talmud/` | Every Talmud citation, by tractate and daf |
 | `data/targum/` | Every Targum citation, by Targum, book, chapter and verse |
 | `data/midrash/` | Every Midrash Rabbah citation, by book and section or verse |
+| `data/sources/` | Every citation of the Mishnah, Tosefta, Yalkut Shimoni, Midrash Tehillim and Pesikta Rabbati |
 | `build/build2.py` | Builds the pages from Sefaria's current text, using the 2018 page breaks |
 | `build/make_site2.py` | Turns the built pages into `data/`, adding the title pages, preface footnotes and text corrections |
 | `build/text_fixes.json` | Corrections to the text, one record per change |
@@ -63,6 +67,7 @@ Changes to Sefaria's text are kept in [`build/text_fixes.json`](build/text_fixes
 | `build/talmud_index.py` | Builds `data/talmud/` from the entry text |
 | `build/targum_index.py` | Builds `data/targum/` from the entry text |
 | `build/midrash_index.py` | Builds `data/midrash/` from the entry text |
+| `build/sources_index.py` | Builds `data/sources/` from the entry text |
 | `favicon.ico`, `icon-*.png`, `og.png`, `site.webmanifest` | Icons and the image shown in link previews |
 
 ## Rebuilding `data/`
@@ -75,4 +80,5 @@ BREAKS=build/breaks_all2.json python3 build/make_site2.py out2 . jastrow-complet
 python3 build/talmud_index.py .
 python3 build/targum_index.py .
 python3 build/midrash_index.py .
+python3 build/sources_index.py .
 ```

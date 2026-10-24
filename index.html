@@ -373,7 +373,7 @@ button { cursor: pointer; }
   <div class="bar">
     <div class="brand"><b>Jastrow</b><span lang="he" dir="rtl">ספר המלים</span></div>
     <button class="btn" id="tocBtn" aria-controls="drawer" aria-expanded="false" title="Contents (C)">Contents</button>
-    <button class="btn" id="talBtn" title="Find the entries that cite a daf of the Talmud, a chapter of a Targum, or a section of Midrash Rabbah">Citations</button>
+    <button class="btn" id="talBtn" title="Find the entries that cite a place in the Talmud, Mishnah, Tosefta, Targumim or Midrashim">Citations</button>
     <button class="btn" id="aboutBtn" title="About this edition and how to use it">About</button>
     <div class="search" id="searchBox">
       <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search a headword, or any English or Hebrew text" aria-label="Search">
@@ -426,7 +426,8 @@ button { cursor: pointer; }
       <select id="talC" aria-label="Source" dir="rtl" lang="he">
         <optgroup label="תלמוד"><option value="b">תלמוד בבלי</option><option value="y">תלמוד ירושלמי</option></optgroup>
         <optgroup label="תרגום"><option value="o">תרגום אונקלוס</option><option value="yj">תרגום יונתן על התורה (Targ. Y., Y. I)</option><option value="yr">תרגום ירושלמי (Targ. Y. II)</option><option value="n">תרגום יונתן על הנביאים</option><option value="k">תרגום כתובים</option></optgroup>
-        <optgroup label="מדרש"><option value="r">מדרש רבה</option></optgroup>
+        <optgroup label="משנה ותוספתא"><option value="m">משנה</option><option value="t">תוספתא</option></optgroup>
+        <optgroup label="מדרש"><option value="r">מדרש רבה</option><option value="mt">מדרש תהלים</option><option value="pr">פסיקתא רבתי</option><option value="ys">ילקוט שמעוני</option></optgroup>
       </select>
       <select id="talM" aria-label="Tractate" dir="rtl" lang="he"></select>
       <div class="tal-daf">
@@ -464,6 +465,8 @@ button { cursor: pointer; }
             <li><span lang="he">תרגום יונתן על הנביאים</span>: “Targ. Is. XXX, 2”, “Targ. I Sam. …”.</li>
             <li><span lang="he">תרגום כתובים</span>: Psalms, Proverbs, Job, the Megillot (with Targum Sheni to Esther, “Targ. II Esth.”) and Chronicles.</li>
             <li><span lang="he">מדרש רבה</span>: the Rabbah on the Torah by section (“Gen. R. s. 19”), and on the Megillot by the verse commented on (“Lam. R. to I, 5”) or the introduction (“Lam. R. introd.”).</li>
+            <li><span lang="he">משנה</span> by tractate, chapter and mishnah (“Ber. VII, 1”, “Aboth I, 5”), and <span lang="he">תוספתא</span> by tractate, chapter and halakha (“Tosef. Sabb. XVI (XVII), 3”, “Tosef. Kel. B. Mets. VIII, 6”). Where Jastrow gives a second chapter number in parentheses, the first is used.</li>
+            <li><span lang="he">מדרש תהלים</span> by psalm and verse (“Midr. Till. to Ps. XXII, 4”), <span lang="he">פסיקתא רבתי</span> by section (“Pesik. R. s. 18”), and <span lang="he">ילקוט שמעוני</span> by book and remez (“Yalk. Gen. 61”).</li>
           </ul>
           Pick the book and the chapter or section; the entries are listed verse by verse. A reference that follows on from one of these (“Targ. O. ib. XLI, 43”, “Ib. 16”, “; s. 78”) counts as the same source.</li>
       </ul>
@@ -1133,7 +1136,7 @@ function showPane(p) {
   $("tabToc").setAttribute("aria-selected", p === "toc");
   $("tabRes").setAttribute("aria-selected", p === "res");
   $("tabHelp").setAttribute("aria-selected", p === "help");
-  $("drawerTitle").textContent = p === "toc" ? "Contents" : p === "res" ? "Search results" : p === "tal" ? "Talmud, Targum and Midrash citations" : "About this edition";
+  $("drawerTitle").textContent = p === "toc" ? "Contents" : p === "res" ? "Search results" : p === "tal" ? "Citations" : "About this edition";
 }
 $("tabToc").onclick = () => openDrawer("toc");
 $("tabRes").onclick = () => openDrawer("res");
@@ -1432,10 +1435,11 @@ $("rdCopy").onclick = () => {
 };
 
 /* ---------- Talmud finder ---------- */
-const TALC = ["b", "y", "o", "yj", "yr", "n", "k", "r"];
+const TALC = ["b", "y", "o", "yj", "yr", "n", "k", "m", "t", "r", "mt", "pr", "ys"];
 const TAL = { idx: null, corp: TALC.includes(store.get("talCorp")) ? store.get("talCorp") : "b", key: null, daf: null, files: new Map(), seq: 0 };
-const TALDIR = { b: "talmud", y: "talmud", o: "targum", yj: "targum", yr: "targum", n: "targum", k: "targum", r: "midrash" };
-const TALPRE = { o: "אונקלוס", yj: "תרגום יונתן", yr: "תרגום ירושלמי", n: "תרגום יונתן", k: "תרגום", r: "" };
+const TALDIR = { b: "talmud", y: "talmud", o: "targum", yj: "targum", yr: "targum", n: "targum", k: "targum", r: "midrash", m: "sources", t: "sources", ys: "sources", mt: "sources", pr: "sources" };
+const TALPRE = { o: "אונקלוס", yj: "תרגום יונתן", yr: "תרגום ירושלמי", n: "תרגום יונתן", k: "תרגום", r: "", m: "משנה", t: "תוספתא", ys: "ילקוט שמעוני", mt: "", pr: "" };
+const TALSUB = { m: "משנה", t: "הלכה", mt: "פסוק" };      // what the second number in a row is
 const isTalmud = (c) => c === "b" || c === "y";
 function toRoman(n) { let s = ""; for (const [v, r] of [[100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]]) while (n >= v) { s += r; n -= v; } return s; }
 function gem(n) {
@@ -1450,8 +1454,9 @@ function dafHeb(d) { const m = /^(\d+)([a-d])$/.exec(d); return "דף " + gem(+m
 function talLoadIdx() {
   const get = (u) => fetch(u).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
   const strU = (books) => books.map(b => [b[0], b[1], b[2].map(c => [String(c[0]), c[1]]), b[3] || ""]);
-  if (!TAL.idxP) TAL.idxP = Promise.all([get("data/talmud/index.json"), get("data/targum/index.json"), get("data/midrash/index.json")])
-    .then(([t, g, m]) => { const idx = { ...t }; for (const c in g) idx[c] = strU(g[c]); idx.r = strU(m.r); return (TAL.idx = idx); })
+  const strS = (books) => books.map(b => [b[0], b[1], b[2].map(c => [String(c[0]), c[1]]), b[3] || "", b[4] || ""]);
+  if (!TAL.idxP) TAL.idxP = Promise.all([get("data/talmud/index.json"), get("data/targum/index.json"), get("data/midrash/index.json"), get("data/sources/index.json")])
+    .then(([t, g, m, s]) => { const idx = { ...t }; for (const c in g) idx[c] = strU(g[c]); idx.r = strU(m.r); for (const c in s) idx[c] = strS(s[c]); return (TAL.idx = idx); })
     .catch(e => { TAL.idxP = null; throw e; });
   return TAL.idxP;
 }
@@ -1467,6 +1472,9 @@ function talTract() { return TAL.idx[TAL.corp].find(t => t[0] === TAL.key) || TA
 function unitHeb(corp, tr, u) {
   if (isTalmud(corp)) return dafHeb(u);
   if (corp === "r" && tr[3] === "s") return "פרשה " + gem(+u);
+  if (corp === "ys") return "רמז " + gem(+u);
+  if (corp === "pr") return "פיסקא " + gem(+u);
+  if (corp === "mt") return "מזמור " + gem(+u);
   if (+u === 0) return "פתיחתא";
   return "פרק " + gem(+u);
 }
@@ -1508,7 +1516,7 @@ async function talShow(push) {
     const row = rdRow(r[0]);
     const hw = row ? row[2].split("|").join(" ") : r[0];
     const pi = S.entryPage.get(r[0]);
-    const pv = !isTalmud(TAL.corp) && r[1] ? '<span class="pv" lang="he" dir="rtl">פסוק ' + gem(r[1]) + "</span> · " : "";
+    const pv = !isTalmud(TAL.corp) && r[1] ? '<span class="pv" lang="he" dir="rtl">' + (TALSUB[TAL.corp] || "פסוק") + " " + gem(r[1]) + "</span> · " : "";
     return '<div class="res-row tal-row" data-id="' + r[0] + '"' + (!isTalmud(TAL.corp) ? ' data-v="' + r[1] + '"' : "") + ' data-c="' + esc(JSON.stringify(r[3] || [])) + '" tabindex="0" role="button"><div class="rp">' + pv + '<span class="heb" lang="he" dir="rtl">' + esc(hw) + "</span> · p. " +
       esc(pi != null ? label(pi) : "") + "</div>" + talSnippet(r[2]) + "</div>";
   }).join("") || '<div class="help">No entries cite this ' + (isTalmud(TAL.corp) ? "daf" : "chapter") + ".</div>";
@@ -1567,6 +1575,11 @@ function markRefs(body, corp, key, daf, v, cites) {
     const re = tr[3] === "s" ? new RegExp("^" + key + "\\." + daf + "(\\.|$)")
       : (key === "Shir_HaShirim_Rabbah" || key === "Kohelet_Rabbah") && +daf ? new RegExp("^" + key + "\\." + daf + "\\." + v + "(\\.|$)") : null;
     if (re) hit = links.filter(a => re.test(refOf(a)));
+  } else if (["m", "t", "ys", "mt", "pr"].includes(corp)) {
+    const tr = TAL.idx[corp].find(x => x[0] === key) || [];
+    const esc_ = (s) => (s || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const re = corp === "m" && v && +v ? new RegExp("^" + esc_(tr[4]) + "\\." + daf + "\\." + v + "(\\D|$)") : new RegExp("^" + esc_(tr[4]) + "\\." + daf + "(\\D|$)");
+    hit = links.filter(a => re.test(refOf(a)));
   } else if (!isTalmud(corp)) {
     const title = corp === "o" ? "Onkelos_" + key : corp === "yr" ? "Targum_Jerusalem,_" + key : corp === "k" ? (/Chronicles/.test(key) ? "Targum_of_" + key : "Aramaic_Targum_to_" + key) : "Targum_Jonathan_on_" + key;
     const re = new RegExp("^" + title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\." + daf + "\\." + v + "(\\D|$)");
@@ -1576,7 +1589,7 @@ function markRefs(body, corp, key, daf, v, cites) {
     const re = new RegExp("(^|\\D)" + m[1] + m[2] + "\\b");
     hit = links.filter(a => refOf(a).startsWith("Jerusalem_Talmud_" + key + ".") && re.test(a.textContent.replace(/\s+/g, " ")));
   }
-  hit.forEach(wrapMark);
+  hit.filter(a => a.textContent.trim()).forEach(wrapMark);
   const first = body.querySelector("mark.tal");
   if (first) first.scrollIntoView({ block: "center" });
 }
@@ -1589,7 +1602,7 @@ function markAllText(body, re) {
     const nodes = []; let n, text = "";
     while ((n = tw.nextNode())) { nodes.push([n, text.length]); text += n.nodeValue; }
     g.lastIndex = from;
-    const m = g.exec(text); if (!m) return;
+    const m = g.exec(text); if (!m || !m[0]) return;
     from = m.index + Math.max(1, m[0].length);
     const at = (off, end) => { for (let i = nodes.length - 1; i >= 0; i--) if (nodes[i][1] < off || (!end && nodes[i][1] === off)) return [nodes[i][0], off - nodes[i][1]]; return [nodes[0][0], 0]; };
     const [sn, so] = at(m.index, false), [en, eo] = at(m.index + m[0].length, true);
@@ -1664,7 +1677,7 @@ function routeHash(push) {
   let m;
   if ((m = /^p(.+)$/.exec(h)) && S.byLabel.has(m[1])) { if (S.byLabel.get(m[1]) !== S.idx || !S.rendered) go(S.byLabel.get(m[1]), { push }); return true; }
   if (/^[A-V]\d{5}[a-z]?$/.test(h)) { gotoEntry(h, push).then(ok => { if (ok) openReader(h, S.entryPage.get(h)); }); return true; }
-  if ((m = /^t\/(b|y|o|yj|yr|n|k|r)\/(\w+)\/(\d+[a-d]?)$/.exec(h))) {
+  if ((m = /^t\/(b|y|o|yj|yr|n|k|r|m|t|ys|mt|pr)\/([\w']+)\/(\d+[a-d]?)$/.exec(h))) {
     if (!S.rendered) { const last = store.get("page"); S.idx = last && S.byLabel.has(last) ? S.byLabel.get(last) : S.byLabel.get("1"); render(); }
     TAL.corp = m[1]; TAL.key = m[2]; TAL.daf = m[3]; openDrawer("tal"); return true;
   }
