@@ -8291,7 +8291,7 @@
   "kind": "misprint",
   "old": "Y. ib. II, beg. 22<sup>d</sup> כּוֹכְבֵי",
   "new": "Y. ib. II, beg. 52<sup>d</sup> כּוֹכְבֵי",
-  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Sukkah II, 52ᵈ (“בכוכבי חמה”). The 1903 printing itself has “Y. ib. II, beg. 22ᵈ” (the scan of the page agrees), and Yerushalmi Sukkah runs from 51ᵃ to 55ᵈ, so this is a misprint in the original book. Corrected to “Y. ib. II, beg. 52ᵈ”."
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Sukkah II, 52ᵈ (“בכוכבי חמה”). The 1903 printing itself has “Y. ib. II, beg. 22ᵈ” (the scan of the page agrees), and Yerushalmi Sukkah runs from 51ᶜ to 55ᵈ, so this is a misprint in the original book. Corrected to “Y. ib. II, beg. 52ᵈ”."
  },
  {
   "page": 100,
@@ -8309,7 +8309,7 @@
   "kind": "misprint",
   "old": "Y. Keth. VIII, 22<sup>b</sup> top",
   "new": "Y. Keth. VIII, 32<sup>b</sup> top",
-  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Ketubot VIII, 32ᵇ (“ופקעת מינייהו קדושתן”). The 1903 printing itself has “Y. Keth. VIII, 22ᵇ” (the scan of the page agrees), and Yerushalmi Ketubot runs from 24ᵃ to 36ᵈ, so this is a misprint in the original book. Corrected to “Y. Keth. VIII, 32ᵇ”."
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Ketubot VIII, 32ᵇ (“ופקעת מינייהו קדושתן”). The 1903 printing itself has “Y. Keth. VIII, 22ᵇ” (the scan of the page agrees), and Yerushalmi Ketubot runs from 24ᵈ to 36ᵇ, so this is a misprint in the original book. Corrected to “Y. Keth. VIII, 32ᵇ”."
  },
  {
   "page": 1521,
@@ -8318,7 +8318,7 @@
   "kind": "misprint",
   "old": "Y. Keth. VIII, 3<sup>b</sup> bot.",
   "new": "Y. Keth. VII, 31<sup>b</sup> bot.",
-  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Ketubot VII, 31ᵇ (“ואין ברייה משגחת עליה”). The 1903 printing itself has “Y. Keth. VII, 3ᵇ” (the scan of the page agrees), and Yerushalmi Ketubot runs from 24ᵃ to 36ᵈ, so this is a misprint in the original book. Corrected to “Y. Keth. VII, 31ᵇ”. (The digital text also had chapter “VIII” where the book has “VII”.)"
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Ketubot VII, 31ᵇ (“ואין ברייה משגחת עליה”). The 1903 printing itself has “Y. Keth. VII, 3ᵇ” (the scan of the page agrees), and Yerushalmi Ketubot runs from 24ᵈ to 36ᵇ, so this is a misprint in the original book. Corrected to “Y. Keth. VII, 31ᵇ”. (The digital text also had chapter “VIII” where the book has “VII”.)"
  },
  {
   "page": 1018,
@@ -8327,7 +8327,7 @@
   "kind": "misprint",
   "old": "Y. Mass. Sh. II, 50<sup>a</sup> top",
   "new": "Y. Maasr. II, 50<sup>a</sup> top",
-  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Maasrot II, 50ᵃ (“אבטיח שספת בו”). The 1903 printing itself has “Y. Mass. Sh. II, 50ᵃ” (the scan of the page agrees), and Yerushalmi Maaser Sheni runs from 52ᵃ to 56ᵈ, so this is a misprint in the original book. Corrected to “Y. Maasr. II, 50ᵃ”."
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Maasrot II, 50ᵃ (“אבטיח שספת בו”). The 1903 printing itself has “Y. Mass. Sh. II, 50ᵃ” (the scan of the page agrees), and Yerushalmi Maaser Sheni runs from 52ᵇ to 56ᵈ, so this is a misprint in the original book. Corrected to “Y. Maasr. II, 50ᵃ”."
  },
  {
   "page": 919,
@@ -8336,6 +8336,6 @@
   "kind": "misprint",
   "old": "Y. Shek. V, 55<sup>c</sup> bot.",
   "new": "Y. Succ. V, 55<sup>c</sup> bot.",
-  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Sukkah V, 55ᶜ (“סורח את הנעימה”). The 1903 printing itself has “Y. Shek. V, 55ᶜ” (the scan of the page agrees), and Yerushalmi Shekalim runs from 45ᵃ to 51ᵇ, so this is a misprint in the original book. Corrected to “Y. Succ. V, 55ᶜ”."
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Sukkah V, 55ᶜ (“סורח את הנעימה”). The 1903 printing itself has “Y. Shek. V, 55ᶜ” (the scan of the page agrees), and Yerushalmi Shekalim runs from 45ᵈ to 51ᵇ, so this is a misprint in the original book. Corrected to “Y. Succ. V, 55ᶜ”."
  }
 ]
