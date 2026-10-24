@@ -529,7 +529,7 @@ const store = {
 function chunkOf(i) { return Math.floor(i / S.chunk); }
 function loadChunk(c) {
   if (!S.chunks.has(c)) {
-    const p = fetch("data/c" + String(c).padStart(3, "0") + ".json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    const p = fetch("data/c" + String(c).padStart(3, "0") + ".json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(a => a.map(x => Array.isArray(x) ? x.join("") : x));
     p.catch(() => S.chunks.delete(c));
     S.chunks.set(c, p);
   }

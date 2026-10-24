@@ -217,8 +217,11 @@ for c in range(0, len(pages), CHUNK):
         if p["id"] in ("xv", "xvi", "xvii", "xviii"):
             h = h.replace('<p class="fm">', '<p class="fm" dir="auto">')
         chunk.append(h)
-    json.dump(chunk, open(os.path.join(OUT, "data", "c%03d.json" % (c // CHUNK)), "w"),
-              ensure_ascii=False, separators=(",", ":"))
+    # each page is a list of pieces, one entry per line, so a change to one entry changes one line of the file
+    # (the site and the index scripts join the pieces back into the page's HTML)
+    def _pieces(h): return [x for x in re.split(r'(?=<div class="e[ "])', h) if x]
+    with open(os.path.join(OUT, "data", "c%03d.json" % (c // CHUNK)), "w") as f:
+        f.write("[\n" + ",\n".join("[\n" + ",\n".join(json.dumps(x, ensure_ascii=False) for x in _pieces(h)) + "\n]" for h in chunk) + "\n]\n")
 
 import html as _html
 cur = json.load(open(sys.argv[3]))["entries"]

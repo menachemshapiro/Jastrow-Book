@@ -86,6 +86,7 @@ def entry_texts():
     for f in sorted(glob.glob(os.path.join(SITE, "data/c*.json"))):
         ci = int(re.search(r"c(\d+)\.json", f).group(1))
         for k, h in enumerate(json.load(open(f))):
+            if isinstance(h, list): h = "".join(h)
             i = ci * 10 + k
             if i >= len(meta) or meta[i][1] != "b": continue
             for m in re.finditer(r'<div class="e(?: cont)?" id="([^"]+)">(.*?)</div>(?=<div class="e|$|<div class="after)', h, re.S):

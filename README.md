@@ -62,7 +62,7 @@ Other suspected typos are listed for review first and corrected only once approv
 | Path | What it is |
 | --- | --- |
 | `index.html` | The whole site: viewer, search, keyboard, contents, entry reader and Talmud finder |
-| `data/c000.json`–`c174.json` | The pages, ten to a file |
+| `data/c000.json`–`c174.json` | The pages, ten to a file, one entry per line (so a correction to an entry changes one short line) |
 | `data/pages.json` | The page list: labels, first and last headwords, and the column break on each page |
 | `data/hw.json` | The headword index |
 | `data/talmud/` | Every Talmud citation, by tractate and daf |
