@@ -8,6 +8,7 @@ os.makedirs(os.path.join(OUT, "data"), exist_ok=True)
 
 pages = json.load(open(os.path.join(SRC, "pages_all.json")))["pages"]
 BREAKS = json.load(open(os.environ["BREAKS"])) if os.environ.get("BREAKS") else {}
+MIDB = {k: v for k, v in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "mid_breaks.json"))).items() if not k.startswith("_")}
 
 TITLE1 = """<div class="tp">
 <div class="tp-a">A DICTIONARY</div>
@@ -209,6 +210,7 @@ def transform(h):
 meta = []
 for i, p in enumerate(pages):
     meta.append([p["id"], {"front": "f", "body": "b", "back": "x"}[p["section"]], p["first"], p["last"], 1 if p["estimated"] else 0, p["kind"], BREAKS.get(p["id"]) if BREAKS.get(p["id"]) is not None else -1])
+    if p["id"] in MIDB: meta[-1].append(MIDB[p["id"]])      # the column break below a mid-page letter heading
 
 for c in range(0, len(pages), CHUNK):
     chunk = []

@@ -73,6 +73,7 @@ Other suspected typos are listed for review first and corrected only once approv
 | `build/make_site2.py` | Turns the built pages into `data/`, adding the title pages, preface footnotes and text corrections |
 | `build/text_fixes.json` | Corrections to the text, one record per change |
 | `build/breaks_all2.json` | Each page's column break, as a character offset into that page's text |
+| `build/mid_breaks.json` | On pages where a letter begins part-way down, the words that begin the right-hand column below the letter's heading, read off the scan |
 | `build/talmud_index.py` | Builds `data/talmud/` from the entry text |
 | `build/targum_index.py` | Builds `data/targum/` from the entry text |
 | `build/midrash_index.py` | Builds `data/midrash/` from the entry text |

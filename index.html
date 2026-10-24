@@ -688,7 +688,7 @@ function fitPage(art) {
   else { f = HI - STEP; while (f > 14) { cols.style.fontSize = f + "px"; if (!overflow(cols)) break; f -= STEP; } }
   if (kind === "letter") short = true;
   const mid = cols.querySelector(":scope > h2.letter");
-  if (mid && kind !== "letter") { midLetterLayout(art, cols, colsH, S.pages[+art.dataset.i] ? S.pages[+art.dataset.i][6] : -1); return; }
+  if (mid && kind !== "letter") { midLetterLayout(art, cols, colsH, S.pages[+art.dataset.i] ? S.pages[+art.dataset.i][6] : -1, S.pages[+art.dataset.i] ? S.pages[+art.dataset.i][7] : null); return; }
   const known = S.pages[+art.dataset.i] ? S.pages[+art.dataset.i][6] : -1;
   const html0 = cols.innerHTML;
   if (known >= 0 && short) {
@@ -775,7 +775,7 @@ function splitAt(cols, n, k, cls) {
   cols.style.height = "auto";
   return [c1, c2];
 }
-function midLetterLayout(art, cols, colsH, known) {
+function midLetterLayout(art, cols, colsH, known, belowAt) {
   // a letter that begins part-way down the page: two balanced columns above the letter, two below
   const kids = [...cols.childNodes];
   const hi = kids.findIndex(k => k.nodeType === 1 && k.matches("h2.letter"));
@@ -795,6 +795,8 @@ function midLetterLayout(art, cols, colsH, known) {
     if (!sec.textContent.trim()) { parts.push(null); continue; }
     let sp = splitPoint(sec);
     if (sec === secA && known > 0 && known < secA.textContent.length - 5) { const tp = textPos(secA, known); if (tp) sp = tp; }
+    // below the heading: the words that begin the book's right-hand column, read off the scan
+    if (sec === secB && belowAt) { const k = secB.textContent.indexOf(belowAt); if (k > 0) { const tp = textPos(secB, k); if (tp) sp = tp; } }
     parts.push(sp ? splitAt(sec, sp[0], sp[1], "sec split") : null);
   }
   const hA = parts[0] ? Math.max(parts[0][0].scrollHeight, parts[0][1].scrollHeight) : secA.scrollHeight;
