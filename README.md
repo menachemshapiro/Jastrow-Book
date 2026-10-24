@@ -20,15 +20,20 @@ Marcus Jastrow's *A Dictionary of the Targumim, the Talmud Babli and Yerushalmi,
   - Citations are read from Jastrow's own abbreviations. The Bavli is cited by daf and amud ("Ber. 26ᵇ"), and the Yerushalmi by chapter plus the folio and column of the Krotoshin edition ("Y. Ber. VIII, 12ᶜ").
   - "Ib." and a bare folio count as the tractate cited just before.
   - The index holds about 31,900 Bavli and 12,200 Yerushalmi citations. Sefaria links many of the same Bavli citations, and the two agree in all but one case.
-- **Onkelos**, in the same panel, lists the entries that cite a chapter of Targum Onkelos, verse by verse, with the book and chapter in Hebrew.
-  - Jastrow cites Onkelos as "Targ. O. Gen. XVII, 4" or simply "Targ. Gen. XVII, 4". Targum Yerushalmi and Pseudo-Jonathan ("Targ. Y.") are left out.
-  - The index holds about 3,800 citations. Sefaria links 3,493 of the same ones, and the two agree on every one.
+- **Targumim and Midrash Rabbah**, in the same panel, list the entries that cite a chapter (or a section of the Rabbah), verse by verse, with the book and chapter in Hebrew. Choose the source from the menu:
+  - תרגום אונקלוס: "Targ. O. Gen. XVII, 4", or "Targ. Gen. XVII, 4" (on the Torah, "Targ." alone is Onkelos). About 3,800 citations.
+  - תרגום יונתן על התורה (Pseudo-Jonathan): Jastrow's "Targ. Y." and "Targ. Y. I". About 3,200.
+  - תרגום ירושלמי (the Fragment Targum): "Targ. Y. II". About 600.
+  - תרגום יונתן על הנביאים: "Targ. Is. XXX, 2", "Targ. I Sam. …". About 4,600.
+  - תרגום כתובים: Psalms, Proverbs, Job, the Megillot (and Targum Sheni to Esther, "Targ. II Esth.") and Chronicles. About 6,600.
+  - מדרש רבה: on the Torah by section ("Gen. R. s. 19"), on the Megillot by the verse commented on ("Lam. R. to I, 5") or the introduction. About 10,800.
+  - Where Sefaria links the same citation, the two agree in all but a handful of cases. Most of those are "Targ. Y. ib." right after a "Targ. Y. II" citation: Sefaria reads it as Y. II, and this index, following Jastrow's abbreviations, as Y. I.
 
 **Link**
 - A page: `#p1087`
 - An entry, by its Sefaria id: `#P00866` (opens the page with the entry in the reader; the reader's "Copy link" button gives this link)
 - A daf: `#t/b/Berakhot/26b` or `#t/y/Berakhot/12c`
-- A chapter of Onkelos: `#t/o/Genesis/17`
+- A chapter of Onkelos: `#t/o/Genesis/17`; a section of Bereshit Rabbah: `#t/r/Bereishit_Rabbah/19`
 
 ## Sources and thanks
 
@@ -49,13 +54,15 @@ Changes to Sefaria's text are kept in [`build/text_fixes.json`](build/text_fixes
 | `data/pages.json` | The page list: labels, first and last headwords, and the column break on each page |
 | `data/hw.json` | The headword index |
 | `data/talmud/` | Every Talmud citation, by tractate and daf |
-| `data/targum/` | Every Onkelos citation, by book, chapter and verse |
+| `data/targum/` | Every Targum citation, by Targum, book, chapter and verse |
+| `data/midrash/` | Every Midrash Rabbah citation, by book and section or verse |
 | `build/build2.py` | Builds the pages from Sefaria's current text, using the 2018 page breaks |
 | `build/make_site2.py` | Turns the built pages into `data/`, adding the title pages, preface footnotes and text corrections |
 | `build/text_fixes.json` | Corrections to the text, one record per change |
 | `build/breaks_all2.json` | Each page's column break, as a character offset into that page's text |
 | `build/talmud_index.py` | Builds `data/talmud/` from the entry text |
 | `build/targum_index.py` | Builds `data/targum/` from the entry text |
+| `build/midrash_index.py` | Builds `data/midrash/` from the entry text |
 | `favicon.ico`, `icon-*.png`, `og.png`, `site.webmanifest` | Icons and the image shown in link previews |
 
 ## Rebuilding `data/`
@@ -67,4 +74,5 @@ python3 build/build2.py Jastrow-full.xml jastrow-complete.json out2
 BREAKS=build/breaks_all2.json python3 build/make_site2.py out2 . jastrow-complete.json
 python3 build/talmud_index.py .
 python3 build/targum_index.py .
+python3 build/midrash_index.py .
 ```

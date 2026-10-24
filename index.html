@@ -288,6 +288,7 @@ button { cursor: pointer; }
 /* Talmud finder */
 .tal-ctl { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: var(--paper); border-bottom: 1px solid var(--chrome-line); }
 .tal-ctl .seg { align-self: flex-start; }
+.tal-ctl optgroup { font-weight: 600; }
 .tal-ctl .seg button { font-family: var(--f-ui-heb); font-size: 15px; padding: 0 14px; }
 .tal-ctl select { height: 38px; border: 1px solid var(--chrome-line); border-radius: 6px; background: var(--paper); color: var(--ink); font-family: var(--f-ui-heb); font-size: 16px; padding: 0 8px; width: 100%; }
 .tal-daf { display: flex; gap: 6px; }
@@ -372,7 +373,7 @@ button { cursor: pointer; }
   <div class="bar">
     <div class="brand"><b>Jastrow</b><span lang="he" dir="rtl">ספר המלים</span></div>
     <button class="btn" id="tocBtn" aria-controls="drawer" aria-expanded="false" title="Contents (C)">Contents</button>
-    <button class="btn" id="talBtn" title="Find the entries that cite a daf of the Talmud or a chapter of Targum Onkelos">Citations</button>
+    <button class="btn" id="talBtn" title="Find the entries that cite a daf of the Talmud, a chapter of a Targum, or a section of Midrash Rabbah">Citations</button>
     <button class="btn" id="aboutBtn" title="About this edition and how to use it">About</button>
     <div class="search" id="searchBox">
       <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search a headword, or any English or Hebrew text" aria-label="Search">
@@ -422,7 +423,11 @@ button { cursor: pointer; }
   </div>
   <div id="paneTal" style="display:none;flex-direction:column;flex:1;min-height:0">
     <div class="tal-ctl">
-      <div class="seg" role="group" aria-label="Talmud"><button id="talB" aria-pressed="true" lang="he">בבלי</button><button id="talY" aria-pressed="false" lang="he">ירושלמי</button><button id="talO" aria-pressed="false" lang="he">אונקלוס</button></div>
+      <select id="talC" aria-label="Source" dir="rtl" lang="he">
+        <optgroup label="תלמוד"><option value="b">תלמוד בבלי</option><option value="y">תלמוד ירושלמי</option></optgroup>
+        <optgroup label="תרגום"><option value="o">תרגום אונקלוס</option><option value="yj">תרגום יונתן על התורה (Targ. Y., Y. I)</option><option value="yr">תרגום ירושלמי (Targ. Y. II)</option><option value="n">תרגום יונתן על הנביאים</option><option value="k">תרגום כתובים</option></optgroup>
+        <optgroup label="מדרש"><option value="r">מדרש רבה</option></optgroup>
+      </select>
       <select id="talM" aria-label="Tractate" dir="rtl" lang="he"></select>
       <div class="tal-daf">
         <button class="btn" id="talNext" aria-label="Next daf" title="Next daf">‹</button>
@@ -451,12 +456,21 @@ button { cursor: pointer; }
         <li><span lang="he">א־ב</span> opens a Hebrew keyboard, alphabetical or in the standard Israeli layout.</li>
         <li><b>Contents</b> lists every page by its first and last headword, letter by letter, as in the running heads of the book.</li>
         <li><b>Citations</b> lists the entries that cite a chosen daf of the Talmud or chapter of Onkelos. Choose <span lang="he">בבלי</span> or <span lang="he">ירושלמי</span>, the tractate and the daf. Citations are read from Jastrow’s own abbreviations: the Bavli by daf and amud (“Ber. 26<sup>b</sup>”), the Yerushalmi by chapter and the folio and column of the Krotoshin edition (“Y. Ber. VIII, 12<sup>c</sup>”); “Ib.” and a bare folio count as the tractate cited just before.</li>
-        <li>Choose <span lang="he">אונקלוס</span> there for Targum Onkelos: pick a book of the Torah and a chapter to list every entry that cites it, verse by verse. Jastrow cites Onkelos as “Targ. O. Gen. XVII, 4” or simply “Targ. Gen. XVII, 4”; Targum Yerushalmi and Pseudo-Jonathan (“Targ. Y.”) are not included.</li>
+        <li>The same panel covers the Targumim and Midrash Rabbah. Choose the source from the menu at the top:
+          <ul>
+            <li><span lang="he">תרגום אונקלוס</span>: “Targ. O. Gen. XVII, 4”, or simply “Targ. Gen. XVII, 4” (on the Torah, “Targ.” alone is Onkelos).</li>
+            <li><span lang="he">תרגום יונתן על התורה</span> (Pseudo-Jonathan): Jastrow’s “Targ. Y.” and “Targ. Y. I”.</li>
+            <li><span lang="he">תרגום ירושלמי</span> (the Fragment Targum): Jastrow’s “Targ. Y. II”.</li>
+            <li><span lang="he">תרגום יונתן על הנביאים</span>: “Targ. Is. XXX, 2”, “Targ. I Sam. …”.</li>
+            <li><span lang="he">תרגום כתובים</span>: Psalms, Proverbs, Job, the Megillot (with Targum Sheni to Esther, “Targ. II Esth.”) and Chronicles.</li>
+            <li><span lang="he">מדרש רבה</span>: the Rabbah on the Torah by section (“Gen. R. s. 19”), and on the Megillot by the verse commented on (“Lam. R. to I, 5”) or the introduction (“Lam. R. introd.”).</li>
+          </ul>
+          Pick the book and the chapter or section; the entries are listed verse by verse. A reference that follows on from one of these (“Targ. O. ib. XLI, 43”, “Ib. 16”, “; s. 78”) counts as the same source.</li>
       </ul>
 
       <h3>Links</h3>
       <ul>
-        <li>A page: <code>#p1087</code>. An entry, by its Sefaria id: <code>#P00866</code> (opens its page with the entry in the reader; “Copy link” in the reader gives you this link). A daf: <code>#t/b/Berakhot/26b</code> or <code>#t/y/Berakhot/12c</code>. A chapter of Onkelos: <code>#t/o/Genesis/17</code>.</li>
+        <li>A page: <code>#p1087</code>. An entry, by its Sefaria id: <code>#P00866</code> (opens its page with the entry in the reader; “Copy link” in the reader gives you this link). A daf: <code>#t/b/Berakhot/26b</code> or <code>#t/y/Berakhot/12c</code>. A chapter of Onkelos: <code>#t/o/Genesis/17</code>; of a section of Bereshit Rabbah: <code>#t/r/Bereishit_Rabbah/19</code>.</li>
         <li>Keys: <kbd>←</kbd> <kbd>→</kbd> turn pages · <kbd>/</kbd> search · <kbd>C</kbd> contents · <kbd>+</kbd> <kbd>−</kbd> <kbd>0</kbd> zoom · <kbd>Esc</kbd> closes.</li>
       </ul>
 
@@ -1119,7 +1133,7 @@ function showPane(p) {
   $("tabToc").setAttribute("aria-selected", p === "toc");
   $("tabRes").setAttribute("aria-selected", p === "res");
   $("tabHelp").setAttribute("aria-selected", p === "help");
-  $("drawerTitle").textContent = p === "toc" ? "Contents" : p === "res" ? "Search results" : p === "tal" ? "Talmud and Targum citations" : "About this edition";
+  $("drawerTitle").textContent = p === "toc" ? "Contents" : p === "res" ? "Search results" : p === "tal" ? "Talmud, Targum and Midrash citations" : "About this edition";
 }
 $("tabToc").onclick = () => openDrawer("toc");
 $("tabRes").onclick = () => openDrawer("res");
@@ -1418,9 +1432,12 @@ $("rdCopy").onclick = () => {
 };
 
 /* ---------- Talmud finder ---------- */
-const TAL = { idx: null, corp: ["y", "o"].includes(store.get("talCorp")) ? store.get("talCorp") : "b", key: null, daf: null, files: new Map(), seq: 0 };
-const TALDIR = { b: "talmud", y: "talmud", o: "targum" };
-function toRoman(n) { let s = ""; for (const [v, r] of [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]]) while (n >= v) { s += r; n -= v; } return s; }
+const TALC = ["b", "y", "o", "yj", "yr", "n", "k", "r"];
+const TAL = { idx: null, corp: TALC.includes(store.get("talCorp")) ? store.get("talCorp") : "b", key: null, daf: null, files: new Map(), seq: 0 };
+const TALDIR = { b: "talmud", y: "talmud", o: "targum", yj: "targum", yr: "targum", n: "targum", k: "targum", r: "midrash" };
+const TALPRE = { o: "אונקלוס", yj: "תרגום יונתן", yr: "תרגום ירושלמי", n: "תרגום יונתן", k: "תרגום", r: "" };
+const isTalmud = (c) => c === "b" || c === "y";
+function toRoman(n) { let s = ""; for (const [v, r] of [[100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]]) while (n >= v) { s += r; n -= v; } return s; }
 function gem(n) {
   const U = ["", "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט"], T = ["", "י", "כ", "ל", "מ", "נ", "ס", "ע", "פ", "צ"], C = ["", "ק", "ר", "ש", "ת"];
   let s = C[Math.floor(n / 100)] || "";
@@ -1432,8 +1449,10 @@ const AMUD = { a: "א", b: "ב", c: "ג", d: "ד" };
 function dafHeb(d) { const m = /^(\d+)([a-d])$/.exec(d); return "דף " + gem(+m[1]) + " ע״" + AMUD[m[2]]; }
 function talLoadIdx() {
   const get = (u) => fetch(u).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
-  if (!TAL.idxP) TAL.idxP = Promise.all([get("data/talmud/index.json"), get("data/targum/index.json")])
-    .then(([t, o]) => (TAL.idx = { ...t, o: o.o.map(b => [b[0], b[1], b[2].map(c => [String(c[0]), c[1]])]) })).catch(e => { TAL.idxP = null; throw e; });
+  const strU = (books) => books.map(b => [b[0], b[1], b[2].map(c => [String(c[0]), c[1]]), b[3] || ""]);
+  if (!TAL.idxP) TAL.idxP = Promise.all([get("data/talmud/index.json"), get("data/targum/index.json"), get("data/midrash/index.json")])
+    .then(([t, g, m]) => { const idx = { ...t }; for (const c in g) idx[c] = strU(g[c]); idx.r = strU(m.r); return (TAL.idx = idx); })
+    .catch(e => { TAL.idxP = null; throw e; });
   return TAL.idxP;
 }
 function talFile(corp, key) {
@@ -1445,18 +1464,25 @@ function talFile(corp, key) {
   return TAL.files.get(k);
 }
 function talTract() { return TAL.idx[TAL.corp].find(t => t[0] === TAL.key) || TAL.idx[TAL.corp][0]; }
+function unitHeb(corp, tr, u) {
+  if (isTalmud(corp)) return dafHeb(u);
+  if (corp === "r" && tr[3] === "s") return "פרשה " + gem(+u);
+  if (+u === 0) return "פתיחתא";
+  return "פרק " + gem(+u);
+}
 function talPaintSelects() {
-  $("talB").setAttribute("aria-pressed", TAL.corp === "b"); $("talY").setAttribute("aria-pressed", TAL.corp === "y"); $("talO").setAttribute("aria-pressed", TAL.corp === "o");
-  $("talM").setAttribute("aria-label", TAL.corp === "o" ? "Book" : "Tractate"); $("talD").setAttribute("aria-label", TAL.corp === "o" ? "Chapter" : "Daf");
-  $("talNext").setAttribute("aria-label", TAL.corp === "o" ? "Next chapter" : "Next daf"); $("talNext").title = $("talNext").getAttribute("aria-label");
-  $("talPrev").setAttribute("aria-label", TAL.corp === "o" ? "Previous chapter" : "Previous daf"); $("talPrev").title = $("talPrev").getAttribute("aria-label");
+  $("talC").value = TAL.corp;
+  const t = isTalmud(TAL.corp);
+  $("talM").setAttribute("aria-label", t ? "Tractate" : "Book"); $("talD").setAttribute("aria-label", t ? "Daf" : "Chapter or section");
+  $("talNext").setAttribute("aria-label", t ? "Next daf" : "Next"); $("talNext").title = $("talNext").getAttribute("aria-label");
+  $("talPrev").setAttribute("aria-label", t ? "Previous daf" : "Previous"); $("talPrev").title = $("talPrev").getAttribute("aria-label");
   const list = TAL.idx[TAL.corp];
-  if (!list.some(t => t[0] === TAL.key)) TAL.key = list[0][0];
-  $("talM").innerHTML = list.map(t => '<option value="' + t[0] + '"' + (t[0] === TAL.key ? " selected" : "") + ">" + esc(t[1]) + "</option>").join("");
+  if (!list.some(x => x[0] === TAL.key)) TAL.key = list[0][0];
+  $("talM").innerHTML = list.map(x => '<option value="' + x[0] + '"' + (x[0] === TAL.key ? " selected" : "") + ">" + esc(x[1]) + "</option>").join("");
   const tr = talTract();
   if (!tr[2].some(d => d[0] === TAL.daf)) TAL.daf = tr[2][0][0];
   $("talD").innerHTML = tr[2].map(d => {
-    let lab = TAL.corp === "o" ? "פרק " + gem(+d[0]) : dafHeb(d[0]);
+    let lab = unitHeb(TAL.corp, tr, d[0]);
     if (TAL.corp === "y" && d[2].length) lab = "פרק " + d[2].map(gem).join("–") + " · " + lab;
     return '<option value="' + d[0] + '"' + (d[0] === TAL.daf ? " selected" : "") + ">" + lab + " (" + d[1] + ")</option>";
   }).join("");
@@ -1475,17 +1501,17 @@ async function talShow(push) {
   catch (e) { if (seq === TAL.seq) $("talSum").textContent = "The list didn’t load. Check the connection and choose the daf again."; return; }
   if (seq !== TAL.seq) return;
   const chs = TAL.corp === "y" ? tr[2].find(d => d[0] === daf)[2] : [];
-  const title = TAL.corp === "o" ? "אונקלוס " + name + " פרק " + gem(+daf)
+  const title = !isTalmud(TAL.corp) ? (TALPRE[TAL.corp] ? TALPRE[TAL.corp] + " " : "") + name + " " + unitHeb(TAL.corp, tr, daf)
     : (TAL.corp === "y" ? "ירושלמי " : "") + name + (chs.length ? " פרק " + chs.map(gem).join("–") + "," : "") + " " + dafHeb(daf);
   $("talSum").innerHTML = '<span class="heb" dir="rtl">' + esc(title) + "</span> — " + rows.length + (rows.length === 1 ? " entry" : " entries");
   $("talList").innerHTML = rows.map(r => {
     const row = rdRow(r[0]);
     const hw = row ? row[2].split("|").join(" ") : r[0];
     const pi = S.entryPage.get(r[0]);
-    const pv = TAL.corp === "o" ? '<span class="pv" lang="he" dir="rtl">פסוק ' + gem(r[1]) + "</span> · " : "";
-    return '<div class="res-row tal-row" data-id="' + r[0] + '"' + (TAL.corp === "o" ? ' data-v="' + r[1] + '"' : "") + ' data-c="' + esc(JSON.stringify(r[3] || [])) + '" tabindex="0" role="button"><div class="rp">' + pv + '<span class="heb" lang="he" dir="rtl">' + esc(hw) + "</span> · p. " +
+    const pv = !isTalmud(TAL.corp) && r[1] ? '<span class="pv" lang="he" dir="rtl">פסוק ' + gem(r[1]) + "</span> · " : "";
+    return '<div class="res-row tal-row" data-id="' + r[0] + '"' + (!isTalmud(TAL.corp) ? ' data-v="' + r[1] + '"' : "") + ' data-c="' + esc(JSON.stringify(r[3] || [])) + '" tabindex="0" role="button"><div class="rp">' + pv + '<span class="heb" lang="he" dir="rtl">' + esc(hw) + "</span> · p. " +
       esc(pi != null ? label(pi) : "") + "</div>" + talSnippet(r[2]) + "</div>";
-  }).join("") || '<div class="help">No entries cite this ' + (TAL.corp === "o" ? "chapter" : "daf") + ".</div>";
+  }).join("") || '<div class="help">No entries cite this ' + (isTalmud(TAL.corp) ? "daf" : "chapter") + ".</div>";
   $("talList").scrollTop = 0;
   const hash = "#t/" + TAL.corp + "/" + TAL.key + "/" + daf;
   try { if (location.hash !== hash) history[push ? "pushState" : "replaceState"](history.state, "", hash); } catch (e) {}
@@ -1503,9 +1529,7 @@ function talStep(dir) {
   const j = Math.max(0, Math.min(ds.length - 1, i + dir));
   if (j !== i) { TAL.daf = ds[j][0]; talShow(false); }
 }
-$("talB").onclick = () => { if (TAL.corp !== "b") { TAL.corp = "b"; store.set("talCorp", "b"); TAL.daf = null; talShow(false); } };
-$("talY").onclick = () => { if (TAL.corp !== "y") { TAL.corp = "y"; store.set("talCorp", "y"); TAL.daf = null; talShow(false); } };
-$("talO").onclick = () => { if (TAL.corp !== "o") { TAL.corp = "o"; store.set("talCorp", "o"); TAL.key = null; TAL.daf = null; talShow(false); } };
+$("talC").onchange = () => { const c = $("talC").value; if (c !== TAL.corp) { TAL.corp = c; store.set("talCorp", c); TAL.key = null; TAL.daf = null; talShow(false); } };
 $("talM").onchange = () => { TAL.key = $("talM").value; TAL.daf = null; talShow(false); };
 $("talD").onchange = () => { TAL.daf = $("talD").value; talShow(false); };
 $("talPrev").onclick = () => talStep(-1);
@@ -1538,8 +1562,14 @@ function markRefs(body, corp, key, daf, v, cites) {
   if (corp === "b") {
     const re = new RegExp("^" + key + "\\." + daf + "(\\.|$)");
     hit = links.filter(a => re.test(refOf(a)));
-  } else if (corp === "o") {
-    const re = new RegExp("^Onkelos_" + key + "\\." + daf + "\\." + v + "(\\D|$)");
+  } else if (corp === "r") {
+    const tr = TAL.idx.r.find(x => x[0] === key) || [];
+    const re = tr[3] === "s" ? new RegExp("^" + key + "\\." + daf + "(\\.|$)")
+      : (key === "Shir_HaShirim_Rabbah" || key === "Kohelet_Rabbah") && +daf ? new RegExp("^" + key + "\\." + daf + "\\." + v + "(\\.|$)") : null;
+    if (re) hit = links.filter(a => re.test(refOf(a)));
+  } else if (!isTalmud(corp)) {
+    const title = corp === "o" ? "Onkelos_" + key : corp === "yr" ? "Targum_Jerusalem,_" + key : corp === "k" ? (/Chronicles/.test(key) ? "Targum_of_" + key : "Aramaic_Targum_to_" + key) : "Targum_Jonathan_on_" + key;
+    const re = new RegExp("^" + title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\." + daf + "\\." + v + "(\\D|$)");
     hit = links.filter(a => re.test(refOf(a)));
   } else {
     const m = /^(\d+)([a-d])$/.exec(daf);
@@ -1634,7 +1664,7 @@ function routeHash(push) {
   let m;
   if ((m = /^p(.+)$/.exec(h)) && S.byLabel.has(m[1])) { if (S.byLabel.get(m[1]) !== S.idx || !S.rendered) go(S.byLabel.get(m[1]), { push }); return true; }
   if (/^[A-V]\d{5}[a-z]?$/.test(h)) { gotoEntry(h, push).then(ok => { if (ok) openReader(h, S.entryPage.get(h)); }); return true; }
-  if ((m = /^t\/([byo])\/(\w+)\/(\d+[a-d]?)$/.exec(h))) {
+  if ((m = /^t\/(b|y|o|yj|yr|n|k|r)\/(\w+)\/(\d+[a-d]?)$/.exec(h))) {
     if (!S.rendered) { const last = store.get("page"); S.idx = last && S.byLabel.has(last) ? S.byLabel.get(last) : S.byLabel.get("1"); render(); }
     TAL.corp = m[1]; TAL.key = m[2]; TAL.daf = m[3]; openDrawer("tal"); return true;
   }

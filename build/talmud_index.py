@@ -50,7 +50,7 @@ HEB = {t[1]: t[2] for t in TRACT}
 HAS = {t[1]: t[3] for t in TRACT}
 TR = "|".join(sorted((re.escape(a) for a in ABBR), key=len, reverse=True))
 ROM = r"(?:X{0,3}(?:IX|IV|V?I{0,3}))"
-ROMV = {"I": 1, "V": 5, "X": 10, "L": 50}
+ROMV = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100}
 def roman(s):
     n, prev = 0, 0
     for ch in reversed(s):
