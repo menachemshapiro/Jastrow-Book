@@ -8229,5 +8229,113 @@
   "before": "ʿĂkhinai",
   "after": "Ps. CVIII,",
   "why": "Two words run together (“sameTarg.” for “same Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1090,
+  "entry": "P00915",
+  "headword": "עָמַץ",
+  "kind": "misprint",
+  "old": "Ib. 181<sup>b</sup> הרוצה",
+  "new": "Ib. 151<sup>b</sup> הרוצה",
+  "why": "We searched the Talmud for the quotation and found it at Shabbat 151ᵇ (“הרוצה שיתעצמו עיניו”). The 1903 printing itself has “Ib. 181ᵇ” (the scan of the page agrees), and Shabbat ends at 157ᵇ, so this is a misprint in the original book. Corrected to “Ib. 151ᵇ”."
+ },
+ {
+  "page": 1465,
+  "entry": "T00488",
+  "headword": "רָחוֹק",
+  "kind": "misprint",
+  "old": "Sabb. 182<sup>a</sup> קרובים",
+  "new": "Sabb. 152<sup>a</sup> קרובים",
+  "why": "We searched the Talmud for the quotation and found it at Shabbat 152ᵃ (“קרובים נעשו רחוקים”). The 1903 printing itself has “Sabb. 182ᵃ” (the scan of the page agrees), and Shabbat ends at 157ᵇ, so this is a misprint in the original book. Corrected to “Sabb. 152ᵃ”."
+ },
+ {
+  "page": 498,
+  "entry": "H01581",
+  "headword": "חֶרֶב",
+  "kind": "misprint",
+  "old": "Snh. 116<sup>a</sup> מהם",
+  "new": "Snh. 111<sup>a</sup> מהם",
+  "why": "We searched the Talmud for the quotation and found it at Sanhedrin 111ᵃ (“מהם הרגו בחרב”). The 1903 printing itself has “Snh. 116ᵃ” (the scan of the page agrees), and Sanhedrin ends at 113ᵇ, so this is a misprint in the original book. Corrected to “Snh. 111ᵃ”."
+ },
+ {
+  "page": 1018,
+  "entry": "O01437",
+  "headword": "סָפַת",
+  "kind": "misprint",
+  "old": "Ab. Zar. 80<sup>b</sup> ס׳ לה",
+  "new": "Ab. Zar. 50<sup>b</sup> ס׳ לה",
+  "why": "We searched the Talmud for the quotation and found it at Avodah Zarah 50ᵇ (“סך לה צואה”). The 1903 printing itself has “Ab. Zar. 80ᵇ” (the scan of the page agrees), and Avodah Zarah ends at 76ᵇ, so this is a misprint in the original book. Corrected to “Ab. Zar. 50ᵇ”."
+ },
+ {
+  "page": 197,
+  "entry": "B01335",
+  "headword": "בָּרַר",
+  "kind": "misprint",
+  "old": "Y. Ned. I, beg. 51<sup>a</sup>",
+  "new": "Y. Naz. I, beg. 51<sup>a</sup>",
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Nazir I, 51ᵃ (“לשונות שביררו להן”). The 1903 printing itself has “Y. Ned. I, beg. 51ᵃ” (the scan of the page agrees), and Yerushalmi Nedarim runs from 36ᶜ to 42ᵈ, so this is a misprint in the original book. Corrected to “Y. Naz. I, beg. 51ᵃ”."
+ },
+ {
+  "page": 1301,
+  "entry": "R00775",
+  "headword": "צְרִיךְ",
+  "kind": "misprint",
+  "old": "Y. Ned. V, end, 54<sup>b</sup> תמן",
+  "new": "Y. Naz. V, end, 54<sup>b</sup> תמן",
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Nazir V, 54ᵇ (“תמן צריכה ליה”). The 1903 printing itself has “Y. Ned. V, end, 54ᵇ” (the scan of the page agrees), and Yerushalmi Nedarim runs from 36ᶜ to 42ᵈ, so this is a misprint in the original book. Corrected to “Y. Naz. V, end, 54ᵇ”."
+ },
+ {
+  "page": 619,
+  "entry": "K00249",
+  "headword": "כּוֹכָב,",
+  "kind": "misprint",
+  "old": "Y. ib. II, beg. 22<sup>d</sup> כּוֹכְבֵי",
+  "new": "Y. ib. II, beg. 52<sup>d</sup> כּוֹכְבֵי",
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Sukkah II, 52ᵈ (“בכוכבי חמה”). The 1903 printing itself has “Y. ib. II, beg. 22ᵈ” (the scan of the page agrees), and Yerushalmi Sukkah runs from 51ᵃ to 55ᵈ, so this is a misprint in the original book. Corrected to “Y. ib. II, beg. 52ᵈ”."
+ },
+ {
+  "page": 100,
+  "entry": "A02608",
+  "headword": "אָפֹּובַּלְסְמֹון,",
+  "kind": "misprint",
+  "old": "Y. Shebi. V, 55<sup>d</sup> bot. רושמין",
+  "new": "Y. Maas. Sh. V, 55<sup>d</sup> bot. רושמין",
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Maaser Sheni V, 55ᵈ (“רושמין באפובלסמון”). The 1903 printing itself has “Y. Shebi. V, 55ᵈ” (the scan of the page agrees), and Yerushalmi Sheviit runs from 33ᵃ to 39ᵈ, so this is a misprint in the original book. Corrected to “Y. Maas. Sh. V, 55ᵈ”."
+ },
+ {
+  "page": 1210,
+  "entry": "Q01503",
+  "headword": "פְּקַע",
+  "kind": "misprint",
+  "old": "Y. Keth. VIII, 22<sup>b</sup> top",
+  "new": "Y. Keth. VIII, 32<sup>b</sup> top",
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Ketubot VIII, 32ᵇ (“ופקעת מינייהו קדושתן”). The 1903 printing itself has “Y. Keth. VIII, 22ᵇ” (the scan of the page agrees), and Yerushalmi Ketubot runs from 24ᵃ to 36ᵈ, so this is a misprint in the original book. Corrected to “Y. Keth. VIII, 32ᵇ”."
+ },
+ {
+  "page": 1521,
+  "entry": "U00219",
+  "headword": "שָׁגַח",
+  "kind": "misprint",
+  "old": "Y. Keth. VIII, 3<sup>b</sup> bot.",
+  "new": "Y. Keth. VII, 31<sup>b</sup> bot.",
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Ketubot VII, 31ᵇ (“ואין ברייה משגחת עליה”). The 1903 printing itself has “Y. Keth. VII, 3ᵇ” (the scan of the page agrees), and Yerushalmi Ketubot runs from 24ᵃ to 36ᵈ, so this is a misprint in the original book. Corrected to “Y. Keth. VII, 31ᵇ”. (The digital text also had chapter “VIII” where the book has “VII”.)"
+ },
+ {
+  "page": 1018,
+  "entry": "O01437",
+  "headword": "סָפַת",
+  "kind": "misprint",
+  "old": "Y. Mass. Sh. II, 50<sup>a</sup> top",
+  "new": "Y. Maasr. II, 50<sup>a</sup> top",
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Maasrot II, 50ᵃ (“אבטיח שספת בו”). The 1903 printing itself has “Y. Mass. Sh. II, 50ᵃ” (the scan of the page agrees), and Yerushalmi Maaser Sheni runs from 52ᵃ to 56ᵈ, so this is a misprint in the original book. Corrected to “Y. Maasr. II, 50ᵃ”."
+ },
+ {
+  "page": 919,
+  "entry": "N00983",
+  "headword": "נְעִימָה",
+  "kind": "misprint",
+  "old": "Y. Shek. V, 55<sup>c</sup> bot.",
+  "new": "Y. Succ. V, 55<sup>c</sup> bot.",
+  "why": "We searched the Talmud for the quotation and found it at Yerushalmi Sukkah V, 55ᶜ (“סורח את הנעימה”). The 1903 printing itself has “Y. Shek. V, 55ᶜ” (the scan of the page agrees), and Yerushalmi Shekalim runs from 45ᵃ to 51ᵇ, so this is a misprint in the original book. Corrected to “Y. Succ. V, 55ᶜ”."
  }
 ]
