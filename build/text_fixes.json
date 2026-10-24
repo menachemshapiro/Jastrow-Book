@@ -8769,5 +8769,77 @@
   "old": "׳; ib. in Ib.",
   "new": "׳; ib. in Gem.",
   "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…יומת; Rashi מתא'; ib. in Gem. תיומות, תיומת); Sif…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 40,
+  "entry": "A01045",
+  "headword": "אֲחַר",
+  "kind": "missing",
+  "old": "<p class=\"bin\"><i class=\"bn\">Pa.</i> <span class=\"bf\">אחרוה</span> <span class=\"s\"><span class=\"d\"> take ye a later meal (on Sabbaths).</span></span></p>",
+  "new": "<p class=\"bin\"><i class=\"bn\">Pa.</i> <span class=\"s\"><span class=\"d\">as foreg. <i>Pi.</i>, <i>to tarry; to retard</i>. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Onkelos_Genesis.34.19\">Targ. O. Gen. XXXIV, 19</a>; a. fr. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Shabbat.119a\">Sabb. 119<sup>a</sup></a> אחרוה take ye a later meal (on Sabbaths).</span></span></p>",
+  "why": "The digital text leaves out most of the Pa. paragraph and treats the quoted word אחרוה as the form of the Pa. The 1903 printing reads: “Pa. as foreg. Pi., to tarry; to retard. Targ. O. Gen. XXXIV, 19; a. fr. Sabb. 119ᵃ אחרוה take ye a later meal (on Sabbaths).” Restored from the scan."
+ },
+ {
+  "page": 504,
+  "entry": "H01716",
+  "headword": "חֵרֶם",
+  "kind": "missing",
+  "old": "סתם ח׳ containing the expression",
+  "new": "סתם ח׳ vows containing the expression",
+  "why": "The word “vows” is missing from the digital text (“Ned. II, 4 סתם ח׳ vows containing the expression ḥerem unqualified”). Restored from the scan."
+ },
+ {
+  "page": 547,
+  "entry": "I00660",
+  "headword": "טָפַל",
+  "kind": "missing",
+  "old": "<i class=\"bn\">Pu.</i> <span class=\"bf\">מְטוּפָּל</span>",
+  "new": "<i class=\"bn\">Pu.</i>, part. <span class=\"bf\">מְטוּפָּל</span>",
+  "why": "The words “, part.” are missing from the digital text (“Pu., part. מְטוּפָּל”). Restored from the scan."
+ },
+ {
+  "page": 569,
+  "entry": "J00199",
+  "headword": "יָוָן",
+  "kind": "missing",
+  "old": "<span class=\"s\"> <span class=\"d\"><a class=\"x\" href=\"#M01579\">מלכות</a>) <i>Greek</i>",
+  "new": "<span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\">fem. (sub. <a class=\"x\" href=\"#M01579\">מלכות</a>) <i>Greek</i>",
+  "why": "The beginning of sense 2) is missing from the digital text, which leaves an unmatched “)”. The 1903 printing reads “—2) fem. (sub. מלכות) Greek (Syrian) Government.” Restored from the scan."
+ },
+ {
+  "page": 493,
+  "entry": "H01481",
+  "headword": "חָפְשִׁי",
+  "kind": "missing",
+  "old": "a. fr.— masc. <i>free, exempt</i>",
+  "new": "a. fr.—2) masc. <i>free, exempt</i>",
+  "why": "The sense number “2)” is missing from the digital text; the 1903 printing has “a. fr.—2) masc. free, exempt”. Restored from the scan."
+ },
+ {
+  "page": 484,
+  "entry": "H01308",
+  "headword": "חֲנַמְאֵל",
+  "kind": "missing",
+  "old": "<i>Hanameel</i>, 1) cousin of Jeremiah.</span><span class=\"nt\">, </span></span><span class=\"s\"><span class=\"n\">1)</span><span class=\"d\"></span><span class=\"nt\"> cousin of Jeremiah. Meg. 14<sup>b</sup>; a. e.</span></span>",
+  "new": "<i>Hanameel</i>,</span></span><span class=\"s\"><span class=\"n\">1)</span><span class=\"d\"> cousin of Jeremiah.</span><span class=\"nt\"> Meg. 14<sup>b</sup>; a. e.</span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\">H., the Egyptian, a High-priest.</span><span class=\"nt\"> <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Mishnah_Parah.3.5\">Par. III, 5</a>.</span></span>",
+  "why": "The digital text repeats “1) cousin of Jeremiah” and leaves out sense 2) entirely. The 1903 printing reads: “Hanameel, 1) cousin of Jeremiah. Meg. 14ᵇ; a. e.—2) H., the Egyptian, a High-priest. Par. III, 5.” Restored from the scan."
+ },
+ {
+  "page": 510,
+  "entry": "H01848",
+  "headword": "חֲשַׁךְ",
+  "kind": "missing",
+  "old": "they contain much </span></span></span></p></div>",
+  "new": "they contain much water.</span></span></span></p></div>",
+  "why": "The 1903 printing ends page 510 with “they contain much water.”; in the digital text “water.” had moved to the top of page 511. It is put back at the end of page 510 (checked against the scan)."
+ },
+ {
+  "page": 511,
+  "entry": "H01848",
+  "headword": "חֲשַׁךְ",
+  "kind": "missing",
+  "old": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">water.</span></span></span>",
+  "new": "<p class=\"ep\" data-c=\"1\">",
+  "why": "The word “water.” belongs at the end of page 510 (see the record for page 510); it is removed from the top of page 511."
  }
 ]
