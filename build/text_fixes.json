@@ -8427,5 +8427,50 @@
   "old": "[<i>bringingdown</i>,]",
   "new": "<i>down</i>,]",
   "why": "The 1903 printing ends page 836 with “[bringing” and begins page 837 with “down”. In the digital text the last word of page 836 had moved to page 837 and run into the next word (“bringingdown”). Here the space is restored and the moved word removed. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 532,
+  "entry": "I00374",
+  "headword": "טִימוּרָא",
+  "kind": "space-scan",
+  "old": "hiding, turningaway",
+  "new": "hiding, turning away",
+  "why": "Two words run together (“turningaway”); the 1903 printing has “turning away” (checked against the scan). We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 745,
+  "entry": "M00553",
+  "headword": "מוֹסֵרָה",
+  "kind": "space-scan",
+  "old": "the ownertied the",
+  "new": "the owner tied the",
+  "why": "Two words run together (“ownertied”); the 1903 printing has “owner tied” (checked against the scan). We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1012,
+  "entry": "O01323",
+  "headword": "סְפוֹג",
+  "kind": "space-scan",
+  "old": "them onhis heart",
+  "new": "them on his heart",
+  "why": "Two words run together (“onhis”); the 1903 printing has “on his” (checked against the scan). We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1017,
+  "entry": "O01417",
+  "headword": "סַפָּר",
+  "kind": "space-scan",
+  "old": "time beforesaying the",
+  "new": "time before saying the",
+  "why": "Two words run together (“beforesaying”); the 1903 printing has “before saying” (checked against the scan). We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1251,
+  "entry": "Q02143",
+  "headword": "פָּתַח",
+  "kind": "space-scan",
+  "old": "the publicroad;",
+  "new": "the public road;",
+  "why": "Two words run together (“publicroad”); the 1903 printing has “public road” (checked against the scan). We believe this is a typo in the digital text, not in the 1903 printing."
  }
 ]
