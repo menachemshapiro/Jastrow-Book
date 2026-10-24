@@ -20,11 +20,15 @@ Marcus Jastrow's *A Dictionary of the Targumim, the Talmud Babli and Yerushalmi,
   - Citations are read from Jastrow's own abbreviations. The Bavli is cited by daf and amud ("Ber. 26ᵇ"), and the Yerushalmi by chapter plus the folio and column of the Krotoshin edition ("Y. Ber. VIII, 12ᶜ").
   - "Ib." and a bare folio count as the tractate cited just before.
   - The index holds about 31,900 Bavli and 12,200 Yerushalmi citations. Sefaria links many of the same Bavli citations, and the two agree in all but one case.
+- **Onkelos**, in the same panel, lists the entries that cite a chapter of Targum Onkelos, verse by verse, with the book and chapter in Hebrew.
+  - Jastrow cites Onkelos as "Targ. O. Gen. XVII, 4" or simply "Targ. Gen. XVII, 4". Targum Yerushalmi and Pseudo-Jonathan ("Targ. Y.") are left out.
+  - The index holds about 3,800 citations. Sefaria links 3,490 of the same ones, and the two agree on every one.
 
 **Link**
 - A page: `#p1087`
 - An entry, by its Sefaria id: `#P00866`
 - A daf: `#t/b/Berakhot/26b` or `#t/y/Berakhot/12c`
+- A chapter of Onkelos: `#t/o/Genesis/17`
 
 ## Sources and thanks
 
@@ -45,11 +49,13 @@ Changes to Sefaria's text are kept in [`build/text_fixes.json`](build/text_fixes
 | `data/pages.json` | The page list: labels, first and last headwords, and the column break on each page |
 | `data/hw.json` | The headword index |
 | `data/talmud/` | Every Talmud citation, by tractate and daf |
+| `data/targum/` | Every Onkelos citation, by book, chapter and verse |
 | `build/build2.py` | Builds the pages from Sefaria's current text, using the 2018 page breaks |
 | `build/make_site2.py` | Turns the built pages into `data/`, adding the title pages, preface footnotes and text corrections |
 | `build/text_fixes.json` | Corrections to the text, one record per change |
 | `build/breaks_all2.json` | Each page's column break, as a character offset into that page's text |
 | `build/talmud_index.py` | Builds `data/talmud/` from the entry text |
+| `build/targum_index.py` | Builds `data/targum/` from the entry text |
 | `favicon.ico`, `icon-*.png`, `og.png`, `site.webmanifest` | Icons and the image shown in link previews |
 
 ## Rebuilding `data/`
@@ -60,4 +66,5 @@ The two sources aren't in this repository because of their size. They are Sefari
 python3 build/build2.py Jastrow-full.xml jastrow-complete.json out2
 BREAKS=build/breaks_all2.json python3 build/make_site2.py out2 . jastrow-complete.json
 python3 build/talmud_index.py .
+python3 build/targum_index.py .
 ```
