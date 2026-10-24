@@ -12,5 +12,5477 @@
   "old": "<i>delicacies, indulgenceindelicacies</i>",
   "new": "<i>delicacies, indulgence in delicacies</i>",
   "why": "The book reads “delicacies, indulgence in delicacies”, with “in delicacies” starting the next column; Sefaria's text ran the words together as “indulgenceindelicacies”."
+ },
+ {
+  "page": 3,
+  "entry": "A00056",
+  "headword": "אַבּוּב,",
+  "kind": "space",
+  "before": "אַבּוּבָא  ch. same.",
+  "after": "Yoma 20b (",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 5,
+  "entry": "A00110",
+  "headword": "אָבִיב,",
+  "kind": "space",
+  "before": "ַבִּיבָא)  ch. same.",
+  "after": "Targ. O. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 6,
+  "entry": "A00148",
+  "headword": "אַבְיַת",
+  "kind": "space",
+  "before": "א' ישימון pr. n. pl.",
+  "after": "Abyath Y’s",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 7,
+  "entry": "A00173",
+  "headword": "אֶבֶן,",
+  "kind": "space",
+  "before": ", אַבְנָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 9,
+  "entry": "A00204",
+  "headword": "אֲבָר,",
+  "kind": "space",
+  "before": ") אֲבָרָא  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 21,
+  "entry": "A00523",
+  "headword": "אוֹב,",
+  "kind": "space",
+  "before": "ב, אוּבָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 23,
+  "entry": "A00578",
+  "headword": "אַוְוזָא",
+  "kind": "space",
+  "before": " אֲוָוזָא  ch. same.",
+  "after": "Git. 86a.—",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 27,
+  "entry": "A00702",
+  "headword": "אוּמַן,",
+  "kind": "space",
+  "before": " אוּמָנָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 27,
+  "entry": "A00709",
+  "headword": "אוּמָנוּתָא,",
+  "kind": "space",
+  "before": " אוּמָנוּ  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 28,
+  "entry": "A00720",
+  "headword": "*אונא",
+  "kind": "space",
+  "before": " , נקיס א' pr. n. m.",
+  "after": "Nakis Una(",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 29,
+  "entry": "A00742",
+  "headword": "אוּנְיָיקִי",
+  "kind": "space",
+  "before": " , בית א' pr. n. pl.",
+  "after": "Beth-Unyak",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 32,
+  "entry": "A00826",
+  "headword": "אֹוצָרָא",
+  "kind": "space",
+  "before": "אֹוצָרָא  ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 36,
+  "entry": "A00935",
+  "headword": "אוּשְׁפִּיזְכָנָא,",
+  "kind": "space",
+  "before": "יזִיכְנָא  ch. same.",
+  "after": "Zeb. 18b ב",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 41,
+  "entry": "A01060",
+  "headword": "אָחֳרָן,",
+  "kind": "space",
+  "before": ". ch. = h. אִחֲרוֹן.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 42,
+  "entry": "A01064",
+  "headword": "(אַחַת) אֲחָת,",
+  "kind": "space",
+  "before": " f. ch. = h. אָחוֹת.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 42,
+  "entry": "A01072",
+  "headword": "אָטָד,",
+  "kind": "space",
+  "before": ", אַטְדָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 48,
+  "entry": "A01260",
+  "headword": "אִיכָּרָא,",
+  "kind": "space",
+  "before": "א, אִכָּ'  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 48,
+  "entry": "A01267",
+  "headword": "אַיָּלָא,",
+  "kind": "space",
+  "before": "ָא  ch. = h. אַיָּל.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 49,
+  "entry": "A01307",
+  "headword": "אִילַן,",
+  "kind": "space",
+  "before": "ָא, אִלָ'  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 69,
+  "entry": "A01844",
+  "headword": "אִלְיוֹן,",
+  "kind": "space",
+  "before": "ָא, אִיל'  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 69,
+  "entry": "A01857",
+  "headword": "אֱלֵיל",
+  "kind": "space",
+  "before": "= יְלֵיל) to lament.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 71,
+  "entry": "A01907",
+  "headword": "אִלְּמָא,",
+  "kind": "space",
+  "before": " אֲלוּמָא  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 72,
+  "entry": "A01933",
+  "headword": "אֲלַף,",
+  "kind": "space",
+  "before": ", אַלְפָא  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 75,
+  "entry": "A01985",
+  "headword": "אֲמַד",
+  "kind": "space",
+  "before": "אֲמַד  ch. same.",
+  "after": "Bekh. 61a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 75,
+  "entry": "A01991",
+  "headword": "אַמְהָא,",
+  "kind": "space",
+  "before": "אַמְהֲתָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 81,
+  "entry": "A02117",
+  "headword": "*אנדיתיקוס",
+  "kind": "space",
+  "before": "*אנדיתיקוס  m. pl.",
+  "after": "Esth. R. t",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 101,
+  "entry": "A02632",
+  "headword": "*אַפֹּוסְטֹומֹוס,",
+  "kind": "space",
+  "before": "; Y. ib. 68cd; Yalk.",
+  "after": "Kings 250.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 102,
+  "entry": "A02668",
+  "headword": "אָפֵי,",
+  "kind": "space",
+  "before": ", (אֲפָה)  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 103,
+  "entry": "A02688",
+  "headword": "אַפִּילוֹן,",
+  "kind": "space",
+  "before": ". Till. to Ps. XVIII, 8; Yalk.",
+  "after": "Sam.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 106,
+  "entry": "A02766",
+  "headword": "(אַפְסִירָא) אַפְסָרָא",
+  "kind": "space",
+  "before": "אַפְסָרָא  ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 110,
+  "entry": "A02853",
+  "headword": "אֶצְבְּעָא,",
+  "kind": "space",
+  "before": " אֶצְבַּע  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 114,
+  "entry": "A02971",
+  "headword": "אַרְבְּעָה",
+  "kind": "space",
+  "before": "רְבַּע  f. ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 117,
+  "entry": "A03049",
+  "headword": "אַרְזָא",
+  "kind": "space",
+  "before": "XVI, 7.—3) pr. n. m.",
+  "after": "Arza. Tam.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 118,
+  "entry": "A03081",
+  "headword": "אֲרִי,",
+  "kind": "space",
+  "before": ") אַרְיָא  ch. same.",
+  "after": "Targ. Num.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 119,
+  "entry": "A03087",
+  "headword": "*אריהון",
+  "kind": "space",
+  "before": " אֲרִיחַ) pr. n. pl.",
+  "after": "Cant. R. t",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 121,
+  "entry": "A03135",
+  "headword": "אַרְכּוּבְתָּא",
+  "kind": "space",
+  "before": "ּוּבְתָּא  ch. same.",
+  "after": "Targ. Esth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 123,
+  "entry": "A03196",
+  "headword": "אַרְנַבְתָּא,",
+  "kind": "space",
+  "before": "אַרְנְבָא  ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 124,
+  "entry": "A03209",
+  "headword": "אֶרֶס,",
+  "kind": "space",
+  "before": " אֵירְסָא  ch. same.",
+  "after": "Targ. Y. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 126,
+  "entry": "A03248",
+  "headword": "אֲרַר",
+  "kind": "space",
+  "before": "אֲרַר  ch. same.",
+  "after": "Targ. II K",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 127,
+  "entry": "A03293",
+  "headword": "אֲשֵׁירתָּא,",
+  "kind": "space",
+  "before": "שֵׁרְתָּא  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 129,
+  "entry": "A03318",
+  "headword": "אַשְׁלְגָא,",
+  "kind": "space",
+  "before": " שַׁלְגָא  ch. same.",
+  "after": "Nidd. 62a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 129,
+  "entry": "A03335",
+  "headword": "אַשָּׁף",
+  "kind": "space",
+  "before": "אַשָּׁף  ch. same.",
+  "after": "Dan. II, 1",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 133,
+  "entry": "A03410",
+  "headword": "אַתּוּר,",
+  "kind": "space",
+  "before": "  ch. = h. אַשּׁוּר.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 143,
+  "entry": "B00195",
+  "headword": "בַּהַרְתָּא,",
+  "kind": "space",
+  "before": " בַּהְרָא  ch. same.",
+  "after": "Targ. O. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 147,
+  "entry": "B00289",
+  "headword": "בֹּוסַם,",
+  "kind": "space",
+  "before": ", בֻּשְׂ'  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 152,
+  "entry": "B00423",
+  "headword": "בָּזוֹזָא",
+  "kind": "space",
+  "before": "בָּזוֹזָא  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 154,
+  "entry": "B00464",
+  "headword": "בִּזְקָא,",
+  "kind": "space",
+  "before": "בִּיזְקָא  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 167,
+  "entry": "B00737",
+  "headword": "בִּירְתָא",
+  "kind": "space",
+  "before": "f. ch. = h. בִּירָה.",
+  "after": "Ezra VI, 2",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 171,
+  "entry": "B00815",
+  "headword": "בַּלְבֵּל",
+  "kind": "space",
+  "before": "בַּלְבֵּל  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 174,
+  "entry": "B00899",
+  "headword": "בְּלַע",
+  "kind": "space",
+  "before": "בְּלַע  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 176,
+  "entry": "B00931",
+  "headword": "בָּמְתָא",
+  "kind": "space",
+  "before": " f. ch. = h. בָּמָה.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 179,
+  "entry": "B00998",
+  "headword": "בְּסִיס,",
+  "kind": "space",
+  "before": "סִיסָא  f. ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 179,
+  "entry": "B01004",
+  "headword": "בְּסַם",
+  "kind": "space",
+  "before": "בְּסַם  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 184,
+  "entry": "B01083",
+  "headword": "בַּצּוֹרְתָא,",
+  "kind": "space",
+  "before": "א, בּוּ')  ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 187,
+  "entry": "B01135",
+  "headword": "בַּקְעֲתָא,",
+  "kind": "space",
+  "before": ". ch. = h. בִּקְעָה.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 193,
+  "entry": "B01240",
+  "headword": "בְּרִי,",
+  "kind": "space",
+  "before": ", בְּרִיא  ch. same.",
+  "after": "Targ. Koh.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 194,
+  "entry": "B01280",
+  "headword": "בְּרִירוּתָא,",
+  "kind": "space",
+  "before": "בָּרִירוּ  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 196,
+  "entry": "B01297",
+  "headword": "בִּרְכְתָא,",
+  "kind": "space",
+  "before": ". ch. = h. בְּרָכָה.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 198,
+  "entry": "B01353",
+  "headword": "בְּשׂוֹרְתָּא,",
+  "kind": "space",
+  "before": "בְּסוֹרָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 200,
+  "entry": "B01386",
+  "headword": "בְּתוּלְתָּא,",
+  "kind": "space",
+  "before": " ch. = h. בְּתוּלָה.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 205,
+  "entry": "C00064",
+  "headword": "גְּבוּרְתָּא,",
+  "kind": "space",
+  "before": " ch. = h. גְּבוּרָה.",
+  "after": "Targ. II C",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 208,
+  "entry": "C00127",
+  "headword": "גִּבְעֲתָא",
+  "kind": "space",
+  "before": ". ch. = h. גִּבְעָה.",
+  "after": "Targ. Jud.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 209,
+  "entry": "C00145",
+  "headword": "גַּבְשׁוּשִׁיתָא",
+  "kind": "space",
+  "before": "וּשִׁיתָא  ch. same.",
+  "after": "Targ. Koh.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 211,
+  "entry": "C00193",
+  "headword": "גְּדִי,",
+  "kind": "space",
+  "before": "ַּדְיָא, I ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 212,
+  "entry": "C00206",
+  "headword": "גְּדִילָא",
+  "kind": "space",
+  "before": "א  ch. = h. גָּדִיל.",
+  "after": "Men. 39b t",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 219,
+  "entry": "C00336",
+  "headword": "גַּוָּון,",
+  "kind": "space",
+  "before": " גַּוְנָא  ch. same.",
+  "after": "Targ. Esth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 222,
+  "entry": "C00403",
+  "headword": "גּוּלְמֵישׁ,",
+  "kind": "space",
+  "before": "ּלְמָשָׁא  ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 226,
+  "entry": "C00471",
+  "headword": "גּוּץ,",
+  "kind": "space",
+  "before": ", גּוּצָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 226,
+  "entry": "C00474",
+  "headword": "גּוּר",
+  "kind": "space",
+  "before": "גּוּר  ch. same.",
+  "after": "Taan. 25a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 226,
+  "entry": "C00477",
+  "headword": "גּוּר,",
+  "kind": "space",
+  "before": ", גּוּרָא  ch. same.",
+  "after": "Lev. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 228,
+  "entry": "C00515",
+  "headword": "גַּזָּא,",
+  "kind": "space",
+  "before": "בַּר גַּ'  ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 228,
+  "entry": "C00521",
+  "headword": "גִּזְבָּרָא,",
+  "kind": "space",
+  "before": ", גִּיזְ'  ch. same.",
+  "after": "Targ. Esth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 230,
+  "entry": "C00548",
+  "headword": "גָּזֵילָא,",
+  "kind": "space",
+  "before": " ch. = h. גְּזֵילָה.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 230,
+  "entry": "C00559",
+  "headword": "גְּזַל,",
+  "kind": "space",
+  "before": " Iגְּזֵיל  ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 231,
+  "entry": "C00566",
+  "headword": "גַּזְלָנוּתָא",
+  "kind": "space",
+  "before": "ְלָנוּתָא  ch. same.",
+  "after": "Snh. 23b ע",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 233,
+  "entry": "C00596",
+  "headword": "גְּחַן,",
+  "kind": "space",
+  "before": ", גְּחֵין  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 233,
+  "entry": "C00599",
+  "headword": "גֵּט,",
+  "kind": "space",
+  "before": " גִּיטָּא  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 234,
+  "entry": "C00627",
+  "headword": "גִּידָא",
+  "kind": "space",
+  "before": "גִּידָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 236,
+  "entry": "C00654",
+  "headword": "גֵּיהִינָּם,",
+  "kind": "space",
+  "before": "א בֶן הִנֹּם) pr. n.",
+  "after": "Gehinnom, ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 237,
+  "entry": "C00692",
+  "headword": "גִּיחוּכָא",
+  "kind": "space",
+  "before": "ִּיחוּכָא  ch. same.",
+  "after": "Targ. II C",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 238,
+  "entry": "C00709",
+  "headword": "גַּיָּיסָא",
+  "kind": "space",
+  "before": "ַּיָּיסָא  ch. same.",
+  "after": "Targ. II C",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 241,
+  "entry": "C00788",
+  "headword": "גֵּיף,",
+  "kind": "space",
+  "before": ", גֵּיפָא  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 247,
+  "entry": "C00920",
+  "headword": "גָּלוּתָא,",
+  "kind": "space",
+  "before": "א, גָּלוּ  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 249,
+  "entry": "C00948",
+  "headword": "גְּלִילָה",
+  "kind": "space",
+  "before": "g the nations; Yalk.",
+  "after": "Kings 237.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 250,
+  "entry": "C00978",
+  "headword": "גְּלַף,",
+  "kind": "space",
+  "before": "גְּלַף, I ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 251,
+  "entry": "C00999",
+  "headword": "גַּמְגֵּם",
+  "kind": "space",
+  "before": "גַּמְגֵּם  ch. same.",
+  "after": "Ḥag. 15b מ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 253,
+  "entry": "C01041",
+  "headword": "גֻּמְלָא,",
+  "kind": "space",
+  "before": "m. ch. = h. גְּמוּל.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 256,
+  "entry": "C01073",
+  "headword": "גַּנָּא,",
+  "kind": "space",
+  "before": " גִּינָּא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 256,
+  "entry": "C01079",
+  "headword": "גְּנַב,",
+  "kind": "space",
+  "before": ", גְּנֵיב  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 258,
+  "entry": "C01119",
+  "headword": "גּנוּתָא",
+  "kind": "space",
+  "before": "גּנוּתָא  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 259,
+  "entry": "C01137",
+  "headword": "גְּנֵיבוּתָא,",
+  "kind": "space",
+  "before": " ch. = h. גְּנֵיבָה.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 260,
+  "entry": "C01151",
+  "headword": "גְּנַן",
+  "kind": "space",
+  "before": "גְּנַן  ch. same.",
+  "after": "Targ. Zech",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 260,
+  "entry": "C01167",
+  "headword": "גַּסּוּתָא",
+  "kind": "space",
+  "before": "ַּסּוּתָא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 261,
+  "entry": "C01186",
+  "headword": "גְּעִי,",
+  "kind": "space",
+  "before": "י, גְּעָא  ch. same.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 264,
+  "entry": "C01235",
+  "headword": "גָּרָב,",
+  "kind": "space",
+  "before": "ּרְבּא, II ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 265,
+  "entry": "C01262",
+  "headword": "גַּרְגְּרָן,",
+  "kind": "space",
+  "before": "ְגְּרָנָא  ch. same.",
+  "after": "Targ. Y. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 266,
+  "entry": "C01278",
+  "headword": "גַּרְדַּי,",
+  "kind": "space",
+  "before": ", גִּירְ'  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 277,
+  "entry": "D00060",
+  "headword": "דְּבֵילְתָּא,",
+  "kind": "space",
+  "before": "דִּיבְלָא  ch. same.",
+  "after": "Targ. Jud.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 280,
+  "entry": "D00119",
+  "headword": "דְּגָנָא",
+  "kind": "space",
+  "before": "ָא  ch. = h. דָּגָן.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 280,
+  "entry": "D00124",
+  "headword": "דַּד,",
+  "kind": "space",
+  "before": ", דַּדָּא  ch. same.",
+  "after": "Ab. Zar. 2",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 282,
+  "entry": "D00172",
+  "headword": "דּוֹב,",
+  "kind": "space",
+  "before": " דּוּבָּא  ch. same.",
+  "after": "Targ. II S",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 283,
+  "entry": "D00195",
+  "headword": "דּוֹדָא",
+  "kind": "space",
+  "before": "דּוֹדָא  ch. same.",
+  "after": "Gen. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 285,
+  "entry": "D00250",
+  "headword": "דּוּכָן,",
+  "kind": "space",
+  "before": "דּוּכָנָא  ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 285,
+  "entry": "D00252",
+  "headword": "דּוּכָּס,",
+  "kind": "space",
+  "before": "ָא  ch. = דּוּכּוֹס.",
+  "after": "Lam. R. to",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 287,
+  "entry": "D00322",
+  "headword": "דּוּץ,",
+  "kind": "space",
+  "before": "ּץ, דִּיץ  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 289,
+  "entry": "D00342",
+  "headword": "דּוּר,",
+  "kind": "space",
+  "before": "t manure, v. preced.",
+  "after": "Pi.—B. Kam",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 293,
+  "entry": "D00433",
+  "headword": "דְּחַף",
+  "kind": "space",
+  "before": "דְּחַף  ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 297,
+  "entry": "D00537",
+  "headword": "דְּיוֹקְנָא",
+  "kind": "space",
+  "before": "ּיוֹקְנָא  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 298,
+  "entry": "D00561",
+  "headword": "דַּיָּין,",
+  "kind": "space",
+  "before": "ַּיָּ'  m. ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 301,
+  "entry": "D00634",
+  "headword": "דִּין,",
+  "kind": "space",
+  "before": "ין, דּוּן  ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 314,
+  "entry": "D00912",
+  "headword": "דִּמְעֲתָא",
+  "kind": "space",
+  "before": "ִּמְעֲתָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 315,
+  "entry": "D00928",
+  "headword": "דָּנִיאֵל",
+  "kind": "space",
+  "before": "ל  (b. h.) pr. n. m.",
+  "after": "Daniel, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 317,
+  "entry": "D00953",
+  "headword": "דַּפָּא",
+  "kind": "space",
+  "before": "דַּפָּא  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 322,
+  "entry": "D01056",
+  "headword": "דָּרוֹמָא,",
+  "kind": "space",
+  "before": "דָּרוֹמָה  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 327,
+  "entry": "D01161",
+  "headword": "דָּת,",
+  "kind": "space",
+  "before": "ת, דָּתָא  ch. same.",
+  "after": "Dan. VI, 1",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 331,
+  "entry": "E00067",
+  "headword": "הגי,",
+  "kind": "space",
+  "before": " הַגֵּי  (v. preced.",
+  "after": "Pi.) to st",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 334,
+  "entry": "E00148",
+  "headword": "הֲדַר",
+  "kind": "space",
+  "before": ". הַדּר  (v. preced.",
+  "after": "Pi.) 1) to",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 339,
+  "entry": "E00247",
+  "headword": "הַוָּן,",
+  "kind": "space",
+  "before": ", הַוָּו'  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 345,
+  "entry": "E00388",
+  "headword": "הֶיכֵּרָא,",
+  "kind": "space",
+  "before": "ֶיכֵּירָא  ch. same.",
+  "after": "Sabb. 16a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 349,
+  "entry": "E00487",
+  "headword": "הֶיקֵּשָׁא,",
+  "kind": "space",
+  "before": "יקֵּישָׁא  ch. same.",
+  "after": "Snh. 85b ב",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 354,
+  "entry": "E00574",
+  "headword": "הַלֵּלָא,",
+  "kind": "space",
+  "before": "הַלֵּילָה  ch. same.",
+  "after": "Ber. 56a ה",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 355,
+  "entry": "E00608",
+  "headword": "הִמְיָינָא,",
+  "kind": "space",
+  "before": "א, הִימְ'  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 358,
+  "entry": "E00679",
+  "headword": "הֲנָיָיה,",
+  "kind": "space",
+  "before": ", הֲנָאָה  ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 366,
+  "entry": "E00839",
+  "headword": "הַרְהוּרָא,",
+  "kind": "space",
+  "before": "ירְהוּרָא  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 374,
+  "entry": "F00062",
+  "headword": "(וָולַד) וְלַד,",
+  "kind": "space",
+  "before": " וַלְדָּא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 380,
+  "entry": "G00073",
+  "headword": "זָדֹון",
+  "kind": "space",
+  "before": "זָדֹון  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 381,
+  "entry": "G00098",
+  "headword": "זהִיר,",
+  "kind": "space",
+  "before": "ר, זְהִיר  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 385,
+  "entry": "G00148",
+  "headword": "זוּזָא,",
+  "kind": "space",
+  "before": "זוּזָא, I ch. same.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 386,
+  "entry": "G00172",
+  "headword": "זָוִיתָא",
+  "kind": "space",
+  "before": "זָוִיתָא  ch. same.",
+  "after": "Targ. Ez. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 392,
+  "entry": "G00320",
+  "headword": "זִיוְתָן,",
+  "kind": "space",
+  "before": "ִיוְתָנָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 393,
+  "entry": "G00323",
+  "headword": "זִיזָא,",
+  "kind": "space",
+  "before": "זִיזָא, I ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 395,
+  "entry": "G00379",
+  "headword": "זֵין,",
+  "kind": "space",
+  "before": " m. ch. = h. זַיִין.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 397,
+  "entry": "G00431",
+  "headword": "זֵיתָא,",
+  "kind": "space",
+  "before": "זֵיתָא, I ch. same.",
+  "after": "Targ. Hag.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 398,
+  "entry": "G00453",
+  "headword": "זְכוּתָא,",
+  "kind": "space",
+  "before": "וּ, זְכוּ  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 400,
+  "entry": "G00473",
+  "headword": "זְכַרְיָה,",
+  "kind": "space",
+  "before": "ּ  (b. h.) pr. n. m.",
+  "after": "Zechariah,",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 402,
+  "entry": "G00501",
+  "headword": "זְלַף",
+  "kind": "space",
+  "before": "זְלַף  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 403,
+  "entry": "G00527",
+  "headword": "זְמַם,",
+  "kind": "space",
+  "before": " ch. same. ch. same.",
+  "after": "Af. - אַזֵ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 403,
+  "entry": "G00527",
+  "headword": "זְמַם,",
+  "kind": "space",
+  "before": "s to time and place.",
+  "after": "Ithpa. - א",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 404,
+  "entry": "G00538",
+  "headword": "זְמַן,",
+  "kind": "space",
+  "before": "נָא, זִי'  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 406,
+  "entry": "G00581",
+  "headword": "זַנְיְתָא,",
+  "kind": "space",
+  "before": " f. ch. = h. זוֹנָה.",
+  "after": "Targ. Joel",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 412,
+  "entry": "G00688",
+  "headword": "זְרַז,",
+  "kind": "space",
+  "before": "א, זָרִיז  ch. same.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 413,
+  "entry": "G00704",
+  "headword": "זָרֵיז,",
+  "kind": "space",
+  "before": "ז, זָרִיז  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 414,
+  "entry": "G00725",
+  "headword": "זְרַע,",
+  "kind": "space",
+  "before": "IIזַרְעָא  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 414,
+  "entry": "G00730",
+  "headword": "זַרְעִית,",
+  "kind": "space",
+  "before": ", זַרְעִי  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 417,
+  "entry": "H00038",
+  "headword": "חָבוּשָׁא",
+  "kind": "space",
+  "before": "חָבוּשָׁא  ch. same.",
+  "after": "Keth. 60b.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 418,
+  "entry": "H00051",
+  "headword": "חָבִיב,",
+  "kind": "space",
+  "before": "ֲבִיבָא, I ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 423,
+  "entry": "H00134",
+  "headword": "חַגָּא,",
+  "kind": "space",
+  "before": "חַגָּא, I ch. same.",
+  "after": "Targ. Deut",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 426,
+  "entry": "H00188",
+  "headword": "חֶדְוְתָא,",
+  "kind": "space",
+  "before": "א  ch. = h. חֶדְוָה.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 428,
+  "entry": "H00222",
+  "headword": "חֲדַת,",
+  "kind": "space",
+  "before": " f. ch. = h. חָדָשׁ.",
+  "after": "Targ. Num.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 431,
+  "entry": "H00292",
+  "headword": "חוֹחָא",
+  "kind": "space",
+  "before": "חוֹחָא  ch. same.",
+  "after": "Targ. II K",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 433,
+  "entry": "H00326",
+  "headword": "(חוֹלָא) חוּלָּא",
+  "kind": "space",
+  "before": ") חוּלָּא  ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 436,
+  "entry": "H00398",
+  "headword": "חוּמְשָׁא",
+  "kind": "space",
+  "before": ", חוֹמֶשׁ  ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 437,
+  "entry": "H00409",
+  "headword": "חוּס",
+  "kind": "space",
+  "before": "חוּס  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 442,
+  "entry": "H00499",
+  "headword": "חוֹתָמָא",
+  "kind": "space",
+  "before": "חוֹתָמָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 442,
+  "entry": "H00523",
+  "headword": "חֲזָזִיתָא",
+  "kind": "space",
+  "before": "ֲזָזִיתָא  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 446,
+  "entry": "H00558",
+  "headword": "חִזְקִיָּה,",
+  "kind": "space",
+  "before": "ּ  (b. h.) pr. n. m.",
+  "after": "Ezekiah, H",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 447,
+  "entry": "H00586",
+  "headword": "(חַטְ') חֶטְאָה,",
+  "kind": "space",
+  "before": "א  m. ch. = h. חֵטא.",
+  "after": "Targ. Deut",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 448,
+  "entry": "H00611",
+  "headword": "חֲטָטָא",
+  "kind": "space",
+  "before": "חֲטָטָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 449,
+  "entry": "H00618",
+  "headword": "חֲטָי",
+  "kind": "space",
+  "before": "חֲטָי  ch. same.",
+  "after": "Dan. IV, 2",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 450,
+  "entry": "H00649",
+  "headword": "חַי,",
+  "kind": "space",
+  "before": ", חַיָּיא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 451,
+  "entry": "H00660",
+  "headword": "חִיבְּתָא,",
+  "kind": "space",
+  "before": "ּ'  ch. = h. חִבָּה.",
+  "after": "Targ. Cant",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 454,
+  "entry": "H00717",
+  "headword": "חֲיִי,",
+  "kind": "space",
+  "before": "ִי, חֲיָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 457,
+  "entry": "H00781",
+  "headword": "חִילְפָא,",
+  "kind": "space",
+  "before": "א, Iחִלְ'  ch. same.",
+  "after": "Gitt. 68b ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 458,
+  "entry": "H00830",
+  "headword": "חִיסּוּדָא,",
+  "kind": "space",
+  "before": "ָא, חִסּ'  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 459,
+  "entry": "H00853",
+  "headword": "חִיפּוּשִׂיתָא,",
+  "kind": "space",
+  "before": "ָא, חִפּ'  ch. same.",
+  "after": "Cant. R. t",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 461,
+  "entry": "H00904",
+  "headword": "חִיתּוּנָא",
+  "kind": "space",
+  "before": "ִיתּוּנָא  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 468,
+  "entry": "H01046",
+  "headword": "חָלִילָא",
+  "kind": "space",
+  "before": "חָלִילָא  ch. same.",
+  "after": "Targ. Y. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 469,
+  "entry": "H01061",
+  "headword": "חֲלִיצְתָּא",
+  "kind": "space",
+  "before": "לִיצְתָּא  ch. same.",
+  "after": "Yeb. 102a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 471,
+  "entry": "H01086",
+  "headword": "חֶלְמָא,",
+  "kind": "space",
+  "before": " m. ch. = h. חֲלוֹם.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 474,
+  "entry": "H01121",
+  "headword": "חִלְקִיָּה",
+  "kind": "space",
+  "before": "ה  (b. h.) pr. n. m.",
+  "after": "Ḥilkiya, H",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 475,
+  "entry": "H01137",
+  "headword": "חָמָא,",
+  "kind": "space",
+  "before": "חָמָא, I ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 477,
+  "entry": "H01194",
+  "headword": "חֲמִישַׁי,",
+  "kind": "space",
+  "before": "שָׁאָה, …  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 480,
+  "entry": "H01233",
+  "headword": "חֲמֵשׁ",
+  "kind": "space",
+  "before": "מְשָׁה  m. ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 484,
+  "entry": "H01308",
+  "headword": "חֲנַמְאֵל",
+  "kind": "space",
+  "before": "ל  (b. h.) pr. n. m.",
+  "after": "Hanameel, ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 485,
+  "entry": "H01322",
+  "headword": "חֲנֵפָא,",
+  "kind": "space",
+  "before": " חֲנֵיפָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 486,
+  "entry": "H01338",
+  "headword": "חֶסֶד,",
+  "kind": "space",
+  "before": " חִיסְ', I ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 490,
+  "entry": "H01413",
+  "headword": "חָסֵר",
+  "kind": "space",
+  "before": "ֵר, חֲסַר  ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 492,
+  "entry": "H01461",
+  "headword": "חָפְנָא,",
+  "kind": "space",
+  "before": " חוּפְנָא  ch. same.",
+  "after": "Targ. Koh.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 493,
+  "entry": "H01486",
+  "headword": "חֵפְתָא,",
+  "kind": "space",
+  "before": "ֵי'  ch. = h. חֵפֶת.",
+  "after": "Gen. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 494,
+  "entry": "H01496",
+  "headword": "חַצְבָּא",
+  "kind": "space",
+  "before": "  m. ch. = h. חָצָב.",
+  "after": "Succ. 29a.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 495,
+  "entry": "H01514",
+  "headword": "חֲצוֹצַרְתָּא",
+  "kind": "space",
+  "before": "ֹצַרְתָּא  ch. same.",
+  "after": "Targ. Hos.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 497,
+  "entry": "H01564",
+  "headword": "חֲקַק",
+  "kind": "space",
+  "before": "חֲקַק  ch. same.",
+  "after": "Lev. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 499,
+  "entry": "H01602",
+  "headword": "חַרְדּוֹנָא",
+  "kind": "space",
+  "before": "רְדּוֹנָא  ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 501,
+  "entry": "H01669",
+  "headword": "חֲרֵי,",
+  "kind": "space",
+  "before": "ֵי, חֲרָא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 507,
+  "entry": "H01785",
+  "headword": "חַרְשָׁא,",
+  "kind": "space",
+  "before": "חֵירְשָׁא  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 508,
+  "entry": "H01807",
+  "headword": "(חֲשֵׁיב) חֲשֵׁב",
+  "kind": "space",
+  "before": "ב) חֲשֵׁב  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 509,
+  "entry": "H01816",
+  "headword": "חֲשָׁדָא",
+  "kind": "space",
+  "before": "חֲשָׁדָא  ch. same.",
+  "after": "Ḥag. 5a מי",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 512,
+  "entry": "H01875",
+  "headword": "חָתוּל,",
+  "kind": "space",
+  "before": " חֲתוּלָא  ch. same.",
+  "after": "Ḥull. 52b.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 514,
+  "entry": "H01905",
+  "headword": "חַתְנָא,",
+  "kind": "space",
+  "before": ", חֲתָנָא  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 515,
+  "entry": "I00020",
+  "headword": "טַב,",
+  "kind": "space",
+  "before": " עֵין טַב pr. n. pl.",
+  "after": "En Tab, a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 516,
+  "entry": "I00045",
+  "headword": "טַבָּחָא",
+  "kind": "space",
+  "before": "טַבָּחָא  ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 517,
+  "entry": "I00063",
+  "headword": "(טְבִיל) טְבַל",
+  "kind": "space",
+  "before": "יל) טְבַל  ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 517,
+  "entry": "I00065",
+  "headword": "טְבַל",
+  "kind": "space",
+  "before": "טְבַל  ch. same.",
+  "after": "Men. 70a ט",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 518,
+  "entry": "I00067",
+  "headword": "טִבְלָא",
+  "kind": "space",
+  "before": "טִבְלָא  ch. same.",
+  "after": "Nidd. 46b ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 524,
+  "entry": "I00174",
+  "headword": "טוּם",
+  "kind": "space",
+  "before": "טוּם  ch. same.",
+  "after": "Targ. II K",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 527,
+  "entry": "I00250",
+  "headword": "טוּשׁ",
+  "kind": "space",
+  "before": "טוּשׁ  ch. same.",
+  "after": "Targ. Y. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 528,
+  "entry": "I00269",
+  "headword": "טַחֲלָא",
+  "kind": "space",
+  "before": "ָא  ch. = h. טְחוֹל.",
+  "after": "Gitt. 69b ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 528,
+  "entry": "I00271",
+  "headword": "טְחַן,",
+  "kind": "space",
+  "before": "ן, טְחֵין  ch. same.",
+  "after": "Targ. Jud.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 530,
+  "entry": "I00312",
+  "headword": "טִיגָּנָא,",
+  "kind": "space",
+  "before": "יגָּנָא, I ch. same.",
+  "after": "Kidd. 44a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 535,
+  "entry": "I00469",
+  "headword": "טַל,",
+  "kind": "space",
+  "before": "ל, טַלָּא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 541,
+  "entry": "I00586",
+  "headword": "טָסָא,",
+  "kind": "space",
+  "before": " טַסָּא, I ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 544,
+  "entry": "I00617",
+  "headword": "טְעַן,",
+  "kind": "space",
+  "before": "ינָא.—3) (v. preced.",
+  "after": "Nif.) to b",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 548,
+  "entry": "I00673",
+  "headword": "טַפְסְרָא",
+  "kind": "space",
+  "before": "טַפְסְרָא  ch. same.",
+  "after": "Targ. Y. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 549,
+  "entry": "I00684",
+  "headword": "טִפֵּשׁ,",
+  "kind": "space",
+  "before": "א, טִיפּ'  ch. same.",
+  "after": "Targ. O. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 551,
+  "entry": "I00744",
+  "headword": "טְרַח,",
+  "kind": "space",
+  "before": "טְרַח, I ch. same.",
+  "after": "Targ. Koh.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 552,
+  "entry": "I00754",
+  "headword": "טַרְטְיָאוֹת,",
+  "kind": "space",
+  "before": "תִּיאַטְרוֹן). Yalk.",
+  "after": "Sam. 158; ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 554,
+  "entry": "I00815",
+  "headword": "טְרֵיפְתָּא,",
+  "kind": "space",
+  "before": ". ch. = h. טְרֵיפָה.",
+  "after": "Ḥull. 94b.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 559,
+  "entry": "J00016",
+  "headword": "יָאִיר",
+  "kind": "space",
+  "before": "ר  (b. h.) pr. n. m.",
+  "after": "Jair, 1) s",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 562,
+  "entry": "J00070",
+  "headword": "יָבֵשׁ,",
+  "kind": "space",
+  "before": " יַבִּישׁ  ch. same.",
+  "after": "Targ. Josh",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 564,
+  "entry": "J00094",
+  "headword": "יַד,",
+  "kind": "space",
+  "before": "ַד, יְדָא  ch. same.",
+  "after": "Targ. Num.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 565,
+  "entry": "J00109",
+  "headword": "יְדַעְיָה",
+  "kind": "space",
+  "before": "ה  (b. h.) pr. n. m.",
+  "after": "Jedaiah, 1",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 566,
+  "entry": "J00121",
+  "headword": "יְהוּדָאָה,",
+  "kind": "space",
+  "before": ". ch. = h. יְהוּדִי.",
+  "after": "Targ. Esth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 566,
+  "entry": "J00134",
+  "headword": "יְהוֹרָם,",
+  "kind": "space",
+  "before": "ם  (b. h.) pr. n. m.",
+  "after": "Jehoram, J",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 569,
+  "entry": "J00195",
+  "headword": "יוֹם,",
+  "kind": "space",
+  "before": "ם, יוֹמָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 570,
+  "entry": "J00202",
+  "headword": "יוֹנָה,",
+  "kind": "space",
+  "before": " I (b. h.) pr. n. m.",
+  "after": "Jonah, 1) ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 571,
+  "entry": "J00219",
+  "headword": "יוֹסֵף",
+  "kind": "space",
+  "before": "ף  (b. h.) pr. n. m.",
+  "after": "Joseph, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 572,
+  "entry": "J00246",
+  "headword": "*,",
+  "kind": "space",
+  "before": ", Ar. ירוקמי) pr. n.",
+  "after": "Yurkami, n",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 574,
+  "entry": "J00279",
+  "headword": "יְחֶזְקֵאל",
+  "kind": "space",
+  "before": "ל  (b. h.) pr. n. m.",
+  "after": "Ezekiel, 1",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 574,
+  "entry": "J00285",
+  "headword": "יָחִיד,",
+  "kind": "space",
+  "before": "ִידָא, י'  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 575,
+  "entry": "J00298",
+  "headword": "יַחְמוּרָא",
+  "kind": "space",
+  "before": "ַחְמוּרָא  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 575,
+  "entry": "J00306",
+  "headword": "יָחֵף,",
+  "kind": "space",
+  "before": "ף, יָחֵיף  ch. same.",
+  "after": "Targ. II S",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 579,
+  "entry": "J00381",
+  "headword": "יְלִיד",
+  "kind": "space",
+  "before": "יְלִיד  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 579,
+  "entry": "J00382",
+  "headword": "יָלֵידְתָּא,",
+  "kind": "space",
+  "before": ". ch. = h. יוֹלֵדָה.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 579,
+  "entry": "J00404",
+  "headword": "יַמָּא",
+  "kind": "space",
+  "before": "יַמָּא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 581,
+  "entry": "J00432",
+  "headword": "יָנוּקָא,",
+  "kind": "space",
+  "before": "II, מַר י' pr. n. m.",
+  "after": "Mar Yanuka",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 582,
+  "entry": "J00453",
+  "headword": "יְסַד",
+  "kind": "space",
+  "before": "יְסַד ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 584,
+  "entry": "J00488",
+  "headword": "יַעֲלָא,",
+  "kind": "space",
+  "before": " יָעֵילָא  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 588,
+  "entry": "J00526",
+  "headword": "יִצְחָק",
+  "kind": "space",
+  "before": "ק  (b. h.) pr. n. m.",
+  "after": "Isaac, 1) ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 597,
+  "entry": "J00643",
+  "headword": "יְרַךְ,",
+  "kind": "space",
+  "before": ", יִירָךְ  ch. same.",
+  "after": "Targ. O. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 599,
+  "entry": "J00678",
+  "headword": "יְשֵׁבָב",
+  "kind": "space",
+  "before": ". preced.) pr. n. m.",
+  "after": "Jeshebab, ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 600,
+  "entry": "J00684",
+  "headword": "יֵשׁוּעַ",
+  "kind": "space",
+  "before": "ַ  (b. h.) pr. n. m.",
+  "after": "Jeshua, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 603,
+  "entry": "J00721",
+  "headword": "יָתוֹם,",
+  "kind": "space",
+  "before": " יְתוֹמָא  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 603,
+  "entry": "J00725",
+  "headword": "יַתּוּשָׁא,",
+  "kind": "space",
+  "before": "ַתּוּשָׁה  ch. same.",
+  "after": "Gen. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 608,
+  "entry": "K00063",
+  "headword": "כַּבְלָא",
+  "kind": "space",
+  "before": "כַּבְלָא  ch. same.",
+  "after": "Sabb. 57b ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 610,
+  "entry": "K00081",
+  "headword": "כָּבַשׁ",
+  "kind": "space",
+  "before": "alk. Gen. 145; Yalk.",
+  "after": "Sam. 112.,",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 610,
+  "entry": "K00081",
+  "headword": "כָּבַשׁ",
+  "kind": "space",
+  "before": "alk. Gen. 145; Yalk.",
+  "after": "Sam. 112. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 615,
+  "entry": "K00165",
+  "headword": "כָּהֵן,",
+  "kind": "space",
+  "before": ", I ch. = h. כֹּהֵן.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 616,
+  "entry": "K00180",
+  "headword": "כּוּבָּא,",
+  "kind": "space",
+  "before": " Iכֻּבָּא  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 619,
+  "entry": "K00250",
+  "headword": "כּוֹכָב,",
+  "kind": "space",
+  "before": "ָא, כֹּכ'  ch. same.",
+  "after": "Targ. Am. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 619,
+  "entry": "K00253",
+  "headword": "כּוֹכַבְתָּא",
+  "kind": "space",
+  "before": "ֹכַבְתָּא  ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 621,
+  "entry": "K00292",
+  "headword": "כּוּמָרָא,",
+  "kind": "space",
+  "before": "וּמְרָא, I ch. same.",
+  "after": "Targ. Jud.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 623,
+  "entry": "K00321",
+  "headword": "כּוּסְבַּר,",
+  "kind": "space",
+  "before": "רְתָּא  f. ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 625,
+  "entry": "K00363",
+  "headword": "כּוֹר,",
+  "kind": "space",
+  "before": ", כּוֹרָא  ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 626,
+  "entry": "K00399",
+  "headword": "כּוּשׁ,",
+  "kind": "space",
+  "before": "ׁ, II (b. h.) pr. n.",
+  "after": "Cush, 1) s",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 626,
+  "entry": "K00403",
+  "headword": "כּוּשָׁיָיא,",
+  "kind": "space",
+  "before": "ּוּשָׁאָה  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 627,
+  "entry": "K00423",
+  "headword": "כּוּתַּח,",
+  "kind": "space",
+  "before": "ּוּתְּחָא  ch. same.",
+  "after": "Keth. 60b;",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 627,
+  "entry": "K00429",
+  "headword": "כּוֹתְלָא,",
+  "kind": "space",
+  "before": " כָּתְלָא  ch. same.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 627,
+  "entry": "K00437",
+  "headword": "כּוֹתַרְתָּא",
+  "kind": "space",
+  "before": "ֹתַרְתָּא  ch. same.",
+  "after": "Targ. Ez. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 628,
+  "entry": "K00451",
+  "headword": "כֹּחַ,",
+  "kind": "space",
+  "before": "ּר כּוֹחָא pr. n. m.",
+  "after": "Bar-Koḥa. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 631,
+  "entry": "K00513",
+  "headword": "(כִּיוּרָא) כִּיוֹרָא",
+  "kind": "space",
+  "before": "כִּיוֹרָא  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 634,
+  "entry": "K00591",
+  "headword": "כִּיסְנִין,",
+  "kind": "space",
+  "before": " כְּסָא')  ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 639,
+  "entry": "K00678",
+  "headword": "כְּלֵב,",
+  "kind": "space",
+  "before": "ּלְבָּא, I ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 640,
+  "entry": "K00709",
+  "headword": "כְּלוֹנְסָא",
+  "kind": "space",
+  "before": "ּלוֹנְסָא  ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 644,
+  "entry": "K00761",
+  "headword": "כְּלָלָא",
+  "kind": "space",
+  "before": "כְּלָלָא  ch. same.",
+  "after": "Targ. Y. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 646,
+  "entry": "K00795",
+  "headword": "כַּמּוֹנָא,",
+  "kind": "space",
+  "before": "כְּמוֹנָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 648,
+  "entry": "K00847",
+  "headword": "כִּנּוֹרָא,",
+  "kind": "space",
+  "before": " כִּנָרָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 650,
+  "entry": "K00868",
+  "headword": "כְּנַעַן",
+  "kind": "space",
+  "before": "ַעַן  (b. h.) pr. n.",
+  "after": "Canaan, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 652,
+  "entry": "K00912",
+  "headword": "כְּסוּתָא,",
+  "kind": "space",
+  "before": "כְּסוּ  f. ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 655,
+  "entry": "K00954",
+  "headword": "כְּסַף,",
+  "kind": "space",
+  "before": "ַּסְפָּא I ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 657,
+  "entry": "K00993",
+  "headword": "כִּפּוּר,",
+  "kind": "space",
+  "before": ", כִּיפּ'  ch. same.",
+  "after": "Targ. Hos.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 669,
+  "entry": "K01189",
+  "headword": "כְּרַךְ,",
+  "kind": "space",
+  "before": "כַּרְכָּא  ch. same.",
+  "after": "Targ. II S",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 671,
+  "entry": "K01230",
+  "headword": "כְּרָם,",
+  "kind": "space",
+  "before": " כַּרְמָא  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 673,
+  "entry": "K01260",
+  "headword": "כַּרְעָא",
+  "kind": "space",
+  "before": "כַּרְעָא  ch. same.",
+  "after": "Ber. 7a קא",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 677,
+  "entry": "K01325",
+  "headword": "כְּשַׁר",
+  "kind": "space",
+  "before": " fit &c. (v. preced.",
+  "after": "Hof.). Tar",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 679,
+  "entry": "K01340",
+  "headword": "כְּתַב,",
+  "kind": "space",
+  "before": " Iכְּתוֹב  ch. same.",
+  "after": "Targ. Deut",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 679,
+  "entry": "K01342",
+  "headword": "כְּתַב,",
+  "kind": "space",
+  "before": "א, כִּתְ'  ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 680,
+  "entry": "K01352",
+  "headword": "כְּתוּבְתָּא",
+  "kind": "space",
+  "before": "ch. = h. כְּתוּבָּה.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 682,
+  "entry": "K01382",
+  "headword": "כְּתַף,",
+  "kind": "space",
+  "before": "כַּתְפָּא  ch. same.",
+  "after": "Targ. Zeph",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 682,
+  "entry": "K01389",
+  "headword": "כְּתַר,",
+  "kind": "space",
+  "before": "י', כּוּ'  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 686,
+  "entry": "L00031",
+  "headword": "לֵב",
+  "kind": "space",
+  "before": "בָא, לִי'  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 689,
+  "entry": "L00093",
+  "headword": "לִבְלָר",
+  "kind": "space",
+  "before": " , לִיבְ'  ch. same.",
+  "after": "Targ. II C",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 696,
+  "entry": "L00227",
+  "headword": "לוּז",
+  "kind": "space",
+  "before": "ז, לוּזָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 696,
+  "entry": "L00234",
+  "headword": "לוּחַ",
+  "kind": "space",
+  "before": " לְוָוחָא  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 697,
+  "entry": "L00251",
+  "headword": "לֵוִי",
+  "kind": "space",
+  "before": "ֵוִי  (b. h.) pr. n.",
+  "after": "Levi, 1) t",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 703,
+  "entry": "L00355",
+  "headword": "לְחַךְ",
+  "kind": "space",
+  "before": "לְחַךְ  ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 710,
+  "entry": "L00526",
+  "headword": "לִישׁ",
+  "kind": "space",
+  "before": "לַיְישָׁא  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 713,
+  "entry": "L00590",
+  "headword": "לִסְתָא",
+  "kind": "space",
+  "before": "א, לִיסְ'  ch. same.",
+  "after": "Targ. Y. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 720,
+  "entry": "L00708",
+  "headword": "לִשְׁכְּתָא",
+  "kind": "space",
+  "before": ", לִישְׁ'  ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 721,
+  "entry": "L00718",
+  "headword": "לְתַת",
+  "kind": "space",
+  "before": "לְתַת  ch. same.",
+  "after": "Pes. 36a [",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 721,
+  "entry": "M00009",
+  "headword": "מְאָה",
+  "kind": "space",
+  "before": "מְאָה  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 725,
+  "entry": "M00082",
+  "headword": "מַבּוּעַ",
+  "kind": "space",
+  "before": "מַבּוּעָא  ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 726,
+  "entry": "M00121",
+  "headword": "מִגְדַּל",
+  "kind": "space",
+  "before": "', מוּגְ'  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 728,
+  "entry": "M00180",
+  "headword": "מַגַּל",
+  "kind": "space",
+  "before": "א, מַגָּ'  ch. same.",
+  "after": "Targ. Deut",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 729,
+  "entry": "M00182",
+  "headword": "מַגְלָבָא",
+  "kind": "space",
+  "before": "מַגְלְבָא  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 730,
+  "entry": "M00216",
+  "headword": "מַגְרוֹפִיתָא",
+  "kind": "space",
+  "before": "ַגְרוֹפִי  ch. same.",
+  "after": "Gen. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 731,
+  "entry": "M00242",
+  "headword": "מַדְבְּרָא",
+  "kind": "space",
+  "before": "רְתָּא  f. ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 733,
+  "entry": "M00274",
+  "headword": "מָדוֹר",
+  "kind": "space",
+  "before": " מְדוֹרָא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 733,
+  "entry": "M00282",
+  "headword": "מָדָיָא",
+  "kind": "space",
+  "before": ", מָדָאָה  ch. same.",
+  "after": "Dan. VI, 1",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 734,
+  "entry": "M00297",
+  "headword": "(… תָּה) מְדִינְתָּא",
+  "kind": "space",
+  "before": ". ch. = h. מְדִינָה.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 736,
+  "entry": "M00338",
+  "headword": "מִדְרָשָׁא",
+  "kind": "space",
+  "before": "ׁא, מֶדְ'  ch. same.",
+  "after": "Lev. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 739,
+  "entry": "M00432",
+  "headword": "מוֹהֲרָא",
+  "kind": "space",
+  "before": "מוֹהֲרָא  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 743,
+  "entry": "M00516",
+  "headword": "מוּם",
+  "kind": "space",
+  "before": "ם, מוּמָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 745,
+  "entry": "M00558",
+  "headword": "מוֹעֵד",
+  "kind": "space",
+  "before": " מוֹעֲדָא  ch. same.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 746,
+  "entry": "M00567",
+  "headword": "מוֹפֵת",
+  "kind": "space",
+  "before": " מוֹפְתָא  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 747,
+  "entry": "M00582",
+  "headword": "מוֹקֵד",
+  "kind": "space",
+  "before": "מוֹקְדָא I ch. same.",
+  "after": "Targ. I Ch",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 752,
+  "entry": "M00693",
+  "headword": "מוֹת",
+  "kind": "space",
+  "before": ", מוֹתָא I ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 755,
+  "entry": "M00769",
+  "headword": "מִזְמוֹרָא",
+  "kind": "space",
+  "before": "ִזְמוֹרָא  ch. same.",
+  "after": "Lev. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 763,
+  "entry": "M00910",
+  "headword": "מְחַסְיָא",
+  "kind": "space",
+  "before": " מָתָא מ' pr. n. pl.",
+  "after": "Matha M’ḥa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 763,
+  "entry": "M00927",
+  "headword": "מַחְצַלְתָּא",
+  "kind": "space",
+  "before": "מַחְצְלָא  ch. same.",
+  "after": "Gen. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 765,
+  "entry": "M00955",
+  "headword": "מַחְתִּיתָא",
+  "kind": "space",
+  "before": ". ch. = h. מַחְתָּה.",
+  "after": "Targ. O. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 765,
+  "entry": "M00958",
+  "headword": "מַחְתַּרְתָּא",
+  "kind": "space",
+  "before": "תַּרְתָּא  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 769,
+  "entry": "M01052",
+  "headword": "מִטְרָא",
+  "kind": "space",
+  "before": "רָא  ch. = h. מָטָר.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 770,
+  "entry": "M01057",
+  "headword": "מַטְרוֹנִיתָא",
+  "kind": "space",
+  "before": "רוֹנִיתָא  ch. same.",
+  "after": "Ḥull. 105b",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 773,
+  "entry": "M01161",
+  "headword": "מִילָא",
+  "kind": "space",
+  "before": "מִילָא I ch. same.",
+  "after": "Ḥull. 139b",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 775,
+  "entry": "M01193",
+  "headword": "מִילְפִּפּוֹנָא",
+  "kind": "space",
+  "before": "ָא, מִלְ'  ch. same.",
+  "after": "Snh. 110a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 776,
+  "entry": "M01215",
+  "headword": "מִינּוּי",
+  "kind": "space",
+  "before": "ִנּוּיָיה  ch. same.",
+  "after": "Targ. II C",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 778,
+  "entry": "M01260",
+  "headword": "מִיעוּטָא",
+  "kind": "space",
+  "before": "מִיעוּטָא  ch. same.",
+  "after": "Erub. 77a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 784,
+  "entry": "M01420",
+  "headword": "מִכְסָא",
+  "kind": "space",
+  "before": "א, מִיכְ'  ch. same.",
+  "after": "Gen. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 784,
+  "entry": "M01438",
+  "headword": "מַכָּרָא",
+  "kind": "space",
+  "before": "מַכָּרָא  ch. same.",
+  "after": "Targ. II K",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 785,
+  "entry": "M01447",
+  "headword": "מִכְתָּב",
+  "kind": "space",
+  "before": "ִכְתָּבָא  ch. same.",
+  "after": "Targ. Esth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 786,
+  "entry": "M01471",
+  "headword": "מַלְאָךְ",
+  "kind": "space",
+  "before": "מַלְאֲכָא  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 788,
+  "entry": "M01524",
+  "headword": "מֶלַח",
+  "kind": "space",
+  "before": "חָא, מִי'  ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 791,
+  "entry": "M01573",
+  "headword": "מֶלֶךְ",
+  "kind": "space",
+  "before": " מַלְכָּא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 792,
+  "entry": "M01586",
+  "headword": "מַלְכְּתָא",
+  "kind": "space",
+  "before": ". ch. = h. מַלְכָּה.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 795,
+  "entry": "M01660",
+  "headword": "מַמְזֵרָא",
+  "kind": "space",
+  "before": " מַמְזֵי'  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 795,
+  "entry": "M01685",
+  "headword": "מַמָּשׁ",
+  "kind": "space",
+  "before": "מַמָּשָׁא  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 796,
+  "entry": "M01693",
+  "headword": "מִן",
+  "kind": "space",
+  "before": "מִן, מִין  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 798,
+  "entry": "M01740",
+  "headword": "מָנוֹחַ",
+  "kind": "space",
+  "before": " I (b. h.) pr. n. m.",
+  "after": "Manoah, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 799,
+  "entry": "M01760",
+  "headword": "מְנַחֵם",
+  "kind": "space",
+  "before": "ם  (b. h.) pr. n. m.",
+  "after": "Menahem, 1",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 799,
+  "entry": "M01763",
+  "headword": "מְנַחֵשׁ",
+  "kind": "space",
+  "before": "ְנַחְשָׁא  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 801,
+  "entry": "M01787",
+  "headword": "מִנְיַן",
+  "kind": "space",
+  "before": "ָי', מִי'  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 803,
+  "entry": "M01821",
+  "headword": "מְנַת",
+  "kind": "space",
+  "before": ", מְנָתָא  ch. same.",
+  "after": "Targ. II S",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 803,
+  "entry": "M01824",
+  "headword": "מִסָּא",
+  "kind": "space",
+  "before": ", מִיסָּא  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 810,
+  "entry": "M01987",
+  "headword": "מִסְפַּד",
+  "kind": "space",
+  "before": "ִסְפְּדָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 811,
+  "entry": "M02007",
+  "headword": "מְסַר",
+  "kind": "space",
+  "before": ", מָסַר) I ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 811,
+  "entry": "M02010",
+  "headword": "מְסָרָא",
+  "kind": "space",
+  "before": "מְסָרָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 812,
+  "entry": "M02029",
+  "headword": "מַסְרֵקָא",
+  "kind": "space",
+  "before": " מַסְרִי'  ch. same.",
+  "after": "Ber. 18b מ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 815,
+  "entry": "M02110",
+  "headword": "מְעִיל",
+  "kind": "space",
+  "before": " מְעִילָא  ch. same.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 819,
+  "entry": "M02168",
+  "headword": "מַעֲרָבָא",
+  "kind": "space",
+  "before": "מַעַרְבָא  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 819,
+  "entry": "M02185",
+  "headword": "מְעַרְתָּא",
+  "kind": "space",
+  "before": "f. ch. = h. מְעָרָה.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 820,
+  "entry": "M02189",
+  "headword": "מַעְשְׂרָא",
+  "kind": "space",
+  "before": "ְ', מַעַ'  ch. same.",
+  "after": "Targ. Num.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 821,
+  "entry": "M02221",
+  "headword": "מַפַּלְתָּא",
+  "kind": "space",
+  "before": "ָּלָה, a. מַפּוֹלֶת.",
+  "after": "Targ. Ez. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 822,
+  "entry": "M02259",
+  "headword": "מַפְתְּחָא",
+  "kind": "space",
+  "before": "ַפְתְּחָא  ch. same.",
+  "after": "Targ. Jud.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 824,
+  "entry": "M02285",
+  "headword": "מִצְוָה",
+  "kind": "space",
+  "before": "מִצְוְתָא  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 827,
+  "entry": "M02343",
+  "headword": "מַצָּעָא",
+  "kind": "space",
+  "before": "מַצָּעָא  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 829,
+  "entry": "M02385",
+  "headword": "מַקְדַּשׁ",
+  "kind": "space",
+  "before": "א, מוּקְ'  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 832,
+  "entry": "M02444",
+  "headword": "מְקַק",
+  "kind": "space",
+  "before": "to sneeze, v. infra.",
+  "after": "Ithpe. - א",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 836,
+  "entry": "M02523",
+  "headword": "מַרְגָּלִיתָא",
+  "kind": "space",
+  "before": "גַּלְיָיא  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 837,
+  "entry": "M02552",
+  "headword": "מָרְדְּכַי",
+  "kind": "space",
+  "before": "י  (b. h.) pr. n. m.",
+  "after": "Mordecai, ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 838,
+  "entry": "M02573",
+  "headword": "מָרוֹד",
+  "kind": "space",
+  "before": "מָרוֹדָא I ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 839,
+  "entry": "M02591",
+  "headword": "מְרוֹמָא",
+  "kind": "space",
+  "before": "מְרוֹמָא I ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 840,
+  "entry": "M02615",
+  "headword": "מַרְזְבָא",
+  "kind": "space",
+  "before": "ַרְזֵיבָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 841,
+  "entry": "M02643",
+  "headword": "מְרַט",
+  "kind": "space",
+  "before": "מְרַט I ch. same.",
+  "after": "Targ. O. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 843,
+  "entry": "M02671",
+  "headword": "מִרְיָם",
+  "kind": "space",
+  "before": "ם  (b. h.) pr. n. f.",
+  "after": "Miriam, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 845,
+  "entry": "M02735",
+  "headword": "מַרְעֵי",
+  "kind": "space",
+  "before": "m. ch. = h. מִרְעֶה.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 851,
+  "entry": "M02863",
+  "headword": "מַשְׁטָחָא",
+  "kind": "space",
+  "before": "ַשְׁטָחָא  ch. same.",
+  "after": "Targ. II K",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 852,
+  "entry": "M02871",
+  "headword": "מְשִׁיחָא",
+  "kind": "space",
+  "before": "ְשִׁיחָא I ch. same.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 854,
+  "entry": "M02892",
+  "headword": "מְשַׁךְ",
+  "kind": "space",
+  "before": ". fr.—2) (v. preced.",
+  "after": "Nif.) to w",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 854,
+  "entry": "M02896",
+  "headword": "מַשְׁכְּבָא",
+  "kind": "space",
+  "before": "א, מִשְׁ'  ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 861,
+  "entry": "M03036",
+  "headword": "מְתוּרְגְּמָן",
+  "kind": "space",
+  "before": ", מְתֻרְ'  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 864,
+  "entry": "M03091",
+  "headword": "מַתַּנְיָה",
+  "kind": "space",
+  "before": "ה  (b. h.) pr. n. m.",
+  "after": "Mattaniah,",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 867,
+  "entry": "N00046",
+  "headword": "נְבוּאָה",
+  "kind": "space",
+  "before": "ְבוּאֲתָא  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 870,
+  "entry": "N00100",
+  "headword": "נְבֵלְתָּא",
+  "kind": "space",
+  "before": "'  ch. = h. נְבֵלָה.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 873,
+  "entry": "N00146",
+  "headword": "נְגַח",
+  "kind": "space",
+  "before": "נְגַח  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 874,
+  "entry": "N00149",
+  "headword": "נַגְחַן",
+  "kind": "space",
+  "before": "נַגְחָנָא  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 876,
+  "entry": "N00190",
+  "headword": "נַגְרָא",
+  "kind": "space",
+  "before": "נַגְרָא  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 880,
+  "entry": "N00243",
+  "headword": "נְדַר",
+  "kind": "space",
+  "before": "רָא, נִי'  ch. same.",
+  "after": "Targ. Jud.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 881,
+  "entry": "N00251",
+  "headword": "נְהַג",
+  "kind": "space",
+  "before": "ג, נְהֵיג  ch. same.",
+  "after": "Targ. Lam.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 882,
+  "entry": "N00282",
+  "headword": "נְהַר",
+  "kind": "space",
+  "before": " Iנַהֲרָה  ch. same.",
+  "after": "Targ. Jon.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 894,
+  "entry": "N00499",
+  "headword": "נַחַל",
+  "kind": "space",
+  "before": ", נַחֲלָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 896,
+  "entry": "N00523",
+  "headword": "נַחַשׁ",
+  "kind": "space",
+  "before": "ׁא  ch. = h. נַחַשׁ.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 897,
+  "entry": "N00526",
+  "headword": "נַחְשׁוֹל",
+  "kind": "space",
+  "before": "חְשׁוֹלָא  ch. same.",
+  "after": "Targ. Jon.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 900,
+  "entry": "N00575",
+  "headword": "נָטַע",
+  "kind": "space",
+  "before": "nt, contrad. to זרע.",
+  "after": "Kil. II, 4",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 905,
+  "entry": "N00682",
+  "headword": "נִימוֹסָא",
+  "kind": "space",
+  "before": ", נִימוּ'  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 911,
+  "entry": "N00842",
+  "headword": "נִכְסִין",
+  "kind": "space",
+  "before": "סֵי, נִי'  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 914,
+  "entry": "N00891",
+  "headword": "נְמַר",
+  "kind": "space",
+  "before": "ִי'  ch. = h. נָמֵר.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 917,
+  "entry": "N00949",
+  "headword": "נִסְכָּא",
+  "kind": "space",
+  "before": "ּא, נִי' I ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 923,
+  "entry": "N01029",
+  "headword": "נַפָּחָא",
+  "kind": "space",
+  "before": " נַפְּחָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 928,
+  "entry": "N01108",
+  "headword": "נָצַח",
+  "kind": "space",
+  "before": ". pass. נָצוּחַ. Ib.",
+  "after": "Pesik. R. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 930,
+  "entry": "N01158",
+  "headword": "נִקְבָּא",
+  "kind": "space",
+  "before": "ִי', נוּ'  ch. same.",
+  "after": "Lev. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 934,
+  "entry": "N01234",
+  "headword": "נְקַף",
+  "kind": "space",
+  "before": "to mince (v. preced.",
+  "after": "Hif.). Tar",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 934,
+  "entry": "N01234",
+  "headword": "נְקַף",
+  "kind": "space",
+  "before": " defects (v. preced.",
+  "after": "Hif.). Ḥul",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 937,
+  "entry": "N01277",
+  "headword": "נַרְתֵּיקָא",
+  "kind": "space",
+  "before": "ַרְתֵּקָא  ch. same.",
+  "after": "Targ. Ruth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 941,
+  "entry": "N01331",
+  "headword": "נְשַׁם",
+  "kind": "space",
+  "before": "nd I shall be cured.",
+  "after": "Ittafel. -",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 941,
+  "entry": "N01335",
+  "headword": "נִשְׁמְתָא",
+  "kind": "space",
+  "before": " נִשְׁמָא  ch. same.",
+  "after": "Targ. Deut",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 941,
+  "entry": "N01337",
+  "headword": "נְשַׁף",
+  "kind": "space",
+  "before": "נְשַׁף I ch. same.",
+  "after": "Ber. 3b (e",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 942,
+  "entry": "N01342",
+  "headword": "נְשַׁק",
+  "kind": "space",
+  "before": ", נְשֵׁיק  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 944,
+  "entry": "N01383",
+  "headword": "נָתָן",
+  "kind": "space",
+  "before": "ן  (b. h.) pr. n. m.",
+  "after": "Nathan, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 947,
+  "entry": "O00003",
+  "headword": "סָאַב",
+  "kind": "space",
+  "before": ". מְסוֹאֶבֶת; hands.",
+  "after": "Ḥall pl. מ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 947,
+  "entry": "O00008",
+  "headword": "סְאָה",
+  "kind": "space",
+  "before": "ָה, סְאָא  ch. same.",
+  "after": "Targ. II K",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 955,
+  "entry": "O00155",
+  "headword": "סְגַן",
+  "kind": "space",
+  "before": "ָא, סִי' I ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 956,
+  "entry": "O00166",
+  "headword": "סְגַר",
+  "kind": "space",
+  "before": "סְגַר  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 957,
+  "entry": "O00194",
+  "headword": "סְדַק",
+  "kind": "space",
+  "before": "ק, סְדֵיק  ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 960,
+  "entry": "O00230",
+  "headword": "סוֹבְבָא",
+  "kind": "space",
+  "before": "סוֹבֵיבָא  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 962,
+  "entry": "O00265",
+  "headword": "סוּדָרָא",
+  "kind": "space",
+  "before": " סוּדְרָא  ch. same.",
+  "after": "Targ. Ruth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 964,
+  "entry": "O00312",
+  "headword": "סוּל",
+  "kind": "space",
+  "before": "סוּל  ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 967,
+  "entry": "O00386",
+  "headword": "סוּף",
+  "kind": "space",
+  "before": "ong thy enemies? (v.",
+  "after": "Tanḥ. Tanḥ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 968,
+  "entry": "O00394",
+  "headword": "סוֹפִיסְטָא",
+  "kind": "space",
+  "before": "an can count; Pesik.",
+  "after": "Baḥod. Baḥ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 970,
+  "entry": "O00422",
+  "headword": "סוּרְחַן",
+  "kind": "space",
+  "before": "וּרְחָנָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 973,
+  "entry": "O00498",
+  "headword": "סְטַן",
+  "kind": "space",
+  "before": ", שְׂטַן I ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 978,
+  "entry": "O00617",
+  "headword": "סְיָיג",
+  "kind": "space",
+  "before": "ָא, סְיָ'  ch. same.",
+  "after": "Targ. Mic.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 978,
+  "entry": "O00631",
+  "headword": "סַיְיפָא",
+  "kind": "space",
+  "before": ", סֵיפָא)  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 980,
+  "entry": "O00684",
+  "headword": "סִימָא",
+  "kind": "space",
+  "before": " Tanḥ. Emor 6; Yalk.",
+  "after": "Ps. Ps. 72",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 981,
+  "entry": "O00711",
+  "headword": "סִימָן",
+  "kind": "space",
+  "before": "סִימָנָא I ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 983,
+  "entry": "O00745",
+  "headword": "סִיסָא",
+  "kind": "space",
+  "before": "סִיסָא  ch. same.",
+  "after": "Men. 41b ע",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 984,
+  "entry": "O00761",
+  "headword": "סִיסְרָא",
+  "kind": "space",
+  "before": "א  (b. h.) pr. n. m.",
+  "after": "Sisera, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 989,
+  "entry": "O00884",
+  "headword": "סְכוֹם",
+  "kind": "space",
+  "before": " סְכוֹמָא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 993,
+  "entry": "O00949",
+  "headword": "סַלָּא",
+  "kind": "space",
+  "before": "סַלָּא I ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 994,
+  "entry": "O00980",
+  "headword": "סְלָיו",
+  "kind": "space",
+  "before": "סְלָיו  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 998,
+  "entry": "O01045",
+  "headword": "סֹלַת",
+  "kind": "space",
+  "before": "א, סוּלְ'  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 998,
+  "entry": "O01050",
+  "headword": "סַמָּא",
+  "kind": "space",
+  "before": "סַמָּא I ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 998,
+  "entry": "O01052",
+  "headword": "סַמָּא",
+  "kind": "space",
+  "before": " of Nazareth. Tosef.",
+  "after": "Ḥull. Ḥull",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1004,
+  "entry": "O01179",
+  "headword": "סַנְדְּלָא",
+  "kind": "space",
+  "before": "נְדַּלָּא  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1005,
+  "entry": "O01196",
+  "headword": "סַנְהֶדְרִי",
+  "kind": "space",
+  "before": "ַנְדְּרִי  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1008,
+  "entry": "O01244",
+  "headword": "סָנַן",
+  "kind": "space",
+  "before": " through a cloth &c.",
+  "after": "Ḥull. Ḥull",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1013,
+  "entry": "O01361",
+  "headword": "סְפִינְתָּא",
+  "kind": "space",
+  "before": " סְפִינָא  ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1015,
+  "entry": "O01389",
+  "headword": "סַפָּנָא",
+  "kind": "space",
+  "before": "סַפּוֹנָא  ch. same.",
+  "after": "Bekh. 8b b",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1015,
+  "entry": "O01398",
+  "headword": "סַפְסְלָא",
+  "kind": "space",
+  "before": "ה, סִיפְ'  ch. same.",
+  "after": "Sabb. 29b ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1016,
+  "entry": "O01408",
+  "headword": "סְפֵקָא",
+  "kind": "space",
+  "before": "א, סְפֵי'  ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1019,
+  "entry": "O01441",
+  "headword": "סַק",
+  "kind": "space",
+  "before": "ק, סַקָּא  ch. same.",
+  "after": "Targ. Am. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1022,
+  "entry": "O01518",
+  "headword": "סַרְבָּלָא",
+  "kind": "space",
+  "before": "רְבַּלָּא  ch. same.",
+  "after": "Targ. Esth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1032,
+  "entry": "O01706",
+  "headword": "סְתַם",
+  "kind": "space",
+  "before": "סְתַם  ch. same.",
+  "after": "Targ. II C",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1033,
+  "entry": "O01716",
+  "headword": "סִתְרָא",
+  "kind": "space",
+  "before": "רָה, סִי'  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1040,
+  "entry": "P00072",
+  "headword": "עִבְרַי",
+  "kind": "space",
+  "before": "אָה, עִי'  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1041,
+  "entry": "P00099",
+  "headword": "עֲגַלְתָּא",
+  "kind": "space",
+  "before": "ֶגְלְתָא)  ch. same.",
+  "after": "Targ. O. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1042,
+  "entry": "P00103",
+  "headword": "עֲגַם",
+  "kind": "space",
+  "before": "עֲגַם  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1049,
+  "entry": "P00219",
+  "headword": "עוּזָּא",
+  "kind": "space",
+  "before": "'  (b. h.) pr. n. m.",
+  "after": "Uzza, 1) o",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1049,
+  "entry": "P00221",
+  "headword": "עוּזִּיאֵל",
+  "kind": "space",
+  "before": "'  (b. h.) pr. n. m.",
+  "after": "Uzziel, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1050,
+  "entry": "P00245",
+  "headword": "עַוְלָא",
+  "kind": "space",
+  "before": "א, עַוְו'  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1055,
+  "entry": "P00316",
+  "headword": "עוֹף",
+  "kind": "space",
+  "before": ", עוֹפָא I ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1058,
+  "entry": "P00350",
+  "headword": "עוּרְבָּא",
+  "kind": "space",
+  "before": " עוֹרְבָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1059,
+  "entry": "P00371",
+  "headword": "עוּשְׁקָא",
+  "kind": "space",
+  "before": "קָא, עֹו'  ch. same.",
+  "after": "Targ. O. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1062,
+  "entry": "P00431",
+  "headword": "עֲזַרְיָה",
+  "kind": "space",
+  "before": "ה  (b. h.) pr. n. m.",
+  "after": "Azariah, 1",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1064,
+  "entry": "P00471",
+  "headword": "עֲטַף",
+  "kind": "space",
+  "before": "עֲטַף I ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1065,
+  "entry": "P00483",
+  "headword": "עִטְרָנָא",
+  "kind": "space",
+  "before": "נָא, עִי'  ch. same.",
+  "after": "Sabb. 20b ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1067,
+  "entry": "P00507",
+  "headword": "עִידּוּי",
+  "kind": "space",
+  "before": "ָא, עִדּ'  ch. same.",
+  "after": "Targ. Ruth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1074,
+  "entry": "P00666",
+  "headword": "עִיקָּר",
+  "kind": "space",
+  "before": " 5a משלק בו הע׳. Ib.",
+  "after": "Kerith. 5a",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1078,
+  "entry": "P00720",
+  "headword": "עַכְבָּר",
+  "kind": "space",
+  "before": "ַכְבְּרָא  ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1079,
+  "entry": "P00750",
+  "headword": "עֲכַר",
+  "kind": "space",
+  "before": "עֲכַר  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1080,
+  "entry": "P00758",
+  "headword": "עַל",
+  "kind": "space",
+  "before": "עַל  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1082,
+  "entry": "P00791",
+  "headword": "עֲלֵי",
+  "kind": "space",
+  "before": "אַעֲלֵי  (v. preced.",
+  "after": "Hif. c) to",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1085,
+  "entry": "P00832",
+  "headword": "עַלְעוֹל",
+  "kind": "space",
+  "before": "ַלְעוֹלָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1089,
+  "entry": "P00900",
+  "headword": "עֲמַל",
+  "kind": "space",
+  "before": "IIעַמְלָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1091,
+  "entry": "P00934",
+  "headword": "עַמְרָם",
+  "kind": "space",
+  "before": "  (b. h.) pr. n. pl.",
+  "after": "Amram, 1) ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1092,
+  "entry": "P00966",
+  "headword": "עִנְוְתָן",
+  "kind": "space",
+  "before": "', עִינְ'  ch. same.",
+  "after": "Targ. Num.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1094,
+  "entry": "P00977",
+  "headword": "עַנְיָא",
+  "kind": "space",
+  "before": " עַנְיָיא  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1095,
+  "entry": "P00993",
+  "headword": "עִנְיָנָא",
+  "kind": "space",
+  "before": "ָי', עִי'  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1095,
+  "entry": "P01001",
+  "headword": "עֲנַן",
+  "kind": "space",
+  "before": "IIעֲנָנָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1113,
+  "entry": "P01281",
+  "headword": "עֲרָבי",
+  "kind": "space",
+  "before": "עַרְבָאָה  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1119,
+  "entry": "P01385",
+  "headword": "עָרֵל",
+  "kind": "space",
+  "before": " עַרְלַאי  ch. same.",
+  "after": "Targ. Deut",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1123,
+  "entry": "P01437",
+  "headword": "עַרְפְּלָא",
+  "kind": "space",
+  "before": "ֲרָפֵילָא  ch. same.",
+  "after": "Targ. II S",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1124,
+  "entry": "P01465",
+  "headword": "עֲשַׂב",
+  "kind": "space",
+  "before": "ָּא, עִי'  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1132,
+  "entry": "Q00037",
+  "headword": "פַּגָּא",
+  "kind": "space",
+  "before": "פַּגָּא I ch. same.",
+  "after": "Pes. 112a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1136,
+  "entry": "Q00095",
+  "headword": "פְּגַר",
+  "kind": "space",
+  "before": " (, פַּ')  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1136,
+  "entry": "Q00108",
+  "headword": "פְּדָגוֹגָא",
+  "kind": "space",
+  "before": "ַּדְגּוּ'  ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1146,
+  "entry": "Q00329",
+  "headword": "פּוּרָא",
+  "kind": "space",
+  "before": "פּוּרָא  ch. same.",
+  "after": "Targ. Esth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1160,
+  "entry": "Q00603",
+  "headword": "פִּיּוּסָא",
+  "kind": "space",
+  "before": "פִּיּיוּ'  ch. same.",
+  "after": "Gen. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1160,
+  "entry": "Q00617",
+  "headword": "פִּיטּוּמָא",
+  "kind": "space",
+  "before": ", פִּטּ' I ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1162,
+  "entry": "Q00650",
+  "headword": "פְּיָילִי",
+  "kind": "space",
+  "before": "I, בַּר פ' pr. n. m.",
+  "after": "Bar-Piali.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1166,
+  "entry": "Q00738",
+  "headword": "פִּינְקֵס",
+  "kind": "space",
+  "before": "ה, פִּנַ'  ch. same.",
+  "after": "Targ. Ez. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1173,
+  "entry": "Q00905",
+  "headword": "פִּיתַק",
+  "kind": "space",
+  "before": "א, פִּתְ'  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1184,
+  "entry": "Q01118",
+  "headword": "פִּלְפְּלָא",
+  "kind": "space",
+  "before": ", פִּילְ'  ch. same.",
+  "after": "Keth. 75a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1193,
+  "entry": "Q01250",
+  "headword": "פְּסוּקָא",
+  "kind": "space",
+  "before": "פְּסוּקָא  ch. same.",
+  "after": "Taan. 27b ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1194,
+  "entry": "Q01257",
+  "headword": "פִּסְחָא",
+  "kind": "space",
+  "before": "ָא, פִּי'  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1196,
+  "entry": "Q01307",
+  "headword": "פְּסִיעֲתָא",
+  "kind": "space",
+  "before": "פְּסִיעָא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1216,
+  "entry": "Q01591",
+  "headword": "פַּרְדֵּס",
+  "kind": "space",
+  "before": "רְדֵּיסָא  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1220,
+  "entry": "Q01689",
+  "headword": "פָּרוּכְתָּא",
+  "kind": "space",
+  "before": " פָּרֻכְ'  ch. same.",
+  "after": "Targ. O. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1231,
+  "entry": "Q01899",
+  "headword": "פַּרְנָס",
+  "kind": "space",
+  "before": "ּרְנָסָא I ch. same.",
+  "after": "Targ. Ez. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1233,
+  "entry": "Q01909",
+  "headword": "פְּרַס",
+  "kind": "space",
+  "before": ", 11.—3) (v. preced.",
+  "after": "Hif.) to s",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1238,
+  "entry": "Q01977",
+  "headword": "פַּרְצוּפָא",
+  "kind": "space",
+  "before": "ּרְצוּפָא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1240,
+  "entry": "Q01994",
+  "headword": "פִּרְקוּנָא",
+  "kind": "space",
+  "before": "ָא, פִּי'  ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1241,
+  "entry": "Q02005",
+  "headword": "פְּרַקְלִיטָא",
+  "kind": "space",
+  "before": "ַקְלִיטָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1243,
+  "entry": "Q02026",
+  "headword": "פָּרָשׁ",
+  "kind": "space",
+  "before": "פָּרָשָׁא  ch. same.",
+  "after": "Targ. Nah.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1244,
+  "entry": "Q02043",
+  "headword": "פְּרַת",
+  "kind": "space",
+  "before": "ikewise, sneered &c.",
+  "after": "Ithpe. - א",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1251,
+  "entry": "Q02144",
+  "headword": "פְּתַח",
+  "kind": "space",
+  "before": "פְּתַח  ch. same.",
+  "after": "Targ. Deut",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1254,
+  "entry": "Q02177",
+  "headword": "פְּתַךְ",
+  "kind": "space",
+  "before": "פְּתַךְ  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1255,
+  "entry": "Q02191",
+  "headword": "פֶּתֶן",
+  "kind": "space",
+  "before": "ָא, פִּו'  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1259,
+  "entry": "R00054",
+  "headword": "צְבַע",
+  "kind": "space",
+  "before": "th פייסא (v. preced.",
+  "after": "Hif.) to c",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1259,
+  "entry": "R00060",
+  "headword": "צַבָּעָא",
+  "kind": "space",
+  "before": "צַבָּעָא  ch. same.",
+  "after": "Gitt. 52b ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1261,
+  "entry": "R00086",
+  "headword": "צְדָדָא",
+  "kind": "space",
+  "before": "צְדָדָא  ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1262,
+  "entry": "R00114",
+  "headword": "צַדִּיק",
+  "kind": "space",
+  "before": "צַדִּיקָא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1276,
+  "entry": "R00335",
+  "headword": "צַיָּיד",
+  "kind": "space",
+  "before": ", צַיָּד'  ch. same.",
+  "after": "Gen. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1280,
+  "entry": "R00449",
+  "headword": "צִיר",
+  "kind": "space",
+  "before": "ר, צִירָא  ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1282,
+  "entry": "R00480",
+  "headword": "צְלַב",
+  "kind": "space",
+  "before": "ב, צְלֵיב  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1284,
+  "entry": "R00527",
+  "headword": "צֶלֶם",
+  "kind": "space",
+  "before": "', צִילְ'  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1302,
+  "entry": "R00781",
+  "headword": "צְרִיפָא",
+  "kind": "space",
+  "before": "ntied.—2) pr. n. pl.",
+  "after": "Ts’rifa (o",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1309,
+  "entry": "S00058",
+  "headword": "קְבַל",
+  "kind": "space",
+  "before": ". fr.—2) (v. preced.",
+  "after": "Hithpa.) t",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1313,
+  "entry": "S00098",
+  "headword": "קִבְרָא",
+  "kind": "space",
+  "before": "(קְבָרָא)  ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1318,
+  "entry": "S00175",
+  "headword": "קְדַר",
+  "kind": "space",
+  "before": " קְדֵירָא  ch. same.",
+  "after": "Targ. O. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1322,
+  "entry": "S00210",
+  "headword": "קָהָל",
+  "kind": "space",
+  "before": ", קַהֲלָא  ch. same.",
+  "after": "Targ. Num.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1327,
+  "entry": "S00324",
+  "headword": "קוּלַב",
+  "kind": "space",
+  "before": " קוּלְבָא  ch. same.",
+  "after": "Gen. R. s.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1328,
+  "entry": "S00349",
+  "headword": "קוֹלְמוֹס",
+  "kind": "space",
+  "before": "ּלְמוֹסָא  ch. same.",
+  "after": "Targ. Jud.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1332,
+  "entry": "S00376",
+  "headword": "קוֹם",
+  "kind": "space",
+  "before": "קוֹם  m. (v. preced.",
+  "after": "Pe. 2, a. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1332,
+  "entry": "S00378",
+  "headword": "קוֹמָא",
+  "kind": "space",
+  "before": "מָא I ch. = h. קוֹם.",
+  "after": "Ned. 52b ב",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1333,
+  "entry": "S00402",
+  "headword": "קוּמְצָא",
+  "kind": "space",
+  "before": " קָמְצָא I ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1337,
+  "entry": "S00489",
+  "headword": "קוֹף",
+  "kind": "space",
+  "before": ", קוֹפָא I ch. same.",
+  "after": "Ned. 50b. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1337,
+  "entry": "S00496",
+  "headword": "קוּפְדָּא",
+  "kind": "space",
+  "before": "וּפְדָּא I ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1342,
+  "entry": "S00592",
+  "headword": "קוֹרְטָא",
+  "kind": "space",
+  "before": "קוֹרְטָא  ch. same.",
+  "after": "Nidd. 20a,",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1343,
+  "entry": "S00625",
+  "headword": "קוּרְנְסָא",
+  "kind": "space",
+  "before": "ּרְנֵיסָא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1347,
+  "entry": "S00733",
+  "headword": "קְטַט",
+  "kind": "space",
+  "before": "es) could not do it.",
+  "after": "Ithpe. - א",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1352,
+  "entry": "S00811",
+  "headword": "קְטַף",
+  "kind": "space",
+  "before": "קְטַף I ch. same.",
+  "after": "Targ. O. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1359,
+  "entry": "S00935",
+  "headword": "קַיָּים",
+  "kind": "space",
+  "before": "א, קַיָּ'  ch. same.",
+  "after": "Targ. Jud.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1370,
+  "entry": "S01211",
+  "headword": "קִישּׁוּטָא",
+  "kind": "space",
+  "before": "א, קִשּׁ'  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1371,
+  "entry": "S01227",
+  "headword": "קִיתוֹן",
+  "kind": "space",
+  "before": "קִיתוֹנָא  ch. same.",
+  "after": "Esth. R. t",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1375,
+  "entry": "S01319",
+  "headword": "קְלֵי",
+  "kind": "space",
+  "before": "ֵי, קְלָא  ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1376,
+  "entry": "S01321",
+  "headword": "קָלִי",
+  "kind": "space",
+  "before": "Iקַלְיָא I ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1380,
+  "entry": "S01386",
+  "headword": "קְלַסְטֵירָא",
+  "kind": "space",
+  "before": "ַסְתְּרָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1388,
+  "entry": "S01514",
+  "headword": "קַנַּאי",
+  "kind": "space",
+  "before": "(קַנָאַן)  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1394,
+  "entry": "S01606",
+  "headword": "קְנָסָא",
+  "kind": "space",
+  "before": "קְנָסָא  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1404,
+  "entry": "S01780",
+  "headword": "קֵץ",
+  "kind": "space",
+  "before": " ּא, קִי'  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1411,
+  "entry": "S01888",
+  "headword": "קְרָב",
+  "kind": "space",
+  "before": "ְרָבָא  f. ch. same.",
+  "after": "Targ. II S",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1411,
+  "entry": "S01897",
+  "headword": "קָרְבַּן",
+  "kind": "space",
+  "before": "א, קוּרְ'  ch. same.",
+  "after": "Targ. Hos.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1423,
+  "entry": "S02115",
+  "headword": "קַרְסוּלָּא",
+  "kind": "space",
+  "before": "רְסוּלָּה  ch. same.",
+  "after": "Targ. Y. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1424,
+  "entry": "S02131",
+  "headword": "קֶרַע",
+  "kind": "space",
+  "before": ", קִרְעָא  ch. same.",
+  "after": "Keth. 104a",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1428,
+  "entry": "S02213",
+  "headword": "קַשָּׁא",
+  "kind": "space",
+  "before": "קַשָּׁא I ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1433,
+  "entry": "S02268",
+  "headword": "קְשַׁשׁ",
+  "kind": "space",
+  "before": ", correct, v. infra.",
+  "after": "Ithpolel. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1433,
+  "entry": "S02274",
+  "headword": "קַשָּׁתָא",
+  "kind": "space",
+  "before": "קַשָּׁתָא  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1440,
+  "entry": "T00065",
+  "headword": "רִבּוֹא",
+  "kind": "space",
+  "before": "וֹא, רִי'  ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1440,
+  "entry": "T00073",
+  "headword": "רִבּוֹן",
+  "kind": "space",
+  "before": "נָא, רִי'  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1443,
+  "entry": "T00112",
+  "headword": "רִבִּית",
+  "kind": "space",
+  "before": "תָא, רִי'  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1447,
+  "entry": "T00180",
+  "headword": "רַגְזָנָא",
+  "kind": "space",
+  "before": "רַגְזָנָא  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1448,
+  "entry": "T00192",
+  "headword": "רָגִיל",
+  "kind": "space",
+  "before": "רָגִיל  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1449,
+  "entry": "T00212",
+  "headword": "רְגַם",
+  "kind": "space",
+  "before": "רְגַם  ch. same.",
+  "after": "Targ. O. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1453,
+  "entry": "T00267",
+  "headword": "רְדַף",
+  "kind": "space",
+  "before": "רְדַף  ch. same.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1455,
+  "entry": "T00296",
+  "headword": "רוּבָּא",
+  "kind": "space",
+  "before": "רוּבָּא  ch. same.",
+  "after": "Ḥull. 11a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1456,
+  "entry": "T00313",
+  "headword": "רוּגְזָא",
+  "kind": "space",
+  "before": "ּגְזָא  f. ch. same.",
+  "after": "Targ. II C",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1458,
+  "entry": "T00346",
+  "headword": "רוּחָא",
+  "kind": "space",
+  "before": "רוּחָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1461,
+  "entry": "T00387",
+  "headword": "רוּמְחָא",
+  "kind": "space",
+  "before": "חָא, רוֹ'  ch. same.",
+  "after": "Targ. Num.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1464,
+  "entry": "T00460",
+  "headword": "רָז",
+  "kind": "space",
+  "before": "ָז, רָזָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1466,
+  "entry": "T00513",
+  "headword": "רָחֵל",
+  "kind": "space",
+  "before": "f. (b. h.) pr. n. f.",
+  "after": "Rachel, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1467,
+  "entry": "T00515",
+  "headword": "רְחֵלָא",
+  "kind": "space",
+  "before": ", רַחְלָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1468,
+  "entry": "T00529",
+  "headword": "רַחֲמָן",
+  "kind": "space",
+  "before": "רַחֲמָנָא  ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1474,
+  "entry": "T00618",
+  "headword": "רֵיחַ",
+  "kind": "space",
+  "before": "ַ, רֵיחָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1476,
+  "entry": "T00693",
+  "headword": "רֵיקָא",
+  "kind": "space",
+  "before": "ָה, רֵקָ'  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1477,
+  "entry": "T00707",
+  "headword": "רֵיקָן",
+  "kind": "space",
+  "before": "ָא, רִקָ'  ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1477,
+  "entry": "T00715",
+  "headword": "רִירָא",
+  "kind": "space",
+  "before": "רִירָא  ch. same.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1479,
+  "entry": "T00746",
+  "headword": "רְכַב",
+  "kind": "space",
+  "before": "ב, רְכֵיב  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1481,
+  "entry": "T00796",
+  "headword": "רִמֹּון",
+  "kind": "space",
+  "before": " ; , רִי'  ch. same.",
+  "after": "Targ. Cant",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1491,
+  "entry": "T00958",
+  "headword": "רְפַף",
+  "kind": "space",
+  "before": "and made it tremble.",
+  "after": "Ithpa. - א",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1496,
+  "entry": "T01010",
+  "headword": "רְקֵב",
+  "kind": "space",
+  "before": "me רָקָב (v. preced.",
+  "after": "Hif.). Naz",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1497,
+  "entry": "T01033",
+  "headword": "רְקִיעַ",
+  "kind": "space",
+  "before": "רְקִיעָא I ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1498,
+  "entry": "T01066",
+  "headword": "רַשַּׁאי",
+  "kind": "space",
+  "before": " רַשַּׁיי  ch. same.",
+  "after": "Targ. Ruth",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1501,
+  "entry": "T01099",
+  "headword": "רְשַׁע",
+  "kind": "space",
+  "before": "רְשַׁע I ch. same.",
+  "after": "Targ. Deut",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1503,
+  "entry": "T01142",
+  "headword": "רִתְמָא",
+  "kind": "space",
+  "before": "ִי', רוּ'  ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1505,
+  "entry": "U00012",
+  "headword": "שָׁאוּל",
+  "kind": "space",
+  "before": "ל  (b. h.) pr. n. m.",
+  "after": "Shaul, Sau",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1513,
+  "entry": "U00110",
+  "headword": "שְׁבֵי",
+  "kind": "space",
+  "before": "י, שְׁבָא  ch. same.",
+  "after": "Targ. Num.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1514,
+  "entry": "U00123",
+  "headword": "שְׁבִילָא",
+  "kind": "space",
+  "before": "שְׁבִילָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1515,
+  "entry": "U00151",
+  "headword": "שֶׁבְנָא",
+  "kind": "space",
+  "before": "ה  (b. h.) pr. n. m.",
+  "after": "Shebna, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1515,
+  "entry": "U00156",
+  "headword": "שְׁבַע",
+  "kind": "space",
+  "before": "ְעָתֵי  m. ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1523,
+  "entry": "U00252",
+  "headword": "שֵׁדָא",
+  "kind": "space",
+  "before": "ָא, שֵׁי'  ch. same.",
+  "after": "Sabb. 67a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1528,
+  "entry": "U00320",
+  "headword": "שׁוֹבְכָא",
+  "kind": "space",
+  "before": "שׁוֹבְכָא  ch. same.",
+  "after": "Targ. Hos.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1531,
+  "entry": "U00375",
+  "headword": "שׁוּט",
+  "kind": "space",
+  "before": "שׁוּט  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1531,
+  "entry": "U00380",
+  "headword": "שׁוֹטָא",
+  "kind": "space",
+  "before": "שׁוֹטָא  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1533,
+  "entry": "U00392",
+  "headword": "שְׁוֵי",
+  "kind": "space",
+  "before": "ל to care for, mind.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1537,
+  "entry": "U00470",
+  "headword": "שׁוּנִּיתָא",
+  "kind": "space",
+  "before": "וּנִּיתָא  ch. same.",
+  "after": "Koh. R. to",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1540,
+  "entry": "U00510",
+  "headword": "שֹׁופָרָא",
+  "kind": "space",
+  "before": ", שֹׁופְ'  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1549,
+  "entry": "U00686",
+  "headword": "שַׁחַפְתָּא",
+  "kind": "space",
+  "before": "ׁחַפְתָּא  ch. same.",
+  "after": "Targ. O. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1551,
+  "entry": "U00701",
+  "headword": "שַׁחַק",
+  "kind": "space",
+  "before": " שְׁחָקָא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1551,
+  "entry": "U00712",
+  "headword": "שַׁחֲרָא",
+  "kind": "space",
+  "before": " שַׁחֲרָה  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1553,
+  "entry": "U00742",
+  "headword": "שְׁטַח",
+  "kind": "space",
+  "before": " שְׁטֵיחַ  ch. same.",
+  "after": "Targ. Num.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1554,
+  "entry": "U00761",
+  "headword": "שָׂטָן",
+  "kind": "space",
+  "before": "ָא, שִׂי'  ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1555,
+  "entry": "U00771",
+  "headword": "שְׁטָרָא",
+  "kind": "space",
+  "before": "שִׁטְרָא)  ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1558,
+  "entry": "U00842",
+  "headword": "שִׁיּוּרָא",
+  "kind": "space",
+  "before": "ִׁיּוּרָא  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1561,
+  "entry": "U00910",
+  "headword": "שְׁיָירָא",
+  "kind": "space",
+  "before": "ְׁיָירָא I ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1565,
+  "entry": "U00992",
+  "headword": "שִׁיעוּרָא",
+  "kind": "space",
+  "before": "ָא, שִׁע'  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1565,
+  "entry": "U01001",
+  "headword": "שַׁיְפָא",
+  "kind": "space",
+  "before": "ׁיָיאפָא)  ch. same.",
+  "after": "Ab. Zar. 5",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1567,
+  "entry": "U01045",
+  "headword": "שִׁיקּוּץ",
+  "kind": "space",
+  "before": "א, שִׁקּ'  ch. same.",
+  "after": "Targ. I Ki",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1568,
+  "entry": "U01057",
+  "headword": "שֵׁיר",
+  "kind": "space",
+  "before": ", שֵׁירָא  ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1568,
+  "entry": "U01061",
+  "headword": "שִׁירָא",
+  "kind": "space",
+  "before": "ִׁירָה I f. h. same.",
+  "after": "Sot. 48b; ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1573,
+  "entry": "U01154",
+  "headword": "שְׁכִינָה",
+  "kind": "space",
+  "before": "ׁכִינתָּא  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1579,
+  "entry": "U01254",
+  "headword": "שַׁלּוּם",
+  "kind": "space",
+  "before": "ם  (b. h.) pr. n. m.",
+  "after": "Shallum, 1",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1582,
+  "entry": "U01286",
+  "headword": "שִׁלְטוֹן",
+  "kind": "space",
+  "before": "ָא, שִׁי'  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1583,
+  "entry": "U01313",
+  "headword": "שַׁלִּיט",
+  "kind": "space",
+  "before": "ַׁלִּיטָא  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1589,
+  "entry": "U01398",
+  "headword": "שַׁלְשֵׁל",
+  "kind": "space",
+  "before": " ch. same. ch. same.",
+  "after": "Ithpalp. -",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1590,
+  "entry": "U01402",
+  "headword": "שַׁלְשֶׁלְתָּא",
+  "kind": "space",
+  "before": " שִׁישֶׁ'  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1591,
+  "entry": "U01408",
+  "headword": "שֵׁם",
+  "kind": "space",
+  "before": "ם, שְׁמָא  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1597,
+  "entry": "U01492",
+  "headword": "שְׁמַם",
+  "kind": "space",
+  "before": "14 (h. text ויתהלל).",
+  "after": "Ithpol. - ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1599,
+  "entry": "U01512",
+  "headword": "שְׁמַע",
+  "kind": "space",
+  "before": "שְׁמַע I ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1600,
+  "entry": "U01517",
+  "headword": "שִׁמְעוֹן",
+  "kind": "space",
+  "before": "ן  (b. h.) pr. n. m.",
+  "after": "Simeon, Si",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1600,
+  "entry": "U01518",
+  "headword": "שִׁמְעִי",
+  "kind": "space",
+  "before": "י  (b. h.) pr. n. m.",
+  "after": "Shimei, 1)",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1601,
+  "entry": "U01528",
+  "headword": "שְׁמָרָא",
+  "kind": "space",
+  "before": "שְׁמָרָא  ch. same.",
+  "after": "Targ. Jer.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1603,
+  "entry": "U01557",
+  "headword": "שֵׁן",
+  "kind": "space",
+  "before": "ּא, שִׁי'  ch. same.",
+  "after": "Targ. O. D",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1609,
+  "entry": "U01629",
+  "headword": "שַׁעְבֵּד",
+  "kind": "space",
+  "before": "ַׁעְבֵּיד  ch. same.",
+  "after": "Targ. O. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1614,
+  "entry": "U01715",
+  "headword": "שַׁפּוּדָא",
+  "kind": "space",
+  "before": "ַׁפּוּדָא  ch. same.",
+  "after": "Pes. 74b ש",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1623,
+  "entry": "U01867",
+  "headword": "שְׁקִיפָא",
+  "kind": "space",
+  "before": "שְׁקִיפָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1625,
+  "entry": "U01888",
+  "headword": "שִׁקְצָא",
+  "kind": "space",
+  "before": "ָא, שִׁי'  ch. same.",
+  "after": "Targ. Lev.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1626,
+  "entry": "U01894",
+  "headword": "שְׁקַר",
+  "kind": "space",
+  "before": "שְׁקַר I ch. same.",
+  "after": "Targ. Mal.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1626,
+  "entry": "U01897",
+  "headword": "שְׁקַר",
+  "kind": "space",
+  "before": "ָא, שִׁי'  ch. same.",
+  "after": "Targ. I Sa",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1628,
+  "entry": "U01921",
+  "headword": "שַׁרְבִיטָא",
+  "kind": "space",
+  "before": "ׁרְבִיטָא  ch. same.",
+  "after": "Targ. Y. L",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1629,
+  "entry": "U01956",
+  "headword": "שַׁרְטֵט",
+  "kind": "space",
+  "before": "שַׁרְטֵט  ch. same.",
+  "after": "Gitt. 7a ש",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1634,
+  "entry": "U02021",
+  "headword": "שְׁרַק",
+  "kind": "space",
+  "before": ", שְׁרֵיק  ch. same.",
+  "after": "Targ. Lam.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1635,
+  "entry": "U02037",
+  "headword": "שֹׁרֶשׁ",
+  "kind": "space",
+  "before": "ׁוֹרְשָׁא  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1637,
+  "entry": "U02092",
+  "headword": "שְׁתֵי",
+  "kind": "space",
+  "before": "י, שְׁתָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1639,
+  "entry": "U02120",
+  "headword": "שְׁתַל",
+  "kind": "space",
+  "before": ", שְׁתֵיל  ch. same.",
+  "after": "Taan. 23a ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1646,
+  "entry": "V00079",
+  "headword": "תַּבְשִׁיל",
+  "kind": "space",
+  "before": "בְשִׁילָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1647,
+  "entry": "V00090",
+  "headword": "תַּגָּר",
+  "kind": "space",
+  "before": "תַּגָּרָא  ch. same.",
+  "after": "Targ. Koh.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1648,
+  "entry": "V00120",
+  "headword": "תְּהוֹם",
+  "kind": "space",
+  "before": "תְּהוֹמָא  ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1649,
+  "entry": "V00129",
+  "headword": "תַּהְפּוּכְתָּא",
+  "kind": "space",
+  "before": "תַּהֲפוּ'  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1655,
+  "entry": "V00252",
+  "headword": "תּוֹעֵיבָא",
+  "kind": "space",
+  "before": "בְתָּא  f. ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1655,
+  "entry": "V00257",
+  "headword": "תּוּפָּא",
+  "kind": "space",
+  "before": ", תֻּפָּא  ch. same.",
+  "after": "Targ. Ex. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1658,
+  "entry": "V00305",
+  "headword": "תּוּרְנָא",
+  "kind": "space",
+  "before": "א, תָּרְ'  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1660,
+  "entry": "V00354",
+  "headword": "תְּחוּם",
+  "kind": "space",
+  "before": "תְּחוּמָא  ch. same.",
+  "after": "Targ. Josh",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1665,
+  "entry": "V00482",
+  "headword": "תֵּיקָא",
+  "kind": "space",
+  "before": "תֵּיקָא  ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1667,
+  "entry": "V00516",
+  "headword": "תְּיָשָׁא",
+  "kind": "space",
+  "before": ", תְּיָי'  ch. same.",
+  "after": "Targ. Prov",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1669,
+  "entry": "V00548",
+  "headword": "תְּכֶלְתָּא",
+  "kind": "space",
+  "before": "תְּכֶילְ'  ch. same.",
+  "after": "Targ. O. N",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1669,
+  "entry": "V00561",
+  "headword": "תַּכְשִׁיטָא",
+  "kind": "space",
+  "before": "כְשִׁיטָא  ch. same.",
+  "after": "Targ. Y. E",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1672,
+  "entry": "V00599",
+  "headword": "תְּלָמָא",
+  "kind": "space",
+  "before": "תַּלְמָא I ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1672,
+  "entry": "V00602",
+  "headword": "תַּלְמוּדָא",
+  "kind": "space",
+  "before": "ּלְמוּדָא  ch. same.",
+  "after": "Targ. Cant",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1673,
+  "entry": "V00609",
+  "headword": "תַּלְמִידָא",
+  "kind": "space",
+  "before": "ּלְמִידָא  ch. same.",
+  "after": "Erub. 53b ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1677,
+  "entry": "V00678",
+  "headword": "תְּמִים",
+  "kind": "space",
+  "before": "תְּמִימָא  ch. same.",
+  "after": "Targ. Y. I",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1678,
+  "entry": "V00704",
+  "headword": "תָּמָר",
+  "kind": "space",
+  "before": " I (b. h.) pr. n. f.",
+  "after": "Tamar, 1) ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1679,
+  "entry": "V00706",
+  "headword": "תָּמָר",
+  "kind": "space",
+  "before": ", תּוּמְ'  ch. same.",
+  "after": "Targ. Cant",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1681,
+  "entry": "V00740",
+  "headword": "תַּנְחוּמְתָּא",
+  "kind": "space",
+  "before": "ְחֻמְ'  f. ch. same.",
+  "after": "Targ. Job ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1682,
+  "entry": "V00750",
+  "headword": "תַּנִּינָא",
+  "kind": "space",
+  "before": "ַּנִּינָא  ch. same.",
+  "after": "Targ. Is. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1682,
+  "entry": "V00763",
+  "headword": "תָּסִילָא",
+  "kind": "space",
+  "before": "תָּסִילָא  ch. same.",
+  "after": "Targ. Y. G",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1684,
+  "entry": "V00789",
+  "headword": "תַּעֲנִיתָא",
+  "kind": "space",
+  "before": " תַּעֲנִי  ch. same.",
+  "after": "Targ. Joel",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1700,
+  "entry": "V01022",
+  "headword": "תַּרְנְגוֹל",
+  "kind": "space",
+  "before": "ְנַגְלָא I ch. same.",
+  "after": "Targ. Ps. ",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
+ },
+ {
+  "page": 1705,
+  "entry": "V01106",
+  "headword": "תְּשַׁע",
+  "kind": "space",
+  "before": "שְׁעָה  m. ch. same.",
+  "after": "Targ. Gen.",
+  "why": "Missing space after a period (“same.Targ.”). We believe this is a typo in the digital text, not in the 1903 printing, which spaces its words normally."
  }
 ]
