@@ -8472,5 +8472,32 @@
   "old": "the publicroad;",
   "new": "the public road;",
   "why": "Two words run together (“publicroad”); the 1903 printing has “public road” (checked against the scan). We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 89,
+  "entry": "A02324",
+  "headword": "*אֲסַב",
+  "kind": "word",
+  "old": "into its month,",
+  "new": "into its mouth,",
+  "why": "The digital text has “month” where the 1903 printing has “mouth” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 107,
+  "entry": "A02783",
+  "headword": "אַפְקָרוּתָא",
+  "kind": "word",
+  "old": "pronounced forth with",
+  "new": "pronounced forthwith",
+  "why": "The digital text splits “forthwith” into “forth with”; the 1903 printing has “forthwith” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 399,
+  "entry": "G00456",
+  "headword": "זְכֵי",
+  "kind": "word",
+  "old": "to deserve welt,",
+  "new": "to deserve well,",
+  "why": "The digital text has “welt” where the 1903 printing has “well” (checked against the scan). We believe this is a typo in the digital text."
  }
 ]
