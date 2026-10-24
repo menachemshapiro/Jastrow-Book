@@ -8337,5 +8337,95 @@
   "old": "Y. Shek. V, 55<sup>c</sup> bot.",
   "new": "Y. Succ. V, 55<sup>c</sup> bot.",
   "why": "We searched the Talmud for the quotation and found it at Yerushalmi Sukkah V, 55ᶜ (“סורח את הנעימה”). The 1903 printing itself has “Y. Shek. V, 55ᶜ” (the scan of the page agrees), and Yerushalmi Shekalim runs from 45ᵈ to 51ᵇ, so this is a misprint in the original book. Corrected to “Y. Succ. V, 55ᶜ”."
+ },
+ {
+  "page": 52,
+  "entry": "A01389",
+  "headword": "אֶינְמִירִינוֹן",
+  "kind": "page-edge",
+  "old": "<i>unguent </i></span></span></span></p></div>",
+  "new": "<i>unguent scented</i></span></span></span></p></div>",
+  "why": "The 1903 printing ends page 52 with “scented” and begins page 53 with “with”. In the digital text the last word of page 52 had moved to page 53 and run into the next word (“scentedwith”). Here it is put back at the end of page 52. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 53,
+  "entry": "A01389",
+  "headword": "אֶינְמִירִינוֹן",
+  "kind": "page-edge",
+  "old": "<i>scentedwith Arabian",
+  "new": "<i>with Arabian",
+  "why": "The 1903 printing ends page 52 with “scented” and begins page 53 with “with”. In the digital text the last word of page 52 had moved to page 53 and run into the next word (“scentedwith”). Here the space is restored and the moved word removed. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 237,
+  "entry": "C00708",
+  "headword": "גַּיָּיס",
+  "kind": "page-edge",
+  "old": "<i>to arrange battle, to </i></span></span></span></p></div>",
+  "new": "<i>to arrange battle, to order</i></span></span></span></p></div>",
+  "why": "The 1903 printing ends page 237 with “order” and begins page 238 with “out”. In the digital text the last word of page 237 had moved to page 238 and run into the next word (“orderout”). Here it is put back at the end of page 237. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 238,
+  "entry": "C00708",
+  "headword": "גַּיָּיס",
+  "kind": "page-edge",
+  "old": "<i>orderout troops",
+  "new": "<i>out troops",
+  "why": "The 1903 printing ends page 237 with “order” and begins page 238 with “out”. In the digital text the last word of page 237 had moved to page 238 and run into the next word (“orderout”). Here the space is restored and the moved word removed. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 332,
+  "entry": "E00108",
+  "headword": "הֲדוּרָא",
+  "kind": "page-edge",
+  "old": "<i>a field </i></span></span></span></p></div>",
+  "new": "<i>a field which</i></span></span></span></p></div>",
+  "why": "The 1903 printing ends page 332 with “which” and begins page 333 with “can”. In the digital text the last word of page 332 had moved to page 333 and run into the next word (“whichcan”). Here it is put back at the end of page 332. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 333,
+  "entry": "E00108",
+  "headword": "הֲדוּרָא",
+  "kind": "page-edge",
+  "old": "<i>whichcan be",
+  "new": "<i>can be",
+  "why": "The 1903 printing ends page 332 with “which” and begins page 333 with “can”. In the digital text the last word of page 332 had moved to page 333 and run into the next word (“whichcan”). Here the space is restored and the moved word removed. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 517,
+  "entry": "I00066",
+  "headword": "טֶבֶל",
+  "kind": "page-edge",
+  "old": "<i>Tebel, produces </i></span></span></span></p></div>",
+  "new": "<i>Tebel, produces in</i></span></span></span></p></div>",
+  "why": "The 1903 printing ends page 517 with “in” and begins page 518 with “that”. In the digital text the last word of page 517 had moved to page 518 and run into the next word (“inthat”). Here it is put back at the end of page 517. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 518,
+  "entry": "I00066",
+  "headword": "טֶבֶל",
+  "kind": "page-edge",
+  "old": "<i>inthat stage",
+  "new": "<i>that stage",
+  "why": "The 1903 printing ends page 517 with “in” and begins page 518 with “that”. In the digital text the last word of page 517 had moved to page 518 and run into the next word (“inthat”). Here the space is restored and the moved word removed. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 836,
+  "entry": "M02532",
+  "headword": "מֶרֶד II",
+  "kind": "page-edge",
+  "old": "רָדָה</a>) </span></span></span></p></div>",
+  "new": "רָדָה</a>) [<i>bringing</i></span></span></span></p></div>",
+  "why": "The 1903 printing ends page 836 with “[bringing” and begins page 837 with “down”. In the digital text the last word of page 836 had moved to page 837 and run into the next word (“bringingdown”). Here it is put back at the end of page 836. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 837,
+  "entry": "M02532",
+  "headword": "מֶרֶד II",
+  "kind": "page-edge",
+  "old": "[<i>bringingdown</i>,]",
+  "new": "<i>down</i>,]",
+  "why": "The 1903 printing ends page 836 with “[bringing” and begins page 837 with “down”. In the digital text the last word of page 836 had moved to page 837 and run into the next word (“bringingdown”). Here the space is restored and the moved word removed. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
  }
 ]
