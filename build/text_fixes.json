@@ -8499,5 +8499,77 @@
   "old": "to deserve welt,",
   "new": "to deserve well,",
   "why": "The digital text has “welt” where the 1903 printing has “well” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 223,
+  "entry": "C00423",
+  "headword": "גּוּמְרָא",
+  "kind": "doubled",
+  "old": " to Ps. XI. Sabb. 11</a><a ",
+  "new": " to Ps. XI.</a> <a ",
+  "why": "The digital text gives the citation twice, the first copy cut short (“Sabb. 11Sabb. 110ᵃ”); the 1903 printing has it once (“Sabb. 110ᵃ”), checked against the scan. We believe this is a typo in the digital text. The cut-short copy is removed."
+ },
+ {
+  "page": 588,
+  "entry": "J00527",
+  "headword": "יְצִיאָה",
+  "kind": "doubled",
+  "old": " to Ps. II. Lam. R. to IV, 2</a><a ",
+  "new": " to Ps. II.</a> <a ",
+  "why": "The digital text gives the citation twice, the first copy cut short (“Lam. R. to IV, 2Lam. R. to IV, 2”); the 1903 printing has it once (“Lam. R. to IV, 2”), checked against the scan. We believe this is a typo in the digital text. The cut-short copy is removed."
+ },
+ {
+  "page": 623,
+  "entry": "K00314",
+  "headword": "כּוֹס I",
+  "kind": "doubled",
+  "old": "utta ch. V.—Keth. 75</a><a ",
+  "new": "utta ch. V.—</a><a ",
+  "why": "The digital text gives the citation twice, the first copy cut short (“Keth. 75Keth. 75ᵇ”); the 1903 printing has it once (“Keth. 75ᵇ”), checked against the scan. We believe this is a typo in the digital text. The cut-short copy is removed."
+ },
+ {
+  "page": 870,
+  "entry": "N00101",
+  "headword": "נָבַע",
+  "kind": "doubled",
+  "old": ". to Ps. I; Gen. R. s. 61</a><a ",
+  "new": ". to Ps. I;</a> <a ",
+  "why": "The digital text gives the citation twice, the first copy cut short (“Gen. R. s. 61Gen. R. s. 61”); the 1903 printing has it once (“Gen. R. s. 61”), checked against the scan. We believe this is a typo in the digital text. The cut-short copy is removed."
+ },
+ {
+  "page": 894,
+  "entry": "N00498",
+  "headword": "נַחַל",
+  "kind": "doubled",
+  "old": ". to Ps. I. Ber. 1</a><a ",
+  "new": ". to Ps. I.</a> <a ",
+  "why": "The digital text gives the citation twice, the first copy cut short (“Ber. 1Ber. 16ᵃ”); the 1903 printing has it once (“Ber. 16ᵃ”), checked against the scan. We believe this is a typo in the digital text. The cut-short copy is removed."
+ },
+ {
+  "page": 1146,
+  "entry": "Q00327",
+  "headword": "פוֹקָרִין",
+  "kind": "doubled",
+  "old": " V (VI), 2; Sabb. 5</a><a ",
+  "new": " V (VI), 2;</a> <a ",
+  "why": "The digital text gives the citation twice, the first copy cut short (“Sabb. 5Sabb. 50ᵃ”); the 1903 printing has it once (“Sabb. 50ᵃ”), checked against the scan. We believe this is a typo in the digital text. The cut-short copy is removed."
+ },
+ {
+  "page": 1670,
+  "entry": "V00578",
+  "headword": "תְּלוֹי",
+  "kind": "doubled",
+  "old": "to Ps. III; Yalk. Ex. 3</a><a ",
+  "new": "to Ps. III;</a> <a ",
+  "why": "The digital text gives the citation twice, the first copy cut short (“Yalk. Ex. 3Yalk. Ex. 365”); the 1903 printing has it once (“Yalk. Ex. 365”), checked against the scan. We believe this is a typo in the digital text. The cut-short copy is removed."
+ },
+ {
+  "page": 1473,
+  "entry": "T00589",
+  "headword": "רִיבּוּעַ",
+  "kind": "doubled",
+  "old": " VI (V), 3; Erub. 56</a><a ",
+  "new": " VI (V), 3;</a> <a ",
+  "why": "The digital text gives the citation twice, the first copy cut short (“Erub. 56Erub. 56ᵃ”); the 1903 printing has it once (“Erub. 56ᵃ”), checked against the scan. We believe this is a typo in the digital text. The cut-short copy is removed."
  }
 ]
