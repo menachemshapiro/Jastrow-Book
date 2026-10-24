@@ -214,6 +214,9 @@ for c in range(0, len(pages), CHUNK):
     chunk = []
     for p in pages[c:c + CHUNK]:
         h = transform(p["html"])
+        if p["id"] == "1706":     # the Addenda's title and the line under it run across the top of both columns, as in the book
+            h = h.replace('<p class="fm">Addenda et Corrigenda.</p><p class="fm">(Articles', '<p class="fm hd">Addenda et Corrigenda.</p><p class="fm hd">(Articles', 1)
+            assert 'class="fm hd"' in h
         if p["id"] in ("xv", "xvi", "xvii", "xviii"):
             h = h.replace('<p class="fm">', '<p class="fm" dir="auto">')
         chunk.append(h)

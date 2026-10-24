@@ -207,6 +207,9 @@ button { cursor: pointer; }
 .cols p[data-c] { text-indent: 0; }
 .cols .fm { margin-bottom: .45em; text-indent: 1.2em; }
 .cols .fm:first-child { text-indent: 0; }
+.cols .fm.hd { column-span: all; text-align: center; text-indent: 0; margin-bottom: .3em; }
+.cols .fm.hd:first-child { font-size: 1.35em; letter-spacing: .04em; }
+.cols .fm.hd + .fm.hd { margin-bottom: .9em; }
 .cols .hw { font-family: var(--f-heb); font-weight: 500; font-size: 1.72em; line-height: .9; cursor: pointer; border-radius: 3px; }
 .cols .hw:hover { background: color-mix(in srgb, var(--accent) 14%, transparent); }
 .cols .h, .cols .bf { font-family: var(--f-heb); font-size: 1.04em; }
