@@ -8841,5 +8841,23 @@
   "old": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">water.</span></span></span>",
   "new": "<p class=\"ep\" data-c=\"1\">",
   "why": "The word “water.” belongs at the end of page 510 (see the record for page 510); it is removed from the top of page 511."
+ },
+ {
+  "page": 256,
+  "entry": "C01079",
+  "headword": "גְּנַב",
+  "kind": "same",
+  "old": ".—2) <a class=\"x\" href=\"#C01078\">same</a>.</span>",
+  "new": ".—2)</span>",
+  "why": "The digital text has an extra “same.” after “2)” (“—2) same. to go round about”); the 1903 printing reads “—2) to go round about” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 301,
+  "entry": "D00634",
+  "headword": "דִּין",
+  "kind": "same",
+  "old": "a. e.—2) <a class=\"x\" href=\"#D00633\">same</a>.</span>",
+  "new": "a. e.—2)</span>",
+  "why": "The digital text has an extra “same.” after “2)” (“—2) same. to argue”); the 1903 printing reads “—2) to argue, dispute, have a law-suit with” (checked against the scan). We believe this is a typo in the digital text."
  }
 ]
