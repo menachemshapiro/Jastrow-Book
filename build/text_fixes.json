@@ -8571,5 +8571,203 @@
   "old": " VI (V), 3; Erub. 56</a><a ",
   "new": " VI (V), 3;</a> <a ",
   "why": "The digital text gives the citation twice, the first copy cut short (“Erub. 56Erub. 56ᵃ”); the 1903 printing has it once (“Erub. 56ᵃ”), checked against the scan. We believe this is a typo in the digital text. The cut-short copy is removed."
+ },
+ {
+  "page": 7,
+  "entry": "A00172",
+  "headword": "אֶבֶן",
+  "kind": "gem",
+  "old": ".3\">3</a>); v. Ib.",
+  "new": ".3\">3</a>); v. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…y Arc. Yoma V, 2 (3); v. Gem. a. l.—אבנים תּוֹשָׁ…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 7,
+  "entry": "A00172",
+  "headword": "אֶבֶן",
+  "kind": "gem",
+  "old": "/a> a. Y. Ib.",
+  "new": "/a> a. Y. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…cmp. Shebi. III, 7 a. Y. Gem. a. l.—א' תלושה v. s…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 8,
+  "entry": "A00189",
+  "headword": "אָבַק",
+  "kind": "gem",
+  "old": " (cmp. Y. Ib.",
+  "new": " (cmp. Y. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…, 2 מְאַבְּקִין (cmp. Y. Gem. a. l.). M. Kat. 3 a…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 18,
+  "entry": "A00466",
+  "headword": "אַדְרְיָינִי",
+  "kind": "gem",
+  "old": " Mish. a. Ib.",
+  "new": " Mish. a. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…I, 3 חרס ה' (Y. Mish. a. Gem. א') earthen ware of…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 63,
+  "entry": "A01704",
+  "headword": "אָכְלָה II",
+  "kind": "gem",
+  "old": "ת</a>; Y. Ib.",
+  "new": "ת</a>; Y. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…(Mish. ed. אֲכִילַת; Y. Gem. 28 a אוֹכְלַת) the…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 71,
+  "entry": "A01900",
+  "headword": "אֱלָל",
+  "kind": "gem",
+  "old": "n.121a.3\">Ib.",
+  "new": "n.121a.3\">Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…Job. l. c.—Ḥull. IX, 1 ( Gem. 121 a, diff. of opi…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 83,
+  "entry": "A02181",
+  "headword": "*אַנְטִיכִי",
+  "kind": "gem",
+  "old": "up></a>); Ib.",
+  "new": "up></a>); Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…&c. Sabb. III, 4 (41 a); Gem. ib. one opin., בי כ…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 92,
+  "entry": "A02422",
+  "headword": "אִסְטַרְיָא",
+  "kind": "gem",
+  "old": "א, but in Ib.",
+  "new": "א, but in Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…(Ms. M. אצטריבא, but in Gem. 18 b repeatedly אצט…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 92,
+  "entry": "A02422",
+  "headword": "אִסְטַרְיָא",
+  "kind": "gem",
+  "old": "mp;c.; v. Ib.",
+  "new": "mp;c.; v. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…cution, of shows &c.; v. Gem. 18 b.—[Men. 103 b א…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 106,
+  "entry": "A02763",
+  "headword": "אָפְסַנְיָא",
+  "kind": "gem",
+  "old": "(Mish. a. Ib.",
+  "new": "(Mish. a. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…. II, 4 (21 b) (Mish. a. Gem. ed. אספ' throughout…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 110,
+  "entry": "A02871",
+  "headword": "אִצְטַרְיָא",
+  "kind": "gem",
+  "old": "supra; in Ib.",
+  "new": "supra; in Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…b. אצטרינא, v. supra; in Gem. 18 b repeatedly אצט…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 128,
+  "entry": "A03302",
+  "headword": "אֶשֶׁךְ",
+  "kind": "gem",
+  "old": "h. l. c. (Ib.",
+  "new": "h. l. c. (Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…testicles. Bekh. l. c. ( Gem. ed. מאושבן, v. שעבז…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 165,
+  "entry": "B00704",
+  "headword": "בִּירָה",
+  "kind": "gem",
+  "old": "ת הב׳; v. Ib.",
+  "new": "ת הב׳; v. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…, 5 (104 b) בבית הב'; v. Gem. a. l.—Yoma 9 b עידי…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 181,
+  "entry": "B01045",
+  "headword": "בְּעִיטָה",
+  "kind": "gem",
+  "old": "ough. Ib. Ib.",
+  "new": "ough. Ib. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…refers to the dough. Ib. Gem. Var. שיפה בחיטים וב…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 206,
+  "entry": "C00091",
+  "headword": "גְּבִין II",
+  "kind": "gem",
+  "old": ">); expl. Ib.",
+  "new": ">); expl. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…le (Lev. XXI, 20); expl. Gem. ib. זהו מדרש או גבן…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 259,
+  "entry": "C01144",
+  "headword": "גְּנִינִים",
+  "kind": "gem",
+  "old": " which in Ib.",
+  "new": " which in Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…; (Ar. גני'—for which in Gem. ib. גוונים; incorr.…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 577,
+  "entry": "J00367",
+  "headword": "יָלַד",
+  "kind": "gem",
+  "old": "s vow (v. Ib.",
+  "new": "s vow (v. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…e born after his vow (v. Gem. ib. 30 b).—Esp. a)…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 605,
+  "entry": "J00748",
+  "headword": "יָתֵר",
+  "kind": "gem",
+  "old": "תירה</a>; Ib.",
+  "new": "תירה</a>; Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…ו יתרת וכ' (Rashi יתירה; Gem. יתירת) if there has…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 618,
+  "entry": "K00243",
+  "headword": "כוי",
+  "kind": "gem",
+  "old": "(Mish. a. Ib.",
+  "new": "(Mish. a. Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…Y. ib. 6 a, b (Mish. a. Gem. ) כְּוָייוֹ, כְּוָוי…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 619,
+  "entry": "K00256",
+  "headword": "כּוֹכְלִיאָר",
+  "kind": "gem",
+  "old": "Ms. M. in Ib.",
+  "new": "Ms. M. in Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…. 62 a כוליאר, Ms. M. in Gem. כובליאר, corr. acc.…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 841,
+  "entry": "M02630",
+  "headword": "מָרַח",
+  "kind": "gem",
+  "old": "ed ib. in Ib.",
+  "new": "ed ib. in Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…crushed; (refuted ib. in Gem. ) האי ממורח וכ', v.…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
+ },
+ {
+  "page": 860,
+  "entry": "M03007",
+  "headword": "מַתְאִימָה",
+  "kind": "gem",
+  "old": "׳; ib. in Ib.",
+  "new": "׳; ib. in Gem.",
+  "why": "The digital text has “Ib.” where the 1903 printing has “Gem.” (G’mara, the Talmud’s discussion as distinct from the Mishnah): “…יומת; Rashi מתא'; ib. in Gem. תיומות, תיומת); Sif…”. Sefaria’s 2018 text of the dictionary still has “Gem.” here; its current text has “Ib.” in every such place, so the change came in the digital text. We restore “Gem.”."
  }
 ]
