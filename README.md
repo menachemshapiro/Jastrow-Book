@@ -9,24 +9,24 @@ Marcus Jastrow's *A Dictionary of the Targumim, the Talmud Babli and Yerushalmi,
 **Read**
 - **Spread** shows two facing pages, **Page** shows one, and **Text** reflows the page's text for a small screen.
 - To turn pages, use ‹ ›, the slider, the arrow keys, or swipe on a phone. Type a page number to jump to it; the preface and abbreviations use their Roman numerals.
-- Click any entry to read it in larger type. The whole entry is shown, even when it runs over two columns or pages. From there you can step to the previous or next entry, change the type size, show the entry on its page, open it on Sefaria, or copy a citation.
+- Click any entry to read it in larger type. The whole entry is shown, even when it runs over two columns or pages. From there you can step to the previous or next entry, change the type size, show the entry on its page, open it on Sefaria, copy a citation, or copy a link to it.
 - Dotted words are cross-references within the dictionary. Source citations ("Ber. 26ᵇ") open the passage on Sefaria.
 
 **Find**
 - **Search** matches headwords as you type, in Hebrew with or without vowel points, or by page number. "Search all text" looks through every entry, in English and Hebrew.
 - **א־ב** opens a Hebrew keyboard, either alphabetical or in the standard Israeli layout.
 - **Contents** lists every page by its first and last headword, letter by letter, like the book's running heads.
-- **Talmud** lists the entries that cite a chosen daf of the בבלי or the ירושלמי, with the tractate and daf in Hebrew.
+- **Citations** lists the entries that cite a chosen daf of the בבלי or the ירושלמי, with the tractate and daf in Hebrew.
   - Citations are read from Jastrow's own abbreviations. The Bavli is cited by daf and amud ("Ber. 26ᵇ"), and the Yerushalmi by chapter plus the folio and column of the Krotoshin edition ("Y. Ber. VIII, 12ᶜ").
   - "Ib." and a bare folio count as the tractate cited just before.
   - The index holds about 31,900 Bavli and 12,200 Yerushalmi citations. Sefaria links many of the same Bavli citations, and the two agree in all but one case.
 - **Onkelos**, in the same panel, lists the entries that cite a chapter of Targum Onkelos, verse by verse, with the book and chapter in Hebrew.
   - Jastrow cites Onkelos as "Targ. O. Gen. XVII, 4" or simply "Targ. Gen. XVII, 4". Targum Yerushalmi and Pseudo-Jonathan ("Targ. Y.") are left out.
-  - The index holds about 3,800 citations. Sefaria links 3,490 of the same ones, and the two agree on every one.
+  - The index holds about 3,800 citations. Sefaria links 3,493 of the same ones, and the two agree on every one.
 
 **Link**
 - A page: `#p1087`
-- An entry, by its Sefaria id: `#P00866`
+- An entry, by its Sefaria id: `#P00866` (opens the page with the entry in the reader; the reader's "Copy link" button gives this link)
 - A daf: `#t/b/Berakhot/26b` or `#t/y/Berakhot/12c`
 - A chapter of Onkelos: `#t/o/Genesis/17`
 

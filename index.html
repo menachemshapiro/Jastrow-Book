@@ -372,7 +372,7 @@ button { cursor: pointer; }
   <div class="bar">
     <div class="brand"><b>Jastrow</b><span lang="he" dir="rtl">ספר המלים</span></div>
     <button class="btn" id="tocBtn" aria-controls="drawer" aria-expanded="false" title="Contents (C)">Contents</button>
-    <button class="btn" id="talBtn" title="Find the entries that cite a daf of the Talmud or a chapter of Targum Onkelos">Talmud</button>
+    <button class="btn" id="talBtn" title="Find the entries that cite a daf of the Talmud or a chapter of Targum Onkelos">Citations</button>
     <button class="btn" id="aboutBtn" title="About this edition and how to use it">About</button>
     <div class="search" id="searchBox">
       <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search a headword, or any English or Hebrew text" aria-label="Search">
@@ -409,7 +409,7 @@ button { cursor: pointer; }
   <div class="tabs" role="tablist">
     <button role="tab" id="tabToc" aria-selected="true">Pages</button>
     <button role="tab" id="tabRes" aria-selected="false">Text search</button>
-    <button role="tab" id="tabTal" aria-selected="false">Talmud</button>
+    <button role="tab" id="tabTal" aria-selected="false">Citations</button>
     <button role="tab" id="tabHelp" aria-selected="false">About</button>
   </div>
   <div id="paneToc" style="display:flex;flex-direction:column;flex:1;min-height:0">
@@ -441,7 +441,7 @@ button { cursor: pointer; }
       <ul>
         <li><b>Spread</b> shows two facing pages, <b>Page</b> one, and <b>Text</b> the page’s text reflowed for a small screen.</li>
         <li>Turn pages with ‹ ›, the slider at the bottom, the arrow keys, or a swipe on a phone. Type a page number into the box to jump there; the preface and abbreviations use their Roman numerals (<code>v</code>, <code>xv</code>).</li>
-        <li>Click any entry to read it in larger type, whole even when it runs over two columns or pages. From there: the previous and next entries, A− and A+ for the type size, “Show on the page”, “Open on Sefaria”, and “Copy citation”.</li>
+        <li>Click any entry to read it in larger type, whole even when it runs over two columns or pages. From there: the previous and next entries, A− and A+ for the type size, “Show on the page”, “Open on Sefaria”, “Copy citation”, and “Copy link”.</li>
         <li>Dotted words are cross-references within the dictionary. Citations of sources (“Ber. 26<sup>b</sup>”) open the passage on Sefaria.</li>
       </ul>
 
@@ -450,13 +450,13 @@ button { cursor: pointer; }
         <li><b>Search</b> matches headwords as you type, in Hebrew (with or without vowel points) or by page number; “Search all text” looks through every entry, English and Hebrew.</li>
         <li><span lang="he">א־ב</span> opens a Hebrew keyboard, alphabetical or in the standard Israeli layout.</li>
         <li><b>Contents</b> lists every page by its first and last headword, letter by letter, as in the running heads of the book.</li>
-        <li><b>Talmud</b> lists the entries that cite a chosen daf. Choose <span lang="he">בבלי</span> or <span lang="he">ירושלמי</span>, the tractate and the daf. Citations are read from Jastrow’s own abbreviations: the Bavli by daf and amud (“Ber. 26<sup>b</sup>”), the Yerushalmi by chapter and the folio and column of the Krotoshin edition (“Y. Ber. VIII, 12<sup>c</sup>”); “Ib.” and a bare folio count as the tractate cited just before.</li>
+        <li><b>Citations</b> lists the entries that cite a chosen daf of the Talmud or chapter of Onkelos. Choose <span lang="he">בבלי</span> or <span lang="he">ירושלמי</span>, the tractate and the daf. Citations are read from Jastrow’s own abbreviations: the Bavli by daf and amud (“Ber. 26<sup>b</sup>”), the Yerushalmi by chapter and the folio and column of the Krotoshin edition (“Y. Ber. VIII, 12<sup>c</sup>”); “Ib.” and a bare folio count as the tractate cited just before.</li>
         <li>Choose <span lang="he">אונקלוס</span> there for Targum Onkelos: pick a book of the Torah and a chapter to list every entry that cites it, verse by verse. Jastrow cites Onkelos as “Targ. O. Gen. XVII, 4” or simply “Targ. Gen. XVII, 4”; Targum Yerushalmi and Pseudo-Jonathan (“Targ. Y.”) are not included.</li>
       </ul>
 
       <h3>Links</h3>
       <ul>
-        <li>A page: <code>#p1087</code>. An entry, by its Sefaria id: <code>#P00866</code>. A daf: <code>#t/b/Berakhot/26b</code> or <code>#t/y/Berakhot/12c</code>. A chapter of Onkelos: <code>#t/o/Genesis/17</code>.</li>
+        <li>A page: <code>#p1087</code>. An entry, by its Sefaria id: <code>#P00866</code> (opens its page with the entry in the reader; “Copy link” in the reader gives you this link). A daf: <code>#t/b/Berakhot/26b</code> or <code>#t/y/Berakhot/12c</code>. A chapter of Onkelos: <code>#t/o/Genesis/17</code>.</li>
         <li>Keys: <kbd>←</kbd> <kbd>→</kbd> turn pages · <kbd>/</kbd> search · <kbd>C</kbd> contents · <kbd>+</kbd> <kbd>−</kbd> <kbd>0</kbd> zoom · <kbd>Esc</kbd> closes.</li>
       </ul>
 
@@ -488,6 +488,7 @@ button { cursor: pointer; }
     <button class="btn" id="rdGo">Show on the page</button>
     <a class="btn" id="rdSef" target="_blank" rel="noopener">Open on Sefaria ↗</a>
     <button class="btn" id="rdCopy">Copy citation</button>
+    <button class="btn" id="rdLink">Copy link</button>
     <div class="rd-cite" id="rdCite"></div>
   </div>
 </div>
@@ -1380,7 +1381,7 @@ async function openReader(id, near, fromLink) {
   const sef = ((row && row[4]) || first).replace(/ /g, "_");
   $("rdSef").href = "https://www.sefaria.org/Jastrow,_" + encodeURIComponent(sef) + ".1";
   $("rdCite").innerHTML = "Jastrow, <i>Dictionary</i>, p. " + esc(label(ex.first)) + ', s.v. <span class="h" lang="he">' + esc(first) + "</span>";
-  $("rdCopy").textContent = "Copy citation";
+  $("rdCopy").textContent = "Copy citation"; $("rdLink").textContent = "Copy link";
   $("rdBack").hidden = !RD.hist.length;
   $("rdPrev").disabled = !rdNeighbor(id, -1); $("rdNext").disabled = !rdNeighbor(id, 1);
   if (!fromLink) $("rdClose").focus({ preventScroll: true });
@@ -1404,6 +1405,11 @@ $("rdBody").addEventListener("click", (e) => {
   const a = e.target.closest("a.x");
   if (a) { e.preventDefault(); openReader(a.getAttribute("href").slice(1), RD.page, true); }
 });
+$("rdLink").onclick = () => {
+  const url = "https://menachemshapiro.github.io/Jastrow-Book/#" + RD.id;
+  const ok = () => { $("rdLink").textContent = "Link copied"; };
+  try { navigator.clipboard.writeText(url).then(ok, () => { $("rdLink").textContent = url; }); } catch (er) { $("rdLink").textContent = url; }
+};
 $("rdCopy").onclick = () => {
   const t = $("rdCite").textContent;
   const ok = () => { $("rdCopy").textContent = "Copied"; };
@@ -1477,7 +1483,7 @@ async function talShow(push) {
     const hw = row ? row[2].split("|").join(" ") : r[0];
     const pi = S.entryPage.get(r[0]);
     const pv = TAL.corp === "o" ? '<span class="pv" lang="he" dir="rtl">פסוק ' + gem(r[1]) + "</span> · " : "";
-    return '<div class="res-row tal-row" data-id="' + r[0] + '"' + (TAL.corp === "o" ? ' data-v="' + r[1] + '"' : "") + ' tabindex="0" role="button"><div class="rp">' + pv + '<span class="heb" lang="he" dir="rtl">' + esc(hw) + "</span> · p. " +
+    return '<div class="res-row tal-row" data-id="' + r[0] + '"' + (TAL.corp === "o" ? ' data-v="' + r[1] + '"' : "") + ' data-c="' + esc(JSON.stringify(r[3] || [])) + '" tabindex="0" role="button"><div class="rp">' + pv + '<span class="heb" lang="he" dir="rtl">' + esc(hw) + "</span> · p. " +
       esc(pi != null ? label(pi) : "") + "</div>" + talSnippet(r[2]) + "</div>";
   }).join("") || '<div class="help">No entries cite this ' + (TAL.corp === "o" ? "chapter" : "daf") + ".</div>";
   $("talList").scrollTop = 0;
@@ -1507,39 +1513,62 @@ $("talNext").onclick = () => talStep(1);
 $("talBtn").onclick = () => ($("drawer").classList.contains("open") && paneShown === "tal") ? closeDrawer() : openDrawer("tal");
 function talOpen(el) {
   const r = el.closest(".tal-row"); if (!r) return;
-  if (TAL.corp === "o") {
-    const ch = toRoman(+TAL.daf), v = r.dataset.v;
-    openReader(r.dataset.id, S.entryPage.get(r.dataset.id)).then(() => markText($("rdBody"), [new RegExp("\\b" + ch + ",\\s*" + v + "\\b"), new RegExp("\\b[Ii]b\\.,?\\s*" + v + "\\b")]));
-    return;
-  }
-  const m = /^(\d+)([a-d])$/.exec(TAL.daf);
-  openReader(r.dataset.id, S.entryPage.get(r.dataset.id)).then(() => markCite($("rdBody"), +m[1], m[2]));
+  const corp = TAL.corp, key = TAL.key, daf = TAL.daf, v = r.dataset.v;
+  let cites = []; try { cites = JSON.parse(r.dataset.c || "[]"); } catch (e) {}
+  openReader(r.dataset.id, S.entryPage.get(r.dataset.id)).then(() => markRefs($("rdBody"), corp, key, daf, v, cites));
 }
 $("talList").addEventListener("click", (e) => talOpen(e.target));
 $("talList").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); talOpen(e.target); } });
-function markText(body, res) {
-  // highlight the first match of the first pattern that matches, within a single text node
-  const tw = document.createTreeWalker(body, NodeFilter.SHOW_TEXT);
-  const nodes = []; let n; while ((n = tw.nextNode())) nodes.push(n);
-  for (const re of res) for (const t of nodes) {
-    const m = re.exec(t.nodeValue); if (!m) continue;
-    const rg = document.createRange(); rg.setStart(t, m.index); rg.setEnd(t, m.index + m[0].length);
-    const mk = document.createElement("mark"); mk.className = "tal"; rg.surroundContents(mk);
-    mk.scrollIntoView({ block: "center" }); return;
-  }
+function wrapMark(node) {
+  const mk = document.createElement("mark"); mk.className = "tal";
+  node.parentNode.insertBefore(mk, node); mk.appendChild(node); return mk;
 }
-function markCite(body, fol, side) {
-  // highlight the folio in the reader: a number followed by its side in superscript
-  for (const sup of body.querySelectorAll("sup")) {
-    if (sup.textContent !== side) continue;
-    const prev = sup.previousSibling;
-    const t = prev && prev.nodeType === 3 ? prev.nodeValue : (prev && prev.textContent) || "";
-    if (!new RegExp("(^|\\D)" + fol + "$").test(t)) continue;
-    const a = sup.closest("a") || sup;
+function markRefs(body, corp, key, daf, v, cites) {
+  // highlight every citation of this daf (or chapter and verse) in the entry, as the whole reference
+  const refOf = (a) => decodeURIComponent((a.getAttribute("href") || "").replace(/^https?:\/\/www\.sefaria\.org\//, ""));
+  // 1. the citations as Jastrow wrote them ("Ber. 2^a", "Ib. 13^a", "Targ. Gen. XVII, 4"); a bare number is too ambiguous to look for
+  for (const c of cites || []) {
+    const plain = c.replace(/\^([a-d])/g, "$1");
+    if (!/[A-Za-z]{2}|\b[A-Z]\./.test(plain.replace(/\d+[a-d]\b/, ""))) continue;
+    markAllText(body, new RegExp(plain.split(/\s+/).map(w => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("\\s+")));
+  }
+  // 2. Sefaria's links to the same place
+  const links = [...body.querySelectorAll("a.r")].filter(a => !a.closest("mark.tal"));
+  let hit = [];
+  if (corp === "b") {
+    const re = new RegExp("^" + key + "\\." + daf + "(\\.|$)");
+    hit = links.filter(a => re.test(refOf(a)));
+  } else if (corp === "o") {
+    const re = new RegExp("^Onkelos_" + key + "\\." + daf + "\\." + v + "(\\D|$)");
+    hit = links.filter(a => re.test(refOf(a)));
+  } else {
+    const m = /^(\d+)([a-d])$/.exec(daf);
+    const re = new RegExp("(^|\\D)" + m[1] + m[2] + "\\b");
+    hit = links.filter(a => refOf(a).startsWith("Jerusalem_Talmud_" + key + ".") && re.test(a.textContent.replace(/\s+/g, " ")));
+  }
+  hit.forEach(wrapMark);
+  const first = body.querySelector("mark.tal");
+  if (first) first.scrollIntoView({ block: "center" });
+}
+function markAllText(body, re) {
+  // every match of re in the entry's text, even across elements; a match inside a link marks the whole link
+  const g = new RegExp(re.source, "g");
+  let from = 0, guard = 0;
+  while (guard++ < 50) {
+    const tw = document.createTreeWalker(body, NodeFilter.SHOW_TEXT);
+    const nodes = []; let n, text = "";
+    while ((n = tw.nextNode())) { nodes.push([n, text.length]); text += n.nodeValue; }
+    g.lastIndex = from;
+    const m = g.exec(text); if (!m) return;
+    from = m.index + Math.max(1, m[0].length);
+    const at = (off, end) => { for (let i = nodes.length - 1; i >= 0; i--) if (nodes[i][1] < off || (!end && nodes[i][1] === off)) return [nodes[i][0], off - nodes[i][1]]; return [nodes[0][0], 0]; };
+    const [sn, so] = at(m.index, false), [en, eo] = at(m.index + m[0].length, true);
+    if (sn.parentElement.closest("mark.tal")) continue;
+    const link = sn.parentElement.closest("a.r");
+    if (link && link.contains(en)) { wrapMark(link); continue; }
+    const rg = document.createRange(); rg.setStart(sn, so); rg.setEnd(en, eo);
     const mk = document.createElement("mark"); mk.className = "tal";
-    a.parentNode.insertBefore(mk, a); mk.appendChild(a);
-    mk.scrollIntoView({ block: "center" });
-    return;
+    mk.appendChild(rg.extractContents()); rg.insertNode(mk);
   }
 }
 
@@ -1604,7 +1633,7 @@ function routeHash(push) {
   const h = decodeURIComponent(location.hash.slice(1));
   let m;
   if ((m = /^p(.+)$/.exec(h)) && S.byLabel.has(m[1])) { if (S.byLabel.get(m[1]) !== S.idx || !S.rendered) go(S.byLabel.get(m[1]), { push }); return true; }
-  if (/^[A-V]\d{5}$/.test(h)) { gotoEntry(h, push); return true; }
+  if (/^[A-V]\d{5}[a-z]?$/.test(h)) { gotoEntry(h, push).then(ok => { if (ok) openReader(h, S.entryPage.get(h)); }); return true; }
   if ((m = /^t\/([byo])\/(\w+)\/(\d+[a-d]?)$/.exec(h))) {
     if (!S.rendered) { const last = store.get("page"); S.idx = last && S.byLabel.has(last) ? S.byLabel.get(last) : S.byLabel.get("1"); render(); }
     TAL.corp = m[1]; TAL.key = m[2]; TAL.daf = m[3]; openDrawer("tal"); return true;

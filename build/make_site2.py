@@ -91,6 +91,9 @@ def fix_special(pid, h):
         h = h.replace(fx["old"], fx["new"])
     return h
 
+HEB_PAREN = re.compile(r'<span class="h">([^<]*)</span>(\s*[(\[]\s*)<span class="h">([^<]*)</span>(\s*[)\]])')
+HEB_AFTER = re.compile(r'([)\]])</span>(\s+)<span class="h">')
+
 TEXT_FIXES = {}
 _tf = os.path.join(os.path.dirname(os.path.abspath(__file__)), "text_fixes.json")
 if os.path.exists(_tf):
@@ -169,6 +172,14 @@ def transform(h):
             continue
         out.append((DOT.sub("\u05C4", p) if in_hw else fix_text(p)) if p else p)
     h = "".join(out)
+    # a Hebrew phrase with a Hebrew word in parentheses or brackets ("למה קדמה (פרשת) ש׳ וכ׳") is one
+    # right-to-left run in the book; Sefaria splits it into separate spans, which puts the pieces in
+    # left-to-right order. Join them into one span.
+    while True:
+        h2 = HEB_PAREN.sub(r'<span class="h">\1\2\3\4</span>', h)
+        h2 = HEB_AFTER.sub(r"\1\2", h2)
+        if h2 == h: break
+        h = h2
     return h.replace('href="#e=', 'href="#')
 
 

@@ -180,8 +180,11 @@ def main():
             corp, key, ch, daf = hit
             if corp == "y" and "y" not in HAS[key]: continue
             lst = out[corp][key][daf]
-            if not (lst and lst[-1][0] == eid):     # one row per entry and daf
-                lst.append([eid, ch or 0, snippet(t, m.start())])
+            cite = m.group(0).strip("() ")
+            if not (lst and lst[-1][0] == eid):     # one row per entry and daf, with every citation of it
+                lst.append([eid, ch or 0, snippet(t, m.start()), [cite]])
+            elif cite not in lst[-1][3]:
+                lst[-1][3].append(cite)
             # compare with Sefaria's link at the same place, when there is one
             r = refs.get(m.start()) or refs.get(m.start() + (5 if t[m.start():m.start() + 4] == "Bab." else 0))
             if r and corp == "b":

@@ -27,7 +27,7 @@ ROM = r"(?:XL|L?X{0,3})(?:IX|IV|V?I{0,3})"        # I to L (Genesis has fifty ch
 
 P = re.compile(
     # Targum Onkelos: "Targ. Gen. XVII, 4", "Targ. O. Gen. XVII, 4", "Targ. O. ib. XLI, 43"
-    r"(?P<o>(?<![A-Z])Targ\.\s+(?:O\.,?\s+)?(?P<ob>" + BK + r"\.|ib\.)\s*(?P<oc>" + ROM + r")\b\.?,? (?P<ov>\d+))"
+    r"(?P<o>(?<![A-HJ-Z])Targ\.\s+(?:O\.,?\s+)?(?P<ob>" + BK + r"\.|ib\.)\s*(?P<oc>" + ROM + r")\b\.?,? (?P<ov>\d+))"
     # "Targ. O. ib. 16": the same chapter
     r"|(?P<oib>(?<![A-Z])Targ\.\s+(?:O\.,?\s+)?ib\.,? (?P<oibv>\d+)\b(?!\^))"
     # another Targum (Yerushalmi, Pseudo-Jonathan, the Prophets and Writings) or any other Targ. citation
@@ -35,13 +35,13 @@ P = re.compile(
     # a Bible reference: remembered for a following "Targ. ib.", ends an Onkelos run
     r"|(?P<bib>(?<![\w.])(?P<bb>" + BK + r")\.\s*(?P<bc>" + ROM + r")\b,? \d+)"
     # follow-ons: "ib. XXI, 3", "ib. 6", "; XXI, 3", "; 6"
-    r"|(?P<ibc>\b[Ii]b\.,? (?P<ic>" + ROM + r")\b,? (?P<iv>\d+))"
+    r"|(?P<ibc>\b[Ii]b\.,?\s+(?P<ic>" + ROM + r")\b,? (?P<iv>\d+))"
     r"|(?P<ibv>\b[Ii]b\.,? (?P<iv2>\d+)\b(?!\^))"
     r"|(?P<cc>(?<=[;,] )(?P<cc_c>" + ROM + r")\b,? (?P<cc_v>\d+)\b(?!\^))"
     r"|(?P<cv>(?<=[;,] )(?P<cv_v>\d+)\b(?![\^\d]))"
     r"|(?P<cv2>(?<=\d)[-–](?P<cv2_v>\d+)\b)"
     # anything else that starts a citation ends the run
-    r"|(?P<other>(?<![\w.])(?:(?!Targ\.)[A-Z][\wḤḥ’'é]*\.,? ){1,3}(?:" + ROM + r"\b,? \d|\d+\^|s\. \d|p\. \d|\d))"
+    r"|(?P<other>(?<![\w.])(?:(?![A-Z]?Targ\.)[A-Z][\wḤḥ’'é]*\.,? ){1,3}(?:" + ROM + r"\b,? \d|\d+\^|s\. \d|p\. \d|\d))"
 )
 
 
@@ -102,8 +102,11 @@ def main():
             if not (1 <= ch <= NCH[book]) or not (1 <= v <= 90):
                 continue
             lst = out[book][ch]
-            if not (lst and lst[-1][0] == eid and lst[-1][1] == v):
-                lst.append([eid, v, snippet(t, m.start(), m.end())])
+            cite = m.group(0).strip("() ")
+            if not (lst and lst[-1][0] == eid and lst[-1][1] == v):     # one row per entry and verse, with every citation of it
+                lst.append([eid, v, snippet(t, m.start(), m.end()), [cite]])
+            elif cite not in lst[-1][3]:
+                lst[-1][3].append(cite)
             r = refs.get(m.start())
             if r:
                 rm = re.match(r"Onkelos_([A-Za-z]+)\.(\d+)\.(\d+)", r)
