@@ -1,16 +1,16 @@
 [
-  {
-    "page": 832,
-    "entry": "מְקַק ch.",
-    "old": "<span class=\"lr\">same</span><span class=\"ss\">",
-    "new": "<span class=\"lr\">same.</span> <span class=\"ss\">",
-    "why": "The book reads “ch. same.” with Ithpalp. starting the next column; Sefaria lost the period and the space (“sameIthpalp.”)."
-  },
-  {
-    "page": 1067,
-    "entry": "עִידּוּן",
-    "old": "<i>delicacies, indulgenceindelicacies</i>",
-    "new": "<i>delicacies, indulgence in delicacies</i>",
-    "why": "The book reads “delicacies, indulgence in delicacies”, with “in delicacies” starting the next column; Sefaria's text ran the words together as “indulgenceindelicacies”."
-  }
+ {
+  "page": 832,
+  "entry": "מְקַק ch.",
+  "old": "<span class=\"lr\">same</span><span class=\"ss\">",
+  "new": "<span class=\"lr\">same.</span> <span class=\"ss\">",
+  "why": "The book reads “ch. same.” with Ithpalp. starting the next column; Sefaria lost the period and the space (“sameIthpalp.”)."
+ },
+ {
+  "page": 1067,
+  "entry": "עִידּוּן",
+  "old": "<i>delicacies, indulgenceindelicacies</i>",
+  "new": "<i>delicacies, indulgence in delicacies</i>",
+  "why": "The book reads “delicacies, indulgence in delicacies”, with “in delicacies” starting the next column; Sefaria's text ran the words together as “indulgenceindelicacies”."
+ }
 ]

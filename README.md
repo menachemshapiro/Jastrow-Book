@@ -46,7 +46,15 @@ Marcus Jastrow's *A Dictionary of the Targumim, the Talmud Babli and Yerushalmi,
 
 ## Corrections
 
-Changes to Sefaria's text are kept in [`build/text_fixes.json`](build/text_fixes.json). Each record gives the page, the text before and after, and the reason for the change, checked against the 1903 printing. Each correction is its own commit, so the history shows every change.
+**We have edited the dictionary's text where we believe the digital text has a typo.** These edits are our own corrections, made on our own judgment. They are not part of Sefaria's text and not Jastrow's. If you quote the dictionary from this site, keep in mind that the text includes them.
+
+Every correction is listed in [`build/text_fixes.json`](build/text_fixes.json), one record per change: the page, the entry, the text before and after (or, for an added space, the words on either side), and the reason. The site is built from Sefaria's text with these records applied, and each kind of correction is a separate commit, so the history shows every change.
+
+So far the corrections are:
+- **Words run together (645 places).** A missing space after a period ("ch. same.Targ."), a Hebrew word run into the binyan after it ("v. אָבַרPi."), and a homonym's number run into the next word ("כְּרוּב ITarg."). The 1903 printing spaces its words normally, so we take these to be typos in the digital text and restore the space; they were found by searching the text, not checked one by one against the scans.
+- **Two single corrections**, each checked against the scan of the 1903 page: page 832 ("sameIthpalp." to "same. Ithpalp.") and page 1067 ("indulgenceindelicacies" to "indulgence in delicacies").
+
+Other suspected typos are listed for review first and corrected only once approved.
 
 ## What's in the repository
 

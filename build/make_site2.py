@@ -87,9 +87,32 @@ def fix_special(pid, h):
         h = h.replace('<i class="bn">נִסְתַּר.</i> <span class="bf">הִסְתַּתֵּר</span>', '<span class="bf">נִסְתַּר</span>, <i class="bn">Hithpa.</i> <span class="bf">הִסְתַּתֵּר</span>')
     # corrections checked against the 1903 printing, one record per change (build/text_fixes.json)
     for fx in TEXT_FIXES.get(pid, []):
+        if fx.get("kind") == "space":
+            h = insert_space(h, fx["before"], fx["after"], pid)
+            continue
         assert h.count(fx["old"]) == 1, (pid, fx["old"])
         h = h.replace(fx["old"], fx["new"])
     return h
+
+
+def insert_space(h, before, after, pid):
+    """put a space between `before` and `after` (plain text, which must occur once on the page), wherever the
+    markup falls between them"""
+    import html as _H
+    plain, ends = [], []           # plain text, and for each plain character the index in h just after it
+    for m in re.finditer(r"<[^>]+>|&[#\w]+;|[^<&]+|&", h):
+        tok = m.group(0)
+        if tok.startswith("<"): continue
+        if tok.startswith("&") and len(tok) > 1:
+            plain.append(_H.unescape(tok)); ends.append(m.end()); continue
+        for k, ch in enumerate(tok):
+            plain.append(ch); ends.append(m.start() + k + 1)
+    text = "".join(plain).replace("\u0307", "\u05C4")
+    key = (before + after).replace("\u0307", "\u05C4")
+    assert text.count(key) == 1, (pid, before, after, text.count(key))
+    j = text.index(key) + len(before)
+    at = ends[j - 1]               # right after the last character before the gap, so the space stays outside the next link
+    return h[:at] + " " + h[at:]
 
 HEB_PAREN = re.compile(r'<span class="h">([^<]*)</span>(\s*[(\[]\s*)<span class="h">([^<]*)</span>(\s*[)\]])')
 HEB_AFTER = re.compile(r'([)\]])</span>(\s+)<span class="h">')
