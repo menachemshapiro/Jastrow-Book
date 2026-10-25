@@ -8859,5 +8859,131 @@
   "old": "a. e.—2) <a class=\"x\" href=\"#D00633\">same</a>.</span>",
   "new": "a. e.—2)</span>",
   "why": "The digital text has an extra “same.” after “2)” (“—2) same. to argue”); the 1903 printing reads “—2) to argue, dispute, have a law-suit with” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 281,
+  "entry": "D00160",
+  "headword": "דַּהֲנוּנִיתָא",
+  "kind": "page-edge",
+  "old": "<i>a species of dates of </i></span></span></span></p></div>",
+  "new": "<i>a species of dates of strong</i></span></span></span></p></div>",
+  "why": "The 1903 printing ends page 281 with “strong” and begins page 282 with “perfume”. In the digital text the last word of page 281 had moved to page 282 and run into the next word (“strongperfume”). Here it is put back at the end of page 281. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 282,
+  "entry": "D00160",
+  "headword": "דַּהֲנוּנִיתָא",
+  "kind": "page-edge",
+  "old": "<i>strongperfume</i>",
+  "new": "<i>perfume</i>",
+  "why": "The 1903 printing ends page 281 with “strong” and begins page 282 with “perfume”. In the digital text the last word of page 281 had moved to page 282 and run into the next word (“strongperfume”). Here the space is restored and the moved word removed. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 665,
+  "entry": "K01141",
+  "headword": "כַּרְזִילָא",
+  "kind": "page-edge",
+  "old": "<i>the shepherd’s </i></span></span></span></p></div>",
+  "new": "<i>the shepherd’s assistant</i></span></span></span></p></div>",
+  "why": "The 1903 printing divides “as-sistant” between pages 665 and 666. In the digital text the last word of page 665 had moved to page 666 and run into the next word (“assistantthat”). Here it is put back at the end of page 665. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 666,
+  "entry": "K01141",
+  "headword": "כַּרְזִילָא",
+  "kind": "page-edge",
+  "old": "<i>assistantthat gathers",
+  "new": "<i>that gathers",
+  "why": "The 1903 printing divides “as-sistant” between pages 665 and 666. In the digital text the last word of page 665 had moved to page 666 and run into the next word (“assistantthat”). Here the space is restored and the moved word removed. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1064,
+  "entry": "P00477",
+  "headword": "עַטַר II",
+  "kind": "page-edge",
+  "old": "<i>to be gone; </i></span></span></span></p></div>",
+  "new": "<i>to be gone; to</i></span></span></span></p></div>",
+  "why": "The 1903 printing ends page 1064 with “to” and begins page 1065 with “cease”. In the digital text the last word of page 1064 had moved to page 1065 and run into the next word (“tocease”). Here it is put back at the end of page 1064. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1065,
+  "entry": "P00477",
+  "headword": "עַטַר II",
+  "kind": "page-edge",
+  "old": "<i>tocease entirely",
+  "new": "<i>cease entirely",
+  "why": "The 1903 printing ends page 1064 with “to” and begins page 1065 with “cease”. In the digital text the last word of page 1064 had moved to page 1065 and run into the next word (“tocease”). Here the space is restored and the moved word removed. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1423,
+  "entry": "S02125",
+  "headword": "קִרְסֵם",
+  "kind": "page-edge",
+  "old": "[Maim. <i>cut the </i></span></span></span></p></div>",
+  "new": "[Maim. <i>cut the ears</i></span></span></span></p></div>",
+  "why": "The 1903 printing ends page 1423 with “ears” and begins page 1424 with “off”. In the digital text the last word of page 1423 had moved to page 1424 and run into the next word (“earsoff”). Here it is put back at the end of page 1423. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1424,
+  "entry": "S02125",
+  "headword": "קִרְסֵם",
+  "kind": "page-edge",
+  "old": "<i>earsoff</i>",
+  "new": "<i>off</i>",
+  "why": "The 1903 printing ends page 1423 with “ears” and begins page 1424 with “off”. In the digital text the last word of page 1423 had moved to page 1424 and run into the next word (“earsoff”). Here the space is restored and the moved word removed. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1020,
+  "entry": "O01493",
+  "headword": "סְקַף I",
+  "kind": "page-edge",
+  "old": "סְקַף</span> <span class=\"hn\">I</span> <span class=\"lk\">ch.</span> </p></div>",
+  "new": "סְקַף</span> <span class=\"hn\">I</span> <span class=\"lk\">ch.</span> <span class=\"lr\">same</span></p></div>",
+  "why": "The 1903 printing ends page 1020 with “ch. same” and begins page 1021 with the Pa.; in the digital text “same” had moved to page 1021, where it ran into the Pa. (“samePa.”). Here it is put back at the end of page 1020. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1021,
+  "entry": "O01493",
+  "headword": "סְקַף I",
+  "kind": "page-edge",
+  "old": "<p class=\"ep\" data-c=\"1\"><span class=\"lr\">same</span><span class=\"ss\"></span>",
+  "new": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"></span>",
+  "why": "The 1903 printing ends page 1020 with “ch. same” and begins page 1021 with the Pa.; in the digital text “same” had moved to page 1021, where it ran into the Pa. (“samePa.”). Here it is removed from the top of page 1021. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1427,
+  "entry": "S02196",
+  "headword": "קְרַר ²",
+  "kind": "page-edge",
+  "old": "קְרַר, קוֹר</span> <span class=\"lk\">ch.</span> </p></div>",
+  "new": "קְרַר, קוֹר</span> <span class=\"lk\">ch.</span> <span class=\"lr\">same</span></p></div>",
+  "why": "The 1903 printing ends page 1427 with “ch. same” and begins page 1428 with the Pa.; in the digital text “same” had moved to page 1428, where it ran into the Pa. (“samePa.”). Here it is put back at the end of page 1427. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1428,
+  "entry": "S02196",
+  "headword": "קְרַר ²",
+  "kind": "page-edge",
+  "old": "<p class=\"ep\" data-c=\"1\"><span class=\"lr\">same</span><span class=\"ss\"></span>",
+  "new": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"></span>",
+  "why": "The 1903 printing ends page 1427 with “ch. same” and begins page 1428 with the Pa.; in the digital text “same” had moved to page 1428, where it ran into the Pa. (“samePa.”). Here it is removed from the top of page 1428. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1479,
+  "entry": "T00767",
+  "headword": "רְכַךְ",
+  "kind": "page-edge",
+  "old": "רְכַךְ</span> <span class=\"lk\">ch.</span> </p></div>",
+  "new": "רְכַךְ</span> <span class=\"lk\">ch.</span> <span class=\"lr\">same</span></p></div>",
+  "why": "The 1903 printing ends page 1479 with “ch. same” and begins page 1480 with the Pa.; in the digital text “same” had moved to page 1480, where it ran into the Pa. (“samePa.”). Here it is put back at the end of page 1479. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1480,
+  "entry": "T00767",
+  "headword": "רְכַךְ",
+  "kind": "page-edge",
+  "old": "<p class=\"ep\" data-c=\"1\"><span class=\"lr\">same</span><span class=\"ss\"></span>",
+  "new": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"></span>",
+  "why": "The 1903 printing ends page 1479 with “ch. same” and begins page 1480 with the Pa.; in the digital text “same” had moved to page 1480, where it ran into the Pa. (“samePa.”). Here it is removed from the top of page 1480. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
  }
 ]
