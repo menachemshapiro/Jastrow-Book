@@ -53,7 +53,7 @@ Every correction is listed in [`build/text_fixes.json`](build/text_fixes.json), 
 So far the corrections are:
 - **Words run together (913 places).** A missing space after a period ("ch. same.Targ.", 608 places), a word run into the abbreviation after it ("ch. sameTarg.", 268), a Hebrew word run into the binyan after it ("v. אָבַרPi.", 30), and a homonym's number run into the next word ("כְּרוּב ITarg.", 7). The 1903 printing spaces its words normally, so we take these to be typos in the digital text and restore the space. They were found by searching the text, not checked one by one against the scans.
 - **Misprints in the 1903 book (12 Talmud references).** These are mistakes in the original printing, not in the digital text. Each one cites a daf or folio that does not exist, such as "Sabb. 182ᵃ" when Shabbat ends at 157ᵇ, or names the wrong tractate of the Yerushalmi. We searched the Talmud for the passage Jastrow quotes and found it on the right page ("Sabb. 152ᵃ"), and the scan of the 1903 page shows the same wrong reference. Each record gives the quotation and where it was found.
-- **Corrections checked one by one against the scans (67 places).** Each was found while proofreading the site against the 1903 printing and approved before it was made:
+- **Corrections checked one by one against the scans (90 places).** Each was found while proofreading the site against the 1903 printing and approved before it was made:
   - "Gem." (G'mara) restored in 22 places where the digital text has "Ib." Sefaria's 2018 text still has "Gem." in each of them.
   - A citation given twice, the first copy cut short ("Sabb. 11Sabb. 110ᵃ"), in 8 places.
   - Text left out of the digital text, restored from the scan, in 8 places. Examples are the Pa. paragraph on page 40, sense 2) of חֲנַמְאֵל on page 484, and "—2) fem. (sub. מלכות)" on page 569.
@@ -61,6 +61,8 @@ So far the corrections are:
   - Two words run together ("onhis"), in 5 places.
   - Misread words: "month" for "mouth", "forth with" for "forthwith" and "welt" for "well".
   - An extra "same." after a sense number, in 2 places.
+  - "constr." restored in 9 lists of forms where the digital text dropped it ("חֲפוּרְתָּא f., constr. חֲפוּרַת").
+  - 14 more from proofreading notes: two whole senses (pp. 35, 136), "roof;" (p. 14), "(and Hof.)" (p. 40), "also" (p. 462), "sinner, v. חָטְיָא" (p. 449), three sense numbers, and others.
   - Page 832 ("sameIthpalp." to "same. Ithpalp.") and page 1067 ("indulgenceindelicacies" to "indulgence in delicacies").
 
 Other suspected typos are listed for review first and corrected only once approved.
