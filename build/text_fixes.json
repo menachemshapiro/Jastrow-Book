@@ -8985,5 +8985,131 @@
   "old": "<p class=\"ep\" data-c=\"1\"><span class=\"lr\">same</span><span class=\"ss\"></span>",
   "new": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"></span>",
   "why": "The 1903 printing ends page 1479 with “ch. same” and begins page 1480 with the Pa.; in the digital text “same” had moved to page 1480, where it ran into the Pa. (“samePa.”). Here it is removed from the top of page 1480. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 14,
+  "entry": "A00340",
+  "headword": "אִגָר",
+  "kind": "note",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">אִגָר, אִגָרָא, אִגְּרָא</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\"><i>letter</i>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">אִגָר, אִגָרָא</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\"><i>roof</i>;</span></span></span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">אִגְּרָא</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\"><i>letter</i>",
+  "why": "The digital text runs two entries together and leaves out “roof;”. The 1903 printing reads “אִגָר, אִגָרָא roof; אִגְּרָא letter, v. אי׳.” (checked against the scan)."
+ },
+ {
+  "page": 35,
+  "entry": "A00927",
+  "headword": "אוֹשַׁעְיָא",
+  "kind": "note",
+  "old": "redactor of Tosefta. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Yevamot.18b.7\">Yeb. 18<sup>b</sup></a>; a. fr.</span></span>",
+  "new": "redactor of Tosefta. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Yevamot.18b.7\">Yeb. 18<sup>b</sup></a>; a. fr.</span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\">one mentioned as a wool-washer. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Jerusalem_Talmud_Bava_Kamma.10\">Y. B. Kam. end</a>.</span></span>",
+  "why": "Sense 2) is missing from the digital text. The 1903 printing reads “—2) one mentioned as a wool-washer. Y. B. Kam. end.” (checked against the scan)."
+ },
+ {
+  "page": 37,
+  "entry": "A00971",
+  "headword": "*אַזֵּיק",
+  "kind": "note",
+  "old": "עזק)<i>to tie up</i>",
+  "new": "עזק) <i>to tie up</i>",
+  "why": "A missing space after “)” (“עזק)to tie up”). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 40,
+  "entry": "A01044",
+  "headword": "אָחַר",
+  "kind": "note",
+  "old": "<i class=\"bn\">Pu.</i> <span class=\"bf\">אוּחָר, הוּאֲחָר</span>",
+  "new": "<i class=\"bn\">Pu.</i> (and <i class=\"bn\">Hof.</i>) <span class=\"bf\">אוּחָר, הוּאֲחָר</span>",
+  "why": "The words “(and Hof.)” are missing from the digital text. The 1903 printing reads “Pu. (and Hof.) אוּחַר, הוּאֲחַר to be postponed” (checked against the scan)."
+ },
+ {
+  "page": 136,
+  "entry": "B00052",
+  "headword": "בָּבָא II",
+  "kind": "note",
+  "old": "(Cmp. Jos. Ant. XV, 7, 10.)</span></span>",
+  "new": "(Cmp. Jos. Ant. XV, 7, 10.)</span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\">B. father of R. Judah. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Mishnah_Eduyot.6.1\">Eduy. VI, 1</a>; a. fr.</span></span>",
+  "why": "Sense 2) is missing from the digital text. The 1903 printing reads “—2) B. father of R. Judah. Eduy. VI, 1; a. fr.” (checked against the scan)."
+ },
+ {
+  "page": 180,
+  "entry": "B01034",
+  "headword": "בְּעַט",
+  "kind": "note",
+  "old": "rejected his </span></span></span></p></div>",
+  "new": "rejected his authority.</span></span></span></p></div>",
+  "why": "The 1903 printing ends page 180 with “rejected his authority.”; in the digital text “authority.” had moved to the top of page 181. It is put back at the end of page 180 (checked against the scan)."
+ },
+ {
+  "page": 181,
+  "entry": "B01034",
+  "headword": "בְּעַט",
+  "kind": "note",
+  "old": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">authority.</span></span></span>",
+  "new": "<p class=\"ep\" data-c=\"1\">",
+  "why": "The word “authority.” belongs at the end of page 180 (see the record for page 180); it is removed from the top of page 181."
+ },
+ {
+  "page": 222,
+  "entry": "C00404",
+  "headword": "גּוֹלָן",
+  "kind": "note",
+  "old": "Targum_Jonathan_on_Joshua.20.8\">Targ. Josh. XX, 8</a>",
+  "new": "Targum_Jonathan_on_Joshua.20.8\">Targ. Jos. XX, 8</a>",
+  "why": "The 1903 printing has “Targ. Jos. XX, 8” (Joshua), where the digital text has “Josh.” (checked against the scan). We follow the book."
+ },
+ {
+  "page": 353,
+  "entry": "E00563",
+  "headword": "הֲלָךְ",
+  "kind": "note",
+  "old": "name of <i>atax</i>",
+  "new": "name of <i>a tax</i>",
+  "why": "Two words run together (“atax”); the 1903 printing has “a tax” (checked against the scan)."
+ },
+ {
+  "page": 449,
+  "entry": "H00630",
+  "headword": "חָטְיָיא",
+  "kind": "note",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חָטְיָיא, חַטַּיָּיא</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\">, v. חַטָּאָח</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חָטְיָיא</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\"> <i>sinner</i>, v. <a class=\"x\" href=\"#H00621\">חָטְיָא</a>.—</span></span></span><span class=\"hw\" lang=\"he\" dir=\"rtl\">חַטַּיָּיא</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\">, v. חַטָּאָח</span>",
+  "why": "The digital text runs two entries together and leaves out “sinner, v. חָטְיָא”. The 1903 printing reads “חָטְיָיא sinner, v. חָטְיָא.—חַטַּיָּיא, v. …” (checked against the scan)."
+ },
+ {
+  "page": 462,
+  "entry": "H00940",
+  "headword": "חֲכַם",
+  "kind": "note",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חֲכַם, חֲכִים, חַכִּים</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חֲכַם, חֲכִים,</span> <span class=\"lk\">also</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">חַכִּים</span>",
+  "why": "The word “also” is missing from the digital text. The 1903 printing reads “חֲכַם, חֲכִים, also חַכִּים (adj. with verbal inflection)” (checked against the scan)."
+ },
+ {
+  "page": 205,
+  "entry": "C00062",
+  "headword": "גְּבוּרָה",
+  "kind": "note",
+  "old": "a. fr.— הַגְּ׳",
+  "new": "a. fr.—2) הַגְּ׳",
+  "why": "The sense number “2)” is missing from the digital text; the 1903 printing has “a. fr.—2) הַגְּ׳ Divine Majesty, the Lord” (checked against the scan)."
+ },
+ {
+  "page": 388,
+  "entry": "G00217",
+  "headword": "זוּעַ",
+  "kind": "note",
+  "old": "<i>Hif.</i></span></span><span class=\"s\"> <span class=\"d\"><i>to move, shake, tremble</i>",
+  "new": "<i>Hif.</i></span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\"><i>to move, shake, tremble</i>",
+  "why": "The sense number “2)” is missing from the digital text; the 1903 printing has “1) to drip, v. Hif.—2) to move, shake, tremble” (checked against the scan)."
+ },
+ {
+  "page": 410,
+  "entry": "G00652",
+  "headword": "זָקַק",
+  "kind": "note",
+  "old": "v. <i>Pi.</i></span></span><span class=\"s\"> <span class=\"d\"><a class=\"x\" href=\"#R00797\">צָרַף</a>)",
+  "new": "v. <i>Pi.</i></span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\">(cmp. <a class=\"x\" href=\"#R00797\">צָרַף</a>)",
+  "why": "The beginning of sense 2) is missing from the digital text, which leaves an unmatched “)”. The 1903 printing reads “v. Pi.—2) (cmp. צָרַף) to rivet, forge” (checked against the scan)."
  }
 ]
