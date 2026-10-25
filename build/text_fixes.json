@@ -9111,5 +9111,86 @@
   "old": "v. <i>Pi.</i></span></span><span class=\"s\"> <span class=\"d\"><a class=\"x\" href=\"#R00797\">צָרַף</a>)",
   "new": "v. <i>Pi.</i></span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\">(cmp. <a class=\"x\" href=\"#R00797\">צָרַף</a>)",
   "why": "The beginning of sense 2) is missing from the digital text, which leaves an unmatched “)”. The 1903 printing reads “v. Pi.—2) (cmp. צָרַף) to rivet, forge” (checked against the scan)."
+ },
+ {
+  "page": 216,
+  "entry": "C00263",
+  "headword": "גֵּו ²",
+  "kind": "constr",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">גֵּו, גֵּיו, גַּו, גַּוָּא, גּוֹ, גּוֹא</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">גֵּו, גֵּיו, גַּו, גַּוָּא,</span> <span class=\"lk\">constr.</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">גּוֹ, גּוֹא</span>",
+  "why": "The 1903 printing reads “גֵּו, גֵּיו, גַּו, גַּוָּא, constr. גּוֹ, גּוֹא”. The digital text dropped “constr.” (the construct form) from the list of forms; checked against the scan."
+ },
+ {
+  "page": 255,
+  "entry": "C01065",
+  "headword": "גָּמָר",
+  "kind": "constr",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">גָּמָר, גְּמַר</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">גָּמָר,</span> <span class=\"lk\">constr.</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">גְּמַר</span>",
+  "why": "The 1903 printing reads “גָּמָר, constr. גְּמַר”. The digital text dropped “constr.” (the construct form) from the list of forms; checked against the scan."
+ },
+ {
+  "page": 258,
+  "entry": "C01123",
+  "headword": "גִּנְזָא",
+  "kind": "constr",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">גִּנְזָא, גְּנִיז, גְּנַז</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">גִּנְזָא,</span> <span class=\"lk\">constr.</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">גְּנִיז, גְּנַז</span>",
+  "why": "The 1903 printing reads “גִּנְזָא, constr. גְּנִיז, גְּנַז”. The digital text dropped “constr.” (the construct form) from the list of forms; checked against the scan."
+ },
+ {
+  "page": 428,
+  "entry": "H00229",
+  "headword": "חֵוָא",
+  "kind": "constr",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חֵוָא, חֵוַת</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חֵוָא,</span> <span class=\"lk\">constr.</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">חֵוַת</span>",
+  "why": "The 1903 printing reads “חֵוָא, constr. חֵוַת”. The digital text dropped “constr.” (the construct form) from the list of forms; checked against the scan."
+ },
+ {
+  "page": 450,
+  "entry": "H00653",
+  "headword": "חִיבּוּבָא",
+  "kind": "constr",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חִיבּוּבָא, חִיבּוּב, חִבּ'</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חִיבּוּבָא,</span> <span class=\"lk\">constr.</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">חִיבּוּב, חִבּ'</span>",
+  "why": "The 1903 printing reads “חִיבּוּבָא, constr. חִיבּוּב, חִבּ'”. The digital text dropped “constr.” (the construct form) from the list of forms; checked against the scan."
+ },
+ {
+  "page": 466,
+  "entry": "H01010",
+  "headword": "*חֲלוּקָה",
+  "kind": "constr",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">*, *חֲלוּקָה, חֲלוּקַת</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">*חֲלוּקָה</span><span class=\"pos\"> f.</span>, <span class=\"lk\">constr.</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">חֲלוּקַת</span>",
+  "why": "The 1903 printing reads “*חֲלוּקָה f., constr. חֲלוּקַת”; the digital text also had a stray “*, ” in front. The digital text dropped “constr.” (the construct form) from the list of forms; checked against the scan."
+ },
+ {
+  "page": 490,
+  "entry": "H01413",
+  "headword": "חָסֵר",
+  "kind": "constr",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חָסֵר, חֲסַר</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חָסֵר,</span> <span class=\"lk\">constr.</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">חֲסַר</span>",
+  "why": "The 1903 printing reads “חָסֵר, constr. חֲסַר”. The digital text dropped “constr.” (the construct form) from the list of forms; checked against the scan."
+ },
+ {
+  "page": 490,
+  "entry": "H01425",
+  "headword": "חִפּוּיָא",
+  "kind": "constr",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חִפּוּיָא, חִפּוּי, חִי'</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חִפּוּיָא</span> <span class=\"lk\">ch.</span>, <span class=\"lk\">constr.</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">חִפּוּי, חִי'</span>",
+  "why": "The 1903 printing reads “חִפּוּיָא ch., constr. חִפּוּי, חִי'”. The digital text dropped “constr.” (the construct form) from the list of forms; checked against the scan."
+ },
+ {
+  "page": 491,
+  "entry": "H01434",
+  "headword": "חֲפוּרְתָּא",
+  "kind": "constr",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חֲפוּרְתָּא, חֲפוּרַת</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חֲפוּרְתָּא</span><span class=\"pos\"> f.</span>, <span class=\"lk\">constr.</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">חֲפוּרַת</span>",
+  "why": "The 1903 printing reads “חֲפוּרְתָּא f., constr. חֲפוּרַת”. The digital text dropped “constr.” (the construct form) from the list of forms; checked against the scan."
  }
 ]
