@@ -212,10 +212,32 @@ for i, p in enumerate(pages):
     meta.append([p["id"], {"front": "f", "body": "b", "back": "x"}[p["section"]], p["first"], p["last"], 1 if p["estimated"] else 0, p["kind"], BREAKS.get(p["id"]) if BREAKS.get(p["id"]) is not None else -1])
     if p["id"] in MIDB: meta[-1].append(MIDB[p["id"]])      # the column break below a mid-page letter heading
 
+HEB_WORD = re.compile("\\*?[\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05F4'\"\u2019]*")
+
+
+def ltr_forms(h):
+    """A list of Hebrew forms (headwords, binyan forms) runs left to right in the 1903 printing, the first form on
+    the left: "אוּחַר, הוּאֲחַר". Set as one right-to-left run, the browser put the first form on the right and a
+    headword's trailing comma in front of it. Each form is now isolated on its own, in a left-to-right list."""
+    def words(c, cls):
+        return HEB_WORD.sub(lambda m: '<span%s dir="rtl">%s</span>' % (cls, m.group(0)), c)
+    def hw(m):
+        c = m.group(1)
+        if len(HEB_WORD.findall(c)) < 2 and not re.search(r"[^\u0591-\u05F4*'\"\u2019\s]", c): return m.group(0)
+        return '<span class="hw" lang="he" dir="ltr">%s</span>' % words(c, "")
+    h = re.sub(r'<span class="hw" lang="he" dir="rtl">([^<]*)</span>', hw, h)
+    def bf(m):
+        c = m.group(1)
+        if len(HEB_WORD.findall(c)) < 2 and "," not in c: return m.group(0)
+        return '<span class="bf">%s' % words(c, ' class="h"')       # the bf span's own closing tag follows
+    h = re.sub(r'<span class="bf"><span class="h">([^<]*)</span>', bf, h)
+    return h
+
+
 for c in range(0, len(pages), CHUNK):
     chunk = []
     for p in pages[c:c + CHUNK]:
-        h = transform(p["html"])
+        h = ltr_forms(transform(p["html"]))
         if p["id"] == "1706":     # the Addenda's title and the line under it run across the top of both columns, as in the book
             h = h.replace('<p class="fm">Addenda et Corrigenda.</p><p class="fm">(Articles', '<p class="fm hd">Addenda et Corrigenda.</p><p class="fm hd">(Articles', 1)
             assert 'class="fm hd"' in h
