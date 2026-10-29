@@ -163,6 +163,27 @@ def main():
         elif pid in errors:
             findings.append(CK.finding(pid, "layout", 1, None, "", "the scan could not be processed: %s" % errors[pid]))
         findings += CK.site_checks(book, pid)
+    # the scans against each other: a page whose image or text block is a different size from the rest of the run
+    sizes = {pid: pages[pid]["scan"]["layout"] for pid in run if pages[pid].get("scan")}
+    for pid, l in sizes.items():
+        if not l.get("size"):              # pages OCR'd before the size was recorded
+            from PIL import Image
+            l["size"] = list(Image.open(os.path.join(args.out, "pages", "p%04d" % int(pid), "page.png")).size)
+    if len(sizes) >= 3:
+        import statistics as stt
+        mw = stt.median(l["size"][0] for l in sizes.values() if l.get("size"))
+        mh = stt.median(l["size"][1] for l in sizes.values() if l.get("size"))
+        bw = stt.median(l["body"][2] - l["body"][0] for l in sizes.values())
+        for pid, l in sizes.items():
+            notes = []
+            if l.get("size") and (abs(l["size"][0] - mw) > 0.08 * mw or abs(l["size"][1] - mh) > 0.08 * mh):
+                notes.append("the scan image is %dx%d, the other pages about %dx%d" % (l["size"][0], l["size"][1], mw, mh))
+            if (l["body"][2] - l["body"][0]) < 0.92 * bw:
+                notes.append("the text block is %d%% as wide as on the other pages" % round(100 * (l["body"][2] - l["body"][0]) / bw))
+            if notes:
+                findings.append(CK.finding(pid, "scan_incomplete", 1, None, "", "; ".join(notes) + ": a cropped or partial scan?",
+                                           boxes=[l["body"]]))
+                pages[pid].setdefault("stats", {})["scan_problem"] = True
     # 3. Bavli references
     tstats = Counter()
     if not args.no_talmud:

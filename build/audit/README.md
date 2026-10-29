@@ -47,6 +47,14 @@ Severity: 1 = likely an error, 2 = check, 3 = minor or uncertain.
    - Hebrew: the same words in the same left-to-right order on each line as the site shows them; headwords letter by letter;
    - entries: the site's entries are paired, in order, with the lines the book starts at the column's edge. One left over on either side is a missing entry, or two entries run into one;
    - the running head: page number and guide words. A wrong page number means the PDF page mapping is off.
+   - **is the scan page whole?** (`scan_incomplete`, listed first in the report and in `summary.txt`). The page is flagged when:
+     - the text runs to the image's edge (cropped);
+     - there is a blank stretch of several lines inside a column;
+     - a run of 15 or more of the site's words is not in the scan at all (the message says whether at the top, middle or foot);
+     - under 75% of the site's words are found;
+     - the image or text block is a different size from the other pages in the run.
+
+     A column that ends lines above the other is reported as a "check", because the book balances its columns. Findings on a flagged page may come from the scan, not the site.
 4. **Site-only checks** (`checks.py`): unbalanced brackets, sense numbers out of sequence, "un- worthy" hyphens, stray characters, repeated phrases, headword punctuation and display, alphabetical order.
 5. **Bavli** (`checks.py`, using `talmud_index.citations` and `talsearch`). Each citation is checked against the tractate's range. Then the Hebrew that follows it is searched on the cited daf, its neighbouring amudim, the rest of the tractate, and the whole Bavli, with abbreviations expanded (rule 2.5).
 

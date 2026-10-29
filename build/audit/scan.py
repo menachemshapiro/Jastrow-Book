@@ -230,7 +230,7 @@ def layout(img):
             for c in sg["cols"]:
                 if c["box"][2] - c["box"][0] > 0.6 * W_: c["box"][0] = min(c["box"][0], c["box"][2] - W_)
     return {"thr": int(thr), "body": [x0, y0, x1, y1], "lineh": lineh, "medgap": medgap, "gutter": [g0, g1],
-            "rule": bool(rule), "header": header, "footer": footer, "bands": heads, "segments": segs}
+            "rule": bool(rule), "header": header, "footer": footer, "bands": heads, "segments": segs, "size": [W, H]}
 
 
 def tesseract(png, lang, psm, dpi):

@@ -36,7 +36,7 @@ TYPES = {
     "hebrew_extra_in_book": "Hebrew missing on the site", "hebrew_missing_in_site": "Hebrew missing on the site",
     "brackets": "Unbalanced brackets", "sense_numbers": "Sense numbers out of sequence",
     "stray_char": "Stray character", "headword_text": "Headword text", "headword_display": "Headword display",
-    "alphabetical": "Alphabetical order", "talmud_range": "Bavli folio out of range",
+    "alphabetical": "Alphabetical order", "scan_incomplete": "Scan page incomplete", "talmud_range": "Bavli folio out of range",
     "talmud_near": "Bavli quote on next amud", "talmud_elsewhere": "Bavli quote elsewhere in tractate",
     "talmud_other_tractate": "Bavli quote in another tractate", "talmud_not_found": "Bavli quote not found",
 }
@@ -191,6 +191,11 @@ def write(out, findings, pages, entries, book, run):
     h.append('<div class="mut">Pages %s · %d findings (%s) · <a href="entries.html">every entry, scan beside text</a></div>' %
              (esc(", ".join(run) if len(run) < 12 else "%s–%s (%d pages)" % (run[0], run[-1], len(run))), len(findings),
               ", ".join("%d %s" % (sevc[k], SEV[k]) for k in sorted(sevc))))
+    bad = [pid for pid in run if pages.get(pid, {}).get("stats", {}).get("scan_problem")]
+    if bad:
+        h.append('<h2 class="s1">Scan pages that look incomplete</h2><div>%s. Check these scans first: findings on '
+                 'them may come from the scan, not the site. Pages: %s</div>' % (len(bad), ", ".join(
+                     '<a href="#p%s">%s</a>' % (p, p) for p in bad)))
     h.append("<h2>By kind</h2><table><tr><th>Kind</th><th>Code</th><th class=n>Count</th></tr>")
     for k, v in sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0])):
         h.append('<tr><td>%s</td><td class="mut">%s</td><td class="n">%d</td></tr>' % (esc(TYPES.get(k, k)), k, v))
@@ -255,6 +260,7 @@ x.style.display=(e.target.checked&&x.dataset.n==='0')?'none':''})})</script></bo
     lines = ["Jastrow audit: pages %s" % (", ".join(run) if len(run) < 12 else "%s-%s (%d)" % (run[0], run[-1], len(run))),
              "findings: %d (%s)" % (len(findings), ", ".join("%d %s" % (sevc[k], SEV[k]) for k in sorted(sevc))),
              "by kind: " + ", ".join("%s %d" % (k, v) for k, v in sorted(cnt.items(), key=lambda kv: -kv[1])),
+             "scan pages that look incomplete: " + (", ".join(pid for pid in run if pages.get(pid, {}).get("stats", {}).get("scan_problem")) or "none"),
              "per page (matched %, entries site/book, findings):"]
     for pid in run:
         st = pages.get(pid, {}).get("stats", {})

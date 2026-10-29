@@ -208,6 +208,7 @@ class PageCompare:
         self.check_pairs()
         self.check_breaks()
         self.check_header()
+        self.check_scan()
         self.map_entries()
         self.check_structure()
         return self.f
@@ -487,6 +488,98 @@ class PageCompare:
                          % (P.words_at(site), P.words_at(off), len(between), "s" if len(between) > 1 else "",
                             "earlier" if off < site else "later") + (" — the site's break falls inside a word" if inside else ""),
                          boxes=[R[0]["box"]], lines=[R[0]["line"]], words=len(between), **info)
+
+    # ---------- is the scan page whole? ----------
+    def scan_problem(self, note, sev=1, **kw):
+        self.add("scan_incomplete", sev, [], [], note, **kw)
+        if sev == 1: self.stats["scan_problem"] = True
+
+    def check_scan(self):
+        """the scan page itself: cut off at an edge, a column shorter than the other, a blank band in a column, or
+        a stretch of the site's text that the scan does not have at all (a missing piece of the page)"""
+        lay, P = self.s["layout"], self.p
+        lh = self.lineh
+        W, H = lay.get("size") or (None, None)
+        if W is None:
+            try:
+                from PIL import Image
+                W, H = Image.open(os.path.join(self.wd, "page.png")).size
+            except Exception:
+                W = H = None
+        x0, y0, x1, y1 = lay["body"]
+        # 1. text running to the edge of the image: the scan is cropped
+        if W:
+            edges = [n for n, near in (("left", x0 < 8), ("top", y0 < 8), ("right", x1 > W - 8), ("bottom", y1 > H - 8)) if near]
+            if edges:
+                self.scan_problem("the text runs to the %s edge of the scan: the page may be cut off there" %
+                                  " and ".join(edges), boxes=[[x0, y0, x1, y1]])
+        # 2. the two columns of a segment should start and end on the same line (except at the foot of a page whose
+        #    text ends early, where the book still balances them)
+        bylines = {}
+        for ln in self.lines:
+            bylines.setdefault((ln["seg"], ln["col"]), []).append(ln)
+        for si, seg in enumerate(lay["segments"]):
+            cols = {c["side"]: c for c in seg["cols"]}
+            if len(cols) < 2:
+                self.scan_problem("segment %d of the page has only its %s column" % (si + 1, "left" if "L" in cols else "right"),
+                                  boxes=[c["box"] for c in seg["cols"]])
+                continue
+            L, R = cols["L"]["box"], cols["R"]["box"]
+            for what, a, b in (("top", L[1], R[1]), ("foot", L[3], R[3])):
+                if abs(a - b) > 2.5 * lh:
+                    short = "left" if (a > b if what == "top" else a < b) else "right"
+                    self.scan_problem("the %s column %s %d lines %s the other's (the book balances its columns): "
+                                      "part of it may be missing from the scan"
+                                      % (short, "starts" if what == "top" else "ends", round(abs(a - b) / (lh * 1.25)),
+                                         "below" if what == "top" else "above"), sev=2,
+                                      boxes=[L, R], lines=[(ls[0] if what == "top" else ls[-1])["i"]
+                                                           for ls in (bylines.get((si, "L")), bylines.get((si, "R"))) if ls])
+        # 3. a blank band inside a column (ink rows), taller than a few lines
+        try:
+            import numpy as np
+            from PIL import Image
+            a = np.asarray(Image.open(os.path.join(self.wd, "page.png"))) < lay.get("thr", 128)
+            for si, seg in enumerate(lay["segments"]):
+                for c in seg["cols"]:
+                    bx = c["box"]
+                    rows = a[bx[1]:bx[3], bx[0]:bx[2]].sum(1) > 2
+                    k, start = 0, None
+                    for yy, v in enumerate(list(rows) + [True]):
+                        if not v and start is None: start = yy
+                        if v and start is not None:
+                            if yy - start > 3 * lh:
+                                self.scan_problem("a blank stretch of about %d lines in the %s column: text missing "
+                                                  "from the scan?" % (round((yy - start) / (lh * 1.25)),
+                                                                      {"L": "left", "R": "right"}[c["side"]]),
+                                                  boxes=[[bx[0], bx[1] + start, bx[2], bx[1] + yy]])
+                            start = None
+        except Exception:
+            pass
+        # 4. a long run of the site's text with nothing matched in the scan (Latin words of 3+ letters)
+        run, runs = [], []
+        for t in self.S:
+            if t["heb"] or len(t["key"]) < 3: continue
+            if t["i"] in self.s2k:
+                if len(run) >= 15: runs.append(run)
+                run = []
+            else:
+                run.append(t)
+        if len(run) >= 15: runs.append(run)
+        for r in runs:
+            where = "at the top of the page" if r[0]["i"] <= self.S[0]["i"] + 3 else \
+                    ("at the foot of the page" if r[-1]["i"] >= self.S[-1]["i"] - 3 else "in the middle of the page")
+            self.scan_problem("%d words of the site's text, %s, are not in the scan at all: is part of the scan page "
+                              "missing? (from “%s” to “%s”)" % (len(r), where, P.words_at(r[0]["off"], 5),
+                                                                P.words_at(r[-1]["end"], 5, before=True)),
+                              off=r[0]["off"], eid=r[0]["eid"])
+        # 5. how much of the site's page the scan covers
+        lat = [t for t in self.S if not t["heb"] and len(t["key"]) >= 3]
+        if lat:
+            cov = sum(1 for t in lat if t["i"] in self.s2k) / len(lat)
+            self.stats["coverage"] = round(cov, 3)
+            if cov < 0.75:
+                self.scan_problem("only %d%% of the site's words were found in the scan: the scan page may be "
+                                  "incomplete, or a different page" % round(100 * cov))
 
     # ---------- running head ----------
     def check_header(self):
