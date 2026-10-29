@@ -62,7 +62,38 @@ VERSE119 = ('<div class="verse" dir="rtl" lang="he"><span>ויאמרו לאמר<
             '<span>ורכבו רמה בים</span><span>עזי וזמרת יה ויהי לי</span><span></span></div>'
             '<p class="ep" data-c="1">Ib. <span class="h">א׳ ע״ג א׳ וכ׳</span> small brick (lath) above small brick and brick above brick; e.g. (Esth. IX, 7 sq.)</p>'
             '<div class="verse v2" dir="rtl" lang="he"><span>פרשנדתא</span><span>ואת</span><span>דלפון.</span><span>ואת</span></div>')
+import difflib as _dl, html as _H
+def _pt(h): return "".join(_H.unescape(x) for x in re.split(r"(<[^>]+>)", h) if not x.startswith("<"))
+BRK = [None]      # the column break of the page being repaired, as an offset into its plain text
+
+
+def _step(old, new):
+    """a repair changed the page from `old` to `new`: move the column break by the same amount. Each repair is one
+    local change, so only the stretch between the common beginning and end of the two texts is compared."""
+    if BRK[0] is None or old == new: return
+    a_, b_ = _pt(old), _pt(new); k = BRK[0]
+    n = min(len(a_), len(b_)); i = 0
+    while i < n and a_[i] == b_[i]: i += 1
+    j = 0
+    while j < n - i and a_[-1 - j] == b_[-1 - j]: j += 1
+    if k < i: return
+    if k > len(a_) - j: BRK[0] = k + len(b_) - len(a_); return
+    i = max(0, i - 40)     # a little context either side, so the comparison aligns as a whole-page one would
+    am, bm = a_[i:len(a_) - j], b_[i:len(b_) - j]
+    ops_ = _dl.SequenceMatcher(None, am, bm, autojunk=False).get_opcodes()
+    k -= i
+    for n_, (t_, i1, i2, j1, j2) in enumerate(ops_):
+        if i1 <= k < i2 or (k == i2 and t_ == "equal"):
+            k2 = j1 + (k - i1) if t_ == "equal" else j1
+            nx = ops_[n_ + 1] if n_ + 1 < len(ops_) else None
+            if t_ == "equal" and k == i2 and nx and nx[0] == "insert" and re.fullmatch(r"[\s.,;:]+", bm[nx[3]:nx[4]]):
+                k2 = nx[4]      # punctuation added at the break stays with the first column
+            BRK[0] = k2 + i; return
+    BRK[0] = len(b_)        # the break was at the very end of the compared stretch
+
+
 def fix_special(pid, h):
+    h0 = h
     h = re.sub(r'<p class="bin"><i class="bn">[^<A-Za-z]*</i> </p>', "", h)
     if pid in BINYAN:
         h, n = BADBN.subn('<i class="bn">%s</i>' % BINYAN[pid], h, count=1)
@@ -86,13 +117,16 @@ def fix_special(pid, h):
         h = h.replace(a, '<div class="e" id="N01268b"><p class="ep"><span class="hw" lang="he" dir="rtl">נרווד</span><span class="s"><span class="d">, ')
     if pid == "1032":
         h = h.replace('<i class="bn">נִסְתַּר.</i> <span class="bf">הִסְתַּתֵּר</span>', '<span class="bf">נִסְתַּר</span>, <i class="bn">Hithpa.</i> <span class="bf">הִסְתַּתֵּר</span>')
+    _step(h0, h)
     # corrections checked against the 1903 printing, one record per change (build/text_fixes.json)
     for fx in TEXT_FIXES.get(pid, []):
+        h0 = h
         if fx.get("kind") == "space":
             h = insert_space(h, fx["before"], fx["after"], pid)
-            continue
-        assert h.count(fx["old"]) == 1, (pid, fx["old"])
-        h = h.replace(fx["old"], fx["new"])
+        else:
+            assert h.count(fx["old"]) == 1, (pid, fx["old"])
+            h = h.replace(fx["old"], fx["new"])
+        _step(h0, h)
     return h
 
 
@@ -117,6 +151,9 @@ def insert_space(h, before, after, pid):
 
 HEB_PAREN = re.compile(r'<span class="h">([^<]*)</span>(\s*[(\[]\s*)<span class="h">([^<]*)</span>(\s*[)\]])')
 HEB_AFTER = re.compile(r'([)\]])</span>(\s+)<span class="h">')
+# a cross-reference link on a Hebrew word inside a quotation ("וכל פ׳ ופ׳ עשרין (העיר) וכ׳") is part of the same
+# right-to-left run; take the linked word, with any parentheses around it, into the phrase
+HEB_LINK = re.compile(r'<span class="h">([^<]*)</span>(\s*[(\[]?\s*)(<a class="x"[^>]*>)<span class="h">([^<]*)</span></a>(\s*[)\]]?)(?:(\s+)<span class="h">([^<]*)</span>)?')
 
 TEXT_FIXES = {}
 _tf = os.path.join(os.path.dirname(os.path.abspath(__file__)), "text_fixes.json")
@@ -148,21 +185,14 @@ for p in pages:
         p["kind"] = "idx" if int(p["id"]) >= 1722 else "back"
     elif p.get("letter"):
         p["kind"] = "letter"
-    _old = p["html"]
+    BRK[0] = BREAKS.get(p["id"])
     p["html"] = fix_special(p["id"], p["html"])
-    if p["html"] != _old and BREAKS.get(p["id"]) is not None:
-        # a repair changed the text: move the column break by the same amount
-        import difflib as _dl, html as _H
-        def _pt(h): return "".join(_H.unescape(x) for x in re.split(r"(<[^>]+>)", h) if not x.startswith("<"))
-        a_, b_ = _pt(_old), _pt(p["html"]); k = BREAKS[p["id"]]
-        ops_ = _dl.SequenceMatcher(None, a_, b_, autojunk=False).get_opcodes()
-        for n_, (t_, i1, i2, j1, j2) in enumerate(ops_):
-            if i1 <= k < i2 or (k == i2 and t_ == "equal"):
-                BREAKS[p["id"]] = j1 + (k - i1) if t_ == "equal" else j1
-                nx = ops_[n_ + 1] if n_ + 1 < len(ops_) else None
-                if t_ == "equal" and k == i2 and nx and nx[0] == "insert" and re.fullmatch(r"[\s.,;:]+", b_[nx[3]:nx[4]]):
-                    BREAKS[p["id"]] = nx[4]      # punctuation added at the break stays with the first column
-                break
+    if BRK[0] is not None:
+        BREAKS[p["id"]] = BRK[0]
+        b_ = _pt(p["html"])
+        for fx in TEXT_FIXES.get(p["id"], []):    # a correction that says where the column break falls
+            if fx.get("break_after") and fx["break_after"] in b_:
+                BREAKS[p["id"]] = b_.index(fx["break_after"]) + len(fx["break_after"])
     p["html"] += AFTER.get(p["id"], "")
     newpages.append(p)
     if p["id"] == "683":
@@ -202,6 +232,7 @@ def transform(h):
     while True:
         h2 = HEB_PAREN.sub(r'<span class="h">\1\2\3\4</span>', h)
         h2 = HEB_AFTER.sub(r"\1\2", h2)
+        h2 = HEB_LINK.sub(lambda m: '<span class="h">%s%s%s%s</a>%s%s%s</span>' % (m.group(1), m.group(2), m.group(3), m.group(4), m.group(5), m.group(6) or "", m.group(7) or ""), h2)
         if h2 == h: break
         h = h2
     return h.replace('href="#e=', 'href="#')

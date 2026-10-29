@@ -22,7 +22,7 @@ TRACT = [
     (["Sabb.", "Sab."], "Shabbat", "שבת", "by"), (["Erub."], "Eruvin", "עירובין", "by"), (["Pes."], "Pesachim", "פסחים", "by"),
     (["Shek."], "Shekalim", "שקלים", "y"), (["Yoma"], "Yoma", "יומא", "by"), (["Succ."], "Sukkah", "סוכה", "by"),
     (["Bets."], "Beitzah", "ביצה", "by"), (["R. Hash.", "R. Hash", "R. Hasḥ.", "B. Hash."], "Rosh_Hashanah", "ראש השנה", "by"),
-    (["Taan."], "Taanit", "תענית", "by"), (["Meg."], "Megillah", "מגילה", "by"), (["M. Kat.", "M Kat."], "Moed_Katan", "מועד קטן", "by"),
+    (["Taan."], "Taanit", "תענית", "by"), (["Meg."], "Megillah", "מגילה", "by"), (["M. Kat.", "M Kat.", "M. K."], "Moed_Katan", "מועד קטן", "by"),
     (["Ḥag."], "Chagigah", "חגיגה", "by"), (["Yeb."], "Yevamot", "יבמות", "by"), (["Keth."], "Ketubot", "כתובות", "by"),
     (["Ned."], "Nedarim", "נדרים", "by"), (["Naz.", "Nâz."], "Nazir", "נזיר", "by"), (["Sot.", "Sotah"], "Sotah", "סוטה", "by"),
     (["Gitt.", "Git."], "Gittin", "גיטין", "by"), (["Kidd.", "Kid."], "Kiddushin", "קידושין", "by"),
@@ -63,6 +63,7 @@ P = re.compile(
     r"(?P<y>\bY\. (?P<yt>" + TR + r") ?(?P<yc>" + ROM + r")\b,? " + MODS + r"(?P<yf>\d+)\^(?P<ys>[a-d]))"
     r"|(?P<y2>(?<!\w)(?P<y2t>" + TR + r") (?P<y2c>" + ROM + r")\b,? " + MODS + r"(?P<y2f>\d+)\^(?P<y2s>[a-d]))"
     r"|(?P<lc>(?<!\w)(?P<lct>" + TR + r") l\. c\.)"
+    r"|(?P<bablc>\bBab\. ib\. l\. c\.)"
     r"|(?P<b>(?<!\w)(?:Bab\. )?(?P<bt>" + TR + r") +(?P<bf>\d+)\^(?P<bs>[ab]))"
     r"|(?P<m>(?<!\w)(?P<mt>" + TR + r") (?P<mc>" + ROM + r"),)"
     r"|(?P<bc>(?<!\w)(?P<bct>" + TR + r") (?P<bcf>\d+)(?![\d^]))"
@@ -77,6 +78,9 @@ P = re.compile(
 )
 # words that make the citation before them part of something else (e.g. "Targ. Y. Gen.", "Tosef. Sabb.")
 PRE_BAD = re.compile(r"(?:Tosef|Targ|Pesik|Sifra|Sifré|Mekh|Midr|Yalk|Tanḥ|Mass|Yelamd|Seder)\.? (?:\w+\. ){0,2}$")
+
+
+WS, WS2 = re.compile(r"\s+"), re.compile(r"\s\s+")
 
 
 def entry_texts():
@@ -103,7 +107,13 @@ def entry_texts():
                 if re.match(r"</?p\b", tok): text.append(" "); n += 1
                 continue
             t = html.unescape(tok); text.append(t); n += len(t)
-        yield eid, "".join(text), refs
+        # pieces of an entry from two pages are joined with several spaces ("Bab.    ib."); make them one,
+        # keeping Sefaria's link offsets in step
+        raw = "".join(text)
+        runs = [(m.start(), m.end() - m.start()) for m in WS2.finditer(raw)]
+        if runs and refs:
+            refs = {k - sum(min(n_ - 1, k - s_ - 1) for s_, n_ in runs if s_ < k - 1): v for k, v in refs.items()}
+        yield eid, WS.sub(" ", raw), refs
 
 
 def snippet(t, a):
@@ -121,6 +131,7 @@ def main():
     agree = Counter(); disagree = []
     for eid, t, refs in entry_texts():
         ctx = None                      # [kind "b"|"y"|"m"|"t", tractate, chapter, folio]
+        yctx = None
         for m in P.finditer(t):
             g = m.group
             hit = None
@@ -135,6 +146,9 @@ def main():
                 if PRE_BAD.search(t[max(0, m.start() - 24):m.start()]): continue
                 ctx = ["y", ABBR[g("y2t")], roman(g("y2c")), g("y2f")]
                 hit = ("y", ctx[1], ctx[2], g("y2f") + g("y2s"))
+            elif g("bablc"):                 # "Bab. ib. l. c.": the Babylonian Talmud, same tractate
+                if ctx and "b" in HAS.get(ctx[1], ""): ctx = ["b", ctx[1], None, None]
+                continue
             elif g("lc"):                    # "Bekh. l. c.": the tractate cited above
                 key = ABBR[g("lct")]
                 ctx = ["b" if "b" in HAS[key] else "m", key, None, None]; continue
@@ -143,6 +157,10 @@ def main():
                     continue
                 key = ABBR[g("bt")]
                 if "b" not in HAS[key]: continue
+                if t[max(0, m.start() - 6):m.start()] == "expl. " and ctx and ctx[0] in ("m", "y"):
+                    yctx = ctx[:]                # an aside ("expl. Ber. 40^b"): keep the tractate for a later "Y. ib."
+                else:
+                    yctx = None
                 ctx = ["b", key, None, g("bf")]
                 hit = ("b", key, None, g("bf") + g("bs"))
             elif g("m"):
@@ -154,6 +172,7 @@ def main():
             elif not ctx:
                 continue
             elif g("yib"):
+                if yctx: ctx = yctx; yctx = None
                 ch = roman(g("yic")) if g("yic") else (ctx[2] or 0)
                 ctx = ["y", ctx[1], ch, g("yif")]
                 hit = ("y", ctx[1], ch, g("yif") + g("yis"))

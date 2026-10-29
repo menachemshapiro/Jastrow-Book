@@ -88,6 +88,7 @@ Other suspected typos are listed for review first and corrected only once approv
 | `build/targum_index.py` | Builds `data/targum/` from the entry text |
 | `build/midrash_index.py` | Builds `data/midrash/` from the entry text |
 | `build/sources_index.py` | Builds `data/sources/` from the entry text |
+| `build/indexes.py` | Runs all four index builders at once, sharing the entry text (the quick way to rebuild them) |
 | `favicon.ico`, `icon-*.png`, `og.png`, `site.webmanifest` | Icons and the image shown in link previews |
 
 ## Rebuilding `data/`
@@ -97,8 +98,5 @@ The two sources aren't in this repository because of their size. They are Sefari
 ```
 python3 build/build2.py Jastrow-full.xml jastrow-complete.json out2
 BREAKS=build/breaks_all2.json python3 build/make_site2.py out2 . jastrow-complete.json
-python3 build/talmud_index.py .
-python3 build/targum_index.py .
-python3 build/midrash_index.py .
-python3 build/sources_index.py .
+python3 build/indexes.py .
 ```
