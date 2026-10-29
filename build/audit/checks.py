@@ -134,14 +134,53 @@ class Talmud:
             except Exception as e:
                 self.search_error = str(e)
 
+    HEB = r"[א-ת][֑-״א-ת'\"’]*"
+    RUN = re.compile(r"(" + HEB + r"(?:(?:\s|,\s|\s?\.\.\.\s?|\s?…\s?|\s?\(\s?|\s?\)\s?)+" + HEB + r")*\)?)")
+    # a short Latin remark between the citation and the quotation: "(prov.)", "[Var.]"
+    SKIP = re.compile(r"\s*(?:\([^()א-ת]{1,25}\)|\[[^\[\]א-ת]{1,25}\])")
+
     def quote_near(self, t, a, b):
-        """the Hebrew right after a citation (or, failing that, right before it)"""
-        HEB = r"[א-ת][֑-״א-ת'\"’]*"
-        RUN = re.compile(r"\s*(" + HEB + r"(?:(?:\s|,\s|\s?\.\.\.\s?|\s?…\s?|\s?\(\s?|\s?\)\s?)+" + HEB + r")*)")
-        m = RUN.match(t, b)
-        if m and m.group(1): return m.group(1)
-        m = re.search("(" + HEB + r"(?:\s+" + HEB + r")*)\s*[.,;]?\s*$", t[max(0, a - 120):a])
-        return m.group(1) if m else ""
+        """the Hebrew right after a citation, past a short Latin remark such as "(prov.)". Failing that, Hebrew right
+        before it, but not across a full stop or semicolon, nor a cross-reference ("v. אֲבַק."): Jastrow's stop
+        ends what the Hebrew belongs to"""
+        while True:
+            m = self.SKIP.match(t, b)
+            if not m: break
+            b = m.end()
+        m = re.compile(r"\s*").match(t, b)
+        m = self.RUN.match(t, m.end())
+        if m and m.group(1): return m.group(1).strip()
+        m = re.search("(" + self.HEB + r"(?:\s+" + self.HEB + r")*)\s*,?\s*$", t[max(0, a - 120):a])
+        if not m: return ""
+        if re.search(r"(?:\bv\.|\bcmp\.|\bs\.|=)\s*$", t[max(0, a - 120):a][:m.start()]): return ""
+        return m.group(1)
+
+    @staticmethod
+    def variants(q, after):
+        """the ways a quotation may stand in the Talmud's text: without Jastrow's bracketed variants ("ניזיל
+        (ליזיל)"), with the brackets' letters kept ("(ו)בגבולין"), and with the readings he gives after it
+        ("read אבקתא", "Ar. … (ed. אבין)") put in for a word"""
+        out = []
+        def add(x):
+            x = re.sub(r"\s+", " ", x).strip()
+            if x and x not in out: out.append(x)
+        add(re.sub(r"\([^()]*\)", " ", q))
+        add(re.sub(r"[()]", "", q))
+        # readings named after the quotation, up to the next citation-like stop
+        alts = []
+        for mm in re.finditer(r"(?:\bread|\bed\.|\bMs\.(?: M\.)?|\bVar\.(?: lect\.)?|\bcorr\.(?: acc\.)?|\bAr\.)\s*"
+                              r"((?:[א-ת][֑-״א-ת'’]*[\s,]*)+)", after[:160]):
+            alts += [w.strip(" ,") for w in re.split(r",\s*", mm.group(1)) if w.strip(" ,")]
+        base = out[0] if out else q
+        words = base.split()
+        for a_ in alts:
+            add(a_)
+            sa = re.sub("[^א-ת]", "", a_)
+            for i, w in enumerate(words):
+                sw = re.sub("[^א-ת]", "", w)
+                if sw and sa and sw[0] == sa[0] and len(set(sw) & set(sa)) >= min(len(sw), len(sa)) - 1:
+                    add(" ".join(words[:i] + [a_] + words[i + 1:]))
+        return out
 
     def daf_list(self, key, daf):
         f, s = int(daf[:-1]), daf[-1]
@@ -171,15 +210,33 @@ class Talmud:
                 q = self.quote_near(t, m.start(), m.end())
                 if not q:
                     stats["no_quote"] += 1; continue
-                rx, nw, n = self.S2.pattern(q)
-                if n < 2 and nw < 1:
+                after = t[m.end():m.end() + 200]
+                Rs = []
+                for v in self.variants(q, after):
+                    rx, nw, n = self.S2.pattern(v)
+                    if n < 2 and nw < 1: continue
+                    Rs.append(re.compile(r"(?:^| )" + rx.replace(r"\S* ", r"\S*(?: |$)") + r"(?= |$)"))
+                if not Rs:
                     stats["quote_too_short"] += 1; continue
-                R = re.compile(r"(?:^| )" + rx.replace(r"\S* ", r"\S*(?: |$)") + r"(?= |$)")
                 def found(k, d):
                     txt = self.B.get((k, d))
-                    return bool(txt and R.search(txt.translate(self.CO.FIN) + " "))
+                    if not txt: return False
+                    txt = txt.translate(self.CO.FIN) + " "
+                    return any(R.search(txt) for R in Rs)
                 if found(key, daf):
                     stats["found_at"] += 1; continue
+                # every word of the quotation on the cited daf, but not as one phrase: Jastrow follows a manuscript
+                # or Ar., or quotes the words in another order. All words but one for a quotation of three or more
+                words = [w for w in self.variants(q, "")[0].split() if re.sub("[^א-ת]", "", w)]
+                if len(words) >= 2 and (key, daf) in self.B:
+                    txt = self.B[(key, daf)].translate(self.CO.FIN) + " "
+                    hit = 0
+                    for w in words:
+                        rx, _, _ = self.S2.pattern(w)
+                        if rx and re.search(r"(?:^| )" + rx.replace(r"\S* ", r"\S*(?: |$)") + r"(?= |$)", txt): hit += 1
+                    if hit >= (len(words) if len(words) == 2 else len(words) - 1):
+                        stats["found_words_at"] += 1; continue
+                variant = bool(re.match(r"\s*(?:\S+\s+){0,12}?(?:Ar\.|Ms\.|ed\.|Var\.|read\b)", after))
                 near = [d for d in self.daf_list(key, daf) if found(key, d)]
                 where = None
                 if near:
@@ -191,6 +248,7 @@ class Talmud:
                         other = [h for h in self.S2.find(q) if h[0] == "b"][:5]
                         if other: kind, sev, where = "talmud_other_tractate", 1, ["%s %s" % (h[1], h[2]) for h in other]
                         else: kind, sev = "talmud_not_found", 3
+                if variant and sev == 1: sev = 2                 # Jastrow quotes a variant reading here
                 stats[kind] += 1
                 out.append(finding(pid, kind, sev, eid, cite, {
                     "talmud_near": "the quotation is on a neighbouring amud",

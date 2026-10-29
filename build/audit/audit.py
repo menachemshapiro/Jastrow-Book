@@ -175,6 +175,10 @@ def main():
         elif pid in errors:
             findings.append(CK.finding(pid, "layout", 1, None, "", "the scan could not be processed: %s" % errors[pid]))
         findings += CK.site_checks(book, pid)
+    # the same doubled words found twice, by the comparison ("doubled") and by the check of the site's text
+    # ("doubled_text"): keep the second, which names both copies
+    dt = {(x["page"], x.get("eid")) for x in findings if x["type"] == "doubled_text"}
+    findings = [x for x in findings if not (x["type"] == "doubled" and (x["page"], x.get("eid")) in dt)]
     # the scans against each other: a page whose image or text block is a different size from the rest of the run
     sizes = {pid: pages[pid]["scan"]["layout"] for pid in run if pages[pid].get("scan")}
     for pid, l in sizes.items():

@@ -344,6 +344,10 @@ class PageCompare:
                 # the book's pieces on two lines: a word divided at a line's end, whatever the OCR made of the
                 # hyphen ("sur: rounding", "wea- ‘vers"); rule 2.8, not a finding
                 if any(K[i]["lines"][-1] != K[i + 1]["lines"][0] for i in range(len(K) - 1)): return
+                # or the OCR put a space after a hyphen, or read a hyphen as ":" ("bed- cover", "meeting- -place",
+                # "sur: rounding"): the book's word is the site's
+                if all(re.search(r"[-‐‑¬~:‘’]$", K[i]["text"]) or re.match(r"^[-‐‑]", K[i + 1]["text"])
+                       for i in range(len(K) - 1)): return
                 # an abbreviation the site sets without its space ("i.e." for "i. e.")
                 abbr = len(S) == 1 and re.search(r"[.’'][A-Za-z]", S[0]["text"])
                 self.add("run_on", 3 if abbr else (2 if short else 1), S, K,
@@ -398,8 +402,11 @@ class PageCompare:
                 if v is not None and ST.key(v) == s["key"]: continue        # the second reading agrees with the site
                 typ, sev, note = ("number_differs" if num else "word_differs"), (1 if num else 2), ""
                 sd, kd = re.search(r"\d", s["text"]), re.search(r"\d", k["text"])
-                if num and self.ocr_misread_number(s["text"], k["text"]):
+                if num and self.ocr_misread_number(s["text"], k["text"], v):
                     sev, note = 3, "most likely the OCR misreading the book (a raised folio letter or a stop read as a digit, or a digit as a letter)"
+                elif num and v is not None and re.search(r"\d", s["text"]) and not re.search(r"\d", v):
+                    # read again, the OCR finds no digit at all: it cannot read this spot
+                    sev, note = 3, "the OCR cannot read this number (read again: %s)" % (v or "nothing")
                 elif num and not (sd and kd):
                     # a number on one side only: mostly the alignment next to Hebrew, or a letter read as a digit
                     common = self.vocab.get(s["key"], 0) >= 20
@@ -438,7 +445,7 @@ class PageCompare:
         return hi.startswith(lo) and hi[-1] == lo[-1]
 
     @staticmethod
-    def ocr_misread_number(site, scan):
+    def ocr_misread_number(site, scan, reread=None):
         """the site has a folio number with its side (39ᵇ) and the OCR one digit more, the rest the same but for at
         most one digit (895, 444): the small raised letter read as a digit"""
         # the OCR read a digit as a letter (S for 5 or 8, g for 9, O for 0, l for 1) where the site has the digits;
@@ -447,12 +454,18 @@ class PageCompare:
         for conf in (str.maketrans("SsBgqOoIliZ", "55899001112"), str.maketrans("SsBgqOoIliZ", "88899001112")):
             # only when the site has the digits: a site letter where the book has a digit may be the site's error
             if a0.isdigit() and a0 != b0 and a0 == b0.translate(conf): return True
+        for sc in [scan] + ([reread] if reread else []):
+            # a stop after the number read as a digit: "5;" as 53 or 55
+            m2 = re.match(r"^\D*?(\d+)[;,:]$", site)
+            if m2 and re.fullmatch(re.escape(m2.group(1)) + r"[35]", sc.strip().rstrip(";,.")): return True
+            # one of two like digits lost: 111ᵃ read as 11ᵃ
+            sd, kd = re.sub(r"\D", "", site), re.sub(r"\D", "", sc)
+            if kd and len(sd) == len(kd) + 1 and any(sd[i] == sd[i + 1] and sd[:i] + sd[i + 1:] == kd for i in range(len(sd) - 1)):
+                return True
         m = re.match(r"^\D*?(\d+)\s*\^?([a-dᵃᵇᶜᵈ])", site)
         if not m: return False
         a = m.group(1)
         d = re.sub(r"\D", "", scan)
-        m2 = re.match(r"^\D*?(\d+)[;,]$", site)                    # a stop after the number read as a digit: 5; as 53
-        if m2 and re.fullmatch(re.escape(m2.group(1)) + r"[35]", scan.strip()): return True
         raised = re.search(r"\d[°¢%®*'’\"”^>]+[;:,.)]*$", scan)   # the letter read as a symbol: 83°, 35¢, 89>
         if len(d) == len(a) + 1: b = d[:len(a)]
         elif len(d) == len(a) and raised: b = d
@@ -665,8 +678,21 @@ class PageCompare:
             if Sl[-1]["key"].startswith(k): return True          # "un-" at the page's foot, "unworthy" in the site
         if start and Sl and not real and len(Sl) == 1: return False
         if len(Sl) + len(real) <= 1: return False
-        self.add("page_start" if start else "page_end", 1, S, between,
-                 "the %s of the page differs: words may have slipped across the page break" % ("start" if start else "end"))
+        # what really differs: words of three letters or more on one side that the other side lacks. Short words
+        # (v., pl., m.) and numbers the OCR read in part are no evidence; next to Hebrew the OCR reads Hebrew as
+        # Latin garbage, which is not "real" text
+        kk = {plain_shape(t["text"]) for t in between}
+        sk = {plain_shape(t["text"]) for t in Sl}
+        sdig = set(re.findall(r"\d", " ".join(t["text"] for t in between)))
+        s_only = [t for t in Sl if plain_shape(t["text"]) not in kk and
+                  (len(t["key"].lstrip("#")) >= 3 and not t["key"].startswith("#") or
+                   (re.search(r"\d", t["text"]) and not set(re.findall(r"\d", t["text"])) & sdig))]
+        k_only = [t for t in real if plain_shape(t["text"]) not in sk and len(t["key"]) >= 3]
+        if not s_only and not k_only: return False         # compared word by word (and the Hebrew) as usual
+        heb = any(t["heb"] for t in S) or any(t["script"] == "heb" for t in between)
+        self.add("page_start" if start else "page_end", 2 if heb or len(s_only) + len(k_only) <= 1 else 1, S, between,
+                 "the %s of the page differs: words may have slipped across the page break" % ("start" if start else "end"),
+                 site_only=" ".join(t["text"] for t in s_only), book_only=" ".join(t["text"] for t in k_only))
         return True
 
     # ---------- column breaks ----------
@@ -1079,9 +1105,10 @@ class PageCompare:
             st = [x for x in self.p.tokens if x["i"] == e["a"]]
             lo = self.scan_pos(e["_idx"][0])
             near = self.k[lo:lo + 4] if lo is not None else []
-            self.add("entry_start", 2, st, near, "the site starts an entry (%s) where the book does not begin an "
-                     "entry line: two entries in the book run together on the site, or an entry the book lacks?"
-                     % e.get("hw", ""), eid=e["eid"])
+            self.add("entry_start", 2, st, near, "a new entry (%s) begins here on the site, but the book's line here "
+                     "is not indented as an entry's first line is. Either the book runs these words on in the entry "
+                     "before (the site split one entry in two), or the audit misjudged the indent (likeliest on the "
+                     "lines by a letter heading): look at the indent in the scan" % e.get("hw", ""), eid=e["eid"])
         for j in self.unexplained:
             t = self.k[j]
             toks = [x for x in self.k if x["line"] == t["line"]]

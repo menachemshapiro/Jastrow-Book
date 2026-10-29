@@ -19,7 +19,11 @@ def sup(s):
     """'26^b' as 26<sup>b</sup>, after escaping"""
     return re.sub(r"\^([a-d])", r"<sup>\1</sup>", s)
 
-SEV = {1: "likely error", 2: "check", 3: "minor / uncertain"}
+SEV = {1: "likely error", 2: "check", 3: "minor / uncertain", 4: "decide as a group"}
+# kinds that are one systematic question each, decided together, not finding by finding
+GROUP = {"ib_named", "abbreviation"}
+SEV_ORDER = (1, 2, 4, 3)
+SEV_TITLE = {1: "Likely errors", 2: "Worth a check", 3: "Minor or uncertain", 4: "Decide as a group"}
 TYPES = {
     "run_on": "Words run together", "split_word": "Word split apart", "hyphen_kept": "Line-end hyphen kept",
     "hyphen_space": "Hyphen followed by a space", "word_differs": "Word differs", "number_differs": "Number differs",
@@ -49,7 +53,10 @@ SITE_ONLY = {"brackets", "sense_numbers", "stray_char", "headword_text", "headwo
              "doubled_text", "doubled_word", "hyphen_space"}
 SEV_HELP = {1: "What the audit thinks is most likely a real difference between the site and the book.",
             2: "A difference that may be real, or may come from the OCR or the page layout. Compare the two sides.",
-            3: "Small or doubtful: mostly OCR noise. Look here after the others."}
+            3: "Small or doubtful: mostly OCR noise. Look here after the others.",
+            4: "Systematic differences, one question each: the book's “Ib.” where Sefaria's text names the work, and "
+               "abbreviations spelt with a letter more or less. Decide each kind once (restore the book, or keep the "
+               "site), rather than finding by finding."}
 LABEL = {"scan": "OCR reads", "reread": "read again", "book_vis": "Hebrew in the book", "scan_heb": "Hebrew OCR",
          "book_words": "book's words", "scan_line": "the book's line", "site_vis": "as the site shows it",
          "site_heb": "site's Hebrew", "ref": "reference", "quote": "the quotation", "found": "found at",
@@ -60,11 +67,11 @@ main{max-width:1180px;margin:0 auto}
 .tile{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:10px;
 padding:10px 14px;cursor:pointer;position:relative}.tile input{position:absolute;top:10px;right:10px}
 .tile b{font-size:28px;line-height:1.1;font-variant-numeric:tabular-nums}.tile small{color:var(--mut)}
-.tile.t1 b{color:var(--s1)}.tile.t2 b{color:var(--s2)}.tile.t3 b{color:var(--s3)}.tile.t0{cursor:default}.tile.t0 b{color:var(--mut)}
+.tile.t1 b{color:var(--s1)}.tile.t2 b{color:var(--s2)}.tile.t3 b{color:var(--s3)}.tile.t4 b{color:var(--s4)}.tile.t0{cursor:default}.tile.t0 b{color:var(--mut)}
 .tile:has(input:not(:checked)){opacity:.55}
 .warn{border:1px solid var(--s1);border-radius:8px;padding:8px 12px;margin:8px 0}
 .pill{font-size:12px;font-weight:600;border-radius:99px;padding:1px 8px;color:#fff;white-space:nowrap}
-.pill.p1{background:var(--s1)}.pill.p2{background:var(--s2)}.pill.p3{background:var(--s3)}
+.pill.p1{background:var(--s1)}.pill.p2{background:var(--s2)}.pill.p3{background:var(--s3)}.pill.p4{background:var(--s4)}
 article.f{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0}
 article.f header{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:baseline}
 .note{margin:6px 0 8px}
@@ -91,9 +98,9 @@ article.f.v-false{border-left-color:#12805c}article.f.v-unsure{border-left-color
 border-radius:6px;padding:2px 10px;cursor:pointer}.mbar .dirty{color:var(--s2);font-weight:600}
 """
 CSS = """
-:root{--bg:#fbfaf7;--fg:#1d1b18;--mut:#6b665e;--line:#e3dfd6;--s1:#b42318;--s2:#b54708;--s3:#667085;--card:#fff}
+:root{--bg:#fbfaf7;--fg:#1d1b18;--mut:#6b665e;--line:#e3dfd6;--s1:#b42318;--s2:#b54708;--s3:#667085;--s4:#6941c6;--card:#fff}
 @media (prefers-color-scheme:dark){:root{--bg:#161513;--fg:#ece8e1;--mut:#a29c92;--line:#36332e;--card:#1f1e1b;
---s1:#f97066;--s2:#fdb022;--s3:#98a2b3}}
+--s1:#f97066;--s2:#fdb022;--s3:#98a2b3;--s4:#b692f6}}
 body{background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif;margin:0;padding:16px 24px 60px}
 h1{font-size:22px;margin:4px 0 2px}h2{font-size:18px;margin:28px 0 8px;border-bottom:1px solid var(--line);padding-bottom:4px}
 .mut{color:var(--mut)}table{border-collapse:collapse;margin:8px 0}td,th{border-bottom:1px solid var(--line);padding:3px 10px;text-align:left}
@@ -245,7 +252,10 @@ def render_marked(text, sup, unit, marks, cur=None):
         if sp: out.append("<sup>")
     for i in range(n + 1):
         if ins.get(i):
-            close(state); state = None
+            if state is not None and i < n and unit[i] is not None and unit[i] == state[0] and i > 0 and unit[i - 1] == unit[i]:
+                close((None,) + state[1:]); state = (state[0], (), False); out.append("")
+            else:
+                close(state); state = None
             for m in ins[i]:
                 c = " cur" if cur is not None and m[3] == cur else ""
                 out.append('<a class="ins s%d%s" href="index.html#f%d" data-f="%d" title="%s">‸</a>' %
@@ -253,7 +263,13 @@ def render_marked(text, sup, unit, marks, cur=None):
         if i == n: break
         st = (unit[i], tuple(cover[i]), sup[i])
         if st != state:
-            close(state); opn(st); state = st
+            # a mark starting or ending inside a right-to-left island must not split the island: two islands are set
+            # left to right, so the Hebrew would come out in the wrong order. Close and reopen only what is inside it
+            if state is not None and st[0] is not None and st[0] == state[0]:
+                close((None,) + state[1:]); opn((None,) + st[1:])
+            else:
+                close(state); opn(st)
+            state = st
         out.append(esc(text[i]))
     close(state)
     return "".join(out)
@@ -389,6 +405,9 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
         hw = next((e["hw"] for pid in pids for e in book.page(pid).entries if e["eid"] == eid and e["hw"]), "")
         ent_rows.append((eid, pids, hw, name, cont_note))
     # ---- index.html: likely errors first; each finding as the site's text beside the book's scan
+    eimg = {r[0]: r[3] for r in ent_rows}
+    for x in findings:
+        if x["type"] in GROUP: x["sev"] = 4
     shown = [x for x in findings if x["type"] not in NOT_CHECKED]
     unread = [x for x in findings if x["type"] in NOT_CHECKED]
     cnt = Counter(x["type"] for x in shown)
@@ -406,7 +425,7 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
     # the counts, as tiles that also switch the list
     h.append('<div class="tiles">')
     for k, lab, sub in ((1, "Likely errors", "start here"), (2, "Worth a check", "often OCR or layout"),
-                        (3, "Minor or uncertain", "hidden at first")):
+                        (4, "Decide as a group", "Ib., abbreviations"), (3, "Minor or uncertain", "hidden at first")):
         h.append('<label class="tile t%d"><input type="checkbox" class="sv" value="%d"%s><b>%d</b><span>%s</span>'
                  '<small>%s</small></label>' % (k, k, "" if k == 3 else " checked", sevc[k], lab, sub))
     h.append('<div class="tile t0"><b>%d</b><span>Hebrew not checked</span><small>the OCR could not read it; '
@@ -447,8 +466,11 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
 
     def book_side(x):
         if x["type"] in SITE_ONLY:
-            return '<div class="side"><div class="lab">Book</div><div class="mut">A check of the site\'s own text: ' \
-                   'not compared with the scan. Open the scan page to see the book.</div></div>'
+            im_ = eimg.get(x.get("eid"))
+            return '<div class="side"><div class="lab">Book (1903 scan: the whole entry)</div>%s<div class="sub">A check ' \
+                   'of the site\'s own text, not compared with the scan word by word.</div></div>' % (
+                       ('<img loading="lazy" src="%s" alt="scan of the entry">' % im_) if im_ else
+                       '<div class="mut">no scan of this entry: open the scan page</div>')
         if x["type"].startswith("talmud_"):
             body = "".join('<div class="sub"><span>%s</span> <span dir="auto">%s</span></div>' % (
                 LABEL.get(k, k), esc(", ".join(x[k]) if isinstance(x[k], list) else x[k]))
@@ -491,11 +513,11 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
         o.append("</article>")
         return "".join(o)
 
-    for sev in (1, 2, 3):
+    for sev in SEV_ORDER:
         fs = sorted((x for x in shown if x["sev"] == sev),
                     key=lambda x: (run.index(x["page"]) if x["page"] in run else 1e9, x.get("off") if x.get("off") is not None else 1e9))
         h.append('<section class="grp" data-sev="%d"><h2>%s <span class="mut">%d</span></h2>%s%s</section>' % (
-            sev, {1: "Likely errors", 2: "Worth a check", 3: "Minor or uncertain"}[sev], len(fs),
+            sev, SEV_TITLE[sev], len(fs),
             '<p class="mut">%s</p>' % SEV_HELP[sev], "".join(card(x) for x in fs) or '<p class="mut">None.</p>'))
     # pages, at the foot: how well each page was read
     h.append('<section><h2 id="pages">Pages</h2><table><tr><th>Page</th><th class=n>Site words found</th>'
@@ -512,7 +534,6 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
                      e_ if e_ is not None else "–", b_ if b_ is not None else "–", pf[pid], pu[pid], page_links(pid)))
     h.append('</table><p class="mut">"Entries: book" counts the lines the book indents as an entry\'s first line, '
              'plus paragraphs such as a binyan. A page whose two numbers differ by more than one is marked.</p></section>')
-    eimg = {r[0]: r[3] for r in ent_rows}
     for eid in used_eids:
         im_ = ('<img loading="lazy" src="%s" alt="scan of the entry">' % eimg[eid]) if eimg.get(eid) else \
             '<div class="mut">no scan</div>'
