@@ -598,7 +598,7 @@ if(window.showSaveFilePicker){ab.hidden=false;
 }else st('marks are kept in this browser as you go; for a file, use Export marks (autosave to a file needs Chrome or Edge)');
 document.getElementById('mexp').addEventListener('click',()=>{
  const blob=new Blob([payload()],{type:'application/json'});
- const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='jastrow-audit-marks.json';
+ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='jastrow-audit-marks-'+new Date().toISOString().slice(0,16).replace(/[-:]/g,'').replace('T','-')+'.json';
  document.body.appendChild(a); a.click(); a.remove(); setDirty(false);});
 document.getElementById('mimp').addEventListener('change',e=>{const f=e.target.files[0]; if(!f) return;
  f.text().then(t=>{let n=0; (JSON.parse(t).marks||[]).forEach(m=>{if(m.key&&(!M[m.key]||(m.time||'')>=(M[m.key].time||''))){M[m.key]=m;n++}});

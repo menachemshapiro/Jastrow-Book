@@ -622,7 +622,15 @@ class PageCompare:
                      "check the Hebrew (OCR of pointed Hebrew is not reliable)",
                      site_heb=" ".join(t["text"] for t in us), scan_heb=" ".join(w["text"] for w in uk),
                      site_all=sv, scan_all=kv, **rec)
-        elif len(uk) >= 2 and not us and sum(len(w["skel"]) for w in uk) >= 6:
+        # what the book seems to have beyond the site: not a second reading of a word that is there (the OCR often
+        # reads a word twice, from the line above or below: "רבתא רבתא"), nor one like a site word, nor a reading
+        # with digits or Latin in it (the marks found all of these false)
+        def extra(w):
+            if re.search(r"[0-9A-Za-z]", w["text"]): return False
+            return all(ratio(w["skel"], t["skel"]) < 0.6 and w["skel"] not in t["skel"] and t["skel"] not in w["skel"]
+                       for t in sh) and all(w["skel"] != x["skel"] for x in ks if x is not w)
+        uk = [w for w in uk if extra(w)]
+        if len(uk) >= 2 and not us and sum(len(w["skel"]) for w in uk) >= 6:
             self.add("hebrew_extra_in_book", 2, sh, [], "the book seems to have Hebrew words here that the site lacks",
                      scan_heb=" ".join(w["text"] for w in uk), site_all=sv, scan_all=kv,
                      eid=sh[0]["eid"] if sh else (self.eid_for_scan(prev["j"]) if prev else None), **rec)
@@ -632,9 +640,15 @@ class PageCompare:
         (ט/מ/ס, ה/ח/ת, ו/י/ר/ד/ז, ב/כ/פ, ג/נ, ע/צ), and a ו or י more or less (a holam, shuruk or hiriq read as a
         letter), could be either's error: minor"""
         look = heb_look(t["skel"]) == heb_look(w["skel"])
-        sure = w["conf"] >= 75 and not look and (rr is None or ST.heb_skel(rr) == w["skel"])
+        # the OCR read only part of the word (גינוס for אבגינוס, אב for אבן), or ran a letter of the next word
+        # into it (מאבבא for אבב): the user's marks found these all false
+        a_, b_ = t["skel"], w["skel"]
+        part = a_ != b_ and (a_ in b_ or b_ in a_) or (rr and ST.heb_skel(rr) != b_ and
+                                                        (a_ in ST.heb_skel(rr) or ST.heb_skel(rr) in a_))
+        sure = w["conf"] >= 75 and not look and not part and (rr is None or ST.heb_skel(rr) == w["skel"])
         self.add("headword_letters", 2 if sure else 3, [t], [],
                  "a letter of the headword differs from the book's" + ("" if sure else
+                 " (the OCR read only part of the word: check)" if part else
                  " (letters the OCR often confuses: check)" if look else " (the OCR is unsure: check)"),
                  site_heb=t["text"], scan_heb=w["text"], ocr_conf=w["conf"], reread=rr,
                  boxes=[w["box"]], lines=[w["line"]])

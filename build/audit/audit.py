@@ -222,6 +222,24 @@ def main():
     mfiles = [os.path.join(args.out, "marks.json")] + ([args.marks] if args.marks else []) + \
         sorted(glob.glob(os.path.expanduser("~/Downloads/jastrow-audit-marks*.json")))
     marks = RP.load_marks(mfiles)
+    # every marks file read, and the merged file before it is rewritten, is copied into marks_backup/ under the
+    # time it was made (a copy only when its contents are new): no export or autosave can overwrite the only copy
+    import hashlib
+    bdir = os.path.join(args.out, "marks_backup")
+    seen = set()
+    if os.path.isdir(bdir):
+        for f in os.listdir(bdir):
+            try: seen.add(hashlib.sha1(open(os.path.join(bdir, f), "rb").read()).hexdigest())
+            except OSError: pass
+    for f in mfiles:
+        if not os.path.exists(f): continue
+        data = open(f, "rb").read()
+        h_ = hashlib.sha1(data).hexdigest()
+        if h_ in seen: continue
+        os.makedirs(bdir, exist_ok=True)
+        stamp = time.strftime("%Y-%m-%d_%H%M%S", time.localtime(os.path.getmtime(f)))
+        open(os.path.join(bdir, "%s_%s" % (stamp, os.path.basename(f))), "wb").write(data)
+        seen.add(h_)
     if marks:
         json.dump({"version": 1, "marks": sorted(marks.values(), key=lambda m: m.get("time") or "")},
                   open(os.path.join(args.out, "marks.json"), "w"), ensure_ascii=False, indent=1)
