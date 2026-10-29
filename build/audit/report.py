@@ -171,9 +171,12 @@ def render_marked(text, sup, unit, marks, cur=None):
     return "".join(out)
 
 
-def write(out, findings, pages, entries, book, run, scans=None, site_url="http://localhost:8000/"):
-    """out: the audit folder; pages: {pid: {"stats":…, "scan":…}}; entries: [(pid, eid, parts)]"""
+def write(out, findings, pages, entries, book, run, scans=None, site_url="http://localhost:8000/", pages_root=None):
+    """out: this run's folder; pages_root: the folder whose pages/ holds each page's scan and OCR (shared by all
+    runs); pages: {pid: {"stats":…, "scan":…}}; entries: [(pid, eid, parts)]"""
+    pages_root = pages_root or out
     rd = os.path.join(out, "report")
+    prel = os.path.relpath(os.path.join(pages_root, "pages"), rd)
     os.makedirs(os.path.join(rd, "crops"), exist_ok=True)
     os.makedirs(os.path.join(rd, "entries"), exist_ok=True)
     with open(os.path.join(out, "findings.jsonl"), "w") as f:
@@ -183,7 +186,7 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
 
     def page_img(pid):
         if pid not in imgs:
-            p = os.path.join(out, "pages", "p%04d" % int(pid), "page.png")
+            p = os.path.join(pages_root, "pages", "p%04d" % int(pid), "page.png")
             imgs[pid] = Image.open(p) if os.path.exists(p) else None
         return imgs[pid]
 
@@ -191,8 +194,8 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
         """open the whole page: the scan (PDF at that page, and the straightened image) and the site"""
         L = []
         if page_img(pid) is not None:
-            L.append('<a href="../pages/p%04d/page.png" target="_blank">whole scan page</a>' % int(pid))
-            L.append('<a href="../pages/p%04d/layout.png" target="_blank">layout</a>' % int(pid))
+            L.append('<a href="%s/p%04d/page.png" target="_blank">whole scan page</a>' % (prel, int(pid)))
+            L.append('<a href="%s/p%04d/layout.png" target="_blank">layout</a>' % (prel, int(pid)))
         L.append('<a href="%s#p%s" target="_blank">site page (local)</a>' % (esc(site_url), pid))
         L.append('<a href="%s#p%s" target="_blank">site page (live)</a>' % (LIVE, pid))
         if eid:

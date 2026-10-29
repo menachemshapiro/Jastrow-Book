@@ -19,12 +19,15 @@ options:
   --site-url URL  where the report's "site page (local)" links go (default http://localhost:8000/, the local
                   preview: python3 -m http.server in the repository)
 
-Results, in the --out folder:
-  summary.txt             a short summary (paste this to Claude)
-  findings.jsonl          every finding, one per line
-  report/index.html       the findings, page by page, each with its piece of the scan
-  report/entries.html     every entry: its scan (all parts, across columns and pages) beside the site's text
-  pages/pNNNN/layout.png  what the layout step found on each page (columns red, headings purple, lines blue)
+Results, in the --out folder (work/audit):
+  index.html                     every run so far, newest first
+  runs/<pages>_<date>_<time>/    one folder per run, never overwritten:
+      summary.txt                a short summary (paste this to Claude)
+      findings.jsonl             every finding, one per line
+      report/index.html          the findings, page by page, each with its piece of the scan
+      report/entries.html        every entry: its scan (all parts) beside the site's text
+  pages/pNNNN/                   each page's scan and OCR, shared by all runs (layout.png: what the layout step
+                                 found: columns red, headings purple, lines blue)
 Paths (scans, Talmud text) come from build/paths.py: config.json or JASTROW_* variables."""
 import argparse, glob, json, os, re, shutil, subprocess, sys, time
 from collections import Counter
@@ -200,15 +203,37 @@ def main():
             findings += f; tstats += s
     # 4. report
     print("writing the report...")
-    idx, summary = RP.write(args.out, findings, pages, entries, book, run, scans=paths.SCANS, site_url=args.site_url)
+    # each run gets its own folder, so an earlier report is never overwritten; the OCR stays shared in pages/
+    label = "p" + re.sub(r"[^0-9a-z-]+", "_", args.pages.lower()).strip("_")[:40] + "_" + time.strftime("%Y-%m-%d_%H%M%S")
+    rdir = os.path.join(args.out, "runs", label)
+    os.makedirs(rdir, exist_ok=True)
+    idx, summary = RP.write(rdir, findings, pages, entries, book, run, scans=paths.SCANS, site_url=args.site_url,
+                            pages_root=args.out)
     if tstats:
         extra = "Bavli citations: " + ", ".join("%s %d" % kv for kv in sorted(tstats.items()))
         summary += "\n" + extra
-        open(os.path.join(args.out, "summary.txt"), "a").write(extra + "\n")
+        open(os.path.join(rdir, "summary.txt"), "a").write(extra + "\n")
+    # an index of all runs, newest first
+    runs = sorted((d for d in os.listdir(os.path.join(args.out, "runs"))
+                   if os.path.exists(os.path.join(args.out, "runs", d, "report", "index.html"))), reverse=True,
+                  key=lambda d: d.rsplit("_", 2)[-2:])
+    import html as _h
+    rows = []
+    for d in runs:
+        sm = os.path.join(args.out, "runs", d, "summary.txt")
+        first = open(sm).read().splitlines()[:2] if os.path.exists(sm) else []
+        rows.append('<li><a href="runs/%s/report/index.html">%s</a> <span style="color:#777">%s</span></li>' %
+                    (d, _h.escape(d), _h.escape(" · ".join(first))))
+    open(os.path.join(args.out, "index.html"), "w").write(
+        '<!doctype html><meta charset="utf-8"><title>Jastrow audit runs</title><body style="font:15px system-ui;'
+        'margin:24px"><h1>Audit runs</h1><ul>%s</ul>' % "\n".join(rows))
     print()
     print(summary)
     print()
-    print("report: %s" % idx)
+    print("this run:   %s" % rdir)
+    print("report:     %s" % idx)
+    print("summary:    %s" % os.path.join(rdir, "summary.txt"))
+    print("all runs:   %s" % os.path.join(args.out, "index.html"))
     print("done in %.0f s" % (time.time() - t0))
 
 
