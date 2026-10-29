@@ -9437,24 +9437,6 @@
   "why": "The digital text has “(but most understand” where the 1903 printing has “(but must understand” (checked against the scan). We believe this is a typo in the digital text."
  },
  {
-  "page": 1052,
-  "entry": "P00266",
-  "headword": "עוֹלָם",
-  "kind": "words",
-  "old": "thy life-time",
-  "new": "thy lifetime",
-  "why": "The book breaks “life-time” across two lines; written as one word, as asked in proofreading."
- },
- {
-  "page": 1303,
-  "entry": "R00790",
-  "headword": "צָרַם",
-  "kind": "words",
-  "old": "other first-born",
-  "new": "other firstborn",
-  "why": "The book breaks “first-born” across two lines; written as one word, as asked in proofreading."
- },
- {
   "page": 650,
   "entry": "K00872",
   "headword": "כְּנַף I",
@@ -9768,7 +9750,7 @@
   "kind": "misprint",
   "old": "Taan. 35<sup>a</sup>",
   "new": "Taan. 25<sup>a</sup>",
-  "why": "The 1903 printing has “Taan. 35ᵃ”, but Taanit ends at 31ᵃ. The quotation (“א׳ נמטו כשוריך”, א׳ standing for איכו) is at Taanit 25ᵃ: “אמר איכו נימטו כשוריך”. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Taan. 35ᵃ”, but Taanit ends at 31ᵃ. The quotation “א׳ נמטו כשוריך” (א׳ standing for איכו) was found word for word at Taanit 25ᵃ: “אמר איכו נימטו כשוריך”."
  },
  {
   "page": 282,
@@ -9777,7 +9759,7 @@
   "kind": "misprint",
   "old": "Ber. 68<sup>a</sup>",
   "new": "Ber. 61<sup>a</sup>",
-  "why": "The 1903 printing has “Ber. 68ᵃ”, but Berakhot ends at 64ᵃ. The passage on the two faces of Adam (“דו פרצופין”) is at Berakhot 61ᵃ. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Ber. 68ᵃ”, but Berakhot ends at 64ᵃ. The passage on the two faces of Adam (“דו פרצופין”) is at Berakhot 61ᵃ, and Jastrow himself cites it there: “Ber. 61ᵃ דו פרצופין ברא וכ׳” s.v. דִּיפְּרוֹסוֹף, and “Ber. 61ᵃ” s.v. פַּרְצוֹף."
  },
  {
   "page": 1335,
@@ -9786,7 +9768,7 @@
   "kind": "misprint",
   "old": "Ḥull. 147<sup>b</sup>",
   "new": "Ḥull. 47<sup>b</sup>",
-  "why": "The 1903 printing has “Ḥull. 147ᵇ”, but Ḥullin ends at 142ᵃ. The passage (“צעא דקוניא”, v. צָעָא) is at Ḥullin 47ᵇ. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Ḥull. 147ᵇ”, but Ḥullin ends at 142ᵃ. The quotation “צעא דקוניא” (v. צָעָא) was found word for word at Ḥullin 47ᵇ."
  },
  {
   "page": 2,
@@ -9795,7 +9777,7 @@
   "kind": "misprint",
   "old": "Kidd. 83<sup>a</sup>",
   "new": "Kidd. 82<sup>a</sup>",
-  "why": "The 1903 printing has “Kidd. 83ᵃ”, but Kiddushin ends at 82ᵇ; proofreading identified the reference as Kiddushin 82ᵃ. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Kid. 83ᵃ”, but Kiddushin ends at 82ᵇ. The passage (the fathers and mothers who come with schoolchildren) is at Kiddushin 82ᵃ, and Jastrow himself cites it there: “Kidd. 82ᵃ א׳ דינוקי” s.v. אִימָּא."
  },
  {
   "page": 939,
@@ -9804,7 +9786,7 @@
   "kind": "misprint",
   "old": "Y. Sabb. XII, 93<sup>c</sup> bot.",
   "new": "Y. Sabb. XII, 13<sup>c</sup> bot.",
-  "why": "The 1903 printing has “Y. Sabb. XII, 93ᶜ”, but Yerushalmi Shabbat runs only to 18ᵃ. The quotation “אתחתנון בנ׳” (בנ׳ standing for בנשיאותא) is at Y. Shabbat XII, 13ᶜ: “ואיתחתנון בנשיאותא”. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Y. Sabb. XII, 93ᶜ”, but Yerushalmi Shabbat runs only to 18ᵃ. The quotation “אתחתנון בנ׳” (בנ׳ standing for בנשיאותא) was found word for word at Y. Shabbat XII, 13ᶜ (Krotoshin = Venice folio and column): “ואיתחתנון בנשיאותא”. Jastrow himself cites the same passage as “Y. Sabb. XII, 13ᶜ bot.” s.v. חֲתַן."
  },
  {
   "page": 319,
@@ -9813,7 +9795,7 @@
   "kind": "misprint",
   "old": "Y. B. Mets. VI, end, 5<sup>c</sup>",
   "new": "Y. B. Kam. VI, end, 5<sup>c</sup>",
-  "why": "The 1903 printing has “Y. B. Mets. VI, end, 5ᶜ”, but Yerushalmi Bava Metzia begins at 7ᵈ. The quotation “בנין ד׳” (ד׳ standing for דקיקין) is at Y. Bava Kamma VI, 5ᶜ: “בנין רברבין ובנין דקיקין”. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Y. B. Mets. VI, end, 5ᶜ”, but Yerushalmi Bava Metzia begins at 7ᵈ. The quotation “בנין ד׳” (ד׳ standing for דקיקין) was found word for word at Y. Bava Kamma VI, 5ᶜ: “בנין רברבין ובנין דקיקין”."
  },
  {
   "page": 289,
@@ -9822,7 +9804,7 @@
   "kind": "misprint",
   "old": "Y. Kil. VII, 20<sup>a</sup> bot.",
   "new": "Y. Peah VII, 20<sup>a</sup> bot.",
-  "why": "The 1903 printing has “Y. Kil. VII, 20ᵃ”, but Yerushalmi Kilayim begins at 26ᵈ. “כרם ד׳” (the vineyard of Doron) is at Y. Peah VII, 20ᵃ. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book (wrong tractate), corrected here; it is not a typo in the digital text. The book prints “Y. Kil. VII, 20ᵃ”, but Yerushalmi Kilayim begins at 26ᵈ. “כרם ד׳” (the vineyard of Doron) is in another tractate, at Y. Peah VII, 20ᵃ."
  },
  {
   "page": 1358,
@@ -9831,7 +9813,7 @@
   "kind": "misprint",
   "old": "Y. Ter. V, 51<sup>d</sup>",
   "new": "Y. Maasr. V, 51<sup>d</sup>",
-  "why": "The 1903 printing has “Y. Ter. V, 51ᵈ”, but Yerushalmi Terumot runs from 40ᵃ to 48ᵇ. The quotation “התורם בלבו על הק׳” is at Y. Maasrot V, 51ᵈ. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book (wrong tractate), corrected here; it is not a typo in the digital text. The book prints “Y. Ter. V, 51ᵈ”, but Yerushalmi Terumot runs from 40ᵃ to 48ᵇ. The quotation “התורם בלבו על הק׳” is in another tractate, at Y. Maasrot V, 51ᵈ."
  },
  {
   "page": 360,
@@ -9840,7 +9822,7 @@
   "kind": "misprint",
   "old": "Y. Maas. III, 54<sup>c</sup>",
   "new": "Y. Maas. Sh. III, 54<sup>c</sup>",
-  "why": "The 1903 printing has “Y. Maas. III, 54ᶜ” (Maasroth), but Yerushalmi Maasrot ends at 52ᵃ. The quotation “ה׳ והערכה” (ה׳ standing for העמדה) is at Y. Maaser Sheni III, 54ᶜ. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book (wrong tractate), corrected here; it is not a typo in the digital text. The book prints “Y. Maas. III, 54ᶜ” (Maasroth), but Yerushalmi Maasrot ends at 52ᵃ. The quotation “ה׳ והערכה” (ה׳ standing for העמדה) is in another tractate, at Y. Maaser Sheni III, 54ᶜ."
  },
  {
   "page": 992,
@@ -9849,7 +9831,7 @@
   "kind": "misprint",
   "old": "Y. Shebi. I, 52<sup>d</sup>",
   "new": "Y. Maas. Sh. I, 52<sup>d</sup>",
-  "why": "The 1903 printing has “Y. Shebi. I, 52ᵈ”, but Yerushalmi Sheviit ends at 39ᵈ. The quotation “מעות של ס׳” is at Y. Maaser Sheni I, 52ᵈ. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book (wrong tractate), corrected here; it is not a typo in the digital text. The book prints “Y. Shebi. I, 52ᵈ” (Shebiith), but Yerushalmi Sheviit ends at 39ᵈ. The quotation “מעות של ס׳” is in another tractate, at Y. Maaser Sheni I, 52ᵈ."
  },
  {
   "page": 234,
@@ -9858,7 +9840,7 @@
   "kind": "misprint",
   "old": "Y. Meg. I, 17<sup>d</sup>",
   "new": "Y. Meg. I, 71<sup>d</sup>",
-  "why": "The 1903 printing has “Y. Meg. I, 17ᵈ”, but Yerushalmi Megillah begins at 69ᵈ. The quotation “תופרין בג׳” is at Y. Megillah I, 71ᵈ (the digits are transposed). So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Y. Meg. I, 17ᵈ”, but Yerushalmi Megillah begins at 69ᵈ. The quotation “תופרין בג׳” was found word for word at Y. Megillah I, 71ᵈ; the book transposed the digits."
  },
  {
   "page": 779,
@@ -9867,7 +9849,7 @@
   "kind": "misprint",
   "old": "Mishnah_Kiddushin.2.6\">Kidd. II, 6</a>",
   "new": "Mishnah_Kilayim.2.6\">Kil. II, 6</a>",
-  "why": "The 1903 printing has “Kidd. II, 6”, but the quotation “לעשות שדהו מ׳ מ׳” (מ׳ standing for מישר) is Mishnah Kilayim II, 6, and the next reference, “Y. ib. II, 28ᵃ”, is Yerushalmi Kilayim. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book (wrong tractate), corrected here; it is not a typo in the digital text. The book prints “Kidd. II, 6”, but the quotation “לעשות שדהו מ׳ מ׳” (מ׳ standing for מישר) is Mishnah Kilayim II, 6, and the book's next reference, “Y. ib. II, 28ᵃ”, is to Yerushalmi Kilayim."
  },
  {
   "page": 307,
@@ -9876,7 +9858,7 @@
   "kind": "misprint",
   "old": "concernig",
   "new": "concerning",
-  "why": "The 1903 printing itself has the typo “concernig”; corrected as asked in proofreading. So this is a misprint in the original book, not a typo in the digital text."
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book itself prints “concernig” for “concerning”."
  },
  {
   "page": 1128,
