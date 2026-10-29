@@ -1,7 +1,7 @@
 """Write the audit's report: findings.jsonl (one finding per line, for tools), summary.txt (short, to paste to
 Claude), and report/index.html + report/entries.html (to read: every finding with its piece of the scan, and every
 entry's scan, from all the columns and pages it runs over, beside the site's text)."""
-import html, json, os
+import hashlib, html, json, os, time
 from collections import Counter, defaultdict
 
 from PIL import Image, ImageDraw, ImageFont
@@ -75,6 +75,20 @@ article.f header{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:baseline}
 .lab{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin-bottom:4px}
 .sub{font-size:13px;color:var(--mut);margin-top:6px}.sub span:first-child{font-weight:600}
 .grp h2 .mut{font-weight:400}
+.mark{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line)}
+.mark button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:99px;
+padding:2px 10px;cursor:pointer}.mark button:hover{border-color:var(--mut)}
+.mark button.on[data-v=error]{background:var(--s1);border-color:var(--s1);color:#fff}
+.mark button.on[data-v=false]{background:#12805c;border-color:#12805c;color:#fff}
+.mark button.on[data-v=unsure]{background:var(--s3);border-color:var(--s3);color:#fff}
+.mark textarea{flex:1 1 260px;min-width:0;font:inherit;font-size:13px;border:1px solid var(--line);border-radius:6px;
+background:var(--bg);color:var(--fg);padding:3px 8px;resize:vertical;min-height:28px;height:28px}
+.mark .when{font-size:12px;color:var(--mut)}
+article.f.done{border-left:4px solid var(--line)}article.f.v-error{border-left-color:var(--s1)}
+article.f.v-false{border-left-color:#12805c}article.f.v-unsure{border-left-color:var(--s3)}
+.mbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.mbar button,.mbar label.btn{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--fg);
+border-radius:6px;padding:2px 10px;cursor:pointer}.mbar .dirty{color:var(--s2);font-weight:600}
 """
 CSS = """
 :root{--bg:#fbfaf7;--fg:#1d1b18;--mut:#6b665e;--line:#e3dfd6;--s1:#b42318;--s2:#b54708;--s3:#667085;--card:#fff}
@@ -113,6 +127,42 @@ LIVE = "https://menachemshapiro.github.io/Jastrow-Book/"
 
 
 def esc(s): return html.escape(str(s or ""))
+
+
+# what a mark keeps of its finding, so that marks.json alone says what was judged
+MARK_FIELDS = ("page", "type", "sev", "eid", "site", "scan", "note", "reread", "site_heb", "scan_heb", "site_vis",
+               "book_vis", "site_all", "scan_all", "ocr_conf", "ref", "quote", "found")
+
+
+def fkey(x):
+    """a finding's key, the same from run to run as long as the site's text and the OCR's reading are: the page, the
+    kind, the entry and the two texts (not the severity or the note, which tuning changes)"""
+    s = "|".join(str(x.get(k) or "") for k in ("page", "type", "eid", "site", "scan", "site_heb", "scan_heb", "book_vis"))
+    return hashlib.sha1(s.encode("utf-8")).hexdigest()[:12]
+
+
+def marks_line(shown):
+    """your verdicts on this run's findings, and the false alarms by kind (what tuning should look at)"""
+    v = Counter((x.get("mark") or {}).get("verdict") for x in shown if (x.get("mark") or {}).get("verdict"))
+    if not v: return "your marks: none yet (mark findings in the report, then Export marks)"
+    fa = Counter(x["type"] for x in shown if (x.get("mark") or {}).get("verdict") == "false")
+    er = Counter(x["type"] for x in shown if (x.get("mark") or {}).get("verdict") == "error")
+    return "your marks: %d (site is wrong %d, false alarm %d, not sure %d); false alarms by kind: %s; errors by kind: %s" % (
+        sum(v.values()), v["error"], v["false"], v["unsure"],
+        ", ".join("%s %d" % kv for kv in fa.most_common()) or "none", ", ".join("%s %d" % kv for kv in er.most_common()) or "none")
+
+
+def load_marks(paths_):
+    """the verdicts given in the report, from marks.json files (exported from the report): {key: mark}; where a key
+    is in more than one file, the latest verdict wins"""
+    out = {}
+    for p in paths_:
+        try: d = json.load(open(p))
+        except Exception: continue
+        for m in d.get("marks", []):
+            k = m.get("key")
+            if k and (k not in out or (m.get("time") or "") >= (out[k].get("time") or "")): out[k] = m
+    return out
 
 
 def crop_lines(img, scan, lines, boxes, pad_lines=1):
@@ -206,7 +256,8 @@ def render_marked(text, sup, unit, marks, cur=None):
     return "".join(out)
 
 
-def write(out, findings, pages, entries, book, run, scans=None, site_url="http://localhost:8000/", pages_root=None):
+def write(out, findings, pages, entries, book, run, scans=None, site_url="http://localhost:8000/", pages_root=None,
+          marks=None, label=""):
     """out: this run's folder; pages_root: the folder whose pages/ holds each page's scan and OCR (shared by all
     runs); pages: {pid: {"stats":…, "scan":…}}; entries: [(pid, eid, parts)]"""
     pages_root = pages_root or out
@@ -214,6 +265,10 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
     prel = os.path.relpath(os.path.join(pages_root, "pages"), rd)
     os.makedirs(os.path.join(rd, "crops"), exist_ok=True)
     os.makedirs(os.path.join(rd, "entries"), exist_ok=True)
+    saved = marks or {}
+    for x in findings:
+        x["key"] = fkey(x)
+        if x["key"] in saved: x["mark"] = {k: saved[x["key"]].get(k) for k in ("verdict", "note", "time")}
     with open(os.path.join(out, "findings.jsonl"), "w") as f:
         for x in findings:
             f.write(json.dumps({k: v for k, v in x.items() if k not in ("boxes",)}, ensure_ascii=False) + "\n")
@@ -360,7 +415,14 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
     # filters
     h.append('<div class="bar"><select id="ty"><option value="">every kind</option>%s</select> '
              '<select id="pg"><option value="">every page</option>%s</select> '
-             '<span class="mut" id="nshow"></span></div>' % (
+             '<select id="mk"><option value="">marked or not</option><option value="none">not yet marked</option>'
+             '<option value="error">marked: site is wrong</option><option value="false">marked: false alarm</option>'
+             '<option value="unsure">marked: not sure</option><option value="any">marked</option></select> '
+             '<span class="mut" id="nshow"></span>'
+             '<div class="mbar"><span id="mcount" class="mut"></span>'
+             '<button id="mexp" title="save your verdicts and notes as a file">Export marks</button>'
+             '<label class="btn" title="load a marks file exported before">Import marks<input type="file" id="mimp" '
+             'accept=".json,application/json" hidden></label><span id="mdirty" class="dirty"></span></div></div>' % (
                  "".join('<option value="%s">%s (%d)</option>' % (k, esc(TYPES.get(k, k)), v)
                          for k, v in sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0]))),
                  "".join('<option value="%s">p. %s (%d)</option>' % (p, p, pf[p]) for p in run)))
@@ -401,7 +463,8 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
         if eid:
             where += ' · <a href="entries.html#%s"><span lang="he" dir="rtl">%s</span> %s</a>' % (
                 esc(eid), esc(hw_of.get(eid, "")), esc(eid))
-        o = ['<article class="f" id="f%d" data-sev="%d" data-ty="%s" data-pg="%s">' % (x["_id"], x["sev"], x["type"], x["page"]),
+        o = ['<article class="f" id="f%d" data-sev="%d" data-ty="%s" data-pg="%s" data-k="%s">' % (
+                 x["_id"], x["sev"], x["type"], x["page"], x["key"]),
              '<header><span class="pill p%d">%s</span> <b>%s</b> <span class="mut">%s</span></header>' % (
                  x["sev"], SEV[x["sev"]], esc(TYPES.get(x["type"], x["type"])), where)]
         if x.get("note"): o.append('<p class="note">%s</p>' % sup(esc(x["note"])))
@@ -415,6 +478,11 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
             o.append('<details data-e="%s" data-f="%d"><summary>the whole entry, text and scan</summary><div class="ctx">'
                      '</div></details>' % (esc(eid), x["_id"]))
         o.append(page_links(x["page"], eid))
+        o.append('<div class="mark" data-k="%s"><button data-v="error" title="the site differs from the book: a real '
+                 'error to correct">Site is wrong</button><button data-v="false" title="the site is right: the OCR, the '
+                 'layout or the audit is at fault">False alarm</button><button data-v="unsure">Not sure</button>'
+                 '<textarea rows="1" placeholder="note: what the book really has, why it is right or wrong…"></textarea>'
+                 '<span class="when"></span></div>' % x["key"])
         o.append("</article>")
         return "".join(o)
 
@@ -445,14 +513,54 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
             '<div class="mut">no scan</div>'
         h.append('<template id="t-%s"><div class="we"><div dir="ltr">%s</div><div>%s</div></div></template>' %
                  (esc(eid), ent_html[eid], im_))
+    fdata = {x["key"]: {k: x[k] for k in MARK_FIELDS if x.get(k) not in (None, "", [])} for x in shown}
+    h.append('<script>const RUN=%s, FD=%s, SAVED=%s;</script>' % tuple(
+        json.dumps(v, ensure_ascii=False).replace("</", "<\\/") for v in (label, fdata, list(saved.values()))))
     h.append("""</main><script>
+// ---- your verdicts: kept in the browser as you go, and in marks.json when you export them
+const LS='jastrow-audit-marks-v1';
+let M={}; SAVED.forEach(m=>{M[m.key]=m});
+let dirty=false;
+function lsRead(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){return {}}}
+function lsWrite(){try{localStorage.setItem(LS,JSON.stringify(M))}catch(e){}}
+Object.values(lsRead()).forEach(m=>{if(m&&m.key&&(!M[m.key]||(m.time||'')>=(M[m.key].time||''))) M[m.key]=m});
+function setDirty(v){dirty=v;document.getElementById('mdirty').textContent=v?'not exported yet':''}
+function show(box){const k=box.dataset.k, m=M[k]||{}, art=box.closest('article');
+ box.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===m.verdict));
+ const ta=box.querySelector('textarea'); if(document.activeElement!==ta) ta.value=m.note||'';
+ box.querySelector('.when').textContent=m.time?('marked '+m.time.slice(0,10)):'';
+ art.classList.remove('done','v-error','v-false','v-unsure'); if(m.verdict) art.classList.add('done','v-'+m.verdict);}
+function count(){const v={error:0,false:0,unsure:0}; let n=0;
+ document.querySelectorAll('article.f').forEach(a=>{const m=M[a.dataset.k]; if(m&&m.verdict){v[m.verdict]++;n++}});
+ document.getElementById('mcount').textContent='marked '+n+' of '+document.querySelectorAll('article.f').length+
+  ': site is wrong '+v.error+', false alarm '+v.false+', not sure '+v.unsure;}
+function put(k,ch){const m=Object.assign({key:k},M[k]||{},ch,{time:new Date().toISOString(),run:RUN});
+ if(!m.verdict&&!m.note) delete M[k]; else M[k]=m; lsWrite(); setDirty(true);
+ const box=document.querySelector('.mark[data-k="'+k+'"]'); if(box) show(box); count();}
+document.querySelectorAll('.mark').forEach(box=>{const k=box.dataset.k; show(box);
+ box.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>put(k,{verdict:(M[k]||{}).verdict===b.dataset.v?'':b.dataset.v})));
+ const ta=box.querySelector('textarea'); let tm;
+ ta.addEventListener('input',()=>{clearTimeout(tm); tm=setTimeout(()=>put(k,{note:ta.value.trim()}),400)});
+ ta.addEventListener('focus',()=>{ta.style.height='70px'}); ta.addEventListener('blur',()=>{if(!ta.value) ta.style.height=''});});
+count();
+document.getElementById('mexp').addEventListener('click',()=>{
+ const marks=Object.values(M).filter(m=>m.verdict||m.note).map(m=>Object.assign({},m,{finding:FD[m.key]||m.finding||null}));
+ const blob=new Blob([JSON.stringify({version:1,exported:new Date().toISOString(),run:RUN,marks:marks},null,1)],{type:'application/json'});
+ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='jastrow-audit-marks.json';
+ document.body.appendChild(a); a.click(); a.remove(); setDirty(false);});
+document.getElementById('mimp').addEventListener('change',e=>{const f=e.target.files[0]; if(!f) return;
+ f.text().then(t=>{let n=0; (JSON.parse(t).marks||[]).forEach(m=>{if(m.key&&(!M[m.key]||(m.time||'')>=(M[m.key].time||''))){M[m.key]=m;n++}});
+  lsWrite(); document.querySelectorAll('.mark').forEach(show); count(); alert(n+' marks loaded');}).catch(()=>alert('not a marks file'));});
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault(); e.returnValue='';}});
 function upd(){const s=[...document.querySelectorAll('.sv')].filter(c=>c.checked).map(c=>c.value);
-const t=document.getElementById('ty').value, p=document.getElementById('pg').value; let n=0;
-document.querySelectorAll('.f').forEach(f=>{const on=s.includes(f.dataset.sev)&&(!t||f.dataset.ty===t)&&(!p||f.dataset.pg===p);
+const t=document.getElementById('ty').value, p=document.getElementById('pg').value, mk=document.getElementById('mk').value; let n=0;
+document.querySelectorAll('.f').forEach(f=>{const v=(M[f.dataset.k]||{}).verdict||'';
+ const okm=!mk||(mk==='none'?!v:mk==='any'?!!v:v===mk);
+ const on=s.includes(f.dataset.sev)&&(!t||f.dataset.ty===t)&&(!p||f.dataset.pg===p)&&okm;
  f.style.display=on?'':'none'; if(on) n++});
 document.querySelectorAll('.grp').forEach(g=>{g.style.display=s.includes(g.dataset.sev)?'':'none'});
 document.getElementById('nshow').textContent=n+' shown';}
-document.querySelectorAll('.sv,#ty,#pg').forEach(e=>e.addEventListener('change',upd));
+document.querySelectorAll('.sv,#ty,#pg,#mk').forEach(e=>e.addEventListener('change',upd));
 if(location.hash.startsWith('#f')){const f=document.querySelector(location.hash); if(f){const c=document.querySelector('.sv[value="'+f.dataset.sev+'"]'); c.checked=true;}}
 upd(); if(location.hash){const f=document.querySelector(location.hash); if(f) f.scrollIntoView();}
 document.querySelectorAll('details[data-e]').forEach(d=>d.addEventListener('toggle',()=>{
@@ -488,6 +596,7 @@ x.style.display=(e.target.checked&&x.dataset.n==='0')?'none':''})})</script></bo
                  len(shown), ", ".join("%d %s" % (sevc[k], SEV[k]) for k in sorted(sevc)), len(unread)),
              "by kind: " + ", ".join("%s %d" % (k, v) for k, v in sorted(cnt.items(), key=lambda kv: -kv[1])),
              "scan pages that look incomplete: " + (", ".join(bad) or "none"),
+             marks_line(shown),
              "per page (matched %, entries site/book, findings, Hebrew not checked):"]
     for pid in run:
         st = pages.get(pid, {}).get("stats", {})

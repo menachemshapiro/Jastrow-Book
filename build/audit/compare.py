@@ -18,6 +18,10 @@ CFG = {
     "verify": True,           # re-read a differing word at double size before reporting it
     "heb_fuzzy": 0.75,        # two Hebrew words (letters only) this similar are the same word
     "heb_differs": 0.55,      # a Hebrew stretch less similar than this is reported
+    "heb_loose": 0.5,         # an unpaired site word this like an unpaired scan word is "read poorly", not "differs"
+    "heb_order_sim": 0.85,    # Hebrew order is checked only on words read this close to the site's ...
+    "heb_order_conf": 60,     # ... and at least this confidently
+    "heb_short_conf": 85,     # a two-letter Hebrew scan word left over counts only if read this confidently
     "indent": 0.45,           # a line starting this many line pitches in from its column's edge is indented
     "entry_lines": "indent",  # how an entry's first line sits in the book: indented (Jastrow), or "flush"
 }
@@ -60,6 +64,17 @@ def plain_shape(x):
 ROMAN = re.compile(r"^[\[(—-]*[IVXLC]+[\]),.;:]*$")
 ROMAN_OCR = re.compile(r"^[\[(—-]*[IVXLCUHTEKYlif1|!tJ]+[\]),.;:]*$")
 HEB_CONF = str.maketrans("כפחתזירדןךמסםנצף", "בבההווווווטטטגעק")   # Hebrew letters the OCR confuses
+
+
+def one_letter(a, b):
+    """the same length, and one letter different"""
+    return len(a) == len(b) >= 2 and sum(x != y for x, y in zip(a, b)) == 1
+
+
+def heb_look(skel):
+    """a Hebrew word as the OCR might read it either way: confusable letters made the same, and ו/י left out (a
+    holam, shuruk or hiriq is often read as one)"""
+    return re.sub("[וי]", "", skel).translate(HEB_CONF)
 
 
 class PageCompare:
@@ -505,13 +520,13 @@ class PageCompare:
             if r < CFG["heb_fuzzy"]: break
             if si in pair or kj in used: continue
             pair[si] = kj; used.add(kj)
-        # order: any two paired words on one scan line that the site shows the other way round
+        # order: any two paired words on one scan line that the site shows the other way round. Only pairs the OCR
+        # read well count: a misread word paired with its neighbour's reading would look like a swap
         bad = []
-        dup = Counter(t["skel"] for t in sh) + Counter(w["skel"] for w in ks)
-        dup = Counter({k: v for k, v in dup.items()})
         sc, kc_ = Counter(t["skel"] for t in sh), Counter(w["skel"] for w in ks)
         dup = Counter({k: max(sc[k], kc_[k]) for k in set(sc) | set(kc_)})
-        items = [(sh[si], ks[kj]) for si, kj in pair.items() if len(sh[si]["skel"]) >= 2]
+        items = [(sh[si], ks[kj]) for si, kj in pair.items() if len(sh[si]["skel"]) >= 3
+                 and ks[kj]["conf"] >= CFG["heb_order_conf"] and ratio(sh[si]["skel"], ks[kj]["skel"]) >= CFG["heb_order_sim"]]
         for x in range(len(items)):
             for y in range(x + 1, len(items)):
                 (a, wa), (b, wb) = items[x], items[y]
@@ -521,33 +536,64 @@ class PageCompare:
                 # order is only reported when the pairing is clear
                 if ratio(a["skel"], wb["skel"]) + ratio(b["skel"], wa["skel"]) >= \
                         ratio(a["skel"], wa["skel"]) + ratio(b["skel"], wb["skel"]) - 0.3: continue
+                # the OCR's boxes overlap or touch: their order on the line can't be told
+                if min(wa["box"][2], wb["box"][2]) - max(wa["box"][0], wb["box"][0]) > -0.1 * self.lineh: continue
                 if ST.visual_left_of(a, b) != (wa["x"] < wb["x"]):
-                    bad.append((a, b, wa["line"]))
+                    bad.append((a, b, wa, wb))
         if bad:
-            ln = bad[0][2]
-            typ_o = "headword" if any(a["hw"] or b["hw"] for a, b, _ in bad) else "hebrew"
+            ln = bad[0][2]["line"]
+            typ_o = "headword" if any(a["hw"] or b["hw"] for a, b, _, _ in bad) else "hebrew"
             on = [(t, w) for t, w in items if w["line"] == ln]
             site_vis = sorted([t for t, w in on], key=cmp_to_key(lambda a, b: -1 if ST.visual_left_of(a, b) else 1))
             book_vis = [t for t, w in sorted(on, key=lambda p: p[1]["x"])]
-            self.add(typ_o + "_order", 1, sh, [], "the Hebrew words stand in a different order on the site",
+            # sure only when every word of the swap was read letter for letter and confidently
+            exact = all(a["skel"] == wa["skel"] and b["skel"] == wb["skel"] and min(wa["conf"], wb["conf"]) >= 80
+                        for a, b, wa, wb in bad)
+            self.add(typ_o + "_order", 1 if exact else 2, sh, [], "the Hebrew words stand in a different order on the site"
+                     + ("" if exact else " (the OCR's reading is not exact: check)"),
                      site_vis=" ".join(t["text"] for t in site_vis), book_vis=" ".join(t["text"] for t in book_vis),
-                     **rec)
+                     ocr_conf=min(min(wa["conf"], wb["conf"]) for _, _, wa, wb in bad), **rec)
         us = [t for si, t in enumerate(sh) if si not in pair and len(t["skel"]) >= 2]
-        uk = [w for kj, w in enumerate(ks) if kj not in used and w["conf"] >= 70 and len(w["skel"]) >= 2]
+        # what the OCR read but nothing on the site pairs with. Vowel points, a dagesh or a Latin letter often come
+        # out as a short "word" (דד, זז, תק): only words of three letters, or very confident two-letter ones, count
+        uk = [w for kj, w in enumerate(ks) if kj not in used and w["conf"] >= 70 and
+              (len(w["skel"]) >= 3 or (len(w["skel"]) == 2 and w["conf"] >= CFG["heb_short_conf"]))]
+        loose = [w for kj, w in enumerate(ks) if kj not in used]
         sv = " ".join(t["text"] for t in sh)
         kv = " ".join(w["text"] for w in ks)
         # a headword paired with a scan word that differs in a letter: the pairing allows small differences, but a
-        # headword must be exact (the OCR's reading has to be confident)
+        # headword must be exact. It is read again, by itself at double size, before it is reported
         for si, kj in pair.items():
             t, w = sh[si], ks[kj]
             if t["hw"] and t["skel"] != w["skel"] and w["conf"] >= 30 and len(t["skel"]) >= 2:
-                # letters the OCR often takes for each other (ט/מ, ה/ח/ת, ו/י/ר/ד, ב/כ/פ): could be either's error
-                look = t["skel"].translate(HEB_CONF) == w["skel"].translate(HEB_CONF)
-                sure = w["conf"] >= 75 and not look
-                self.add("headword_letters", 2 if sure else 3, [t], [],
-                         "a letter of the headword differs from the book's" + ("" if sure else
-                         " (letters the OCR often confuses: check)" if look else " (the OCR is unsure: check)"),
-                         site_heb=t["text"], scan_heb=w["text"], ocr_conf=w["conf"], boxes=[w["box"]], lines=[w["line"]])
+                rr = self.verify_heb(w["box"])
+                if rr is not None and ST.heb_skel(rr) == t["skel"]: continue
+                self.headword_letters(t, w, rr)
+        # a site word left unpaired that is like a scan word nothing else took (the OCR dropped or added letters):
+        # the reading is too poor to say the site is wrong. Read it again first
+        rest = []
+        for t in us:
+            best = max(loose, key=lambda w: ratio(t["skel"], w["skel"]), default=None)
+            if best is not None and (ratio(t["skel"], best["skel"]) >= CFG["heb_loose"] or
+                                     (len(best["skel"]) >= 2 and best["skel"] in t["skel"])):
+                loose.remove(best)
+                uk = [w for w in uk if w is not best]
+                if t["hw"]:
+                    rr = self.verify_heb(best["box"])
+                    if rr is not None and ST.heb_skel(rr) == t["skel"]: continue
+                    # a short headword with one letter different is still the same word (אכה / אכח: ratio 0.67)
+                    for cand in ([dict(best, text=rr, skel=ST.heb_skel(rr))] if rr else []) + [best]:
+                        if ratio(cand["skel"], t["skel"]) >= CFG["heb_fuzzy"] or one_letter(cand["skel"], t["skel"]):
+                            self.headword_letters(t, cand, rr); break
+                    else:
+                        cand = None
+                    if cand is not None: continue
+                self.add(("headword" if t["hw"] else "hebrew") + "_unread", 3, [t], [],
+                         "the OCR's reading is too poor to compare", site_heb=t["text"], scan_heb=best["text"],
+                         ocr_conf=best["conf"], boxes=[best["box"]], lines=[best["line"]])
+                continue
+            rest.append(t)
+        us = rest
         uhw = [t for t in us if t["hw"]]
         if uhw and not uk:
             # the headword is there but the OCR's reading is too unclear to pair with it: not checked
@@ -563,10 +609,50 @@ class PageCompare:
                      "check the Hebrew (OCR of pointed Hebrew is not reliable)",
                      site_heb=" ".join(t["text"] for t in us), scan_heb=" ".join(w["text"] for w in uk),
                      site_all=sv, scan_all=kv, **rec)
-        elif len(uk) >= 2 and not us:
+        elif len(uk) >= 2 and not us and sum(len(w["skel"]) for w in uk) >= 6:
             self.add("hebrew_extra_in_book", 2, sh, [], "the book seems to have Hebrew words here that the site lacks",
                      scan_heb=" ".join(w["text"] for w in uk), site_all=sv, scan_all=kv,
                      eid=sh[0]["eid"] if sh else (self.eid_for_scan(prev["j"]) if prev else None), **rec)
+
+    def headword_letters(self, t, w, rr):
+        """a headword the OCR read with a letter or more different. Letters the OCR often takes for each other
+        (ט/מ/ס, ה/ח/ת, ו/י/ר/ד/ז, ב/כ/פ, ג/נ, ע/צ), and a ו or י more or less (a holam, shuruk or hiriq read as a
+        letter), could be either's error: minor"""
+        look = heb_look(t["skel"]) == heb_look(w["skel"])
+        sure = w["conf"] >= 75 and not look and (rr is None or ST.heb_skel(rr) == w["skel"])
+        self.add("headword_letters", 2 if sure else 3, [t], [],
+                 "a letter of the headword differs from the book's" + ("" if sure else
+                 " (letters the OCR often confuses: check)" if look else " (the OCR is unsure: check)"),
+                 site_heb=t["text"], scan_heb=w["text"], ocr_conf=w["conf"], reread=rr,
+                 boxes=[w["box"]], lines=[w["line"]])
+
+    def verify_heb(self, box):
+        """read one Hebrew word of the scan again, by itself at double size (cached in the page's folder)"""
+        if not CFG["verify"]: return None
+        import json
+        cache = os.path.join(self.wd, "reread_heb.json")
+        if not hasattr(self, "_rh"):
+            try: self._rh = json.load(open(cache))
+            except Exception: self._rh = {}
+        k = ",".join(map(str, box))
+        if k in self._rh: return self._rh[k]
+        try:
+            from PIL import Image
+            img = Image.open(os.path.join(self.wd, "page.png"))
+            pad = 6
+            c = img.crop((box[0] - pad, box[1] - pad, box[2] + pad, box[3] + pad))
+            c = c.resize((c.width * 2, c.height * 2), Image.LANCZOS)
+            name = os.path.join(self.wd, "verify_heb.png")
+            c.save(name)
+            r = subprocess.run(["tesseract", name, "stdout", "-l", "heb", "--psm", "8", "--dpi", "600"],
+                               capture_output=True, text=True)
+            txt = r.stdout.strip() if r.returncode == 0 else None
+        except Exception:
+            return None
+        self._rh[k] = txt
+        try: json.dump(self._rh, open(cache, "w"), ensure_ascii=False)
+        except Exception: pass
+        return txt
 
     # ---------- page edges ----------
     def edge_gap(self, start, S, between):

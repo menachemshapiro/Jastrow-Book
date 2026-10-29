@@ -16,6 +16,8 @@ options:
                   flush (the default; so the 1903 book is set, checked on pp. 2, 6 and 8), or the other way round
   --out DIR       where everything goes (default work/audit)
   --site DIR      the site to audit (default: this repository's data/)
+  --marks FILE    your verdicts, exported from the report ("Export marks"); OUT/marks.json and
+                  ~/Downloads/jastrow-audit-marks*.json are read anyway, merged and kept in OUT/marks.json
   --site-url URL  where the report's "site page (local)" links go (default http://localhost:8000/, the local
                   preview: python3 -m http.server in the repository)
 
@@ -124,6 +126,8 @@ def main():
     ap.add_argument("--out", default=os.path.join(paths.WORK, "audit"))
     ap.add_argument("--site", default=paths.REPO)
     ap.add_argument("--site-url", default="http://localhost:8000/")
+    ap.add_argument("--marks", help="a marks file exported from the report (also read: OUT/marks.json and "
+                    "~/Downloads/jastrow-audit-marks*.json)")
     args = ap.parse_args()
     if args.check:
         sys.exit(0 if check(args) else 1)
@@ -209,8 +213,17 @@ def main():
     label = "p" + re.sub(r"[^0-9a-z-]+", "_", args.pages.lower()).strip("_")[:40] + "_" + time.strftime("%Y-%m-%d_%H%M%S")
     rdir = os.path.join(args.out, "runs", label)
     os.makedirs(rdir, exist_ok=True)
+    # your verdicts from earlier runs: the report's "Export marks" file, kept in --out as marks.json (a fresh export
+    # still in Downloads is picked up too). The latest verdict on each finding wins; the merge is saved back
+    mfiles = [os.path.join(args.out, "marks.json")] + ([args.marks] if args.marks else []) + \
+        sorted(glob.glob(os.path.expanduser("~/Downloads/jastrow-audit-marks*.json")))
+    marks = RP.load_marks(mfiles)
+    if marks:
+        json.dump({"version": 1, "marks": sorted(marks.values(), key=lambda m: m.get("time") or "")},
+                  open(os.path.join(args.out, "marks.json"), "w"), ensure_ascii=False, indent=1)
+        print("your marks: %d, from %s" % (len(marks), ", ".join(os.path.basename(f) for f in mfiles if os.path.exists(f))))
     idx, summary = RP.write(rdir, findings, pages, entries, book, run, scans=paths.SCANS, site_url=args.site_url,
-                            pages_root=args.out)
+                            pages_root=args.out, marks=marks, label=label)
     if tstats:
         extra = "Bavli citations: " + ", ".join("%s %d" % kv for kv in sorted(tstats.items()))
         summary += "\n" + extra
