@@ -20,6 +20,7 @@ sys.path.insert(0, HERE)
 SITE = sys.argv[1] if len(sys.argv) > 1 else "."
 sys.argv = [sys.argv[0], SITE]
 import talmud_index as T            # entry_texts(), roman()
+import paths
 
 # book: (Jastrow's abbreviations, Hebrew name, chapters, section: t = Torah, n = Prophets, k = Writings, Sefaria name)
 BOOKS = {
@@ -176,7 +177,7 @@ def main():
         n = sum(len(v) for b in out[corp].values() for v in b.values())
         print("%-3s %6d citations in %2d books; agree with Sefaria %d, disagree %d; not linked by Sefaria %d" % (
             corp, n, len(out[corp]), agree[corp, True], agree[corp, False], unlinked[corp]))
-    json.dump(disagree, open("/tmp/claude-0/targum_disagree.json", "w"), ensure_ascii=False, indent=0)
+    json.dump(disagree, open(paths.report("targum_disagree.json"), "w"), ensure_ascii=False, indent=0)
 
 
 if __name__ == "__main__":

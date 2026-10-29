@@ -89,6 +89,12 @@ Other suspected typos are listed for review first and corrected only once approv
 | `build/midrash_index.py` | Builds `data/midrash/` from the entry text |
 | `build/sources_index.py` | Builds `data/sources/` from the entry text |
 | `build/indexes.py` | Runs all four index builders at once, sharing the entry text (the quick way to rebuild them) |
+| `build/paths.py` | Where the scripts find the files that aren't in the repository (default: `work/`; change with `config.json` or `JASTROW_*` variables) |
+| `build/rebuild.py` | Rebuilds `data/`: `make_site2.py`, then `indexes.py` |
+| `build/checkbreaks.py` | Compares the column breaks of two commits and lists the pages whose break moved |
+| `build/apply/commit_round.py` | Adds a round of correction records to `text_fixes.json`, rebuilds, commits once and checks the column breaks |
+| `build/apply/recheck.py` | Marks each proofing card with whether what it points at is still on the site |
+| `build/talsearch/` | Finds a quotation in Sefaria's Bavli and Yerushalmi, expanding Jastrow's abbreviations (`search2.py "..."`) |
 | `favicon.ico`, `icon-*.png`, `og.png`, `site.webmanifest` | Icons and the image shown in link previews |
 
 ## Rebuilding `data/`
@@ -99,4 +105,10 @@ The two sources aren't in this repository because of their size. They are Sefari
 python3 build/build2.py Jastrow-full.xml jastrow-complete.json out2
 BREAKS=build/breaks_all2.json python3 build/make_site2.py out2 . jastrow-complete.json
 python3 build/indexes.py .
+```
+
+With the sources in `work/` (`work/out2`, `work/data/jastrow-complete.json`, `work/data2018/full/Jastrow-full.xml`), or wherever `config.json` says (see `build/config.example.json`), the last two steps are one command:
+
+```
+python3 build/rebuild.py
 ```
