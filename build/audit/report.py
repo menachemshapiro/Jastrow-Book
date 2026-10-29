@@ -114,7 +114,10 @@ a{color:inherit}
 .mk.s3{background:color-mix(in srgb,var(--s3) 22%,transparent)}
 .ins{font-weight:700;text-decoration:none;padding:0 2px;border-radius:3px}
 .ins.s1{background:var(--s1);color:#fff}.ins.s2{background:var(--s2);color:#fff}.ins.s3{background:var(--s3);color:#fff}
-.mk.cur,.ins.cur{outline:2px solid var(--fg);outline-offset:1px}
+.mk.cur.s1{background:color-mix(in srgb,var(--s1) 42%,transparent);text-decoration:underline 2px var(--s1);text-underline-offset:4px}
+.mk.cur.s2{background:color-mix(in srgb,var(--s2) 42%,transparent);text-decoration:underline 2px var(--s2);text-underline-offset:4px}
+.mk.cur.s3{background:color-mix(in srgb,var(--s3) 38%,transparent);text-decoration:underline 2px var(--s3);text-underline-offset:4px}
+.ins.cur{box-shadow:0 0 0 2px color-mix(in srgb,var(--fg) 25%,transparent)}
 .ctx{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 9px;margin-top:6px}
 .links{font-size:13px;margin-top:4px}.links a{margin-right:10px}
 details{margin-top:6px}summary{cursor:pointer;color:var(--mut)}
@@ -422,7 +425,9 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
              '<div class="mbar"><span id="mcount" class="mut"></span>'
              '<button id="mexp" title="save your verdicts and notes as a file">Export marks</button>'
              '<label class="btn" title="load a marks file exported before">Import marks<input type="file" id="mimp" '
-             'accept=".json,application/json" hidden></label><span id="mdirty" class="dirty"></span></div></div>' % (
+             'accept=".json,application/json" hidden></label>'
+             '<button id="mauto" hidden title="keep a copy of your marks on disk, saved after every change">Autosave to a file…</button>'
+             '<span id="mautost" class="mut"></span><span id="mdirty" class="dirty"></span></div></div>' % (
                  "".join('<option value="%s">%s (%d)</option>' % (k, esc(TYPES.get(k, k)), v)
                          for k, v in sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0]))),
                  "".join('<option value="%s">p. %s (%d)</option>' % (p, p, pf[p]) for p in run)))
@@ -535,7 +540,7 @@ function count(){const v={error:0,false:0,unsure:0}; let n=0;
  document.getElementById('mcount').textContent='marked '+n+' of '+document.querySelectorAll('article.f').length+
   ': site is wrong '+v.error+', false alarm '+v.false+', not sure '+v.unsure;}
 function put(k,ch){const m=Object.assign({key:k},M[k]||{},ch,{time:new Date().toISOString(),run:RUN});
- if(!m.verdict&&!m.note) delete M[k]; else M[k]=m; lsWrite(); setDirty(true);
+ if(!m.verdict&&!m.note) delete M[k]; else M[k]=m; lsWrite(); setDirty(true); autoSoon();
  const box=document.querySelector('.mark[data-k="'+k+'"]'); if(box) show(box); count();}
 document.querySelectorAll('.mark').forEach(box=>{const k=box.dataset.k; show(box);
  box.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>put(k,{verdict:(M[k]||{}).verdict===b.dataset.v?'':b.dataset.v})));
@@ -543,14 +548,40 @@ document.querySelectorAll('.mark').forEach(box=>{const k=box.dataset.k; show(box
  ta.addEventListener('input',()=>{clearTimeout(tm); tm=setTimeout(()=>put(k,{note:ta.value.trim()}),400)});
  ta.addEventListener('focus',()=>{ta.style.height='70px'}); ta.addEventListener('blur',()=>{if(!ta.value) ta.style.height=''});});
 count();
+function payload(){const marks=Object.values(M).filter(m=>m.verdict||m.note).map(m=>Object.assign({},m,{finding:FD[m.key]||m.finding||null}));
+ return JSON.stringify({version:1,exported:new Date().toISOString(),run:RUN,marks:marks},null,1);}
+// ---- autosave: a file on disk (Chrome and Edge), written a moment after every change and once a minute
+let FH=null, tmA=null, pend=false;
+const st=t=>{document.getElementById('mautost').textContent=t};
+function idb(){return new Promise((ok,no)=>{const r=indexedDB.open('jastrow-audit',1);
+ r.onupgradeneeded=()=>r.result.createObjectStore('kv'); r.onsuccess=()=>ok(r.result); r.onerror=()=>no(r.error)})}
+async function idbSet(k,v){try{const db=await idb(); db.transaction('kv','readwrite').objectStore('kv').put(v,k)}catch(e){}}
+async function idbGet(k){try{const db=await idb(); return await new Promise(ok=>{const q=db.transaction('kv').objectStore('kv').get(k);
+ q.onsuccess=()=>ok(q.result); q.onerror=()=>ok(null)})}catch(e){return null}}
+async function autoWrite(){if(!FH||!pend) return; pend=false;
+ try{const w=await FH.createWritable(); await w.write(payload()); await w.close(); setDirty(false);
+  st('autosaved to '+FH.name+' at '+new Date().toTimeString().slice(0,5));}
+ catch(e){pend=true; st('autosave failed ('+e.name+'): use Export marks');}}
+function autoSoon(){pend=true; if(!FH) return; clearTimeout(tmA); tmA=setTimeout(autoWrite,2000);}
+setInterval(autoWrite,60000);
+const ab=document.getElementById('mauto');
+async function startAuto(h){FH=h; ab.hidden=true; idbSet('fh',h); pend=true; await autoWrite();}
+if(window.showSaveFilePicker){ab.hidden=false;
+ ab.addEventListener('click',async()=>{try{
+  if(ab.dataset.resume){const h=await idbGet('fh'); if(h&&await h.requestPermission({mode:'readwrite'})==='granted') return startAuto(h);}
+  startAuto(await showSaveFilePicker({suggestedName:'jastrow-audit-marks.json',startIn:'downloads',
+   types:[{description:'marks',accept:{'application/json':['.json']}}]}));}catch(e){}});
+ idbGet('fh').then(async h=>{if(!h) return;
+  try{if(await h.queryPermission({mode:'readwrite'})==='granted') return startAuto(h);}catch(e){}
+  ab.dataset.resume='1'; ab.textContent='Resume autosave to '+h.name; ab.hidden=false;});
+}else st('marks are kept in this browser as you go; for a file, use Export marks (autosave to a file needs Chrome or Edge)');
 document.getElementById('mexp').addEventListener('click',()=>{
- const marks=Object.values(M).filter(m=>m.verdict||m.note).map(m=>Object.assign({},m,{finding:FD[m.key]||m.finding||null}));
- const blob=new Blob([JSON.stringify({version:1,exported:new Date().toISOString(),run:RUN,marks:marks},null,1)],{type:'application/json'});
+ const blob=new Blob([payload()],{type:'application/json'});
  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='jastrow-audit-marks.json';
  document.body.appendChild(a); a.click(); a.remove(); setDirty(false);});
 document.getElementById('mimp').addEventListener('change',e=>{const f=e.target.files[0]; if(!f) return;
  f.text().then(t=>{let n=0; (JSON.parse(t).marks||[]).forEach(m=>{if(m.key&&(!M[m.key]||(m.time||'')>=(M[m.key].time||''))){M[m.key]=m;n++}});
-  lsWrite(); document.querySelectorAll('.mark').forEach(show); count(); alert(n+' marks loaded');}).catch(()=>alert('not a marks file'));});
+  lsWrite(); autoSoon(); document.querySelectorAll('.mark').forEach(show); count(); alert(n+' marks loaded');}).catch(()=>alert('not a marks file'));});
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault(); e.returnValue='';}});
 function upd(){const s=[...document.querySelectorAll('.sv')].filter(c=>c.checked).map(c=>c.value);
 const t=document.getElementById('ty').value, p=document.getElementById('pg').value, mk=document.getElementById('mk').value; let n=0;
