@@ -11,6 +11,9 @@ usage: python3 build/talmud_index.py <site dir>      (reads data/c*.json, writes
 import sys, os, re, json, glob, html
 from collections import defaultdict, Counter
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths                        # where the reports go
+
 SITE = sys.argv[1] if len(sys.argv) > 1 else "."
 
 # Jastrow's abbreviation -> (Sefaria-style key, Hebrew name); "b" = has Babylonian Gemara, "y" = has Jerusalem Gemara
@@ -235,7 +238,7 @@ def main():
             for r in out["y"][key][d]:          # chapter missing or out of line with the folio: take the nearest chapter
                 if med and (r[1] not in med or abs(med[r[1]] - f) > 3):
                     r[1] = min(med, key=lambda c: (abs(med[c] - f), c))
-    json.dump(dropped, open("/tmp/claude-0/talmud_dropped.json", "w"), ensure_ascii=False, indent=0)
+    json.dump(dropped, open(paths.report("talmud_dropped.json"), "w"), ensure_ascii=False, indent=0)
     print("dropped as out of range:", len(dropped))
     os.makedirs(os.path.join(SITE, "data/talmud"), exist_ok=True)
     for f in glob.glob(os.path.join(SITE, "data/talmud/*.json")): os.remove(f)
@@ -258,7 +261,7 @@ def main():
     nb = sum(len(v) for t in out["b"].values() for v in t.values()); ny = sum(len(v) for t in out["y"].values() for v in t.values())
     print("Bavli citations", nb, "in", len(out["b"]), "tractates; Yerushalmi", ny, "in", len(out["y"]), "tractates")
     print("agreement with Sefaria's links (Bavli):", dict(agree))
-    json.dump(disagree, open("/tmp/claude-0/talmud_disagree.json", "w"), ensure_ascii=False, indent=0)
+    json.dump(disagree, open(paths.report("talmud_disagree.json"), "w"), ensure_ascii=False, indent=0)
 
 
 if __name__ == "__main__":

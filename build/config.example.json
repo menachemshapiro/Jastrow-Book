@@ -1,0 +1,4 @@
+{
+  "work": "work",
+  "_comment": "Copy to config.json (not committed) and change what differs on your computer. Keys: work, out2, current, xml, talmud, proofing, ocr, scans, reports. Relative paths are read from the repository. JASTROW_<KEY> environment variables override this file."
+}

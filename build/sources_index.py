@@ -21,6 +21,7 @@ sys.path.insert(0, HERE)
 SITE = sys.argv[1] if len(sys.argv) > 1 else "."
 sys.argv = [sys.argv[0], SITE]
 import talmud_index as T            # entry_texts(), roman()
+import paths
 
 # tractate: (Jastrow's abbreviations, Hebrew name, Sefaria's Mishnah title, Sefaria's Tosefta title)
 TR = [
@@ -227,7 +228,7 @@ def main():
     for corp in ("m", "t", "ys", "mt", "pr"):
         n = sum(len(v) for b in out[corp].values() for v in b.values())
         print("%-3s %6d citations; agree with Sefaria %d, disagree %d; not linked %d" % (corp, n, agree[corp, True], agree[corp, False], unlinked[corp]))
-    json.dump(dis, open("/tmp/claude-0/sources_disagree.json", "w"), ensure_ascii=False, indent=0)
+    json.dump(dis, open(paths.report("sources_disagree.json"), "w"), ensure_ascii=False, indent=0)
 
 
 if __name__ == "__main__":
