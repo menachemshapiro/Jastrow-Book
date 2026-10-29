@@ -9192,5 +9192,690 @@
   "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חֲפוּרְתָּא, חֲפוּרַת</span>",
   "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">חֲפוּרְתָּא</span><span class=\"pos\"> f.</span>, <span class=\"lk\">constr.</span> <span class=\"hw\" lang=\"he\" dir=\"rtl\">חֲפוּרַת</span>",
   "why": "The 1903 printing reads “חֲפוּרְתָּא f., constr. חֲפוּרַת”. The digital text dropped “constr.” (the construct form) from the list of forms; checked against the scan."
+ },
+ {
+  "page": 403,
+  "entry": "G00529",
+  "headword": "זְמַם",
+  "kind": "words",
+  "old": "tomuzzle",
+  "new": "to muzzle",
+  "why": "The digital text has “tomuzzle” where the 1903 printing has “to muzzle” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 445,
+  "entry": "H00556",
+  "headword": "חֲזָקָה",
+  "kind": "words",
+  "old": "the anima <i>l</i> when",
+  "new": "the animal when",
+  "why": "The digital text has “the anima l when” where the 1903 printing has “the animal when” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 503,
+  "entry": "H01715",
+  "headword": "חֲרַם",
+  "kind": "words",
+  "old": "to perforale",
+  "new": "to perforate",
+  "why": "The digital text has “to perforale” where the 1903 printing has “to perforate” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 509,
+  "entry": "H01809",
+  "headword": "חֶשְׁבּוֹן",
+  "kind": "words",
+  "old": "settled with yon;",
+  "new": "settled with you;",
+  "why": "The digital text has “settled with yon;” where the 1903 printing has “settled with you;” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 564,
+  "entry": "J00098",
+  "headword": "יִדּוֹעַ",
+  "kind": "words",
+  "old": "name of <i>abird</i>",
+  "new": "name of <i>a bird</i>",
+  "why": "The digital text has “name of abird” where the 1903 printing has “name of a bird” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 609,
+  "entry": "K00070",
+  "headword": "כְּבָסָא",
+  "kind": "words",
+  "old": "that is “held him",
+  "new": "that is “hold him",
+  "why": "The digital text has “that is “held him” where the 1903 printing has “that is “hold him” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 609,
+  "entry": "K00072",
+  "headword": "כְּבָר II",
+  "kind": "words",
+  "old": "put does upon",
+  "new": "put dots upon",
+  "why": "The digital text has “put does upon” where the 1903 printing has “put dots upon” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 613,
+  "entry": "K00121",
+  "headword": "כְּדִי I",
+  "kind": "words",
+  "old": "incidentatly",
+  "new": "incidentally",
+  "why": "The digital text has “incidentatly” where the 1903 printing has “incidentally” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 657,
+  "entry": "K00981",
+  "headword": "כַּף ²",
+  "kind": "words",
+  "old": "do yon mean",
+  "new": "do you mean",
+  "why": "The digital text has “do yon mean” where the 1903 printing has “do you mean” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 663,
+  "entry": "K01067",
+  "headword": "כַּפְתּוֹר",
+  "kind": "words",
+  "old": "shape of <i>apomegranate</i>",
+  "new": "shape of <i>a pomegranate</i>",
+  "why": "The digital text has “shape of apomegranate” where the 1903 printing has “shape of a pomegranate” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 732,
+  "entry": "M00252",
+  "headword": "מִדָּה",
+  "kind": "words",
+  "old": "to intimate the God",
+  "new": "to intimate that God",
+  "why": "The digital text has “to intimate the God” where the 1903 printing has “to intimate that God” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 777,
+  "entry": "M01233",
+  "headword": "מֵינֶקֶת",
+  "kind": "words",
+  "old": "giving such,",
+  "new": "giving suck,",
+  "why": "The digital text has “giving such,” where the 1903 printing has “giving suck,” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 854,
+  "entry": "M02898",
+  "headword": "מַשְׁכּוֹכִית",
+  "kind": "words",
+  "old": "‘the lender’",
+  "new": "‘the leader’",
+  "why": "The digital text has “‘the lender’” where the 1903 printing has “‘the leader’” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1051,
+  "entry": "P00264",
+  "headword": "עוֹלֵלָה",
+  "kind": "words",
+  "old": "(that wag ripe)",
+  "new": "(that was ripe)",
+  "why": "The digital text has “(that wag ripe)” where the 1903 printing has “(that was ripe)” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1089,
+  "entry": "P00903",
+  "headword": "עָמַם",
+  "kind": "words",
+  "old": "disregard the late,",
+  "new": "disregard the law,",
+  "why": "The digital text has “disregard the late,” where the 1903 printing has “disregard the law,” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1114,
+  "entry": "P01321",
+  "headword": "עֶרְוָה",
+  "kind": "words",
+  "old": "your heaving)",
+  "new": "your hearing)",
+  "why": "The digital text has “your heaving)” where the 1903 printing has “your hearing)” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1201,
+  "entry": "Q01362",
+  "headword": "פַּסְקִית",
+  "kind": "words",
+  "old": "in the wag of",
+  "new": "in the way of",
+  "why": "The digital text has “in the wag of” where the 1903 printing has “in the way of” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1471,
+  "entry": "T00559",
+  "headword": "רטי",
+  "kind": "words",
+  "old": "to be wrong out",
+  "new": "to be wrung out",
+  "why": "The digital text has “to be wrong out” where the 1903 printing has “to be wrung out” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1476,
+  "entry": "T00670",
+  "headword": "רִיע",
+  "kind": "words",
+  "old": "Naaman bad,",
+  "new": "Naaman had,",
+  "why": "The digital text has “Naaman bad,” where the 1903 printing has “Naaman had,” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1494,
+  "entry": "T00987",
+  "headword": "רְצִיעָה",
+  "kind": "words",
+  "old": "maid-servant thon shalt",
+  "new": "maid-servant thou shalt",
+  "why": "The digital text has “maid-servant thon shalt” where the 1903 printing has “maid-servant thou shalt” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1502,
+  "entry": "T01123",
+  "headword": "רְתַח",
+  "kind": "words",
+  "old": "30<sup>b</sup></a> hot.",
+  "new": "30<sup>b</sup></a> bot.",
+  "why": "The digital text has “30b hot.” where the 1903 printing has “30b bot.” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1582,
+  "entry": "U01293",
+  "headword": "שְׁלֵי ²",
+  "kind": "words",
+  "old": ") aud throw",
+  "new": ") and throw",
+  "why": "The digital text has “) aud throw” where the 1903 printing has “) and throw” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1624,
+  "entry": "U01877",
+  "headword": "שָׁקַע",
+  "kind": "words",
+  "old": "the objeot is",
+  "new": "the object is",
+  "why": "The digital text has “the objeot is” where the 1903 printing has “the object is” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1629,
+  "entry": "U01956",
+  "headword": "שַׁרְטֵט",
+  "kind": "words",
+  "old": "text about<i>ḥălitsah</i>",
+  "new": "text about <i>ḥălitsah</i>",
+  "why": "The digital text has “text aboutḥălitsah” where the 1903 printing has “text about ḥălitsah” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1637,
+  "entry": "U02091",
+  "headword": "שתי",
+  "kind": "words",
+  "old": "have drank",
+  "new": "have drunk",
+  "why": "The digital text has “have drank” where the 1903 printing has “have drunk” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1652,
+  "entry": "V00196",
+  "headword": "תּוֹךְ II",
+  "kind": "words",
+  "old": "Holy Bay)",
+  "new": "Holy Day)",
+  "why": "The digital text has “Holy Bay)” where the 1903 printing has “Holy Day)” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 1657,
+  "entry": "V00287",
+  "headword": "תּוּרְגְּמָן",
+  "kind": "words",
+  "old": "(but most understand",
+  "new": "(but must understand",
+  "why": "The digital text has “(but most understand” where the 1903 printing has “(but must understand” (checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 650,
+  "entry": "K00872",
+  "headword": "כְּנַף I",
+  "kind": "edges",
+  "old": "called them to a </span></span></span></p></div>",
+  "new": "called them to a meeting.</span></span></span></p></div>",
+  "why": "The 1903 printing ends page 650 with “called them to a meeting.”; in the digital text “meeting.” had moved to the top of page 651. This record changes page 650. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 651,
+  "entry": "K00872",
+  "headword": "כְּנַף I",
+  "kind": "edges",
+  "old": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">meeting.</span></span></span>",
+  "new": "<p class=\"ep\" data-c=\"1\">",
+  "why": "The 1903 printing ends page 650 with “called them to a meeting.”; in the digital text “meeting.” had moved to the top of page 651. This record changes page 651. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 814,
+  "entry": "M02097",
+  "headword": "מָעַט",
+  "kind": "edges",
+  "old": "on the <i>smallest</i> of the </span></span></span></p></div>",
+  "new": "on the <i>smallest</i> of the tables).</span></span></span></p></div>",
+  "why": "The 1903 printing ends page 814 with “of the tables).”; in the digital text “tables).” had moved to the top of page 815. This record changes page 814. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 815,
+  "entry": "M02097",
+  "headword": "מָעַט",
+  "kind": "edges",
+  "old": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">tables).</span></span></span>",
+  "new": "<p class=\"ep\" data-c=\"1\">",
+  "why": "The 1903 printing ends page 814 with “of the tables).”; in the digital text “tables).” had moved to the top of page 815. This record changes page 815. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1206,
+  "entry": "Q01449",
+  "headword": "פָּקַד",
+  "kind": "edges",
+  "old": "‘that my father </span></span></span></p></div>",
+  "new": "‘that my </span></span></span></p></div>",
+  "why": "The 1903 printing begins page 1207 with “father has not left me an order”; in the digital text “father” was at the end of page 1206. This record changes page 1206. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1207,
+  "entry": "Q01449",
+  "headword": "פָּקַד",
+  "kind": "edges",
+  "old": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">has not left me",
+  "new": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">father has not left me",
+  "why": "The 1903 printing begins page 1207 with “father has not left me an order”; in the digital text “father” was at the end of page 1206. This record changes page 1207. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1208,
+  "entry": "Q01482",
+  "headword": "פַּקְטֵין",
+  "kind": "edges",
+  "old": "Aramaic_Targum_to_Job.21.10\">Targ. Job </a></span></span></span></p></div>",
+  "new": "Aramaic_Targum_to_Job.21.10\">Targ.</a></span></span></span></p></div>",
+  "why": "The 1903 printing ends page 1208 with “Targ.” and begins page 1209 with “Job XXI, 10”; in the digital text “Job” was at the end of page 1208. This record changes page 1208. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1209,
+  "entry": "Q01482",
+  "headword": "פַּקְטֵין",
+  "kind": "edges",
+  "old": "Aramaic_Targum_to_Job.21.10\">XXI, 10</a>",
+  "new": "Aramaic_Targum_to_Job.21.10\">Job XXI, 10</a>",
+  "why": "The 1903 printing ends page 1208 with “Targ.” and begins page 1209 with “Job XXI, 10”; in the digital text “Job” was at the end of page 1208. This record changes page 1209. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1265,
+  "entry": "R00161",
+  "headword": "צוּד",
+  "kind": "edges",
+  "old": "insidious cross-examination </span></span></span></p></div>",
+  "new": "insidious cross-</span></span></span></p></div>",
+  "why": "The 1903 printing divides “cross-examination” at its hyphen, “cross-” ending page 1265 and “examination” beginning page 1266; in the digital text the whole word was on page 1265. This record changes page 1265. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1266,
+  "entry": "R00161",
+  "headword": "צוּד",
+  "kind": "edges",
+  "old": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">in court);",
+  "new": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">examination in court);",
+  "why": "The 1903 printing divides “cross-examination” at its hyphen, “cross-” ending page 1265 and “examination” beginning page 1266; in the digital text the whole word was on page 1265. This record changes page 1266. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1313,
+  "entry": "S00119",
+  "headword": "קָדוֹשׁ",
+  "kind": "edges",
+  "old": "he who observes the ordinances </span></span></span></p></div>",
+  "new": "he who observes the </span></span></span></p></div>",
+  "why": "The 1903 printing begins page 1314 with “ordinances of the scholars”; in the digital text “ordinances” was at the end of page 1313. This record changes page 1313. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 1314,
+  "entry": "S00119",
+  "headword": "קָדוֹשׁ",
+  "kind": "edges",
+  "old": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">of the scholars",
+  "new": "<p class=\"ep\" data-c=\"1\"><span class=\"ss\"><span class=\"s\"><span class=\"d\">ordinances of the scholars",
+  "why": "The 1903 printing begins page 1314 with “ordinances of the scholars”; in the digital text “ordinances” was at the end of page 1313. This record changes page 1314. (The scan of both pages was checked.) We believe this is a typo in the digital text, not in the 1903 printing."
+ },
+ {
+  "page": 315,
+  "entry": "D00928",
+  "headword": "דָּנִיאֵל",
+  "kind": "missing",
+  "old": "15<sup>a</sup><i>the Book of Daniel</i></span></span><span class=\"s\"><span class=\"n\">—2)</span><span class=\"d\"></span><span class=\"nt\"> name of an Amora. Y. Succ. IV, 54<sup>b</sup> bot. Ḥull. 62<sup>a</sup>; a. fr.</span></span>",
+  "new": "15<sup>a</sup> <i>the Book of Daniel</i>.</span></span><span class=\"s\"><span class=\"n\">—2)</span><span class=\"d\"></span><span class=\"nt\"> name of an Amora. Y. Succ. IV, 54<sup>b</sup> bot. Ḥull. 62<sup>a</sup>; a. fr.</span></span><span class=\"s\"><span class=\"n\">—3)</span> <span class=\"d\">one Daniel, ‘the tailor’, a scholar. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Vayikra_Rabbah.32\">Lev. R. s. 32</a>, end; <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Kohelet_Rabbah.4.1\">Koh. R. to IV, 1</a>.</span></span>",
+  "why": "Sense 3) is missing from the digital text, and a space and a period are missing before it. The 1903 printing reads “15ᵃ the Book of Daniel.—2) name of an Amora. … a. fr.—3) one Daniel, ‘the tailor’, a scholar. Lev. R. s. 32, end; Koh. R. to IV, 1.” (checked against the scan)."
+ },
+ {
+  "page": 518,
+  "entry": "I00074",
+  "headword": "*טַבְלָר",
+  "kind": "missing",
+  "old": "p. 108<sup>b</sup>, note 16</span></span></span></p></div>",
+  "new": "p. 108<sup>b</sup>, note 161); <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Midrash_Tehillim.17\">Midr. Till. to Ps. XVII</a> ed. Bub. (corr. acc.).</span></span></span></p></div>",
+  "why": "The entry is cut off in the digital text (“note 16”), in Sefaria’s current text and in its 2018 text alike. The 1903 printing ends “note 161); Midr. Till. to Ps. XVII ed. Bub. (corr. acc.).” (checked against the scan)."
+ },
+ {
+  "page": 1349,
+  "entry": "S00775",
+  "headword": "קְטָלָא",
+  "kind": "missing",
+  "old": "Leviticus.24.2\">Lev. XXIV, 2</a></span></span></span></p></div>",
+  "new": "Leviticus.24.21\">Lev. XXIV, 21</a>) refers to slaying (and not to wounding); a. fr.</span></span></span></p></div>",
+  "why": "The entry is cut off in the digital text (“Lev. XXIV, 2”), in Sefaria’s current text and in its 2018 text alike. The 1903 printing ends “(makkeh, Lev. XXIV, 21) refers to slaying (and not to wounding); a. fr.” (checked against the scan). In the book this ends the first column, so the column break comes after it.",
+  "break_after": "refers to slaying (and not to wounding); a. fr."
+ },
+ {
+  "page": 1667,
+  "entry": "V00517",
+  "headword": "תִּישּׁוּעַ",
+  "kind": "missing",
+  "old": "deduct therefrom (from 6 2/</span></span></span></p></div>",
+  "new": "deduct therefrom (from 6 2/3) four-ninths for the four sides, and there remain nineteen thirds less one-ninth (= 6 2/9).</span></span></span></p></div>",
+  "why": "The entry is cut off in the digital text (“from 6 2/”). The 1903 printing ends “deduct therefrom (from 6⅔) four-ninths for the four sides, and there remain nineteen thirds less one-ninth (= 6 2/9).” (checked against the scan)."
+ },
+ {
+  "page": 1105,
+  "entry": "P01171",
+  "headword": "עֲקֵיבָא",
+  "kind": "missing",
+  "old": "<i>consequence</i>, v. <a class=\"x\" href=\"#P01149\">עֶקְבָּא</a>.</span></span></span></p></div>",
+  "new": "<i>consequence</i>, v. <a class=\"x\" href=\"#P01149\">עֶקְבָּא</a>.</span></span><span class=\"s\"><span class=\"n\">—3)</span> <span class=\"d\">v. <a class=\"x\" href=\"#P01172\">next w.</a></span></span></span></p></div>",
+  "why": "Sense 3) is missing from the digital text; the 1903 printing ends “—3) v. next w.” (checked against the scan)."
+ },
+ {
+  "page": 581,
+  "entry": "J00443",
+  "headword": "*יָנַן",
+  "kind": "missing",
+  "old": "<i>to move quickly; to glisten, be bright</i>.</span></span></span><p class=\"bin\">",
+  "new": "<i>to move quickly; to glisten, be bright</i>.</span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\">(act. verb), v. infra.</span></span></span><p class=\"bin\">",
+  "why": "Sense 2) is missing from the digital text; the 1903 printing reads “1) (neut. verb) to move quickly; to glisten, be bright.—2) (act. verb), v. infra.” (checked against the scan)."
+ },
+ {
+  "page": 102,
+  "entry": "A02675",
+  "headword": "אֶפִּיטְרוֹפּוֹס",
+  "kind": "missing",
+  "old": "twice, read our w.]</span></span></span></p></div>",
+  "new": "twice, read our w.]</span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\">fem. v. <a class=\"x\" href=\"#A02676\">next w.</a></span></span></span></p></div>",
+  "why": "Sense 2) is missing from the digital text; the 1903 printing reads “read our w.]—2) fem. v. next w.” (checked against the scan)."
+ },
+ {
+  "page": 133,
+  "entry": "A03408",
+  "headword": "אַתּוּנָא II",
+  "kind": "missing",
+  "old": "inflame his passion.</span></span></span></p></div>",
+  "new": "inflame his passion.</span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\">v. <a class=\"x\" href=\"#A03409\">next w.</a></span></span></span></p></div>",
+  "why": "Sense 2) is missing from the digital text; the 1903 printing ends the entry “inflame his passion.—2) v. next w.” (checked against the scan)."
+ },
+ {
+  "page": 610,
+  "entry": "K00081",
+  "headword": "כָּבַשׁ",
+  "kind": "senses",
+  "old": "Yalk. Sam. 112., v. Rabb. D. S. a. l. note 6); <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Yalkut_Shimoni_on_Torah.145.9\">Yalk. Gen. 145</a>; Yalk. Sam. 112.</span></span><span class=\"s\"> <span class=\"d\"><i>to detain</i>",
+  "new": "Yalk. I Sam. 112.</span></span><span class=\"s\"><span class=\"n\">—5)</span> <span class=\"d\"><i>to detain</i>",
+  "why": "The digital text repeats “, v. Rabb. D. S. a. l. note 6); Yalk. Gen. 145; Yalk.Sam. 112.” and leaves out the sense number. The 1903 printing reads “Yalk. Gen. 145; Yalk. I Sam. 112.—5) to detain” (checked against the scan)."
+ },
+ {
+  "page": 712,
+  "entry": "L00565",
+  "headword": "לָמֵד I",
+  "kind": "senses",
+  "old": "v. <i>Pi.</i></span></span><span class=\"s\"> <span class=\"d\"><i>to accustom, train</i>",
+  "new": "v. <i>Pi.</i></span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\"><i>to accustom, train</i>",
+  "why": "The sense number is missing; the 1903 printing has “v. Pi.—2) to accustom, train” (checked against the scan)."
+ },
+ {
+  "page": 825,
+  "entry": "M02308",
+  "headword": "מצי ²",
+  "kind": "senses",
+  "old": "a. fr.—2) <a class=\"x\" href=\"#M02307\">same</a>.</span>",
+  "new": "a. fr.—2)</span>",
+  "why": "The digital text has an extra “same.” after “2)”; the 1903 printing has “—2) to pour out to the last drop, to drain” (checked against the scan)."
+ },
+ {
+  "page": 1015,
+  "entry": "O01387",
+  "headword": "סְפַן",
+  "kind": "senses",
+  "old": "<i>Ithpe.</i></span></span><span class=\"s\"> <span class=\"d\"><i>to regard</i>",
+  "new": "<i>Ithpe.</i></span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\"><i>to regard</i>",
+  "why": "The sense number is missing; the 1903 printing has “v. Ithpe.—2) to regard” (checked against the scan)."
+ },
+ {
+  "page": 1238,
+  "entry": "Q01974",
+  "headword": "פִּרְצָה",
+  "kind": "senses",
+  "old": "a. fr.— <i>lawlessness",
+  "new": "a. fr.—2) <i>lawlessness",
+  "why": "The sense number is missing; the 1903 printing has “a. fr.—2) lawlessness, licentiousness, demoralization” (checked against the scan)."
+ },
+ {
+  "page": 1287,
+  "entry": "R00565",
+  "headword": "צָמַח",
+  "kind": "senses",
+  "old": "<a class=\"x\" href=\"#R00564\">same</a>, v. <a class=\"x\" href=\"#R00564\">same</a>, v. <i>Pi.</i></span></span><span class=\"s\"> <span class=\"d\"><i>to cause to grow",
+  "new": "<a class=\"x\" href=\"#R00564\">same</a>, v. <i>Pi.</i></span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\"><i>to cause to grow",
+  "why": "The digital text repeats “same, v.” and leaves out the sense number; the 1903 printing has “1) same, v. Pi.—2) to cause to grow, produce” (checked against the scan)."
+ },
+ {
+  "page": 1352,
+  "entry": "S00811",
+  "headword": "קְטַף I",
+  "kind": "senses",
+  "old": "v. supra.—2) same.</span>",
+  "new": "v. supra.—2)</span>",
+  "why": "The digital text has an extra “same.” after “2)”; the 1903 printing has “—2) to break off, interrupt” (checked against the scan)."
+ },
+ {
+  "page": 1418,
+  "entry": "S02018",
+  "headword": "קרי ²",
+  "kind": "senses",
+  "old": "a. fr.— <i>to be read, recited",
+  "new": "a. fr.—2) <i>to be read, recited",
+  "why": "The sense number is missing; the 1903 printing has “a. fr.—2) to be read, recited” (checked against the scan)."
+ },
+ {
+  "page": 1599,
+  "entry": "U01512",
+  "headword": "שְׁמַע I",
+  "kind": "senses",
+  "old": "v. <i>Af.</i></span></span><span class=\"s\"> <span class=\"d\"><a class=\"x\" href=\"#U01516\">שַׁמְּעָא</a>)",
+  "new": "v. <i>Af.</i></span></span><span class=\"s\"><span class=\"n\">—2)</span> <span class=\"d\">(v. <a class=\"x\" href=\"#U01516\">שַׁמְּעָא</a>)",
+  "why": "The beginning of sense 2) is missing, which leaves an unmatched “)”; the 1903 printing has “v. Af.—2) (v. שַׁמְּעָא) to minister to” (checked against the scan)."
+ },
+ {
+  "page": 1683,
+  "entry": "V00765",
+  "headword": "תָּסַס",
+  "kind": "senses",
+  "old": "a. fr.— <i>to spurt.</i>",
+  "new": "a. fr.—2) <i>to spurt.</i>",
+  "why": "The sense number is missing; the 1903 printing has “a. fr.—2) to spurt” (checked against the scan)."
+ },
+ {
+  "page": 1691,
+  "entry": "V00892",
+  "headword": "תְּקַל II",
+  "kind": "senses",
+  "old": "LVII, 3).—2) same.</span>",
+  "new": "LVII, 3).—2)</span>",
+  "why": "The digital text has an extra “same.” after “2)”; the 1903 printing has “—2) to clear, v. infra” (checked against the scan)."
+ },
+ {
+  "page": 1703,
+  "entry": "V01072",
+  "headword": "תְּשׁוּבָה",
+  "kind": "senses",
+  "old": "a. fr.— <i>reply, answer</i>",
+  "new": "a. fr.—2) <i>reply, answer</i>",
+  "why": "The sense number is missing; the 1903 printing has “a. fr.—2) reply, answer” (checked against the scan)."
+ },
+ {
+  "page": 258,
+  "entry": "C01123",
+  "headword": "גִּנְזָא",
+  "kind": "senses",
+  "old": "<span class=\"ss\"><span class=\"s\"><span class=\"d\">1) same.</span><span class=\"nt\"> ch. </span></span><span class=\"s\"><span class=\"n\">1)</span><span class=\"d\"> same. Targ. I Sam.",
+  "new": "<span class=\"ss\"><span class=\"s\"><span class=\"n\">1)</span><span class=\"d\"> same. Targ. I Sam.",
+  "why": "The digital text repeats “ch. 1) same.”; the 1903 printing has it once (checked against the scan)."
+ },
+ {
+  "page": 449,
+  "entry": "H00630",
+  "headword": "חָטְיָיא",
+  "kind": "senses",
+  "old": "v. חַטָּאָח</span>",
+  "new": "v. חַטָּאָה</span>",
+  "why": "The digital text has “חַטָּאָח” where the 1903 printing has “חַטָּאָה” (read in proofreading)."
+ },
+ {
+  "page": 48,
+  "entry": "A01252",
+  "headword": "אִיכּוּ",
+  "kind": "misprint",
+  "old": "Taan. 35<sup>a</sup>",
+  "new": "Taan. 25<sup>a</sup>",
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Taan. 35ᵃ”, but Taanit ends at 31ᵃ. The quotation “א׳ נמטו כשוריך” (א׳ standing for איכו) was found word for word at Taanit 25ᵃ: “אמר איכו נימטו כשוריך”."
+ },
+ {
+  "page": 282,
+  "entry": "D00164",
+  "headword": "דּוּ III",
+  "kind": "misprint",
+  "old": "Ber. 68<sup>a</sup>",
+  "new": "Ber. 61<sup>a</sup>",
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Ber. 68ᵃ”, but Berakhot ends at 64ᵃ. The passage on the two faces of Adam (“דו פרצופין”) is at Berakhot 61ᵃ, and Jastrow himself cites it there: “Ber. 61ᵃ דו פרצופין ברא וכ׳” s.v. דִּיפְּרוֹסוֹף, and “Ber. 61ᵃ” s.v. פַּרְצוֹף."
+ },
+ {
+  "page": 1335,
+  "entry": "S00439",
+  "headword": "*קוֹנְיָא",
+  "kind": "misprint",
+  "old": "Ḥull. 147<sup>b</sup>",
+  "new": "Ḥull. 47<sup>b</sup>",
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Ḥull. 147ᵇ”, but Ḥullin ends at 142ᵃ. The quotation “צעא דקוניא” (v. צָעָא) was found word for word at Ḥullin 47ᵇ."
+ },
+ {
+  "page": 2,
+  "entry": "A00017",
+  "headword": "אַבָּא I",
+  "kind": "misprint",
+  "old": "Kidd. 83<sup>a</sup>",
+  "new": "Kidd. 82<sup>a</sup>",
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Kid. 83ᵃ”, but Kiddushin ends at 82ᵇ. The passage (the fathers and mothers who come with schoolchildren) is at Kiddushin 82ᵃ, and Jastrow himself cites it there: “Kidd. 82ᵃ א׳ דינוקי” s.v. אִימָּא."
+ },
+ {
+  "page": 939,
+  "entry": "N01308",
+  "headword": "נְשִׂיאוּתָא",
+  "kind": "misprint",
+  "old": "Y. Sabb. XII, 93<sup>c</sup> bot.",
+  "new": "Y. Sabb. XII, 13<sup>c</sup> bot.",
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Y. Sabb. XII, 93ᶜ”, but Yerushalmi Shabbat runs only to 18ᵃ. The quotation “אתחתנון בנ׳” (בנ׳ standing for בנשיאותא) was found word for word at Y. Shabbat XII, 13ᶜ (Krotoshin = Venice folio and column): “ואיתחתנון בנשיאותא”. Jastrow himself cites the same passage as “Y. Sabb. XII, 13ᶜ bot.” s.v. חֲתַן."
+ },
+ {
+  "page": 319,
+  "entry": "D01004",
+  "headword": "דַּקִּיק",
+  "kind": "misprint",
+  "old": "Y. B. Mets. VI, end, 5<sup>c</sup>",
+  "new": "Y. B. Kam. VI, end, 5<sup>c</sup>",
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Y. B. Mets. VI, end, 5ᶜ”, but Yerushalmi Bava Metzia begins at 7ᵈ. The quotation “בנין ד׳” (ד׳ standing for דקיקין) was found word for word at Y. Bava Kamma VI, 5ᶜ: “בנין רברבין ובנין דקיקין”."
+ },
+ {
+  "page": 289,
+  "entry": "D00362",
+  "headword": "דּוֹרוֹן I",
+  "kind": "misprint",
+  "old": "Y. Kil. VII, 20<sup>a</sup> bot.",
+  "new": "Y. Peah VII, 20<sup>a</sup> bot.",
+  "why": "Misprint in the 1903 book (wrong tractate), corrected here; it is not a typo in the digital text. The book prints “Y. Kil. VII, 20ᵃ”, but Yerushalmi Kilayim begins at 26ᵈ. “כרם ד׳” (the vineyard of Doron) is in another tractate, at Y. Peah VII, 20ᵃ."
+ },
+ {
+  "page": 1358,
+  "entry": "S00919",
+  "headword": "קִיטֵּעַ",
+  "kind": "misprint",
+  "old": "Y. Ter. V, 51<sup>d</sup>",
+  "new": "Y. Maasr. V, 51<sup>d</sup>",
+  "why": "Misprint in the 1903 book (wrong tractate), corrected here; it is not a typo in the digital text. The book prints “Y. Ter. V, 51ᵈ”, but Yerushalmi Terumot runs from 40ᵃ to 48ᵇ. The quotation “התורם בלבו על הק׳” is in another tractate, at Y. Maasrot V, 51ᵈ."
+ },
+ {
+  "page": 360,
+  "entry": "E00719",
+  "headword": "הַעֲמָדָה",
+  "kind": "misprint",
+  "old": "Y. Maas. III, 54<sup>c</sup>",
+  "new": "Y. Maas. Sh. III, 54<sup>c</sup>",
+  "why": "Misprint in the 1903 book (wrong tractate), corrected here; it is not a typo in the digital text. The book prints “Y. Maas. III, 54ᶜ” (Maasroth), but Yerushalmi Maasrot ends at 52ᵃ. The quotation “ה׳ והערכה” (ה׳ standing for העמדה) is in another tractate, at Y. Maaser Sheni III, 54ᶜ."
+ },
+ {
+  "page": 992,
+  "entry": "O00926",
+  "headword": "סַכָּנָה",
+  "kind": "misprint",
+  "old": "Y. Shebi. I, 52<sup>d</sup>",
+  "new": "Y. Maas. Sh. I, 52<sup>d</sup>",
+  "why": "Misprint in the 1903 book (wrong tractate), corrected here; it is not a typo in the digital text. The book prints “Y. Shebi. I, 52ᵈ” (Shebiith), but Yerushalmi Sheviit ends at 39ᵈ. The quotation “מעות של ס׳” is in another tractate, at Y. Maaser Sheni I, 52ᵈ."
+ },
+ {
+  "page": 234,
+  "entry": "C00626",
+  "headword": "גִּיד",
+  "kind": "misprint",
+  "old": "Y. Meg. I, 17<sup>d</sup>",
+  "new": "Y. Meg. I, 71<sup>d</sup>",
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book prints “Y. Meg. I, 17ᵈ”, but Yerushalmi Megillah begins at 69ᵈ. The quotation “תופרין בג׳” was found word for word at Y. Megillah I, 71ᵈ; the book transposed the digits."
+ },
+ {
+  "page": 779,
+  "entry": "M01317",
+  "headword": "מֵישַׁר",
+  "kind": "misprint",
+  "old": "Mishnah_Kiddushin.2.6\">Kidd. II, 6</a>",
+  "new": "Mishnah_Kilayim.2.6\">Kil. II, 6</a>",
+  "why": "Misprint in the 1903 book (wrong tractate), corrected here; it is not a typo in the digital text. The book prints “Kidd. II, 6”, but the quotation “לעשות שדהו מ׳ מ׳” (מ׳ standing for מישר) is Mishnah Kilayim II, 6, and the book's next reference, “Y. ib. II, 28ᵃ”, is to Yerushalmi Kilayim."
+ },
+ {
+  "page": 307,
+  "entry": "D00770",
+  "headword": "דְּכוּתָא",
+  "kind": "misprint",
+  "old": "concernig",
+  "new": "concerning",
+  "why": "Misprint in the 1903 book, corrected here; it is not a typo in the digital text. The book itself prints “concernig” for “concerning”."
+ },
+ {
+  "page": 1128,
+  "entry": "P01522",
+  "headword": "עֵת",
+  "kind": "digital",
+  "old": "Bab. Ber. 65<sup>a</sup>",
+  "new": "Bab. ib. 65<sup>a</sup>",
+  "why": "The 1903 printing has “Bab. ib. 65ᵃ” (that is, Avodah Zarah, cited just before). Sefaria’s current text replaced “ib.” with “Ber.”, which points to a page that does not exist; its 2018 text still has “ib.”. (checked against the scan)."
+ },
+ {
+  "page": 1669,
+  "entry": "V00557",
+  "headword": "תַּכְרִיךְ",
+  "kind": "word",
+  "old": "shroud</i>. Kit IX, 4",
+  "new": "shroud</i>. Kil. IX, 4",
+  "why": "The digital text has “Kit IX, 4” where the 1903 printing has “Kil. IX, 4” (Mishnah Kilayim, checked against the scan). We believe this is a typo in the digital text."
  }
 ]
