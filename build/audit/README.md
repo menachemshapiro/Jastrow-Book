@@ -22,9 +22,11 @@ Needs: `pdftoppm` (poppler-utils), `tesseract` with the `eng` and `heb` models (
 |---|---|
 | `summary.txt` | Counts by kind and per page. Paste this to Claude. |
 | `findings.jsonl` | Every finding, one per line: page, entry, kind, severity, site text, OCR text, note |
-| `report/index.html` | The findings page by page, filterable, each with its scan crop (the words concerned boxed in red) |
-| `report/entries.html` | Every entry: its scan, in all its parts (across columns and pages, in reading order), beside the site's text |
+| `report/index.html` | The findings page by page, filterable. Each finding shows the site's text around it with the words concerned highlighted (or a ‸ where words are missing), a "show the whole entry" toggle, the scan crop with the words boxed in red, and links to open the whole page: the scan PDF at that page, the straightened scan image, the layout picture, and the site's page on the local preview and on the live site (plus the entry itself on the local preview). |
+| `report/entries.html` | Every entry: its scan, in all its parts (across columns and pages, in reading order), beside the site's text with every finding highlighted by severity. Hover over a highlight for what it is; click it to go to the finding. The same page links. |
 | `pages/pNNNN/layout.png` | What the layout step found. Columns are red, the running head and foot green, a letter heading purple, lines blue. Look here first if a page's results look wrong. |
+
+The "site page (local)" links expect the local preview: run `python3 -m http.server` in the repository, or point them elsewhere with `--site-url`. The live links go to the merged site (`main`), which may differ from your branch.
 
 Severity: 1 = likely an error, 2 = check, 3 = minor or uncertain.
 

@@ -59,7 +59,20 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}
 .e{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;border-bottom:1px solid var(--line);padding:14px 0}
 .e .txt{white-space:pre-wrap}.kv div[dir=rtl]{text-align:left}@media (max-width:800px){.e{grid-template-columns:1fr}}
 a{color:inherit}
+.isl{direction:rtl;unicode-bidi:isolate}
+.mk{border-radius:3px;text-decoration:none;padding:0 1px}
+.mk.s1{background:color-mix(in srgb,var(--s1) 26%,transparent)}.mk.s2{background:color-mix(in srgb,var(--s2) 26%,transparent)}
+.mk.s3{background:color-mix(in srgb,var(--s3) 22%,transparent)}
+.ins{font-weight:700;text-decoration:none;padding:0 2px;border-radius:3px}
+.ins.s1{background:var(--s1);color:#fff}.ins.s2{background:var(--s2);color:#fff}.ins.s3{background:var(--s3);color:#fff}
+.mk.cur,.ins.cur{outline:2px solid var(--fg);outline-offset:1px}
+.ctx{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 9px;margin-top:6px}
+.links{font-size:13px;margin-top:4px}.links a{margin-right:10px}
+details{margin-top:6px}summary{cursor:pointer;color:var(--mut)}
+.pgl{font-size:12px;color:var(--mut);border:1px solid var(--line);border-radius:4px;padding:0 4px;margin:0 3px}
+.elev{font-size:13px;margin:4px 0}
 """
+LIVE = "https://menachemshapiro.github.io/Jastrow-Book/"
 
 
 def esc(s): return html.escape(str(s or ""))
@@ -110,7 +123,53 @@ def small(im, width=900):
     return im
 
 
-def write(out, findings, pages, entries, book, run):
+def render_marked(text, sup, unit, marks, cur=None):
+    """the text as HTML, set like the site (each Hebrew island right to left, folio sides raised), with findings
+    highlighted. marks: (start, end, sev, fid, title); start == end marks a place where words are missing."""
+    n = len(text)
+    cover = [[] for _ in range(n)]
+    ins = defaultdict(list)
+    for m in marks:
+        s_, e_ = max(0, m[0]), min(n, m[1])
+        if e_ <= s_: ins[min(max(0, m[0]), n)].append(m)
+        else:
+            for i in range(s_, e_): cover[i].append(m)
+    out, state = [], None
+
+    def close(st):
+        if st is None: return
+        u, mk, sp = st
+        if sp: out.append("</sup>")
+        if mk: out.append("</a>")
+        if u is not None: out.append("</span>")
+
+    def opn(st):
+        u, mk, sp = st
+        if u is not None: out.append('<span class="isl">')
+        if mk:
+            ms = [m for m in mk]
+            sev = min(m[2] for m in ms)
+            c = " cur" if cur is not None and any(m[3] == cur for m in ms) else ""
+            out.append('<a class="mk s%d%s" href="index.html#f%d" data-f="%s" title="%s">' % (
+                sev, c, ms[0][3], " ".join(str(m[3]) for m in ms), esc(" | ".join(m[4] for m in ms))))
+        if sp: out.append("<sup>")
+    for i in range(n + 1):
+        if ins.get(i):
+            close(state); state = None
+            for m in ins[i]:
+                c = " cur" if cur is not None and m[3] == cur else ""
+                out.append('<a class="ins s%d%s" href="index.html#f%d" data-f="%d" title="%s">‸</a>' %
+                           (m[2], c, m[3], m[3], esc(m[4])))
+        if i == n: break
+        st = (unit[i], tuple(cover[i]), sup[i])
+        if st != state:
+            close(state); opn(st); state = st
+        out.append(esc(text[i]))
+    close(state)
+    return "".join(out)
+
+
+def write(out, findings, pages, entries, book, run, scans=None, site_url="http://localhost:8000/"):
     """out: the audit folder; pages: {pid: {"stats":…, "scan":…}}; entries: [(pid, eid, parts)]"""
     rd = os.path.join(out, "report")
     os.makedirs(os.path.join(rd, "crops"), exist_ok=True)
@@ -126,9 +185,73 @@ def write(out, findings, pages, entries, book, run):
             imgs[pid] = Image.open(p) if os.path.exists(p) else None
         return imgs[pid]
 
-    # crops for findings
+    def page_links(pid, eid=None):
+        """open the whole page: the scan (PDF at that page, and the straightened image) and the site"""
+        L = []
+        sc = pages.get(pid, {}).get("scan")
+        if sc and scans and sc.get("pdf"):
+            L.append('<a href="%s#page=%d" target="_blank">scan PDF p. %d</a>' % (
+                esc(os.path.relpath(os.path.join(scans, sc["pdf"]), rd)), sc["pdf_page"], sc["pdf_page"]))
+        if page_img(pid) is not None:
+            L.append('<a href="../pages/p%04d/page.png" target="_blank">scan image</a>' % int(pid))
+            L.append('<a href="../pages/p%04d/layout.png" target="_blank">layout</a>' % int(pid))
+        L.append('<a href="%s#p%s" target="_blank">site page (local)</a>' % (esc(site_url), pid))
+        L.append('<a href="%s#p%s" target="_blank">site page (live)</a>' % (LIVE, pid))
+        if eid:
+            L.append('<a href="%s#%s" target="_blank">entry on site (local)</a>' % (esc(site_url), esc(eid)))
+        return '<div class="links">%s</div>' % " ".join(L)
+
     for n, x in enumerate(findings):
         x["_id"] = n
+    # ---- each entry's text, as the site has it, with its findings marked (one piece per page)
+    by_eid = defaultdict(list)
+    for pid, eid, parts in entries:
+        by_eid[eid].append((pid, parts))
+    order = []
+    for pid, eid, parts in entries:
+        if eid not in order: order.append(eid)
+    for x in findings:                                  # entries with findings but no scan (site-only checks)
+        if x.get("eid") and x["eid"] not in by_eid and x["page"] in run:
+            by_eid[x["eid"]].append((x["page"], [])); order.append(x["eid"])
+    fby = defaultdict(list)
+    for x in findings:
+        if x.get("eid"): fby[x["eid"]].append(x)
+    ent_html, ent_level, ctx_html = {}, defaultdict(list), {}
+    for eid in order:
+        pieces = []
+        for pid, _ in by_eid[eid]:
+            p = book.page(pid)
+            sp = p.entry_span(eid)
+            if not sp: continue
+            text, pos, sup_, unit = p.text_map(*sp)
+            marks = []
+            for x in fby[eid]:
+                if x["page"] != pid: continue
+                title = "%s: %s" % (TYPES.get(x["type"], x["type"]), x.get("note") or "")
+                m = None
+                if x.get("off") is not None and sp[0] <= x["off"] <= sp[1]:
+                    e_ = x.get("end") if x.get("end") is not None else x["off"]
+                    m = (pos[x["off"]], pos[max(x["off"], min(e_, sp[1]))], x["sev"], x["_id"], title)
+                elif x.get("site") and len(x["site"]) >= 4:
+                    k = text.find(x["site"][:80])
+                    if k >= 0: m = (k, k + len(x["site"][:80]), x["sev"], x["_id"], title)
+                if m: marks.append(m); x["_mark"] = (pid, m)
+                else: ent_level[eid].append(x)
+            pieces.append((pid, text, sup_, unit, marks))
+            # each finding's context: about 90 characters either side of its mark
+            for m in marks:
+                a0 = max(0, m[0] - 90); b0 = min(len(text), m[1] + 90)
+                while a0 > 0 and not text[a0 - 1].isspace(): a0 -= 1
+                while b0 < len(text) and not text[b0].isspace(): b0 += 1
+                sub = [(mm[0] - a0, mm[1] - a0, mm[2], mm[3], mm[4]) for mm in marks if mm[3] == m[3]]
+                ctx_html[m[3]] = ("… " if a0 > 0 else "") + render_marked(text[a0:b0], sup_[a0:b0], unit[a0:b0], sub, cur=m[3]) + \
+                    (" …" if b0 < len(text) else "")
+        multi = len(pieces) > 1
+        ent_html[eid] = " ".join(('<span class="pgl">p. %s</span>' % pid if multi else "") +
+                                 render_marked(t, su, un, mk) for pid, t, su, un, mk in pieces)
+    # crops for findings
+    for x in findings:
+        n = x["_id"]
         sc = pages.get(x["page"], {}).get("scan")
         im = page_img(x["page"]) if sc else None
         if im is None or not (x.get("lines") or x.get("boxes")): continue
@@ -138,14 +261,9 @@ def write(out, findings, pages, entries, book, run):
         small(c).save(os.path.join(rd, name))
         x["_crop"] = name
     # entry images: parts from every page of the run
-    by_eid = defaultdict(list)
-    for pid, eid, parts in entries:
-        by_eid[eid].append((pid, parts))
     ent_rows = []
-    order = []
-    for pid, eid, parts in entries:
-        if eid not in order: order.append(eid)
     run_set = set(run)
+    order_pages = book.body_pages()
     for eid in order:
         pieces, pids = [], []
         for pid, parts in by_eid[eid]:
@@ -162,25 +280,20 @@ def write(out, findings, pages, entries, book, run):
         if st is not None:
             name = "entries/%s.png" % eid
             small(st, 760).save(os.path.join(rd, name))
-        # does it continue past the run?
-        last = pids[-1] if pids else None
         cont_note = ""
-        if last is not None:
-            order_pages = book.body_pages()
-            k = order_pages.index(last)
+        if pids:
+            k = order_pages.index(pids[-1])
             if k + 1 < len(order_pages):
                 nx = book.page(order_pages[k + 1])
                 if nx.entries and nx.entries[0]["eid"] == eid and nx.entries[0]["cont"] and nx.pid not in run_set:
                     cont_note = "continues on p. %s, which is not in this run" % nx.pid
-            first_page = book.page(pids[0])
-            fe = next((e for e in first_page.entries if e["eid"] == eid), None)
+            fe = next((e for e in book.page(pids[0]).entries if e["eid"] == eid), None)
             if fe and fe["cont"]:
                 k0 = order_pages.index(pids[0])
                 if k0 > 0 and order_pages[k0 - 1] not in run_set:
                     cont_note = ("begins on p. %s, which is not in this run. " % order_pages[k0 - 1]) + cont_note
-        text = " ".join(book.page(pid).entry_text(eid) for pid in pids)
         hw = next((e["hw"] for pid in pids for e in book.page(pid).entries if e["eid"] == eid and e["hw"]), "")
-        ent_rows.append((eid, pids, hw, text, name, cont_note))
+        ent_rows.append((eid, pids, hw, name, cont_note))
     # ---- index.html
     cnt = Counter(x["type"] for x in findings)
     sevc = Counter(x["sev"] for x in findings)
@@ -200,59 +313,79 @@ def write(out, findings, pages, entries, book, run):
     for k, v in sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0])):
         h.append('<tr><td>%s</td><td class="mut">%s</td><td class="n">%d</td></tr>' % (esc(TYPES.get(k, k)), k, v))
     h.append("</table><h2>Pages</h2><table><tr><th>Page</th><th class=n>Site words matched</th><th class=n>Entries</th>"
-             "<th class=n>Book entry lines</th><th class=n>Findings</th><th>Layout</th></tr>")
+             "<th class=n>Book entry lines</th><th class=n>Findings</th></tr>")
     pf = Counter(x["page"] for x in findings)
     for pid in run:
         st = pages.get(pid, {}).get("stats", {})
-        lay = "pages/p%04d/layout.png" % int(pid)
         h.append('<tr><td><a href="#p%s">%s</a></td><td class="n">%s</td><td class="n">%s</td><td class="n">%s</td>'
-                 '<td class="n">%d</td><td><a href="../%s">layout</a></td></tr>' %
+                 '<td class="n">%d</td></tr>' %
                  (pid, pid, ("%.0f%%" % (100 * st["match_rate"])) if "match_rate" in st else "–",
-                  st.get("entries", "–"), st.get("book_entry_lines", "–"), pf[pid], lay))
+                  st.get("entries", "–"), st.get("book_entry_lines", "–"), pf[pid]))
     h.append("</table>")
     h.append('<div class="bar">Show: ' + "".join('<label><input type="checkbox" class="sv" value="%d" checked> %s</label>'
                                                    % (k, SEV[k]) for k in (1, 2, 3)) +
              ' <select id="ty"><option value="">all kinds</option>' +
              "".join('<option value="%s">%s (%d)</option>' % (k, esc(TYPES.get(k, k)), v) for k, v in sorted(cnt.items())) +
              "</select></div>")
+    used_eids = set()
     for pid in run:
         fs = [x for x in findings if x["page"] == pid]
-        h.append('<h2 id="p%s">Page %s <span class="mut">· %d findings</span></h2>' % (pid, pid, len(fs)))
+        h.append('<h2 id="p%s">Page %s <span class="mut">· %d findings</span></h2>%s' % (pid, pid, len(fs), page_links(pid)))
         for x in sorted(fs, key=lambda x: (x["sev"], x["type"])):
             kv = []
-            if x.get("site"): kv.append(("site", x["site"]))
+            if x.get("site") and x["_id"] not in ctx_html: kv.append(("site", x["site"]))
             if x.get("scan"): kv.append(("scan (OCR)", x["scan"]))
             for k in ("site_vis", "book_vis", "site_heb", "scan_heb", "reread", "quote", "found", "ref",
                       "book_words", "scan_line", "proposed_known", "proposed_below", "context"):
                 if x.get(k) not in (None, "", []): kv.append((k.replace("_", " "), x[k] if not isinstance(x[k], list) else ", ".join(x[k])))
-            h.append('<div class="f" data-sev="%d" data-ty="%s"><div class="t s%d">%s <span class="mut">· %s · %s%s</span></div>'
-                     % (x["sev"], x["type"], x["sev"], esc(TYPES.get(x["type"], x["type"])), SEV[x["sev"]], x["type"],
-                        (' · <a href="entries.html#%s">entry %s</a>' % (esc(x["eid"]), esc(x["eid"]))) if x.get("eid") else ""))
+            eid = x.get("eid")
+            h.append('<div class="f" id="f%d" data-sev="%d" data-ty="%s"><div class="t s%d">%s <span class="mut">· %s · %s%s</span></div>'
+                     % (x["_id"], x["sev"], x["type"], x["sev"], esc(TYPES.get(x["type"], x["type"])), SEV[x["sev"]], x["type"],
+                        (' · <a href="entries.html#%s">entry %s</a>' % (esc(eid), esc(eid))) if eid else ""))
             if x.get("note"): h.append("<div>%s</div>" % esc(x["note"]))
+            if x["_id"] in ctx_html:
+                h.append('<div class="ctx" dir="ltr">%s</div>' % ctx_html[x["_id"]])
             h.append('<div class="kv">' + "".join('<div>%s</div><div dir="%s">%s</div>' % (
                 esc(k), "rtl" if k in ("site heb", "scan heb", "site vis", "book vis", "quote") else "ltr", sup(esc(v)))
                 for k, v in kv) + "</div>")
+            if eid and eid in ent_html:
+                used_eids.add(eid)
+                h.append('<details data-e="%s" data-f="%d"><summary>show the whole entry</summary><div class="ctx" dir="ltr">'
+                         '</div></details>' % (esc(eid), x["_id"]))
             if x.get("_crop"): h.append('<img loading="lazy" src="%s" alt="scan">' % x["_crop"])
+            h.append(page_links(pid, eid))
             h.append("</div>")
+    # each entry's marked text once; "show the whole entry" copies it in and outlines the finding
+    for eid in used_eids:
+        h.append('<template id="t-%s">%s</template>' % (esc(eid), ent_html[eid]))
     h.append("""<script>
 function upd(){const s=[...document.querySelectorAll('.sv')].filter(c=>c.checked).map(c=>c.value);const t=document.getElementById('ty').value;
 document.querySelectorAll('.f').forEach(f=>{f.style.display=(s.includes(f.dataset.sev)&&(!t||f.dataset.ty===t))?'':'none'})}
-document.querySelectorAll('.sv,#ty').forEach(e=>e.addEventListener('change',upd));</script></body></html>""")
+document.querySelectorAll('.sv,#ty').forEach(e=>e.addEventListener('change',upd));
+document.querySelectorAll('details[data-e]').forEach(d=>d.addEventListener('toggle',()=>{
+ const box=d.querySelector('.ctx'); if(!d.open||box.childNodes.length) return;
+ box.appendChild(document.getElementById('t-'+d.dataset.e).content.cloneNode(true));
+ box.querySelectorAll('[data-f]').forEach(m=>{if(m.dataset.f.split(' ').includes(d.dataset.f)) m.classList.add('cur')});
+}));</script></body></html>""")
     open(os.path.join(rd, "index.html"), "w").write("\n".join(h))
     # ---- entries.html
     h = ['<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,'
          'initial-scale=1"><title>Jastrow audit: entries</title><style>%s</style></head><body>' % CSS,
          '<h1>Every entry: the scan beside the site</h1><div class="mut"><a href="index.html">back to the findings</a> · '
-         'an entry that runs over two columns or pages is shown in all its parts, in reading order · '
+         'an entry that runs over two columns or pages is shown in all its parts, in reading order · findings are '
+         'highlighted in the text (hover for what, click to go to the finding) · '
          '<label><input type="checkbox" id="only"> only entries with findings</label></div>']
-    for eid, pids, hw, text, name, cont_note in ent_rows:
+    for eid, pids, hw, name, cont_note in ent_rows:
         nf = eid_has.get(eid, 0)
+        lev = "".join('<div class="elev"><a class="mk s%d" href="index.html#f%d">%s</a> %s</div>' % (
+            x["sev"], x["_id"], esc(TYPES.get(x["type"], x["type"])), esc(x.get("note") or "")) for x in ent_level.get(eid, []))
         h.append('<div class="e" id="%s" data-n="%d"><div><b lang="he" dir="rtl">%s</b> <span class="mut">%s · p. %s%s</span>'
-                 '%s<div class="txt" dir="ltr">%s</div></div><div>%s%s</div></div>' %
+                 '%s%s<div class="txt" dir="ltr">%s</div>%s</div><div>%s</div></div>' %
                  (esc(eid), nf, esc(hw), esc(eid), esc(", ".join(pids)),
-                  (' · <a href="index.html#p%s">%d finding%s</a>' % (pids[0], nf, "s" if nf > 1 else "")) if nf else "",
-                  ('<div class="mut">%s</div>' % esc(cont_note)) if cont_note else "", sup(esc(text)),
-                  ('<img loading="lazy" src="%s" alt="scan of the entry">' % name) if name else '<div class="mut">no scan</div>', ""))
+                  (' · %d finding%s' % (nf, "s" if nf > 1 else "")) if nf else "",
+                  ('<div class="mut">%s</div>' % esc(cont_note)) if cont_note else "", lev, ent_html.get(eid, ""),
+                  page_links(pids[0], eid) if pids else "",
+                  ('<img loading="lazy" src="%s" alt="scan of the entry">' % name) if name else '<div class="mut">no scan</div>'))
     h.append("""<script>document.getElementById('only').addEventListener('change',e=>{document.querySelectorAll('.e').forEach(x=>{
 x.style.display=(e.target.checked&&x.dataset.n==='0')?'none':''})})</script></body></html>""")
     open(os.path.join(rd, "entries.html"), "w").write("\n".join(h))
@@ -260,7 +393,7 @@ x.style.display=(e.target.checked&&x.dataset.n==='0')?'none':''})})</script></bo
     lines = ["Jastrow audit: pages %s" % (", ".join(run) if len(run) < 12 else "%s-%s (%d)" % (run[0], run[-1], len(run))),
              "findings: %d (%s)" % (len(findings), ", ".join("%d %s" % (sevc[k], SEV[k]) for k in sorted(sevc))),
              "by kind: " + ", ".join("%s %d" % (k, v) for k, v in sorted(cnt.items(), key=lambda kv: -kv[1])),
-             "scan pages that look incomplete: " + (", ".join(pid for pid in run if pages.get(pid, {}).get("stats", {}).get("scan_problem")) or "none"),
+             "scan pages that look incomplete: " + (", ".join(bad) or "none"),
              "per page (matched %, entries site/book, findings):"]
     for pid in run:
         st = pages.get(pid, {}).get("stats", {})

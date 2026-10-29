@@ -16,6 +16,8 @@ options:
                   rest indented (hanging indent; the default), or the other way round
   --out DIR       where everything goes (default work/audit)
   --site DIR      the site to audit (default: this repository's data/)
+  --site-url URL  where the report's "site page (local)" links go (default http://localhost:8000/, the local
+                  preview: python3 -m http.server in the repository)
 
 Results, in the --out folder:
   summary.txt             a short summary (paste this to Claude)
@@ -118,6 +120,7 @@ def main():
     ap.add_argument("--entry-lines", choices=("flush", "indent"), default="flush")
     ap.add_argument("--out", default=os.path.join(paths.WORK, "audit"))
     ap.add_argument("--site", default=paths.REPO)
+    ap.add_argument("--site-url", default="http://localhost:8000/")
     args = ap.parse_args()
     if args.check:
         sys.exit(0 if check(args) else 1)
@@ -197,7 +200,7 @@ def main():
             findings += f; tstats += s
     # 4. report
     print("writing the report...")
-    idx, summary = RP.write(args.out, findings, pages, entries, book, run)
+    idx, summary = RP.write(args.out, findings, pages, entries, book, run, scans=paths.SCANS, site_url=args.site_url)
     if tstats:
         extra = "Bavli citations: " + ", ".join("%s %d" % kv for kv in sorted(tstats.items()))
         summary += "\n" + extra

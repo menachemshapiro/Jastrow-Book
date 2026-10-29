@@ -158,13 +158,40 @@ class PageCompare:
         rec = {"page": self.p.pid, "type": typ, "sev": sev, "eid": eid,
                "site": " ".join(t["text"] for t in st), "scan": " ".join(t.get("raw", t["text"]) for t in scan_toks),
                "note": note, "lines": lines, "boxes": [b for t in scan_toks for b in t.get("boxes", [t.get("box")])],
-               "off": st[0]["off"] if st else None}
+               "off": st[0]["off"] if st else None, "end": st[-1]["end"] if st else None}
         rec.update(kw)
         if rec["eid"] is None and rec["off"] is not None:
             rec["eid"] = self.eid_at(rec["off"])
         if rec["eid"] is None and scan_toks:
             rec["eid"] = self.eid_for_scan(scan_toks[0].get("j", 0))
+        if rec["off"] is None and scan_toks and "j" in scan_toks[-1]:
+            # nothing on the site to point at (words the site lacks): mark the place where they would go, right
+            # after the last word before them that the site and the scan share (else before the next one)
+            prev = self.site_before_scan(scan_toks[0]["j"])
+            at = self.site_after_scan(scan_toks[-1]["j"])
+            if prev is not None:
+                rec["off"] = rec["end"] = prev["end"]
+                if rec["eid"] is None: rec["eid"] = prev["eid"]
+            elif at is not None:
+                rec["off"] = rec["end"] = at["off"]
+                if rec["eid"] is None: rec["eid"] = at["eid"]
         self.f.append(rec)
+
+    def site_before_scan(self, j):
+        """the last site token matched before scan token j"""
+        best = None
+        for si, kj in self.s2k.items():
+            if kj < j and (best is None or kj > best[1]): best = (si, kj)
+        if best is None: return None
+        return next(t for t in self.p.tokens if t["i"] == best[0])
+
+    def site_after_scan(self, j):
+        """the first site token matched after scan token j (where text missing from the site would go)"""
+        best = None
+        for si, kj in self.s2k.items():
+            if kj > j and (best is None or kj < best[1]): best = (si, kj)
+        if best is None: return None
+        return next(t for t in self.p.tokens if t["i"] == best[0])
 
     def eid_for_scan(self, j):
         """the entry of the last site word matched at or before scan token j"""

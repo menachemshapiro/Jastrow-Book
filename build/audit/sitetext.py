@@ -207,6 +207,26 @@ class Page:
         out.append(self.plain[p:b])
         return "".join(out)
 
+    def text_map(self, a, b):
+        """like text(a, b), plus where each plain offset lands in the result, and for each character of the result
+        whether it is a superscript and which right-to-left island (if any) it belongs to"""
+        cuts = set(x for x in self.bounds if a < x < b)
+        out, pos, sup, unit = [], {}, [], []
+        for i in range(a, b):
+            if i in cuts and out and not out[-1].isspace():
+                out.append(" "); sup.append(False); unit.append(None)
+            pos[i] = len(out)
+            out.append(self.plain[i])
+            fl = self.attrs[i][4]
+            sup.append("sup" in fl); unit.append(self.attrs[i][5])
+        pos[b] = len(out)
+        return "".join(out), pos, sup, unit
+
+    def entry_span(self, eid):
+        """first and last plain offsets of an entry on this page"""
+        a = [t for t in self.tokens if t["eid"] == eid and not t["h2"]]
+        return (a[0]["off"], a[-1]["end"]) if a else None
+
     def entry_text(self, eid):
         a = [t for t in self.tokens if t["eid"] == eid and not t["h2"]]
         if not a: return ""
