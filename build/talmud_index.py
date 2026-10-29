@@ -129,77 +129,83 @@ def snippet(t, a):
     return s
 
 
+def citations(t):
+    """the Talmud citations in one entry's text, in order: (match, (corpus "b"|"y", tractate, chapter, daf)).
+    "Ib.", bare folios and the like are resolved to the tractate cited before them."""
+    ctx = None                      # [kind "b"|"y"|"m"|"t", tractate, chapter, folio]
+    yctx = None
+    for m in P.finditer(t):
+        g = m.group
+        hit = None
+        if g("tos"):
+            ctx = ["t", ABBR[g("tt")], roman(g("tc")) if g("tc") else None, None]; continue
+        if g("other"):
+            ctx = None; continue
+        if g("y"):
+            ctx = ["y", ABBR[g("yt")], roman(g("yc")), g("yf")]
+            hit = ("y", ctx[1], ctx[2], g("yf") + g("ys"))
+        elif g("y2"):                    # "Meg. I, 71^b": a chapter and a folio is the Jerusalem Talmud's form
+            if PRE_BAD.search(t[max(0, m.start() - 24):m.start()]): continue
+            ctx = ["y", ABBR[g("y2t")], roman(g("y2c")), g("y2f")]
+            hit = ("y", ctx[1], ctx[2], g("y2f") + g("y2s"))
+        elif g("bablc"):                 # "Bab. ib. l. c.": the Babylonian Talmud, same tractate
+            if ctx and "b" in HAS.get(ctx[1], ""): ctx = ["b", ctx[1], None, None]
+            continue
+        elif g("lc"):                    # "Bekh. l. c.": the tractate cited above
+            key = ABBR[g("lct")]
+            ctx = ["b" if "b" in HAS[key] else "m", key, None, None]; continue
+        elif g("b"):
+            if PRE_BAD.search(t[max(0, m.start() - 24):m.start()]) or t[max(0, m.start() - 3):m.start()] == "Y. ":
+                continue
+            key = ABBR[g("bt")]
+            if "b" not in HAS[key]: continue
+            if t[max(0, m.start() - 6):m.start()] == "expl. " and ctx and ctx[0] in ("m", "y"):
+                yctx = ctx[:]                # an aside ("expl. Ber. 40^b"): keep the tractate for a later "Y. ib."
+            else:
+                yctx = None
+            ctx = ["b", key, None, g("bf")]
+            hit = ("b", key, None, g("bf") + g("bs"))
+        elif g("m"):
+            ctx = ["m", ABBR[g("mt")], roman(g("mc")), None]; continue
+        elif g("bc"):                    # a folio cited without its side: sets the tractate for what follows
+            if not PRE_BAD.search(t[max(0, m.start() - 24):m.start()]):
+                ctx = ["b", ABBR[g("bct")], None, g("bcf")]
+            continue
+        elif not ctx:
+            continue
+        elif g("yib"):
+            if yctx: ctx = yctx; yctx = None
+            ch = roman(g("yic")) if g("yic") else (ctx[2] or 0)
+            ctx = ["y", ctx[1], ch, g("yif")]
+            hit = ("y", ctx[1], ch, g("yif") + g("yis"))
+        elif g("bib") or g("par"):
+            if "b" not in HAS[ctx[1]] or (g("par") and ctx[0] not in ("m", "b")): continue
+            f_, s_ = (g("bif"), g("bis")) if g("bib") else (g("pf"), g("ps"))
+            ctx = ["b", ctx[1], None, f_]
+            hit = ("b", ctx[1], None, f_ + s_)
+        elif g("side"):                  # "Ib.^b": the other side of the same folio
+            if ctx[0] in ("b", "y") and ctx[3] and (ctx[0] == "y" or g("ss") in "ab"):
+                hit = (ctx[0], ctx[1], ctx[2], ctx[3] + g("ss"))
+        elif (g("ib") or g("cont")) and ctx[0] != "t":
+            k = "i" if g("ib") else "c"
+            ch, fo, si = g(k + "c"), g(k + "f"), g(k + "s")
+            if ctx[0] == "y":
+                if ch: ctx[2] = roman(ch)
+                ctx[3] = fo
+                hit = ("y", ctx[1], ctx[2], fo + si)
+            elif ch:
+                continue                 # a chapter after a Babylonian citation: a Mishnah reference
+            elif si in "ab" and "b" in HAS[ctx[1]]:
+                ctx = ["b", ctx[1], None, fo]
+                hit = ("b", ctx[1], None, fo + si)
+        if hit: yield m, hit
+
+
 def main():
     out = {"b": defaultdict(lambda: defaultdict(list)), "y": defaultdict(lambda: defaultdict(list))}
     agree = Counter(); disagree = []
     for eid, t, refs in entry_texts():
-        ctx = None                      # [kind "b"|"y"|"m"|"t", tractate, chapter, folio]
-        yctx = None
-        for m in P.finditer(t):
-            g = m.group
-            hit = None
-            if g("tos"):
-                ctx = ["t", ABBR[g("tt")], roman(g("tc")) if g("tc") else None, None]; continue
-            if g("other"):
-                ctx = None; continue
-            if g("y"):
-                ctx = ["y", ABBR[g("yt")], roman(g("yc")), g("yf")]
-                hit = ("y", ctx[1], ctx[2], g("yf") + g("ys"))
-            elif g("y2"):                    # "Meg. I, 71^b": a chapter and a folio is the Jerusalem Talmud's form
-                if PRE_BAD.search(t[max(0, m.start() - 24):m.start()]): continue
-                ctx = ["y", ABBR[g("y2t")], roman(g("y2c")), g("y2f")]
-                hit = ("y", ctx[1], ctx[2], g("y2f") + g("y2s"))
-            elif g("bablc"):                 # "Bab. ib. l. c.": the Babylonian Talmud, same tractate
-                if ctx and "b" in HAS.get(ctx[1], ""): ctx = ["b", ctx[1], None, None]
-                continue
-            elif g("lc"):                    # "Bekh. l. c.": the tractate cited above
-                key = ABBR[g("lct")]
-                ctx = ["b" if "b" in HAS[key] else "m", key, None, None]; continue
-            elif g("b"):
-                if PRE_BAD.search(t[max(0, m.start() - 24):m.start()]) or t[max(0, m.start() - 3):m.start()] == "Y. ":
-                    continue
-                key = ABBR[g("bt")]
-                if "b" not in HAS[key]: continue
-                if t[max(0, m.start() - 6):m.start()] == "expl. " and ctx and ctx[0] in ("m", "y"):
-                    yctx = ctx[:]                # an aside ("expl. Ber. 40^b"): keep the tractate for a later "Y. ib."
-                else:
-                    yctx = None
-                ctx = ["b", key, None, g("bf")]
-                hit = ("b", key, None, g("bf") + g("bs"))
-            elif g("m"):
-                ctx = ["m", ABBR[g("mt")], roman(g("mc")), None]; continue
-            elif g("bc"):                    # a folio cited without its side: sets the tractate for what follows
-                if not PRE_BAD.search(t[max(0, m.start() - 24):m.start()]):
-                    ctx = ["b", ABBR[g("bct")], None, g("bcf")]
-                continue
-            elif not ctx:
-                continue
-            elif g("yib"):
-                if yctx: ctx = yctx; yctx = None
-                ch = roman(g("yic")) if g("yic") else (ctx[2] or 0)
-                ctx = ["y", ctx[1], ch, g("yif")]
-                hit = ("y", ctx[1], ch, g("yif") + g("yis"))
-            elif g("bib") or g("par"):
-                if "b" not in HAS[ctx[1]] or (g("par") and ctx[0] not in ("m", "b")): continue
-                f_, s_ = (g("bif"), g("bis")) if g("bib") else (g("pf"), g("ps"))
-                ctx = ["b", ctx[1], None, f_]
-                hit = ("b", ctx[1], None, f_ + s_)
-            elif g("side"):                  # "Ib.^b": the other side of the same folio
-                if ctx[0] in ("b", "y") and ctx[3] and (ctx[0] == "y" or g("ss") in "ab"):
-                    hit = (ctx[0], ctx[1], ctx[2], ctx[3] + g("ss"))
-            elif (g("ib") or g("cont")) and ctx[0] != "t":
-                k = "i" if g("ib") else "c"
-                ch, fo, si = g(k + "c"), g(k + "f"), g(k + "s")
-                if ctx[0] == "y":
-                    if ch: ctx[2] = roman(ch)
-                    ctx[3] = fo
-                    hit = ("y", ctx[1], ctx[2], fo + si)
-                elif ch:
-                    continue                 # a chapter after a Babylonian citation: a Mishnah reference
-                elif si in "ab" and "b" in HAS[ctx[1]]:
-                    ctx = ["b", ctx[1], None, fo]
-                    hit = ("b", ctx[1], None, fo + si)
-            if not hit: continue
+        for m, hit in citations(t):
             corp, key, ch, daf = hit
             if corp == "y" and "y" not in HAS[key]: continue
             lst = out[corp][key][daf]
