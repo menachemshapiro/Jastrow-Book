@@ -71,6 +71,8 @@ a{color:inherit}
 details{margin-top:6px}summary{cursor:pointer;color:var(--mut)}
 .pgl{font-size:12px;color:var(--mut);border:1px solid var(--line);border-radius:4px;padding:0 4px;margin:0 3px}
 .elev{font-size:13px;margin:4px 0}
+.we{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}.we img{margin-top:0}
+@media (max-width:800px){.we{grid-template-columns:1fr}}
 """
 LIVE = "https://menachemshapiro.github.io/Jastrow-Book/"
 
@@ -188,12 +190,8 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
     def page_links(pid, eid=None):
         """open the whole page: the scan (PDF at that page, and the straightened image) and the site"""
         L = []
-        sc = pages.get(pid, {}).get("scan")
-        if sc and scans and sc.get("pdf"):
-            L.append('<a href="%s#page=%d" target="_blank">scan PDF p. %d</a>' % (
-                esc(os.path.relpath(os.path.join(scans, sc["pdf"]), rd)), sc["pdf_page"], sc["pdf_page"]))
         if page_img(pid) is not None:
-            L.append('<a href="../pages/p%04d/page.png" target="_blank">scan image</a>' % int(pid))
+            L.append('<a href="../pages/p%04d/page.png" target="_blank">whole scan page</a>' % int(pid))
             L.append('<a href="../pages/p%04d/layout.png" target="_blank">layout</a>' % int(pid))
         L.append('<a href="%s#p%s" target="_blank">site page (local)</a>' % (esc(site_url), pid))
         L.append('<a href="%s#p%s" target="_blank">site page (live)</a>' % (LIVE, pid))
@@ -350,14 +348,18 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
                 for k, v in kv) + "</div>")
             if eid and eid in ent_html:
                 used_eids.add(eid)
-                h.append('<details data-e="%s" data-f="%d"><summary>show the whole entry</summary><div class="ctx" dir="ltr">'
+                h.append('<details data-e="%s" data-f="%d"><summary>show the whole entry (text and scan)</summary><div class="ctx">'
                          '</div></details>' % (esc(eid), x["_id"]))
             if x.get("_crop"): h.append('<img loading="lazy" src="%s" alt="scan">' % x["_crop"])
             h.append(page_links(pid, eid))
             h.append("</div>")
     # each entry's marked text once; "show the whole entry" copies it in and outlines the finding
+    eimg = {r[0]: r[3] for r in ent_rows}
     for eid in used_eids:
-        h.append('<template id="t-%s">%s</template>' % (esc(eid), ent_html[eid]))
+        im_ = ('<img loading="lazy" src="%s" alt="scan of the entry">' % eimg[eid]) if eimg.get(eid) else \
+            '<div class="mut">no scan</div>'
+        h.append('<template id="t-%s"><div class="we"><div dir="ltr">%s</div><div>%s</div></div></template>' %
+                 (esc(eid), ent_html[eid], im_))
     h.append("""<script>
 function upd(){const s=[...document.querySelectorAll('.sv')].filter(c=>c.checked).map(c=>c.value);const t=document.getElementById('ty').value;
 document.querySelectorAll('.f').forEach(f=>{f.style.display=(s.includes(f.dataset.sev)&&(!t||f.dataset.ty===t))?'':'none'})}
