@@ -39,6 +39,7 @@ TYPES = {
     "alphabetical": "Alphabetical order", "scan_incomplete": "Scan page incomplete", "talmud_range": "Bavli folio out of range",
     "talmud_near": "Bavli quote on next amud", "talmud_elsewhere": "Bavli quote elsewhere in tractate",
     "talmud_other_tractate": "Bavli quote in another tractate", "talmud_not_found": "Bavli quote not found",
+    "ib_named": "Book has “Ib.”, site names the work", "abbreviation": "Abbreviation spelt differently",
 }
 
 # what the OCR could not read is not a finding about the site: counted per page, not listed

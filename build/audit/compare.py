@@ -47,7 +47,19 @@ def ocr_shape(k):
     k = k.lstrip("#")
     k = re.sub(r"[1il|]", "l", k).replace("0", "o").replace("rn", "m").replace("vv", "w")
     k = k.replace("ae", "e").replace("ee", "e").replace("oe", "e")
+    k = k.replace("c", "e").replace("y", "v")                # acc./ace., cmp./emp., Prov./Proy.
     return k
+
+
+def plain_shape(x):
+    """letters and digits only, with the OCR's usual confusions made the same: two readings that differ only in
+    spacing or punctuation ("s. 19" / "s.19", "R. s." / "R.s.") come out equal"""
+    return ocr_shape(re.sub(r"[^0-9a-z]", "", x.lower()))
+
+
+ROMAN = re.compile(r"^[\[(—-]*[IVXLC]+[\]),.;:]*$")
+ROMAN_OCR = re.compile(r"^[\[(—-]*[IVXLCUHTEKYlif1|!tJ]+[\]),.;:]*$")
+HEB_CONF = str.maketrans("כפחתזירדןךמסםנצף", "בבההווווווטטטגעק")   # Hebrew letters the OCR confuses
 
 
 class PageCompare:
@@ -81,8 +93,18 @@ class PageCompare:
 
     # ---------- scan words ----------
     def _scan_tokens(self):
+        # a printer's signature at the foot of a column (p. 1669: "210"): its last line, a short number only
+        last, sig = {}, set()
+        for ln in self.lines: last[(ln["seg"], ln["col"])] = max(last.get((ln["seg"], ln["col"]), -1), ln["i"])
+        nseg = max([ln["seg"] for ln in self.lines] or [0])
+        for (sg, col), li in last.items():
+            ws = [t for t in self.s["ocr"]["tokens"] if t["line"] == li]
+            if sg == nseg and ws and len(ws) <= 2 and all(re.fullmatch(r"[\d*]{1,4}[.,]?", t["text"]) for t in ws):
+                sig.add(li)
+        self.signature_lines = sig
         raw = []
         for t in self.s["ocr"]["tokens"]:
+            if t["line"] in sig: continue
             # split "storage.—Pl." before the dash, as on the site side; the box is shared out by letters
             parts = [q for q in re.split(r"(?<=[^\s\u2014])(?=\u2014)", t["text"]) if q]
             if len(parts) == 1:
@@ -304,14 +326,29 @@ class PageCompare:
             # one piece of a letter or two is often the OCR's doing ("I m." read as "Im."): lower confidence
             short = min(len(t["key"]) for t in (S if len(S) > len(K) else K)) <= 2
             if len(S) < len(K):
-                self.add("run_on", 2 if short else 1, S, K, "the site runs together what the book prints as %d words"
-                         % len(K) + (" (check: a short piece)" if short else ""))
+                # the book's pieces on two lines: a word divided at a line's end, whatever the OCR made of the
+                # hyphen ("sur: rounding", "wea- ‘vers"); rule 2.8, not a finding
+                if any(K[i]["lines"][-1] != K[i + 1]["lines"][0] for i in range(len(K) - 1)): return
+                # an abbreviation the site sets without its space ("i.e." for "i. e.")
+                abbr = len(S) == 1 and re.search(r"[.’'][A-Za-z]", S[0]["text"])
+                self.add("run_on", 3 if abbr else (2 if short else 1), S, K,
+                         ("the site sets an abbreviation without the book's space" if abbr else
+                          "the site runs together what the book prints as %d words" % len(K)) +
+                         (" (check: a short piece)" if short and not abbr else ""))
             elif len(S) > len(K):
                 hy = any(t["hyph"] for t in K)
-                self.add("split_word", 2 if short else 1, S, K, "the site splits a word the book prints whole" +
+                # the OCR often loses a space in a tight line ("thealphabet", "R.s.", "field.cannot"): a real
+                # word the site split is one the book uses whole elsewhere
+                joined_known = self.vocab.get(kj, 0) >= 2
+                lost = not hy and (not joined_known or any(re.search(r"[.,;:’')\-][^\s]", t["text"]) for t in K))
+                self.add("split_word", 3 if lost else (2 if short else 1), S, K,
+                         "the site splits a word the book prints whole" +
                          (" (hyphenated at a line's end in the book)" if hy else "") +
-                         (" (check: the OCR may have run them together)" if short else ""))
+                         (" (probably the OCR missing a space)" if lost else
+                          " (check: the OCR may have run them together)" if short else ""))
             return
+        if S and K and plain_shape(" ".join(t["text"] for t in S)) == plain_shape(" ".join(t["text"] for t in K)):
+            return                                             # the same, but for the OCR's spacing and punctuation
         if mixed:
             # next to Hebrew, short words (m., v., I, II, f.) are often read as Hebrew or lost; report only longer
             # words, and numbers the scan does not have anywhere in the gap
@@ -324,14 +361,14 @@ class PageCompare:
             prev = self.p.plain[max(0, S[0]["off"] - 400):S[0]["off"]]
             txt = self.p.plain[S[0]["off"]:S[-1]["end"]]
             doubled = len(txt) > 12 and txt in prev
-            self.add("doubled" if doubled else "not_in_scan", 1 if doubled else 2, S, [],
+            self.add("doubled" if doubled else "not_in_scan", 1 if doubled else (3 if mixed and len(S) <= 2 else 2), S, [],
                      "the same words come just before" if doubled else
                      ("site words the scan's OCR does not have here" + (" (next to Hebrew)" if mixed else "")))
             return
         if not S:
             real = [t for t in K if self.real(t)]
             if real:
-                self.add("missing_in_site", 1 if len(real) >= 2 else 2, [], K,
+                self.add("missing_in_site", 1 if len(real) >= 2 else (3 if len(real[0]["key"]) <= 3 else 2), [], K,
                          "words in the book that the site does not have here", off=None)
             return
         if len(S) == len(K):
@@ -344,15 +381,46 @@ class PageCompare:
                         not re.search(r"\d", s["text"]): continue
                 v = self.verify(k)
                 if v is not None and ST.key(v) == s["key"]: continue        # the second reading agrees with the site
-                sev, note = (1 if num else 2), ""
+                typ, sev, note = ("number_differs" if num else "word_differs"), (1 if num else 2), ""
+                sd, kd = re.search(r"\d", s["text"]), re.search(r"\d", k["text"])
                 if num and self.ocr_misread_number(s["text"], k["text"]):
-                    sev, note = 3, "most likely the OCR misreading the book (a raised folio letter read as a digit, or a digit as a letter)"
-                self.add("number_differs" if num else "word_differs", sev, [s], [k],
-                         note, reread=v, ratio=round(ratio(s["key"], k["key"]), 2))
+                    sev, note = 3, "most likely the OCR misreading the book (a raised folio letter or a stop read as a digit, or a digit as a letter)"
+                elif num and not (sd and kd):
+                    # a number on one side only: mostly the alignment next to Hebrew, or a letter read as a digit
+                    common = self.vocab.get(s["key"], 0) >= 20
+                    sev = 3 if (mixed or common) else 2
+                    if common and kd: note = "the site's %s is a common abbreviation (as in D. S.); the OCR read digits" % s["text"]
+                elif ROMAN.match(s["text"]) and ROMAN_OCR.match(k["text"]) and not ROMAN.match(k["text"]):
+                    sev, note = 3, "a Roman numeral the OCR misread"
+                elif self.ib_named(s, k):
+                    typ, sev = "ib_named", 1
+                    note = "the book has “Ib.” here; the site names the work (%s): Sefaria's expansion?" % s["text"]
+                elif self.abbr_spelling(s, k):
+                    typ, sev = "abbreviation", 2
+                    note = "the site writes “%s”, the book “%s”" % (s["text"].strip("—"), k["text"].strip("—"))
+                self.add(typ, sev, [s], [k], note, reread=v, ratio=round(ratio(s["key"], k["key"]), 2))
             return
         real = [t for t in K if self.real(t)]
         if not real and len(S) <= 1: return
+        if self.ib_named(S[0], K[0]):
+            self.add("ib_named", 1, S, K, "the book has “Ib.” here; the site names the work (%s): Sefaria's expansion?"
+                     % " ".join(t["text"] for t in S[:3]))
+            return
         self.add("differs", 2, S, K, "the site and the scan differ here" + (" (next to Hebrew)" if mixed else ""))
+
+    @staticmethod
+    def ib_named(s, k):
+        """the book prints "Ib." where the site names a work ("Gen.", "Snh.")"""
+        return k["key"] == "ib" and s["key"] != "ib" and re.match(r"^[—\[(]*[A-Z][a-z]*\.", s["text"]) is not None
+
+    @staticmethod
+    def abbr_spelling(s, k):
+        """the same abbreviation spelt with a letter more or less ("Kidd." / "Kid.", "Nidd." / "Nid.")"""
+        a, b = s["key"], k["key"]
+        if not (s["text"].rstrip(";,)").endswith(".") and k["text"].rstrip(";,)").endswith(".")): return False
+        if abs(len(a) - len(b)) != 1 or min(len(a), len(b)) < 2: return False
+        lo, hi = sorted((a, b), key=len)
+        return hi.startswith(lo) and hi[-1] == lo[-1]
 
     @staticmethod
     def ocr_misread_number(site, scan):
@@ -368,7 +436,9 @@ class PageCompare:
         if not m: return False
         a = m.group(1)
         d = re.sub(r"\D", "", scan)
-        raised = re.search(r"\d[°¢%®*'’\"”^]+[;:,.)]*$", scan)    # the letter read as a symbol: 83°, 35¢
+        m2 = re.match(r"^\D*?(\d+)[;,]$", site)                    # a stop after the number read as a digit: 5; as 53
+        if m2 and re.fullmatch(re.escape(m2.group(1)) + r"[35]", scan.strip()): return True
+        raised = re.search(r"\d[°¢%®*'’\"”^>]+[;:,.)]*$", scan)   # the letter read as a symbol: 83°, 35¢, 89>
         if len(d) == len(a) + 1: b = d[:len(a)]
         elif len(d) == len(a) and raised: b = d
         else: return False
@@ -447,6 +517,10 @@ class PageCompare:
                 (a, wa), (b, wb) = items[x], items[y]
                 if wa["line"] != wb["line"] or a["skel"] == b["skel"]: continue
                 if dup[a["skel"]] > 1 or dup[b["skel"]] > 1: continue
+                # two spellings of one word (אֲבֵלָה / אֲבֵילָה) pair either way round with what the OCR read: the
+                # order is only reported when the pairing is clear
+                if ratio(a["skel"], wb["skel"]) + ratio(b["skel"], wa["skel"]) >= \
+                        ratio(a["skel"], wa["skel"]) + ratio(b["skel"], wb["skel"]) - 0.3: continue
                 if ST.visual_left_of(a, b) != (wa["x"] < wb["x"]):
                     bad.append((a, b, wa["line"]))
         if bad:
@@ -467,11 +541,19 @@ class PageCompare:
         for si, kj in pair.items():
             t, w = sh[si], ks[kj]
             if t["hw"] and t["skel"] != w["skel"] and w["conf"] >= 30 and len(t["skel"]) >= 2:
-                self.add("headword_letters", 2 if w["conf"] >= 75 else 3, [t], [],
-                         "a letter of the headword differs from the book's" + ("" if w["conf"] >= 75 else
-                                                                                " (the OCR is unsure: check)"),
+                # letters the OCR often takes for each other (ט/מ, ה/ח/ת, ו/י/ר/ד, ב/כ/פ): could be either's error
+                look = t["skel"].translate(HEB_CONF) == w["skel"].translate(HEB_CONF)
+                sure = w["conf"] >= 75 and not look
+                self.add("headword_letters", 2 if sure else 3, [t], [],
+                         "a letter of the headword differs from the book's" + ("" if sure else
+                         " (letters the OCR often confuses: check)" if look else " (the OCR is unsure: check)"),
                          site_heb=t["text"], scan_heb=w["text"], ocr_conf=w["conf"], boxes=[w["box"]], lines=[w["line"]])
         uhw = [t for t in us if t["hw"]]
+        if uhw and not uk:
+            # the headword is there but the OCR's reading is too unclear to pair with it: not checked
+            self.add("headword_unread", 3, sh, [], "the OCR's reading of the headword is too unclear to compare",
+                     site_all=sv, scan_all=kv, **rec)
+            return
         if us and not ks:
             self.add(typ + "_unread", 3, sh, [], "the OCR read no Hebrew here", **rec)
         elif uhw or (us and uk):
