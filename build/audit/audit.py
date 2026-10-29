@@ -12,8 +12,8 @@ options:
   --force         render and OCR again even if a page was done before (otherwise the OCR is reused)
   --no-talmud     skip the Bavli checks;  --no-quotes  only the range check, not the quotation search
   --no-verify     don't re-read differing words a second time
-  --entry-lines flush|indent   how an entry's first line sits in the book: flush with the column's edge, the
-                  rest indented (hanging indent; the default), or the other way round
+  --entry-lines flush|indent   how an entry's first line sits in the book: indented by about an em, the rest
+                  flush (the default; so the 1903 book is set, checked on pp. 2, 6 and 8), or the other way round
   --out DIR       where everything goes (default work/audit)
   --site DIR      the site to audit (default: this repository's data/)
   --site-url URL  where the report's "site page (local)" links go (default http://localhost:8000/, the local
@@ -120,7 +120,7 @@ def main():
     ap.add_argument("--no-talmud", action="store_true")
     ap.add_argument("--no-quotes", action="store_true")
     ap.add_argument("--no-verify", action="store_true")
-    ap.add_argument("--entry-lines", choices=("flush", "indent"), default="flush")
+    ap.add_argument("--entry-lines", choices=("flush", "indent"), default="indent")
     ap.add_argument("--out", default=os.path.join(paths.WORK, "audit"))
     ap.add_argument("--site", default=paths.REPO)
     ap.add_argument("--site-url", default="http://localhost:8000/")
@@ -161,6 +161,8 @@ def main():
                 pc = CO.PageCompare(page, scan, V, args.out)
                 findings += pc.run()
                 pages[pid] = {"stats": pc.stats, "scan": scan}
+                for w in scan["layout"].get("warnings", []):
+                    findings.append(CK.finding(pid, "layout", 2, None, "", "layout: " + w))
                 for e in page.entries:
                     if e["eid"] in pc.entry_parts: entries.append((pid, e["eid"], pc.entry_parts[e["eid"]]))
             else:

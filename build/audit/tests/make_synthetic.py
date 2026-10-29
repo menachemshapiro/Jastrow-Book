@@ -4,7 +4,7 @@
 usage: python3 build/audit/tests/make_synthetic.py OUTDIR PAGE [PAGE ...]
 Writes OUTDIR/Synthetic_1.pdf with each book page at the PDF page the real scan would have (n+16), white filler pages
 elsewhere. The pages are set in two columns at the site's column break, with a running head, a letter heading where
-the site has one, hanging indents, line-end hyphens, superscript folio sides and Hebrew phrases set right to left.
+the site has one, each entry's first line indented (as in the book; the lines after it flush), line-end hyphens, superscript folio sides and Hebrew phrases set right to left.
 Fonts: DejaVu (Latin) and DejaVu Sans or Noto Sans Hebrew (Hebrew); needs Pillow with raqm for right-to-left text."""
 import os, sys, glob
 from PIL import Image, ImageDraw, ImageFont, features
@@ -83,7 +83,7 @@ def set_cols(d, cols, top, colw, indent, space, lh, fl, fh, fs):
             nonlocal cur, w, ind
             if cur: lines.append((ind, cur, last))
             cur, w = [], 0
-            ind = 0 if new_entry else indent
+            ind = indent if new_entry else 0
         k = 0
         items = [(t["text"], t) for t in ct]
         first = True
@@ -92,7 +92,7 @@ def set_cols(d, cols, top, colw, indent, space, lh, fl, fh, fs):
             newe = t["eid"] != prev_e and not t["cont"]
             if t["eid"] != prev_e:
                 if not first: flush(newe)
-                else: ind = 0 if (newe and k == 0 and not continues_from_left(t)) else indent
+                else: ind = indent if (newe and k == 0 and not continues_from_left(t)) else 0
                 prev_e = t["eid"]
             first = False
             f = fh if t["heb"] else fl

@@ -12,7 +12,7 @@ python3 build/audit/audit.py --pages 1-10       # the pilot
 xdg-open work/audit/report/index.html            # the report
 ```
 
-`--pages` also takes `1,5,7-9` or `all`. Each page's OCR is kept in `work/audit/pages/`, so a second run only compares again, which takes seconds. Add `--force` to OCR again, for example after changing `--dpi`. Other options: `--jobs N`, `--dpi N` (default 400), `--no-talmud`, `--no-quotes`, `--no-verify`, `--entry-lines flush|indent`, `--out DIR`, `--site DIR`.
+`--pages` also takes `1,5,7-9` or `all`. Each page's OCR is kept in `work/audit/pages/`, so a second run only compares again, which takes seconds. Add `--force` to OCR again, for example after changing `--dpi`. A page laid out by an older version of the layout step is laid out again by itself; it is OCR'd again only if its columns moved. Other options: `--jobs N`, `--dpi N` (default 400), `--no-talmud`, `--no-quotes`, `--no-verify`, `--entry-lines flush|indent`, `--out DIR`, `--site DIR`.
 
 Needs: `pdftoppm` (poppler-utils), `tesseract` with the `eng` and `heb` models (`sudo apt install tesseract-ocr-heb`), and `pip install numpy pillow`. The scans are found through `build/paths.py` (`work/scans/*1.pdf` and `*2.pdf`, or `JASTROW_SCANS`). The quotation search needs Sefaria's Talmud text in `work/talmudtext`. Without it, only the range check runs.
 
@@ -22,24 +22,26 @@ Needs: `pdftoppm` (poppler-utils), `tesseract` with the `eng` and `heb` models (
 |---|---|
 | `summary.txt` | Counts by kind and per page. Paste this to Claude. |
 | `findings.jsonl` | Every finding, one per line: page, entry, kind, severity, site text, OCR text, note |
-| `report/index.html` | The findings page by page, filterable. Each finding shows the site's text around it with the words concerned highlighted (or a ‸ where words are missing), a "show the whole entry" toggle (the entry's whole text beside its cropped scan, all parts stitched together), the scan crop with the words boxed in red, and links to open the whole page: the scan page as an image, the layout picture, and the site's page on the local preview and on the live site (plus the entry itself on the local preview). |
+| `report/index.html` | Start here. Likely errors first, then "worth a check"; minor ones are hidden until you tick their tile. Each finding is two boxes side by side: **Site** (the site's text with the words concerned highlighted, or a ‸ where words are missing) and **Book** (the scan crop with the words boxed in red, and what the OCR read). Filter by kind or page. Each finding can open the whole entry (text beside its stitched scan), the whole scan page, the layout picture and the site's page (local and live). Places where the OCR could not read the Hebrew are only counted (per page, at the foot): they say nothing about the site. |
 | `report/entries.html` | Every entry: its scan, in all its parts (across columns and pages, in reading order), beside the site's text with every finding highlighted by severity. Hover over a highlight for what it is; click it to go to the finding. The same page links. |
 | `pages/pNNNN/layout.png` | What the layout step found. Columns are red, the running head and foot green, a letter heading purple, lines blue. Look here first if a page's results look wrong. |
 
 The "site page (local)" links expect the local preview: run `python3 -m http.server` in the repository, or point them elsewhere with `--site-url`. The live links go to the merged site (`main`), which may differ from your branch.
 
-Severity: 1 = likely an error, 2 = check, 3 = minor or uncertain.
+Severity: 1 = likely an error, 2 = check, 3 = minor or uncertain. A number the OCR misread in a familiar way (a raised folio letter read as a digit: 39ᵇ as 895; a digit as a letter where the site has the digits) is minor. A column break the audit could only estimate is a check.
 
 ## How it works
 
 1. **Scan** (`scan.py`). Each page is rendered from the PDF (book page n ≤ 683 → PDF 1 page n+16; n ≥ 684 → PDF 2 page n−683) and straightened. Its layout is found next:
    - the running head, and a rule under it;
+   - a printed vertical rule between the columns (pp. 6 and 8 have one), taken out first;
+   - the line pitch, measured in each column separately;
    - the gutter, found in two passes so that a letter heading crossing it doesn't narrow it;
    - any band crossing the gutter, which is a letter heading part-way down the page;
    - the column segments (two above such a heading, two below);
    - a printer's signature line at the foot, which is ignored.
 
-   A column's left edge is taken from its justified right edge, so a column with no entry starting in it is still measured right. Every column is OCR'd twice, with Tesseract's English and Hebrew models.
+   A column's box is never set into the gutter. A layout that cannot be right (a gutter much wider than a few percent of the page, a "heading" more than five lines high) is reported as a layout finding rather than used. Every column is OCR'd twice, with Tesseract's English and Hebrew models.
 2. **Site** (`sitetext.py`). The page's HTML from `data/` becomes word tokens. Each token knows its entry, its offset in the text the column break is counted in, and whether it is Hebrew, a headword, a binyan form or a sense number. It also knows which right-to-left island the browser sets it in. The site's own column breaks are worked out the way `index.html` does it (letter pages, mid-page letters, `pages.json`).
 3. **Compare** (`compare.py`). Each scan word is classed as Hebrew or English by which OCR reads it more confidently. A word hyphenated at a line's end is joined (rule 2.8). The whole page is aligned word for word in reading order, so an entry that runs from one column into the next, or onto the next page, is compared as one piece. The differences are then classified:
    - run-together and split words; words and numbers that differ (re-read at double size before being reported); folio sides;
@@ -47,7 +49,7 @@ Severity: 1 = likely an error, 2 = check, 3 = minor or uncertain.
    - words that slipped across a page break;
    - column breaks, compared with the site's (`column_break`), or proposed where the site has none (`column_break_unset`, with the offset to put in `breaks_all2.json` or `mid_breaks.json`);
    - Hebrew: the same words in the same left-to-right order on each line as the site shows them; headwords letter by letter;
-   - entries: the site's entries are paired, in order, with the lines the book starts at the column's edge. One left over on either side is a missing entry, or two entries run into one;
+   - entries: the site's entries are paired, in order, with the lines the book indents. The book indents an entry's first line by about an em and sets the lines after it flush; each line is measured against its own column's flush edge, so a column box that is a little off does not matter. One left over on either side is a missing entry, or two entries run into one;
    - the running head: page number and guide words. A wrong page number means the PDF page mapping is off.
    - **is the scan page whole?** (`scan_incomplete`, listed first in the report and in `summary.txt`). The page is flagged when:
      - the text runs to the image's edge (cropped);

@@ -79,12 +79,60 @@ def deskew(img):
     return img, round(best, 2)
 
 
+# the layout step's version, kept in scan.json: a page laid out by an older version is laid out again (and OCR'd
+# again only if its columns moved)
+LAYOUT_VERSION = 2
+
+
+def line_pitch(ink, x0, x1, y0, y1):
+    """the distance from one text line to the next in a block of one column: the first strong peak of the
+    autocorrelation of its row profile. Rows are not counted across the gutter (the two columns' lines are not level
+    with each other), and no gap between lines is needed (vowel points and descenders often bridge them)."""
+    prof = ink[y0:y1, x0:x1].sum(1).astype(float)
+    n = len(prof)
+    if n < 200 or x1 - x0 < 100: return None
+    prof -= prof.mean()
+    f = np.fft.rfft(prof, 2 * n)
+    ac = np.fft.irfft(f * np.conj(f))[:n]
+    if ac[0] <= 0: return None
+    ac /= ac[0]
+    bw = x1 - x0
+    lo, hi = max(8, int(bw / 60)), min(n - 2, int(bw / 6))
+    if hi <= lo + 2: return None
+    seg = ac[lo:hi]
+    top = seg.max()
+    if top < 0.15: return None
+    for i in range(1, len(seg) - 1):               # the first peak near the highest (not a multiple of it)
+        if seg[i] >= seg[i - 1] and seg[i] >= seg[i + 1] and seg[i] > 0.85 * top:
+            return float(lo + i)
+    return float(lo + int(seg.argmax()))
+
+
+def find_rules(ink, x0, x1, y0, y1):
+    """printed vertical rules between the columns: narrow strips in the middle of the body, inked over a good part
+    of its height, with blank paper beside them"""
+    bw = x1 - x0
+    frac = ink[y0:y1, x0:x1].mean(0)
+    lo, hi = int(0.3 * bw), int(0.7 * bw)
+    out = []
+    for a_, b_ in close_runs(runs(frac[lo:hi] > 0.1, 1), 8):     # a broken or doubled stroke is one rule
+        a_, b_ = lo + a_, lo + b_
+        if b_ - a_ > max(4, 0.008 * bw): continue
+        side = max(6, int(0.006 * bw))
+        left, right = frac[max(0, a_ - side - 3):max(0, a_ - 3)], frac[b_ + 3:b_ + side + 3]
+        # blank on both sides: a column's justified right edge or flush left edge is blank on one side only
+        if len(left) and len(right) and left.mean() < 0.04 and right.mean() < 0.04:
+            out.append((x0 + a_, x0 + b_))
+    return out
+
+
 def layout(img):
     """find the body, the gutter, the bands that cross it, and the column segments"""
     a = np.asarray(img)
     H, W = a.shape
     thr = otsu(a)
     ink = a < thr
+    warnings = []
     # dark scanner borders: rows/columns near the edge that are mostly black
     for ax in (0, 1):
         frac = ink.mean(axis=ax)
@@ -101,12 +149,27 @@ def layout(img):
         return {"error": "blank page?", "thr": int(thr)}
     y0, y1 = rr[0][0], rr[-1][1]
     x0, x1 = cr[0][0], cr[-1][1]
-    body = ink[y0:y1, x0:x1]
     bw = x1 - x0
-    # text lines over the full width, for the line height and the gaps between lines
+    # a printed vertical rule between the columns (pp. 6 and 8 have one) is taken out before the gutter is looked
+    # for: it would make every row seem to cross the gutter, and the gutter would come out as the middle 40% of the
+    # page. The rule's own ink is kept in `rule_ink` for the picture only.
+    rules = find_rules(ink, x0, x1, y0, y1)
+    if rules:
+        ink = ink.copy()
+        for r0, r1 in rules: ink[:, max(0, r0 - 2):r1 + 2] = False
+    body = ink[y0:y1, x0:x1]
+    # the line pitch, measured in each half of the body separately (the columns' lines are not level with each
+    # other, so rows counted across the whole width run lines together: p. 2 gave 111 px for a 57 px pitch)
+    ps = [p for p in (line_pitch(ink, x0, x0 + int(0.45 * bw), y0, y1),
+                      line_pitch(ink, x0 + int(0.55 * bw), x1, y0, y1)) if p]
+    # text lines over the full width, for the running head, the foot and the gaps between lines
     lines = runs(body.sum(1) > max(2, 0.002 * bw), 3)
     hts = [b - a_ for a_, b in lines]
-    lineh = float(np.median(hts)) if hts else 30.0
+    if ps:
+        lineh = float(np.median(ps))
+    else:
+        lineh = float(np.median(hts)) if hts else 30.0
+        warnings.append("the line pitch could not be measured; the line height across the page was used")
     gaps = [lines[i + 1][0] - lines[i][1] for i in range(len(lines) - 1)]
     medgap = float(np.median(gaps)) if gaps else lineh / 3
     lo, hi = int(0.3 * bw), int(0.7 * bw)
@@ -128,6 +191,11 @@ def layout(img):
         k = 0
         while e_ < len(body) and anyink[e_] and k < 1.5 * lineh: e_ += 1; k += 1
         keep[max(0, s_ - 2):e_ + 2] = False
+    if keep.sum() < 0.3 * len(body):
+        # most of the page seems to cross the gutter: something in it (a rule not recognised, a stain) is not a
+        # heading. Measure the gutter on every row instead.
+        warnings.append("most rows seemed to cross the gutter; it was measured on all rows")
+        keep[:] = True
     # then exactly, without those rows: the widest strip of (almost) no ink. The columns' lines that stand out (an
     # entry's first line) count as ink, so the gutter ends where they begin. A printed vertical rule inside the
     # gutter (a narrow strip inked over most of the height), or a speck, does not split it.
@@ -149,8 +217,13 @@ def layout(img):
         return {"error": "no gutter found", "thr": int(thr), "body": [x0, y0, x1, y1]}
     g = max(wr, key=lambda r: (r[1] - r[0]) - 0.2 * abs((r[0] + r[1]) / 2 - (hi - lo) / 2))
     g0, g1 = x0 + lo + g[0], x0 + lo + g[1]
-    # a printed vertical rule in the gutter: columns inked over most of the body's height
-    rule = [x for x in range(g0, g1) if ink[y0:y1, x].mean() > 0.5]
+    if g1 - g0 > 0.08 * bw:
+        # the gutter is a few percent of the page's width; a much wider one means the columns were not found
+        return {"error": "the gutter came out %d px wide (%d%% of the text block): the columns were not found"
+                % (g1 - g0, round(100 * (g1 - g0) / bw)), "thr": int(thr), "body": [x0, y0, x1, y1],
+                "gutter": [g0, g1], "lineh": lineh, "warnings": warnings, "version": LAYOUT_VERSION}
+    # the printed rule in the gutter, if any (found above and taken out of `ink`)
+    rule = [x for r0, r1 in rules for x in range(r0, r1) if g0 - 4 <= x <= g1 + 4]
     # bands that cross the gutter: a letter heading, a rule across the page, the running head. Ink must cover a
     # good part of the gutter's middle (a word that sticks out of a column, or a speck, does not)
     q = max(1, (g1 - g0) // 4)
@@ -200,6 +273,11 @@ def layout(img):
         if b1 <= top + 1 or b0 >= bottom - 1: continue
         kind = "heading" if b1 - b0 >= 0.8 * lineh else "rule"
         if kind == "heading": b0, b1 = grow(b0, b1, int(1.5 * lineh))
+        if kind == "heading" and b1 - b0 > 5 * lineh:
+            # a letter heading is one or two lines high; a taller band is not one
+            warnings.append("a band %d lines high crosses the gutter at y %d-%d; it was not taken for a heading"
+                            % (round((b1 - b0) / lineh), b0, b1))
+            continue
         heads.append({"box": [x0, b0, x1, b1], "kind": kind})
     # segments between the bands; a column's box is trimmed to its text lines (rows of ink at least half a line
     # high), so a rule or the foot of a heading letter is not taken for text
@@ -221,16 +299,20 @@ def layout(img):
             box = [cx0 + cc_[0][0], s_ + rr_[0][0], cx0 + cc_[-1][1], s_ + rr_[-1][1]]
             seg["cols"].append({"side": side, "box": box})
         if seg["cols"]: segs.append(seg)
-    # a column's left edge from its right edge (justified) and the widest column: a column with no line standing
-    # out (one long entry running on) would otherwise seem to start further right
+    # a column's left edge: the book indents an entry's first line and sets the lines after it flush, so the ink's
+    # own left edge is the column's edge whenever the column has a line running on. Only a very short column (one
+    # or two lines, all indented) is widened from its justified right edge, and never into the gutter.
     widths = [c["box"][2] - c["box"][0] for sg in segs for c in sg["cols"]]
     if widths:
         W_ = max(widths)
         for sg in segs:
             for c in sg["cols"]:
-                if c["box"][2] - c["box"][0] > 0.6 * W_: c["box"][0] = min(c["box"][0], c["box"][2] - W_)
+                b = c["box"]
+                if b[3] - b[1] < 3 * lineh and b[2] - b[0] > 0.6 * W_:
+                    b[0] = max(x0 if c["side"] == "L" else g1, min(b[0], b[2] - W_))
     return {"thr": int(thr), "body": [x0, y0, x1, y1], "lineh": lineh, "medgap": medgap, "gutter": [g0, g1],
-            "rule": bool(rule), "header": header, "footer": footer, "bands": heads, "segments": segs, "size": [W, H]}
+            "rule": bool(rule), "rules": rules, "header": header, "footer": footer, "bands": heads, "segments": segs,
+            "size": [W, H], "warnings": warnings, "version": LAYOUT_VERSION}
 
 
 def tesseract(png, lang, psm, dpi):
@@ -329,7 +411,25 @@ def process(pid, scans, workdir, dpi, force=False):
     os.makedirs(wd, exist_ok=True)
     out = os.path.join(wd, "scan.json")
     if os.path.exists(out) and not force:
-        return json.load(open(out))
+        old = json.load(open(out))
+        if old.get("layout", {}).get("version") == LAYOUT_VERSION:
+            return old
+        # laid out by an older version: lay the page out again, and OCR it again only if its columns moved
+        pimg = os.path.join(wd, "page.png")
+        if os.path.exists(pimg) and "ocr" in old:
+            img = Image.open(pimg).convert("L")
+            lay = layout(img)
+            lay["angle"] = old["layout"].get("angle", 0)
+            def cols(l): return [c["box"] for s in l.get("segments", []) for c in s["cols"]]
+            a_, b_ = cols(old["layout"]), cols(lay)
+            same = "error" not in lay and len(a_) == len(b_) and all(
+                max(abs(p - q) for p, q in zip(x, y)) <= 12 for x, y in zip(a_, b_))
+            if same:
+                old["layout"] = lay
+                overlay(img, lay, old["ocr"], os.path.join(wd, "layout.png"))
+                json.dump(old, open(out, "w"), ensure_ascii=False)
+                return old
+        # otherwise fall through: OCR again, from the rendered page already there (raw.png)
     raw = os.path.join(wd, "raw.png")
     if force or not os.path.exists(raw):
         pdf, pn = render(pid, scans, raw, dpi)

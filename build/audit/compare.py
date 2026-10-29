@@ -18,7 +18,8 @@ CFG = {
     "verify": True,           # re-read a differing word at double size before reporting it
     "heb_fuzzy": 0.75,        # two Hebrew words (letters only) this similar are the same word
     "heb_differs": 0.55,      # a Hebrew stretch less similar than this is reported
-    "flush": 0.45,            # a line starting within this many line-heights of the column's edge is flush
+    "indent": 0.45,           # a line starting this many line pitches in from its column's edge is indented
+    "entry_lines": "indent",  # how an entry's first line sits in the book: indented (Jastrow), or "flush"
 }
 
 HYPH = re.compile(r"^(.*[A-Za-zÀ-ž])[-‐‑¬~]$")
@@ -57,11 +58,26 @@ class PageCompare:
         self.wd = os.path.join(workdir, "pages", "p%04d" % int(page.pid))
         self.f = []                                 # findings
         lay = scan["layout"]
-        self.lineh = lay.get("lineh", 30)
+        # the line pitch (scan.py, layout version 2); for a page laid out before that, from the OCR's lines
+        self.lineh = lay["lineh"] if lay.get("version", 1) >= 2 else self.pitch_from_lines(scan["ocr"]["lines"], lay.get("lineh", 30))
         self.lines = scan["ocr"]["lines"]
         self.heb = scan["ocr"]["heb"]
         self._scan_tokens()
         self._align()
+
+    @staticmethod
+    def pitch_from_lines(lines, default):
+        """the median distance between the tops of consecutive lines in a column"""
+        import statistics as stt
+        d, by = [], {}
+        for ln in lines: by.setdefault((ln["seg"], ln["col"]), []).append(ln["box"][1])
+        for ys in by.values():
+            ys = sorted(ys)
+            d += [b - a for a, b in zip(ys, ys[1:]) if b - a > 5]
+        if len(d) < 5: return default
+        m = stt.median(d)
+        d = [x for x in d if 0.6 * m < x < 1.6 * m]
+        return float(stt.median(d)) if d else default
 
     # ---------- scan words ----------
     def _scan_tokens(self):
@@ -328,12 +344,35 @@ class PageCompare:
                         not re.search(r"\d", s["text"]): continue
                 v = self.verify(k)
                 if v is not None and ST.key(v) == s["key"]: continue        # the second reading agrees with the site
-                self.add("number_differs" if num else "word_differs", 1 if num else 2, [s], [k],
-                         "", reread=v, ratio=round(ratio(s["key"], k["key"]), 2))
+                sev, note = (1 if num else 2), ""
+                if num and self.ocr_misread_number(s["text"], k["text"]):
+                    sev, note = 3, "most likely the OCR misreading the book (a raised folio letter read as a digit, or a digit as a letter)"
+                self.add("number_differs" if num else "word_differs", sev, [s], [k],
+                         note, reread=v, ratio=round(ratio(s["key"], k["key"]), 2))
             return
         real = [t for t in K if self.real(t)]
         if not real and len(S) <= 1: return
         self.add("differs", 2, S, K, "the site and the scan differ here" + (" (next to Hebrew)" if mixed else ""))
+
+    @staticmethod
+    def ocr_misread_number(site, scan):
+        """the site has a folio number with its side (39ᵇ) and the OCR one digit more, the rest the same but for at
+        most one digit (895, 444): the small raised letter read as a digit"""
+        # the OCR read a digit as a letter (S for 5 or 8, g for 9, O for 0, l for 1) where the site has the digits;
+        # two different digits are never the same
+        a0, b0 = re.sub(r"[^\w]", "", site), re.sub(r"[^\w]", "", scan)
+        for conf in (str.maketrans("SsBgqOoIliZ", "55899001112"), str.maketrans("SsBgqOoIliZ", "88899001112")):
+            # only when the site has the digits: a site letter where the book has a digit may be the site's error
+            if a0.isdigit() and a0 != b0 and a0 == b0.translate(conf): return True
+        m = re.match(r"^\D*?(\d+)\s*\^?([a-dᵃᵇᶜᵈ])", site)
+        if not m: return False
+        a = m.group(1)
+        d = re.sub(r"\D", "", scan)
+        raised = re.search(r"\d[°¢%®*'’\"”^]+[;:,.)]*$", scan)    # the letter read as a symbol: 83°, 35¢
+        if len(d) == len(a) + 1: b = d[:len(a)]
+        elif len(d) == len(a) and raised: b = d
+        else: return False
+        return sum(x != y for x, y in zip(a, b)) <= (1 if len(a) >= 2 else 0)
 
     # ---------- Hebrew ----------
     def region(self, prev, nxt, between):
@@ -494,6 +533,19 @@ class PageCompare:
                 approx = True
                 tok = gap[min(len(gap) - 1, round(len(gap) * nL / (nL + nR)))] if gap else byi[iR]
             if nL == 0 and not gap: tok = byi[iR]
+            if approx and gap:
+                # words the OCR could not place on both sides (Hebrew, mostly): if the right column begins with an
+                # entry's (indented) first line and one entry starts in that stretch, the break is there
+                cls = getattr(self, "cls", None) or self.line_class()
+                if cls.get(R[0]["line"]) == "indent":
+                    st = [t for t in gap if t["i"] > 0 and P.tokens[t["i"] - 1]["eid"] != t["eid"] and not t.get("cont")
+                          and any(e["eid"] == t["eid"] and not e["cont"] for e in P.entries)]
+                    # entries that begin on the left column's last lines, past its last matched word, are on the
+                    # left: so many of these starts belong there (p. 6: a short entry at the foot of the left column)
+                    tail = {t["line"] for t in L if t["j"] > mL[-1]["j"]} - {mL[-1]["line"]}
+                    nleft = sum(1 for l in tail if cls.get(l) == "indent")
+                    if nleft < len(st):
+                        tok, approx = st[nleft], False
             off = tok["off"]
             self.book_breaks.append(off)
             site = P.site_breaks[si] if si < len(P.site_breaks) else None
@@ -511,9 +563,10 @@ class PageCompare:
             between = [t for t in self.S if lo <= t["off"] < hi]
             if between:
                 inside = any(t["off"] < site < t["end"] for t in P.tokens)
-                self.add("column_break", 1, [], [], "the site's right column begins: %s | the book's: %s (%d word%s %s)"
+                self.add("column_break", 2 if approx else 1, [], [], "the site's right column begins: %s | the book's: %s (%d word%s %s)"
                          % (P.words_at(site), P.words_at(off), len(between), "s" if len(between) > 1 else "",
-                            "earlier" if off < site else "later") + (" — the site's break falls inside a word" if inside else ""),
+                            "earlier" if off < site else "later") + (" — the site's break falls inside a word" if inside else "")
+                         + (" — the book's break is estimated: the OCR could not place the words around it" if approx else ""),
                          boxes=[R[0]["box"]], lines=[R[0]["line"]], words=len(between), **info)
 
     # ---------- is the scan page whole? ----------
@@ -615,14 +668,38 @@ class PageCompare:
             self.add("running_head", 3, [], [], "no running head found on the scan"); return
         nums = re.findall(r"\d+", h["eng"])
         if self.p.pid.isdigit() and self.p.pid not in nums:
-            self.add("page_number", 2, [], [], "the running head reads '%s'; expected page %s (is the PDF page "
-                     "mapping right?)" % (h["eng"], self.p.pid))
+            # the whole running head is mostly Hebrew; read the number again from the head's middle, digits only
+            n2 = self.read_page_number()
+            if n2 and self.p.pid in n2:
+                pass
+            elif n2:
+                self.add("page_number", 2, [], [], "the running head's page number reads %s; expected %s (is the PDF "
+                         "page mapping right?)" % (n2[0], self.p.pid))
+            else:
+                self.add("page_number", 3, [], [], "the running head's page number could not be read (expected %s)"
+                         % self.p.pid)
         heb = [ST.heb_skel(w) for w in h["heb"] if ST.heb_skel(w)]
         for which, word in (("first", self.p.first), ("last", self.p.last)):
             sk = ST.heb_skel(word)
             if sk and heb and max(ratio(sk, w) for w in heb) < 0.7:
                 self.add("guide_word", 3, [], [], "the running head's guide words read %s; the site's %s headword "
                          "is %s" % (" ".join(h["heb"]), which, word))
+
+    def read_page_number(self):
+        """the numbers in the middle fifth of the running head, read with digits only"""
+        hb = self.s["layout"].get("header")
+        if not hb: return []
+        try:
+            from PIL import Image
+            im = Image.open(os.path.join(self.wd, "page.png"))
+            w = hb[2] - hb[0]
+            name = os.path.join(self.wd, "pageno.png")
+            im.crop((hb[0] + int(0.4 * w), hb[1] - 4, hb[0] + int(0.6 * w), hb[3] + 4)).save(name)
+            r = subprocess.run(["tesseract", name, "stdout", "-l", "eng", "--psm", "7", "-c",
+                                "tessedit_char_whitelist=0123456789"], capture_output=True, text=True)
+            return re.findall(r"\d+", r.stdout)
+        except Exception:
+            return []
 
     # ---------- entries ----------
     def scan_pos(self, site_i, end=False):
@@ -639,18 +716,108 @@ class PageCompare:
             if order[x] in self.s2k: return self.s2k[order[x]] - 1
         return len(self.k) - 1
 
+    def line_starts(self):
+        """where each scan line's text begins: its first word's left edge, passing over a stray mark the OCR read
+        before it (a lone dash, bar or quote standing apart: a speck, or the gutter's rule)"""
+        by = {}
+        for t in self.s["ocr"]["tokens"]:
+            by.setdefault(t["line"], []).append(t)
+        lh, out = self.lineh, {}
+        for li, ws in by.items():
+            ws = sorted(ws, key=lambda w: w["box"][0])
+            while len(ws) > 1:
+                w, n = ws[0], ws[1]
+                stray = (not re.search(r"[0-9A-Za-zא-ת]", w["text"]) and w["box"][2] - w["box"][0] < 0.5 * lh
+                         and n["box"][0] - w["box"][2] > 0.25 * lh)
+                if not stray: break
+                ws = ws[1:]
+            out[li] = self.ink_start(ws[0]["box"])
+        return out
+
+    def ink_start(self, box):
+        """the left edge of a word's ink, leaving out a speck in front of it that the OCR took into the word
+        (p. 2: "—ND2N," for the headword אִבְּבָא, read 50 px too far left)"""
+        if not hasattr(self, "_ink"):
+            try:
+                import numpy as np
+                from PIL import Image
+                self._ink = np.asarray(Image.open(os.path.join(self.wd, "page.png"))) < self.s["layout"].get("thr", 128)
+            except Exception:
+                self._ink = None
+        a = self._ink
+        if a is None: return box[0]
+        x0, y0, x1, y1 = box
+        mass = a[y0:y1, x0:x1].sum(0)
+        import numpy as np
+        rs = []
+        on =np.concatenate([[0], (mass > 0).astype(np.int8), [0]])
+        d = np.diff(on); starts, ends = np.where(d == 1)[0], np.where(d == -1)[0]
+        for s_, e_ in zip(starts, ends):
+            if rs and s_ - rs[-1][1] <= 3: rs[-1] = [rs[-1][0], e_, rs[-1][2] + int(mass[s_:e_].sum())]
+            else: rs.append([s_, e_, int(mass[s_:e_].sum())])
+        lh = self.lineh
+        while len(rs) > 1 and rs[0][2] < 0.03 * lh * lh and rs[1][0] - rs[0][1] > 0.2 * lh:
+            rs = rs[1:]
+        return x0 + int(rs[0][0]) if rs else x0
+
     def line_class(self):
-        """each scan line: 'flush' (starts at the column's edge) or 'indent'"""
-        cls = {}
+        """each scan line: 'indent' (it starts in from its column's edge: in this book an entry's first line, or a
+        paragraph's, such as a binyan), 'flush', or 'part' (a piece of a line the OCR split off).
+
+        A line is measured against the edge of its own column, found from the column's flush lines and allowed to
+        drift down the column (a page not quite flat), not against the column's box: a box set a little into the
+        gutter made every line of a column look indented (p. 2)."""
+        import numpy as np
+        lh = self.lineh
+        starts = self.line_starts()
+        cls, self.line_dx = {}, {}
+        groups = {}
         for ln in self.lines:
-            dx = ln["box"][0] - ln["colbox"][0]
-            cls[ln["i"]] = "flush" if dx < CFG["flush"] * self.lineh else "indent"
+            if ln["i"] in starts: groups.setdefault((ln["seg"], ln["col"]), []).append(ln)
+        for key, ls in groups.items():
+            ls = sorted(ls, key=lambda l: (l["box"][1] + l["box"][3]) / 2)
+            # a "line" that lies mostly level with the one before it is a piece of the same line
+            keep = []
+            for ln in ls:
+                if keep:
+                    p = keep[-1]["box"]; b = ln["box"]
+                    # level: the centres within a third of a line (a tall headword's box overlaps the line above,
+                    # but its centre is a whole line below)
+                    if abs((p[1] + p[3]) / 2 - (b[1] + b[3]) / 2) < 0.35 * lh:
+                        # the piece further left is the line's start
+                        if starts[ln["i"]] < starts[keep[-1]["i"]]:
+                            cls[keep[-1]["i"]] = "part"; keep[-1] = ln
+                        else:
+                            cls[ln["i"]] = "part"
+                        continue
+                keep.append(ln)
+            if not keep: continue
+            ys = np.array([(l["box"][1] + l["box"][3]) / 2 for l in keep], float)
+            xs = np.array([starts[l["i"]] for l in keep], float)
+            # the flush lines: those near the left of the column; fit their edge, twice
+            e = np.percentile(xs, 25)
+            sel = np.abs(xs - e) < 0.35 * lh
+            fit = lambda y: np.full_like(y, e)
+            for _ in range(2):
+                if sel.sum() >= 6 and np.ptp(ys[sel]) > 4 * lh:
+                    a_, b_ = np.polyfit(ys[sel], xs[sel], 1)
+                    fit = lambda y, a_=a_, b_=b_: a_ * y + b_
+                elif sel.sum():
+                    m = float(np.median(xs[sel])); fit = lambda y, m=m: np.full_like(y, m)
+                sel = np.abs(xs - fit(ys)) < 0.35 * lh
+            rel = xs - fit(ys)
+            for l, d in zip(keep, rel):
+                self.line_dx[l["i"]] = float(d)
+                cls[l["i"]] = "indent" if d > CFG["indent"] * lh else "flush"
+        for ln in self.lines:
+            cls.setdefault(ln["i"], "flush")
         return cls
 
     def map_entries(self):
         """pair the site's entry starts with the book's entry lines, in order.
 
-        An entry begins a new line in the book, at the column's edge (hanging indent; CFG 'entry_lines'). For each
+        An entry begins a new line in the book, indented by about an em; the lines after it are flush (CFG
+        'entry_lines'; checked on pp. 2, 6 and 8). For each
         site entry, the scan words between the last matched word before it and the first matched word of the entry
         are where its first line must be; the book's entry lines are paired with the site's entries in order within
         those bounds. What is left over on either side is a finding: an entry the site has where the book does not
@@ -658,7 +825,7 @@ class PageCompare:
         a missing entry, or two entries run into one)."""
         cls = self.line_class()
         self.cls = cls
-        ecls = CFG.get("entry_lines", "flush")
+        ecls = CFG.get("entry_lines", "indent")
         first_tok = {}
         for t in self.k:
             if t["first"] and t["line"] not in first_tok: first_tok[t["line"]] = t["j"]
