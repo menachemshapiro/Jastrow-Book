@@ -171,11 +171,12 @@ def main():
     import ocrmodel as OM
     print("measuring the OCR's misreadings...")
     verify0 = CO.CFG["verify"]; CO.CFG["verify"] = False
-    for pid in run:
+    for n_, pid in enumerate(run):
         sp = os.path.join(args.out, "pages", "p%04d" % int(pid), "scan.json")
         if not os.path.exists(sp): continue
         scan = json.load(open(sp))
         if "ocr" not in scan: continue
+        if n_ % 10 == 0: print("  p. %s (%d of %d)" % (pid, n_ + 1, len(run)), flush=True)
         try:
             pc = CO.PageCompare(book.page(pid), scan, V, args.out)
             pc.run()
@@ -189,8 +190,9 @@ def main():
     print("  %d Latin and %d Hebrew pairs counted, from every page audited so far" % (CO.CM.pairs, CO.HCM.pairs))
     print("comparing...")
     findings, pages, entries = [], {}, []
-    for pid in run:
+    for n_, pid in enumerate(run):
         sp = os.path.join(args.out, "pages", "p%04d" % int(pid), "scan.json")
+        if n_ % 10 == 0: print("  p. %s (%d of %d)" % (pid, n_ + 1, len(run)), flush=True)
         page = book.page(pid)
         pages[pid] = {}
         if os.path.exists(sp):
