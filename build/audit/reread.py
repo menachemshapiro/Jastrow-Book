@@ -312,6 +312,17 @@ def near(a, b, script):
     return abs(len(x) - len(y)) <= 2 and r >= 0.5
 
 
+HEB_LOOK = str.maketrans("כפחתזירדןךמסםנצף", "בבההווווווטטטגעק")
+
+
+def look_extra(site, ocr, script, cfg):
+    """Hebrew letters the OCR takes for each other (ב/כ/פ, ט/מ/ס, ה/ח/ת, ג/נ, ע/צ, ו/י/ר/ד/ז): a change only among
+    them needs more evidence (p. 5: אבמניות for אבטניות, the OCR's misreading)"""
+    if script != "heb": return 0.0
+    a, b = norm(site, script), norm(ocr, script)
+    return cfg.get("re_err_look", 0.0) if a != b and a.translate(HEB_LOOK) == b.translate(HEB_LOOK) else 0.0
+
+
 ROMAN_RE = re.compile(r"^[\[(—-]*[IVXLC]+[\]),.;:]*$")
 
 
@@ -374,7 +385,7 @@ def judge(site, ocr, reads, script, cfg, forced=None):
     elif f_site and not (k_ok and agreed is not None):
         v = "ocr_misread"            # read with Sefaria's word as the only word, the OCR finds it, and nothing surer
     elif k_ok and agreed is not None and near(site, best, script) and not lost_letters(site, best, script) and \
-            not ROMAN_RE.match(site.strip()) and (delta >= cfg["re_err"] or (
+            not ROMAN_RE.match(site.strip()) and (delta >= cfg["re_err"] + look_extra(site, best, script, cfg) or (
             # read with Sefaria's word as the only dictionary word, the OCR still reads its own: less is needed
             forced is not None and norm(forced, script) == norm(best, script) and delta >= cfg["re_err_forced"])):
         v = "likely_error"           # the reads agree on another word, much likelier than Sefaria's
@@ -390,6 +401,14 @@ def judge(site, ocr, reads, script, cfg, forced=None):
             v, word_note = "ocr_misread", "Sefaria's word is common in the book (%d×), the OCR's reading is no word of it" % sc_
         elif v == "likely_error" and kc_ <= 1 and sc_ > cfg["rare"]:
             v, word_note = "unclear", "the OCR's reading is no word of the book, and Sefaria's is (%d×)" % sc_
+    if sc_ is not None and kc_ is not None and v in ("ocr_misread", "unclear") and script != "heb" and \
+            sc_ <= cfg["rare"] and kc_ >= cfg["common"] and near(site, best, script) and \
+            norm(site, script) != norm(best, script) and (agreed is not None or v == "ocr_misread" or
+                                                          norm(best, script) in [norm(t, script) for t in texts]):
+        # the other way round: Sefaria's word is rare on the site and the OCR's a common word, and the image can't
+        # tell them apart (c and e in this type: "cclebrated" fits as well as "celebrated" on p. 3): the words decide
+        v, word_note = "likely_error", "Sefaria's word is rare on the site (%d×), the OCR's common (%d×); the " \
+                                       "image can't tell them apart" % (sc_, kc_)
     return {"verdict": v, "ocr_best": best, "agreed": agreed is not None, "delta": round(delta, 2),
             "site_fit": round(sf, 3), "site_unsupported": su, "site_weakest": round(sw, 3),
             "ocr_fit": round(kf, 3), "ocr_unsupported": ku, "ocr_weakest": round(kw, 3),

@@ -44,7 +44,8 @@ CFG = {
     "re_err": 3.0,            # the OCR's agreed reading this much likelier than Sefaria's (nats): Sefaria is wrong ...
     "good_reads": True,       # Sefaria's reading is weighed on the reads that make sense of the OCR's own
     "best_own": False,        # with no agreement among the reads, take the read that fits itself best for the OCR (off: worse)
-    "re_err_forced": 1.5,     # ... or this much, when even with Sefaria's word as the only dictionary word it reads its own
+    "re_err_forced": 1.5,
+    "re_err_look": 2.0,       # Hebrew: this much more when the letters changed are ones the OCR confuses     # ... or this much, when even with Sefaria's word as the only dictionary word it reads its own
     # stage 4: content first, order second
     "stage4": True,           # off: --no-stage4
     "near_word": 0.75,        # a site word and a book word this alike (letters the OCR confuses made the same) are one
@@ -93,6 +94,22 @@ HEB_CONF = str.maketrans("כפחתזירדןךמסםנצף", "בבההווווו
 def one_letter(a, b):
     """the same length, and one letter different"""
     return len(a) == len(b) >= 2 and sum(x != y for x, y in zip(a, b)) == 1
+
+
+def heb_shape(skel):
+    """a Hebrew word as the OCR might read it either way, for pairing: letters it confuses made the same, then ו
+    (and what it stands for: י, ר, ד, ז) left out"""
+    return skel.translate(HEB_CONF).replace("ו", "")
+
+
+def heb_sim(a, b):
+    """how alike two Hebrew words are, by their letters or, with stage 4 on, by their shapes (כישתמרט for לישתמיט,
+    מרנרה for מיניה, אבלוג for אבליג: the real scans of pp. 1 and 7)"""
+    r = ratio(a, b)
+    if CFG["stage4"]:
+        x, y = heb_shape(a), heb_shape(b)
+        if len(x) >= 2 and len(y) >= 2: r = max(r, ratio(x, y) - 0.05)
+    return r
 
 
 def heb_look(skel):
@@ -710,8 +727,19 @@ class PageCompare:
             if r < CFG["heb_fuzzy"]: break
             if si in pair or kj in used: continue
             pair[si] = kj; used.add(kj)
-        self.heb_pairs += [(sh[si]["text"], ks[kj]["text"]) for si, kj in pair.items()]
-        self.heb_pair_toks += [(sh[si], ks[kj]) for si, kj in pair.items()]
+        # stage 4: then what is left, by the words' shapes (the letters the OCR confuses made the same): כישתמרט for
+        # לישתמיט, מרנרה for מיניה, אבלוג for אבליג on the real scans. These pairs count for the order (tested
+        # against the image) and for a headword's letters (tested too), not as the OCR's misreadings
+        spair = {}
+        if CFG["stage4"] and CFG["reread3"]:
+            c2 = sorted(((heb_sim(t["skel"], w["skel"]), si, kj) for si, t in enumerate(sh) for kj, w in enumerate(ks)
+                         if si not in pair and kj not in used), reverse=True)
+            for r, si, kj in c2:
+                if r < CFG["heb_fuzzy"]: break
+                if si in pair or kj in used: continue
+                pair[si] = kj; used.add(kj); spair[si] = kj
+        self.heb_pairs += [(sh[si]["text"], ks[kj]["text"]) for si, kj in pair.items() if si not in spair]
+        self.heb_pair_toks += [(sh[si], ks[kj]) for si, kj in pair.items() if si not in spair]
         # order: any two paired words on one scan line that the site shows the other way round. Only pairs the OCR
         # read well count: a misread word paired with its neighbour's reading would look like a swap
         bad = []
@@ -720,16 +748,22 @@ class PageCompare:
         # with stage 3 on, a word the OCR read unsurely still counts: the order is then tested against the image
         conf_min = CFG["heb_order_conf_low"] if CFG["reread3"] else CFG["heb_order_conf"]
         items = [(sh[si], ks[kj]) for si, kj in pair.items() if len(sh[si]["skel"]) >= 3
-                 and ks[kj]["conf"] >= conf_min and ratio(sh[si]["skel"], ks[kj]["skel"]) >= CFG["heb_order_sim"]]
+                 and ks[kj]["conf"] >= conf_min and (heb_sim if CFG["reread3"] else ratio)(
+                     sh[si]["skel"], ks[kj]["skel"]) >= CFG["heb_order_sim"]]
         for x in range(len(items)):
             for y in range(x + 1, len(items)):
                 (a, wa), (b, wb) = items[x], items[y]
                 if a["skel"] == b["skel"]: continue
                 if dup[a["skel"]] > 1 or dup[b["skel"]] > 1: continue
+                # two spellings of one word (אַבָּיִי / אַבָּיָיה): which is where can't be told from the OCR
+                # (short roots like בזר / פזר are told apart by their letters only: their shapes are one letter)
+                sa_, sb_ = heb_shape(a["skel"]), heb_shape(b["skel"])
+                if CFG["stage4"] and (ratio(a["skel"], b["skel"]) >= 0.75 or
+                                      (min(len(sa_), len(sb_)) >= 3 and ratio(sa_, sb_) >= 0.75)): continue
                 # two spellings of one word (אֲבֵלָה / אֲבֵילָה) pair either way round with what the OCR read: the
                 # order is only reported when the pairing is clear
-                if ratio(a["skel"], wb["skel"]) + ratio(b["skel"], wa["skel"]) >= \
-                        ratio(a["skel"], wa["skel"]) + ratio(b["skel"], wb["skel"]) - 0.3: continue
+                if heb_sim(a["skel"], wb["skel"]) + heb_sim(b["skel"], wa["skel"]) >= \
+                        heb_sim(a["skel"], wa["skel"]) + heb_sim(b["skel"], wb["skel"]) - 0.3: continue
                 if wa["line"] != wb["line"]:
                     # on different lines (stage 4: content first, order second): whatever the direction of the
                     # words, the one the site gives first must stand on the earlier line
@@ -1566,7 +1600,7 @@ class PageCompare:
                 elif a == "order": reqs += [(bx, "heb") for bx in b]
                 else: reqs.append((b, "heb" if sc == "heb" else "eng"))
         R.read_all(reqs)
-        cfg = {k: CFG[k] for k in ("re_good", "re_weak", "re_ok", "re_err", "re_err_forced", "rare", "common")}
+        cfg = {k: CFG[k] for k in ("re_good", "re_weak", "re_ok", "re_err", "re_err_forced", "re_err_look", "rare", "common")}
         cfg["best_own"] = CFG.get("best_own", False)
         cfg["good_reads"] = CFG.get("good_reads", True)
         V = self.vocab
