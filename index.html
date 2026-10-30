@@ -369,14 +369,13 @@ button { cursor: pointer; }
 }
 @media (prefers-reduced-motion: reduce) { .drawer { transition: none; } .e.hit { transition: none; } }
 /* abbreviation tooltips */
-::highlight(abbr) { background-color: rgba(40, 74, 122, .14); text-decoration: underline dotted; text-decoration-color: var(--accent); }
+::highlight(abbr) { background-color: color-mix(in srgb, var(--accent) 18%, transparent); text-decoration: underline dotted; text-decoration-color: var(--accent); }
 .ab-tip { position: fixed; z-index: 1000; max-width: min(380px, calc(100vw - 16px)); padding: 7px 10px 8px; border-radius: 6px;
   background: var(--ink); color: var(--paper); font: 13.5px/1.4 var(--f-ui); box-shadow: 0 4px 16px rgba(0,0,0,.25); pointer-events: none; }
 .ab-tip .ab-k { font-weight: 600; margin-bottom: 1px; }
 .ab-tip .ab-k[dir="rtl"] { text-align: right; }
 .ab-tip .ab-v + .ab-v { margin-top: 3px; padding-top: 3px; border-top: 1px solid rgba(127,127,127,.4); }
 .ab-tip .ab-x { margin-top: 3px; font-size: 12.5px; opacity: .8; }
-@media (prefers-color-scheme: dark) { ::highlight(abbr) { background-color: rgba(157, 187, 230, .2); } }
 </style>
 </head>
 <body>
