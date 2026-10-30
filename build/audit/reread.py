@@ -312,6 +312,21 @@ def near(a, b, script):
     return abs(len(x) - len(y)) <= 2 and r >= 0.5
 
 
+ROMAN_RE = re.compile(r"^[\[(—-]*[IVXLC]+[\]),.;:]*$")
+
+
+def lost_letters(site, ocr, script):
+    """Hebrew: the OCR's reading lacks a letter of Sefaria's, or has one more (not only letters changed for
+    others). The Hebrew OCR drops letters often (a yod, a final letter by a comma: "אב" for אֵיב, "אבל" for אַבְלֵט;
+    the user's marks of 30 Oct found every such "likely error" false), while Sefaria's own errors in a headword are a
+    letter for a letter (ב/כ, ד/ר): so only a change of letters is evidence"""
+    if script != "heb": return False
+    import difflib
+    a, b = norm(site, script), norm(ocr, script)
+    return any(t in ("delete", "insert") or (t == "replace" and i2 - i1 != j2 - j1)
+               for t, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes())
+
+
 def judge(site, ocr, reads, script, cfg, forced=None):
     """score both hypotheses against every read; the verdict. Returns a dict for the finding.
 
@@ -358,7 +373,8 @@ def judge(site, ocr, reads, script, cfg, forced=None):
         v = "ocr_misread"            # every letter of Sefaria's among the alternatives, and nearly as likely
     elif f_site and not (k_ok and agreed is not None):
         v = "ocr_misread"            # read with Sefaria's word as the only word, the OCR finds it, and nothing surer
-    elif k_ok and agreed is not None and near(site, best, script) and (delta >= cfg["re_err"] or (
+    elif k_ok and agreed is not None and near(site, best, script) and not lost_letters(site, best, script) and \
+            not ROMAN_RE.match(site.strip()) and (delta >= cfg["re_err"] or (
             # read with Sefaria's word as the only dictionary word, the OCR still reads its own: less is needed
             forced is not None and norm(forced, script) == norm(best, script) and delta >= cfg["re_err_forced"])):
         v = "likely_error"           # the reads agree on another word, much likelier than Sefaria's
@@ -396,5 +412,14 @@ def judge_number(site, reads):
         cut.append(d[:len(sd)] if len(d) in (len(sd), len(sd) + 1) else None)
     c = Counter(x for x in cut if x)
     top, n = c.most_common(1)[0] if c else (None, 0)
-    v = "ocr_misread" if top == sd and n >= 2 else "likely_error" if top and n >= 3 and top != sd else "unclear"
+    if c.get(sd) and len(c) == 1:
+        v = "ocr_misread"            # every read that has digits here has Sefaria's (p. 6: "—2)" read as "rp —2)")
+    elif top == sd and n >= 2:
+        v = "ocr_misread"
+    elif top and n >= 3 and top != sd and len(sd) >= 2:
+        v = "likely_error"
+    else:
+        # a single digit is no evidence: a stop after it is read as a digit too, and 5 as 3 ("5;" read as "33" on
+        # p. 5; the user's mark of 29 Oct)
+        v = "unclear"
     return {"verdict": v, "ocr_best": top or "", "site_fit": None, "reads": [r[1] for r in reads], "digits": True}
