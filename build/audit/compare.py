@@ -18,6 +18,7 @@ CFG = {
     "verify": True,           # re-read a differing word at double size before reporting it
     "heb_fuzzy": 0.75,        # two Hebrew words (letters only) this similar are the same word
     "heb_differs": 0.55,      # a Hebrew stretch less similar than this is reported
+    "word_count": False,      # the per-entry word count check: off (on pp. 1-10 it found only OCR noise); --word-count
     "count_conf": 55,         # an English OCR word this confident counts in the word count check
     "count_left": 2,          # an entry with this many real words left over, and no finding, is reported (word_count)
     "heb_loose": 0.5,         # an unpaired site word this like an unpaired scan word is "read poorly", not "differs"
@@ -293,7 +294,7 @@ class PageCompare:
         self.check_scan()
         self.map_entries()
         self.check_structure()
-        self.check_counts()
+        if CFG["word_count"]: self.check_counts()
         return self.f
 
     # ---------- word counts ----------

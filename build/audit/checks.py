@@ -73,6 +73,16 @@ def site_checks(book, pid):
         if seq_bad:
             out.append(finding(pid, "sense_numbers", 2, eid, " ".join("%d)" % n for n in nums),
                                "sense numbers out of sequence: " + ", ".join("%d) then %d)" % x for x in seq_bad)))
+        # a Hebrew quotation that begins with "etc." (וכ׳, וגו׳): Jastrow ends quotations with it (17,000 times on the
+        # site, 20 times at the start), so the words are probably out of order in Sefaria's text
+        for m in re.finditer(r"(?:^|[^\u05d0-\u05ea\u0591-\u05c7'׳])((?:וכ|וכו|וגו)['׳]\s+[\u05d0-\u05ea][^A-Za-z.;:()\[\]]*)", text):
+            prev = text[max(0, m.start(1) - 3):m.start(1)]
+            if re.search(r"[\u05d0-\u05ea]", prev): continue      # within a longer Hebrew phrase
+            # under a headword beginning with כ, "וכ׳" is "and" with the headword abbreviated, not "etc."
+            if m.group(1).startswith("וכ") and ST.heb_skel(e.get("hw") or "")[:1] == "כ": continue
+            out.append(finding(pid, "etc_first", 2, eid, m.group(1).strip(), "the Hebrew begins with “etc.” (%s); "
+                               "Jastrow ends a quotation with it: are the words out of order? Check the scan"
+                               % m.group(1).split()[0]))
         # a line-break hyphen left in the text ("un- worthy") — rule 2.8
         for m in re.finditer(r"[A-Za-z]{2,}- [a-z]{2,}", text):
             out.append(finding(pid, "hyphen_space", 2, eid, m.group(0), "a hyphen followed by a space: a word broken "

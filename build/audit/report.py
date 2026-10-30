@@ -43,14 +43,14 @@ TYPES = {
     "alphabetical": "Alphabetical order", "scan_incomplete": "Scan page incomplete", "talmud_range": "Bavli folio out of range",
     "talmud_near": "Bavli quote on next amud", "talmud_elsewhere": "Bavli quote elsewhere in tractate",
     "talmud_other_tractate": "Bavli quote in another tractate", "talmud_not_found": "Bavli quote not found",
-    "ib_named": "Book has “Ib.”, site names the work", "word_count": "Word count differs", "abbreviation": "Abbreviation spelt differently",
+    "ib_named": "Book has “Ib.”, site names the work", "word_count": "Word count differs", "etc_first": "Hebrew begins with “etc.”", "abbreviation": "Abbreviation spelt differently",
 }
 
 # what the OCR could not read is not a finding about the site: counted per page, not listed
 NOT_CHECKED = {"hebrew_unread", "headword_unread"}
 # checks of the site's text alone
 SITE_ONLY = {"brackets", "sense_numbers", "stray_char", "headword_text", "headword_display", "alphabetical",
-             "doubled_text", "doubled_word", "hyphen_space"}
+             "doubled_text", "doubled_word", "hyphen_space", "etc_first"}
 SEV_HELP = {1: "What the audit thinks is most likely a real difference between the site and the book.",
             2: "A difference that may be real, or may come from the OCR or the page layout. Compare the two sides.",
             3: "Small or doubtful: mostly OCR noise. Look here after the others.",

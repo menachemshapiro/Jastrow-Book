@@ -265,10 +265,33 @@ def ltr_forms(h):
     return h
 
 
+HEB_ITEM = r"[\u05d0-\u05ea\u0591-\u05c7'\u05f3\"\u05f4*]+"
+HEB_LIST = re.compile(r'<span class="h">(' + HEB_ITEM + r'(?:,\s?' + HEB_ITEM + r')+)</span>')
+
+
+def heb_runs(h):
+    """Hebrew as the 1903 printing sets it, beyond the headword and binyan forms (ltr_forms):
+    1. A phrase Sefaria's markup splits in two ("תנא (ו)" + "בגבולין ובלשון אגא") is one phrase. As two right-to-left
+       islands the browser set the second to the right of the first, the wrong way round. They are joined.
+    2. A list of single Hebrew words separated by commas (plurals after "Pl.", variants after "Var." or "ed.",
+       roots in "(cmp. בזר, פזר)") runs left to right in the book, the first word on the left, like the forms of a
+       headword. Set as one right-to-left island it came out the other way round. Each word is now isolated on
+       its own, in a left-to-right list."""
+    while True:
+        h2 = re.sub(r'(<span class="h">[^<]*)</span><span class="h">', r'\1', h)
+        if h2 == h: break
+        h = h2
+    def lst(m):
+        parts = re.split(r'(,\s?)', m.group(1))
+        return '<span class="hl" dir="ltr">%s</span>' % "".join(
+            ('<span class="h">%s</span>' % x) if k % 2 == 0 else x for k, x in enumerate(parts))
+    return HEB_LIST.sub(lst, h)
+
+
 for c in range(0, len(pages), CHUNK):
     chunk = []
     for p in pages[c:c + CHUNK]:
-        h = ltr_forms(transform(p["html"]))
+        h = heb_runs(ltr_forms(transform(p["html"])))
         if p["id"] == "1706":     # the Addenda's title and the line under it run across the top of both columns, as in the book
             h = h.replace('<p class="fm">Addenda et Corrigenda.</p><p class="fm">(Articles', '<p class="fm hd">Addenda et Corrigenda.</p><p class="fm hd">(Articles', 1)
             assert 'class="fm hd"' in h

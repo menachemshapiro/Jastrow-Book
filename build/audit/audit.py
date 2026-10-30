@@ -12,6 +12,7 @@ options:
   --force         render and OCR again even if a page was done before (otherwise the OCR is reused)
   --no-talmud     skip the Bavli checks;  --no-quotes  only the range check, not the quotation search
   --no-verify     don't re-read differing words a second time
+  --word-count    also compare each entry's word count (off: on pp. 1-10 it found only OCR noise)
   --entry-lines flush|indent   how an entry's first line sits in the book: indented by about an em, the rest
                   flush (the default; so the 1903 book is set, checked on pp. 2, 6 and 8), or the other way round
   --out DIR       where everything goes (default work/audit)
@@ -122,6 +123,7 @@ def main():
     ap.add_argument("--no-talmud", action="store_true")
     ap.add_argument("--no-quotes", action="store_true")
     ap.add_argument("--no-verify", action="store_true")
+    ap.add_argument("--word-count", action="store_true")
     ap.add_argument("--entry-lines", choices=("flush", "indent"), default="indent")
     ap.add_argument("--out", default=os.path.join(paths.WORK, "audit"))
     ap.add_argument("--site", default=paths.REPO)
@@ -137,6 +139,7 @@ def main():
     import checks as CK
     import report as RP
     if args.no_verify: CO.CFG["verify"] = False
+    if args.word_count: CO.CFG["word_count"] = True
     CO.CFG["entry_lines"] = args.entry_lines
     book = ST.Book(args.site)
     run = parse_pages(args.pages, book)
