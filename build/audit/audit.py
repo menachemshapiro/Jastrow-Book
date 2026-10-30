@@ -12,6 +12,8 @@ options:
   --force         render and OCR again even if a page was done before (otherwise the OCR is reused)
   --no-talmud     skip the Bavli checks;  --no-quotes  only the range check, not the quotation search
   --no-verify     don't re-read differing words a second time
+  --trained       OCR with the models trained on this book (build/audit/train_ocr.py); pages read with
+                  other models are OCR'd again. --ocr-models DIR: models from another folder
   --word-count    also compare each entry's word count (off: on pp. 1-10 it found only OCR noise)
   --entry-lines flush|indent   how an entry's first line sits in the book: indented by about an em, the rest
                   flush (the default; so the 1903 book is set, checked on pp. 2, 6 and 8), or the other way round
@@ -124,6 +126,8 @@ def main():
     ap.add_argument("--no-quotes", action="store_true")
     ap.add_argument("--no-verify", action="store_true")
     ap.add_argument("--word-count", action="store_true")
+    ap.add_argument("--trained", action="store_true", help="OCR with the models trained on the book (train_ocr.py)")
+    ap.add_argument("--ocr-models", help="a folder with jeng/jheb.traineddata (default with --trained: work/ocrtrain/models)")
     ap.add_argument("--entry-lines", choices=("flush", "indent"), default="indent")
     ap.add_argument("--out", default=os.path.join(paths.WORK, "audit"))
     ap.add_argument("--site", default=paths.REPO)
@@ -140,6 +144,12 @@ def main():
     import report as RP
     if args.no_verify: CO.CFG["verify"] = False
     if args.word_count: CO.CFG["word_count"] = True
+    if args.trained or args.ocr_models:
+        md = os.path.abspath(args.ocr_models or os.path.join(paths.WORK, "ocrtrain", "models"))
+        if not any(os.path.exists(os.path.join(md, "j%s.traineddata" % l)) for l in ("eng", "heb")):
+            sys.exit("no trained models in %s: run build/audit/train_ocr.py first" % md)
+        os.environ["JASTROW_OCR_MODELS"] = md
+        print("OCR models trained on the book, from %s (pages read with other models are OCR'd again)" % md)
     CO.CFG["entry_lines"] = args.entry_lines
     book = ST.Book(args.site)
     run = parse_pages(args.pages, book)
@@ -155,8 +165,29 @@ def main():
             print("  p. %-5s %5.1f s%s" % (pid, secs, ("  ERROR " + err) if err else ""), flush=True)
             if err: errors[pid] = err
     # 2. compare
-    print("comparing...")
     V = vocab(args.site)
+    # 2a. this OCR's misreadings on this book: count them on every page of the run (quickly: no re-reading), keep
+    # them with the page, and build the model from every page audited so far and the user's marks
+    import ocrmodel as OM
+    print("measuring the OCR's misreadings...")
+    verify0 = CO.CFG["verify"]; CO.CFG["verify"] = False
+    for pid in run:
+        sp = os.path.join(args.out, "pages", "p%04d" % int(pid), "scan.json")
+        if not os.path.exists(sp): continue
+        scan = json.load(open(sp))
+        if "ocr" not in scan: continue
+        try:
+            pc = CO.PageCompare(book.page(pid), scan, V, args.out)
+            pc.run()
+            OM.save_pairs(os.path.dirname(sp), pc.pairs())
+        except Exception as e:
+            print("  p. %s: %s" % (pid, e))
+    CO.CFG["verify"] = verify0
+    mf = [os.path.join(args.out, "marks.json")] + ([args.marks] if args.marks else []) + \
+        sorted(glob.glob(os.path.expanduser("~/Downloads/jastrow-audit-marks*.json")))
+    CO.CM, CO.HCM = OM.build(os.path.join(args.out, "pages"), RP.load_marks(mf))
+    print("  %d Latin and %d Hebrew pairs counted, from every page audited so far" % (CO.CM.pairs, CO.HCM.pairs))
+    print("comparing...")
     findings, pages, entries = [], {}, []
     for pid in run:
         sp = os.path.join(args.out, "pages", "p%04d" % int(pid), "scan.json")

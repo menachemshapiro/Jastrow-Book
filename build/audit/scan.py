@@ -315,8 +315,29 @@ def layout(img):
             "size": [W, H], "warnings": warnings, "version": LAYOUT_VERSION}
 
 
+def ocr_models():
+    """the OCR models in use: Tesseract's own eng and heb, or the ones trained on this book (train_ocr.py), given by
+    JASTROW_OCR_MODELS (a folder with jeng.traineddata and/or jheb.traineddata; audit.py --trained sets it)"""
+    d = os.environ.get("JASTROW_OCR_MODELS")
+    out = {"eng": ("eng", None), "heb": ("heb", None)}
+    if d:
+        for lang in ("eng", "heb"):
+            if os.path.exists(os.path.join(d, "j%s.traineddata" % lang)): out[lang] = ("j" + lang, d)
+    return out
+
+
+def lang_args(lang):
+    """the command-line arguments that select a language's model: ["-l", name] (and --tessdata-dir)"""
+    name, d = ocr_models()[lang]
+    return (["--tessdata-dir", d] if d else []) + ["-l", name]
+
+
+def models_tag():
+    return {k: v[0] for k, v in ocr_models().items()}
+
+
 def tesseract(png, lang, psm, dpi):
-    r = subprocess.run(["tesseract", png, "stdout", "-l", lang, "--psm", str(psm), "--dpi", str(dpi),
+    r = subprocess.run(["tesseract", png, "stdout"] + lang_args(lang) + ["--psm", str(psm), "--dpi", str(dpi),
                         "-c", "tessedit_create_tsv=1"],
                        capture_output=True, text=True)
     if r.returncode:
@@ -412,6 +433,18 @@ def process(pid, scans, workdir, dpi, force=False):
     out = os.path.join(wd, "scan.json")
     if os.path.exists(out) and not force:
         old = json.load(open(out))
+        if old.get("layout", {}).get("version") == LAYOUT_VERSION and "ocr" in old and \
+                old.get("models", {"eng": "eng", "heb": "heb"}) != models_tag() and \
+                os.path.exists(os.path.join(wd, "page.png")):
+            # read with other OCR models (trained on the book, or back to Tesseract's own): OCR again, same layout
+            img = Image.open(os.path.join(wd, "page.png")).convert("L")
+            old["ocr"] = ocr_page(img, old["layout"], wd, old.get("dpi", dpi))
+            old["models"] = models_tag()
+            for f in ("reread_heb.json", "pairs.json"):
+                if os.path.exists(os.path.join(wd, f)): os.remove(os.path.join(wd, f))
+            overlay(img, old["layout"], old["ocr"], os.path.join(wd, "layout.png"))
+            json.dump(old, open(out, "w"), ensure_ascii=False)
+            return old
         if old.get("layout", {}).get("version") == LAYOUT_VERSION:
             return old
         # laid out by an older version: lay the page out again, and OCR it again only if its columns moved
@@ -440,7 +473,8 @@ def process(pid, scans, workdir, dpi, force=False):
     img.save(os.path.join(wd, "page.png"))
     lay = layout(img)
     lay["angle"] = angle
-    res = {"pid": str(pid), "pdf": os.path.basename(pdf), "pdf_page": pn, "dpi": dpi, "layout": lay}
+    res = {"pid": str(pid), "pdf": os.path.basename(pdf), "pdf_page": pn, "dpi": dpi, "layout": lay,
+           "models": models_tag()}
     if "error" not in lay:
         res["ocr"] = ocr_page(img, lay, wd, dpi)
     overlay(img, lay, res.get("ocr"), os.path.join(wd, "layout.png"))

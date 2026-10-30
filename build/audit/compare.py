@@ -11,6 +11,10 @@ import difflib, os, re, subprocess
 from collections import Counter
 
 import sitetext as ST
+import ocrmodel as OM
+
+CM = None                  # this OCR's measured misreadings on this book (ocrmodel.Confusions): Latin ...
+HCM = None                 # ... and Hebrew letters; set by audit.py before the comparison
 
 CFG = {
     "heb_margin": 8,          # Hebrew OCR must beat the English OCR's confidence by this much for a word to be Hebrew
@@ -18,6 +22,10 @@ CFG = {
     "verify": True,           # re-read a differing word at double size before reporting it
     "heb_fuzzy": 0.75,        # two Hebrew words (letters only) this similar are the same word
     "heb_differs": 0.55,      # a Hebrew stretch less similar than this is reported
+    "rare": 2,                # a site word used this often or less on the whole site ...
+    "common": 5,              # ... where the book reads one used this often or more: Sefaria's error
+    "cm_min": 3,              # a difference made only of changes the OCR has made this often elsewhere is its misreading
+    "cm_pairs": 150,          # with this many pairs counted, a change never seen before stands out
     "word_count": False,      # the per-entry word count check: off (on pp. 1-10 it found only OCR noise); --word-count
     "count_conf": 55,         # an English OCR word this confident counts in the word count check
     "count_left": 2,          # an entry with this many real words left over, and no finding, is reported (word_count)
@@ -87,6 +95,8 @@ class PageCompare:
         self.vocab = vocab
         self.wd = os.path.join(workdir, "pages", "p%04d" % int(page.pid))
         self.f = []                                 # findings
+        self.heb_pairs = []                         # (site word, OCR word) the Hebrew comparison paired: for ocrmodel
+        self.heb_pair_toks = []                     # the same, as tokens (with the scan word's box): for train_ocr
         lay = scan["layout"]
         # the line pitch (scan.py, layout version 2); for a page laid out before that, from the OCR's lines
         self.lineh = lay["lineh"] if lay.get("version", 1) >= 2 else self.pitch_from_lines(scan["ocr"]["lines"], lay.get("lineh", 30))
@@ -278,7 +288,8 @@ class PageCompare:
                 c = c.resize((c.width * 2, c.height * 2), Image.LANCZOS)
                 name = os.path.join(self.wd, "verify.png")
                 c.save(name)
-                r = subprocess.run(["tesseract", name, "stdout", "-l", "eng", "--psm", "8", "--dpi", "600"],
+                import scan as SC
+                r = subprocess.run(["tesseract", name, "stdout"] + SC.lang_args("eng") + ["--psm", "8", "--dpi", "600"],
                                    capture_output=True, text=True)
                 reads.append(r.stdout.strip())
             txt = "".join(re.sub(r"[-¬]$", "", x) if k < len(reads) - 1 else x for k, x in enumerate(reads))
@@ -408,6 +419,41 @@ class PageCompare:
             else:
                 self.latin(S, [t for t in between if t["key"]])
 
+    def pairs(self):
+        """the pairs this page gives the OCR model: one site word against one scan word, where the alignment put them
+        face to face (gaps of the same number of words, up to three, Latin only), and the Hebrew words paired"""
+        lat = []
+        for tag, i1, i2, j1, j2 in self.ops:
+            if tag != "replace": continue
+            S = [t for t in self.S[i1:i2] if not t["heb"]]
+            K = self.K[j1:j2]
+            if 1 <= len(S) == len(K) <= 3 and len(S) == i2 - i1:
+                lat += [(a["text"], b.get("raw", b["text"])) for a, b in zip(S, K) if not b["hyph"]]
+        return {"lat": lat, "heb": self.heb_pairs}
+
+    def site_rare(self, S, K):
+        """one site word against one scan word, the site's rare on the whole site (twice or less) and the book's
+        common (five times or more), both real words of three letters or more: the site's error"""
+        if len(S) != 1 or len(K) != 1: return False
+        a, b = S[0]["key"], K[0]["key"]
+        if a == b or len(a) < 3 or len(b) < 3 or a.startswith("#") or b.startswith("#"): return False
+        if K[0]["conf"] < 70: return False
+        return self.vocab.get(a, 0) <= CFG["rare"] and self.vocab.get(b, 0) >= CFG["common"]
+
+    def cm_judge(self, site, scan, typ, sev, note, k=None, v=None):
+        """the measured model's view of a difference: a misreading this OCR makes often is minor; with enough pairs
+        counted, a change never seen before, read the same way twice and confidently, stands out"""
+        if CM is None or CM.pairs < 20: return sev, note
+        n, bl = CM.seen(OM.lat(site), OM.lat(scan))
+        if n is None: return sev, note
+        if n >= CFG["cm_min"]:
+            return 3, (note + "; " if note else "") + "a misreading this OCR makes often on this book: " + CM.describe(bl)
+        if CM.pairs >= CFG["cm_pairs"] and n == 0:
+            note = (note + "; " if note else "") + "not a misreading this OCR is known to make (%s)" % CM.describe(bl)
+            if typ == "word_differs" and k is not None and k["conf"] >= 85 and (v is None or ST.key(v) == k["key"]):
+                sev = 1
+        return sev, note
+
     def latin_sub(self, S, K):
         """the Latin words of a gap that also has Hebrew: align them on their own"""
         ops = difflib.SequenceMatcher(None, [t["key"] for t in S], [t["key"] for t in K], autojunk=False).get_opcodes()
@@ -446,7 +492,8 @@ class PageCompare:
                          (" (probably the OCR missing a space)" if lost else
                           " (check: the OCR may have run them together)" if short else ""))
             return
-        if S and K and plain_shape(" ".join(t["text"] for t in S)) == plain_shape(" ".join(t["text"] for t in K)):
+        if S and K and plain_shape(" ".join(t["text"] for t in S)) == plain_shape(" ".join(t["text"] for t in K)) \
+                and not self.site_rare(S, K):
             return                                             # the same, but for the OCR's spacing and punctuation
         if mixed:
             # next to Hebrew, short words (m., v., I, II, f.) are often read as Hebrew or lost; report only longer
@@ -475,6 +522,14 @@ class PageCompare:
                 if s["key"] == k["key"]: continue
                 num = s["key"].startswith("#") or k["key"].startswith("#") or re.search(r"\d", s["text"] + k["text"])
                 if not num and (k["conf"] < 50 or len(k["key"]) < 2): continue
+                # Sefaria's text was made by OCR too, so its typos are the same confusions ("narne" for "name"). Which
+                # side is wrong is told by the words themselves: a site word rare on the whole site where the book
+                # reads a common one is Sefaria's error
+                if self.site_rare([s], [k]):
+                    self.add("word_differs", 1, [s], [k], "the site's “%s” is rare on the site (%d×), the book's “%s” "
+                             "common (%d×): a misreading in Sefaria's text?" % (s["text"], self.vocab.get(s["key"], 0),
+                             k["text"], self.vocab.get(k["key"], 0)), ratio=round(ratio(s["key"], k["key"]), 2))
+                    continue
                 # letters the OCR confuses, in a word the site uses often: the OCR's error, not the site's
                 if ocr_shape(s["key"]) == ocr_shape(k["key"]) and self.vocab.get(s["key"], 0) >= 3 and \
                         not re.search(r"\d", s["text"]): continue
@@ -500,6 +555,8 @@ class PageCompare:
                 elif self.abbr_spelling(s, k):
                     typ, sev = "abbreviation", 2
                     note = "the site writes “%s”, the book “%s”" % (s["text"].strip("—"), k["text"].strip("—"))
+                if typ in ("word_differs", "number_differs") and sev < 3:
+                    sev, note = self.cm_judge(s["text"], k.get("raw", k["text"]), typ, sev, note, k, v)
                 self.add(typ, sev, [s], [k], note, reread=v, ratio=round(ratio(s["key"], k["key"]), 2))
             return
         real = [t for t in K if self.real(t)]
@@ -508,7 +565,9 @@ class PageCompare:
             self.add("ib_named", 1, S, K, "the book has “Ib.” here; the site names the work (%s): Sefaria's expansion?"
                      % " ".join(t["text"] for t in S[:3]))
             return
-        self.add("differs", 2, S, K, "the site and the scan differ here" + (" (next to Hebrew)" if mixed else ""))
+        sev, note = self.cm_judge(" ".join(t["text"] for t in S), " ".join(t.get("raw", t["text"]) for t in K), "differs",
+                                  2, "the site and the scan differ here" + (" (next to Hebrew)" if mixed else ""))
+        self.add("differs", sev, S, K, note)
 
     @staticmethod
     def ib_named(s, k):
@@ -613,6 +672,8 @@ class PageCompare:
             if r < CFG["heb_fuzzy"]: break
             if si in pair or kj in used: continue
             pair[si] = kj; used.add(kj)
+        self.heb_pairs += [(sh[si]["text"], ks[kj]["text"]) for si, kj in pair.items()]
+        self.heb_pair_toks += [(sh[si], ks[kj]) for si, kj in pair.items()]
         # order: any two paired words on one scan line that the site shows the other way round. Only pairs the OCR
         # read well count: a misread word paired with its neighbour's reading would look like a swap
         bad = []
@@ -726,10 +787,18 @@ class PageCompare:
         part = a_ != b_ and (a_ in b_ or b_ in a_) or (rr and ST.heb_skel(rr) != b_ and
                                                         (a_ in ST.heb_skel(rr) or ST.heb_skel(rr) in a_))
         sure = w["conf"] >= 75 and not look and not part and (rr is None or ST.heb_skel(rr) == w["skel"])
+        extra = ""
+        if HCM is not None and HCM.pairs >= 20:
+            n, bl = HCM.seen(OM.heb_letters(t["text"]), OM.heb_letters(w["text"]))
+            if n is not None and n >= CFG["cm_min"]:
+                sure, look = False, True
+                extra = "; a confusion this OCR makes often on this book: " + HCM.describe(bl)
+            elif n == 0 and HCM.pairs >= CFG["cm_pairs"]:
+                extra = "; not a confusion this OCR is known to make: " + HCM.describe(bl)
         self.add("headword_letters", 2 if sure else 3, [t], [],
                  "a letter of the headword differs from the book's" + ("" if sure else
                  " (the OCR read only part of the word: check)" if part else
-                 " (letters the OCR often confuses: check)" if look else " (the OCR is unsure: check)"),
+                 " (letters the OCR often confuses: check)" if look else " (the OCR is unsure: check)") + extra,
                  site_heb=t["text"], scan_heb=w["text"], ocr_conf=w["conf"], reread=rr,
                  boxes=[w["box"]], lines=[w["line"]])
 
@@ -742,6 +811,8 @@ class PageCompare:
             try: self._rh = json.load(open(cache))
             except Exception: self._rh = {}
         k = ",".join(map(str, box))
+        import scan as SC
+        k = k + "|" + SC.models_tag()["heb"]
         if k in self._rh: return self._rh[k]
         try:
             from PIL import Image
@@ -751,7 +822,8 @@ class PageCompare:
             c = c.resize((c.width * 2, c.height * 2), Image.LANCZOS)
             name = os.path.join(self.wd, "verify_heb.png")
             c.save(name)
-            r = subprocess.run(["tesseract", name, "stdout", "-l", "heb", "--psm", "8", "--dpi", "600"],
+            import scan as SC
+            r = subprocess.run(["tesseract", name, "stdout"] + SC.lang_args("heb") + ["--psm", "8", "--dpi", "600"],
                                capture_output=True, text=True)
             txt = r.stdout.strip() if r.returncode == 0 else None
         except Exception:

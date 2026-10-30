@@ -64,6 +64,22 @@ Severity: 1 = likely an error, 2 = check, 3 = minor or uncertain; the report sho
 4. **Site-only checks** (`checks.py`): unbalanced brackets, sense numbers out of sequence, "un- worthy" hyphens, stray characters, repeated phrases, headword punctuation and display, alphabetical order.
 5. **Bavli** (`checks.py`, using `talmud_index.citations` and `talsearch`). Each citation is checked against the tractate's range. Then the Hebrew that follows it (past a short remark such as "(prov.)"; Hebrew before it only when no full stop, semicolon or "v." comes between) is searched, without and with Jastrow's bracketed variants, and with the readings he names after it ("read …", "Ar.", "ed. …", "Ms. M. …") put in. When the phrase isn't found, every word of it on the cited daf (all but one, for three words or more) counts as found. It is searched on the cited daf, its neighbouring amudim, the rest of the tractate, and the whole Bavli, with abbreviations expanded (rule 2.5).
 
+## Learning from the book itself
+
+- **The OCR's misreadings, measured** (`ocrmodel.py`). Each run first counts, on every page audited so far, how the OCR misreads this book: wherever one site word stands against one scan word, the change between them ("5;" → "53", ב → כ). The counts are kept in `pages/pNNNN/pairs.json`. Your marks teach it too: a "false alarm" counts three times, a "site is wrong" is left out. A difference made only of changes seen three times or more is minor ("a misreading this OCR makes often"); once enough pairs are counted, a change never seen before stands out, and a confident, re-read word with such a change is a likely error.
+- **Which side is wrong.** Sefaria's text was made by OCR too, so its typos are the same confusions ("narne" for "name"). A site word that is rare on the whole site (twice or less) where the book reads a common one (five times or more) is reported as a likely error in Sefaria's text.
+- **Training the OCR on the book** (`train_ocr.py`). Where the scan and the site agree, the site's text is what the page says: those places are cut out as training pairs (English stretches of three words or more, Hebrew words with their vowel points), and Tesseract's best models are fine-tuned on them. Then `audit.py --trained` reads the scans with the trained models; pages read with other models are OCR'd again by themselves.
+
+```
+pip install python-bidi                                   # once
+python3 build/audit/audit.py --pages 1-150                # the more pages OCR'd, the more to train on
+python3 build/audit/train_ocr.py check
+python3 build/audit/train_ocr.py prepare                  # training pairs from every page OCR'd
+python3 build/audit/train_ocr.py train                    # a few hours; can be stopped and run again
+python3 build/audit/train_ocr.py status
+python3 build/audit/audit.py --trained --pages 1-10       # the audit with the trained models
+```
+
 ## Limits
 
 - Tesseract does not read vowel points reliably. Hebrew is compared by its letters, and only headwords letter by letter.
