@@ -10,6 +10,7 @@ usage:
   python3 build/audit/train_ocr.py check                  the tools, the base models, the training scripts
   python3 build/audit/train_ocr.py prepare [--pages 1-200]  training pairs from pages the audit has OCR'd
   python3 build/audit/train_ocr.py train [--which eng|heb|both] [--iterations N]
+  python3 build/audit/train_ocr.py fetch                  only the downloads train needs (models, tesstrain)
   python3 build/audit/train_ocr.py status                 what has been prepared and trained
 
 What goes in, and what is left out:
@@ -181,28 +182,67 @@ def prepare(spec, clear=True):
               "prepare again")
 
 
+def download(url, dest, what, min_size):
+    """Download url to dest, trying three times. On failure: say plainly what failed and how to get the file by hand,
+    and stop (no traceback). A file already at dest is kept. A download smaller than min_size bytes, or an HTML
+    page, is taken as a failure (an error page saved under the model's name would break the training later)."""
+    import time, socket, urllib.error
+    if os.path.exists(dest) and os.path.getsize(dest) >= min_size: return
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
+    part = dest + ".part"
+    err = None
+    for attempt in range(3):
+        if attempt: time.sleep(10)
+        try:
+            if os.path.exists(part): os.remove(part)
+            with urllib.request.urlopen(url, timeout=60) as r, open(part, "wb") as f:
+                shutil.copyfileobj(r, f)
+            with open(part, "rb") as f: head = f.read(200).lstrip().lower()
+            if os.path.getsize(part) < min_size or head.startswith((b"<!doctype", b"<html")):
+                raise IOError("got %d bytes, not the file (an error page?)" % os.path.getsize(part))
+            os.replace(part, dest)
+            return
+        except (urllib.error.URLError, socket.error, IOError) as e:
+            err = e
+            print("  %s: attempt %d failed: %s" % (what, attempt + 1, getattr(e, "reason", e)), flush=True)
+    if os.path.exists(part): os.remove(part)
+    msg = str(getattr(err, "reason", err))
+    print("\ncould not download %s\n  from: %s\n  to:   %s\n  error: %s" % (what, url, dest, msg))
+    if "name resolution" in msg or "Name or service not known" in msg or "getaddrinfo" in msg:
+        print("This computer could not look up the server's name (DNS), so the download never started. Check:\n"
+              "  getent hosts github.com raw.githubusercontent.com\n"
+              "Both should print an address. If not: check the internet connection (Wi-Fi, VPN), or restart the\n"
+              "name service: sudo systemctl restart systemd-resolved")
+    print("Or download the file by hand, then run train again (files already there are kept):\n"
+          "  curl -fL --retry 3 -o '%s' '%s'" % (dest, url))
+    sys.exit(1)
+
+
 def fetch():
-    os.makedirs(os.path.join(ROOT, "tessdata_best"), exist_ok=True)
+    """The base models, tesstrain and its character-set files: everything train needs from the internet."""
     for lang in ("eng", "heb"):
         p = os.path.join(ROOT, "tessdata_best", "%s.traineddata" % lang)
-        if not os.path.exists(p):
-            print("downloading Tesseract's best %s model..." % lang)
-            urllib.request.urlretrieve(BEST % lang, p + ".part"); os.replace(p + ".part", p)
+        if not os.path.exists(p): print("downloading Tesseract's best %s model..." % lang, flush=True)
+        download(BEST % lang, p, "the %s base model" % lang, 1000000)
     tt = os.path.join(ROOT, "tesstrain")
+    if os.path.isdir(tt) and not os.path.exists(os.path.join(tt, "Makefile")):
+        shutil.rmtree(tt)  # a clone that failed half-way
     if not os.path.isdir(tt):
-        print("cloning tesstrain...")
-        subprocess.run(["git", "clone", "--depth", "1", TESSTRAIN, tt], check=True)
+        print("cloning tesstrain...", flush=True)
+        if subprocess.run(["git", "clone", "--depth", "1", TESSTRAIN, tt]).returncode:
+            if os.path.isdir(tt): shutil.rmtree(tt)
+            sys.exit("\ncould not clone %s into %s\nCheck the internet connection, or clone it by hand:\n"
+                     "  git clone --depth 1 %s '%s'" % (TESSTRAIN, tt, TESSTRAIN, tt))
     # the stock character sets of every script, which tesstrain wants (it would fetch them with wget)
     mk = open(os.path.join(tt, "Makefile")).read()
     scripts = " ".join(re.findall(r"^TESSERACT_SCRIPTS\s*\+?:?=\s*(.*)$", mk, re.M)).split()
     ld = os.path.join(ROOT, "data", "langdata")
-    os.makedirs(ld, exist_ok=True)
     need = ["radical-stroke.txt"] + ["%s.unicharset" % x for x in scripts]
     todo = [f for f in need if not os.path.exists(os.path.join(ld, f))]
-    if todo: print("downloading %d character-set files for tesstrain..." % len(todo))
+    if todo: print("downloading %d character-set files for tesstrain..." % len(todo), flush=True)
     for f in todo:
-        urllib.request.urlretrieve(LANGDATA % f, os.path.join(ld, f) + ".part")
-        os.replace(os.path.join(ld, f) + ".part", os.path.join(ld, f))
+        download(LANGDATA % f, os.path.join(ld, f), f, 50)
+    print("downloads: all there")
 
 
 def train(which, iterations):
@@ -252,13 +292,14 @@ def status():
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("cmd", choices=("check", "prepare", "train", "status"))
+    ap.add_argument("cmd", choices=("check", "prepare", "fetch", "train", "status"))
     ap.add_argument("--pages")
     ap.add_argument("--which", choices=("eng", "heb", "both"), default="both")
     ap.add_argument("--iterations", type=int)
     a = ap.parse_args()
     if a.cmd == "check": sys.exit(0 if check() else 1)
     if a.cmd == "prepare": prepare(a.pages)
+    if a.cmd == "fetch": fetch()
     if a.cmd == "train": train(a.which, a.iterations)
     if a.cmd == "status": status()
 
