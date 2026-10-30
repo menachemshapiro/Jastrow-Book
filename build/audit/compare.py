@@ -18,6 +18,8 @@ CFG = {
     "verify": True,           # re-read a differing word at double size before reporting it
     "heb_fuzzy": 0.75,        # two Hebrew words (letters only) this similar are the same word
     "heb_differs": 0.55,      # a Hebrew stretch less similar than this is reported
+    "count_conf": 55,         # an English OCR word this confident counts in the word count check
+    "count_left": 2,          # an entry with this many real words left over, and no finding, is reported (word_count)
     "heb_loose": 0.5,         # an unpaired site word this like an unpaired scan word is "read poorly", not "differs"
     "heb_order_sim": 0.85,    # Hebrew order is checked only on words read this close to the site's ...
     "heb_order_conf": 60,     # ... and at least this confidently
@@ -291,7 +293,69 @@ class PageCompare:
         self.check_scan()
         self.map_entries()
         self.check_structure()
+        self.check_counts()
         return self.f
+
+    # ---------- word counts ----------
+    def check_counts(self):
+        """each entry's English words, the site's against the book's. The word-by-word comparison accounts for every
+        difference, but drops some as OCR noise without a finding (next to Hebrew, short words, unsure readings).
+        Here those dropped differences are added up per entry: an entry where real words of the book are left over
+        with nothing to explain them is reported, so that missing or extra words can't hide among the noise"""
+        site_n, book_n = Counter(), Counter()
+        for t in self.S:
+            if not t["heb"] and t["eid"]: site_n[t["eid"]] += 1
+        tok = {t["i"]: t for t in self.S}
+        for si in self.s2k:
+            if tok[si]["eid"]: book_n[tok[si]["eid"]] += 1
+        def gap_eid(S, prev):
+            return next((t["eid"] for t in S if t["eid"]), None) or (self.eid_for_scan(prev["j"]) if prev else None)
+        for S, between, prev in self.gaps:
+            e = gap_eid(S, prev)
+            if e: book_n[e] += len([t for t in between if t["script"] == "lat" and t["key"]])
+        left = {}                              # eid -> [book words left over], [site words left over], gaps
+        for S, between, prev in self.silent:
+            eid = gap_eid(S, prev)
+            if not eid: continue
+            # looser than real(): a word-shaped English reading the comparison was unsure of still counts
+            K = [t for t in between if t["script"] == "lat" and len(t["key"]) >= 3 and not t["key"].startswith("#")
+                 and t["conf"] >= CFG["count_conf"] and re.fullmatch(r"[\[(]*[A-Za-zÀ-žḤḥ’'.,;:)\]-]+", t["text"])
+                 and t["heb_conf"] < max(50, t["conf"]) and self.vocab.get(t["key"], 0) >= 2]
+            # Roman numerals and folio numbers are often misread or lost next to Hebrew: they are left to the
+            # number checks
+            Sl = [t for t in S if not t["heb"] and t["key"] and len(t["key"].lstrip("#")) >= 3
+                  and not t["key"].startswith("#") and not ROMAN.match(t["text"].lstrip("—"))]
+            # a pair the comparison let pass as one word read two ways is no count difference
+            ks = [t for t in K if not any(ratio(ocr_shape(t["key"]), ocr_shape(x["key"])) >= 0.7 for x in Sl)]
+            ss = [t for t in Sl if not any(ratio(ocr_shape(t["key"]), ocr_shape(x["key"])) >= 0.7 for x in K)
+                  and not any(ocr_shape(t["key"]) in ocr_shape(x["key"]) for x in between if x["key"])]
+            if not ks and not ss: continue
+            d = left.setdefault(eid, [[], [], [], []])
+            d[0] += ks; d[1] += ss; d[2].append(between); d[3].append(any(t["heb"] for t in S) or
+                                                                    any(t["script"] == "heb" for t in between))
+        self.stats["count_entries"] = len(site_n)
+        self.stats["count_flagged"] = 0
+        for eid, (ks, ss, gaps, heb) in left.items():
+            if len(ks) + len(ss) < CFG["count_left"]: continue
+            self.stats["count_flagged"] += 1
+            causes = []
+            if any(heb): causes.append("next to Hebrew (the OCR may have read Hebrew as English, or lost a short word)")
+            if ks and not ss: causes.append("words in the book that the site lacks: missing on the site, or run "
+                                            "together with a neighbour")
+            if ss and not ks: causes.append("site words not in the book: extra or doubled on the site, or the OCR "
+                                            "lost them")
+            if ks and ss: causes.append("words differ: a misreading on either side")
+            site_t = [t for t in self.S if t["eid"] == eid]
+            sev = 2 if len(ks) + len(ss) >= 3 and not all(heb) else 3
+            self.add("word_count", sev, site_t[:1], [t for g in gaps for t in g],
+                     "the site has %d English words in this entry, the book about %d. Left over after the word-by-word "
+                     "comparison, with no other finding: %s%s%s. Likely: %s" % (
+                         site_n[eid], book_n[eid],
+                         ("in the book only: " + " ".join(t["text"] for t in ks)) if ks else "",
+                         "; " if ks and ss else "",
+                         ("on the site only: " + " ".join(t["text"] for t in ss)) if ss else "",
+                         "; ".join(causes)), eid=eid,
+                     book_words=" ".join(t["text"] for t in ks), site_words=" ".join(t["text"] for t in ss))
 
     def check_pairs(self):
         for tag, i1, i2, j1, j2 in self.ops:
@@ -311,12 +375,27 @@ class PageCompare:
 
     def check_gaps(self):
         n = len(self.ops)
+        self.silent = []                      # gaps that differ but gave no finding: for the word count check
+        self.gaps = []                        # every gap, for the book's word count per entry
         for oi, (tag, i1, i2, j1, j2) in enumerate(self.ops):
             if tag == "equal": continue
             S = self.S[i1:i2]
             between, prev, nxt = self.scan_between(i1, i2, j1, j2)
+            n0 = len(self.f)
+            self.gaps.append((S, between, prev))
+            self._gap(oi, n, S, between, prev, nxt)
+            new = self.f[n0:]
+            # nothing reported, or only minor notes and "not checked": the stretch's English is still unaccounted for
+            if all(x["sev"] == 3 or x["type"].endswith("_unread") for x in new):
+                told = {w for x in new for w in (x.get("scan") or "").split()}
+                told_s = {w for x in new for w in (x.get("site") or "").split()}
+                self.silent.append(([t for t in S if t["text"] not in told_s],
+                                    [t for t in between if t.get("raw", t["text"]) not in told], prev))
+
+    def _gap(self, oi, n, S, between, prev, nxt):
+        if True:
             if oi == 0 or oi == n - 1:
-                if self.edge_gap(oi == 0, S, between): continue
+                if self.edge_gap(oi == 0, S, between): return
             Sh = [t for t in S if t["heb"]]
             if Sh or any(t["script"] == "heb" for t in between):
                 self.hebrew(S, between, prev, nxt)

@@ -43,7 +43,7 @@ TYPES = {
     "alphabetical": "Alphabetical order", "scan_incomplete": "Scan page incomplete", "talmud_range": "Bavli folio out of range",
     "talmud_near": "Bavli quote on next amud", "talmud_elsewhere": "Bavli quote elsewhere in tractate",
     "talmud_other_tractate": "Bavli quote in another tractate", "talmud_not_found": "Bavli quote not found",
-    "ib_named": "Book has “Ib.”, site names the work", "abbreviation": "Abbreviation spelt differently",
+    "ib_named": "Book has “Ib.”, site names the work", "word_count": "Word count differs", "abbreviation": "Abbreviation spelt differently",
 }
 
 # what the OCR could not read is not a finding about the site: counted per page, not listed
@@ -57,7 +57,7 @@ SEV_HELP = {1: "What the audit thinks is most likely a real difference between t
             4: "Systematic differences, one question each: the book's “Ib.” where Sefaria's text names the work, and "
                "abbreviations spelt with a letter more or less. Decide each kind once (restore the book, or keep the "
                "site), rather than finding by finding."}
-LABEL = {"scan": "OCR reads", "reread": "read again", "book_vis": "Hebrew in the book", "scan_heb": "Hebrew OCR",
+LABEL = {"site_words": "site only", "scan": "OCR reads", "reread": "read again", "book_vis": "Hebrew in the book", "scan_heb": "Hebrew OCR",
          "book_words": "book's words", "scan_line": "the book's line", "site_vis": "as the site shows it",
          "site_heb": "site's Hebrew", "ref": "reference", "quote": "the quotation", "found": "found at",
          "proposed_known": "proposed", "proposed_below": "proposed below", "context": "context"}
@@ -459,7 +459,7 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
             body = '<div class="ctx" dir="auto">%s</div>' % sup(esc(x["site"]))
         else:
             body = '<div class="mut">—</div>'
-        extra = [(k, x[k]) for k in ("site_vis", "site_heb") if x.get(k)]
+        extra = [(k, x[k]) for k in ("site_vis", "site_heb", "site_words") if x.get(k)]
         body += "".join('<div class="sub"><span>%s</span> <span dir="rtl" lang="he">%s</span></div>'
                         % (LABEL.get(k, k), esc(v)) for k, v in extra)
         return '<div class="side"><div class="lab">Site</div>%s</div>' % body
