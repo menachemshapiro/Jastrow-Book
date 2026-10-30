@@ -370,10 +370,8 @@ button { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { .drawer { transition: none; } .e.hit { transition: none; } }
 /* abbreviation tooltips */
 ::highlight(abbr) { background-color: color-mix(in srgb, var(--accent) 18%, transparent); text-decoration: underline dotted; text-decoration-color: var(--accent); }
-.ab-tip { position: fixed; z-index: 1000; max-width: min(380px, calc(100vw - 16px)); padding: 7px 10px 8px; border-radius: 6px;
+.ab-tip { position: fixed; z-index: 1000; max-width: min(380px, calc(100vw - 16px)); padding: 5px 9px 6px; border-radius: 6px;
   background: var(--ink); color: var(--paper); font: 13.5px/1.4 var(--f-ui); box-shadow: 0 4px 16px rgba(0,0,0,.25); pointer-events: none; }
-.ab-tip .ab-k { font-weight: 600; margin-bottom: 1px; }
-.ab-tip .ab-k[dir="rtl"] { text-align: right; }
 .ab-tip .ab-v + .ab-v { margin-top: 3px; padding-top: 3px; border-top: 1px solid rgba(127,127,127,.4); }
 .ab-tip .ab-x { margin-top: 3px; font-size: 12.5px; opacity: .8; }
 </style>
@@ -1803,7 +1801,7 @@ function abAt(x, y) {
 }
 function abHTML(key, lang) {
   const vals = (lang === "he" ? AB.he : AB.en).get(key) || [];
-  let h = '<div class="ab-k"' + (lang === "he" ? ' lang="he" dir="rtl"' : "") + ">" + esc(key) + "</div>";
+  let h = "";                      // the expansion only: the abbreviation is right under the pointer
   for (const v of vals) {
     h += '<div class="ab-v">' + esc(v).replace(/[א-ת][א-ת״׳"' ,]*[א-ת״׳]/g, m => '<span lang="he" dir="rtl">' + m + "</span>") + "</div>";
     // the list's own cross-references: "B. Bath. = …, v. Kel." also shows what Kel. says
