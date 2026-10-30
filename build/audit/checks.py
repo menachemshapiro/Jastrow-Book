@@ -73,7 +73,9 @@ def homonyms(book):
             for m in re.finditer(HW + r'\s*,?\s*<span class="hn">([IVX]+)</span>', head):
                 forms = [P(x) for x in re.sub(r"<[^>]+>", "", m.group(1)).split(",") if P(x)]
                 if forms and m.group(2) in R: nums[forms[-1]] = (R[m.group(2)], m.group(2))
-            forms = {P(x) for x in re.sub(r"<[^>]+>", "", " ".join(re.findall(HW, head))).split(",") if P(x)}
+            # (the forms keep their abbreviation mark, so that זִי׳ can be told from זִי)
+            forms = {re.sub(r"[^\u05d0-\u05ea\u05b0-\u05bc\u05c1\u05c2\u05c7'\u05f3]", "", x)
+                     for x in re.sub(r"<[^>]+>", "", ",".join(re.findall(HW, head))).split(",") if P(x)}
             ch = " ch." in re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", body))[:70]      # an Aramaic counterpart
             rows.append((eid, pid, nums, forms, ch))
     out = {}
@@ -81,23 +83,26 @@ def homonyms(book):
         for f, (n, rn) in nums.items():
             if n < 2: continue
             near = rows[max(0, k - 30):k]
-            back = [r for r in near if f in r[2]]
-            if not back:
-                # the book numbers by letters too when the vowels differ ("אֱגֹורָא I", then "אֲגֹורָא II": the user, 30 Oct)
-                C = lambda x: re.sub(r"[^\u05d0-\u05ea]", "", x)
-                back = [r for r in near if any(C(g) == C(f) for g in r[2])]
-                if back:
-                    g = [g for g in back[-1][2] if C(g) == C(f)][-1]
-                    back = [(back[-1][0], back[-1][1], {f: back[-1][2][g]})]
-            if not back:
-                # an earlier entry with the same form and no number is how the book has it (the user, 30 Oct): not
-                # reported. Nor is one with no entry before it at all: too often the number goes with another form
+            # the earlier homonym is the last entry nearby that has this form among any of its forms, numbered or
+            # not, by letters (vowels may differ: "אֱגֹורָא I", then "אֲגֹורָא II"). An entry carries one number, and the
+            # next one can link to it through any of its forms: "בִּיזָּא I, בִּזָּא m." then "בִּיזָא, בִּזָּא II" (p. 159)
+            C = lambda x: re.sub(r"[^\u05d0-\u05ea]", "", x)
+            # through any form of this entry too ("שִׁיטָּה, שִׁטָּה III" links to "שִׁיטָּה II"); abbreviated forms (זִי׳)
+            # match too much and are left out
+            mine = {C(g) for g in forms if not re.search(r"['׳]$", g)} | {C(f)}
+            back = [r for r in near if any(C(g) in mine for g in r[3] if not re.search(r"['׳]$", g))]
+            if not back or not back[-1][2]:
+                # an earlier entry with the same form and no number is how the book has it (the user, 30 Oct); one
+                # with no entry before it at all is too often a number going with another form: neither reported
                 continue
-            m_ = back[-1][2][f][0]
-            if m_ == n - 1 or (m_ == n and ch): continue
-            out.setdefault(eid, []).append(("homonym_number", 2, "this is %s %s, but the entry before with the same form "
-                "(%s, p. %s) is number %s: a number skipped, repeated or wrong?" % (f, rn, back[-1][0], back[-1][1],
-                                                                              back[-1][2][f][1])))
+            # any nearby entry sharing a form that carries N - 1 will do: Jastrow keeps separate series for
+            # different pointings (אָגַר I, II; אֲגַר I, II, III) and also links across them (אֱגֹורָא I, אֲגֹורָא II)
+            had = {v[0] for r in back for v in r[2].values()}
+            if n - 1 in had or (n in had and ch): continue
+            prev_n = sorted({v for v in back[-1][2].values()})
+            out.setdefault(eid, []).append(("homonym_number", 2, "this is %s %s, but the entry before with the same "
+                "form (%s, p. %s) is number %s: a number skipped, repeated or wrong?" % (
+                    f, rn, back[-1][0], back[-1][1], "/".join(x[1] for x in prev_n))))
     _HOMONYMS[key] = out
     return out
 
