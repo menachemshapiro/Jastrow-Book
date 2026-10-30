@@ -12,6 +12,10 @@ options:
   --force         render and OCR again even if a page was done before (otherwise the OCR is reused)
   --no-talmud     skip the Bavli checks;  --no-quotes  only the range check, not the quotation search
   --no-verify     don't re-read differing words a second time
+  --no-reread     skip stage 3: re-reading each disagreement with the OCR's character alternatives and scoring
+                  Sefaria's reading and the OCR's against them (cached in pages/pNNNN/reread3.json)
+  --no-stage4     skip stage 4: comparing each entry's words as a bag before their order
+  --cfg K=V       set a threshold of compare.CFG for this run (e.g. --cfg re_err=2.5); may be given more than once
   --trained       OCR with the models trained on this book (build/audit/train_ocr.py); pages read with
                   other models are OCR'd again. --ocr-models DIR: models from another folder
   --word-count    also compare each entry's word count (off: on pp. 1-10 it found only OCR noise)
@@ -112,6 +116,10 @@ def vocab(site):
             for w in re.sub(r"<[^>]+>", " ", h).split():
                 k = ST.key(w)
                 if k: v[k] += 1
+                # Hebrew words by their letters, for stage 3's "is the OCR's reading a word at all?"
+                for hw in ST.HEBWORD.findall(w):
+                    sk = ST.heb_skel(hw)
+                    if len(sk) >= 2: v["h:" + sk] += 1
     return v
 
 
@@ -126,6 +134,9 @@ def main():
     ap.add_argument("--no-quotes", action="store_true")
     ap.add_argument("--no-verify", action="store_true")
     ap.add_argument("--word-count", action="store_true")
+    ap.add_argument("--no-reread", action="store_true")
+    ap.add_argument("--no-stage4", action="store_true")
+    ap.add_argument("--cfg", action="append", default=[], help="K=V: a compare.CFG value for this run")
     ap.add_argument("--trained", action="store_true", help="OCR with the models trained on the book (train_ocr.py)")
     ap.add_argument("--ocr-models", help="a folder with jeng/jheb.traineddata (default with --trained: work/ocrtrain/models)")
     ap.add_argument("--entry-lines", choices=("flush", "indent"), default="indent")
@@ -144,6 +155,13 @@ def main():
     import report as RP
     if args.no_verify: CO.CFG["verify"] = False
     if args.word_count: CO.CFG["word_count"] = True
+    if args.no_reread: CO.CFG["reread3"] = False
+    if args.no_stage4: CO.CFG["stage4"] = False
+    for kv in args.cfg:
+        k, v = kv.split("=", 1)
+        if k not in CO.CFG: sys.exit("no such setting in compare.CFG: %s" % k)
+        old = CO.CFG[k]
+        CO.CFG[k] = (v.lower() in ("1", "true", "yes", "on")) if isinstance(old, bool) else type(old)(v)
     if args.trained or args.ocr_models:
         md = os.path.abspath(args.ocr_models or os.path.join(paths.WORK, "ocrtrain", "models"))
         if not any(os.path.exists(os.path.join(md, "j%s.traineddata" % l)) for l in ("eng", "heb")):
@@ -170,7 +188,8 @@ def main():
     # them with the page, and build the model from every page audited so far and the user's marks
     import ocrmodel as OM
     print("measuring the OCR's misreadings...")
-    verify0 = CO.CFG["verify"]; CO.CFG["verify"] = False
+    saved = {k: CO.CFG[k] for k in ("verify", "reread3", "stage4")}
+    CO.CFG.update(verify=False, reread3=False, stage4=False)
     for n_, pid in enumerate(run):
         sp = os.path.join(args.out, "pages", "p%04d" % int(pid), "scan.json")
         if not os.path.exists(sp): continue
@@ -183,7 +202,7 @@ def main():
             OM.save_pairs(os.path.dirname(sp), pc.pairs())
         except Exception as e:
             print("  p. %s: %s" % (pid, e))
-    CO.CFG["verify"] = verify0
+    CO.CFG.update(saved)
     mf = [os.path.join(args.out, "marks.json")] + ([args.marks] if args.marks else []) + \
         sorted(glob.glob(os.path.expanduser("~/Downloads/jastrow-audit-marks*.json")))
     CO.CM, CO.HCM = OM.build(os.path.join(args.out, "pages"), RP.load_marks(mf))

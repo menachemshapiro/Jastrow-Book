@@ -31,10 +31,23 @@ CFG = {
     "count_left": 2,          # an entry with this many real words left over, and no finding, is reported (word_count)
     "heb_loose": 0.5,         # an unpaired site word this like an unpaired scan word is "read poorly", not "differs"
     "heb_order_sim": 0.85,    # Hebrew order is checked only on words read this close to the site's ...
-    "heb_order_conf": 60,     # ... and at least this confidently
+    "heb_order_conf": 60,     # ... and at least this confidently (with stage 3 off) ...
+    "heb_order_conf_low": 20, # ... or this, with stage 3 on: the order is then tested against the image
     "heb_short_conf": 85,     # a two-letter Hebrew scan word left over counts only if read this confidently
     "indent": 0.45,           # a line starting this many line pitches in from its column's edge is indented
     "entry_lines": "indent",  # how an entry's first line sits in the book: indented (Jastrow), or "flush"
+    # stage 3 (reread.py): each disagreement read again with the OCR's character alternatives, both readings scored
+    "reread3": True,          # off: --no-reread
+    "re_good": 0.5,           # the OCR's reading fits when its letters' confidences average (geometric mean) this ...
+    "re_weak": 0.02,          # ... none is weaker than this, and none is missing from the alternatives
+    "re_ok": 0.7,             # Sefaria's reading, all its letters among the alternatives, this little less likely: fits
+    "re_err": 3.0,            # the OCR's agreed reading this much likelier than Sefaria's (nats): Sefaria is wrong ...
+    "good_reads": True,       # Sefaria's reading is weighed on the reads that make sense of the OCR's own
+    "best_own": False,        # with no agreement among the reads, take the read that fits itself best for the OCR (off: worse)
+    "re_err_forced": 1.5,     # ... or this much, when even with Sefaria's word as the only dictionary word it reads its own
+    # stage 4: content first, order second
+    "stage4": True,           # off: --no-stage4
+    "near_word": 0.75,        # a site word and a book word this alike (letters the OCR confuses made the same) are one
 }
 
 HYPH = re.compile(r"^(.*[A-Za-zÀ-ž])[-‐‑¬~]$")
@@ -86,6 +99,11 @@ def heb_look(skel):
     """a Hebrew word as the OCR might read it either way: confusable letters made the same, and ו/י left out (a
     holam, shuruk or hiriq is often read as one)"""
     return re.sub("[וי]", "", skel).translate(HEB_CONF)
+
+
+def RRnorm(s):
+    import reread as RR
+    return RR.norm_lat(s)
 
 
 class PageCompare:
@@ -149,10 +167,13 @@ class PageCompare:
             t = dict(raw[i]); t["boxes"] = [t["box"]]; t["lines"] = [t["line"]]; t["hyph"] = False
             m = HYPH.match(t["text"])
             if m and t["last"]:
-                if i + 1 < len(raw) and raw[i + 1]["first"] and re.match(r"[a-zà-ž]", raw[i + 1]["text"]):
+                # the rest of the word on the next line; the OCR may put a mark before it ("accor-" / "(iti")
+                nx = raw[i + 1]["text"] if i + 1 < len(raw) else ""
+                rest = re.sub(r"^[(‘'\"`|,.:;]+", "", nx)
+                if i + 1 < len(raw) and raw[i + 1]["first"] and re.match(r"[a-zà-ž]", rest):
                     n = raw[i + 1]
                     t["raw"] = t["text"] + " " + n["text"]
-                    t["text"] = m.group(1) + n["text"]
+                    t["text"] = m.group(1) + rest
                     t["boxes"].append(n["box"]); t["lines"].append(n["line"])
                     t["conf"] = min(t["conf"], n["conf"]); t["hyph"] = True
                     t["last"] = n["last"]
@@ -226,6 +247,8 @@ class PageCompare:
                "note": note, "lines": lines, "boxes": [b for t in scan_toks for b in t.get("boxes", [t.get("box")])],
                "off": st[0]["off"] if st else None, "end": st[-1]["end"] if st else None}
         rec.update(kw)
+        # for stages 3 and 4 (taken out before the findings are written): the tokens, and the gap they came from
+        rec["_S"], rec["_K"], rec["_ctx"] = st, list(scan_toks), getattr(self, "_ctx", None)
         if rec["eid"] is None and rec["off"] is not None:
             rec["eid"] = self.eid_at(rec["off"])
         if rec["eid"] is None and scan_toks:
@@ -306,6 +329,10 @@ class PageCompare:
         self.map_entries()
         self.check_structure()
         if CFG["word_count"]: self.check_counts()
+        if CFG["stage4"]: self.stage4()
+        if CFG["reread3"]: self.stage3()
+        for x in self.f:
+            for k in [k for k in x if k.startswith("_")]: del x[k]
         return self.f
 
     # ---------- word counts ----------
@@ -395,7 +422,10 @@ class PageCompare:
             between, prev, nxt = self.scan_between(i1, i2, j1, j2)
             n0 = len(self.f)
             self.gaps.append((S, between, prev))
+            self._ctx = {"S": S, "between": between, "prev": prev, "nxt": nxt,
+                         "pure": not any(t["heb"] for t in S) and not any(t["script"] == "heb" for t in between)}
             self._gap(oi, n, S, between, prev, nxt)
+            self._ctx = None
             new = self.f[n0:]
             # nothing reported, or only minor notes and "not checked": the stretch's English is still unaccounted for
             if all(x["sev"] == 3 or x["type"].endswith("_unread") for x in new):
@@ -494,7 +524,13 @@ class PageCompare:
             return
         if S and K and plain_shape(" ".join(t["text"] for t in S)) == plain_shape(" ".join(t["text"] for t in K)) \
                 and not self.site_rare(S, K):
-            return                                             # the same, but for the OCR's spacing and punctuation
+            # the same, but for the OCR's spacing and punctuation, or letters it confuses (c/e, rn/m, l/i). Those
+            # are also Sefaria's own typos ("rcmarks"): a site word rare on the site is left to stage 3 to test
+            if CFG["reread3"] and len(S) == len(K) == 1 and S[0]["key"] != K[0]["key"] and len(S[0]["key"]) >= 3 \
+                    and not S[0]["key"].startswith("#") and self.vocab.get(S[0]["key"], 0) <= CFG["rare"]:
+                self.add("word_differs", 3, S, K, "letters the OCR confuses (c/e, rn/m, l/i), in a word rare on the "
+                         "site (%d×): tested against the image" % self.vocab.get(S[0]["key"], 0))
+            return
         if mixed:
             # next to Hebrew, short words (m., v., I, II, f.) are often read as Hebrew or lost; report only longer
             # words, and numbers the scan does not have anywhere in the gap
@@ -506,7 +542,9 @@ class PageCompare:
             if len(S) == 1 and len(S[0]["key"]) <= 1: return
             prev = self.p.plain[max(0, S[0]["off"] - 400):S[0]["off"]]
             txt = self.p.plain[S[0]["off"]:S[-1]["end"]]
-            doubled = len(txt) > 12 and txt in prev
+            # the same words just before, or just after (the alignment may take the second copy for the book's)
+            after = self.p.plain[S[-1]["end"]:S[-1]["end"] + len(txt) + 3]
+            doubled = len(txt) > 12 and (txt in prev or txt in after)
             self.add("doubled" if doubled else "not_in_scan", 1 if doubled else (3 if mixed and len(S) <= 2 else 2), S, [],
                      "the same words come just before" if doubled else
                      ("site words the scan's OCR does not have here" + (" (next to Hebrew)" if mixed else "")))
@@ -679,17 +717,25 @@ class PageCompare:
         bad = []
         sc, kc_ = Counter(t["skel"] for t in sh), Counter(w["skel"] for w in ks)
         dup = Counter({k: max(sc[k], kc_[k]) for k in set(sc) | set(kc_)})
+        # with stage 3 on, a word the OCR read unsurely still counts: the order is then tested against the image
+        conf_min = CFG["heb_order_conf_low"] if CFG["reread3"] else CFG["heb_order_conf"]
         items = [(sh[si], ks[kj]) for si, kj in pair.items() if len(sh[si]["skel"]) >= 3
-                 and ks[kj]["conf"] >= CFG["heb_order_conf"] and ratio(sh[si]["skel"], ks[kj]["skel"]) >= CFG["heb_order_sim"]]
+                 and ks[kj]["conf"] >= conf_min and ratio(sh[si]["skel"], ks[kj]["skel"]) >= CFG["heb_order_sim"]]
         for x in range(len(items)):
             for y in range(x + 1, len(items)):
                 (a, wa), (b, wb) = items[x], items[y]
-                if wa["line"] != wb["line"] or a["skel"] == b["skel"]: continue
+                if a["skel"] == b["skel"]: continue
                 if dup[a["skel"]] > 1 or dup[b["skel"]] > 1: continue
                 # two spellings of one word (אֲבֵלָה / אֲבֵילָה) pair either way round with what the OCR read: the
                 # order is only reported when the pairing is clear
                 if ratio(a["skel"], wb["skel"]) + ratio(b["skel"], wa["skel"]) >= \
                         ratio(a["skel"], wa["skel"]) + ratio(b["skel"], wb["skel"]) - 0.3: continue
+                if wa["line"] != wb["line"]:
+                    # on different lines (stage 4: content first, order second): whatever the direction of the
+                    # words, the one the site gives first must stand on the earlier line
+                    if CFG["stage4"] and (wa["line"] < wb["line"]) != (a["i"] < b["i"]):
+                        bad.append((a, b, wa, wb))
+                    continue
                 # the OCR's boxes overlap or touch: their order on the line can't be told
                 if min(wa["box"][2], wb["box"][2]) - max(wa["box"][0], wb["box"][0]) > -0.1 * self.lineh: continue
                 if ST.visual_left_of(a, b) != (wa["x"] < wb["x"]):
@@ -700,13 +746,18 @@ class PageCompare:
             on = [(t, w) for t, w in items if w["line"] == ln]
             site_vis = sorted([t for t, w in on], key=cmp_to_key(lambda a, b: -1 if ST.visual_left_of(a, b) else 1))
             book_vis = [t for t, w in sorted(on, key=lambda p: p[1]["x"])]
+            if len({wa["line"] for _, _, wa, _ in bad} | {wb["line"] for _, _, _, wb in bad}) > 1:
+                # across lines: each word in the book's reading order (line by line; right to left)
+                book_vis = [a for a, b, wa, wb in bad[:1]] and [t for t, w in sorted(
+                    [(t, w) for t, w in items if any(w is q for p_ in bad for q in p_[2:])],
+                    key=lambda p: (p[1]["line"], -p[1]["x"]))]
             # sure only when every word of the swap was read letter for letter and confidently
             exact = all(a["skel"] == wa["skel"] and b["skel"] == wb["skel"] and min(wa["conf"], wb["conf"]) >= 80
                         for a, b, wa, wb in bad)
             self.add(typ_o + "_order", 1 if exact else 2, sh, [], "the Hebrew words stand in a different order on the site"
                      + ("" if exact else " (the OCR's reading is not exact: check)"),
                      site_vis=" ".join(t["text"] for t in site_vis), book_vis=" ".join(t["text"] for t in book_vis),
-                     ocr_conf=min(min(wa["conf"], wb["conf"]) for _, _, wa, wb in bad), **rec)
+                     ocr_conf=min(min(wa["conf"], wb["conf"]) for _, _, wa, wb in bad), _bad=bad, **rec)
         us = [t for si, t in enumerate(sh) if si not in pair and len(t["skel"]) >= 2]
         # what the OCR read but nothing on the site pairs with. Vowel points, a dagesh or a Latin letter often come
         # out as a short "word" (דד, זז, תק): only words of three letters, or very confident two-letter ones, count
@@ -762,7 +813,8 @@ class PageCompare:
             self.add(typ + "_differs", 2 if typ == "headword" else 3, sh, [],
                      "check the Hebrew (OCR of pointed Hebrew is not reliable)",
                      site_heb=" ".join(t["text"] for t in us), scan_heb=" ".join(w["text"] for w in uk),
-                     site_all=sv, scan_all=kv, **rec)
+                     site_all=sv, scan_all=kv, _us=list(us), _cands=[w for kj, w in enumerate(ks) if kj not in used],
+                     **rec)
         # what the book seems to have beyond the site: not a second reading of a word that is there (the OCR often
         # reads a word twice, from the line above or below: "רבתא רבתא"), nor one like a site word, nor a reading
         # with digits or Latin in it (the marks found all of these false)
@@ -1283,3 +1335,374 @@ class PageCompare:
                      boxes=[next(ln["box"] for ln in self.lines if ln["i"] == t["line"])])
         self.stats["entries"] = len([e for e in self.p.entries if not e["cont"]])
         self.stats["book_entry_lines"] = len(self.book_entry_lines)
+
+    # ---------- stage 4: content first, order second ----------
+    def stage4(self):
+        """per entry, the words each side has that the other lacks, compared as a bag before their order:
+          - the same words on both sides, at different places: one "order differs" finding, not "missing" + "extra";
+          - a word missing on one side and a word like it extra on the other: one word, misread or mistyped: a
+            "word differs" finding, which stage 3 then tests against the image.
+        What is left is missing or doubled text, as before."""
+        kinds = ("not_in_scan", "missing_in_site", "differs")
+        groups = {}
+        for x in self.f:
+            if x["type"] in kinds and x.get("eid"): groups.setdefault(x["eid"], []).append(x)
+        drop, new = set(), []
+        for eid, fs in groups.items():
+            if len(fs) < 2 and not any(x["type"] == "differs" for x in fs): continue
+            so = [(x, t) for x in fs for t in x["_S"] if not t["heb"] and len(t["key"].lstrip("#")) >= 2]
+            bo = [(x, t) for x in fs for t in x["_K"] if t.get("script") == "lat" and len(t.get("key", "").lstrip("#")) >= 2
+                  and (self.real(t) or (t["conf"] >= 60 and t["heb_conf"] < 50))]
+            used_s, used_b = set(), set()
+            # 1. the same word on both sides, in different findings: moved
+            moved = []
+            for a, (xs, s_) in enumerate(so):
+                for b, (xk, k_) in enumerate(bo):
+                    if b in used_b or xs is xk: continue
+                    if s_["key"] == k_["key"]:
+                        used_s.add(a); used_b.add(b); moved.append((s_, k_)); break
+            # 2. one word for another, alike in letters: misread or mistyped
+            pairs = []
+            for a, (xs, s_) in enumerate(so):
+                if a in used_s: continue
+                best = None
+                for b, (xk, k_) in enumerate(bo):
+                    if b in used_b or xs is xk: continue
+                    r = ratio(ocr_shape(s_["key"]), ocr_shape(k_["key"]))
+                    if r >= CFG["near_word"] and abs(len(s_["key"]) - len(k_["key"])) <= 2 and (best is None or r > best[0]):
+                        best = (r, b, k_)
+                if best:
+                    used_s.add(a); used_b.add(best[1]); pairs.append((s_, best[2]))
+            if not moved and not pairs: continue
+            # take the accounted words out of the findings they were in; a finding left with nothing real goes
+            gone_s = {id(so[a][1]) for a in used_s}
+            gone_b = {id(bo[b][1]) for b in used_b}
+            for x in fs:
+                if x["type"] == "differs" and not any(id(t) in gone_s for t in x["_S"]) and \
+                        not any(id(t) in gone_b for t in x["_K"]): continue
+                restS = [t for t in x["_S"] if id(t) not in gone_s]
+                restK = [t for t in x["_K"] if id(t) not in gone_b]
+                realS = [t for t in restS if not t["heb"] and len(t["key"].lstrip("#")) >= 3]
+                realK = [t for t in restK if t.get("script") == "lat" and self.real(t)]
+                if not realS and not realK:
+                    drop.add(id(x)); continue
+                x["_S"], x["_K"] = restS, restK
+                x["site"] = " ".join(t["text"] for t in restS)
+                x["scan"] = " ".join(t.get("raw", t["text"]) for t in restK)
+                x["note"] = (x.get("note") or "") + "; some of its words are accounted for elsewhere in the entry (stage 4)"
+                x["_ctx"] = None                       # no longer the whole gap: not tested as one
+            n0 = len(self.f)
+            if moved:
+                S_, K_ = [s_ for s_, _ in moved], [k_ for _, k_ in moved]
+                self.add("order_differs", 2, sorted(S_, key=lambda t: t["i"]), sorted(K_, key=lambda t: t["j"]),
+                         "the same words on both sides, in another order (or moved within the entry)", eid=eid)
+            for s_, k_ in pairs:
+                num = re.search(r"\d", s_["text"] + k_["text"])
+                self.add("number_differs" if num else "word_differs", 2, [s_], [k_],
+                         "a word the scan has here and the site lacks, and one the site has and the scan lacks: one "
+                         "word, read or typed two ways (stage 4)", ratio=round(ratio(s_["key"], k_["key"]), 2),
+                         eid=eid)
+            for x in self.f[n0:]: x["_ctx"] = None
+        self.f = [x for x in self.f if id(x) not in drop]
+        self.stats["stage4"] = sum(1 for x in self.f if "(stage 4)" in (x.get("note") or "") or x["type"] == "order_differs")
+
+    # ---------- stage 3: test both readings against the image ----------
+    def region_boxes(self, ctx):
+        """the scan's boxes between a gap's anchors, line by line"""
+        L = {ln["i"]: ln for ln in self.lines}
+        out = []
+        for li, a, b in self.region(ctx["prev"], ctx["nxt"], ctx["between"]):
+            lb = L[li]["box"]
+            a, b = max(a, L[li]["colbox"][0] - 4) + 2, min(b, L[li]["colbox"][2] + 4) - 2
+            if b - a > 0.3 * self.lineh: out.append(self.trim_slivers([int(a), int(lb[1]), int(b), int(lb[3])]))
+        return [b for b in out if b[2] - b[0] > 0.3 * self.lineh]
+
+    def trim_slivers(self, box):
+        """a stretch between two words the OCR read: its ink, without the edge of a neighbour's last or first
+        letter that the OCR's box of it left out (a narrow run of ink at either end, set off by a space)"""
+        self.ink_start(box)
+        a = self._ink
+        if a is None: return box
+        x0, y0, x1, y1 = box
+        col = a[y0:y1, x0:x1].sum(0) > 0
+        import numpy as np
+        on = np.concatenate([[0], col.astype(np.int8), [0]])
+        d = np.diff(on); st, en = list(np.where(d == 1)[0]), list(np.where(d == -1)[0])
+        if not st: return box
+        gap = max(3, int(0.12 * self.lineh))
+        # runs of ink joined across gaps narrower than a space
+        runs = [[st[0], en[0]]]
+        for s_, e_ in zip(st[1:], en[1:]):
+            if s_ - runs[-1][1] < gap: runs[-1][1] = e_
+            else: runs.append([s_, e_])
+        thin = 0.25 * self.lineh
+        if len(runs) > 1 and runs[0][0] <= 3 and runs[0][1] - runs[0][0] < thin: runs = runs[1:]
+        if len(runs) > 1 and runs[-1][1] >= len(col) - 3 and runs[-1][1] - runs[-1][0] < thin: runs = runs[:-1]
+        return [int(x0 + max(0, runs[0][0] - 2)), y0, int(x0 + min(len(col), runs[-1][1] + 2)), y1]
+
+    def ink_extent(self, box, lo, hi, y0, y1):
+        """a word's own ink, from the OCR's box out to the spaces on either side (a gap in the ink wider than a
+        letter's), but not past lo and hi (the neighbours): the OCR's box of a word it misread often leaves out a
+        letter or two, and the room up to the neighbours often takes in a sliver of them"""
+        self.ink_start(box)                          # loads the page's ink
+        a = self._ink
+        if a is None: return [max(lo, box[0]), y0, min(hi, box[2]), y1]
+        lo, hi = max(0, int(lo)), min(a.shape[1], int(hi))
+        col = a[max(0, y0):y1, :].sum(0) > 0
+        gap = max(3, int(0.12 * self.lineh))
+        x0, x1 = max(lo, int(box[0])), min(hi, int(box[2]))
+        while x0 > lo:
+            k = x0 - 1
+            while k >= lo and not col[k] and x0 - k <= gap: k -= 1
+            if k < lo or not col[k]: break               # a space (or the neighbour's edge): the word begins here
+            x0 = k
+        while x1 < hi:
+            k = x1
+            while k < hi and not col[k] and k - x1 < gap: k += 1
+            if k >= hi or not col[k]: break
+            x1 = k + 1
+        return [x0, y0, x1, y1]
+
+    def word_region(self, k):
+        """the space a scan word has on its line(s): from the word before it to the word after it (the column's edge
+        where there is none), the height of its line. The OCR's own box of a word it misread often leaves out a
+        letter or two, which is exactly where Sefaria's reading and its own differ"""
+        L = {ln["i"]: ln for ln in self.lines}
+        out = []
+        for b, li in zip(k["boxes"], k["lines"]):
+            ln = L.get(li)
+            if ln is None: out.append(b); continue
+            same = [t for t in self.s["ocr"]["tokens"] if t["line"] == li and t["box"] != b]
+            left = [t["box"][2] for t in same if t["box"][2] <= b[0] + 2]
+            right = [t["box"][0] for t in same if t["box"][0] >= b[2] - 2]
+            x0 = max(left) + 1 if left else ln["colbox"][0] - 4
+            x1 = min(right) - 1 if right else ln["colbox"][2] + 4
+            y0, y1 = int(min(ln["box"][1], b[1])), int(max(ln["box"][3], b[3]))
+            out.append(self.ink_extent(b, min(x0, b[0]), max(x1, b[2]), y0, y1))
+        return out
+
+    def heb_region(self, box):
+        """the same for a word of the Hebrew OCR: from its neighbours on the line (Hebrew words, and English words
+        read surely) to either side"""
+        cy = (box[1] + box[3]) / 2
+        L = [ln for ln in self.lines if ln["box"][1] - 0.3 * self.lineh <= cy <= ln["box"][3] + 0.3 * self.lineh]
+        cb = L[0]["colbox"] if L else [box[0] - self.lineh, 0, box[2] + self.lineh, 0]
+        nb = [w["box"] for w in self.heb if w["box"] != box and abs((w["box"][1] + w["box"][3]) / 2 - cy) < 0.4 * self.lineh
+              and re.search("[א-ת]", w["text"])]
+        nb += [t["box"] for t in self.k if t["script"] == "lat" and self.real(t)
+               and abs((t["box"][1] + t["box"][3]) / 2 - cy) < 0.4 * self.lineh]
+        left = [b[2] for b in nb if b[2] <= box[0] + 2 and cb[0] - 10 <= b[2]]
+        right = [b[0] for b in nb if b[0] >= box[2] - 2 and b[0] <= cb[2] + 10]
+        x0 = max(left) + 1 if left else max(cb[0] - 4, box[0] - self.lineh)
+        x1 = min(right) - 1 if right else min(cb[2] + 4, box[2] + self.lineh)
+        y0 = min(box[1], L[0]["box"][1]) if L else box[1]
+        y1 = max(box[3], L[0]["box"][3]) if L else box[3]
+        return [self.ink_extent(box, min(x0, box[0]), max(x1, box[2]), int(y0), int(y1))]
+
+    def tests_for(self, x):
+        """what stage 3 tests for a finding: [(Sefaria's reading, the OCR's reading, boxes, script)]"""
+        t, ctx = x["type"], x.get("_ctx")
+        whole = ctx is not None and ctx["pure"] and \
+            [u["i"] for u in ctx["S"] if not u["heb"]] == [u["i"] for u in x["_S"]]
+        if t in ("word_differs", "number_differs") and x["_S"] and x["_K"]:
+            k = x["_K"][0]
+            boxes = self.region_boxes(ctx) if whole and len([u for u in ctx["between"] if u["key"]]) == 1 else None
+            boxes = boxes or self.word_region(k)
+            # a word divided at the line's end that the OCR did not join ("bran-" / "ches"): its rest is the next
+            # line's first word
+            nx = self.k[k["j"] + 1] if k.get("j") is not None and k["j"] + 1 < len(self.k) else None
+            if k.get("last") and re.search(r"[-¬‐’']$", k["text"]) and nx is not None and nx.get("first") and \
+                    not k.get("hyph"):
+                boxes = boxes + self.word_region(nx)
+            return [(x["_S"][0]["text"], k["text"], boxes, "lat")]
+        if t in ("differs", "not_in_scan", "missing_in_site") and whole:
+            boxes = self.region_boxes(ctx)
+            if not boxes: return []
+            return [(" ".join(u["text"] for u in x["_S"]), " ".join(u.get("raw", u["text"]) for u in ctx["between"]),
+                     boxes, "lat")]
+        if t in ("differs", "not_in_scan") and ctx is not None and not ctx["pure"]:
+            # next to Hebrew: are Sefaria's words there at all? Each is looked for among the scan's words of the gap
+            # (the OCR often reads English next to Hebrew as Hebrew, or as noise)
+            # (numbers and Roman numerals are left to the number checks: the OCR reads them worst next to Hebrew)
+            words = [u["text"] for u in x["_S"] if len(RRnorm(u["text"])) >= 3 and not re.search(r"\d", u["text"])
+                     and not ROMAN.match(u["text"].lstrip("—"))]
+            cands = [u for u in ctx["between"] if not (u["script"] == "heb" and u["heb_conf"] >= 80)]
+            if words and cands:
+                return [("find", words, [self.word_region(u) for u in cands], "lat")]
+            return []
+        if t == "headword_letters" and x["_S"] and x.get("boxes"):
+            return [(x["_S"][0]["text"], x.get("scan_heb") or "", self.heb_region(x["boxes"][0]), "heb")]
+        if t in ("hebrew_order", "headword_order") and x.get("_bad"):
+            # each swapped pair, both ways: is the site's word a where the OCR read wa, and b at wb (then the book's
+            # order is not the site's), or the other way round (then the OCR's pairing was wrong)?
+            out = []
+            for a, b, wa, wb in x["_bad"]:
+                out.append(("order", (a["text"], b["text"]), (self.heb_region(wa["box"]), self.heb_region(wb["box"])), "heb"))
+            return out
+        if t in ("hebrew_differs", "headword_differs") and x.get("_us"):
+            out, cands = [], list(x.get("_cands") or [])
+            for u in x["_us"]:
+                best = max(cands, key=lambda w: ratio(u["skel"], w["skel"]), default=None)
+                if best is None or ratio(u["skel"], best["skel"]) < 0.4: return []     # a word with no place: untestable
+                cands.remove(best)
+                out.append((u["text"], best["text"], self.heb_region(best["box"]), "heb"))
+            return out
+        return []
+
+    def stage3(self):
+        """each disagreement read again with the OCR's character alternatives (reread.py); both readings scored; the
+        finding settled as the OCR's misreading, a likely error in Sefaria's text, or unclear"""
+        import reread as RR
+        R = RR.Reader(self.wd, self.s.get("dpi", 400), self.lineh)
+        todo = []
+        for x in self.f:
+            ts = self.tests_for(x)
+            if ts: todo.append((x, ts))
+        if not todo: return
+        reqs = []
+        for _, ts in todo:
+            for a, _, b, sc in ts:
+                if a == "find": reqs += [(bx, "eng") for bx in b]
+                elif a == "order": reqs += [(bx, "heb") for bx in b]
+                else: reqs.append((b, "heb" if sc == "heb" else "eng"))
+        R.read_all(reqs)
+        cfg = {k: CFG[k] for k in ("re_good", "re_weak", "re_ok", "re_err", "re_err_forced", "rare", "common")}
+        cfg["best_own"] = CFG.get("best_own", False)
+        cfg["good_reads"] = CFG.get("good_reads", True)
+        V = self.vocab
+        def wc(text, sc):
+            """how often a reading occurs on the whole site, as a word (None for a stretch of words)"""
+            if len(text.split()) != 1: return None
+            return V.get("h:" + RR.norm_heb(text), 0) if sc == "heb" else V.get(ST.key(text), 0)
+        cfg["count"] = wc
+        n = Counter()
+        for x, ts in todo:
+            res = []
+            if ts[0][0] == "order":
+                margin = CFG["re_err"]
+                vs, rd_ = [], []
+                for _, (a, b), (ba, bb), sc in ts:
+                    ra, rb = R.reads(ba, "heb"), R.reads(bb, "heb")
+                    if not ra or not rb: vs.append("unclear"); continue
+                    def cost(w, rds): return min(RR.score(w, r[3], "heb")[3] for r in rds)
+                    keep = cost(a, ra) + cost(b, rb)            # the words where the OCR's pairing puts them
+                    swap = cost(a, rb) + cost(b, ra)            # the other way round
+                    # each place must have been read as one of the two words, more or less: noise decides nothing
+                    def legible(rds):
+                        return max(ratio(RR.norm_heb(r[1]), RR.norm_heb(w)) for r in rds for w in (a, b)) >= 0.5
+                    if not (legible(ra) and legible(rb)):
+                        vs.append("unclear")
+                    else:
+                        vs.append("likely_error" if swap - keep >= margin else "ocr_misread" if keep - swap >= margin
+                                  else "unclear")
+                    def shown(rds): return " | ".join(dict.fromkeys(r[1] for r in rds if r[1])) or "nothing"
+                    rd_.append({"site": a + " / " + b, "ocr": shown(ra) + " / " + shown(rb), "verdict": vs[-1],
+                                "delta": round(swap - keep, 2), "reads": [shown(ra), shown(rb)]})
+                v = "likely_error" if vs and all(q == "likely_error" for q in vs) else \
+                    "ocr_misread" if any(q == "ocr_misread" for q in vs) else "unclear"
+                x["verdict"], x["readings"] = v, rd_
+                n[v] += 1
+                x["note"] += "; re-read: " + {
+                    "likely_error": "each word's place confirmed against the image (its letters fit there, and not "
+                                    "at the other's place): the order differs",
+                    "ocr_misread": "the words fit the other way round: the OCR's pairing was wrong, not the order",
+                    "unclear": "the image can't tell which word stands where"}[v]
+                x["sev"] = 1 if v == "likely_error" else 3 if v == "ocr_misread" else 2
+                continue
+            if ts[0][0] == "find":
+                _, words, cands, sc = ts[0]
+                reads = [R.reads(b, "eng") for b in cands]
+                found = []
+                for w in words:
+                    hit = None
+                    for rd in reads:
+                        if not rd: continue
+                        # a word divided at a line's end: its first part, with the hyphen, ends the read
+                        heads = [r[1].strip() for r in rd if re.search(r"[-¬‐]$", r[1].strip())]
+                        if any(len(RR.norm_lat(h)) >= 3 and RR.norm_lat(w).startswith(RR.norm_lat(h)) for h in heads):
+                            hit = {"ocr_best": heads[0], "site_fit": None}; break
+                        # the word is there if, on one of the four reads, every letter of it is among the alternatives
+                        # and they fit it well (the read's own top reading may be another word: the OCR's first
+                        # choice is what failed here)
+                        fits = [(RR.score(w, r[3], sc), r[1]) for r in rd]
+                        okf = [(f, t) for f, t in fits if f[1] == 0 and f[0] >= CFG["re_good"]]
+                        if okf:
+                            f, t = max(okf, key=lambda z: z[0][0])
+                            hit = {"ocr_best": t, "site_fit": round(f[0], 3), "site_unsupported": 0}; break
+                        # or, on some read, all its letters among the alternatives and nearly as likely as that
+                        # read's own letters
+                        for r in rd:
+                            if not RR.norm_lat(r[1]): continue
+                            a_, b_ = RR.score(w, r[3], sc), RR.score(r[1], r[3], sc)
+                            if a_[1] == 0 and a_[3] - b_[3] <= CFG["re_ok"]:
+                                hit = {"ocr_best": r[1], "site_fit": round(a_[0], 3), "site_unsupported": 0}; break
+                        if hit: break
+                    found.append((w, hit))
+                ok = all(h is not None for _, h in found)
+                # the numbers among the site's words are left out of the search: they must be in the scan's reading
+                # of the gap as they are, or the finding stands
+                gapd = set(re.findall(r"\d+", " ".join(u.get("raw", u["text"]) for u in (x.get("_ctx") or {}).get("between", []))))
+                nums = [d for u in x["_S"] for d in re.findall(r"\d+", u["text"])]
+                # (a number of the same length read differently, as 116 for the site's 111: not one merely unread)
+                if ok and any(d not in gapd and any(len(g) == len(d) for g in gapd) for d in nums): ok = False
+                x["verdict"] = "ocr_misread" if ok else "unclear"
+                x["readings"] = [{"site": w, "ocr": (h or {}).get("ocr_best") or "", "verdict": "found" if h else "not found",
+                                  **{k: v for k, v in (h or {}).items() if k not in ("verdict",)}} for w, h in found]
+                n[x["verdict"]] += 1
+                miss = [w for w, h in found if h is None]
+                x["note"] = ((x.get("note") or "") + "; " if x.get("note") else "") + "re-read: " + (
+                    "every one of Sefaria's words here is in the scan, read again with the OCR's alternatives (the "
+                    "first reading took it for Hebrew or noise): the OCR's misreading" if ok else
+                    "not found in the scan, read again with the OCR's alternatives: %s; found: %s" % (
+                        " ".join(miss), " ".join(w for w, h in found if h) or "none"))
+                if ok: x["sev"] = 3
+                continue
+            for site, ocr, boxes, sc in ts:
+                lang = "heb" if sc == "heb" else "eng"
+                reads = R.reads(boxes, lang)
+                if x["type"] == "number_differs" and re.search(r"\d", site) and re.match(r"^\D{0,2}\d+[a-d]?\W*$", site):
+                    res.append((site, ocr, RR.judge_number(site, reads))); continue
+                j = RR.judge(site, ocr, reads, sc, cfg)
+                if j["verdict"] in ("likely_error", "unclear") and len(site.split()) == 1 and RR.norm(site, sc):
+                    word = RR.norm_heb(site) if sc == "heb" else site.strip(".,;:()[]—-")
+                    j = RR.judge(site, ocr, reads, sc, cfg, forced=R.forced(boxes, lang, word))
+                res.append((site, ocr, j))
+            vs = [j["verdict"] for _, _, j in res]
+            v = "ocr_misread" if all(a == "ocr_misread" for a in vs) else \
+                "likely_error" if "likely_error" in vs else "unclear"
+            if all(a == "unread" for a in vs): v = "unread"
+            x["verdict"] = v
+            x["readings"] = [{"site": a, "ocr": b, **j} for a, b, j in res]
+            n[v] += 1
+            def fmt(a, b, j):
+                if j.get("digits"):
+                    return "the number's digits: Sefaria's %s; read again: %s" % (
+                        re.search(r"\d+", a).group(0), " / ".join(r for r in j["reads"] if r) or "nothing")
+                if j.get("site_fit") is None: return "nothing read"
+                return "Sefaria's “%s” fits %.2f%s, the OCR's “%s” %.2f%s; read again: %s%s" % (
+                    a, j["site_fit"], " (%d letter%s not among the alternatives)" % (
+                        j["site_unsupported"], "s" if j["site_unsupported"] > 1 else "") if j["site_unsupported"] else "",
+                    j.get("ocr_best") or b, j["ocr_fit"], " (%d not among them)" % j["ocr_unsupported"] if j["ocr_unsupported"] else "",
+                    " / ".join(dict.fromkeys(r for r in j["reads"] if r)) or "nothing",
+                    ("; with Sefaria's word as the only word: “%s”" % j["forced"]) if j.get("forced") is not None else "") + \
+                    ("; " + j["word_note"] if j.get("word_note") else "")
+            what = {"ocr_misread": "the OCR misread the book: Sefaria's reading fits the image",
+                    "likely_error": "likely an error in Sefaria's text: only the OCR's reading fits the image",
+                    "unclear": "unclear: " + ("neither reading fits the image (worn or damaged print, or the crop "
+                                              "missed the word)" if all((j.get("site_unsupported") or 0) and
+                                              ((j.get("ocr_unsupported") or 0) or (j.get("ocr_fit") or 0) < CFG["re_good"]
+                                               or not j.get("agreed")) for _, _, j in res) else
+                                              "both readings fit the image about as well"),
+                    "unread": "the re-reading found nothing"}[v]
+            if v == "likely_error" and any(j.get("blatant") for _, _, j in res): what += " (blatant: even with Sefaria's word as the only dictionary word, the OCR reads otherwise)"
+            x["note"] = ((x.get("note") or "") + "; " if x.get("note") else "") + "re-read: " + what + ". " + \
+                "; ".join(fmt(a, b, j) for a, b, j in res)
+            if v == "ocr_misread":
+                x["sev"] = 3
+            elif v == "likely_error":
+                # a number the first comparison let pass as the OCR's misreading is raised only on its digits'
+                # evidence (judge_number), not on the letters' scores
+                if not (x["type"] == "number_differs" and x["sev"] == 3 and not any(j.get("digits") for _, _, j in res)):
+                    x["sev"] = 1
+        self.stats["reread"] = dict(n)
+        self.stats["reread_runs"] = R.ran

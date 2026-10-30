@@ -27,7 +27,7 @@ SEV_TITLE = {1: "Likely errors", 2: "Worth a check", 3: "Minor or uncertain", 4:
 TYPES = {
     "run_on": "Words run together", "split_word": "Word split apart", "hyphen_kept": "Line-end hyphen kept",
     "hyphen_space": "Hyphen followed by a space", "word_differs": "Word differs", "number_differs": "Number differs",
-    "folio_side": "Folio side differs", "differs": "Text differs", "missing_in_site": "Missing on the site",
+    "folio_side": "Folio side differs", "differs": "Text differs", "order_differs": "Same words, other order", "missing_in_site": "Missing on the site",
     "not_in_scan": "Not found in the scan", "doubled": "Doubled text", "doubled_text": "Phrase repeated",
     "doubled_word": "Word repeated", "page_start": "Page start differs", "page_end": "Page end differs",
     "column_break": "Column break differs", "column_break_unset": "No fixed column break",
@@ -57,6 +57,9 @@ SEV_HELP = {1: "What the audit thinks is most likely a real difference between t
             4: "Systematic differences, one question each: the book's “Ib.” where Sefaria's text names the work, and "
                "abbreviations spelt with a letter more or less. Decide each kind once (restore the book, or keep the "
                "site), rather than finding by finding."}
+# stage 3's verdicts (reread.py)
+VERDICT = {"ocr_misread": "re-read: the OCR misread the book", "likely_error": "re-read: likely Sefaria's error",
+           "unclear": "re-read: unclear, for you", "unread": "re-read: nothing read"}
 LABEL = {"site_words": "site only", "scan": "OCR reads", "reread": "read again", "book_vis": "Hebrew in the book", "scan_heb": "Hebrew OCR",
          "book_words": "book's words", "scan_line": "the book's line", "site_vis": "as the site shows it",
          "site_heb": "site's Hebrew", "ref": "reference", "quote": "the quotation", "found": "found at",
@@ -72,6 +75,9 @@ padding:10px 14px;cursor:pointer;position:relative}.tile input{position:absolute
 .warn{border:1px solid var(--s1);border-radius:8px;padding:8px 12px;margin:8px 0}
 .pill{font-size:12px;font-weight:600;border-radius:99px;padding:1px 8px;color:#fff;white-space:nowrap}
 .pill.p1{background:var(--s1)}.pill.p2{background:var(--s2)}.pill.p3{background:var(--s3)}.pill.p4{background:var(--s4)}
+.rr{margin:6px 0;font-size:13px}.rr table{border-collapse:collapse;margin-top:4px}.rr td,.rr th{border:1px solid var(--line);
+padding:2px 6px;text-align:left}.vd{font-weight:600;border-radius:6px;padding:1px 6px}.v-likely_error{color:var(--s1)}
+.v-unclear{color:var(--s2)}.v-ocr_misread{color:var(--mut)}
 article.f{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0}
 article.f header{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:baseline}
 .note{margin:6px 0 8px}
@@ -141,7 +147,7 @@ def esc(s): return html.escape(str(s or ""))
 
 # what a mark keeps of its finding, so that marks.json alone says what was judged
 MARK_FIELDS = ("page", "type", "sev", "eid", "site", "scan", "note", "reread", "site_heb", "scan_heb", "site_vis",
-               "book_vis", "site_all", "scan_all", "ocr_conf", "ref", "quote", "found")
+               "book_vis", "site_all", "scan_all", "ocr_conf", "ref", "quote", "found", "verdict", "readings")
 
 
 def fkey(x):
@@ -437,6 +443,9 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
     # filters
     h.append('<div class="bar"><select id="ty"><option value="">every kind</option>%s</select> '
              '<select id="pg"><option value="">every page</option>%s</select> '
+             '<select id="vd"><option value="">re-read or not</option><option value="likely_error">re-read: likely '
+             'Sefaria\'s error</option><option value="unclear">re-read: unclear</option><option value="ocr_misread">'
+             're-read: the OCR misread</option></select> '
              '<select id="mk"><option value="">marked or not</option><option value="none">not yet marked</option>'
              '<option value="error">marked: site is wrong</option><option value="false">marked: false alarm</option>'
              '<option value="unsure">marked: not sure</option><option value="any">marked</option></select> '
@@ -484,18 +493,38 @@ def write(out, findings, pages, entries, book, run, scans=None, site_url="http:/
             sup(esc(", ".join(v) if isinstance(v, list) else v))) for k, v in reads)
         return '<div class="side"><div class="lab">Book (1903 scan)</div>%s</div>' % body
 
+    def readings_html(x):
+        """stage 3: the verdict, and both readings with their scores"""
+        rows = []
+        for r in x.get("readings") or []:
+            if r.get("digits"):
+                sc_s, sc_k = "digits", "digits"
+            else:
+                sc_s = "" if r.get("site_fit") is None else "%.2f%s" % (r["site_fit"], (" · %d not among the alternatives"
+                                                                                       % r["site_unsupported"]) if r.get("site_unsupported") else "")
+                sc_k = "" if r.get("ocr_fit") is None else "%.2f%s" % (r["ocr_fit"], (" · %d not among them"
+                                                                                     % r["ocr_unsupported"]) if r.get("ocr_unsupported") else "")
+            rows.append('<tr><td dir="auto">%s</td><td>%s</td><td dir="auto">%s</td><td>%s</td><td dir="auto">%s</td>'
+                        '<td>%s</td></tr>' % (esc(r.get("site")), esc(sc_s), esc(r.get("ocr_best") or r.get("ocr")), esc(sc_k),
+                                              esc(" / ".join(dict.fromkeys(q for q in (r.get("reads") or []) if q))),
+                                              esc(r.get("verdict", ""))))
+        return ('<div class="rr"><span class="vd v-%s">%s</span><table><tr><th>Sefaria</th><th>fits</th><th>OCR</th>'
+                '<th>fits</th><th>read again (4 ways)</th><th></th></tr>%s</table></div>' % (
+                    x["verdict"], esc(VERDICT.get(x["verdict"], x["verdict"])), "".join(rows)))
+
     def card(x):
         eid = x.get("eid")
         where = "p. %s" % x["page"]
         if eid:
             where += ' · <a href="entries.html#%s"><span lang="he" dir="rtl">%s</span> %s</a>' % (
                 esc(eid), esc(hw_of.get(eid, "")), esc(eid))
-        o = ['<article class="f" id="f%d" data-sev="%d" data-ty="%s" data-pg="%s" data-k="%s">' % (
-                 x["_id"], x["sev"], x["type"], x["page"], x["key"]),
-             '<header><span class="pill p%d">%s</span> <b>%s</b> <span class="mut">%s</span></header>' % (
+        o = ['<article class="f" id="f%d" data-sev="%d" data-ty="%s" data-pg="%s" data-k="%s"' % (
+                 x["_id"], x["sev"], x["type"], x["page"], x["key"]) + (' data-v="%s"' % x["verdict"] if x.get("verdict") else ""),
+             '><header><span class="pill p%d">%s</span> <b>%s</b> <span class="mut">%s</span></header>' % (
                  x["sev"], SEV[x["sev"]], esc(TYPES.get(x["type"], x["type"])), where)]
         if x.get("note"): o.append('<p class="note">%s</p>' % sup(esc(x["note"])))
         o.append('<div class="cmp">%s%s</div>' % (site_side(x), book_side(x)))
+        if x.get("verdict"): o.append(readings_html(x))
         more = [(k, x[k]) for k in ("proposed_known", "proposed_below", "context") if x.get(k) not in (None, "", [])]
         if more:
             o.append('<div class="sub">' + " · ".join("%s: %s" % (esc(LABEL.get(k, k)), esc(v if not isinstance(v, list)
@@ -605,14 +634,14 @@ document.getElementById('mimp').addEventListener('change',e=>{const f=e.target.f
   lsWrite(); autoSoon(); document.querySelectorAll('.mark').forEach(show); count(); alert(n+' marks loaded');}).catch(()=>alert('not a marks file'));});
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault(); e.returnValue='';}});
 function upd(){const s=[...document.querySelectorAll('.sv')].filter(c=>c.checked).map(c=>c.value);
-const t=document.getElementById('ty').value, p=document.getElementById('pg').value, mk=document.getElementById('mk').value; let n=0;
+const t=document.getElementById('ty').value, p=document.getElementById('pg').value, mk=document.getElementById('mk').value, vd=document.getElementById('vd').value; let n=0;
 document.querySelectorAll('.f').forEach(f=>{const v=(M[f.dataset.k]||{}).verdict||'';
  const okm=!mk||(mk==='none'?!v:mk==='any'?!!v:v===mk);
- const on=s.includes(f.dataset.sev)&&(!t||f.dataset.ty===t)&&(!p||f.dataset.pg===p)&&okm;
+ const on=s.includes(f.dataset.sev)&&(!t||f.dataset.ty===t)&&(!p||f.dataset.pg===p)&&okm&&(!vd||f.dataset.v===vd);
  f.style.display=on?'':'none'; if(on) n++});
 document.querySelectorAll('.grp').forEach(g=>{g.style.display=s.includes(g.dataset.sev)?'':'none'});
 document.getElementById('nshow').textContent=n+' shown';}
-document.querySelectorAll('.sv,#ty,#pg,#mk').forEach(e=>e.addEventListener('change',upd));
+document.querySelectorAll('.sv,#ty,#pg,#mk,#vd').forEach(e=>e.addEventListener('change',upd));
 if(location.hash.startsWith('#f')){const f=document.querySelector(location.hash); if(f){const c=document.querySelector('.sv[value="'+f.dataset.sev+'"]'); c.checked=true;}}
 upd(); if(location.hash){const f=document.querySelector(location.hash); if(f) f.scrollIntoView();}
 document.querySelectorAll('details[data-e]').forEach(d=>d.addEventListener('toggle',()=>{
@@ -648,6 +677,10 @@ x.style.display=(e.target.checked&&x.dataset.n==='0')?'none':''})})</script></bo
                  len(shown), ", ".join("%d %s" % (sevc[k], SEV[k]) for k in sorted(sevc)), len(unread)),
              "by kind: " + ", ".join("%s %d" % (k, v) for k, v in sorted(cnt.items(), key=lambda kv: -kv[1])),
              "scan pages that look incomplete: " + (", ".join(bad) or "none"),
+             "re-read (stage 3): " + (", ".join("%s %d" % (k, v) for k, v in Counter(
+                 x["verdict"] for x in shown if x.get("verdict")).most_common()) or "nothing re-read") +
+             "; left to you as unclear (likely error or check): %d" % sum(
+                 1 for x in shown if x.get("verdict") == "unclear" and x["sev"] <= 2),
              marks_line(shown),
              "per page (matched %, entries site/book, findings, Hebrew not checked):"]
     for pid in run:

@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Make a synthetic 'scan' PDF from the site's own text, for testing the audit without the real scans.
 
-usage: python3 build/audit/tests/make_synthetic.py OUTDIR PAGE [PAGE ...]
+usage: python3 build/audit/tests/make_synthetic.py [--worn] OUTDIR PAGE [PAGE ...]
+--worn: made to look like a worn 1903 printing scanned in grey: uneven, faint and broken ink, thickened strokes in
+places, speckles, a grey paper tone and a slight blur (the same wear on every run: seeded by the page number).
 Writes OUTDIR/Synthetic_1.pdf with each book page at the PDF page the real scan would have (n+16), white filler pages
 elsewhere. The pages are set in two columns at the site's column break, with a running head, a letter heading where
 the site has one, each entry's first line indented (as in the book; the lines after it flush), line-end hyphens, superscript folio sides and Hebrew phrases set right to left.
@@ -142,8 +144,46 @@ def set_cols(d, cols, top, colw, indent, space, lh, fl, fh, fs):
     return max(bottoms)
 
 
+def wear(img, seed):
+    """a worn printing, scanned: ink that is faint or broken in places and spread in others, speckles, grey paper,
+    a little blur"""
+    import numpy as np
+    from PIL import ImageFilter
+    rng = np.random.default_rng(seed)
+    a = np.asarray(img, dtype=np.float32) / 255.0                  # 1 = paper, 0 = ink
+    H, W = a.shape
+    def field(scale):
+        """smooth random field in 0..1, varying over about `scale` pixels"""
+        small = rng.random((max(2, H // scale), max(2, W // scale))).astype(np.float32)
+        f = np.asarray(Image.fromarray((small * 255).astype(np.uint8)).resize((W, H), Image.BICUBIC), np.float32) / 255
+        return (f - f.min()) / max(1e-6, f.max() - f.min())
+    ink = 1 - a
+    # strokes thinned (worn type) or thickened (ink spread) in patches
+    thin = np.asarray(Image.fromarray((a * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(3)), np.float32) / 255
+    thick = np.asarray(Image.fromarray((a * 255).astype(np.uint8)).filter(ImageFilter.MinFilter(3)), np.float32) / 255
+    f = field(300)
+    a = np.where(f > 0.8, thin, np.where(f < 0.15, thick, a))
+    ink = 1 - a
+    # faint ink in patches, and small breaks in the strokes
+    fade = 0.7 + 0.3 * field(220)
+    breaks = rng.random((H, W)) < 0.02
+    ink = ink * fade * np.where(breaks, 0.3, 1.0)
+    a = 1 - ink
+    # paper tone, speckles, blur, noise
+    g = 0.86 + 0.06 * field(500)
+    a = a * g
+    sp = rng.random((H, W)) < 0.0004
+    a[sp] = 0.25
+    im = Image.fromarray(np.clip(a * 255, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.7))
+    a = np.asarray(im, np.float32) + rng.normal(0, 7, (H, W))
+    return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
+
+
 def main():
-    out, pages = sys.argv[1], sys.argv[2:]
+    args = sys.argv[1:]
+    worn = "--worn" in args
+    args = [x for x in args if x != "--worn"]
+    out, pages = args[0], args[1:]
     if not features.check("raqm"): sys.exit("Pillow needs raqm for right-to-left text")
     os.makedirs(out, exist_ok=True)
     book = S.Book(os.environ.get("JASTROW_SITE", S.REPO))
@@ -157,6 +197,7 @@ def main():
             size -= 1
         if pid == pages[0]:
             ImageDraw.Draw(img).text((MX, PH - MY // 2), "Jastrow, Dictionary.", font=font(LAT, 20), fill=0)
+        if worn: img = wear(img, int(pid))
         imgs[int(pid) + 16] = img
         print("page", pid, "type size", size)
     n = max(imgs)
