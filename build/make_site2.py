@@ -246,6 +246,21 @@ for i, p in enumerate(pages):
 HEB_WORD = re.compile("\\*?[\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05F4'\"\u2019]*")
 
 
+HEB_W = r"[\u05d0-\u05ea\u0591-\u05c7'\u05f3\"\u05f4*]+"
+BRACKET_FIRST = re.compile(r"\((\??" + HEB_W + r"(?:,\s?" + HEB_W + r")*)\)\s*(" + HEB_W + r")")
+
+
+def bracket_after(c):
+    """Sefaria's text puts a bracketed variant before the form it belongs to: "(עָגָה) אָגָא", "אִבּוּ, (אַיְיבוּ) אִיבּוּ".
+    Shown right to left that came out as the book prints it, the bracket after its form; in a list set left to
+    right (as the book sets it) it lands on the wrong side. The bracket is put after its form: "אָגָא (עָגָה)"."""
+    return BRACKET_FIRST.sub(lambda m: "%s (%s)" % (m.group(2), m.group(1)), c)
+
+
+def hw_bracket(m):
+    return '<span class="hw" lang="he" dir="rtl">%s</span>' % bracket_after(m.group(1))
+
+
 def ltr_forms(h):
     """A list of Hebrew forms (headwords, binyan forms) runs left to right in the 1903 printing, the first form on
     the left: "אוּחַר, הוּאֲחַר". Set as one right-to-left run, the browser put the first form on the right and a
@@ -256,6 +271,7 @@ def ltr_forms(h):
         c = m.group(1)
         if len(HEB_WORD.findall(c)) < 2 and not re.search(r"[^\u0591-\u05F4*'\"\u2019\s]", c): return m.group(0)
         return '<span class="hw" lang="he" dir="ltr">%s</span>' % words(c, "")
+    h = re.sub(r'<span class="hw" lang="he" dir="rtl">([^<]*)</span>', hw_bracket, h)
     h = re.sub(r'<span class="hw" lang="he" dir="rtl">([^<]*)</span>', hw, h)
     def bf(m):
         c = m.group(1)
@@ -265,7 +281,7 @@ def ltr_forms(h):
     return h
 
 
-HEB_ITEM = r"[\u05d0-\u05ea\u0591-\u05c7'\u05f3\"\u05f4*]+"
+HEB_ITEM = r"(?:\(\??" + HEB_W + r"\)\s*)?" + HEB_W
 HEB_LIST = re.compile(r'<span class="h">(' + HEB_ITEM + r'(?:,\s?' + HEB_ITEM + r')+)</span>')
 
 
@@ -281,10 +297,14 @@ def heb_runs(h):
         h2 = re.sub(r'(<span class="h">[^<]*)</span><span class="h">', r'\1', h)
         if h2 == h: break
         h = h2
+    def item(x):
+        m = re.fullmatch(r"\((\??" + HEB_W + r")\)\s*(" + HEB_W + r")", x)
+        if m: return '<span class="h">%s</span> (<span class="h">%s</span>)' % (m.group(2), m.group(1))
+        return '<span class="h">%s</span>' % x
     def lst(m):
         parts = re.split(r'(,\s?)', m.group(1))
         return '<span class="hl" dir="ltr">%s</span>' % "".join(
-            ('<span class="h">%s</span>' % x) if k % 2 == 0 else x for k, x in enumerate(parts))
+            item(x) if k % 2 == 0 else x for k, x in enumerate(parts))
     return HEB_LIST.sub(lst, h)
 
 
