@@ -83,13 +83,15 @@ def homonyms(book):
             near = rows[max(0, k - 30):k]
             back = [r for r in near if f in r[2]]
             if not back:
-                if any(f in r[3] for r in near):
-                    prev = [r for r in near if f in r[3]][-1]
-                    out.setdefault(eid, []).append(("homonym_number", 2, "this is %s %s, but the entry before with the same "
-                        "form (%s, p. %s) has no number: a number missing there?" % (f, rn, prev[0], prev[1])))
-                else:
-                    out.setdefault(eid, []).append(("homonym_number", 3, "this is %s %s, but no entry just before has the "
-                        "same pointed form: a vowel different in one of them, or the number belongs to another form?" % (f, rn)))
+                # the book numbers by letters too when the vowels differ ("אֱגֹורָא I", then "אֲגֹורָא II": the user, 30 Oct)
+                C = lambda x: re.sub(r"[^\u05d0-\u05ea]", "", x)
+                back = [r for r in near if any(C(g) == C(f) for g in r[2])]
+                if back:
+                    g = [g for g in back[-1][2] if C(g) == C(f)][-1]
+                    back = [(back[-1][0], back[-1][1], {f: back[-1][2][g]})]
+            if not back:
+                # an earlier entry with the same form and no number is how the book has it (the user, 30 Oct): not
+                # reported. Nor is one with no entry before it at all: too often the number goes with another form
                 continue
             m_ = back[-1][2][f][0]
             if m_ == n - 1 or (m_ == n and ch): continue

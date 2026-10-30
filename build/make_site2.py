@@ -264,12 +264,32 @@ def hw_bracket(m):
 HN_COMMA = re.compile(r'(<span class="hw" lang="he" dir="rtl">[^<]*?),\s*</span>\s*(<span class="hn">[IVX]+</span>)\s*(?=<span class="hw")')
 
 
+HN_ALONE = re.compile(r'(<span class="hw" lang="he" dir="rtl">[^<]*?),\s*</span>(\s*<span class="hn">[IVX]+</span>)(?!\s*,?\s*<span class="hw")')
+
+
 def hn_place(h):
     """A homonym number belongs right after the form it numbers, before the comma: the book prints "אֲגַד III,
     אַגְדָא", "אַבָּא II, אַבָּה". Sefaria's text has the comma first and no space after the number ("אֲגַד, IIIאַגְדָא").
     Where a second form follows the number, the comma is moved after it (544 entries). (Where no form follows,
     "אָב, II m.", it is left as it is: whether the book has a comma there is still to be checked.)"""
-    return HN_COMMA.sub(r'\1</span> \2, ', h)
+    h = HN_COMMA.sub(r'\1</span> \2, ', h)
+    # a number with no second form after it: the book has no comma ("אָב I m."; the user, 30 Oct)
+    return HN_ALONE.sub(r'\1</span>\2', h)
+
+
+def hw_star(h):
+    """The asterisk of a headword (a word not found in the Bible) stands to the left of the word in the book, at the
+    start of the entry's line. Inside the right-to-left headword the browser put it on the word's right. It is set
+    before the word, outside it. Sefaria's text often also has a stray "*, " in front ("*, *זְמַם"); the book has the
+    asterisk once (a record of the Oct 29 round removed one on p. 466). Runs after ltr_forms."""
+    h = re.sub(r'(<span class="hw" lang="he" dir="ltr">)\*,\s*(?=<span dir="rtl">\*)', r'\1', h)
+    h = re.sub(r'<span class="hw" lang="he" dir="rtl">\*([^<]*)</span>',
+               r'<span class="hw" lang="he" dir="ltr">*<span dir="rtl">\1</span></span>', h)
+    h = re.sub(r'(<span class="hw" lang="he" dir="ltr">(?:[^<]|<span dir="rtl">[^<]*</span>)*?)<span dir="rtl">\*', r'\1*<span dir="rtl">', h)
+    # the same comma rules once the forms are set left to right (in case the comma was outside the word by then)
+    h = re.sub(r',</span>(\s*<span class="hn">[IVX]+</span>)\s*(?=<span class="hw")', r'</span>\1, ', h)
+    h = re.sub(r',</span>(\s*<span class="hn">[IVX]+</span>)(?!\s*,?\s*<span class="hw")', r'</span>\1', h)
+    return h
 
 
 def ltr_forms(h):
@@ -322,7 +342,7 @@ def heb_runs(h):
 for c in range(0, len(pages), CHUNK):
     chunk = []
     for p in pages[c:c + CHUNK]:
-        h = heb_runs(ltr_forms(hn_place(transform(p["html"]))))
+        h = hw_star(heb_runs(ltr_forms(hn_place(transform(p["html"])))))
         if p["id"] == "1706":     # the Addenda's title and the line under it run across the top of both columns, as in the book
             h = h.replace('<p class="fm">Addenda et Corrigenda.</p><p class="fm">(Articles', '<p class="fm hd">Addenda et Corrigenda.</p><p class="fm hd">(Articles', 1)
             assert 'class="fm hd"' in h
