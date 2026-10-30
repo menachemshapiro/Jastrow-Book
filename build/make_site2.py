@@ -261,6 +261,17 @@ def hw_bracket(m):
     return '<span class="hw" lang="he" dir="rtl">%s</span>' % bracket_after(m.group(1))
 
 
+HN_COMMA = re.compile(r'(<span class="hw" lang="he" dir="rtl">[^<]*?),\s*</span>\s*(<span class="hn">[IVX]+</span>)\s*(?=<span class="hw")')
+
+
+def hn_place(h):
+    """A homonym number belongs right after the form it numbers, before the comma: the book prints "אֲגַד III,
+    אַגְדָא", "אַבָּא II, אַבָּה". Sefaria's text has the comma first and no space after the number ("אֲגַד, IIIאַגְדָא").
+    Where a second form follows the number, the comma is moved after it (544 entries). (Where no form follows,
+    "אָב, II m.", it is left as it is: whether the book has a comma there is still to be checked.)"""
+    return HN_COMMA.sub(r'\1</span> \2, ', h)
+
+
 def ltr_forms(h):
     """A list of Hebrew forms (headwords, binyan forms) runs left to right in the 1903 printing, the first form on
     the left: "אוּחַר, הוּאֲחַר". Set as one right-to-left run, the browser put the first form on the right and a
@@ -311,7 +322,7 @@ def heb_runs(h):
 for c in range(0, len(pages), CHUNK):
     chunk = []
     for p in pages[c:c + CHUNK]:
-        h = heb_runs(ltr_forms(transform(p["html"])))
+        h = heb_runs(ltr_forms(hn_place(transform(p["html"]))))
         if p["id"] == "1706":     # the Addenda's title and the line under it run across the top of both columns, as in the book
             h = h.replace('<p class="fm">Addenda et Corrigenda.</p><p class="fm">(Articles', '<p class="fm hd">Addenda et Corrigenda.</p><p class="fm hd">(Articles', 1)
             assert 'class="fm hd"' in h

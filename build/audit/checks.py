@@ -51,13 +51,65 @@ STRAY = re.compile(r"[�¬¦|_\\~^`\x00-\x08\x0b-\x1f]|[A-Za-z][א-ת]|[א-ת][
                    r"[א-ת]\d|\d[א-ת]")
 
 
+_HOMONYMS = {}
+
+
+def homonyms(book):
+    """Homonym numbers, checked across the whole site (the user's rule, 30 Oct): a number N > 1 means an earlier entry,
+    nearby, has the same pointed form with N - 1. The number belongs to the last form of the headword before it. An
+    unnumbered entry may stand between (often "ch. same"), and the Aramaic counterpart repeats the Hebrew's number
+    ("אָב II", then "אָב II ch."). Returns {eid: [(kind, sev, note)]}, computed once."""
+    key = id(book)
+    if key in _HOMONYMS: return _HOMONYMS[key]
+    R = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8}
+    P = lambda x: re.sub(r"[^\u05d0-\u05ea\u05b0-\u05bc\u05c1\u05c2\u05c7]", "", x)
+    HW = r'<span class="hw"[^>]*>((?:[^<]|<span[^>]*>[^<]*</span>)*)</span>'
+    rows = []
+    for pid in book.body_pages():
+        h = book.html(pid)                      # the page's HTML only (tokenizing every page would be slow)
+        for eid, body in re.findall(r'<div class="e[^"]*" id="([^"]+)"><p class="ep">(.*?)</p>', h):
+            head = body.split('<span class="ss">')[0]
+            nums = {}
+            for m in re.finditer(HW + r'\s*,?\s*<span class="hn">([IVX]+)</span>', head):
+                forms = [P(x) for x in re.sub(r"<[^>]+>", "", m.group(1)).split(",") if P(x)]
+                if forms and m.group(2) in R: nums[forms[-1]] = (R[m.group(2)], m.group(2))
+            forms = {P(x) for x in re.sub(r"<[^>]+>", "", " ".join(re.findall(HW, head))).split(",") if P(x)}
+            ch = " ch." in re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", body))[:70]      # an Aramaic counterpart
+            rows.append((eid, pid, nums, forms, ch))
+    out = {}
+    for k, (eid, pid, nums, forms, ch) in enumerate(rows):
+        for f, (n, rn) in nums.items():
+            if n < 2: continue
+            near = rows[max(0, k - 30):k]
+            back = [r for r in near if f in r[2]]
+            if not back:
+                if any(f in r[3] for r in near):
+                    prev = [r for r in near if f in r[3]][-1]
+                    out.setdefault(eid, []).append(("homonym_number", 2, "this is %s %s, but the entry before with the same "
+                        "form (%s, p. %s) has no number: a number missing there?" % (f, rn, prev[0], prev[1])))
+                else:
+                    out.setdefault(eid, []).append(("homonym_number", 3, "this is %s %s, but no entry just before has the "
+                        "same pointed form: a vowel different in one of them, or the number belongs to another form?" % (f, rn)))
+                continue
+            m_ = back[-1][2][f][0]
+            if m_ == n - 1 or (m_ == n and ch): continue
+            out.setdefault(eid, []).append(("homonym_number", 2, "this is %s %s, but the entry before with the same form "
+                "(%s, p. %s) is number %s: a number skipped, repeated or wrong?" % (f, rn, back[-1][0], back[-1][1],
+                                                                              back[-1][2][f][1])))
+    _HOMONYMS[key] = out
+    return out
+
+
 def site_checks(book, pid):
     p = book.page(pid)
     out = []
     prev_hw = None
+    hom = homonyms(book)
     for e in p.entries:
         eid = e["eid"]
         if e["cont"]: continue                       # checked with the page it starts on
+        for kind, sev, note in hom.get(eid, []):
+            out.append(finding(pid, kind, sev, eid, e.get("hw") or "", note))
         text = entry_full_text(book, pid, eid)
         # brackets (not counting the ")" of the sense numbers, span.n: "1)", "—2)")
         ntoks = [t for t in entry_tokens(book, pid, eid) if t["n"]]
