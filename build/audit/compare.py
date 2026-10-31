@@ -45,7 +45,10 @@ CFG = {
     "good_reads": True,       # Sefaria's reading is weighed on the reads that make sense of the OCR's own
     "best_own": False,        # with no agreement among the reads, take the read that fits itself best for the OCR (off: worse)
     "re_err_forced": 1.5,
-    "re_err_look": 2.0,       # Hebrew: this much more when the letters changed are ones the OCR confuses     # ... or this much, when even with Sefaria's word as the only dictionary word it reads its own
+    "re_err_look": 2.0,
+    "strict_likely": False,   # English "likely error" only for a letter changed for a letter (rn/m allowed), no
+                              # ligature, and Hebrew order only when the letters show the placing: fewer false
+                              # "likely errors" (pp. 11-20: 15 -> 10), as many alarms, more left unclear (43 -> 48)       # Hebrew: this much more when the letters changed are ones the OCR confuses     # ... or this much, when even with Sefaria's word as the only dictionary word it reads its own
     # stage 4: content first, order second
     "stage4": True,           # off: --no-stage4
     "near_word": 0.75,        # a site word and a book word this alike (letters the OCR confuses made the same) are one
@@ -1602,6 +1605,7 @@ class PageCompare:
         R.read_all(reqs)
         cfg = {k: CFG[k] for k in ("re_good", "re_weak", "re_ok", "re_err", "re_err_forced", "re_err_look", "rare", "common")}
         cfg["best_own"] = CFG.get("best_own", False)
+        RR.STRICT["on"] = CFG["strict_likely"]
         cfg["good_reads"] = CFG.get("good_reads", True)
         V = self.vocab
         def wc(text, sc):
@@ -1624,7 +1628,11 @@ class PageCompare:
                     # each place must have been read as one of the two words, more or less: noise decides nothing
                     def legible(rds):
                         return max(ratio(RR.norm_heb(r[1]), RR.norm_heb(w)) for r in rds for w in (a, b)) >= 0.5
-                    if not (legible(ra) and legible(rb)):
+                    # and the placing claimed must be read in the letters: a at its place, b at its own (p. 17: "רמת"
+                    # read where the site's מַאֲדֶמֶת was put, a piece of the word, decided nothing)
+                    def reads_as(rds, w): return max(ratio(RR.norm_heb(r[1]), RR.norm_heb(w)) for r in rds) >= 0.6
+                    if not (legible(ra) and legible(rb)) or (CFG["strict_likely"] and swap - keep >= margin and
+                                                             not (reads_as(ra, a) and reads_as(rb, b))):
                         vs.append("unclear")
                     else:
                         vs.append("likely_error" if swap - keep >= margin else "ocr_misread" if keep - swap >= margin

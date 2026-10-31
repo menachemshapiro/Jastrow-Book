@@ -326,14 +326,23 @@ def look_extra(site, ocr, script, cfg):
 ROMAN_RE = re.compile(r"^[\[(—-]*[IVXLC]+[\]),.;:]*$")
 
 
+STRICT = {"on": False}      # compare.CFG["strict_likely"], set by compare.stage3
+
+
 def lost_letters(site, ocr, script):
-    """Hebrew: the OCR's reading lacks a letter of Sefaria's, or has one more (not only letters changed for
-    others). The Hebrew OCR drops letters often (a yod, a final letter by a comma: "אב" for אֵיב, "אבל" for אַבְלֵט;
+    """The OCR's reading lacks a letter of Sefaria's, or has one more (not only letters changed for others). The Hebrew OCR drops letters often (a yod, a final letter by a comma: "אב" for אֵיב, "אבל" for אַבְלֵט;
     the user's marks of 30 Oct found every such "likely error" false), while Sefaria's own errors in a headword are a
     letter for a letter (ב/כ, ד/ר): so only a change of letters is evidence"""
-    if script != "heb": return False
     import difflib
     a, b = norm(site, script), norm(ocr, script)
+    if script != "heb" and not STRICT["on"]: return False
+    if script != "heb":
+        # English (only with --cfg strict_likely=1): the same, but for the pairs Sefaria's OCR (and ours) run together or split: rn/m, cl/d, li/h,
+        # vv/w ("forrn" for form). A letter simply lost ("no" for not, p. 16) is the crop's doing, and a ligature
+        # (æ, œ) is read as anything
+        if re.search("[æœÆŒ]", site): return True
+        for x, y in (("rn", "m"), ("cl", "d"), ("li", "h"), ("vv", "w")):
+            a, b = a.replace(x, y), b.replace(x, y)
     return any(t in ("delete", "insert") or (t == "replace" and i2 - i1 != j2 - j1)
                for t, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes())
 
