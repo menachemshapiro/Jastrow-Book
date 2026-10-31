@@ -335,6 +335,8 @@ def lost_letters(site, ocr, script):
     letter for a letter (ב/כ, ד/ר): so only a change of letters is evidence"""
     import difflib
     a, b = norm(site, script), norm(ocr, script)
+    # a ligature (æ, œ) is read as anything ("excellentiæ" as "excellentin", p. 17)
+    if script != "heb" and re.search("[æœÆŒ]", site): return True
     if script != "heb" and not STRICT["on"]: return False
     if script != "heb":
         # English (only with --cfg strict_likely=1): the same, but for the pairs Sefaria's OCR (and ours) run together or split: rn/m, cl/d, li/h,

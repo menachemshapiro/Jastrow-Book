@@ -32,6 +32,8 @@ CFG = {
     "heb_loose": 0.5,         # an unpaired site word this like an unpaired scan word is "read poorly", not "differs"
     "heb_order_sim": 0.85,    # Hebrew order is checked only on words read this close to the site's ...
     "heb_order_conf": 60,     # ... and at least this confidently (with stage 3 off) ...
+    "cm_heb_often": 0.03,     # stage 3: a Hebrew letter change in this share of the OCR's paired words is not evidence
+    "heb_order_unique": 0.15,  # ... and only words read clearly more like their own site word than any other
     "heb_order_conf_low": 20, # ... or this, with stage 3 on: the order is then tested against the image
     "heb_short_conf": 85,     # a two-letter Hebrew scan word left over counts only if read this confidently
     "indent": 0.45,           # a line starting this many line pitches in from its column's edge is indented
@@ -753,6 +755,14 @@ class PageCompare:
         items = [(sh[si], ks[kj]) for si, kj in pair.items() if len(sh[si]["skel"]) >= 3
                  and ks[kj]["conf"] >= conf_min and (heb_sim if CFG["reread3"] else ratio)(
                      sh[si]["skel"], ks[kj]["skel"]) >= CFG["heb_order_sim"]]
+        if CFG["stage4"]:
+            # a scan word nearly as like another site word of the stretch is no evidence of where either stands
+            # (p. 11: אגדו, אגדון, v. אִגְּרוּ; p. 12: Var. אגידי, אגודות, ed. אגודי: the user's marks of 31 Oct)
+            def unique(t, w):
+                own = heb_sim(t["skel"], w["skel"])
+                return all(own - heb_sim(u["skel"], w["skel"]) >= CFG["heb_order_unique"]
+                           for u in sh if u is not t and u["skel"] != t["skel"])
+            items = [(t, w) for t, w in items if unique(t, w)]
         for x in range(len(items)):
             for y in range(x + 1, len(items)):
                 (a, wa), (b, wb) = items[x], items[y]
@@ -1708,6 +1718,12 @@ class PageCompare:
                 if j["verdict"] in ("likely_error", "unclear") and len(site.split()) == 1 and RR.norm(site, sc):
                     word = RR.norm_heb(site) if sc == "heb" else site.strip(".,;:()[]—-")
                     j = RR.judge(site, ocr, reads, sc, cfg, forced=R.forced(boxes, lang, word))
+                if sc == "heb" and j["verdict"] == "likely_error" and HCM is not None and HCM.pairs >= CFG["cm_pairs"]:
+                    # a change of letters this OCR makes often on this book (ג→נ, ט→מ): not enough on its own
+                    cn, bl = HCM.seen(OM.heb_letters(site), OM.heb_letters(j.get("ocr_best") or ocr), own=False)
+                    if cn is not None and cn >= CFG["cm_heb_often"] * HCM.pairs:
+                        j["verdict"] = "unclear"
+                        j["word_note"] = "a confusion this OCR makes often on this book: " + HCM.describe(bl)
                 res.append((site, ocr, j))
             vs = [j["verdict"] for _, _, j in res]
             v = "ocr_misread" if all(a == "ocr_misread" for a in vs) else \
@@ -1739,6 +1755,17 @@ class PageCompare:
             if v == "likely_error" and any(j.get("blatant") for _, _, j in res): what += " (blatant: even with Sefaria's word as the only dictionary word, the OCR reads otherwise)"
             x["note"] = ((x.get("note") or "") + "; " if x.get("note") else "") + "re-read: " + what + ". " + \
                 "; ".join(fmt(a, b, j) for a, b, j in res)
+            if v == "likely_error" and all(j.get("digits") for _, _, j in res if j["verdict"] == "likely_error"):
+                # digits the reads agree on, other than Sefaria's: a check, not a likely error. This OCR takes 7 for 1,
+                # 3 for 8, 9 for 0 next to a raised folio letter (pp. 11, 18, 20: 29ᵃ, 77ᵃ, 23ᶜ, the user's marks of
+                # 31 Oct), as often as the site has a wrong digit
+                v = x["verdict"] = "unclear"
+                n["likely_error"] -= 1; n["unclear"] += 1
+                x["note"] = x["note"].replace("re-read: likely an error in Sefaria's text: only the OCR's reading fits the image",
+                                              "re-read: the reads agree on other digits than Sefaria's (check: this OCR misreads "
+                                              "digits next to a raised letter)")
+                x["sev"] = min(x["sev"], 2)
+                continue
             if v == "ocr_misread":
                 x["sev"] = 3
             elif v == "likely_error":
