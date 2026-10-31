@@ -86,6 +86,25 @@ python3 build/audit/train_ocr.py status
 python3 build/audit/audit.py --trained --pages 1-10       # the audit with the trained models
 ```
 
+## Two focused checks: columns and headwords (`focus.py`)
+
+```
+python3 build/audit/focus.py --pages 1-20              # both; or `columns` / `headwords` before --pages
+```
+
+Reads the audit's cached OCR (OCRs any page not yet done) and writes `work/audit/focus/<pages>_<time>/columns.html`, `headwords.html` and `summary.txt`. The site's text checks the scan as well as the other way round: Sefaria's text was made from this book and is mostly right, so a disagreement is flagged only when the image confirms it.
+
+- **Columns.** For each column, the scan's first and last two lines beside the site's words at that end. Column breaks and page starts and ends come from the audit (`column_break`, `page_start`, `page_end`). The site's Hebrew words on either side of each break are also looked for in the image: first by the OCR's letters, matched loosely, then by re-reading each place with the OCR's alternatives (stage 3) and scoring the site's word. A Hebrew word the image places in the other column confirms the break is wrong. If the Hebrew sits where the site puts it, an estimated break is downgraded.
+- **Headwords.** The headword is found in the ink: stretches of ink separated by word spaces, measured in the line's letter band, whose letters are large. These run from the line's start, with only marks, a homonym number or a joining word (constr., also, a., or) between them. A grammar label (ch., m., pr. n.) ends the headword. Flagged:
+  - a first letter that is not the section's;
+  - English in the headword, or a second headword in the entry;
+  - letters: stage 3 runs for headword findings only. A letter is flagged only when the image fits the OCR's reading clearly better than Sefaria's. Confusions the OCR makes 100 times or more on this book (ג/נ, ט/מ) are left as minor;
+  - forms: the site's words are looked for among the large words, matched loosely. A flag is raised only for a large word the site lacks that was read surely, or a site word with no large word for it. A word the OCR split or joined doesn't count;
+  - punctuation: doubled marks, a space before a comma, stray points, full stops, unpaired brackets. Each proposed removal is tested against the marks in the image in that gap between the headword's words. "Scan confirms: no mark here" is likely wrong. "Scan shows a mark here: keep" drops the proposal.
+- In the report, click a character to strike it or bring it back, and mark the entry Wrong. **Export** then writes the removals as `text_fixes` records (page, entry, old, new, why) for `build/apply/commit_round.py`.
+
+Pages 1–20 (31 Oct): columns 14 likely / 3 check. Each of the 14 (7 breaks, both sides) is confirmed by the Hebrew at the edge. Headwords 3 likely / 26 check / 127 minor; before the two-way tests, 1 / 51 / 237. The 3 likely were checked against the crops, and all are real: A00018 (אַכָּה for the book's אַבָּה), A00271 and A00286 (", ," where the book has one comma or none).
+
 ## Limits
 
 - Tesseract does not read vowel points reliably. Hebrew is compared by its letters, and only headwords letter by letter.
