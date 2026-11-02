@@ -90,6 +90,31 @@ def hw_html(page_html, eid):
         return {"html": page_html[a:p], "at": a, "second": True, "hn_inside": hn_inside}
 
 
+def entry_html(page_html, eid):
+    """the entry's whole div, as raw HTML (as the site has it on this page)"""
+    m = re.search(r'<div class="e[^"]*" id="%s">' % re.escape(eid), page_html)
+    if not m: return ""
+    depth = 0
+    for t in re.finditer(r"<(/?)div\b[^>]*>", page_html[m.start():]):
+        depth += -1 if t.group(1) else 1
+        if depth == 0: return page_html[m.start():m.start() + t.end()]
+    return page_html[m.start():]
+
+
+# the site's own stylesheet and fonts, for showing an entry as the site sets it
+SITE_FONTS = ("https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Frank+Ruhl+Libre:"
+              "wght@400;500;700&family=GFS+Didot&family=Noto+Serif+Hebrew:wght@400;700&family=Noto+Serif:ital,wght@0,400;"
+              "0,700;1,400&display=swap")
+
+
+def site_css():
+    try:
+        m = re.search(r"<style>(.*?)</style>", open(os.path.join(ST.REPO, "index.html"), encoding="utf-8").read(), re.S)
+        return m.group(1) if m else ""
+    except OSError:
+        return ""
+
+
 def text_units(raw):
     """the headword's characters, each with where it stands in its HTML: [char, start, end]"""
     out = []
@@ -589,7 +614,9 @@ def check_headwords(pid, pc, F, ink, img_dir):
     for e in P.entries:
         if e["cont"]: continue
         eid = e["eid"]
-        r = {"page": pid, "eid": eid, "flags": [], "img": None, "book": [], "verdicts": {}}
+        r = {"page": pid, "eid": eid, "flags": [], "img": None, "book": [], "verdicts": {},
+             "ent": entry_html(P.html, eid), "parts": [x["box"] for x in getattr(pc, "entry_parts", {}).get(eid, [])],
+             "pdir": pc.wd, "isz": list(ink.img.size)}
         info = hw_html(P.html, eid)
         if not info:
             r.update(hw="", units=[], sugg={}, old="", prefix="", sev=1)
@@ -719,6 +746,11 @@ background:var(--card);color:var(--fg)}
 .m-ok .b-ok,.m-wrong .b-wrong,.m-unsure .b-unsure{border-color:currentColor;font-weight:600;background:var(--hl)}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:10px} @media (max-width:700px){.cols{grid-template-columns:1fr}}
 .hidden{display:none}
+.card.wide{grid-column:1/-1} .sbs{display:none;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;align-items:start}
+.card.wide .sbs{display:grid} @media (max-width:800px){.sbs{grid-template-columns:1fr}}
+.sbs iframe{width:100%;border:1px solid var(--line);border-radius:4px;height:300px;background:#fdfdfa}
+.bookv .part{width:100%;background-repeat:no-repeat;border:1px solid var(--line);border-radius:4px;margin-bottom:6px;
+background-color:#fff} .m-sbs .b-sbs{font-weight:600;border-color:currentColor}
 """
 
 JS = r"""
@@ -754,6 +786,33 @@ function filt(){const s=document.getElementById('sev').value,mm=document.getElem
  document.querySelectorAll('.card').forEach(c=>{const r=DATA[c.id];const m=(M[c.id]||{}).v||'';
   let show=(s==='all'||r.sev<=+s)&&(mm==='all'||(mm==='none'?!m:m===mm));c.classList.toggle('hidden',!show)});
  document.querySelectorAll('.pgbox').forEach(p=>p.classList.toggle('hidden',!p.querySelector('.card:not(.hidden)')))}
+function sbs(id,force){const c=document.getElementById(id);if(!c)return;const on=force!==undefined?force:!c.classList.contains('wide');
+ c.classList.toggle('wide',on);c.classList.toggle('m-sbs',on);if(!on||c.querySelector('.sbs'))return;
+ const r=DATA[id],b=document.createElement('div');b.className='sbs';
+ const L=document.createElement('div');L.innerHTML='<div class=lab>Site, as on the website</div>';
+ const fr=document.createElement('iframe');fr.title='the site\'s entry';
+ fr.srcdoc='<!doctype html><meta charset=utf-8><link rel=stylesheet href="'+FONTS+'"><style>'+SITECSS+
+  'html,body{height:auto;overflow:hidden;margin:0;background:var(--paper)}#w{position:static;transform-origin:0 0;'+
+  'width:633px;height:auto;padding:10px 20px}#w .cols{height:auto;column-count:1;overflow:visible}</style>'+
+  '<div class="page" id=w><div class="cols"><div class="col">'+(r.ent||'<p>(no entry on the site)</p>')+'</div></div></div>';
+ const fit=()=>{try{const d=fr.contentDocument,w=d.getElementById('w');const z=fr.clientWidth/633;
+  w.style.transform='scale('+z+')';fr.style.height=Math.ceil(w.offsetHeight*z)+4+'px'}catch(e){}};
+ fr.onload=()=>{fit();try{fr.contentDocument.fonts.ready.then(fit)}catch(e){}};
+ new ResizeObserver(fit).observe(fr);L.appendChild(fr);
+ if(r.more){const n=document.createElement('div');n.className='mut';n.textContent='The entry continues on p. '+r.more+' (not shown).';L.appendChild(n)}
+ const R=document.createElement('div');R.className='bookv';R.innerHTML='<div class=lab>Book (1903 scan: the entry on this page)</div>';
+ if(!r.parts||!r.parts.length||!r.pimg){R.innerHTML+='<div class=mut>the entry was not found in the scan</div>'}
+ for(const [x0,y0,x1,y1] of r.parts||[]){const W=r.isz[0],H=r.isz[1],a=Math.max(0,x0),t=Math.max(0,y0),w=Math.min(W,x1)-a,h=Math.min(H,y1)-t;
+  const d=document.createElement('div');d.className='part';d.style.aspectRatio=w+'/'+h;
+  d.style.backgroundImage='url("'+encodeURI(r.pimg)+'")';d.style.backgroundSize=(W/w*100)+'% auto';
+  d.style.backgroundPosition=(W>w?a/(W-w)*100:0)+'% '+(H>h?t/(H-h)*100:0)+'%';R.appendChild(d)}
+ b.appendChild(L);b.appendChild(R);c.appendChild(b)}
+let SBSALL=false,IO=null;
+function sbsAll(on){SBSALL=on;document.getElementById('sbsall').classList.toggle('on',on);
+ if(IO){IO.disconnect();IO=null}
+ if(!on){document.querySelectorAll('.card.wide').forEach(c=>sbs(c.id,false));return}
+ IO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!e.target.classList.contains('hidden')){sbs(e.target.id,true);IO.unobserve(e.target)}}),{rootMargin:'600px'});
+ document.querySelectorAll('.card').forEach(c=>IO.observe(c))}
 window.addEventListener('load',()=>{Object.keys(DATA).forEach(paint);count();filt()});
 """
 
@@ -768,11 +827,13 @@ def flags_html(fl):
                    for s, t in sorted(fl, key=lambda f: f[0]))
 
 
-def marks_html(cid):
+def marks_html(cid, sbs=False):
     return ('<div class="marks"><button class="b-ok" onclick="mark(\'%s\',\'ok\')">OK</button>'
             '<button class="b-wrong" onclick="mark(\'%s\',\'wrong\')">Wrong</button>'
             '<button class="b-unsure" onclick="mark(\'%s\',\'unsure\')">Not sure</button>'
-            '<input placeholder="note" onchange="note(\'%s\',this.value)"></div>') % (cid, cid, cid, cid)
+            '<input placeholder="note" onchange="note(\'%s\',this.value)">%s</div>') % (
+        cid, cid, cid, cid, ('<button class="b-sbs" onclick="sbs(\'%s\')" title="the whole entry: the site as it looks '
+                             'on the website, beside the scan">Side by side</button>' % cid) if sbs else "")
 
 
 def page_shell(kind, title, run, intro, body, data):
@@ -785,10 +846,13 @@ def page_shell(kind, title, run, intro, body, data):
             "</option><option value=ok>OK</option><option value=wrong>Wrong</option><option value=unsure>Not sure"
             "</option></select></label><button onclick=exportMarks()>Export</button>"
             "<label><button onclick=\"this.nextElementSibling.click()\">Import…</button><input type=file hidden "
-            "accept=.json onchange=importMarks(this.files[0])></label><span id=nm class=mut></span></div>%s"
-            "<script>const KIND=%s,RUN=%s,DATA=%s;%s</script>") % (
-        esc(title), CSS, esc(title), intro, body, json.dumps(kind), json.dumps(run),
-        json.dumps(data, ensure_ascii=False).replace("</", "<\\/"), JS)
+            "accept=.json onchange=importMarks(this.files[0])></label>%s<span id=nm class=mut></span></div>%s"
+            "<script>const KIND=%s,RUN=%s,DATA=%s,FONTS=%s,SITECSS=%s;%s</script>") % (
+        esc(title), CSS, esc(title), intro,
+        '<button id=sbsall onclick="sbsAll(!SBSALL)" title="open every card shown as the whole entry, the site beside '
+        'the scan">Side by side: all</button>' if kind == "headwords" else "",
+        body, json.dumps(kind), json.dumps(run), json.dumps(data, ensure_ascii=False).replace("</", "<\\/"),
+        json.dumps(SITE_FONTS), json.dumps(site_css() if kind == "headwords" else "").replace("</", "<\\/"), JS)
 
 
 def report_columns(rows, out, run):
@@ -833,7 +897,9 @@ def report_headwords(rows, out, run):
         for r in rs:
             cid = "p%s-%s" % (pid, r["eid"])
             r["where"] = r["hw"]
-            data[cid] = {k: r.get(k) for k in ("page", "eid", "hw", "units", "sugg", "old", "prefix", "flags", "sev", "where")}
+            data[cid] = {k: r.get(k) for k in ("page", "eid", "hw", "units", "sugg", "old", "prefix", "flags", "sev", "where",
+                                               "ent", "parts", "isz", "more")}
+            data[cid]["pimg"] = os.path.relpath(os.path.join(r["pdir"], "page.png"), out) if r.get("pdir") else ""
             spans = "".join('<span class="u" data-i="%d" title="%s" onclick="tog(\'%s\',%d)">%s</span>' % (
                 i, esc(r["sugg"].get(str(i), "click to strike")), cid, i, esc(u[0]) if u[0] != " " else "&nbsp;")
                 for i, u in enumerate(r["units"]))
@@ -843,7 +909,7 @@ def report_headwords(rows, out, run):
                          '<div class=mut><b>Book, as the OCR read the large words:</b> <span dir=rtl>%s</span></div>%s%s</div>'
                          % (r["sev"] if r["sev"] < 9 else "", cid, esc(r["eid"]),
                             '<img loading=lazy src="%s">' % r["img"] if r["img"] else "", spans or "(none)",
-                            esc(book), flags_html(r["flags"]), marks_html(cid)))
+                            esc(book), flags_html(r["flags"]), marks_html(cid, sbs=True)))
         body.append('<div class=pgbox><div class=pg>p. %s</div><div class=grid>%s</div></div>' % (pid, "".join(cards)))
     nflag = sum(1 for d in data.values() if d["sev"] <= 2)
     intro = ("Run %s. Each entry: the scan's first line, the headword boxed in red where the audit found it by its "
@@ -903,7 +969,15 @@ def main():
             F = run_page(pc, CO)
             ink = Ink(pc.wd, scan["layout"].get("thr", 128))
             if args.what in ("both", "columns"): cols += check_columns(pid, pc, F, ink, img)
-            if args.what in ("both", "headwords"): hws += check_headwords(pid, pc, F, ink, img)
+            if args.what in ("both", "headwords"):
+                hr = check_headwords(pid, pc, F, ink, img)
+                try:
+                    nx = book.page(str(int(pid) + 1)).entries
+                except Exception:
+                    nx = []
+                if hr and nx and nx[0]["cont"] and nx[0]["eid"] == hr[-1]["eid"]:
+                    hr[-1]["more"] = str(int(pid) + 1)
+                hws += hr
         except Exception as e:
             print("  p. %s: %s: %s" % (pid, type(e).__name__, e)); skipped.append(pid)
     lines = ["focus.py %s --pages %s  (%s)" % (args.what, args.pages, name)]

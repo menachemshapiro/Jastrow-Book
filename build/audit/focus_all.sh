@@ -1,11 +1,11 @@
 #!/bin/bash
 # focus.py over the whole book, 100 pages per batch (one report folder each, in work/audit/focus/).
-# usage: bash build/audit/focus_all.sh [FIRST] [LAST]      (default 1 1800)
+# usage: bash build/audit/focus_all.sh [FIRST] [LAST] [focus.py options]   (default 1 1800; e.g. 1 1800 headwords)
 cd "$(dirname "$0")/../.." || exit 1
 source ~/jastrow/venv/bin/activate
-first=${1:-1}; last=${2:-1800}
+first=${1:-1}; last=${2:-1800}; shift $(( $# < 2 ? $# : 2 ))
 for a in $(seq "$first" 100 "$last"); do
   echo "=== pages $a-$((a + 99))  $(date '+%H:%M')"
-  python3 build/audit/focus.py --pages "$a-$((a + 99))"
+  python3 build/audit/focus.py "$@" --pages "$a-$((a + 99))"
 done
 echo "=== all done  $(date '+%H:%M')"
