@@ -165,6 +165,7 @@ HEAD_GROUP = re.compile(r'(<div class="e" id="(\w+)"><p class="ep"[^>]*>)((?:<sp
                         r'|\s*<span class="hn">[IVX]+</span>|[\s,]+)+?)(?=\s*<span class="(?!hw|hn))')
 CUR = json.load(open(sys.argv[3]))["entries"]
 _HW_FIXED = []
+HW_SCAN = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "headwords_scan.json")))
 
 
 def _sk(t): return re.sub(r"[^\u05d0-\u05ea]", "", t)
@@ -189,7 +190,13 @@ def head_2026(eid, old):
         try: alts = ast.literal_eval(alts)
         except (ValueError, SyntaxError): return None
     alts = [a.strip() for a in alts if a and a.strip()]
-    if _sk(hw + "".join(alts)) != _sk(re.sub(r'<span class="hn">[IVX]+</span>|<[^>]+>', "", old)): return None
+    old_t = re.sub(r'<span class="hn">[IVX]+</span>|<[^>]+>', "", old)
+    def forms(t): return sorted(_sk(f) for f in re.split(r"[,()=]", t) if _sk(f))
+    if _sk(hw + "".join(alts)) != _sk(old_t):
+        # the same forms in another order (the current text sets a bracketed form after its own, as the book does),
+        # or decided on the scan (build/headwords_scan.json)
+        if eid in HW_SCAN.get("2018", ()): return None
+        if forms(hw + "," + ",".join(alts)) != forms(old_t) and eid not in HW_SCAN.get("2026", ()): return None
     def join(forms):
         out = ""
         for f in forms:

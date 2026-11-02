@@ -1,0 +1,30 @@
+{
+ "_about": "Entries whose headword forms differ in letters between Sefaria's 2018 XML and its current text, decided on the 1903 scan (the OCR's large-type words at the entry's first line, 2 Nov). \"2026\": the current forms are used; \"2018\": the 2018 forms are kept. Entries whose forms differ only in order take the current text by themselves (make_site2.py). Not listed: unclear, for the user to review.",
+ "2026": [
+  "A00529",
+  "A00719",
+  "A00732",
+  "A01672",
+  "A01924",
+  "M02761",
+  "M02774",
+  "M02792",
+  "M02826",
+  "M02834",
+  "M02845",
+  "M02851",
+  "M02862",
+  "M02876",
+  "N00288",
+  "N00303",
+  "N00327",
+  "Q01782"
+ ],
+ "2018": [
+  "A02161",
+  "A03073",
+  "B01018",
+  "H01808",
+  "M00098"
+ ]
+}
