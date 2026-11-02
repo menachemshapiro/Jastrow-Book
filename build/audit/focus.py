@@ -355,10 +355,15 @@ def check_columns(pid, pc, F, ink, img_dir):
 
 
 def edge_sev(x):
-    """a page's first or last words differing: in the user's marks mostly a word the book hyphenates across the page,
-    or a page number or signature read as text; one differing word (or numbers only) is minor"""
-    w = (x.get("site_only") or "").split() + (x.get("book_only") or "").split()
-    if len(w) <= 1 or all(re.fullmatch(r"[\d.,;:()]+", t) for t in w): return 3
+    """a page's first or last words differing by one word is minor only when the book splits that word across the
+    page (hyphenated) and the site has it whole: the site's word, and in the book only a piece of it or nothing.
+    Anything else (a run-on word, a number) keeps its severity (the user, 2 Nov)."""
+    so = (x.get("site_only") or "").split()
+    bo = (x.get("book_only") or "").split()
+    if len(so) == 1 and len(bo) <= 1:
+        w = re.sub(r"\W", "", so[0]).lower()
+        f = re.sub(r"\W", "", bo[0]).lower() if bo else ""
+        if len(w) >= 5 and (not f or (len(f) >= 2 and (w.startswith(f) or w.endswith(f)) and f != w)): return 3
     return x["sev"]
 
 
