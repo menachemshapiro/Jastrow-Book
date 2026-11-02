@@ -196,6 +196,21 @@ HW_SCAN = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__))
 def _sk(t): return re.sub(r"[^\u05d0-\u05ea]", "", t)
 
 
+def head_exact(text):
+    """a head group as written in build/headwords_scan.json "exact": forms with their punctuation, a homonym number
+    as " I", " II" after its form"""
+    parts = re.split(r"\s+([IVX]+)(?=[\s,;.]|$)", text)
+    out = ""
+    for k, piece in enumerate(parts):
+        if k % 2:
+            out += ' <span class="hn">%s</span>' % piece; continue
+        m = re.match(r"^([\s,]*)(.*?)([\s,]*)$", piece)
+        out += m.group(1)
+        if m.group(2): out += '<span class="hw" lang="he" dir="rtl">%s</span>' % m.group(2)
+        out += m.group(3)
+    return out
+
+
 def head_2026(eid, old):
     """the entry's head group rebuilt from Sefaria's current headword and alt_headwords (the user, 2 Nov: the
     current text first). None keeps the old one: no current headword; its letters differ from the old forms (to be
@@ -204,6 +219,7 @@ def head_2026(eid, old):
     if not _HW_FIXED:
         _HW_FIXED.append({fx.get("entry") for fxs in TEXT_FIXES.values() for fx in fxs
                           if 'class="hw"' in (fx.get("old", "") + fx.get("new", ""))})
+    if eid in HW_SCAN.get("exact", {}): return head_exact(HW_SCAN["exact"][eid])
     e = CUR.get(eid)
     if not e or eid in _HW_FIXED[0] or not re.search("[\u05d0-\u05ea]", e.get("headword", "")): return None
     # Sefaria marks a second entry of the same form with a superscript number ("רַחֲמָן ²"): not in the book
@@ -361,6 +377,7 @@ for i, p in enumerate(pages):
     if p["id"] in MIDB: meta[-1].append(MIDB[p["id"]])      # the column break below a mid-page letter heading
 
 HEB_WORD = re.compile("\\*?[\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05F4'\"\u2019]*")
+HEB_PHRASE = re.compile("\\*?[\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05F4'\"\u2019\u05f3]*(?: [\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05F4'\"\u2019\u05f3]*)*")
 HEB_W = r"[\u05d0-\u05ea\u0591-\u05c7'\u05f3\"\u05f4*]+"
 BRACKET_FIRST = re.compile(r"\((\??" + HEB_W + r"(?:,\s?" + HEB_W + r")*)\)\s*(" + HEB_W + r")")
 
@@ -384,7 +401,8 @@ def ltr_forms(h):
             w = m.group(0)
             if star_out and w.startswith("*"): return '*<span%s dir="rtl">%s</span>' % (cls, w[1:])
             return '<span%s dir="rtl">%s</span>' % (cls, w)
-        return HEB_WORD.sub(one, c)
+        # a form of several words ("בֵּי אֱלִישָׁפָט", "אַבּוּב רוֹעֶה") is one right-to-left run, read right to left
+        return HEB_PHRASE.sub(one, c)
     def hw(m):
         c = m.group(1)
         if len(HEB_WORD.findall(c)) < 2 and not re.search(r"[^\u0591-\u05F4*'\"\u2019\s]", c) and "*" not in c:

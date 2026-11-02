@@ -1,5 +1,5 @@
 {
- "_about": "Entries whose headword forms differ in letters between Sefaria's 2018 XML and its current text, decided on the 1903 scan (the OCR's large-type words at the entry's first line, 2 Nov). \"2026\": the current forms are used; \"2018\": the 2018 forms are kept. Entries whose forms differ only in order take the current text by themselves (make_site2.py). Not listed: unclear, for the user to review.",
+ "_about": "Entries whose headword forms differ in letters between Sefaria's 2018 XML and its current text, decided on the 1903 scan (the OCR's large-type words at the entry's first line, 2 Nov). \"2026\": the current forms are used; \"2018\": the 2018 forms are kept. Entries whose forms differ only in order take the current text by themselves (make_site2.py). Not listed: unclear, for the user to review. \"exact\": the head group as the user read it on the scan (2 Nov), forms in reading order, homonym numbers as I, II, and the punctuation the book prints.",
  "2026": [
   "A00529",
   "A00719",
@@ -55,5 +55,34 @@
   "M00910",
   "M00943",
   "S00269"
- ]
+ ],
+ "exact": {
+  "A00116": "אַבְיוּ,",
+  "A00057": "אַבּוּבְרָאֶה, אַבּוּבְרוֹאֶה = אַבּוּב רוֹעֶה,",
+  "A00121": "*אֶבְיוֹנֵי",
+  "A00148": "אַבְיַת",
+  "A00183": "אַבֵּעַ = הַבֵּעַ",
+  "A00434": "אַדְנֵי (אַבְנֵי),",
+  "A00570": "אוּדְנָא III,",
+  "A00592": "אֶוְושַׁר, אֶוְשַׁר = אֶפְשַׁר",
+  "A00720": "*אונא",
+  "A00736": "אוֹנִי I",
+  "A00742": "אוּנְיָיקִי,",
+  "A01035": "אַחִים,",
+  "A01119": "*אִיבְבָא = אִיבָּא I,",
+  "A01129": "אִיבְלָא = אֶבְלָא",
+  "I00020": "טַב III,",
+  "I00049": "טָבִי II,",
+  "J00338": "יִינוּן, יִנוּן = אִינוּן",
+  "J00432": "יָנוּקָא II,",
+  "K00382": "כּוּרְכָּא = כְּרַכָּא",
+  "M00910": "מְחַסְיָא,",
+  "M00943": "מְחַרְתָּא,",
+  "M02850": "מְשַׁח III, מִשְׁחָא, מִישְׁ׳ I",
+  "M02868": "מְשֵׁיזֵב, מְשֵׁיזְבָא, מְשֵׁיזִיב",
+  "O00564": "סִיגְנָא, סִגְ׳ II,",
+  "Q00650": "פְּיָילִי II,",
+  "R00569": "צֶמַח III,",
+  "S00269": "קוורנוט', קוורניט'"
+ }
 }
