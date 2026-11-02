@@ -129,6 +129,14 @@ def fix_special(pid, h):
             assert h.count(fx["old"]) == 1, (pid, fx["old"])
             h = h.replace(fx["old"], fx["new"])
         _step(h0, h)
+    # the headword and its other forms from Sefaria's current text (the 2018 XML's <head-word> pieces carry stray
+    # punctuation, and the join added a comma before each); one entry at a time, so the column break follows
+    for m in list(HEAD_GROUP.finditer(h))[::-1]:
+        new = head_2026(m.group(2), m.group(3))
+        if new is None or new == m.group(3).rstrip(): continue
+        h0 = h
+        h = h[:m.start(3)] + new + h[m.end(3):]
+        _step(h0, h)
     # a headword the merged sources set as "*, *X": the book prints one asterisk ("*X"). One at a time, so the
     # column break follows each change.
     while True:
@@ -153,6 +161,46 @@ HN_ALONE = re.compile(r'(<span class="hw" lang="he" dir="rtl">[^<]*?),\s*</span>
 
 
 STRAY_STAR = re.compile(r'(<span class="hw" lang="he" dir="rtl">)\*, (?=\*)')
+HEAD_GROUP = re.compile(r'(<div class="e" id="(\w+)"><p class="ep"[^>]*>)((?:<span class="hw" lang="he" dir="rtl">[^<]*</span>'
+                        r'|\s*<span class="hn">[IVX]+</span>|[\s,]+)+?)(?=\s*<span class="(?!hw|hn))')
+CUR = json.load(open(sys.argv[3]))["entries"]
+_HW_FIXED = []
+
+
+def _sk(t): return re.sub(r"[^\u05d0-\u05ea]", "", t)
+
+
+def head_2026(eid, old):
+    """the entry's head group rebuilt from Sefaria's current headword and alt_headwords (the user, 2 Nov: the
+    current text first). None keeps the old one: no current headword; its letters differ from the old forms (to be
+    checked on the scans); or a correction of build/text_fixes.json is made on the headword."""
+    import ast
+    if not _HW_FIXED:
+        _HW_FIXED.append({fx.get("entry") for fxs in TEXT_FIXES.values() for fx in fxs
+                          if 'class="hw"' in (fx.get("old", "") + fx.get("new", ""))})
+    e = CUR.get(eid)
+    if not e or eid in _HW_FIXED[0] or not re.search("[\u05d0-\u05ea]", e.get("headword", "")): return None
+    # Sefaria marks a second entry of the same form with a superscript number ("רַחֲמָן ²"): not in the book
+    hw = re.sub(r"\s*[\u00b2\u00b3\u00b9\u2070-\u2079]+$", "", e["headword"].strip())
+    num = re.search(r"\s+([IVX]+)$", hw)
+    if num: hw = hw[:num.start()]
+    alts = e.get("alt_headwords") or []
+    if isinstance(alts, str):
+        try: alts = ast.literal_eval(alts)
+        except (ValueError, SyntaxError): return None
+    alts = [a.strip() for a in alts if a and a.strip()]
+    if _sk(hw + "".join(alts)) != _sk(re.sub(r'<span class="hn">[IVX]+</span>|<[^>]+>', "", old)): return None
+    def join(forms):
+        out = ""
+        for f in forms:
+            out += f if not out else (" " if f.startswith("(") else ", ") + f
+        return out
+    span = '<span class="hw" lang="he" dir="rtl">%s</span>'
+    if num:
+        out = span % hw + ' <span class="hn">%s</span>' % num.group(1)
+        if alts: out += (" " if alts[0].startswith("(") else ", ") + span % join(alts)
+        return out
+    return span % join([hw] + alts)
 
 
 def insert_space(h, before, after, pid):
