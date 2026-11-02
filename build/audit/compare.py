@@ -327,11 +327,27 @@ class PageCompare:
         return e
 
     def verify(self, t):
-        """read one scan word again, at double size, as a single word"""
+        """read one scan word again, at double size, as a single word (cached in the page's folder)"""
         if not CFG["verify"]: return None
+        import json
+        cache = os.path.join(self.wd, "reread_lat.json")
+        if not hasattr(self, "_rl"):
+            try: self._rl = json.load(open(cache))
+            except (OSError, ValueError): self._rl = {}
+        key = json.dumps(t["boxes"])
+        if key in self._rl: return self._rl[key]
+        txt = self._verify(t)
+        if txt is not None:
+            self._rl[key] = txt
+            try: json.dump(self._rl, open(cache, "w"))
+            except OSError: pass
+        return txt
+
+    def _verify(self, t):
         try:
             from PIL import Image
-            img = Image.open(os.path.join(self.wd, "page.png"))
+            if not hasattr(self, "_img"): self._img = Image.open(os.path.join(self.wd, "page.png"))
+            img = self._img
             reads = []
             for k, b in enumerate(t["boxes"]):
                 pad = 4

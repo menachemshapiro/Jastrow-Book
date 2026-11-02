@@ -460,7 +460,7 @@ def process(pid, scans, workdir, dpi, force=False):
             img = Image.open(os.path.join(wd, "page.png")).convert("L")
             old["ocr"] = ocr_page(img, old["layout"], wd, old.get("dpi", dpi))
             old["models"] = models_tag()
-            for f in ("reread_heb.json", "pairs.json"):
+            for f in ("reread_heb.json", "reread_lat.json", "pairs.json"):
                 if os.path.exists(os.path.join(wd, f)): os.remove(os.path.join(wd, f))
             overlay(img, old["layout"], old["ocr"], os.path.join(wd, "layout.png"))
             json.dump(old, open(out, "w"), ensure_ascii=False)
