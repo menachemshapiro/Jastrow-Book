@@ -139,6 +139,21 @@ def fix_special(pid, h):
     # a homonym number belongs right after the form it numbers, before the comma: the book prints "אֲגַד III,
     # אַגְדָא", "אַבָּא II, אַבָּה"; Sefaria's text has the comma first and no space after the number ("אֲגַד, IIIאַגְדָא").
     # With no second form after the number the book has no comma ("אָב I m."; the user, 30 Oct).
+    # stray commas the merged sources leave in a headword's list of forms (", ," "*X, , (Y)" "(, Y, )"): the book
+    # has one comma between forms and none before or inside a bracketed variant (the user's marks, 2 Nov)
+    def hw_commas(m):
+        c = m.group(2)
+        for _ in range(3):
+            c = re.sub(r",\s*,", ",", c)
+            c = re.sub(r",\s*\((?=[^()]*\)\s*(?:,|$))", " (", c)     # not a bracket that comes before its own form
+            c = re.sub(r"\(\s*,\s*", "(", c)
+            c = re.sub(r"\s*,\s*\)", ")", c)
+        c = re.sub(r"\s{2,}", " ", c)
+        return m.group(1) + c + "</span>"
+    for m in list(HW_RTL.finditer(h))[::-1]:
+        h0 = h
+        h = h[:m.start()] + hw_commas(m) + h[m.end():]
+        _step(h0, h)
     for rx, rp in ((HN_COMMA, r'\1</span> \2, '), (HN_ALONE, r'\1</span>\2')):
         while True:
             h0 = h
@@ -148,6 +163,7 @@ def fix_special(pid, h):
     return h
 
 
+HW_RTL = re.compile(r'(<span class="hw" lang="he" dir="rtl">)([^<]*)</span>')
 HN_COMMA = re.compile(r'(<span class="hw" lang="he" dir="rtl">[^<]*?),\s*</span>\s*(<span class="hn">[IVX]+</span>)\s*(?=<span class="hw")')
 HN_ALONE = re.compile(r'(<span class="hw" lang="he" dir="rtl">[^<]*?),\s*</span>(\s*<span class="hn">[IVX]+</span>)(?!\s*,?\s*<span class="hw")')
 
