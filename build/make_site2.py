@@ -136,7 +136,20 @@ def fix_special(pid, h):
         h = STRAY_STAR.sub(r"\1", h, count=1)
         if h == h0: break
         _step(h0, h)
+    # a homonym number belongs right after the form it numbers, before the comma: the book prints "אֲגַד III,
+    # אַגְדָא", "אַבָּא II, אַבָּה"; Sefaria's text has the comma first and no space after the number ("אֲגַד, IIIאַגְדָא").
+    # With no second form after the number the book has no comma ("אָב I m."; the user, 30 Oct).
+    for rx, rp in ((HN_COMMA, r'\1</span> \2, '), (HN_ALONE, r'\1</span>\2')):
+        while True:
+            h0 = h
+            h = rx.sub(rp, h, count=1)
+            if h == h0: break
+            _step(h0, h)
     return h
+
+
+HN_COMMA = re.compile(r'(<span class="hw" lang="he" dir="rtl">[^<]*?),\s*</span>\s*(<span class="hn">[IVX]+</span>)\s*(?=<span class="hw")')
+HN_ALONE = re.compile(r'(<span class="hw" lang="he" dir="rtl">[^<]*?),\s*</span>(\s*<span class="hn">[IVX]+</span>)(?!\s*,?\s*<span class="hw")')
 
 
 STRAY_STAR = re.compile(r'(<span class="hw" lang="he" dir="rtl">)\*, (?=\*)')
@@ -259,6 +272,16 @@ for i, p in enumerate(pages):
     if p["id"] in MIDB: meta[-1].append(MIDB[p["id"]])      # the column break below a mid-page letter heading
 
 HEB_WORD = re.compile("\\*?[\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05F4'\"\u2019]*")
+HEB_W = r"[\u05d0-\u05ea\u0591-\u05c7'\u05f3\"\u05f4*]+"
+BRACKET_FIRST = re.compile(r"\((\??" + HEB_W + r"(?:,\s?" + HEB_W + r")*)\)\s*(" + HEB_W + r")")
+
+
+def hw_bracket(m):
+    """Sefaria's text puts a bracketed variant before the form it belongs to: "(עָגָה) אָגָא", "אִבּוּ, (אַיְיבוּ) אִיבּוּ".
+    Right to left that showed as the book prints it; set left to right it lands on the wrong side (the user, p. 10,
+    A00233). The bracket goes after its form, "אָגָא (עָגָה)": the same characters, so the column breaks stay."""
+    c = BRACKET_FIRST.sub(lambda x: "%s (%s)" % (x.group(2), x.group(1)), m.group(1))
+    return '<span class="hw" lang="he" dir="rtl">%s</span>' % c
 
 
 def ltr_forms(h):
@@ -278,6 +301,7 @@ def ltr_forms(h):
         if len(HEB_WORD.findall(c)) < 2 and not re.search(r"[^\u0591-\u05F4*'\"\u2019\s]", c) and "*" not in c:
             return m.group(0)
         return '<span class="hw" lang="he" dir="ltr">%s</span>' % words(c, "", star_out=True)
+    h = re.sub(r'<span class="hw" lang="he" dir="rtl">([^<]*)</span>', hw_bracket, h)
     h = re.sub(r'<span class="hw" lang="he" dir="rtl">([^<]*)</span>', hw, h)
     def bf(m):
         c = m.group(1)

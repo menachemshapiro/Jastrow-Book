@@ -10941,5 +10941,12 @@
   "kind": "break",
   "break_after": ", v. תַּשְׁלוּמָא",
   "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. תַּשְׁלוּמָא” and the second begins “תַּשְׁמִישׁ m. (שָׁמַשׁ) 1) handling, use; …”; the site broke the columns 4 words earlier (after “, v. sub תּוּשְׁל׳.”)."
+ },
+ {
+  "page": 242,
+  "entry": "",
+  "kind": "break",
+  "break_after": "גִירְדַּאי , v. גַּרְדּ׳",
+  "why": "Column break only, no change to the text. The second column begins with the headword “גִּירְדּוֹנָא (גִּידְרוֹנָא)”; the site broke one character into it (after its opening bracket, and after the bracket was moved behind its form, inside the word)."
  }
 ]
