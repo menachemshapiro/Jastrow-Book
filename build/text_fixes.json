@@ -11732,5 +11732,14 @@
   "kind": "break",
   "break_after": "עצמם (corr. acc.).",
   "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… עצמם (corr. acc.).” and the second begins “Nif. נִתְרַז to be shocked, frightened; …”; the site broke the columns one word earlier (after “72b ומתריזין עצמם (corr.”)."
+ },
+ {
+  "page": 372,
+  "entry": "F00009",
+  "headword": "וַארְדּוּנְיָא",
+  "kind": "letters",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">וַארְךּוּנְיָא</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">וַארְדּוּנְיָא</span>",
+  "why": "The digital text has a final kaf (ךּ) where the 1903 printing has a dalet: “וַארְדּוּנְיָא” (the user, checked against the scan, 2 Nov). We believe this is a typo in the digital text."
  }
 ]
