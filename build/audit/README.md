@@ -105,7 +105,7 @@ Reads the audit's cached OCR (OCRs any page not yet done) and writes `work/audit
 
 Pages 1–20 (31 Oct): columns 14 likely / 3 check. Each of the 14 (7 breaks, both sides) is confirmed by the Hebrew at the edge. Headwords 3 likely / 26 check / 127 minor; before the two-way tests, 1 / 51 / 237. The 3 likely were checked against the crops, and all are real: A00018 (אַכָּה for the book's אַבָּה), A00271 and A00286 (", ," where the book has one comma or none).
 
-**Side by side** (headwords.html): each card's **Side by side** button opens the whole entry, the site's text set with the website's own stylesheet and fonts beside the scan of the entry on that page (cut from the page image, so nothing extra is saved). **Side by side: all** opens every card shown as you scroll. To regenerate only the headword reports for the whole book: `bash build/audit/focus_all.sh 1 1800 headwords`.
+**Side by side** (headwords.html): each card's **Side by side** button opens the whole entry, the site's text set with the website's own stylesheet and fonts beside the scan of the entry on that page (cut from the page image, so nothing extra is saved). **Side by side: all** opens every card shown as you scroll. Reports made before this view existed get it with `python3 build/audit/focus_patch.py` (every folder in work/audit/focus/, a few minutes for the whole book; the old file is kept as headwords.orig.html). To regenerate the headword reports instead: `bash build/audit/focus_all.sh 1 1800 headwords`.
 
 ## Limits
 
