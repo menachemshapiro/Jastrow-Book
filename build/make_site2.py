@@ -68,20 +68,20 @@ BRK = [None]      # the column break of the page being repaired, as an offset in
 
 
 def loose_end(text, words):
-    """where `words` ends in `text`, matched without vowel signs and with ׳ for ' (one match only), else None"""
+    """where `words` ends in `text`, matched without vowel signs, with ׳ for ' and any run of spaces as one (one
+    match only), else None"""
     def norm(t):
         out, pos = [], []
         for i, ch in enumerate(t):
             if "\u0591" <= ch <= "\u05c7": continue
+            if ch.isspace():
+                if out and out[-1] == " ": continue
+                ch = " "
             out.append("\u05f3" if ch == "'" else ch); pos.append(i)
         return "".join(out), pos
     a, pa = norm(text)
-    w, _ = norm(words)
-    w = re.sub(r"\s+", " ", w).strip()
-    a2 = re.sub(r"\s+", " ", a)
-    if a2.count(w) != 1 or a2 != a: 
-        if a.count(w) != 1: return None
-        return pa[a.index(w) + len(w) - 1] + 1
+    w = norm(words)[0].strip()
+    if not w or a.count(w) != 1: return None
     return pa[a.index(w) + len(w) - 1] + 1
 
 
