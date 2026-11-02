@@ -751,6 +751,11 @@ background:var(--card);color:var(--fg)}
 .sbs iframe{width:100%;border:1px solid var(--line);border-radius:4px;height:300px;background:#fdfdfa}
 .bookv .part{width:100%;background-repeat:no-repeat;border:1px solid var(--line);border-radius:4px;margin-bottom:6px;
 background-color:#fff} .m-sbs .b-sbs{font-weight:600;border-color:currentColor}
+.psbs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 12px;align-items:start}
+@media (max-width:800px){.psbs{grid-template-columns:1fr}}
+.psbs iframe{width:100%;height:85vh;border:1px solid var(--line);border-radius:4px;background:#fff}
+.psbs .scanv{height:85vh;overflow:auto;border:1px solid var(--line);border-radius:4px;background:#fff}
+.psbs .scanv img{width:100%;margin:0} .pg button{font-size:13px;font-weight:400;margin-left:8px} .pg button.on{font-weight:600}
 """
 
 JS = r"""
@@ -807,17 +812,35 @@ function sbs(id,force){const c=document.getElementById(id);if(!c)return;const on
   d.style.backgroundImage='url("'+encodeURI(r.pimg)+'")';d.style.backgroundSize=(W/w*100)+'% auto';
   d.style.backgroundPosition=(W>w?a/(W-w)*100:0)+'% '+(H>h?t/(H-h)*100:0)+'%';R.appendChild(d)}
  b.appendChild(L);b.appendChild(R);c.appendChild(b)}
+let SITEURL=SITE0;try{SITEURL=localStorage.getItem('jastrow-focus-site')||SITE0}catch(e){}
+function setSite(u){SITEURL=(u||SITE0).trim();if(!/\/$/.test(SITEURL))SITEURL+='/';try{localStorage.setItem('jastrow-focus-site',SITEURL)}catch(e){}
+ document.querySelectorAll('.psbs iframe').forEach(f=>{f.src=SITEURL+'#p'+f.dataset.p})}
+function psbs(pid){const bx=document.querySelector('.pgbox[data-p="'+pid+'"]');if(!bx)return;const btn=bx.querySelector('.b-psbs');
+ let v=bx.querySelector('.psbs');if(v){v.hidden=!v.hidden;btn.classList.toggle('on',!v.hidden);return}
+ v=document.createElement('div');v.className='psbs';
+ v.innerHTML='<div><div class=lab>Site, the page on the website</div><iframe data-p="'+pid+'" title="the website"></iframe></div>'+
+  '<div><div class=lab>Book (1903 scan: the whole page)</div><div class=scanv><img loading=lazy alt="scan of the page"></div></div>';
+ v.querySelector('iframe').src=SITEURL+'#p'+pid;v.querySelector('img').src=bx.dataset.img;
+ bx.querySelector('.pg').after(v);btn.classList.add('on')}
 let SBSALL=false,IO=null;
 function sbsAll(on){SBSALL=on;document.getElementById('sbsall').classList.toggle('on',on);
  if(IO){IO.disconnect();IO=null}
  if(!on){document.querySelectorAll('.card.wide').forEach(c=>sbs(c.id,false));return}
  IO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!e.target.classList.contains('hidden')){sbs(e.target.id,true);IO.unobserve(e.target)}}),{rootMargin:'600px'});
  document.querySelectorAll('.card').forEach(c=>IO.observe(c))}
-window.addEventListener('load',()=>{Object.keys(DATA).forEach(paint);count();filt()});
+window.addEventListener('load',()=>{Object.keys(DATA).forEach(paint);count();filt();
+ const si=document.getElementById('siteurl');if(si)si.value=SITEURL});
 """
 
 
 def esc(s): return H.escape(str(s))
+
+
+VERDICT_HELP = ("<b>OK</b>: the site is right (a false alarm). <b>Wrong</b>: the site is wrong here and needs fixing. "
+                "<b>Not sure</b>: can't tell.")
+SITE_URL = "https://menachemshapiro.github.io/Jastrow-Book/"
+SITE_INPUT = ('<label title="the website shown beside the scan: the live site, or http://localhost:8000/ for your local '
+              'copy">site <input id=siteurl size=34 onchange="setSite(this.value)"></label>')
 
 
 def flags_html(fl):
@@ -827,10 +850,13 @@ def flags_html(fl):
                    for s, t in sorted(fl, key=lambda f: f[0]))
 
 
+VERDICTS = ('<button class="b-ok" title="the site is right here: a false alarm" onclick="mark(\'%s\',\'ok\')">OK</button>'
+            '<button class="b-wrong" title="the site is wrong here: it needs fixing" onclick="mark(\'%s\',\'wrong\')">'
+            'Wrong</button><button class="b-unsure" title="can\'t tell" onclick="mark(\'%s\',\'unsure\')">Not sure</button>')
+
+
 def marks_html(cid, sbs=False):
-    return ('<div class="marks"><button class="b-ok" onclick="mark(\'%s\',\'ok\')">OK</button>'
-            '<button class="b-wrong" onclick="mark(\'%s\',\'wrong\')">Wrong</button>'
-            '<button class="b-unsure" onclick="mark(\'%s\',\'unsure\')">Not sure</button>'
+    return ('<div class="marks">' + VERDICTS +
             '<input placeholder="note" onchange="note(\'%s\',this.value)">%s</div>') % (
         cid, cid, cid, cid, ('<button class="b-sbs" onclick="sbs(\'%s\')" title="the whole entry: the site as it looks '
                              'on the website, beside the scan">Side by side</button>' % cid) if sbs else "")
@@ -847,12 +873,22 @@ def page_shell(kind, title, run, intro, body, data):
             "</option></select></label><button onclick=exportMarks()>Export</button>"
             "<label><button onclick=\"this.nextElementSibling.click()\">Import…</button><input type=file hidden "
             "accept=.json onchange=importMarks(this.files[0])></label>%s<span id=nm class=mut></span></div>%s"
-            "<script>const KIND=%s,RUN=%s,DATA=%s,FONTS=%s,SITECSS=%s;%s</script>") % (
+            "<script>const KIND=%s,RUN=%s,DATA=%s,FONTS=%s,SITECSS=%s,SITE0=%s;%s</script>") % (
         esc(title), CSS, esc(title), intro,
         '<button id=sbsall onclick="sbsAll(!SBSALL)" title="open every card shown as the whole entry, the site beside '
-        'the scan">Side by side: all</button>' if kind == "headwords" else "",
+        'the scan">Side by side: all</button>' if kind == "headwords" else SITE_INPUT,
         body, json.dumps(kind), json.dumps(run), json.dumps(data, ensure_ascii=False).replace("</", "<\\/"),
-        json.dumps(SITE_FONTS), json.dumps(site_css() if kind == "headwords" else "").replace("</", "<\\/"), JS)
+        json.dumps(SITE_FONTS), json.dumps(site_css() if kind == "headwords" else "").replace("</", "<\\/"),
+        json.dumps(SITE_URL), JS)
+
+
+def page_box(pid, out):
+    """a page's heading in the columns report, with its button for the website's page beside the scan"""
+    img = os.path.relpath(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(out))), "pages",
+                                       "p%04d" % int(pid), "page.png"), out)
+    return ('<div class=pgbox data-p="%s" data-img="%s"><div class=pg>p. %s <button class=b-psbs onclick="psbs(\'%s\')" '
+            'title="the page on the website beside the whole scan page">Side by side</button></div>'
+            % (esc(pid), esc(img), esc(pid), esc(pid)))
 
 
 def report_columns(rows, out, run):
@@ -879,11 +915,11 @@ def report_columns(rows, out, run):
                                      '<img loading=lazy src="%s">' % r["img"] if r["img"] else "",
                                      esc(r["scan"][:200]), esc(r["site"]), flags_html(r["flags"]), marks_html(cid)))
             segs.append('<div class=cols>%s</div>' % "".join(cells))
-        body.append('<div class=pgbox><div class=pg>p. %s</div>%s%s</div>' % (pid, notes, "".join(segs)))
+        body.append(page_box(pid, out) + '%s%s</div>' % (notes, "".join(segs)))
     nflag = sum(1 for d in data.values() if d["sev"] <= 2)
     intro = ("Run %s. Each page is shown as the book has it: the tops of its two columns, then their feet. Each "
              "box is the scan's first or last two lines beside the site's words at that end of the column. %d of %d "
-             "column ends flagged." % (esc(run), nflag, len(data)))
+             "column ends flagged. " % (esc(run), nflag, len(data)) + VERDICT_HELP)
     path = os.path.join(out, "columns.html")
     open(path, "w").write(page_shell("columns", "Columns: start and end", run, intro, "".join(body), data))
     return path, nflag, len(data)
@@ -912,7 +948,7 @@ def report_headwords(rows, out, run):
                             esc(book), flags_html(r["flags"]), marks_html(cid, sbs=True)))
         body.append('<div class=pgbox><div class=pg>p. %s</div><div class=grid>%s</div></div>' % (pid, "".join(cards)))
     nflag = sum(1 for d in data.values() if d["sev"] <= 2)
-    intro = ("Run %s. Each entry: the scan's first line, the headword boxed in red where the audit found it by its "
+    intro = (VERDICT_HELP + " Run %s. Each entry: the scan's first line, the headword boxed in red where the audit found it by its "
              "larger type, beside the site's headword. Characters struck through are proposed for removal: click "
              "any character to strike it or bring it back, then mark the entry <b>Wrong</b> to put the removal in "
              "the export as a text_fixes record. %d of %d headwords flagged." % (esc(run), nflag, len(data)))
