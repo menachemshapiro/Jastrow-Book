@@ -344,14 +344,22 @@ def check_columns(pid, pc, F, ink, img_dir):
                     if bbrk is None and brk is not None:
                         r["flags"].append([2, "the audit could not find the book's break (too few words matched)"])
                 if si == 0 and side == "L" and end == "top":
-                    r["flags"] += [[x["sev"], x["note"] + _only(x)] for x in F if x["type"] == "page_start"]
+                    r["flags"] += [[edge_sev(x), x["note"] + _only(x)] for x in F if x["type"] == "page_start"]
                 if si == nseg - 1 and side == "R" and end == "foot":
-                    r["flags"] += [[x["sev"], x["note"] + _only(x)] for x in F if x["type"] == "page_end"]
+                    r["flags"] += [[edge_sev(x), x["note"] + _only(x)] for x in F if x["type"] == "page_end"]
                 if slipped and ((si == 0 and side == "R" and end == "foot") or (si == 1 and side == "L" and end == "top")):
                     r["flags"].append([1, "words on the wrong side of the letter heading: %s" % " ".join(slipped[:8])])
                 rows.append(r)
     for r in rows: r["page_notes"] = page_notes
     return rows
+
+
+def edge_sev(x):
+    """a page's first or last words differing: in the user's marks mostly a word the book hyphenates across the page,
+    or a page number or signature read as text; one differing word (or numbers only) is minor"""
+    w = (x.get("site_only") or "").split() + (x.get("book_only") or "").split()
+    if len(w) <= 1 or all(re.fullmatch(r"[\d.,;:()]+", t) for t in w): return 3
+    return x["sev"]
 
 
 def _only(x):
