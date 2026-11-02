@@ -204,10 +204,16 @@ class PageCompare:
                     t["page_end_hyph"] = True
             toks.append(t)
             i += 1
-        # script: compare with the Hebrew OCR at the same place
+        # script: compare with the Hebrew OCR at the same place (the Hebrew words indexed by height on the page:
+        # only those whose rows meet the word's can overlap it; in their own order, so ties go as before)
+        BIN = 64
+        rows = {}
+        for n_, w in enumerate(self.heb):
+            for r_ in range(int(w["box"][1]) // BIN, int(w["box"][3]) // BIN + 1): rows.setdefault(r_, []).append(n_)
         for t in toks:
             hc, ht = -1, ""
-            for w in self.heb:
+            near = sorted({n_ for r_ in range(int(t["box"][1]) // BIN, int(t["box"][3]) // BIN + 1) for n_ in rows.get(r_, ())})
+            for w in (self.heb[n_] for n_ in near):
                 b = w["box"]
                 if overlap(b, t["box"]) > 0.5 * min(area(b), area(t["box"])) and re.search("[א-ת]", w["text"]):
                     if w["conf"] > hc: hc, ht = w["conf"], w["text"]

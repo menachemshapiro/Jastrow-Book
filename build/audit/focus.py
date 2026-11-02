@@ -107,9 +107,12 @@ SITE_FONTS = ("https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wgh
               "0,700;1,400&display=swap")
 
 
+SITE = [ST.REPO]      # the site checked: this repository, or --site
+
+
 def site_css():
     try:
-        m = re.search(r"<style>(.*?)</style>", open(os.path.join(ST.REPO, "index.html"), encoding="utf-8").read(), re.S)
+        m = re.search(r"<style>(.*?)</style>", open(os.path.join(SITE[0], "index.html"), encoding="utf-8").read(), re.S)
         return m.group(1) if m else ""
     except OSError:
         return ""
@@ -329,9 +332,13 @@ def check_columns(pid, pc, F, ink, img_dir):
                             sev = 1
                         r["flags"].append([sev, note])
                     if edge and edge["wrong"]:
-                        r["flags"].append([1, "the image has " + "; ".join(
+                        # on its own (no word shift found), the OCR's Hebrew at the edge was a false alarm in all the
+                        # user's marks of pp. 1-100
+                        alone = not any(x["type"] == "column_break" for x in seg_find)
+                        r["flags"].append([3 if alone else 1, "the image has " + "; ".join(
                             "%s at the %s" % (w, "foot of the left column" if sd == "L" else "top of the right column")
-                            for w, st, sd in edge["wrong"]) + ", where the site puts it in the other column"])
+                            for w, st, sd in edge["wrong"]) + ", where the site puts it in the other column"
+                                           + (" (the OCR's Hebrew only: no shift of the words found)" if alone else "")])
                     elif edge and edge["right"] and not any(f[0] <= 2 for f in r["flags"]):
                         r["flags"].append([9, "the Hebrew at the edge is where the site puts it: " + ", ".join(edge["right"])])
                     if bbrk is None and brk is not None:
@@ -587,12 +594,12 @@ def judge_punct(r, sw, bw, lead):
     return out
 
 
-def run_page(pc, CO):
+def run_page(pc, CO, headwords=True):
     """the comparison as audit.py runs it, with stages 3 and 4 off, then stage 3 for the headword findings only"""
     pc.check_gaps(); pc.check_pairs(); pc.check_breaks(); pc.check_header(); pc.check_scan()
     pc.map_entries(); pc.check_structure()
     allf = pc.f
-    hwf = [x for x in allf if x["type"] in ("headword_letters", "headword_differs", "headword_order")]
+    hwf = [x for x in allf if x["type"] in ("headword_letters", "headword_differs", "headword_order")] if headwords else []
     if hwf:
         pc.f = hwf
         CO.CFG["reread3"] = True
@@ -958,6 +965,43 @@ def report_headwords(rows, out, run):
 
 
 # ---------- main ----------
+_W = {}
+
+
+def _init(site, out, what, img, cm, hcm):
+    import audit as AU, compare as CO
+    SITE[0] = site
+    CO.CM, CO.HCM = cm, hcm
+    CO.CFG.update(reread3=False, stage4=False)
+    _W.update(CO=CO, book=ST.Book(site), V=AU.vocab(site), out=out, what=what, img=img)
+
+
+def _page(pid):
+    """one page's column ends and headwords (in a worker)"""
+    CO, book, out, what, img = _W["CO"], _W["book"], _W["out"], _W["what"], _W["img"]
+    sp = os.path.join(out, "pages", "p%04d" % int(pid), "scan.json")
+    if not os.path.exists(sp): return pid, [], [], "no OCR"
+    scan = json.load(open(sp))
+    if "ocr" not in scan: return pid, [], [], "no OCR"
+    cols, hws = [], []
+    try:
+        pc = CO.PageCompare(book.page(pid), scan, _W["V"], out)
+        F = run_page(pc, CO, headwords=what in ("both", "headwords"))
+        ink = Ink(pc.wd, scan["layout"].get("thr", 128))
+        if what in ("both", "columns"): cols = check_columns(pid, pc, F, ink, img)
+        if what in ("both", "headwords"):
+            hws = check_headwords(pid, pc, F, ink, img)
+            try:
+                nx = book.page(str(int(pid) + 1)).entries
+            except Exception:
+                nx = []
+            if hws and nx and nx[0]["cont"] and nx[0]["eid"] == hws[-1]["eid"]:
+                hws[-1]["more"] = str(int(pid) + 1)
+    except Exception as e:
+        return pid, [], [], "%s: %s" % (type(e).__name__, e)
+    return pid, cols, hws, None
+
+
 def main():
     import audit as AU
     import compare as CO
@@ -969,8 +1013,13 @@ def main():
     ap.add_argument("--out", default=os.path.join(paths.WORK, "audit"))
     ap.add_argument("--jobs", type=int, default=os.cpu_count() or 2)
     ap.add_argument("--dpi", type=int, default=400)
+    ap.add_argument("--site", default=os.environ.get("JASTROW_SITE") or ST.REPO,
+                    help="the site to check (a checkout of the live branch; default: this repository)")
     args = ap.parse_args()
-    book = ST.Book()
+    # the pages run in parallel: one thread each for Tesseract's re-reads and numpy (else they compete for the cores)
+    for v in ("OMP_THREAD_LIMIT", "OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS"): os.environ.setdefault(v, "1")
+    SITE[0] = os.path.abspath(os.path.expanduser(args.site))
+    book = ST.Book(SITE[0])
     run = AU.parse_pages(args.pages, book)
     if not run: sys.exit("no pages")
     # OCR any page not done yet
@@ -981,7 +1030,7 @@ def main():
         with Pool(max(1, min(args.jobs, len(todo)))) as pool:
             for pid, secs, err in pool.imap_unordered(AU.scan_one, todo):
                 print("  p. %-5s %5.1f s%s" % (pid, secs, ("  ERROR " + err) if err else ""), flush=True)
-    V = AU.vocab(ST.REPO)
+    V = AU.vocab(SITE[0])
     mf = [os.path.join(args.out, "marks.json")] + sorted(glob.glob(os.path.expanduser("~/Downloads/jastrow-audit-marks*.json")))
     CO.CM, CO.HCM = OM.build(os.path.join(args.out, "pages"), RP.load_marks(mf))
     # the comparison, without stage 3 and 4 (not needed for these two checks; much faster)
@@ -992,30 +1041,15 @@ def main():
     img = os.path.join(out, "img")
     os.makedirs(img, exist_ok=True)
     cols, hws, skipped = [], [], []
-    for n, pid in enumerate(run):
-        if n % 10 == 0: print("  p. %s (%d of %d)" % (pid, n + 1, len(run)), flush=True)
-        sp = os.path.join(args.out, "pages", "p%04d" % int(pid), "scan.json")
-        if not os.path.exists(sp):
-            skipped.append(pid); continue
-        scan = json.load(open(sp))
-        if "ocr" not in scan:
-            skipped.append(pid); continue
-        try:
-            pc = CO.PageCompare(book.page(pid), scan, V, args.out)
-            F = run_page(pc, CO)
-            ink = Ink(pc.wd, scan["layout"].get("thr", 128))
-            if args.what in ("both", "columns"): cols += check_columns(pid, pc, F, ink, img)
-            if args.what in ("both", "headwords"):
-                hr = check_headwords(pid, pc, F, ink, img)
-                try:
-                    nx = book.page(str(int(pid) + 1)).entries
-                except Exception:
-                    nx = []
-                if hr and nx and nx[0]["cont"] and nx[0]["eid"] == hr[-1]["eid"]:
-                    hr[-1]["more"] = str(int(pid) + 1)
-                hws += hr
-        except Exception as e:
-            print("  p. %s: %s: %s" % (pid, type(e).__name__, e)); skipped.append(pid)
+    t0 = time.time()
+    with Pool(max(1, min(args.jobs, len(run))), initializer=_init,
+              initargs=(SITE[0], args.out, args.what, img, CO.CM, CO.HCM)) as pool:
+        for n, (pid, c, h, err) in enumerate(pool.imap(_page, run)):
+            if (n + 1) % 50 == 0: print("  %d of %d pages  (%.0f s)" % (n + 1, len(run), time.time() - t0), flush=True)
+            if err:
+                if err != "no OCR": print("  p. %s: %s" % (pid, err))
+                skipped.append(pid); continue
+            cols += c; hws += h
     lines = ["focus.py %s --pages %s  (%s)" % (args.what, args.pages, name)]
     if args.what in ("both", "columns"):
         p, nf, nt = report_columns(cols, out, name)
