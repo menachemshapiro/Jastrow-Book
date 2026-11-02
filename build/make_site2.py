@@ -212,6 +212,8 @@ for p in pages:
         p["kind"] = "letter"
     BRK[0] = BREAKS.get(p["id"])
     p["html"] = fix_special(p["id"], p["html"])
+    if BRK[0] is None and any(fx.get("kind") == "break" for fx in TEXT_FIXES.get(p["id"], [])):
+        BRK[0] = 0           # a page the browser balanced: a break record gives it a fixed break (set below)
     if BRK[0] is not None:
         BREAKS[p["id"]] = BRK[0]
         b_ = _pt(p["html"])
