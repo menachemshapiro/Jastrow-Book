@@ -150,7 +150,11 @@ def main():
     print("%d report(s), %d pages ..." % (len(todo), len(pages)), flush=True)
     t = time.time()
     with Pool(os.cpu_count() or 2, initializer=_init) as pool:
-        info = {r["pid"]: r for r in pool.imap_unordered(page_info, pages, chunksize=4)}
+        info = {}
+        for r in pool.imap_unordered(page_info, pages, chunksize=4):
+            info[r["pid"]] = r
+            if len(info) % 100 == 0:
+                print("  %d of %d pages  (%.0f s)" % (len(info), len(pages), time.time() - t), flush=True)
     print("pages read in %.0f s" % (time.time() - t), flush=True)
     for d, _ in todo:
         n = patch(d, info)
