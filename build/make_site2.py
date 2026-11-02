@@ -67,6 +67,24 @@ def _pt(h): return "".join(_H.unescape(x) for x in re.split(r"(<[^>]+>)", h) if 
 BRK = [None]      # the column break of the page being repaired, as an offset into its plain text
 
 
+def loose_end(text, words):
+    """where `words` ends in `text`, matched without vowel signs and with ׳ for ' (one match only), else None"""
+    def norm(t):
+        out, pos = [], []
+        for i, ch in enumerate(t):
+            if "\u0591" <= ch <= "\u05c7": continue
+            out.append("\u05f3" if ch == "'" else ch); pos.append(i)
+        return "".join(out), pos
+    a, pa = norm(text)
+    w, _ = norm(words)
+    w = re.sub(r"\s+", " ", w).strip()
+    a2 = re.sub(r"\s+", " ", a)
+    if a2.count(w) != 1 or a2 != a: 
+        if a.count(w) != 1: return None
+        return pa[a.index(w) + len(w) - 1] + 1
+    return pa[a.index(w) + len(w) - 1] + 1
+
+
 def _step(old, new):
     """a repair changed the page from `old` to `new`: move the column break by the same amount. Each repair is one
     local change, so only the stretch between the common beginning and end of the two texts is compared."""
@@ -129,6 +147,13 @@ def fix_special(pid, h):
             assert h.count(fx["old"]) == 1, (pid, fx["old"])
             h = h.replace(fx["old"], fx["new"])
         _step(h0, h)
+    # a column break record is placed here, on the text it was written against (before the headwords below are
+    # rebuilt); the changes below then move the break with them
+    if BRK[0] is not None or any(fx.get("kind") == "break" for fx in TEXT_FIXES.get(pid, [])):
+        for fx in TEXT_FIXES.get(pid, []):
+            if fx.get("kind") != "break": continue
+            k = loose_end(_pt(h), fx["break_after"])
+            if k is not None: BRK[0] = k; fx["_placed"] = True
     # the headword and its other forms from Sefaria's current text (the 2018 XML's <head-word> pieces carry stray
     # punctuation, and the join added a comma before each); one entry at a time, so the column break follows
     for m in list(HEAD_GROUP.finditer(h))[::-1]:
@@ -273,11 +298,18 @@ for p in pages:
         BREAKS[p["id"]] = BRK[0]
         b_ = _pt(p["html"])
         for fx in TEXT_FIXES.get(p["id"], []):    # a correction that says where the column break falls
-            if fx.get("break_after") and fx["break_after"] in b_:
+            if fx.get("kind") == "break" and fx.get("_placed"):
+                BREAKS[p["id"]] = BRK[0]          # placed before the headwords were rebuilt, and moved with them
+            elif fx.get("break_after") and fx["break_after"] in b_:
                 assert fx.get("kind") != "break" or b_.count(fx["break_after"]) == 1, (p["id"], fx["break_after"])
                 BREAKS[p["id"]] = b_.index(fx["break_after"]) + len(fx["break_after"])
             elif fx.get("kind") == "break":
-                raise AssertionError("column break record does not match the page: %s %r" % (p["id"], fx["break_after"]))
+                # the words were taken before the headwords came from the current text: match them without
+                # vowel signs, and with ׳ for '
+                k = loose_end(b_, fx["break_after"])
+                if k is None:
+                    raise AssertionError("column break record does not match the page: %s %r" % (p["id"], fx["break_after"]))
+                BREAKS[p["id"]] = k
     p["html"] += AFTER.get(p["id"], "")
     newpages.append(p)
     if p["id"] == "683":
