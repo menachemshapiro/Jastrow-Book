@@ -129,7 +129,17 @@ def fix_special(pid, h):
             assert h.count(fx["old"]) == 1, (pid, fx["old"])
             h = h.replace(fx["old"], fx["new"])
         _step(h0, h)
+    # a headword the merged sources set as "*, *X": the book prints one asterisk ("*X"). One at a time, so the
+    # column break follows each change.
+    while True:
+        h0 = h
+        h = STRAY_STAR.sub(r"\1", h, count=1)
+        if h == h0: break
+        _step(h0, h)
     return h
+
+
+STRAY_STAR = re.compile(r'(<span class="hw" lang="he" dir="rtl">)\*, (?=\*)')
 
 
 def insert_space(h, before, after, pid):
@@ -254,13 +264,20 @@ HEB_WORD = re.compile("\\*?[\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05F4'\"\u2019]*
 def ltr_forms(h):
     """A list of Hebrew forms (headwords, binyan forms) runs left to right in the 1903 printing, the first form on
     the left: "אוּחַר, הוּאֲחַר". Set as one right-to-left run, the browser put the first form on the right and a
-    headword's trailing comma in front of it. Each form is now isolated on its own, in a left-to-right list."""
-    def words(c, cls):
-        return HEB_WORD.sub(lambda m: '<span%s dir="rtl">%s</span>' % (cls, m.group(0)), c)
+    headword's trailing comma in front of it. Each form is now isolated on its own, in a left-to-right list.
+    A headword's asterisk stands on the left of the form, at the start of the line, as in the book; inside the
+    right-to-left run the browser set it on the right, after the form."""
+    def words(c, cls, star_out=False):
+        def one(m):
+            w = m.group(0)
+            if star_out and w.startswith("*"): return '*<span%s dir="rtl">%s</span>' % (cls, w[1:])
+            return '<span%s dir="rtl">%s</span>' % (cls, w)
+        return HEB_WORD.sub(one, c)
     def hw(m):
         c = m.group(1)
-        if len(HEB_WORD.findall(c)) < 2 and not re.search(r"[^\u0591-\u05F4*'\"\u2019\s]", c): return m.group(0)
-        return '<span class="hw" lang="he" dir="ltr">%s</span>' % words(c, "")
+        if len(HEB_WORD.findall(c)) < 2 and not re.search(r"[^\u0591-\u05F4*'\"\u2019\s]", c) and "*" not in c:
+            return m.group(0)
+        return '<span class="hw" lang="he" dir="ltr">%s</span>' % words(c, "", star_out=True)
     h = re.sub(r'<span class="hw" lang="he" dir="rtl">([^<]*)</span>', hw, h)
     def bf(m):
         c = m.group(1)
