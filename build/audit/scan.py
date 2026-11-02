@@ -27,14 +27,22 @@ def pdf_for(pid, scans):
 
 # page images from another copy of the book (Jastrow<n>.gif, about 185 dpi, 256 greys), used for a page whose PDF
 # page is broken (REPLACE) or could not be laid out. Coarser than the PDFs, so only where the PDF fails.
-GIFS = os.environ.get("JASTROW_GIFS", os.path.expanduser("~/Downloads/Jastrow/ppages"))
+# Where they are looked for: JASTROW_GIFS, then scans/gif/ in the Jastrow-Notes repo (private: the GIFs carry
+# their maker's copyright line, so they are not in this public repo), then the user's download folder.
+GIFS = [d for d in (os.environ.get("JASTROW_GIFS"), os.path.expanduser("~/jastrow/Jastrow-Notes/scans/gif"),
+                    os.path.expanduser("~/Downloads/Jastrow/ppages")) if d]
 GIF_DPI = 185
-REPLACE = {1269}   # the PDF page is a zoomed-in fragment of the page
+# pages whose PDF page is damaged (checked on the scans, 2 Nov): always read from the GIF
+REPLACE = {133,      # cut off at the right edge (the binding)
+           134,      # cut off at the left edge (the binding)
+           1269}     # a zoomed-in fragment of the page
 
 
 def gif_for(pid):
-    f = os.path.join(GIFS, "Jastrow%d.gif" % int(pid))
-    return f if os.path.exists(f) else None
+    for d in GIFS:
+        f = os.path.join(d, "Jastrow%d.gif" % int(pid))
+        if os.path.exists(f): return f
+    return None
 
 
 def render_gif(gif, out_png, dpi):

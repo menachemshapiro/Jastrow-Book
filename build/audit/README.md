@@ -107,6 +107,8 @@ Pages 1–20 (31 Oct): columns 14 likely / 3 check. Each of the 14 (7 breaks, bo
 
 **Side by side** (headwords.html): each card's **Side by side** button opens the whole entry, the site's text set with the website's own stylesheet and fonts beside the scan of the entry on that page (cut from the page image, so nothing extra is saved). **Side by side: all** opens every card shown as you scroll. **columns.html** has a **Side by side** button on each page: the page on the website (live site by default; type http://localhost:8000/ in the "site" box for your local copy) beside the whole scan page. In both reports **OK** means the site is right (a false alarm), **Wrong** that the site is wrong and needs fixing. Reports made before this view existed get it with `python3 build/audit/focus_patch.py` (every folder in work/audit/focus/, a few minutes for the whole book; the old file is kept as headwords.orig.html). To regenerate the headword reports instead: `bash build/audit/focus_all.sh 1 1800 headwords`.
 
+**Damaged PDF pages.** pp. 133 and 134 (cut off at the binding) and 1269 (a fragment) are read from replacement GIFs in the private Jastrow-Notes repo (`scans/gif/`, see its `scans/README.md`); so are pages the layout step cannot lay out from the PDF (461, 1203, 1650). scan.py finds them by itself; no option is needed when checking the whole book.
+
 ## Limits
 
 - Tesseract does not read vowel points reliably. Hebrew is compared by its letters, and only headwords letter by letter.

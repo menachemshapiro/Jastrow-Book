@@ -1023,8 +1023,13 @@ def main():
     run = AU.parse_pages(args.pages, book)
     if not run: sys.exit("no pages")
     # OCR any page not done yet
-    todo = [(p, paths.SCANS, args.out, args.dpi, False) for p in run
-            if not os.path.exists(os.path.join(args.out, "pages", "p%04d" % int(p), "scan.json"))]
+    import scan as SC
+    def need(p):
+        sp = os.path.join(args.out, "pages", "p%04d" % int(p), "scan.json")
+        if not os.path.exists(sp): return True
+        # a damaged PDF page (scan.REPLACE) read from the PDF before its GIF was there
+        return int(p) in SC.REPLACE and SC.gif_for(p) and not json.load(open(sp)).get("gif")
+    todo = [(p, paths.SCANS, args.out, args.dpi, False) for p in run if need(p)]
     if todo:
         print("OCR of %d page(s) not done before (a minute or two each)..." % len(todo), flush=True)
         with Pool(max(1, min(args.jobs, len(todo)))) as pool:
