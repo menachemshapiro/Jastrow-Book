@@ -25,6 +25,24 @@ def pdf_for(pid, scans):
     return cands[0], (n + VOL1_SHIFT if n < VOL2_FROM else n + VOL2_SHIFT)
 
 
+# page images from another copy of the book (Jastrow<n>.gif, about 185 dpi, 256 greys), used for a page whose PDF
+# page is broken (REPLACE) or could not be laid out. Coarser than the PDFs, so only where the PDF fails.
+GIFS = os.environ.get("JASTROW_GIFS", os.path.expanduser("~/Downloads/Jastrow/ppages"))
+GIF_DPI = 185
+REPLACE = {1269}   # the PDF page is a zoomed-in fragment of the page
+
+
+def gif_for(pid):
+    f = os.path.join(GIFS, "Jastrow%d.gif" % int(pid))
+    return f if os.path.exists(f) else None
+
+
+def render_gif(gif, out_png, dpi):
+    im = Image.open(gif).convert("L")
+    k = dpi / GIF_DPI
+    im.resize((round(im.width * k), round(im.height * k)), Image.LANCZOS).save(out_png)
+
+
 def render(pid, scans, out_png, dpi):
     pdf, pn = pdf_for(pid, scans)
     prefix = out_png[:-4]
@@ -433,6 +451,8 @@ def process(pid, scans, workdir, dpi, force=False):
     out = os.path.join(wd, "scan.json")
     if os.path.exists(out) and not force:
         old = json.load(open(out))
+        if not old.get("gif") and gif_for(pid) and (int(pid) in REPLACE or "error" in old.get("layout", {})):
+            return process_gif(pid, scans, wd, out, dpi)
         if old.get("layout", {}).get("version") == LAYOUT_VERSION and "ocr" in old and \
                 old.get("models", {"eng": "eng", "heb": "heb"}) != models_tag() and \
                 os.path.exists(os.path.join(wd, "page.png")):
@@ -473,8 +493,26 @@ def process(pid, scans, workdir, dpi, force=False):
     img.save(os.path.join(wd, "page.png"))
     lay = layout(img)
     lay["angle"] = angle
-    res = {"pid": str(pid), "pdf": os.path.basename(pdf), "pdf_page": pn, "dpi": dpi, "layout": lay,
-           "models": models_tag()}
+    if gif_for(pid) and (int(pid) in REPLACE or "error" in lay):
+        return process_gif(pid, scans, wd, out, dpi)
+    return finish(pid, img, lay, os.path.basename(pdf), pn, wd, out, dpi)
+
+
+def process_gif(pid, scans, wd, out, dpi):
+    """the page from its GIF (see GIFS) instead of the PDF"""
+    gif = gif_for(pid)
+    raw = os.path.join(wd, "raw.png")
+    render_gif(gif, raw, dpi)
+    img, angle = deskew(Image.open(raw).convert("L"))
+    img.save(os.path.join(wd, "page.png"))
+    lay = layout(img)
+    lay["angle"] = angle
+    return finish(pid, img, lay, os.path.basename(gif), 0, wd, out, dpi, gif=True)
+
+
+def finish(pid, img, lay, src, pn, wd, out, dpi, gif=False):
+    res = {"pid": str(pid), "pdf": src, "pdf_page": pn, "dpi": dpi, "layout": lay, "models": models_tag()}
+    if gif: res["gif"] = True
     if "error" not in lay:
         res["ocr"] = ocr_page(img, lay, wd, dpi)
     overlay(img, lay, res.get("ocr"), os.path.join(wd, "layout.png"))
