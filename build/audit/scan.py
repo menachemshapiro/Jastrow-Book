@@ -420,8 +420,13 @@ def ocr_page(img, lay, wd, dpi):
     if lay.get("header"):
         name = os.path.join(wd, "header.png")
         img.crop(lay["header"]).save(name)
-        res["header"] = {"eng": " ".join(w["text"] for w in tesseract(name, "eng", 7, dpi)),
-                         "heb": [w["text"] for w in sorted(tesseract(name, "heb", 7, dpi), key=lambda w: w["box"][0])]}
+        def line(lang):
+            # one line of text (PSM 7); Tesseract crashes on some running heads that way (p. 1337, a floating point
+            # exception), so then as a block (PSM 6)
+            try: return tesseract(name, lang, 7, dpi)
+            except RuntimeError: return tesseract(name, lang, 6, dpi)
+        res["header"] = {"eng": " ".join(w["text"] for w in line("eng")),
+                         "heb": [w["text"] for w in sorted(line("heb"), key=lambda w: w["box"][0])]}
     for k, b in enumerate(lay.get("bands", [])):
         if b["kind"] != "heading": continue
         name = os.path.join(wd, "heading%d.png" % k)
