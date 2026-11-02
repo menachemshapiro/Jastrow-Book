@@ -818,10 +818,10 @@ function sbs(id,force){const c=document.getElementById(id);if(!c)return;const on
  const fr=document.createElement('iframe');fr.title='the site\'s entry';
  fr.srcdoc='<!doctype html><meta charset=utf-8><link rel=stylesheet href="'+FONTS+'"><style>'+SITECSS+
   'html,body{height:auto;overflow:hidden;margin:0;background:var(--paper)}#w{position:static;transform-origin:0 0;'+
-  'width:633px;height:auto;padding:10px 20px}#w .cols{height:auto;column-count:1;overflow:visible}</style>'+
+  'width:633px;height:auto;padding:10px 20px 28px}#w .cols{height:auto;column-count:1;overflow:visible}</style>'+
   '<div class="page" id=w><div class="cols"><div class="col">'+(r.ent||'<p>(no entry on the site)</p>')+'</div></div></div>';
  const fit=()=>{try{const d=fr.contentDocument,w=d.getElementById('w');const z=fr.clientWidth/633;
-  w.style.transform='scale('+z+')';fr.style.height=Math.ceil(w.offsetHeight*z)+4+'px'}catch(e){}};
+  w.style.transform='scale('+z+')';fr.style.height=Math.ceil(Math.max(w.offsetHeight,w.scrollHeight)*z)+16+'px'}catch(e){}};
  fr.onload=()=>{fit();try{fr.contentDocument.fonts.ready.then(fit)}catch(e){}};
  new ResizeObserver(fit).observe(fr);L.appendChild(fr);
  if(r.more){const n=document.createElement('div');n.className='mut';n.textContent='The entry continues on p. '+r.more+' (not shown).';L.appendChild(n)}
