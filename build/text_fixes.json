@@ -9877,5 +9877,1069 @@
   "old": "shroud</i>. Kit IX, 4",
   "new": "shroud</i>. Kil. IX, 4",
   "why": "The digital text has “Kit IX, 4” where the 1903 printing has “Kil. IX, 4” (Mishnah Kilayim, checked against the scan). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 2,
+  "entry": "",
+  "kind": "break",
+  "break_after": "fruit, v. אִיבָּא.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… fruit, v. אִיבָּא.” and the second begins “אַכְאָבִית, אֲבָבִית, עַבְעָבִית, עֲבָבִית, עַוְעָוִית (reduplic. …”; the site broke the columns 5 words later (after “אֲבָבִית, עַבְעָבִית, עֲבָבִית, עַוְעָוִית”)."
+ },
+ {
+  "page": 6,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. אֲבַק",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. אֲבַק” and the second begins “אֲבִיקָה pr. n. m. Abikah, a …”; the site broke the columns 4 words earlier (after “attached. Mikv. VI, 10.”)."
+ },
+ {
+  "page": 9,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. אִבְרוֹסִי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. אִבְרוֹסִי” and the second begins “אברוכסים , v. בריכסוןאברומא, אבדומא f. …”; the site broke the columns 4 words earlier (after “large for balancing purposes.”)."
+ },
+ {
+  "page": 13,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. אנגיסטור",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. אנגיסטור” and the second begins “אֲגַנְתָּא f. 1) = אַגָּנָא. Targ. …”; the site broke the columns 4 words earlier (after “20 Mus. (ed. אגנייה).”)."
+ },
+ {
+  "page": 14,
+  "entry": "",
+  "kind": "break",
+  "break_after": "53aאגרדים  v. next. w.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 53aאגרדים  v. next. w.” and the second begins “אֲגַרְדְּמִיס (freq. אגרדמים) m. (a corrupt. …”; the site broke the columns 4 words earlier (after “104b; 134a. Nidd. 53a”)."
+ },
+ {
+  "page": 16,
+  "entry": "",
+  "kind": "break",
+  "break_after": "XXXVI, 25 אַדְיוּתָא.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… XXXVI, 25 אַדְיוּתָא.” and the second begins “אֲדַיִין (= עֲדַיִין; אַד = עַד …”; the site broke the columns 14 words later (after “h. עַד הֵנָּה) until”)."
+ },
+ {
+  "page": 19,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. דּוּשׁ ch.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… v. דּוּשׁ ch.” and the second begins “אָהַב (b. h.; √הב; cmp. חבב) …”; the site broke the columns 5 words earlier (after “to Dan. II, 35).”)."
+ },
+ {
+  "page": 21,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Ib. 78a מתה",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Ib. 78a מתה” and the second begins “מחמת א׳ died from fatigue. Sabb. …”; the site broke the columns 1 word earlier (after “up hill. Ib. 78a”)."
+ },
+ {
+  "page": 23,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. אִבְרוֹסִי*",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. אִבְרוֹסִי*” and the second begins “אַוְורַקְסִין, אברסקין m. pl. (cmp. אפקרסין, …”; the site broke the columns 4 words earlier (after “bot.אֲוַורְדִּימָס , v. וַרְדִּימוֹס”)."
+ },
+ {
+  "page": 31,
+  "entry": "",
+  "kind": "break",
+  "break_after": "אַשְׁפָּה) בני אוֹפִיכֵיה",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… אַשְׁפָּה) בני אוֹפִיכֵיה” and the second begins “(Var. אוֹפְכָיֵיה) the children of those …”; the site broke the columns 1 word later (after “אַשְׁפָּה) בני אוֹפִיכֵיה (Var.”)."
+ },
+ {
+  "page": 48,
+  "entry": "",
+  "kind": "break",
+  "break_after": "אִכְ׳אִיכַּרְיָיתָא  v. אִיכָּרָא*",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… אִכְ׳אִיכַּרְיָיתָא  v. אִיכָּרָא*” and the second begins “אֱיָל, אֱיָיל m. (b. h.; אול) …”; the site broke the columns 3 words earlier (after “however, אִיבְרָיָאתָא.אִיכְרוּם v. אִכְ׳”)."
+ },
+ {
+  "page": 51,
+  "entry": "",
+  "kind": "break",
+  "break_after": "even with one.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… even with one.” and the second begins “—2) (cmp. חוּמְרָא) knot, bandage on …”; the site broke the columns 2 words later (after “even with one.—2) (cmp.”)."
+ },
+ {
+  "page": 54,
+  "entry": "",
+  "kind": "break",
+  "break_after": "is not convenient.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… is not convenient.” and the second begins “Num. R. s. 12 two columns …”; the site broke the columns 1 word earlier (after “passers by is not”)."
+ },
+ {
+  "page": 55,
+  "entry": "",
+  "kind": "break",
+  "break_after": "fr.איסטיסית , v. אִסְטָנִית",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… fr.איסטיסית , v. אִסְטָנִית” and the second begins “איסטירטיגוס Midr. Till. to Ps. XVII, …”; the site broke the columns 4 words earlier (after “IV, 7; a. fr.”)."
+ },
+ {
+  "page": 58,
+  "entry": "",
+  "kind": "break",
+  "break_after": "52 איפוסֵיהֶן אין",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 52 איפוסֵיהֶן אין” and the second begins “מתקנין … their feed is not …”; the site broke the columns 2 words earlier (after “to Ps. LXXVIII, 52”)."
+ },
+ {
+  "page": 60,
+  "entry": "",
+  "kind": "break",
+  "break_after": "אִירוֹנִיֹּות &c. Eduy.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… אִירוֹנִיֹּות &c. Eduy.” and the second begins “II, 5 לפסין אי׳ ed. (Ms. …”; the site broke the columns 2 words later (after “&c. Eduy. II, 5”)."
+ },
+ {
+  "page": 79,
+  "entry": "",
+  "kind": "break",
+  "break_after": "of מריא to",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… of מריא to” and the second begins “fatten. Sabb. XXIV, 3 (155b) Bab. …”; the site broke the columns 2 words earlier (after “13 הווה).—*[2) (denom. of”)."
+ },
+ {
+  "page": 91,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Filipp. p. 9.]",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Filipp. p. 9.]” and the second begins “אַסְטְרֹולֹוגְיָא, (אִיסְ', אסת', ), , (אִיצְ') …”; the site broke the columns 6 words later (after “אסת', ), , (אִיצְ')”)."
+ },
+ {
+  "page": 93,
+  "entry": "",
+  "kind": "break",
+  "break_after": "47b; a. fr.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 47b; a. fr.” and the second begins “אֲסִינֵי , v. אֲסָנָאאַסִּינְתָּא , v. …”; the site broke the columns 1 word earlier (after “concluded. Ib. 47b; a.”)."
+ },
+ {
+  "page": 95,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. אֲסַף",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. אֲסַף” and the second begins “אספוסין , v. אַפּוֹפְסִיןאֶסְפּוֹר m. (= …”; the site broke the columns 4 words earlier (after “, v. אִסְפַּמְיָא 2).”)."
+ },
+ {
+  "page": 96,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. אִסְפָּתִי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. אִסְפָּתִי” and the second begins “אִסְפִּקְלָטוֹר, אִסְפַּקְלָטוֹרָא , v. אִיסְ׳אִסְפַּקְלַרְיָא, אִיסְ' …”; the site broke the columns 7 words earlier (after “דאפרסמא). B. Bath. 28b”)."
+ },
+ {
+  "page": 100,
+  "entry": "",
+  "kind": "break",
+  "break_after": "expl. ib. המכסים",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… expl. ib. המכסים” and the second begins “את אמות המים וכ׳ (not והמכניסים) …”; the site broke the columns 1 word earlier (after “ch. 23, expl. ib.”)."
+ },
+ {
+  "page": 121,
+  "entry": "",
+  "kind": "break",
+  "break_after": "them.אַרְכּוּבָא  = אַרְכּוּבְתָּא.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… them.אַרְכּוּבָא  = אַרְכּוּבְתָּא.” and the second begins “אַרְכּוּבָה f. (רכב) 1) the leg …”; the site broke the columns 3 words earlier (after “but finally punished them.”)."
+ },
+ {
+  "page": 150,
+  "entry": "",
+  "kind": "break",
+  "break_after": "בהר; v. ברר)",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… בהר; v. ברר)” and the second begins “a sort of soap, lixivium, Nidd. …”; the site broke the columns 1 word earlier (after “of בהרית, בהר; v.”)."
+ },
+ {
+  "page": 153,
+  "entry": "",
+  "kind": "break",
+  "break_after": "burial is required",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… burial is required” and the second begins “in order to prevent disgrace, he …”; the site broke the columns 32 words earlier (after “ב׳ is burial required”)."
+ },
+ {
+  "page": 155,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Snh. 107a בְּחָנֵנִי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Snh. 107a בְּחָנֵנִי” and the second begins “try me.—Part. pass. בָּחוּן. Pes. 87a …”; the site broke the columns 1 word earlier (after “find out. Snh. 107a”)."
+ },
+ {
+  "page": 161,
+  "entry": "",
+  "kind": "break",
+  "break_after": "IX, 2 כובאי).",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… IX, 2 כובאי).” and the second begins “בִּיכּוּרָה , v. בִּכּוּרָה*בּיל h., Hif. …”; the site broke the columns 1 word earlier (after “to Toh. IX, 2”)."
+ },
+ {
+  "page": 173,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. כַּלְקִיס",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. כַּלְקִיס” and the second begins “בְּלִיתָא f. (בלי) rag, shred. Sabb. …”; the site broke the columns 4 words earlier (after “בליצטרא , v. בַּלִּיסְטְרָא”)."
+ },
+ {
+  "page": 174,
+  "entry": "",
+  "kind": "break",
+  "break_after": "(interpr. צרי) בלסם",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… (interpr. צרי) בלסם” and the second begins “קטף the gum of the balsam …”; the site broke the columns 1 word earlier (after “s. 91 (interpr. צרי)”)."
+ },
+ {
+  "page": 223,
+  "entry": "",
+  "kind": "break",
+  "break_after": "XIV, 14d top.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… XIV, 14d top.” and the second begins “גּוּמְתָא f. ch. = h. גּוּמָא. …”; the site broke the columns 12 words later (after “XXXIX, 24 יעביד ג׳”)."
+ },
+ {
+  "page": 235,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. גַּרְזִימֵי*",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. גַּרְזִימֵי*” and the second begins “גִּידּוּנִין m. pl. (v. גִּידּוּדָא) valleys, …”; the site broke the columns 4 words earlier (after “b. R’ulai. Gitt. 34a”)."
+ },
+ {
+  "page": 237,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. גִּיהוּץ",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. גִּיהוּץ” and the second begins “גִּיחוֹר m. (v. גִּיהַּ a. גִּיהְיָא)red-spotted …”; the site broke the columns 4 words earlier (after “16 (play on גָּחוֹן).”)."
+ },
+ {
+  "page": 242,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. גַּרְדּ׳(",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. גַּרְדּ׳(” and the second begins “גִּידְרוֹנָא) גִּירְדּוֹנָא m. (cmp. גַּיְידּוֹר) a …”; the site broke the columns 5 words earlier (after “S. a. l. note).”)."
+ },
+ {
+  "page": 251,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Ar. (ed. גאם)",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Ar. (ed. גאם)” and the second begins “in the shape of a right …”; the site broke the columns 1 word earlier (after “כמין גם Ar. (ed.”)."
+ },
+ {
+  "page": 254,
+  "entry": "",
+  "kind": "break",
+  "break_after": "with the ground.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… with the ground.” and the second begins “—Ḥull. 92b גּוֹמְמוֹ עם וכ׳ he …”; the site broke the columns 1 word later (after “even with the ground.—”)."
+ },
+ {
+  "page": 261,
+  "entry": "",
+  "kind": "break",
+  "break_after": "XLIX, 11 מעגעגין",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… XLIX, 11 מעגעגין” and the second begins “באדמא.]—Trnsf. to enjoy one’s self, play. …”; the site broke the columns 1 word earlier (after “II Gen. XLIX, 11”)."
+ },
+ {
+  "page": 265,
+  "entry": "",
+  "kind": "break",
+  "break_after": "stripped, v. גַּרְדּוּם.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… stripped, v. גַּרְדּוּם.” and the second begins “—2) (denom. of גֶּרֶד 2) to …”; the site broke the columns 1 word later (after “גָּרוּד stripped, v. גַּרְדּוּם.—2)”)."
+ },
+ {
+  "page": 270,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. גִּרְמָנִי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. גִּרְמָנִי” and the second begins “גַּרְמִיתָא f. (dimin. of גַּרְמָא) a …”; the site broke the columns 4 words earlier (after “e.—Snh. 7a. Erub. 14b”)."
+ },
+ {
+  "page": 271,
+  "entry": "",
+  "kind": "break",
+  "break_after": "l. c. אם",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… l. c. אם” and the second begins “בקשה לִיגָּרֵעַ if the desires a …”; the site broke the columns 1 word earlier (after “Y. Kidd. l. c.”)."
+ },
+ {
+  "page": 278,
+  "entry": "",
+  "kind": "break",
+  "break_after": "10, v. כְּלוּם.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 10, v. כְּלוּם.” and the second begins “Pa. דַּבַּר 1) to lead, drive. …”; the site broke the columns 1 word earlier (after “to IX, 10, v.”)."
+ },
+ {
+  "page": 317,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Yeb. 88b מנין",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Yeb. 88b מנין” and the second begins “שאם וכ׳ (read אם). Ib. צריכא …”; the site broke the columns 1 word earlier (after “force him’; Yeb. 88b”)."
+ },
+ {
+  "page": 320,
+  "entry": "",
+  "kind": "break",
+  "break_after": "of קפנדריא) אַדָּ׳",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… of קפנדריא) אַדָּ׳” and the second begins “וכ׳ אדמקיפנא in place of going …”; the site broke the columns 1 word later (after “of קפנדריא) אַדָּ׳ וכ׳”)."
+ },
+ {
+  "page": 322,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. דָּרַס",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. דָּרַס” and the second begins “דְּרוּסוֹת f. pl. (דרס) pomace of …”; the site broke the columns 4 words earlier (after “ed., p. 177, sq.]”)."
+ },
+ {
+  "page": 324,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. הדרניקוס",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. הדרניקוס” and the second begins “דָּרַס 1) to tread, stamp. B. …”; the site broke the columns 4 words earlier (after “Ḥull. 67b. v. זָרָנָא.”)."
+ },
+ {
+  "page": 338,
+  "entry": "",
+  "kind": "break",
+  "break_after": "גלי he emigrated,",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… גלי he emigrated,” and the second begins “v. גְּלֵי. Ib. לא הֲוִינָא גלי …”; the site broke the columns 1 word later (after “גלי he emigrated, v.”)."
+ },
+ {
+  "page": 339,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. חוֹמֶר",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. חוֹמֶר” and the second begins “הוֹן I he, v. הָן. [בְּהוֹן, …”; the site broke the columns 4 words earlier (after “הֶגְמוֹנְיָא.]הומניות , v. חֲמוֹנוּת”)."
+ },
+ {
+  "page": 343,
+  "entry": "",
+  "kind": "break",
+  "break_after": "הוּאהֵיא  = הי.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… הוּאהֵיא  = הי.” and the second begins “הֵיאַךְ h. (interrog. = הֵיךְ) how! …”; the site broke the columns 3 words earlier (after “וַי.הִיא she, v. הוּא”)."
+ },
+ {
+  "page": 393,
+  "entry": "",
+  "kind": "break",
+  "break_after": "inquiry, דבר של",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… inquiry, דבר של” and the second begins “ז׳ something subject to investigation, charge, …”; the site broke the columns 2 words earlier (after “m. (ζήτημα) judicial inquiry,”)."
+ },
+ {
+  "page": 402,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. זִימּוּן",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. זִימּוּן” and the second begins “זְמוֹרָא c. (v. P. Sm. 1138; …”; the site broke the columns 4 words earlier (after “זְמָמֵיהֶן, v. זְמָם II.”)."
+ },
+ {
+  "page": 410,
+  "entry": "",
+  "kind": "break",
+  "break_after": "fr. V. זִיקָה.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… fr. V. זִיקָה.” and the second begins “Nif. נִזְקַק (cmp. זָוַג Nithpa.) 1) …”; the site broke the columns 1 word earlier (after “him; a. fr. V.”)."
+ },
+ {
+  "page": 418,
+  "entry": "",
+  "kind": "break",
+  "break_after": "כמה ח׳ מצוה",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… כמה ח׳ מצוה” and the second begins “בשעתה how much more preferable is …”; the site broke the columns 3 words earlier (after “is appreciated. Pes. 68b”)."
+ },
+ {
+  "page": 438,
+  "entry": "",
+  "kind": "break",
+  "break_after": "XXIV, 16) ואימא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… XXIV, 16) ואימא” and the second begins “דח׳ שם וכ׳ may it not …”; the site broke the columns 1 word earlier (after “נקב, Lev. XXIV, 16)”)."
+ },
+ {
+  "page": 449,
+  "entry": "",
+  "kind": "break",
+  "break_after": "חִיטָּא.חַטַּיָּא, חַטַּיָּיא , v. חַטָּאָה",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… חִיטָּא.חַטַּיָּא, חַטַּיָּיא , v. חַטָּאָה” and the second begins “חָטְיָא, חַ' m. (חֲטִי II) sinner. …”; the site broke the columns 5 words earlier (after “חֶטֹּוי).חִטַּיָּא wheat, v. חִיטָּא.”)."
+ },
+ {
+  "page": 490,
+  "entry": "",
+  "kind": "break",
+  "break_after": "חֲפָא , v. חפי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… חֲפָא , v. חפי” and the second begins “חפאטיקון , v. הִיפָּטִיקוֹסחֳפָאִים, חֳפָאִין m. …”; the site broke the columns 5 words earlier (after “4 הַפִּין = החפין.”)."
+ },
+ {
+  "page": 509,
+  "entry": "",
+  "kind": "break",
+  "break_after": "me without cause; a. fr.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… me without cause; a. fr.” and the second begins “—Part. pass. חָשִׁיד. Ber. 5b ומי …”; the site broke the columns 1 word earlier (after “me without cause; a.”)."
+ },
+ {
+  "page": 567,
+  "entry": "",
+  "kind": "break",
+  "break_after": "III, 5 שוה",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… III, 5 שוה” and the second begins “הי׳ לר\"ה the proclamation of the …”; the site broke the columns 1 word earlier (after “R. Hash. III, 5”)."
+ },
+ {
+  "page": 574,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Ib. אל יאמר",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Ib. אל יאמר” and the second begins “אדם … להיות י׳ one must …”; the site broke the columns 2 words earlier (after “of a community. Ib.”)."
+ },
+ {
+  "page": 591,
+  "entry": "",
+  "kind": "break",
+  "break_after": "יָקֶה  (b. h.)",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… יָקֶה  (b. h.)” and the second begins “pr. n. m., בן י׳ Ben …”; the site broke the columns 8 words earlier (after “grave is on fire.”)."
+ },
+ {
+  "page": 593,
+  "entry": "",
+  "kind": "break",
+  "break_after": "20) אלו …",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 20) אלו …” and the second begins “שהן יְרֵאִין להוציא וכ׳ who are …”; the site broke the columns 2 words earlier (after “to Mal. III, 20)”)."
+ },
+ {
+  "page": 606,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. באמי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. באמי” and the second begins “כַּאַן (v. כָּא) here; now. Y. …”; the site broke the columns 4 words earlier (after “read: כִּילִיאַרְכִין, v. כלירכין”)."
+ },
+ {
+  "page": 607,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. כבי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. כבי” and the second begins “כָּבוֹד m. (b. h.; כָּבַד) 1) …”; the site broke the columns 4 words earlier (after “וחמי בכַבְדֵּיה, v. אִימַּר”)."
+ },
+ {
+  "page": 612,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Hos. IV, 2.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Hos. IV, 2.” and the second begins “Pa. כַּדֵּיב 1) to lie, give …”; the site broke the columns 2 words earlier (after “be false. Targ. Hos.”)."
+ },
+ {
+  "page": 614,
+  "entry": "",
+  "kind": "break",
+  "break_after": "pl. of כּוּדנָא.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… pl. of כּוּדנָא.” and the second begins “כָּדַר (v. כַּד II) to be …”; the site broke the columns 5 words earlier (after “כִּדְנָא thus, v. דֵּן.”)."
+ },
+ {
+  "page": 635,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Bath. 25b אחורי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Bath. 25b אחורי” and the second begins “כ׳ back of (above) the sky. …”; the site broke the columns 1 word earlier (after “&c. B. Bath. 25b”)."
+ },
+ {
+  "page": 658,
+  "entry": "",
+  "kind": "break",
+  "break_after": "בכם ובעונותיכם …",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… בכם ובעונותיכם …” and the second begins “כְּפוּ מיטותיכן וכ׳ I (the Lord) …”; the site broke the columns 3 words later (after “… כְּפוּ מיטותיכן וכ׳”)."
+ },
+ {
+  "page": 697,
+  "entry": "",
+  "kind": "break",
+  "break_after": "&c. Ib. ראו",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… &c. Ib. ראו” and the second begins “כמה הִלְוֵיתִי ואיני … ומה הִלְוְותָה …”; the site broke the columns 2 words later (after “Ib. ראו כמה הִלְוֵיתִי”)."
+ },
+ {
+  "page": 699,
+  "entry": "",
+  "kind": "break",
+  "break_after": "היו קורין לראובן",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… היו קורין לראובן” and the second begins “רופוס וליהודה … ל׳ they did …”; the site broke the columns 4 words earlier (after “to IV, 12 [read:]”)."
+ },
+ {
+  "page": 719,
+  "entry": "",
+  "kind": "break",
+  "break_after": "s. 13 יהבון",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… s. 13 יהבון” and the second begins “ליה מלא ל׳ וכ׳ (Ar. מלא …”; the site broke the columns 1 word earlier (after “Gen. R. s. 13”)."
+ },
+ {
+  "page": 730,
+  "entry": "",
+  "kind": "break",
+  "break_after": "s. 38. Lev.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… s. 38. Lev.” and the second begins “R. s. 24.—Pl. מַגְרוֹפְיָתָא. Targ. Num. …”; the site broke the columns 1 word later (after “s. 38. Lev. R.”)."
+ },
+ {
+  "page": 738,
+  "entry": "",
+  "kind": "break",
+  "break_after": "מתמוגג אני h.).",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… מתמוגג אני h.).” and the second begins “מוֹג m. (מָגַג) a melting substance, …”; the site broke the columns 2 words earlier (after “quotes a Var. מתמוגג”)."
+ },
+ {
+  "page": 776,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. sub. מִנְהָ׳.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… v. sub. מִנְהָ׳.” and the second begins “מִינּוּי, מִנּוּי m. (מָנָה) appointment to …”; the site broke the columns 1 word later (after “מִינְהָגָא v. sub. מִנְהָ׳.מִינּוּי,”)."
+ },
+ {
+  "page": 794,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. מוֹמֵי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. מוֹמֵי” and the second begins “מָמוֹן m. (contr. of מהמון, v. …”; the site broke the columns 4 words earlier (after “151a (ed. Pes. מַמּוּלְיָאתָה).”)."
+ },
+ {
+  "page": 806,
+  "entry": "",
+  "kind": "break",
+  "break_after": "water, v. מְאִיס.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… water, v. מְאִיס.” and the second begins “Af. אַמְסֵי same. Targ. O. Num. …”; the site broke the columns 1 word earlier (after “dissolved in water, v.”)."
+ },
+ {
+  "page": 818,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Ohol. XVII, 2;",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Ohol. XVII, 2;” and the second begins “a. e.—2) (perh. מַעֲנֶה m.) handle …”; the site broke the columns 1 word earlier (after “(V), 6. Ohol. XVII,”)."
+ },
+ {
+  "page": 819,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. מְעַרְקָא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. מְעַרְקָא” and the second begins “מַעֲרִיב m. (עָרַב II), (ה)מַ׳ עֲרָבִים …”; the site broke the columns 5 words earlier (after “grinding (crushing the seeds).”)."
+ },
+ {
+  "page": 820,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. פָּלַשׁ",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. פָּלַשׁ” and the second begins “מַפּוֹלֶת, מַפֹּלֶת f. (נָפַל) 1) dropping, …”; the site broke the columns 4 words earlier (after “merit).מְפוּלָּם , v. פָּלַם”)."
+ },
+ {
+  "page": 823,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. מְצוּבָה",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. מְצוּבָה” and the second begins “מְצוֹגָא m. (יְצַג) stalk. — Pl. …”; the site broke the columns 4 words earlier (after “covering of the Succah.”)."
+ },
+ {
+  "page": 829,
+  "entry": "",
+  "kind": "break",
+  "break_after": "fr.—Pl. מִקְדָּשִׁים. Meg.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… fr.—Pl. מִקְדָּשִׁים. Meg.” and the second begins “16b שני מ׳ two sanctuaries (that …”; the site broke the columns 1 word later (after “fr.—Pl. מִקְדָּשִׁים. Meg. 16b”)."
+ },
+ {
+  "page": 849,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. מָשְׁמָהִיג",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. מָשְׁמָהִיג” and the second begins “מַשּׂוֹא , מַשּׂוֹי, (מַסּוֹי) מַשְּׁאוֹי m. …”; the site broke the columns 9 words later (after “m. (b. h. מַשּׂא;”)."
+ },
+ {
+  "page": 866,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. בן: …",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… v. בן: …” and the second begins “פאפאי וחד נ׳) Goliath was the …”; the site broke the columns 2 words earlier (after “ed. Koh. s. v.”)."
+ },
+ {
+  "page": 869,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. נְמִירֵי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. נְמִירֵי” and the second begins “נָבֵל (b. h.; cmp. בָּלָה) to …”; the site broke the columns 4 words earlier (after “, v. sub. נְבֵל׳.”)."
+ },
+ {
+  "page": 891,
+  "entry": "",
+  "kind": "break",
+  "break_after": "II, 3 הריני",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… II, 3 הריני” and the second begins “נ׳ ממנו I will abstain from …”; the site broke the columns 1 word earlier (after “abstinent. Naz. II, 3”)."
+ },
+ {
+  "page": 914,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. נָאנָאי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. נָאנָאי” and the second begins “נַנַּאי, נַנַּי pr. n. m. (prob. …”; the site broke the columns 4 words earlier (after “pl. of נָא I.”)."
+ },
+ {
+  "page": 922,
+  "entry": "",
+  "kind": "break",
+  "break_after": "(XVI), 2 נופח",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… (XVI), 2 נופח” and the second begins “בחוטמו וכ׳ you blow into its …”; the site broke the columns 1 word earlier (after “Sabb. XV (XVI), 2”)."
+ },
+ {
+  "page": 935,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Mets. 103b בעינא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Mets. 103b בעינא” and the second begins “דתִינְּקַּר ארעאי (Ar. דתִינְּקִיד) I desire …”; the site broke the columns 1 word earlier (after “text למשעי).—B. Mets. 103b”)."
+ },
+ {
+  "page": 942,
+  "entry": "",
+  "kind": "break",
+  "break_after": "a. fr.—Bets. 35b",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… a. fr.—Bets. 35b” and the second begins “מַשִּׁירִין, מַנְשִׁירִין (prob. to be read: …”; the site broke the columns 1 word later (after “a. fr.—Bets. 35b מַשִּׁירִין,”)."
+ },
+ {
+  "page": 949,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. sub. סִיבּ׳.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… v. sub. סִיבּ׳.” and the second begins “סָבוֹרָא m. (סְבַר I) 1) a …”; the site broke the columns 6 words earlier (after “ed. Zyt., v. סִבְנִי”)."
+ },
+ {
+  "page": 975,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. סְיָיג, סְיָיגָא.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… v. סְיָיג, סְיָיגָא.” and the second begins “סִיגָא m. (v. סִיג II, cmp. …”; the site broke the columns 6 words earlier (after “v. סוּג II .].”)."
+ },
+ {
+  "page": 980,
+  "entry": "",
+  "kind": "break",
+  "break_after": "סולתי), v. סְלַת.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… סולתי), v. סְלַת.” and the second begins “Ib. 20b—2) (cmp. בְּקַעַת, גַּוָּוזָא I) …”; the site broke the columns 1 word later (after “סולתי), v. סְלַת. Ib.”)."
+ },
+ {
+  "page": 981,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. סוּם I",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… v. סוּם I” and the second begins “סִימִיסִירִיקִין, סִימִיסרִ' m. pl. (semiserica) half-silken …”; the site broke the columns 1 word later (after “11, v. סוּם Iסִימִיסִירִיקִין,”)."
+ },
+ {
+  "page": 990,
+  "entry": "",
+  "kind": "break",
+  "break_after": "acc.); v. סִיגָא.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… acc.); v. סִיגָא.” and the second begins “Pa. סַכֵּךְ 1) to weave. Targ. …”; the site broke the columns 1 word earlier (after “(נניא) (corr. acc.); v.”)."
+ },
+ {
+  "page": 991,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Lev. 440 ומסכים",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Lev. 440 ומסכים” and the second begins “הלכה and harmonizest the tradition (with …”; the site broke the columns 1 word earlier (after “law; Yalk. Lev. 440”)."
+ },
+ {
+  "page": 992,
+  "entry": "",
+  "kind": "break",
+  "break_after": "9b מי קא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 9b מי קא” and the second begins “מדמית איסורא לס׳ how can you …”; the site broke the columns 3 words earlier (after “Levita a. some ed.—Ḥull.”)."
+ },
+ {
+  "page": 993,
+  "entry": "",
+  "kind": "break",
+  "break_after": "30b [read:] מלא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 30b [read:] מלא” and the second begins “בוצר וסלו room for the grape-cutter …”; the site broke the columns 1 word earlier (after “VI, beg., 30b [read:]”)."
+ },
+ {
+  "page": 995,
+  "entry": "",
+  "kind": "break",
+  "break_after": "סוּלָּם, סִילּוֹן II.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… סוּלָּם, סִילּוֹן II.” and the second begins “סֻלָּם, סֻלָּמָא , v. sub סוּלָּ׳.סַלְמַאי, …”; the site broke the columns 1 word earlier (after “pave.—Denom. מְסִלָּה, סוּלָּם, סִילּוֹן”)."
+ },
+ {
+  "page": 1012,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. סִיפְוָונִיּוֹת",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. סִיפְוָונִיּוֹת” and the second begins “ספוסטא , v. סְבַסְטִיסִפּוּק, סִפּוּקָא , …”; the site broke the columns 4 words earlier (after “אִסְטַגְיוֹת.סִפּוֹנְיָא , v. סִימְפּוֹנְיָא”)."
+ },
+ {
+  "page": 1017,
+  "entry": "",
+  "kind": "break",
+  "break_after": "II, 2 אין",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… II, 2 אין” and the second begins “מִסְתַּפְּרִין מהן וכ׳ you must not …”; the site broke the columns 1 word earlier (after “Ab. Zar. II, 2”)."
+ },
+ {
+  "page": 1021,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. סקְרָרִין",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. סקְרָרִין” and the second begins “סַקְרָנִית f. (סָקַר II) looking around, …”; the site broke the columns 5 words earlier (after “v. ספקלי, a. סַכְיָא.]”)."
+ },
+ {
+  "page": 1022,
+  "entry": "",
+  "kind": "break",
+  "break_after": "f., v. סֵירוּב",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… f., v. סֵירוּב” and the second begins “סַרְבָּנוּתָא f. (preced. wds.) 1) rebelliousness, …”; the site broke the columns 4 words earlier (after “pl. סַרְבַּנְיָן, v. סַרְבָּנִיתָא.”)."
+ },
+ {
+  "page": 1026,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Gitt. 56a אייתי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Gitt. 56a אייתי” and the second begins “מידי ס׳ וכ׳ get some putrid …”; the site broke the columns 1 word earlier (after “offensive, putrid. Gitt. 56a”)."
+ },
+ {
+  "page": 1041,
+  "entry": "",
+  "kind": "break",
+  "break_after": "fr.—[Tosef. Neg. VI, 3",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… fr.—[Tosef. Neg. VI, 3” and the second begins “בית הע׳ Var., v. עִיגּוּל.]—Pl. עֲגָלִים. …”; the site broke the columns 10 words later (after “Snh. 63b; a. fr.—[Ab.”)."
+ },
+ {
+  "page": 1053,
+  "entry": "",
+  "kind": "break",
+  "break_after": "19); a. fr.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 19); a. fr.” and the second begins “—Pl. עוֹמְרִים, עוֹמְרִין, עֳמָרִ׳. Ib. VI, …”; the site broke the columns 2 words later (after “19); a. fr.—Pl. עוֹמְרִים,”)."
+ },
+ {
+  "page": 1079,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. עֶכֶן",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. עֶכֶן” and the second begins “עֶכֶס m. (cmp. עכן; b. h. …”; the site broke the columns 4 words earlier (after “Mets. 59b כעכנא זו.”)."
+ },
+ {
+  "page": 1097,
+  "entry": "",
+  "kind": "break",
+  "break_after": "יודן אנא תחדויה;",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… יודן אנא תחדויה;” and the second begins “ed. אבא היחדויזה, הידחויזה, prob. corrupt. …”; the site broke the columns 6 words earlier (after “ר׳ יודן ענתונ׳ (Bab.”)."
+ },
+ {
+  "page": 1102,
+  "entry": "",
+  "kind": "break",
+  "break_after": "18) נאמר ע׳",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 18) נאמר ע׳” and the second begins “בפה ע׳ בגרון וכ׳ the root …”; the site broke the columns 2 words earlier (after “to Gen. XX, 18)”)."
+ },
+ {
+  "page": 1131,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. פַּיָּיס",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. פַּיָּיס” and the second begins “פאמא , Midr. Till. to Ps. …”; the site broke the columns 4 words earlier (after “פאנון, v. פְּנֵי I”)."
+ },
+ {
+  "page": 1147,
+  "entry": "",
+  "kind": "break",
+  "break_after": "מרדנין, corr. acc.).",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… מרדנין, corr. acc.).” and the second begins “פּוּרַן, פּוּרְנָא I m. endowment, v. …”; the site broke the columns 1 word later (after “ed. מרדנין, corr. acc.).פּוּרַן,”)."
+ },
+ {
+  "page": 1172,
+  "entry": "",
+  "kind": "break",
+  "break_after": "116b חלב …",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 116b חלב …” and the second begins “פ׳ בעלמא הוא the milk in …”; the site broke the columns 2 words earlier (after “פֶּרֶשׁ, secretion. Ḥull. 116b”)."
+ },
+ {
+  "page": 1180,
+  "entry": "",
+  "kind": "break",
+  "break_after": "rely (for my",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… rely (for my” and the second begins “supply) on the shop-keeper; Y. Shek. …”; the site broke the columns 22 words earlier (after “v. קַיבָר; a. fr.”)."
+ },
+ {
+  "page": 1195,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. פְּסִילְתָּא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. פְּסִילְתָּא” and the second begins “פְּסִילְיָא, פְּסִילְיָיה m. (v. next art.) …”; the site broke the columns 4 words earlier (after “Ar. (missing in ed.).”)."
+ },
+ {
+  "page": 1205,
+  "entry": "",
+  "kind": "break",
+  "break_after": "f. מְפוּצֶּלֶת; pl.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… f. מְפוּצֶּלֶת; pl.” and the second begins “מְפוּצָּלִים, מְפוּצָּלִין; מְפוּצָּלוֹת. Men. XI, 6 …”; the site broke the columns 1 word later (after “f. מְפוּצֶּלֶת; pl. מְפוּצָּלִים,”)."
+ },
+ {
+  "page": 1241,
+  "entry": "",
+  "kind": "break",
+  "break_after": "I, 39d משם",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… I, 39d משם” and the second begins “פ׳ if he decorated his store …”; the site broke the columns 1 word earlier (after “Ab. Zar. I, 39d”)."
+ },
+ {
+  "page": 1245,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. פְטִישׁ*, *",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… v. פְטִישׁ*, *” and the second begins “פָּשׁוֹשָׁא m. name of a bird.—Pl. …”; the site broke the columns 5 words earlier (after “legally considered a foundling.”)."
+ },
+ {
+  "page": 1247,
+  "entry": "",
+  "kind": "break",
+  "break_after": "לקופה); Yalk. Lev.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… לקופה); Yalk. Lev.” and the second begins “614 לא יִפְשְׁלֶנּוּ בקופה וכ׳; a. …”; the site broke the columns 1 word later (after “לקופה); Yalk. Lev. 614”)."
+ },
+ {
+  "page": 1248,
+  "entry": "",
+  "kind": "break",
+  "break_after": "2 היאך הוא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 2 היאך הוא” and the second begins “עושה חדרים … פ׳ how to …”; the site broke the columns 2 words earlier (after “1; Yalk. ib. 2”)."
+ },
+ {
+  "page": 1261,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Targ. Ps. CIX,",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Targ. Ps. CIX,” and the second begins “10 מה הוות צָדוּתְהוֹן Ms. (ed. …”; the site broke the columns 1 word later (after “Targ. Ps. CIX, 10”)."
+ },
+ {
+  "page": 1266,
+  "entry": "",
+  "kind": "break",
+  "break_after": "of recovery)? נעשה",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… of recovery)? נעשה” and the second begins “כצווח על וכ׳ it is like …”; the site broke the columns 1 word earlier (after “the hope of recovery)?”)."
+ },
+ {
+  "page": 1277,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. צִמְצֵם",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. צִמְצֵם” and the second begins “צִימְצְמָאֵי, צוּמְצְ' m. pl. (v. צִמְצֵם) …”; the site broke the columns 4 words earlier (after “v. צוּמָּח, a. צִימֵּחַ.”)."
+ },
+ {
+  "page": 1284,
+  "entry": "",
+  "kind": "break",
+  "break_after": "113b שכל מתי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 113b שכל מתי” and the second begins “מבול נִצְטַלְּלוּ לשם Ms. R. a. …”; the site broke the columns 1 word later (after “113b שכל מתי מבול”)."
+ },
+ {
+  "page": 1286,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. צוּם",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. צוּם” and the second begins “צָמֵא Iצְמֵאָה f. (b. h.) [shrunk,] …”; the site broke the columns 4 words earlier (after “the shepherds of Tsalta.”)."
+ },
+ {
+  "page": 1309,
+  "entry": "",
+  "kind": "break",
+  "break_after": "פלוני קובל …",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… פלוני קובל …” and the second begins “כך היום קובל וכ׳ (not קיבל) …”; the site broke the columns 1 word later (after “פלוני קובל … כך”)."
+ },
+ {
+  "page": 1322,
+  "entry": "",
+  "kind": "break",
+  "break_after": "קוֹל) to call.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… קוֹל) to call.” and the second begins “Hif. הִקְהִיל to assemble. Ber. 61b; …”; the site broke the columns 7 words earlier (after “אַקְוָוא.קְהִילָּה , v. קְהִלָּה”)."
+ },
+ {
+  "page": 1348,
+  "entry": "",
+  "kind": "break",
+  "break_after": "[R. S. to",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… [R. S. to” and the second begins “Shebi. V, 4 reads: קַיְיטְנָאֵי (denom. …”; the site broke the columns 1 word earlier (after “(expl. קיצונים); [R. S.”)."
+ },
+ {
+  "page": 1364,
+  "entry": "",
+  "kind": "break",
+  "break_after": "83a, v. קוּנְדָּסָא).—Pl.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 83a, v. קוּנְדָּסָא).—Pl.” and the second begins “קִינְרָסַיָּא, קִינְרָסַיָּה. Y. Bets. I, 60d …”; the site broke the columns 1 word later (after “83a, v. קוּנְדָּסָא).—Pl. קִינְרָסַיָּא,”)."
+ },
+ {
+  "page": 1369,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. קָרָא I",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… v. קָרָא I” and the second begins “קִירְיָינָא, קִירְיָנָא, קִירִינֵי pr. n. pl. …”; the site broke the columns 5 words earlier (after “acc.).קִירְיוּתָא , v. קִרְיוּתָא”)."
+ },
+ {
+  "page": 1372,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. קלִּיגְרָפוֹן",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. קלִּיגְרָפוֹן” and the second begins “קְלַד , Af. אַקְלֵיד (denom. of …”; the site broke the columns 4 words earlier (after “Var. גַּלְגָּסִין, v. גַּלִּיגָאס).”)."
+ },
+ {
+  "page": 1381,
+  "entry": "",
+  "kind": "break",
+  "break_after": "(h. text מחספס).",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… (h. text מחספס).” and the second begins “—Bets. 13b מְקַלְּפָא ליה וכ׳ his …”; the site broke the columns 1 word earlier (after “XVI, 14 (h. text”)."
+ },
+ {
+  "page": 1425,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Erub. 65a אי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Erub. 65a אי” and the second begins “קְרַצְתָּן כינה וכ׳ I could not …”; the site broke the columns 1 word earlier (after “pinch, sting. Erub. 65a”)."
+ },
+ {
+  "page": 1442,
+  "entry": "",
+  "kind": "break",
+  "break_after": "רִבְיָהרִבְיָין , v. רִבִּיתָא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… רִבְיָהרִבְיָין , v. רִבִּיתָא” and the second begins “רְבִיכָא , f. ch. = next …”; the site broke the columns 4 words earlier (after “רִבִּיתָארִבְיָיה , v. רִבְיָה”)."
+ },
+ {
+  "page": 1444,
+  "entry": "",
+  "kind": "break",
+  "break_after": "VI, 3; a. e.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… VI, 3; a. e.” and the second begins “רִבַּנְתָּא , v. רִבּוֹן ch.רַבַסָּא, רַבַסִּי, …”; the site broke the columns 2 words earlier (after “Targ. Koh. VI, 3;”)."
+ },
+ {
+  "page": 1449,
+  "entry": "",
+  "kind": "break",
+  "break_after": "על רִיגְלוֹי (pl.).",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… על רִיגְלוֹי (pl.).” and the second begins “Y. Ab. Zar. III, 42d top …”; the site broke the columns 2 words later (after “רִיגְלוֹי (pl.). Y. Ab.”)."
+ },
+ {
+  "page": 1464,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. רָתַח",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. רָתַח” and the second begins “רוּתְחָא m. (רְתַח) foam. Targ. Hos. …”; the site broke the columns 4 words earlier (after “and Ruth; a. e.”)."
+ },
+ {
+  "page": 1483,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. רֵימָנָא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. רֵימָנָא” and the second begins “רָמַס (b. h.) to tread, stamp. …”; the site broke the columns 4 words earlier (after “4, v. רָמָא I.”)."
+ },
+ {
+  "page": 1488,
+  "entry": "",
+  "kind": "break",
+  "break_after": "IX, 53 ורָעַת",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… IX, 53 ורָעַת” and the second begins “(Levita ורְעִיעַת; some ed. ורעתת, corr. …”; the site broke the columns 1 word earlier (after “Targ. Jud. IX, 53”)."
+ },
+ {
+  "page": 1501,
+  "entry": "",
+  "kind": "break",
+  "break_after": "הרבה הוא דלא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… הרבה הוא דלא” and the second begins “לִירְשַׁע הא מעט לירשע man should …”; the site broke the columns 1 word earlier (after “VII, 17) הרבה הוא”)."
+ },
+ {
+  "page": 1504,
+  "entry": "",
+  "kind": "break",
+  "break_after": "נִרְתָּקוֹת (not נרתיקות)",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… נִרְתָּקוֹת (not נרתיקות)” and the second begins “this refers to the two cord-like …”; the site broke the columns 1 word earlier (after “כמין שתים נִרְתָּקוֹת (not”)."
+ },
+ {
+  "page": 1507,
+  "entry": "",
+  "kind": "break",
+  "break_after": "האומר לעבדו צא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… האומר לעבדו צא” and the second begins “והשאל עם וכ׳ if he says …”; the site broke the columns 1 word earlier (after “neighbor). Ib. האומר לעבדו”)."
+ },
+ {
+  "page": 1508,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. שְׁנֵי",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. שְׁנֵי” and the second begins “שַׁאֲנָן m. (b. h.; שאן to …”; the site broke the columns 5 words earlier (after “Kinnereth; a. fr.—V. בֵּישַׁן.”)."
+ },
+ {
+  "page": 1511,
+  "entry": "",
+  "kind": "break",
+  "break_after": "a. v. fr.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… a. v. fr.” and the second begins “שְׁבוּתְאֵל, שְׁבוּתִיאֵל m. sh’buthel, sh’buthiel, a …”; the site broke the columns 6 words later (after “m. sh’buthel, sh’buthiel, a”)."
+ },
+ {
+  "page": 1520,
+  "entry": "",
+  "kind": "break",
+  "break_after": "בכל הש׳ וש׳",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… בכל הש׳ וש׳” and the second begins “שעברה (if one says on a …”; the site broke the columns 1 word earlier (after “זו אסור בכל הש׳”)."
+ },
+ {
+  "page": 1532,
+  "entry": "",
+  "kind": "break",
+  "break_after": "king’s loss &c.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… king’s loss &c.” and the second begins “Hif. הִשְׁוָה 1) to place side …”; the site broke the columns 1 word earlier (after “for the king’s loss”)."
+ },
+ {
+  "page": 1542,
+  "entry": "",
+  "kind": "break",
+  "break_after": "pl. of שׁוּרְתָא.",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… pl. of שׁוּרְתָא.” and the second begins “שוריבנא , v. שׁוּרְבִּינָאשׁוּרַיי m. (שְׁרֵי) …”; the site broke the columns 5 words earlier (after “battle lines; a. fr.”)."
+ },
+ {
+  "page": 1554,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Levita.שָׂטַן , v. סָטַן",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Levita.שָׂטַן , v. סָטַן” and the second begins “Hif. הִשְׂטִין 1) to accuse, v. …”; the site broke the columns 4 words earlier (after “Gen. XXVII, 41 Levita.”)."
+ },
+ {
+  "page": 1589,
+  "entry": "",
+  "kind": "break",
+  "break_after": "67b כל לרבות",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 67b כל לרבות” and the second begins “הש׳ והרומה לש׳ ‘whatsoever’ goes up …”; the site broke the columns 2 words earlier (after “the dead.’ Ib. 67b”)."
+ },
+ {
+  "page": 1614,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Ib. 99b מוטב",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Ib. 99b מוטב” and the second begins “תהא ש׳ לאומה זו וכ׳ better …”; the site broke the columns 1 word earlier (after “on him. Ib. 99b”)."
+ },
+ {
+  "page": 1618,
+  "entry": "",
+  "kind": "break",
+  "break_after": "554 כל זמן",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 554 כל זמן” and the second begins “ששופע לתוכה וכ׳ as long as …”; the site broke the columns 2 words earlier (after “discharge. Yalk. Lev. 554”)."
+ },
+ {
+  "page": 1627,
+  "entry": "",
+  "kind": "break",
+  "break_after": "(midday), opp. בשעת",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… (midday), opp. בשעת” and the second begins “הטל. Tanḥ. Sh’laḥ 12; Num. R. …”; the site broke the columns 1 word earlier (after “dry heat (midday), opp.”)."
+ },
+ {
+  "page": 1639,
+  "entry": "",
+  "kind": "break",
+  "break_after": "14 יין אצל",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… 14 יין אצל” and the second begins “גוי הש׳ וכ׳ ed. Zuck. (oth. …”; the site broke the columns 2 words earlier (after “Zar. VII (VIII), 14”)."
+ },
+ {
+  "page": 1649,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Bath. 22a תו",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Bath. 22a תו” and the second begins “אכלו וכ׳, v. גְּרַם II. Y. …”; the site broke the columns 3 words later (after “תו אכלו וכ׳, v.”)."
+ },
+ {
+  "page": 1661,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Ber. 21b דלא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… Ber. 21b דלא” and the second begins “א׳ בה he had not begun …”; the site broke the columns 1 word earlier (after “evil prophecies. Ber. 21b”)."
+ },
+ {
+  "page": 1698,
+  "entry": "",
+  "kind": "break",
+  "break_after": "fr.תִּרְיָאקָה , v. תִּירְיָיקָא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… fr.תִּרְיָאקָה , v. תִּירְיָיקָא” and the second begins “תרי\"ג , numerical value, six hundred …”; the site broke the columns 4 words earlier (after “v. יַרְחָא; a. fr.”)."
+ },
+ {
+  "page": 1704,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. תַּשְׁלוּמָא",
+  "why": "Column break only, no change to the text. In the 1903 printing (checked against the scan) the first column ends “… , v. תַּשְׁלוּמָא” and the second begins “תַּשְׁמִישׁ m. (שָׁמַשׁ) 1) handling, use; …”; the site broke the columns 4 words earlier (after “, v. sub תּוּשְׁל׳.”)."
  }
 ]

@@ -123,6 +123,8 @@ def fix_special(pid, h):
         h0 = h
         if fx.get("kind") == "space":
             h = insert_space(h, fx["before"], fx["after"], pid)
+        elif fx.get("kind") == "break":       # only where the column break falls (below): no change to the text
+            continue
         else:
             assert h.count(fx["old"]) == 1, (pid, fx["old"])
             h = h.replace(fx["old"], fx["new"])
@@ -192,7 +194,10 @@ for p in pages:
         b_ = _pt(p["html"])
         for fx in TEXT_FIXES.get(p["id"], []):    # a correction that says where the column break falls
             if fx.get("break_after") and fx["break_after"] in b_:
+                assert fx.get("kind") != "break" or b_.count(fx["break_after"]) == 1, (p["id"], fx["break_after"])
                 BREAKS[p["id"]] = b_.index(fx["break_after"]) + len(fx["break_after"])
+            elif fx.get("kind") == "break":
+                raise AssertionError("column break record does not match the page: %s %r" % (p["id"], fx["break_after"]))
     p["html"] += AFTER.get(p["id"], "")
     newpages.append(p)
     if p["id"] == "683":
