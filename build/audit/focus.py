@@ -682,7 +682,7 @@ def check_headwords(pid, pc, F, ink, img_dir):
                     r["flags"].append([3, "letters: the image seems to fit the OCR's reading, but the letters differ by "
                                           "a confusion this OCR makes hundreds of times on this book: %s" % x["note"]])
                 elif v == "likely_error":
-                    r["flags"].append([1, "letters: the image fits the OCR's reading clearly better than Sefaria's: %s"
+                    r["flags"].append([2, "letters: the image fits the OCR's reading clearly better than Sefaria's: %s"
                                        % x["note"]])
                 else:
                     r["flags"].append([3, "letters: the image can't tell (%s): %s" % (v or "not re-read", x["note"])])
