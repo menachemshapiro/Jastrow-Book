@@ -12991,8 +12991,8 @@
   "entry": "A00325",
   "kind": "order",
   "old": "—Pl. אַגָּסִים, עוּגָּסִים) אַגָּסִין). ",
-  "new": "—Pl. <span dir=\"ltr\"><span dir=\"rtl\">אַגָּסִים</span>, (<span dir=\"rtl\">עוּגָּסִים</span>) <span dir=\"rtl\">אַגָּסִין</span></span>. ",
-  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “Pl. אַגָּסִים, (עוּגָּסִים) אַגָּסִין.”: three forms, the second in brackets; the digital text had the brackets out of place."
+  "new": "—Pl. <span dir=\"ltr\"><span dir=\"rtl\">אַגָּסִים</span>, <span dir=\"rtl\">אַגָּסִין</span> (<span dir=\"rtl\">עוּגָּסִים</span>)</span>. ",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov; order corrected by the user, 5 Nov, p. 13 right column): “Pl. אַגָּסִים, אַגָּסִין (עוּגָּסִים).”: three forms, the bracketed variant to the right of אַגָּסִין; the digital text had the brackets out of place and the variant before its form."
  },
  {
   "page": 16,
