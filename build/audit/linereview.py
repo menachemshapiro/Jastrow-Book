@@ -444,6 +444,34 @@ def in_box(w, b, pad=0):
 
 
 # ---------- one page ----------
+def mark_readers(rec):
+    """each reader's words that differ from rec["site"] (marks), the site's words read otherwise and by how many
+    readers (sitew), and the words two readers or more see that the site lacks (extra). kraken_prep.py calls this
+    again with the training text and Gemini added as a reader."""
+    site = rec["site"]
+    sw = words(site)
+    rec["marks"] = {}
+    for rd, txt in rec["readers"].items():
+        ow = words(txt)
+        ba, bb = diff_marks(sw, ow, latin_only=(rd == "kraken"))
+        rec["marks"][rd] = {"site": sorted(ba), "reader": sorted(bb),
+                            "rspans": [[a, b] for k_, (a, b, _) in enumerate(word_spans(txt)) if k_ in bb]}
+    # for the page: each of the site's words that a reader read otherwise, with how many readers did
+    cnt = {}
+    for m in rec["marks"].values():
+        for i in m["site"]: cnt[i] = cnt.get(i, 0) + 1
+    rec["sitew"] = [[a, b, cnt[k_]] for k_, (a, b, _) in enumerate(word_spans(site)) if k_ in cnt]
+    # words two readers or more see that our text lacks (folio numbers count; one-letter scraps do not)
+    ex = {}
+    for rd, m in rec["marks"].items():
+        ow = words(rec["readers"][rd])
+        for k in {norm_word(ow[j]) for j in m["reader"]}:
+            if len(k) >= 2 and not (rd == "kraken" and HEB_LETTER.search(k)): ex[k] = ex.get(k, 0) + 1
+    sk = {norm_word(w) for w in sw}
+    rec["extra"] = sorted(k for k, n in ex.items() if n >= 2 and k not in sk)
+    return rec
+
+
 def page_lines(pid, book, V, CO, out, img_dir, xml_name):
     import focus as FO
     from PIL import Image
@@ -508,25 +536,7 @@ def page_lines(pid, book, V, CO, out, img_dir, xml_name):
             first = any(any(near(sw[0], w) for w in ow[:2]) for ow in ends)
             last = any(any(near(sw[-1], w) for w in ow[-2:]) for ow in ends)
             if first and last: flags.discard("estimated"); rec["flags"] = sorted(flags)
-        rec["marks"] = {}
-        for rd, txt in rec["readers"].items():
-            ow = words(txt)
-            ba, bb = diff_marks(sw, ow, latin_only=(rd == "kraken"))
-            rec["marks"][rd] = {"site": sorted(ba), "reader": sorted(bb),
-                                "rspans": [[a, b] for k_, (a, b, _) in enumerate(word_spans(txt)) if k_ in bb]}
-        # for the page: each of the site's words that a reader read otherwise, with how many readers did
-        cnt = {}
-        for m in rec["marks"].values():
-            for i in m["site"]: cnt[i] = cnt.get(i, 0) + 1
-        rec["sitew"] = [[a, b, cnt[k_]] for k_, (a, b, _) in enumerate(word_spans(site)) if k_ in cnt]
-        # words two readers or more see that our text lacks (folio numbers count; one-letter scraps do not)
-        ex = {}
-        for rd, m in rec["marks"].items():
-            ow = words(rec["readers"][rd])
-            for k in {norm_word(ow[j]) for j in m["reader"]}:
-                if len(k) >= 2 and not (rd == "kraken" and HEB_LETTER.search(k)): ex[k] = ex.get(k, 0) + 1
-        sk = {norm_word(w) for w in sw}
-        rec["extra"] = sorted(k for k, n in ex.items() if n >= 2 and k not in sk)
+        mark_readers(rec)
         recs.append(rec)
     recs.sort(key=lambda r: r["rank"])
     print("  p. %-5s %3d lines; kraken lines with no text %d; Tesseract lines kraken missed %d; estimated %d" % (
@@ -633,7 +643,7 @@ function noMarks(s){return s.replace(/[\u200E\u200F\u2066-\u2069]/g,"")}
 function siteHTML(r){return heb(r.site, r.sitew.map(([a,b,n])=>[a,b,n>=2?"d2":"d1"]))}
 function showPrev(el){const p=el.querySelector(".prev"); p.innerHTML='<b>shown as</b> '+heb(noMarks(el.querySelector(".edit").value),[])}
 function readerHTML(r,rd){
-  const t=r.readers[rd]; if(!t.trim()) return "";
+  const t=r.readers[rd]; if(!t||!t.trim()) return "";
   return '<div class="rd"><b>'+rd+'</b><span>'+marked(t, r.marks[rd].rspans.map(([a,b])=>[a,b,"x"]))+'</span></div>';
 }
 function disagree(r){return r.sitew.length>0||r.extra.length>0}
@@ -656,7 +666,7 @@ function card(r){
    <input class="edit" dir="ltr" style="display:none" value="${esc(lrmText(shown))}"><div class="prev" style="display:none"></div>
    ${flags?"<div>"+flags+"</div>":""}${changed(r)?'<span class="flag chg">our text for this line changed since you marked it: check again</span>':""}
    ${r.extra.length?'<div class="miss">two readers or more also see, not in our text: <b>'+r.extra.map(w=>wspan(w,"")).join(", ")+'</b></div>':""}${agree}
-   ${["tesseract","pdf","kraken"].map(rd=>readerHTML(r,rd)).join("")}
+   ${["tesseract","pdf","kraken","gemini"].map(rd=>readerHTML(r,rd)).join("")}
    <div class="btns"><button class="b-ok ${st=="ok"?"on":""}" data-s="ok">Right</button>
    <button class="b-fixed ${st=="fixed"?"on":""}" data-s="edit">Edit</button>
    <button class="b-bad ${st=="bad"?"on":""}" data-s="bad">Bad line</button>
