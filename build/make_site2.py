@@ -180,7 +180,22 @@ def fix_special(pid, h):
             h = rx.sub(rp, h, count=1)
             if h == h0: break
             _step(h0, h)
+    # "ch. 1) same. ch. 1) same.": the 2018 XML has a stray first sense "1) same." with " ch." in its notes before
+    # the real "1) same. Targ. ..." (85 entries; the user's marks of pp. 1601-1700, U01543 &c., 5 Nov). Drop it.
+    for rx, rp in ((SAME_DUP, ""), (SAME_DUP_IN, "</span></span>")):
+        while True:
+            h0 = h
+            h = rx.sub(rp, h, count=1)
+            if h == h0: break
+            SAME_DUP_N.append(pid)
+            _step(h0, h)
     return h
+
+
+SAME_DUP_AHEAD = r'(?=<span class="s"><span class="n">1\)</span><span class="d"> same)'
+SAME_DUP = re.compile(r'<span class="s"><span class="d">1\) same\.</span><span class="nt"> ch\. </span></span>' + SAME_DUP_AHEAD)
+SAME_DUP_IN = re.compile(r'1\) same\.</span><span class="nt"> ch\. </span></span>' + SAME_DUP_AHEAD)   # M02826
+SAME_DUP_N = []
 
 
 HN_COMMA = re.compile(r'(<span class="hw" lang="he" dir="rtl">[^<]*?),\s*</span>\s*(<span class="hn">[IVX]+</span>)\s*(?=<span class="hw")')
@@ -462,5 +477,6 @@ for p_i, p in enumerate(pages):
 json.dump({"chunk": CHUNK, "pages": meta}, open(os.path.join(OUT, "data", "pages.json"), "w"),
           ensure_ascii=False, separators=(",", ":"))
 json.dump(hw, open(os.path.join(OUT, "data", "hw.json"), "w"), ensure_ascii=False, separators=(",", ":"))
+if SAME_DUP_N: print(len(SAME_DUP_N), "doubled \"1) same. ch.\" removed")
 if SPACE_HAD: print(len(SPACE_HAD), "space records already had their space")
 print(len(pages), "pages,", len(hw), "headword rows,", (len(pages) + CHUNK - 1) // CHUNK, "chunks")
