@@ -74,7 +74,10 @@ def load(review, export):
     gold = {}
     for m in json.load(open(export))["lines"]:
         if m["status"] in ("ok", "fixed") and (m["page"], m["rank"]) in L:
-            gold[(m["page"], m["rank"])] = m["text"]
+            t = m["text"]
+            # the final stops added to the site on 5 Nov (fixes-nov 44b9c51): a line marked Right before then lacks it
+            if L[(m["page"], m["rank"])]["site"] == t.rstrip() + ".": t = t.rstrip() + "."
+            gold[(m["page"], m["rank"])] = t
     return L, gold
 
 
@@ -115,16 +118,24 @@ def run(a, L, gold):
         if v == "examples":
             for ek in EXAMPLES:
                 shots += [img(crop(ek[0], L[ek]["box"], 1)), "Transcription: " + gold[ek]]
-        for n, k in enumerate(todo):
+        import threading
+        from concurrent.futures import ThreadPoolExecutor
+        lock, done = threading.Lock(), [0]
+
+        def one(k):
             l = L[k]
             pic = img(crop(k[0], l["box"], 2 if v == "big" else 1))
             if v == "checker": contents = [pic, PROMPT + CHECK.format(site=l["site"])]
             elif v == "examples": contents = [PROMPT + "\n\nExamples:"] + shots + ["Now this line:", pic]
             else: contents = [pic, PROMPT]
-            cache["%s:%d" % k] = ask(client, a.model, contents)
-            json.dump(cache, open(cf, "w"), ensure_ascii=False, indent=0)
-            if n % 10 == 9 or n == len(todo) - 1: print("  %d/%d" % (n + 1, len(todo)), flush=True)
+            ans = ask(client, a.model, contents)
+            with lock:
+                cache["%s:%d" % k] = ans; done[0] += 1
+                json.dump(cache, open(cf, "w"), ensure_ascii=False, indent=0)
+                if done[0] % 20 == 0 or done[0] == len(todo): print("  %d/%d" % (done[0], len(todo)), flush=True)
             time.sleep(a.sleep)
+        with ThreadPoolExecutor(a.threads) as ex:
+            list(ex.map(one, todo))
 
 
 def score(a, L, gold):
@@ -166,6 +177,7 @@ def main():
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--model", default="gemini-3.5-flash")
     ap.add_argument("--sleep", type=float, default=7.0, help="seconds between requests (free tier)")
+    ap.add_argument("--threads", type=int, default=1, help="requests at once (paid tier: 4-8)")
     ap.add_argument("--review", default=os.path.join(paths.WORK, "audit", "lines", "pilot", "lines.json"))
     ap.add_argument("--export", default=os.path.expanduser("~/Downloads/jastrow-lines-pilot-2026-11-052024.json"))
     ap.add_argument("--cache", default=paths.report("gemini_lines"))
