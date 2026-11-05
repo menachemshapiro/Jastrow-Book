@@ -12619,5 +12619,323 @@
   "kind": "break",
   "break_after": "(or young) cabbage.",
   "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “תְּרוֹג, תְּרוֹגָא m. = h. אֶתְרוֹג.—Pl.” (V00956)."
+ },
+ {
+  "page": 391,
+  "entry": "G00294",
+  "kind": "order",
+  "old": " <span class=\"pos\"> m.</span><span class=\"lk\"> Ar.)</span>",
+  "new": " <span class=\"pos\"> m.</span>",
+  "why": "The user, on the scan (review_nov5.html, 5 Nov): “זִיהֲרָא II (זַהֲרָא Ar.) m.”: “Ar.)” belongs to the head group (headwords_scan.json), and “m.” follows it."
+ },
+ {
+  "page": 436,
+  "entry": "H00391",
+  "kind": "order",
+  "old": " <span class=\"pos\"> m.</span><span class=\"lk\"> Ar.)</span>",
+  "new": " <span class=\"pos\"> m.</span>",
+  "why": "The user, on the scan (review_nov5.html, 5 Nov): “חוֹמֶר II (הוֹמֶר Ar.) m.”: “Ar.)” belongs to the head group (headwords_scan.json), and “m.” follows it."
+ },
+ {
+  "page": 3,
+  "entry": "A00042",
+  "kind": "order",
+  "old": " <span class=\"pos\"> f.</span><span class=\"lk\"> ch.,</span>",
+  "new": "<span class=\"lk\"> ch.,</span><span class=\"pos\"> f.</span>",
+  "why": "The user, on the scan (review_nov5.html, 5 Nov): “אַבְדָּלָה h., אַבְדַּלְתָּא ch., f. (= הַבְדָּלָה; בדל)”: “h.,” after the first form (headwords_scan.json), and “ch., f.” in that order."
+ },
+ {
+  "page": 15,
+  "entry": "A00367",
+  "kind": "doubled",
+  "old": " insep. insep. conjunct.",
+  "new": " insep. conjunct.",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 20,
+  "entry": "A00515",
+  "kind": "doubled",
+  "old": "e.g. 1) prefix, esp. for verbal nouns, e.g. <a",
+  "new": "e.g. <a",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 24,
+  "entry": "A00635",
+  "kind": "doubled",
+  "old": "<span class=\"lk\"> ch. </span><span class=\"lr\">same.</span><span class=\"lk\"> ch. </span><span class=\"lr\">same.</span>",
+  "new": "<span class=\"lk\"> ch. </span><span class=\"lr\">same.</span>",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 26,
+  "entry": "A00675",
+  "kind": "doubled",
+  "old": "Euseb. Euseb. Onom.",
+  "new": "Euseb. Onom.",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 34,
+  "entry": "A00889",
+  "kind": "doubled",
+  "old": "<span class=\"s\"><span class=\"d\"> same; 1) the Law.</span><span class=\"nt\"> m. same; </span></span>",
+  "new": "<span class=\"s\"><span class=\"d\"> same; </span></span>",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 34,
+  "entry": "A00901",
+  "kind": "doubled",
+  "old": "(of life). (of life). ",
+  "new": "(of life). ",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 38,
+  "entry": "A00990",
+  "kind": "doubled",
+  "old": " interj. interj. ",
+  "new": " interj. ",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 40,
+  "entry": "A01025",
+  "kind": "doubled",
+  "old": "part. pass. of part. pass. of ",
+  "new": "part. pass. of ",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 40,
+  "entry": "A01045",
+  "kind": "doubled",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">אֲחַר</span> <span class=\"lk\"> ch. </span><span class=\"lr\">same.</span><span class=\"lk\"> ch. </span><span class=\"lr\">same.</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">אֲחַר</span> <span class=\"lk\"> ch. </span><span class=\"lr\">same.</span>",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 48,
+  "entry": "A01268",
+  "kind": "doubled",
+  "old": "<i>Ila</i> 1); a Tannai.</span>",
+  "new": "<i>Ila</i></span>",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 53,
+  "entry": "A01405",
+  "kind": "doubled",
+  "old": "<i>Issur;</i> 1) a proselyte.</span>",
+  "new": "<i>Issur;</i></span>",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 70,
+  "entry": "A01873",
+  "kind": "doubled",
+  "old": "<i>Eliezer</i>, 1) servant of Abraham.</span>",
+  "new": "<i>Eliezer</i>,</span>",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 78,
+  "entry": "A02042",
+  "kind": "doubled",
+  "old": "Damascus. (Banas), a river crossing the city of Damascus. <a",
+  "new": "Damascus. <a",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 97,
+  "entry": "A02539",
+  "kind": "doubled",
+  "old": "<span class=\"s\"><span class=\"d\">1) as preced. 2.</span><span class=\"nt\"> ch. </span></span>",
+  "new": "",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 97,
+  "entry": "A02547",
+  "kind": "doubled",
+  "old": "<span class=\"s\"><span class=\"d\">1) = <a class=\"x\" href=\"#A02548\">next w.</a> Targ. O. f. pl. ch. </span></span>",
+  "new": "",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 116,
+  "entry": "A03026",
+  "kind": "doubled",
+  "old": "v. infra. v. infra.",
+  "new": "v. infra.",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 131,
+  "entry": "A03389",
+  "kind": "doubled",
+  "old": "(contr. of (contr. of ",
+  "new": "(contr. of ",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 135,
+  "entry": "B00034",
+  "kind": "doubled",
+  "old": "he came in a hurry. he came in a hurry.",
+  "new": "he came in a hurry.",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 140,
+  "entry": "B00151",
+  "kind": "doubled",
+  "old": "<span class=\"s\"><span class=\"d\">1) as h. Kal.</span><span class=\"nt\"> ch. </span></span>",
+  "new": "",
+  "why": "Doubled text, the user's mark on the scan (review_nov5.html, 5 Nov): the book has it once. The digital text repeats it (often the 2018 XML's copy of the first sense before the sense itself)."
+ },
+ {
+  "page": 122,
+  "entry": "A03173",
+  "kind": "pagebreak",
+  "old": "<i>waving, heave-offering</i>. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Onkelos_Exodus.29.27\">Targ. O. Ex. XXIX, 27</a>; </span>",
+  "new": "<i>waving, heave-offering</i>. </span>",
+  "why": "Page break, the user (review_nov5.html, 5 Nov): in the 1903 printing “Targ. O. Ex. XXIX, 27;” is the first line of p. 123, not the last of p. 122. Part 1 of 2: taken off p. 122."
+ },
+ {
+  "page": 123,
+  "entry": "A03173",
+  "kind": "pagebreak",
+  "old": "<span class=\"d\">a. e.—Pl. <a class=\"x\" href=\"#A03173\">",
+  "new": "<span class=\"d\"><a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Onkelos_Exodus.29.27\">Targ. O. Ex. XXIX, 27</a>; a. e.—Pl. <a class=\"x\" href=\"#A03173\">",
+  "why": "Page break, the user (review_nov5.html, 5 Nov): in the 1903 printing “Targ. O. Ex. XXIX, 27;” is the first line of p. 123, not the last of p. 122. Part 2 of 2: put at the top of p. 123."
+ },
+ {
+  "page": 134,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Esth. VII, 10",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 201,
+  "entry": "",
+  "kind": "break",
+  "break_after": "below; a. fr.",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 275,
+  "entry": "",
+  "kind": "break",
+  "break_after": "preced.) woman engaged",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 327,
+  "entry": "",
+  "kind": "break",
+  "break_after": "IV, 28 נשתמדה)",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 371,
+  "entry": "",
+  "kind": "break",
+  "break_after": "pit became rotten.",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 377,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Ps. X, 2 ליוותרון",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 415,
+  "entry": "",
+  "kind": "break",
+  "break_after": "sacrifice was sprinkled.",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 515,
+  "entry": "",
+  "kind": "break",
+  "break_after": "hundred robberies were",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 559,
+  "entry": "",
+  "kind": "break",
+  "break_after": "70a, v. supra.",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 605,
+  "entry": "",
+  "kind": "break",
+  "break_after": "more; a. fr.",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 721,
+  "entry": "",
+  "kind": "break",
+  "break_after": "do you moisten",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 865,
+  "entry": "",
+  "kind": "break",
+  "break_after": "subject for self-",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 1034,
+  "entry": "",
+  "kind": "break",
+  "break_after": "rock; a. fr.",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 1130,
+  "entry": "",
+  "kind": "break",
+  "break_after": "aside’, v. preced.",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 1256,
+  "entry": "",
+  "kind": "break",
+  "break_after": "(in Pharaoh’s case)",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 1306,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Thymbra). Sabb. 128a",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 1434,
+  "entry": "",
+  "kind": "break",
+  "break_after": "וכ׳ like a king",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 1641,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Is. XXVIII,",
+  "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
  }
 ]

@@ -277,16 +277,24 @@ def _sk(t): return re.sub(r"[^\u05d0-\u05ea]", "", t)
 def head_exact(text):
     """a head group as written in build/headwords_scan.json "exact": forms with their punctuation, a homonym number
     as " I", " II" after its form"""
-    parts = re.split(r"\s+([IVX]+)(?=[\s,;.]|$)", text)
+    parts = re.split(r"\s+([IVX]+)(?=[\s,;.)]|$)", text)
     out = ""
     for k, piece in enumerate(parts):
         if k % 2:
             out += ' <span class="hn">%s</span>' % piece; continue
-        m = re.match(r"^([\s,]*)(.*?)([\s,]*)$", piece)
-        out += m.group(1)
-        if m.group(2): out += '<span class="hw" lang="he" dir="rtl">%s</span>' % m.group(2)
-        out += m.group(3)
+        # a word in Latin letters in the head group stays outside the Hebrew span: a binyan in italics ("Pa."),
+        # others in the small type of the labels ("Ar.", "corr.", "or"; the user, 5 Nov)
+        for j, bit in enumerate(re.split(r"((?<![\u05d0-\u05ea])\b[A-Za-z]+\.?)", piece)):
+            if j % 2:
+                out += ("<i>%s</i>" if bit in BINYANS else '<span class="lk">%s</span>') % bit; continue
+            m = re.match(r"^([\s,()?]*)(.*?)([\s,()?]*)$", bit, re.S)
+            out += m.group(1)
+            if m.group(2): out += '<span class="hw" lang="he" dir="rtl">%s</span>' % m.group(2)
+            out += m.group(3)
     return out
+
+
+BINYANS = {"Pa.", "Pe.", "Af.", "Hif.", "Nif.", "Pi.", "Hof.", "Pu.", "Ithpa.", "Ithpe.", "Hithpa.", "Nithpa.", "Shaf."}
 
 
 def head_2026(eid, old):
