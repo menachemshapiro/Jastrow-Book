@@ -3,7 +3,9 @@
 Each line of the review gets one of these:
   held      a held-out page (pp. 151-160: the gold lines and the test pages): never trained on
   checked   the user marked it on a line review page (Right / Fixed: that text; Bad / Skip: left out)
-  agree     no reader differs from the site and no flag: the site's text, as printed (below), admitted by machine
+  agree     no word of the site's read otherwise by two readers or more, no word two readers see that the site
+            lacks, no flag on the line or on the lines next to it: the site's text, as printed (below), admitted by
+            machine (gold lines: 115 of 116 right; the one wrong was next to a flagged line, now held back)
   gemini    the readers differ, but Gemini (examples, low thinking) reads exactly the site's letters: admitted
             (on the gold lines of pp. 151, 155 this held for 66 of 66 such lines; it never held where the site was wrong)
   check     the rest: for the user, on check.html, the site's text as printed proposed, Gemini shown as a reader
@@ -95,18 +97,34 @@ def classify(recs, marks, gem):
         if "…" in r["text"]:
             r["tier"] = "dots"; continue
         flags = set(r["flags"]) & DISPUTE_FLAGS
-        if not flags and not r["sitew"] and not r["extra"]:
+        if r.get("near_flag"): flags.add("next_to_flagged")
+        most = max([n for *_, n in r["sitew"]] or [0])
+        if not flags and most < 2 and not r["extra"]:
             r["tier"] = "agree"; continue
         if "gemini" in r["readers"] and letters(r["readers"]["gemini"]) == letters(r["text"]):
             r["tier"] = "gemini"; continue
         r["tier"] = "check" if "gemini" in r["readers"] else "disputed"
+        r["two"] = not flags and not r["extra"]          # only two readers read a word otherwise: Gemini first
         r["why"] = ",".join(sorted(flags)) or "readers differ"
     return recs
+
+
+def mark_neighbours(recs):
+    """a line next to a flagged one (same page and column) may have lost or gained a word at its end: on the gold
+    lines, 151:100 began with the word its flagged neighbour had taken"""
+    by = {}
+    for r in recs: by.setdefault((r["page"], r["col"]), []).append(r)
+    for ls in by.values():
+        ls.sort(key=lambda r: r["rank"])
+        for i, r in enumerate(ls):
+            nb = ls[max(0, i - 1):i] + ls[i + 1:i + 2]
+            r["near_flag"] = any(set(n["flags"]) & DISPUTE_FLAGS for n in nb)
 
 
 def setup(a):
     rv = json.load(open(a.review))
     marks = load_marks(sum((glob.glob(os.path.expanduser(f)) for f in a.marks), []))
+    mark_neighbours(rv["lines"])
     return rv, classify(rv["lines"], marks, load_cache())
 
 
@@ -125,15 +143,16 @@ def cmd_plan(a):
             print("  %-9s %5d  (with Hebrew %d)" % (t, len(n), sum(1 for r in n if has_heb(r["text"]))))
     adm = sum(c[t] for t in ("checked", "agree", "gemini"))
     print("admitted for training now: %d; for the user to check: %d" % (adm, c["check"] + c["dots"] + c["disputed"]))
-    if c["disputed"]:
-        lo, hi = (c["disputed"] * x / 100 for x in AGOROT_PER_LINE)
-        print("Gemini (%s, %s, thinking %s) on the %d disputed lines: about %.1f-%.1f NIS" % (
-            MODEL, VARIANT, THINKING, c["disputed"], lo, hi))
+    two = sum(1 for r in recs if r["tier"] == "disputed" and r.get("two"))
+    for what, n in (("--on two (two readers differ, nothing flagged)", two), ("--on all (every disputed line)", c["disputed"])):
+        if n:
+            lo, hi = (n * x / 100 for x in AGOROT_PER_LINE)
+            print("Gemini %s: %d lines, about %.1f-%.1f NIS" % (what, n, lo, hi))
 
 
 def cmd_gemini(a):
     rv, recs = setup(a)
-    todo = [r for r in recs if r["tier"] == "disputed"]
+    todo = [r for r in recs if r["tier"] == "disputed" and (a.on == "all" or r.get("two"))]
     if a.limit: todo = todo[:a.limit]
     if not todo: print("no disputed lines without a Gemini reading"); return
     lo, hi = (len(todo) * x / 100 for x in AGOROT_PER_LINE)
@@ -234,6 +253,8 @@ def main():
     ap.add_argument("--marks", nargs="*", default=[], help="line review exports (jastrow-lines-*.json; globs allowed)")
     ap.add_argument("--yes", action="store_true", help="gemini: spend the credit")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--on", choices=["two", "all"], default="two",
+                    help="gemini: only lines where just two readers differ and nothing is flagged (default), or all disputed")
     ap.add_argument("--threads", type=int, default=6)
     ap.add_argument("--tiers", default="checked,agree,gemini", help="export: which tiers go in")
     ap.add_argument("--xml", default="kraken_mccatmus.xml")
