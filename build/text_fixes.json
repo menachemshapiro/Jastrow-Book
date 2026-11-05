@@ -13137,5 +13137,37 @@
   "old": "—Pl. טְוָוחִים, טְיָחִ׳.",
   "new": "—Pl. טְוָוחִים, טְוָחִ׳.",
   "why": "Typo in the digital text: the 1903 printing has “טְוָחִ׳” (ו, not י), the vowel points as in the digital text (the user, on the scan, review_nov5e.html, 5 Nov)."
+ },
+ {
+  "page": 13,
+  "entry": "A00325",
+  "kind": "word",
+  "old": ">Tosef. ib. I, 4</a>",
+  "new": ">Tosef. ib. 4</a>",
+  "why": "As printed: the 1903 printing has “Tosef. ib. 4.” (no “I,”); the link to Tosefta Kilayim 1:4 is kept (the user's line review, pilot p. 13, 5 Nov; checked on the scan)."
+ },
+ {
+  "page": 151,
+  "entry": "B00398",
+  "kind": "punct",
+  "old": "<span class=\"d\"> v. sub. בוסר׳.",
+  "new": "<span class=\"d\">, v. sub. בוסר׳.",
+  "why": "The 1903 printing has a comma after the headword: “בושׂר׳, v. sub. בוסר׳.” (the user's line review, pilot p. 151, 5 Nov; checked on the scan)."
+ },
+ {
+  "page": 155,
+  "entry": "B00474",
+  "kind": "word",
+  "old": "some ed., read בתודתא, v.",
+  "new": "some ed., read בחודתא, v.",
+  "why": "Typo in the digital text: the 1903 printing has “read בחודתא” (ח, not ת) (the user's line review, pilot p. 155, 5 Nov; checked on the scan)."
+ },
+ {
+  "page": 155,
+  "entry": "B00479",
+  "kind": "punct",
+  "old": "<span class=\"d\"> [1] <i>to be disordered",
+  "new": "<span class=\"d\"> [1) <i>to be disordered",
+  "why": "As printed: “[1) to be disordered, sick; whence בּוֹחַל q. v.].” The bracket opens before “1)” and closes after “q. v.” (the user's line review, pilot p. 155, 5 Nov; checked on the scan)."
  }
 ]
