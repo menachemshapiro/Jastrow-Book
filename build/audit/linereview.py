@@ -439,6 +439,9 @@ main{max-width:1100px;margin:0 auto;padding:12px 16px 80px}
 .scan{display:block;max-width:100%%;margin:6px 0;border:1px solid #eee}
 .txt{font-family:'Noto Serif','Frank Ruhl Libre','Noto Serif Hebrew',serif;font-size:21px;line-height:1.6;padding:2px 4px;direction:ltr;text-align:left}
 .txt [lang=he]{font-family:'Frank Ruhl Libre','Noto Serif Hebrew',serif;font-size:23px}
+.hi{unicode-bidi:isolate}
+.prev{font-family:'Noto Serif','Frank Ruhl Libre','Noto Serif Hebrew',serif;font-size:21px;padding:2px 4px;background:#f3f8ff;direction:ltr;text-align:left}
+.prev b{font:600 11px sans-serif;color:#789;text-transform:uppercase;margin-right:6px}
 .d1{background:#ffe89a}.d2{background:#ffb8a8}
 .edit{width:100%%;box-sizing:border-box;font-family:'Noto Serif','Frank Ruhl Libre',serif;font-size:20px;padding:4px;direction:ltr}
 .rd{font-size:14px;color:#444;margin:2px 0 2px 4px;direction:ltr}
@@ -476,7 +479,25 @@ function marked(s,spans){  // the text with the given [start, end, class] stretc
   for(const [a,b,c] of spans){out+=esc(s.slice(at,a))+wspan(s.slice(a,b),c); at=b}
   return out+esc(s.slice(at));
 }
-function siteHTML(r){return marked(r.site, r.sitew.map(([a,b,n])=>[a,b,n>=2?"d2":"d1"]))}
+// Hebrew laid out as the site sets it (make_site2.py): each Hebrew phrase is one right-to-left island in the
+// left-to-right line; a bracket is part of a phrase only when more Hebrew follows it; a comma list of single words
+// runs left to right, the first word on the left. Plain text in the browser reversed both (the user, 5 Nov).
+const HW="[\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05EA\u05F3\u05F4'\"\u2019*\u05BE-]*";
+const HSEP="(?: +|, ?| *\\( *"+HW+"(?: +"+HW+")* *\\) *)";
+const HPH=new RegExp(HW+"(?:"+HSEP+HW+")*","g");
+function hebCls(s,spans){const c=new Array(s.length).fill(""); for(const [a,b,k] of spans) for(let i=a;i<b;i++) c[i]=k; return c}
+function hebRun(s,c,a,b){let out="",i=a; while(i<b){let j=i; while(j<b&&c[j]==c[i]) j++; const t=esc(s.slice(i,j));
+  out+=c[i]?'<span class="'+c[i]+'">'+t+'</span>':t; i=j} return out}
+function heb(s,spans){const c=hebCls(s,spans); let out="",at=0; HPH.lastIndex=0; let m;
+  while((m=HPH.exec(s))){const a=m.index,b=a+m[0].length; out+=hebRun(s,c,at,a);
+    const parts=m[0].split(/(, ?)/);
+    if(parts.length>1&&parts.every((p,k)=>k%2||!/[ ()]/.test(p))){out+='<span class="hi" dir="ltr">'; let o=a;
+      parts.forEach((p,k)=>{out+=k%2?hebRun(s,c,o,o+p.length):'<span class="hi" dir="rtl" lang="he">'+hebRun(s,c,o,o+p.length)+'</span>'; o+=p.length}); out+='</span>'}
+    else out+='<span class="hi" dir="rtl" lang="he">'+hebRun(s,c,a,b)+'</span>';
+    at=b}
+  return out+hebRun(s,c,at,s.length)}
+function siteHTML(r){return heb(r.site, r.sitew.map(([a,b,n])=>[a,b,n>=2?"d2":"d1"]))}
+function showPrev(el){const p=el.querySelector(".prev"); p.innerHTML='<b>shown as</b> '+heb(el.querySelector(".edit").value,[])}
 function readerHTML(r,rd){
   const t=r.readers[rd]; if(!t.trim()) return "";
   return '<div class="rd"><b>'+rd+'</b><span>'+marked(t, r.marks[rd].rspans.map(([a,b])=>[a,b,"x"]))+'</span></div>';
@@ -493,8 +514,8 @@ function card(r){
    <div class="meta"><span>p. ${r.page}, ${r.col=="L"?"left":"right"} column, line ${r.rank+1}</span><span>${r.eids.join(", ")}</span>
    <a href="https://menachemshapiro.github.io/Jastrow-Book/#p${r.page}" target="_blank">site page</a></div>
    <img class="scan" src="${r.img}" loading="lazy">
-   <div class="txt">${m.text!=null?wordsOf(shown).length?esc(shown):"":siteHTML(r)}</div>
-   <input class="edit" dir="ltr" style="display:none" value="${esc(shown)}">
+   <div class="txt">${m.text!=null?wordsOf(shown).length?heb(shown,[]):"":siteHTML(r)}</div>
+   <input class="edit" dir="ltr" style="display:none" value="${esc(shown)}"><div class="prev" style="display:none"></div>
    ${flags?"<div>"+flags+"</div>":""}${agree}
    ${["tesseract","pdf","kraken"].map(rd=>readerHTML(r,rd)).join("")}
    <div class="btns"><button class="b-ok ${st=="ok"?"on":""}" data-s="ok">Right</button>
@@ -513,7 +534,8 @@ function render(){const V=visible(); if(start>=V.length) start=Math.max(0,V.leng
 function rec(cid){return L.find(r=>id(r)==cid)}
 function set(cid,st){const m=M[cid]||(M[cid]={}); m.status=st; m.time=new Date().toISOString(); save(); rerender(cid)}
 function rerender(cid){const el=document.querySelector('.card[data-id="'+cid+'"]'); const r=rec(cid); const t=document.createElement("div"); t.innerHTML=card(r); el.replaceWith(t.firstElementChild)}
-function startEdit(el){const inp=el.querySelector(".edit"); inp.style.display="block"; el.querySelector(".txt").style.display="none"; inp.focus()}
+function startEdit(el){const inp=el.querySelector(".edit"); inp.style.display="block"; el.querySelector(".txt").style.display="none"; const p=el.querySelector(".prev"); p.style.display="block"; showPrev(el); inp.focus()}
+document.addEventListener("input",e=>{if(e.target.classList.contains("edit")) showPrev(e.target.closest(".card"))});
 document.addEventListener("click",e=>{const b=e.target.closest("button[data-s]"); if(!b) return; const el=b.closest(".card"), cid=el.dataset.id, s=b.dataset.s;
   if(s=="edit") return startEdit(el);
   if(s=="reset"){const m=M[cid]; delete m.text; if(m.status=="fixed") delete m.status; save(); return rerender(cid)}
