@@ -578,7 +578,7 @@ nav{display:flex;gap:8px;align-items:center}
 </style></head><body>
 <header><b>Line review</b><span class="count" id="count"></span>
 <nav><button id="prev">&larr; 20</button><span id="where"></span><button id="next">20 &rarr;</button>
-<select id="filter"><option value="all">all lines</option><option value="open">not yet marked</option><option value="disagree">readers disagree</option><option value="flag">flagged</option></select></nav>
+<select id="filter"><option value="all">all lines</option><option value="open">not yet marked</option><option value="disagree">readers disagree</option><option value="flag">flagged</option><option value="again">check again</option></select></nav>
 <button id="export">Export</button><label style="font-size:13px">Import <input type="file" id="import" accept=".json"></label></header>
 <main><div class="intro">
 <p><b>Each card is one line of the scan</b>, with the site's text for that line under it. Vowel points are Sefaria's and are not being checked: look at the letters, the English, the punctuation and where the line begins and ends. A word the book divides at the line's end should end with its hyphen, as printed.</p>
@@ -586,7 +586,7 @@ nav{display:flex;gap:8px;align-items:center}
 <p><b>Right</b>: the text matches the line. <b>Edit</b>: correct it (marks the line Fixed). <b>Bad line</b>: leave it out of training (bad crop, two lines in one, a heading). <b>Skip</b>: not sure. Marks are kept in this browser; <b>Export</b> saves them to a file (send it, or keep it for the training export). Keys: on a card, <b>r</b> Right, <b>e</b> Edit, <b>b</b> Bad, <b>s</b> Skip; <b>j</b>/<b>k</b> next/previous card.</p>
 </div><div id="cards"></div></main>
 <script>
-const RUN=%(run)s, L=%(lines)s, FLAGS=%(flags)s, PRIOR=%(prior)s;
+const RUN=%(run)s, L=%(lines)s, FLAGS=%(flags)s, PRIOR=%(prior)s, RECHECK=%(recheck)s, MADE=%(made)s;
 const KEY="jastrow-lines-"+RUN;
 const id=r=>r.page+":"+r.rank;
 const nz0=s=>(s||"").normalize("NFKD").replace(/[\u0591-\u05c7\u2066-\u2069\u200e\u200f]/g,"").replace(/\s+/g," ").replace(/ ([,.;:)])/g,"$1").trim();
@@ -637,9 +637,11 @@ function readerHTML(r,rd){
 }
 function disagree(r){return r.sitew.length>0||r.extra.length>0}
 const nz=s=>(s||"").normalize("NFKD").replace(/[\u0591-\u05c7\u2066-\u2069\u200e\u200f]/g,"").replace(/\s+/g," ").replace(/ ([,.;:)])/g,"$1").trim();
+// "check again": a mark made on text that has changed since, or a line Claude asked to redo (--recheck) not marked since this build
+function again(r){const m=M[id(r)]; return changed(r)||(RECHECK.includes(id(r))&&!(m&&m.time&&m.time>MADE))}
 function changed(r){const m=M[id(r)]; return !!(m&&m.status&&m.site!=null&&nz(m.site)!=nz(r.site))}
 function visible(){const f=document.getElementById("filter").value;
-  return L.filter(r=>f=="all"||(f=="open"&&!M[id(r)])||(f=="disagree"&&disagree(r))||(f=="flag"&&(r.flags.length||changed(r))))}
+  return L.filter(r=>f=="all"||(f=="open"&&!M[id(r)])||(f=="disagree"&&disagree(r))||(f=="flag"&&(r.flags.length||changed(r)))||(f=="again"&&again(r)))}
 function card(r){
   const m=M[id(r)]||{}, st=m.status||"";
   const flags=r.flags.map(f=>'<span class="flag">'+esc(FLAGS[f]||f)+'</span>').join("");
@@ -718,6 +720,7 @@ def main():
     ap.add_argument("--xml", default="kraken_mccatmus.xml", help="the PAGE XML's name in each page's folder")
     ap.add_argument("--name", help="the review's name (default: the pages)")
     ap.add_argument("--marks", nargs="*", default=[], help="exported marks (jastrow-lines-*.json) to carry over")
+    ap.add_argument("--recheck", default="", help="lines to show under \"check again\", as page:rank,page:rank")
     args = ap.parse_args()
     site = os.path.abspath(os.path.expanduser(args.site))
     book = ST.Book(site)
@@ -743,7 +746,9 @@ def main():
             prior[(x["page"], x["rank"])] = x                     # a later file wins
     prior = list(prior.values())
     page = PAGE % {"name": H.escape(name), "run": json.dumps(name), "lines": json.dumps(recs, ensure_ascii=False),
-                   "flags": json.dumps(FLAG_TEXT), "prior": json.dumps(prior, ensure_ascii=False)}
+                   "flags": json.dumps(FLAG_TEXT), "prior": json.dumps(prior, ensure_ascii=False),
+                   "recheck": json.dumps([x for x in args.recheck.split(",") if x]),
+                   "made": json.dumps(time.strftime("%Y-%m-%dT%H:%M:%S.000Z", time.gmtime()))}
     open(os.path.join(od, "index.html"), "w").write(page)
     dis = sum(1 for r in recs if any(m["site"] for m in r["marks"].values()))
     print("%d lines; %d where a reader differs from the site; %d flagged.\n%s" % (
