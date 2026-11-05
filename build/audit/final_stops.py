@@ -76,7 +76,7 @@ def page(pid):
         v = [ends_with_stop(tess), ends_with_stop(pdf)]
         # a full stop seen by either reader is taken (the OCR misses stops more often than it invents them)
         verdict = "stop" if "yes" in v else "none" if v == ["no", "no"] else "unclear"
-        res[e] = {"page": str(pid), "verdict": verdict, "tess": tess[-40:], "pdf": pdf[-40:], "site_end": sl[li]["text"][-40:]}
+        res[e] = {"page": str(pid), "verdict": verdict, "tess": tess[-40:], "pdf": pdf[-40:], "site_end": sl[li]["text"][-40:], "box": b}
     return res
 
 
