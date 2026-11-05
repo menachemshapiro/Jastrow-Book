@@ -22,7 +22,8 @@ are the site's (fixes-nov). Vowel points are Sefaria's, unchecked.
 
 export writes OUT/even/pNNNN.xml and OUT/odd/pNNNN.xml: kraken's own PAGE XML of the page (its line cuts, so
 training lines are cut as kraken cuts them when reading), keeping only the admitted lines, each with its text
-(NFD). Train with  ketos train -f page OUT/even/*.xml ...
+in display order, left to right as printed (see display(); --logical for reading order). Run export in kraken's
+environment (it uses kraken's bidi code). Train with  ketos train -f page --no-reorder OUT/even/*.xml ...
 """
 import argparse, glob, html as H, json, os, re, sys, time, unicodedata
 import xml.etree.ElementTree as ET
@@ -48,7 +49,31 @@ def printed(site):
     """the site's text for a line as the book prints it"""
     s = site.strip()
     s = re.sub(r"\s+,", ",", s)                       # "X , v." -> "X, v."
+    s = re.sub(r"\be\.g\.", "e. g.", s)                # the book spaces these (the user, 6 Nov; scan p. 1)
+    s = re.sub(r"\bi\.e\.", "i. e.", s)
     return re.sub(r"\s+", " ", s)
+
+
+# a Hebrew phrase as linereview's page sets it (its HW / HSEP / HPH): a comma list of single words runs left to
+# right, as the book prints form lists (GUIDELINES 2.9); anything else is one right-to-left run
+HW = "[\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05EA\u05F3\u05F4'\"\u2019*\u05BE-]*"
+HPH = re.compile(HW + "(?:(?: +|, ?| *\\( *" + HW + "(?: +" + HW + ")* *\\) *)" + HW + ")*")
+LRM = "\u200e"
+
+
+def display(text):
+    """the training label: the line in display order, left to right as on the scan, so that what the user approved
+    on the check page is what kraken learns (trained with --no-reorder). Kraken's own bidi code does the
+    reordering, with a left-to-right mark after each comma of a single-word list, as the page shows it."""
+    from kraken.lib.bidi import get_display
+
+    def lists(m):
+        parts = re.split(r"(, ?)", m.group(0))
+        if len(parts) > 1 and all(not re.search(r"[ ()]", p) for p in parts[::2]):
+            return "".join(p + LRM if k % 2 else p for k, p in enumerate(parts))
+        return m.group(0)
+    t = HPH.sub(lists, unicodedata.normalize("NFD", text))
+    return get_display(t, base_dir="L").replace(LRM, "")
 
 
 def letters(s):
@@ -237,7 +262,7 @@ def cmd_export(a):
     keep = {}
     for r in recs:
         if r["tier"] in a.tiers.split(","):
-            keep.setdefault(r["page"], {})[r["kid"]] = unicodedata.normalize("NFD", r["text"])
+            keep.setdefault(r["page"], {})[r["kid"]] = display(r["text"]) if a.visual else unicodedata.normalize("NFD", r["text"])
     pdir = os.path.join(paths.WORK, "audit", "pages")
     n = {"even": [0, 0], "odd": [0, 0]}
     for pg, lines in sorted(keep.items(), key=lambda x: int(x[0])):
@@ -275,6 +300,8 @@ def main():
     ap.add_argument("--threads", type=int, default=6)
     ap.add_argument("--tiers", default="checked,agree,gemini", help="export: which tiers go in")
     ap.add_argument("--xml", default="kraken_mccatmus.xml")
+    ap.add_argument("--logical", dest="visual", action="store_false",
+                    help="export: labels in reading order (for ketos --reorder) instead of display order")
     ap.add_argument("--out", default=os.path.join(paths.WORK, "kraken", "train"))
     a = ap.parse_args()
     {"plan": cmd_plan, "gemini": cmd_gemini, "review": cmd_review, "export": cmd_export}[a.cmd](a)
