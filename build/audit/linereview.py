@@ -214,9 +214,11 @@ def near_line(order, box):
 def in_bag(bag, w):
     """the site's word w is among a reader's words of a line (letters only; a near match for longer words)"""
     k = norm_word(w)
-    if not k or not bag: return False
-    if k in bag: return True
-    return len(k) >= 4 and any(len(x) >= 3 and SequenceMatcher(None, k, x).ratio() >= 0.8 for x in bag)
+    if not k or not bag: return 0
+    if k in bag: return 2                                            # a sure sighting counts double
+    # Hebrew words the readers garble more (משיבחלו read as משרבחלף, מטכבחלו: 0.71)
+    cut = 0.7 if HEB_LETTER.search(k) else 0.8
+    return int(len(k) >= 4 and any(len(x) >= 3 and SequenceMatcher(None, k, x).ratio() >= cut for x in bag))
 
 
 def site_lines(pc, CO, bags=None):
@@ -243,8 +245,14 @@ def site_lines(pc, CO, bags=None):
         if used[tuple(w["box"])] > 1: continue
         # the audit finds a Hebrew word in every line whose band it falls in (the bands overlap), so its "line"
         # may be the next one: take the line nearest the word itself
-        if st["i"] in pos:
-            anchors.append({"n": pos[st["i"]], "rank": rank[near_line(order, w["box"])["i"]], "box": w["box"]})
+        if st["i"] not in pos: continue
+        n = pos[st["i"]]
+        # a word whose letters stand again a few words off (בית ... בית, בּוּתָא / בָּוְתָא) may be paired with the
+        # other's place: it places nothing
+        k = norm_word(st["text"])
+        if any(norm_word(toks[j]["text"]) == k for j in range(max(0, n - 15), min(len(toks), n + 16)) if j != n): continue
+        anchors.append({"n": n, "rank": rank[near_line(order, w["box"])["i"]], "box": w["box"],
+                        "exact": k == norm_word(w.get("text", ""))})
     anchors.sort(key=lambda a: a["n"])
     # one anchor per site word (a Hebrew word can be paired twice in overlapping gaps)
     seen, uniq = set(), []
@@ -252,6 +260,22 @@ def site_lines(pc, CO, bags=None):
         if a["n"] in seen: continue
         seen.add(a["n"]); uniq.append(a)
     anchors = lis_keep(uniq)
+    # every entry begins a line: between two anchors there must be at least as many lines as entry starts; where
+    # not, a Hebrew pair is wrong (p. 151 בַּז paired with the בזי of the next line): drop a Hebrew anchor, one whose
+    # scan word has other letters first, else the earlier
+    def starts(a, b): return sum(1 for n in range(a + 1, b + 1) if n > 0 and toks[n]["eid"] != toks[n - 1]["eid"])
+    while True:
+        bad = next(((A, B) for A, B in zip(anchors, anchors[1:])
+                    if B["rank"] - A["rank"] < starts(A["n"], B["n"]) and not (A.get("lat") and B.get("lat"))), None)
+        if not bad: break
+        A, B = bad
+        heb = [x for x in (A, B) if not x.get("lat")]
+        drop = next((x for x in heb if not x.get("exact")), heb[0])
+        anchors.remove(drop)
+    if os.environ.get("LRDEBUG"):
+        for a in uniq:
+            print("ANCHOR", a["n"], toks[a["n"]]["text"], "rank", a["rank"], "lat" if a.get("lat") else "heb",
+                  "kept" if a in anchors else "dropped", file=sys.stderr)
     nl = len(order)
     where = [None] * len(toks)                     # token n -> line rank
     split = {}                                     # token n -> (letters on the first line, rank of the second line)
@@ -323,13 +347,17 @@ def site_lines(pc, CO, bags=None):
                 def score(k): return sum(in_bag(b1, toks[n]["text"]) for n in zone[:k]) + \
                     sum(in_bag(b2, toks[n]["text"]) for n in zone[k:])
                 best = max(range(len(zone) + 1), key=lambda k: (score(k), -abs(k - cur)))
+                if os.environ.get("LRDEBUG"):
+                    print("ZONE", r, [toks[n]["text"] for n in zone], "cur", cur, "best", best, sorted(b1 or []), sorted(b2 or []), file=sys.stderr)
                 if score(best) > score(cur):
                     for k, n in enumerate(zone): where[n] = r if k < best else r + 1
         for r in range(la, lb + 1): flags[r].add("estimated")
     # punctuation standing alone (Sefaria's "X , v. Y") goes with the word before it; an opening bracket with the next
     for n, t in enumerate(toks):
         if any(c.isalnum() for c in t["text"]) or n in split: continue
-        if t["text"].strip()[:1] in "([" and n + 1 < len(toks) and where[n + 1] is not None: where[n] = where[n + 1]
+        # an opening bracket, and the asterisk that marks an entry (it stands before the headword), go with the next word
+        if (t["text"].strip()[:1] in "([" or t["text"].strip() == "*") and n + 1 < len(toks) and where[n + 1] is not None:
+            where[n] = where[n + 1]
         elif n > 0 and where[n - 1] is not None and (n - 1) not in split: where[n] = where[n - 1]
     # spans of the plain text, per line
     spans = {r: [] for r in range(nl)}
@@ -350,7 +378,8 @@ def site_lines(pc, CO, bags=None):
             if k:
                 pa, pb, psuf = sp[k - 1]
                 between = P.plain[pb:a]
-                text += " " if (re.search(r"\s", between) or pb in P.bounds or psuf) else between
+                text += "" if P.plain[pa:pb].strip() == "*" else \
+                    " " if (re.search(r"\s", between) or pb in P.bounds or psuf) else between
             text += "".join(RAISED.get(c, c) if "sup" in P.attrs[o][4] else c
                             for o, c in zip(range(a, b), P.plain[a:b])) + suf
         eids = []
@@ -363,6 +392,30 @@ def site_lines(pc, CO, bags=None):
                               "flags": sorted(flags[r]), "box": order[r]["box"], "col": order[r]["col"],
                               "seg": order[r]["seg"]}
     return out
+
+
+DASH = re.compile("^[\u2014\u2013-]")
+
+
+def move_dashes(sl, scan, PW, CO):
+    """a dash at a line break ("7.—" / "—2) (cmp.") stands at the end of one line or the start of the next: put it
+    where the readers (Tesseract, the PDF layer) see it"""
+    seq = sorted(sl, key=lambda li: sl[li]["rank"])
+    def ends(li):
+        b = sl[li]["box"]
+        pw = [w["text"] for w in sorted((w for w in PW if in_box(w, b)), key=lambda w: w["box"][0])]
+        rd = [tess_text(scan, li, CO), " ".join(pw)]
+        return (sum(1 for t in rd if t.strip() and t.strip()[-1] in "\u2014\u2013-"),
+                sum(1 for t in rd if t.strip() and DASH.match(t.strip())))
+    for a, b in zip(seq, seq[1:]):
+        ta, tb = sl[a]["text"], sl[b]["text"]
+        if not ta or not tb or sl[a]["col"] != sl[b]["col"] or sl[a]["seg"] != sl[b]["seg"]: continue
+        if tb.startswith("\u2014") and not ta.endswith("\u2014"):
+            ea, _ = ends(a); _, sb = ends(b)
+            if ea > sb: sl[a]["text"], sl[b]["text"] = ta + "\u2014", tb[1:].lstrip()
+        elif ta.endswith("\u2014") and not tb.startswith("\u2014"):
+            ea, _ = ends(a); _, sb = ends(b)
+            if sb > ea: sl[a]["text"], sl[b]["text"] = ta[:-1].rstrip(), "\u2014" + tb
 
 
 def split_box_end(A, anchors):
@@ -409,6 +462,7 @@ def page_lines(pid, book, V, CO, out, img_dir, xml_name):
         k = norm_word(w["text"])
         if k and pc.lines: bags[near_line(pc.lines, w["box"])["i"]].add(FOLIO.match(k).group(1) if FOLIO.match(k) else k)
     sl = site_lines(pc, CO, bags)
+    move_dashes(sl, scan, PW, CO)
     gut = scan["layout"].get("gutter") or [img.size[0] // 2, img.size[0] // 2]
     # each Tesseract line to the kraken line it overlaps most
     for k in K:
@@ -569,8 +623,14 @@ function heb(s,spans){const c=hebCls(s,spans); let out="",at=0; HPH.lastIndex=0;
     else out+='<span class="hi" dir="rtl" lang="he">'+hebRun(s,c,a,b)+'</span>';
     at=b}
   return out+hebRun(s,c,at,s.length)}
+// the edit box is plain text, which would set a comma list of Hebrew words right to left (the user typed
+// several reversed, 5 Nov): a left-to-right mark after each comma of such a list keeps it as the book prints it;
+// the marks are taken out again when the edit is kept
+function lrmText(s){HPH.lastIndex=0; return s.replace(HPH,m=>{const parts=m.split(/(, ?)/);
+  return parts.length>1&&parts.every((p,k)=>k%%2||!/[ ()]/.test(p))?parts.map((p,k)=>k%%2?p+"\u200E":p).join(""):m})}
+function noMarks(s){return s.replace(/[\u200E\u200F\u2066-\u2069]/g,"")}
 function siteHTML(r){return heb(r.site, r.sitew.map(([a,b,n])=>[a,b,n>=2?"d2":"d1"]))}
-function showPrev(el){const p=el.querySelector(".prev"); p.innerHTML='<b>shown as</b> '+heb(el.querySelector(".edit").value,[])}
+function showPrev(el){const p=el.querySelector(".prev"); p.innerHTML='<b>shown as</b> '+heb(noMarks(el.querySelector(".edit").value),[])}
 function readerHTML(r,rd){
   const t=r.readers[rd]; if(!t.trim()) return "";
   return '<div class="rd"><b>'+rd+'</b><span>'+marked(t, r.marks[rd].rspans.map(([a,b])=>[a,b,"x"]))+'</span></div>';
@@ -590,7 +650,7 @@ function card(r){
    <a href="https://menachemshapiro.github.io/Jastrow-Book/#p${r.page}" target="_blank">site page</a></div>
    <img class="scan" src="${r.img}" loading="lazy">
    <div class="txt">${m.text!=null?wordsOf(shown).length?heb(shown,[]):"":siteHTML(r)}</div>
-   <input class="edit" dir="ltr" style="display:none" value="${esc(shown)}"><div class="prev" style="display:none"></div>
+   <input class="edit" dir="ltr" style="display:none" value="${esc(lrmText(shown))}"><div class="prev" style="display:none"></div>
    ${flags?"<div>"+flags+"</div>":""}${changed(r)?'<span class="flag chg">our text for this line changed since you marked it: check again</span>':""}
    ${r.extra.length?'<div class="miss">two readers or more also see, not in our text: <b>'+r.extra.map(w=>wspan(w,"")).join(", ")+'</b></div>':""}${agree}
    ${["tesseract","pdf","kraken"].map(rd=>readerHTML(r,rd)).join("")}
@@ -618,7 +678,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("button[data-s]")
   set(cid,s)});
 document.addEventListener("change",e=>{const el=e.target.closest(".card"); if(!el) return; const cid=el.dataset.id, m=M[cid]||(M[cid]={});
   if(e.target.classList.contains("note")){m.note=e.target.value; save()}
-  if(e.target.classList.contains("edit")){const v=e.target.value.trim(); if(v!=rec(cid).site){m.text=v; m.status="fixed"} else {delete m.text}; m.time=new Date().toISOString(); save(); rerender(cid)}});
+  if(e.target.classList.contains("edit")){const v=noMarks(e.target.value).trim(); if(v!=rec(cid).site){m.text=v; m.status="fixed"} else {delete m.text}; m.time=new Date().toISOString(); save(); rerender(cid)}});
 document.addEventListener("keydown",e=>{
   if(e.target.classList&&e.target.classList.contains("edit")&&e.key=="Enter"){e.target.blur(); return}
   if(e.target.tagName=="INPUT"||e.target.tagName=="SELECT") return;
