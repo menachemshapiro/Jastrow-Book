@@ -12937,5 +12937,149 @@
   "kind": "break",
   "break_after": "Is. XXVIII,",
   "why": "Column break above the letter heading on a page where a letter begins part-way down, read on the scan (the user asked for these pages to be set, 5 Nov). No change to the text."
+ },
+ {
+  "page": 6,
+  "entry": "A00123",
+  "kind": "doubled",
+  "old": "<i>Abbayi</i>, 1) a renowned Babyl.</span><span class=\"nt\">, </span></span>",
+  "new": "<i>Abbayi</i>, </span></span>",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “1) a renowned Babyl.” once (the 2018 XML's copy of the first sense removed)."
+ },
+ {
+  "page": 6,
+  "entry": "A00136",
+  "kind": "doubled",
+  "old": "<i>Abbimi</i>, 1) a disciple of Rabbah.</span><span class=\"nt\">, </span></span>",
+  "new": "<i>Abbimi</i>, </span></span>",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “1) a disciple of Rabbah.” once (the 2018 XML's copy of the first sense removed)."
+ },
+ {
+  "page": 5,
+  "entry": "A00116",
+  "kind": "missing",
+  "old": "<span class=\"d\"> pr. n. m. (<i>Bar</i>)",
+  "new": "<span class=\"d\"> בַּר א׳ pr. n. m. (<i>Bar</i>)",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “אַבְיוּ, בַּר א׳ pr. n. m.”: “בַּר א׳” begins the entry (not in the headword's type)."
+ },
+ {
+  "page": 4,
+  "entry": "A00084",
+  "kind": "order",
+  "old": " <span class=\"pl\">pl. אֲבִזְרֵי, אֲבִיזְרֵי</span><span class=\"ss\">",
+  "new": "<span class=\"ss\">",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): The plural “pl. אֲבִזְרֵי, אֲבִיזְרֵי” stands after “—Fig.” in the book. Part 1 of 2."
+ },
+ {
+  "page": 4,
+  "entry": "A00084",
+  "kind": "order",
+  "old": "&amp;c.—Fig. <i>requisites",
+  "new": "&amp;c.—Fig. <span class=\"pl\">pl. אֲבִזְרֵי, אֲבִיזְרֵי</span> <i>requisites",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): Part 2 of 2."
+ },
+ {
+  "page": 9,
+  "entry": "A00215",
+  "kind": "order",
+  "old": "(<a class=\"x\" href=\"#A00588\">אוורוס</a>) אווריס.",
+  "new": "<span dir=\"ltr\"><span dir=\"rtl\">אווריס</span> (<a class=\"x\" href=\"#A00588\"><span dir=\"rtl\">אוורוס</span></a>)</span>.",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “אווריס (אוורוס).”, the bracket after its word, set left to right."
+ },
+ {
+  "page": 13,
+  "entry": "A00325",
+  "kind": "order",
+  "old": "—Pl. אַגָּסִים, עוּגָּסִים) אַגָּסִין). ",
+  "new": "—Pl. <span dir=\"ltr\"><span dir=\"rtl\">אַגָּסִים</span>, (<span dir=\"rtl\">עוּגָּסִים</span>) <span dir=\"rtl\">אַגָּסִין</span></span>. ",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “Pl. אַגָּסִים, (עוּגָּסִים) אַגָּסִין.”: three forms, the second in brackets; the digital text had the brackets out of place."
+ },
+ {
+  "page": 16,
+  "entry": "A00385",
+  "kind": "letters",
+  "old": "there is no justice and not judge",
+  "new": "there is no justice and no judge",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “no judge”; “not” is a typo in the digital text."
+ },
+ {
+  "page": 17,
+  "entry": "A00418",
+  "kind": "order",
+  "old": "—ספרו של, ספרא דאה\"ר אה\"ר the",
+  "new": "—<span dir=\"ltr\"><span dir=\"rtl\">ספרא דאה\"ר</span>, <span dir=\"rtl\">ספרו של אה\"ר</span></span> the",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “ספרא דאה\"ר, ספרו של אה\"ר”, in that order."
+ },
+ {
+  "page": 17,
+  "entry": "A00438",
+  "kind": "letters",
+  "old": "Ibid. id5 ויאדקונכון",
+  "new": "Ibid. v. 45 ויאדקונכון",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “Ibid. v. 45”; “id5” is the digital text's misreading."
+ },
+ {
+  "page": 1610,
+  "entry": "U01640",
+  "kind": "order",
+  "old": "expl. (<a class=\"x\" href=\"#Q02169\">פתילתה</a>) <a class=\"x\" href=\"#Q01295\">פסילתא</a>.",
+  "new": "expl. <span dir=\"ltr\">(<a class=\"x\" href=\"#Q02169\"><span dir=\"rtl\">פתילתה</span></a>) <a class=\"x\" href=\"#Q01295\"><span dir=\"rtl\">פסילתא</span></a></span>.",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “(פתילתה) פסילתא” showed out of order (the characters were right): set left to right, each word in place."
+ },
+ {
+  "page": 1269,
+  "entry": "R00217",
+  "kind": "letters",
+  "old": "מיצף מים צ\"ג מטלית",
+  "new": "מיצף מים ע\"ג מטלית",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “ע\"ג” (על גבי), not “צ\"ג”: a typo in the digital text."
+ },
+ {
+  "page": 259,
+  "entry": "C01139",
+  "kind": "order",
+  "old": "<span class=\"d\"> = <a class=\"x\" href=\"#C01123\">גִּנְזָא</a>.</span>",
+  "new": "<span class=\"d\"> = <a class=\"x\" href=\"#C01123\"><span dir=\"rtl\">גִּנְזָא</span></a>.</span>",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “—2) = גִּנְזָא.” showed out of order: the Hebrew word kept in its place."
+ },
+ {
+  "page": 313,
+  "entry": "D00893",
+  "kind": "doubled",
+  "old": "<span class=\"d\"> pl. of pl. of דְּמָא.</span>",
+  "new": "<span class=\"d\"> pl. of <span dir=\"rtl\">דְּמָא</span>.</span>",
+  "why": "The user, on the scan (review_nov5b.html, 5 Nov): “pl. of” once, and “דְּמָא.” before “—2)” (the Hebrew word kept in its place)."
+ },
+ {
+  "page": 491,
+  "entry": "H01451",
+  "kind": "order",
+  "old": "<span class=\"d\">, Ar.) f. (הפף I)",
+  "new": "<span class=\"d\"> f. (הפף I)",
+  "why": "The user's headword reading on the scan (review_nov5b.html, 5 Nov); “(חֲפוּפְתָּא Ar.) f.”: “Ar.)” is in the head group now (headwords_scan.json)."
+ },
+ {
+  "page": 1049,
+  "entry": "P00223",
+  "kind": "doubled",
+  "old": "<span class=\"d\"> (<b>עוּזְרָד</b>, <b>עוּזְרָר I</b> m. (v. ",
+  "new": "<span class=\"d\"> (v. ",
+  "why": "The user's headword reading on the scan (review_nov5b.html, 5 Nov); the 2018 XML repeats the head group in bold at the start of the definition; the book does not."
+ },
+ {
+  "page": 1049,
+  "entry": "P00224",
+  "kind": "doubled",
+  "old": "<span class=\"d\"> (<b>עוּזְרָד</b>, <b>עוּזְרָר II</b> m. (<span>preced.</span>)",
+  "new": "<span class=\"d\"> (<span>preced.</span>)",
+  "why": "The user's headword reading on the scan (review_nov5b.html, 5 Nov); the 2018 XML repeats the head group in bold at the start of the definition; the book does not."
+ },
+ {
+  "page": 1382,
+  "entry": "S01421",
+  "kind": "doubled",
+  "old": "<span class=\"d\"> (<b>קַלְקַנְתּוּם</b>, <b>קַלְקַנְתּוֹס</b>, <b>קַנְ׳</b> m. (κάλκανθος",
+  "new": "<span class=\"d\"> (κάλκανθος",
+  "why": "The user's headword reading on the scan (review_nov5b.html, 5 Nov); the 2018 XML repeats the head group in bold at the start of the definition; the book does not."
  }
 ]

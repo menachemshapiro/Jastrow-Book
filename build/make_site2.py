@@ -227,6 +227,31 @@ def fix_special(pid, h):
             h = h[:m.start()] + "Bab. ib. " + h[m.end():]
         it["_done"] = True
         _step(h0, h)
+    # a phrase repeated in the digital text ("insep. insep.", "ch. same. ch. same."): the second copy and the space
+    # before it are removed, character by character, so the markup around them stays (build/doubled.json; the user's
+    # marks on the scans, 5 Nov)
+    for eid in re.findall(r'<div class="e[^"]*" id="(\w+)"', h):
+        ph = DOUBLED.get(eid)
+        if not ph or eid in DOUBLED_DONE: continue
+        k = h.find('id="%s"' % eid); end = h.find('<div class="e', k + 5); end = end if end > 0 else len(h)
+        seg = h[k:end]
+        chars, spans, i = [], [], 0          # the segment's text, one entry per character, with its place in the HTML
+        while i < len(seg):
+            if seg[i] == "<":
+                i = seg.index(">", i) + 1; continue
+            if seg[i] == "&":
+                j = seg.index(";", i) + 1; chars.append(_H.unescape(seg[i:j])); spans.append((i, j)); i = j; continue
+            chars.append(seg[i]); spans.append((i, i + 1)); i += 1
+        t = "".join(" " if c.isspace() else c for c in chars)
+        m = re.search(re.escape(ph) + r" +" + re.escape(ph), t)
+        if not m: continue
+        a_, b_ = m.start() + len(ph), m.end()
+        cut = set()
+        for n in range(a_, b_): cut.update(range(*spans[n]))
+        h0 = h
+        h = h[:k] + "".join(c for n, c in enumerate(seg) if n not in cut) + h[end:]
+        DOUBLED_DONE.add(eid)
+        _step(h0, h)
     # a closing parenthesis ran into the definition after it ("(b. h. נְחִירַיִם; נָחַר)nostrils"): the book has a space
     # (M03077, N00491, O00220, Q01454; the user approved all 160, groupc_review.html, 5 Nov). One at a time, for _step.
     while True:
@@ -242,6 +267,8 @@ BAB_IB = {}
 for _it in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "bab_ib.json"), encoding="utf-8"))["items"]:
     _it["_rx"] = re.compile(r'Bab\. (<a class="r"[^>]*>)?(' + re.escape(_it["tractate"]) + r') ')
     BAB_IB.setdefault(_it["entry"], []).append(_it)
+DOUBLED = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "doubled.json"), encoding="utf-8"))["items"]
+DOUBLED_DONE = set()
 PAREN_SP = re.compile(r'\)((?:</a>)?(?:</span>)?)(?=<i>[A-Za-z]|same\. )')
 PAREN_N = []
 
@@ -289,7 +316,7 @@ def head_exact(text):
                 out += ("<i>%s</i>" if bit in BINYANS else '<span class="lk">%s</span>') % bit; continue
             m = re.match(r"^([\s,()?]*)(.*?)([\s,()?]*)$", bit, re.S)
             out += m.group(1)
-            if m.group(2): out += '<span class="hw" lang="he" dir="rtl">%s</span>' % m.group(2)
+            if m.group(2): out += '<span class="hw" lang="he" dir="rtl" data-s="1">%s</span>' % m.group(2)
             out += m.group(3)
     return out
 
@@ -501,6 +528,7 @@ def ltr_forms(h):
             return m.group(0)
         return '<span class="hw" lang="he" dir="ltr">%s</span>' % words(c, "", star_out=True)
     h = re.sub(r'<span class="hw" lang="he" dir="rtl">([^<]*)</span>', hw_bracket, h)
+    h = h.replace(' dir="rtl" data-s="1">', ' dir="rtl">')     # a head group read on the scan keeps its brackets where they are
     h = re.sub(r'<span class="hw" lang="he" dir="rtl">([^<]*)</span>', hw, h)
     def bf(m):
         c = m.group(1)
@@ -555,6 +583,8 @@ json.dump({"chunk": CHUNK, "pages": meta}, open(os.path.join(OUT, "data", "pages
 json.dump(hw, open(os.path.join(OUT, "data", "hw.json"), "w"), ensure_ascii=False, separators=(",", ":"))
 _bab_left = [it["entry"] for v in BAB_IB.values() for it in v if not it.get("_done")]
 assert not _bab_left, ("Bab. ib. not restored", _bab_left)
+_dbl_left = sorted(set(DOUBLED) - DOUBLED_DONE)
+if _dbl_left: print("doubled phrases not found:", _dbl_left)
 if PAREN_N: print(len(PAREN_N), "spaces added after \")\"")
 if PL_N: print(len(PL_N), "plurals moved after the language key")
 if SAME_DUP_N: print(len(SAME_DUP_N), "doubled \"1) same. ch.\" removed")
