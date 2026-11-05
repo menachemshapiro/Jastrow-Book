@@ -47,7 +47,8 @@ def lev(a, b):
 
 
 def norm(s):
-    s = unicodedata.normalize("NFC", s or "")
+    s = (s or "").strip().split("\n")[0]     # one line: an answer that goes on (thinking aloud) is cut at its first line
+    s = unicodedata.normalize("NFC", s)
     s = s.replace("'", "׳").replace("’", "׳").replace('"', "״").replace("…", "...")
     return re.sub(r"\s+", " ", s).strip()
 
@@ -81,11 +82,14 @@ def load(review, export):
     return L, gold
 
 
-def ask(client, model, contents):
+def ask(client, model, contents, config=None, usage=None):
     from google.genai import errors
     for attempt in range(40):    # the free tier is often "high demand" (503) for minutes at a time
         try:
-            r = client.models.generate_content(model=model, contents=contents)
+            r = client.models.generate_content(model=model, contents=contents, config=config)
+            if usage is not None and r.usage_metadata:
+                u = r.usage_metadata
+                usage.append([u.prompt_token_count or 0, u.candidates_token_count or 0, u.thoughts_token_count or 0])
             return (r.text or "").strip()
         except errors.ClientError as e:  # noqa: PERF203
             msg = str(e)
@@ -109,7 +113,10 @@ def run(a, L, gold):
     keys = sorted((k for k in gold if k[0] in pages), key=lambda k: (int(k[0]), k[1]))
     if a.limit: keys = keys[:a.limit]
     for v in a.variants.split(","):
-        cf = os.path.join(a.cache, a.model, v + ".json")
+        cf = os.path.join(a.cache, a.model + ("@" + a.thinking if a.thinking else ""), v + ".json")
+        uf = cf[:-5] + ".usage.json"
+        usage = json.load(open(uf)) if os.path.exists(uf) else {}
+        cfg = types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_level=a.thinking)) if a.thinking else None
         os.makedirs(os.path.dirname(cf), exist_ok=True)
         cache = json.load(open(cf)) if os.path.exists(cf) else {}
         todo = [k for k in keys if "%s:%d" % k not in cache]
@@ -128,9 +135,12 @@ def run(a, L, gold):
             if v == "checker": contents = [pic, PROMPT + CHECK.format(site=l["site"])]
             elif v == "examples": contents = [PROMPT + "\n\nExamples:"] + shots + ["Now this line:", pic]
             else: contents = [pic, PROMPT]
-            ans = ask(client, a.model, contents)
+            u = []
+            ans = ask(client, a.model, contents, cfg, u)
             with lock:
                 cache["%s:%d" % k] = ans; done[0] += 1
+                if u: usage["%s:%d" % k] = u[-1]
+                json.dump(usage, open(uf, "w"))
                 json.dump(cache, open(cf, "w"), ensure_ascii=False, indent=0)
                 if done[0] % 20 == 0 or done[0] == len(todo): print("  %d/%d" % (done[0], len(todo)), flush=True)
             time.sleep(a.sleep)
@@ -143,7 +153,7 @@ def score(a, L, gold):
     base = {"site": {"%s:%d" % k: L[k]["site"] for k in gold}}
     for r in ("tesseract", "pdf", "kraken"):
         base[r] = {"%s:%d" % k: L[k]["readers"].get(r, "") for k in gold}
-    for cf in sorted(glob.glob(os.path.join(a.cache, "*", "*.json"))):
+    for cf in sorted(f for f in glob.glob(os.path.join(a.cache, "*", "*.json")) if not f.endswith(".usage.json")):
         base[os.path.relpath(cf, a.cache)[:-5]] = json.load(open(cf))
     pages = a.pages.split(",")
     print("%-34s %5s %7s %7s %7s %7s %6s" % ("reader", "lines", "CER", "heb", "points", "latin", "exact"))
@@ -176,6 +186,7 @@ def main():
     ap.add_argument("--pages", default="151,155")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--model", default="gemini-3.5-flash")
+    ap.add_argument("--thinking", default="", help="thinking level (minimal, low, medium, high); default: the model's own")
     ap.add_argument("--sleep", type=float, default=7.0, help="seconds between requests (free tier)")
     ap.add_argument("--threads", type=int, default=1, help="requests at once (paid tier: 4-8)")
     ap.add_argument("--review", default=os.path.join(paths.WORK, "audit", "lines", "pilot", "lines.json"))
