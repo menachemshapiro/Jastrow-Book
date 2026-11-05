@@ -7,7 +7,8 @@ way kraken will cut them when it reads), and for each line:
   - the site's text for that line, split into lines by the audit's alignment (each English word the audit matched
     and each Hebrew word it paired puts the site's text on a scan line; the words between are shared out by the
     room left on each line, or at the starts of entries, which always begin a line). A word the book divides at
-    a line's end is divided here too, with its hyphen, since that is what the line shows;
+    a line's end is divided here too, with its hyphen, since that is what the line shows; "=" is set without spaces,
+    as the book prints it ("meadow=to"; the site's text has " = ");
   - what the other readers read there, with the words that differ from the site's marked: Tesseract (the
     audit's OCR), the PDF's own OCR layer (HebrewBooks), and kraken (the stock McCATMuS model reads no Hebrew,
     so only its English counts for now).
@@ -46,6 +47,8 @@ def norm_word(w):
     w = unicodedata.normalize("NFKD", w)                              # also ᵃ -> a, ﬁ -> fi
     w = "".join(c for c in w if not ("֑" <= c <= "ׇ"))     # points and accents (letters are 05d0-05ea)
     w = w.translate(FINALS).replace("ﬁ", "fi").replace("ﬂ", "fl").lower()
+    m = FOLIO.match(w.strip())
+    if m: return m.group(1)                                          # 38a, 38°, 38% are all folio 38
     return "".join(c for c in w if c.isalnum())
 
 
@@ -56,7 +59,7 @@ def word_spans(s):
     """a line's words as compared, with where each stands in the line: a folio's raised side letter, which the
     readers read every way (38°, 38%, "38 a"), is left out, and so is a lone a-d after a number"""
     out = []
-    for mt in re.finditer(r"\S+", s):
+    for mt in re.finditer(r"[^\s\u2014]+", s):
         w = mt.group(0)
         if not norm_word(w): continue
         m = FOLIO.match(w)
@@ -90,8 +93,18 @@ def diff_marks(site, other, latin_only=False):
         keep_b = [j for j, w in enumerate(other) if not HEB_LETTER.search(w)]
     else:
         keep_a, keep_b = list(range(len(a))), list(range(len(b)))
-    sa, sb = [a[i] for i in keep_a], [b[j] for j in keep_b]
+    # Hebrew: a bag of words within the line (the readers' order of Hebrew is unreliable); English: in order
+    heb_a = [i for i in keep_a if HEB_LETTER.search(site[i])]
+    heb_b = [j for j in keep_b if HEB_LETTER.search(other[j])]
     bad_a, bad_b = set(keep_a), set(keep_b)
+    free = {}
+    for j in heb_b: free.setdefault(b[j], []).append(j)
+    for i in heb_a:
+        if free.get(a[i]):
+            bad_a.discard(i); bad_b.discard(free[a[i]].pop(0))
+    keep_a = [i for i in keep_a if i not in heb_a]
+    keep_b = [j for j in keep_b if j not in heb_b]
+    sa, sb = [a[i] for i in keep_a], [b[j] for j in keep_b]
     for tag, i1, i2, j1, j2 in SequenceMatcher(None, sa, sb, autojunk=False).get_opcodes():
         if tag == "equal":
             bad_a -= {keep_a[i] for i in range(i1, i2)}
@@ -175,22 +188,38 @@ def pdf_words(scan, img_size):
 
 # ---------- the site's text, line by line ----------
 def lis_keep(anchors):
-    """keep the longest run of anchors whose lines never go back (an anchor out of order is a chance match)"""
-    import bisect
-    tails, idx, prev = [], [], [-1] * len(anchors)
-    for k, an in enumerate(anchors):
-        v = an["rank"]
-        p = bisect.bisect_right([anchors[i]["rank"] for i in idx], v)
-        if p > 0: prev[k] = idx[p - 1]
-        if p == len(idx): idx.append(k)
-        else: idx[p] = k
-    out, k = [], idx[-1] if idx else -1
+    """keep the heaviest run of anchors whose lines never go back (an anchor out of order is a chance match). An
+    English word matched exactly weighs more than a Hebrew word paired by likeness"""
+    n = len(anchors)
+    best, prev = [0.0] * n, [-1] * n
+    for k in range(n):
+        w = 3.0 if anchors[k].get("lat") else 1.0
+        best[k] = w
+        for i in range(k - 1, max(-1, k - 400), -1):
+            if anchors[i]["rank"] <= anchors[k]["rank"] and best[i] + w > best[k]:
+                best[k], prev[k] = best[i] + w, i
+    out, k = [], max(range(n), key=lambda i: best[i]) if n else -1
     while k >= 0:
         out.append(anchors[k]); k = prev[k]
     return out[::-1]
 
 
-def site_lines(pc, CO):
+def near_line(order, box):
+    """the scan line whose middle is nearest a word's middle, in the word's column"""
+    cx, cy = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2
+    cand = [ln for ln in order if ln["box"][0] - 30 <= cx <= ln["box"][2] + 30] or order
+    return min(cand, key=lambda ln: abs((ln["box"][1] + ln["box"][3]) / 2 - cy))
+
+
+def in_bag(bag, w):
+    """the site's word w is among a reader's words of a line (letters only; a near match for longer words)"""
+    k = norm_word(w)
+    if not k or not bag: return False
+    if k in bag: return True
+    return len(k) >= 4 and any(len(x) >= 3 and SequenceMatcher(None, k, x).ratio() >= 0.8 for x in bag)
+
+
+def site_lines(pc, CO, bags=None):
     """the site's text of each scan line (Tesseract's lines), as {line i: {"spans": [(off, end, suffix)], flags}}"""
     P = pc.p
     lines = [ln for ln in pc.lines if ln["i"] not in pc.signature_lines]
@@ -203,13 +232,19 @@ def site_lines(pc, CO):
     for si, kj in pc.s2k.items():
         k = pc.k[kj]
         if si not in pos or k["lines"][0] not in rank: continue
-        an = {"n": pos[si], "rank": rank[k["lines"][0]], "box": k["boxes"][0]}
+        an = {"n": pos[si], "rank": rank[k["lines"][0]], "box": k["boxes"][0], "lat": True}
         if k.get("hyph") and len(k["lines"]) == 2 and k["lines"][1] in rank:
             an["hyph"] = (rank[k["lines"][1]], k.get("raw", ""), k["boxes"][1])
         anchors.append(an)
+    # a scan word the audit paired with two of the site's words (the same phrase twice, "אקרא דא׳" on p. 13) places neither
+    used = {}
+    for st, w in pc.heb_pair_toks: used[tuple(w["box"])] = used.get(tuple(w["box"]), 0) + 1
     for st, w in pc.heb_pair_toks:
-        if st["i"] in pos and w.get("line") in rank:
-            anchors.append({"n": pos[st["i"]], "rank": rank[w["line"]], "box": w["box"]})
+        if used[tuple(w["box"])] > 1: continue
+        # the audit finds a Hebrew word in every line whose band it falls in (the bands overlap), so its "line"
+        # may be the next one: take the line nearest the word itself
+        if st["i"] in pos:
+            anchors.append({"n": pos[st["i"]], "rank": rank[near_line(order, w["box"])["i"]], "box": w["box"]})
     anchors.sort(key=lambda a: a["n"])
     # one anchor per site word (a Hebrew word can be paired twice in overlapping gaps)
     seen, uniq = set(), []
@@ -277,7 +312,25 @@ def site_lines(pc, CO):
             r = next(i for i in range(len(room)) if cum[i + 1] >= mid)
             where[n] = la + r
             c += w
+        # then move each line end to where the readers saw the words: the split between lines r and r+1 that puts
+        # most of the gap's words on a line whose readers have them (ties keep the share by length)
+        if bags:
+            for r in range(la, lb):
+                zone = [n for n in gap if where[n] in (r, r + 1)]
+                if not zone: continue
+                b1, b2 = bags.get(order[r]["i"]), bags.get(order[r + 1]["i"])
+                cur = sum(1 for n in zone if where[n] == r)
+                def score(k): return sum(in_bag(b1, toks[n]["text"]) for n in zone[:k]) + \
+                    sum(in_bag(b2, toks[n]["text"]) for n in zone[k:])
+                best = max(range(len(zone) + 1), key=lambda k: (score(k), -abs(k - cur)))
+                if score(best) > score(cur):
+                    for k, n in enumerate(zone): where[n] = r if k < best else r + 1
         for r in range(la, lb + 1): flags[r].add("estimated")
+    # punctuation standing alone (Sefaria's "X , v. Y") goes with the word before it; an opening bracket with the next
+    for n, t in enumerate(toks):
+        if any(c.isalnum() for c in t["text"]) or n in split: continue
+        if t["text"].strip()[:1] in "([" and n + 1 < len(toks) and where[n + 1] is not None: where[n] = where[n + 1]
+        elif n > 0 and where[n - 1] is not None and (n - 1) not in split: where[n] = where[n - 1]
     # spans of the plain text, per line
     spans = {r: [] for r in range(nl)}
     for n, t in enumerate(toks):
@@ -306,7 +359,7 @@ def site_lines(pc, CO):
         # the book divides a word at this line's end that the audit did not match: the site's text runs on
         last = [t for t in pc.k if t["lines"][0] == order[r]["i"]]
         if last and last[-1].get("hyph") and "hyphen" not in flags[r]: flags[r].add("divided_word")
-        out[order[r]["i"]] = {"rank": r, "text": re.sub(r"\s+", " ", text).strip(), "eids": eids,
+        out[order[r]["i"]] = {"rank": r, "text": re.sub(r"\s*=\s*", "=", re.sub(r"\s+", " ", text)).strip(), "eids": eids,
                               "flags": sorted(flags[r]), "box": order[r]["box"], "col": order[r]["col"],
                               "seg": order[r]["seg"]}
     return out
@@ -347,10 +400,15 @@ def page_lines(pid, book, V, CO, out, img_dir, xml_name):
         print("  p. %s: no %s (run kraken first, see --help)" % (pid, xml_name)); return []
     pc = CO.PageCompare(book.page(str(pid)), scan, V, out)
     FO.run_page(pc, CO, headwords=False)
-    sl = site_lines(pc, CO)
     img = Image.open(os.path.join(wd, "page.png")).convert("L")
     K = kraken_lines(xml)
     PW = pdf_words(scan, img.size)
+    # each line's words as the readers saw them (a PDF word goes to the one line nearest it: the lines' boxes overlap)
+    bags = {ln["i"]: {norm_word(w) for w in words(tess_text(scan, ln["i"], CO)) if norm_word(w)} for ln in pc.lines}
+    for w in PW:
+        k = norm_word(w["text"])
+        if k and pc.lines: bags[near_line(pc.lines, w["box"])["i"]].add(FOLIO.match(k).group(1) if FOLIO.match(k) else k)
+    sl = site_lines(pc, CO, bags)
     gut = scan["layout"].get("gutter") or [img.size[0] // 2, img.size[0] // 2]
     # each Tesseract line to the kraken line it overlaps most
     for k in K:
@@ -406,6 +464,14 @@ def page_lines(pid, book, V, CO, out, img_dir, xml_name):
         for m in rec["marks"].values():
             for i in m["site"]: cnt[i] = cnt.get(i, 0) + 1
         rec["sitew"] = [[a, b, cnt[k_]] for k_, (a, b, _) in enumerate(word_spans(site)) if k_ in cnt]
+        # words two readers or more see that our text lacks (folio numbers count; one-letter scraps do not)
+        ex = {}
+        for rd, m in rec["marks"].items():
+            ow = words(rec["readers"][rd])
+            for k in {norm_word(ow[j]) for j in m["reader"]}:
+                if len(k) >= 2 and not (rd == "kraken" and HEB_LETTER.search(k)): ex[k] = ex.get(k, 0) + 1
+        sk = {norm_word(w) for w in sw}
+        rec["extra"] = sorted(k for k, n in ex.items() if n >= 2 and k not in sk)
         recs.append(rec)
     recs.sort(key=lambda r: r["rank"])
     print("  p. %-5s %3d lines; kraken lines with no text %d; Tesseract lines kraken missed %d; estimated %d" % (
@@ -448,6 +514,7 @@ main{max-width:1100px;margin:0 auto;padding:12px 16px 80px}
 .rd b{display:inline-block;width:86px;font-weight:600;color:#777}
 .rd .x{background:#ffd6cc}
 .agree{font-size:13px;color:#3a8d3a}
+.miss{font-size:13px;color:#a33;margin:2px 0}.flag.chg{background:#ffe0e0;border-color:#e99}
 .flag{font-size:12px;background:#fff4d6;border:1px solid #ecd58a;border-radius:4px;padding:1px 6px;margin:2px 4px 2px 0;display:inline-block}
 .btns{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .btns button{font-size:14px;padding:4px 12px;border:1px solid #aaa;background:#f7f7f7;border-radius:4px;cursor:pointer}
@@ -465,10 +532,16 @@ nav{display:flex;gap:8px;align-items:center}
 <p><b>Right</b>: the text matches the line. <b>Edit</b>: correct it (marks the line Fixed). <b>Bad line</b>: leave it out of training (bad crop, two lines in one, a heading). <b>Skip</b>: not sure. Marks are kept in this browser; <b>Export</b> saves them to a file (send it, or keep it for the training export). Keys: on a card, <b>r</b> Right, <b>e</b> Edit, <b>b</b> Bad, <b>s</b> Skip; <b>j</b>/<b>k</b> next/previous card.</p>
 </div><div id="cards"></div></main>
 <script>
-const RUN=%(run)s, L=%(lines)s, FLAGS=%(flags)s;
+const RUN=%(run)s, L=%(lines)s, FLAGS=%(flags)s, PRIOR=%(prior)s;
 const KEY="jastrow-lines-"+RUN;
-let M=JSON.parse(localStorage.getItem(KEY)||"{}");
 const id=r=>r.page+":"+r.rank;
+const nz0=s=>(s||"").normalize("NFKD").replace(/[\u0591-\u05c7\u2066-\u2069\u200e\u200f]/g,"").replace(/\s+/g," ").replace(/ ([,.;:)])/g,"$1").trim();
+let M=JSON.parse(localStorage.getItem(KEY)||"{}");
+// marks exported before (linereview.py --marks): taken in where the browser has none, with the text they were made on
+for(const x of PRIOR){const cid=x.page+":"+x.rank; if(!M[cid]){M[cid]={status:x.status, note:x.note, time:x.time, site:x.site}; if(x.text!=x.site) M[cid].text=x.text}
+  else if(M[cid].site==null) M[cid].site=x.site}
+// an edit that the new text now matches is no longer an edit
+for(const r of L){const m=M[id(r)]; if(m&&m.text!=null&&nz0(m.text)==nz0(r.site)){delete m.text; m.status="ok"; m.site=r.site}}
 let start=0, cur=0;
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const HEB=/[א-ת]/;
@@ -491,8 +564,8 @@ function hebRun(s,c,a,b){let out="",i=a; while(i<b){let j=i; while(j<b&&c[j]==c[
 function heb(s,spans){const c=hebCls(s,spans); let out="",at=0; HPH.lastIndex=0; let m;
   while((m=HPH.exec(s))){const a=m.index,b=a+m[0].length; out+=hebRun(s,c,at,a);
     const parts=m[0].split(/(, ?)/);
-    if(parts.length>1&&parts.every((p,k)=>k%2||!/[ ()]/.test(p))){out+='<span class="hi" dir="ltr">'; let o=a;
-      parts.forEach((p,k)=>{out+=k%2?hebRun(s,c,o,o+p.length):'<span class="hi" dir="rtl" lang="he">'+hebRun(s,c,o,o+p.length)+'</span>'; o+=p.length}); out+='</span>'}
+    if(parts.length>1&&parts.every((p,k)=>k%%2||!/[ ()]/.test(p))){out+='<span class="hi" dir="ltr">'; let o=a;
+      parts.forEach((p,k)=>{out+=k%%2?hebRun(s,c,o,o+p.length):'<span class="hi" dir="rtl" lang="he">'+hebRun(s,c,o,o+p.length)+'</span>'; o+=p.length}); out+='</span>'}
     else out+='<span class="hi" dir="rtl" lang="he">'+hebRun(s,c,a,b)+'</span>';
     at=b}
   return out+hebRun(s,c,at,s.length)}
@@ -502,9 +575,11 @@ function readerHTML(r,rd){
   const t=r.readers[rd]; if(!t.trim()) return "";
   return '<div class="rd"><b>'+rd+'</b><span>'+marked(t, r.marks[rd].rspans.map(([a,b])=>[a,b,"x"]))+'</span></div>';
 }
-function disagree(r){return r.sitew.length>0}
+function disagree(r){return r.sitew.length>0||r.extra.length>0}
+const nz=s=>(s||"").normalize("NFKD").replace(/[\u0591-\u05c7\u2066-\u2069\u200e\u200f]/g,"").replace(/\s+/g," ").replace(/ ([,.;:)])/g,"$1").trim();
+function changed(r){const m=M[id(r)]; return !!(m&&m.status&&m.site!=null&&nz(m.site)!=nz(r.site))}
 function visible(){const f=document.getElementById("filter").value;
-  return L.filter(r=>f=="all"||(f=="open"&&!M[id(r)])||(f=="disagree"&&disagree(r))||(f=="flag"&&r.flags.length))}
+  return L.filter(r=>f=="all"||(f=="open"&&!M[id(r)])||(f=="disagree"&&disagree(r))||(f=="flag"&&(r.flags.length||changed(r))))}
 function card(r){
   const m=M[id(r)]||{}, st=m.status||"";
   const flags=r.flags.map(f=>'<span class="flag">'+esc(FLAGS[f]||f)+'</span>').join("");
@@ -516,7 +591,8 @@ function card(r){
    <img class="scan" src="${r.img}" loading="lazy">
    <div class="txt">${m.text!=null?wordsOf(shown).length?heb(shown,[]):"":siteHTML(r)}</div>
    <input class="edit" dir="ltr" style="display:none" value="${esc(shown)}"><div class="prev" style="display:none"></div>
-   ${flags?"<div>"+flags+"</div>":""}${agree}
+   ${flags?"<div>"+flags+"</div>":""}${changed(r)?'<span class="flag chg">our text for this line changed since you marked it: check again</span>':""}
+   ${r.extra.length?'<div class="miss">two readers or more also see, not in our text: <b>'+r.extra.map(w=>wspan(w,"")).join(", ")+'</b></div>':""}${agree}
    ${["tesseract","pdf","kraken"].map(rd=>readerHTML(r,rd)).join("")}
    <div class="btns"><button class="b-ok ${st=="ok"?"on":""}" data-s="ok">Right</button>
    <button class="b-fixed ${st=="fixed"?"on":""}" data-s="edit">Edit</button>
@@ -532,7 +608,7 @@ function render(){const V=visible(); if(start>=V.length) start=Math.max(0,V.leng
   document.getElementById("where").textContent=V.length?(start+1)+"–"+Math.min(V.length,start+20)+" of "+V.length:"none";
   count(); cur=0}
 function rec(cid){return L.find(r=>id(r)==cid)}
-function set(cid,st){const m=M[cid]||(M[cid]={}); m.status=st; m.time=new Date().toISOString(); save(); rerender(cid)}
+function set(cid,st){const m=M[cid]||(M[cid]={}); m.status=st; m.site=rec(cid).site; m.time=new Date().toISOString(); save(); rerender(cid)}
 function rerender(cid){const el=document.querySelector('.card[data-id="'+cid+'"]'); const r=rec(cid); const t=document.createElement("div"); t.innerHTML=card(r); el.replaceWith(t.firstElementChild)}
 function startEdit(el){const inp=el.querySelector(".edit"); inp.style.display="block"; el.querySelector(".txt").style.display="none"; const p=el.querySelector(".prev"); p.style.display="block"; showPrev(el); inp.focus()}
 document.addEventListener("input",e=>{if(e.target.classList.contains("edit")) showPrev(e.target.closest(".card"))});
@@ -581,6 +657,7 @@ def main():
     ap.add_argument("--out", default=os.path.join(paths.WORK, "audit"))
     ap.add_argument("--xml", default="kraken_mccatmus.xml", help="the PAGE XML's name in each page's folder")
     ap.add_argument("--name", help="the review's name (default: the pages)")
+    ap.add_argument("--marks", nargs="*", default=[], help="exported marks (jastrow-lines-*.json) to carry over")
     args = ap.parse_args()
     site = os.path.abspath(os.path.expanduser(args.site))
     book = ST.Book(site)
@@ -600,8 +677,13 @@ def main():
         recs += page_lines(pid, book, V, CO, args.out, img, args.xml)
     json.dump({"run": name, "made": time.strftime("%Y-%m-%d %H:%M"), "site": site, "lines": recs},
               open(os.path.join(od, "lines.json"), "w"), ensure_ascii=False, indent=0)
+    prior = {}
+    for f in args.marks:
+        for x in json.load(open(os.path.expanduser(f)))["lines"]:
+            prior[(x["page"], x["rank"])] = x                     # a later file wins
+    prior = list(prior.values())
     page = PAGE % {"name": H.escape(name), "run": json.dumps(name), "lines": json.dumps(recs, ensure_ascii=False),
-                   "flags": json.dumps(FLAG_TEXT)}
+                   "flags": json.dumps(FLAG_TEXT), "prior": json.dumps(prior, ensure_ascii=False)}
     open(os.path.join(od, "index.html"), "w").write(page)
     dis = sum(1 for r in recs if any(m["site"] for m in r["marks"].values()))
     print("%d lines; %d where a reader differs from the site; %d flagged.\n%s" % (
