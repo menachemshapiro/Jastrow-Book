@@ -189,7 +189,25 @@ def fix_special(pid, h):
             if h == h0: break
             SAME_DUP_N.append(pid)
             _step(h0, h)
+    # a plural set before the language key: the book has "X ch. same. Pl. Y. Ber. ..." and "X ch., pl. Y same"
+    # (the user checked all 24 against the scans, plural_order.html, 5 Nov). Group A: the stray " . " after the label
+    # is where the plural stood; A01485 has "…, רֵי …" there. Group B: lower-case "pl." goes after "ch.,".
+    for rx, rp in ((PL_A, r'\2 <span class="pl">\1</span>. '), (PL_A1, r'\3 <span class="pl">\1 \2</span>…, '),
+                   (PL_B, r'\2 <span class="pl">\1</span>')):
+        while True:
+            h0 = h
+            h = rx.sub(rp, h, count=1)
+            if h == h0: break
+            PL_N.append(pid)
+            _step(h0, h)
     return h
+
+
+_PL_LABEL = r'(<span class="lk">[^<]*</span> ?<span class="lr">(?:[^<]|<(?!span class="ss">|/p>))*?</span><span class="ss"><span class="s"><span class="d">)'
+PL_A = re.compile(r' <span class="pl">(Pl\.[^<]*)</span>' + _PL_LABEL + r' \. ')
+PL_A1 = re.compile(r' <span class="pl">(Pl\.) ([^<]*)</span>' + _PL_LABEL + r' …, ')     # A01485
+PL_B = re.compile(r' <span class="pl">(pl\.[^<]*)</span>(<span class="lk"> ch\.,</span>)')
+PL_N = []
 
 
 SAME_DUP_AHEAD = r'(?=<span class="s"><span class="n">1\)</span><span class="d"> same)'
@@ -477,6 +495,7 @@ for p_i, p in enumerate(pages):
 json.dump({"chunk": CHUNK, "pages": meta}, open(os.path.join(OUT, "data", "pages.json"), "w"),
           ensure_ascii=False, separators=(",", ":"))
 json.dump(hw, open(os.path.join(OUT, "data", "hw.json"), "w"), ensure_ascii=False, separators=(",", ":"))
+if PL_N: print(len(PL_N), "plurals moved after the language key")
 if SAME_DUP_N: print(len(SAME_DUP_N), "doubled \"1) same. ch.\" removed")
 if SPACE_HAD: print(len(SPACE_HAD), "space records already had their space")
 print(len(pages), "pages,", len(hw), "headword rows,", (len(pages) + CHUNK - 1) // CHUNK, "chunks")
