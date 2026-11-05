@@ -221,7 +221,7 @@ def in_bag(bag, w):
     return int(len(k) >= 4 and any(len(x) >= 3 and SequenceMatcher(None, k, x).ratio() >= cut for x in bag))
 
 
-def site_lines(pc, CO, bags=None):
+def site_lines(pc, CO, bags=None, where_out=None):
     """the site's text of each scan line (Tesseract's lines), as {line i: {"spans": [(off, end, suffix)], flags}}"""
     P = pc.p
     lines = [ln for ln in pc.lines if ln["i"] not in pc.signature_lines]
@@ -370,6 +370,7 @@ def site_lines(pc, CO, bags=None):
             flags[where[n]].add("hyphen")
         else:
             spans[where[n]].append((t["off"], t["end"], ""))
+    if where_out is not None: where_out.update(where=where, toks=toks, order=order)
     out = {}
     for r in range(nl):
         sp = sorted(spans[r])
