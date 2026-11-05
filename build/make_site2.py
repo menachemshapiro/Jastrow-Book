@@ -67,21 +67,23 @@ def _pt(h): return "".join(_H.unescape(x) for x in re.split(r"(<[^>]+>)", h) if 
 BRK = [None]      # the column break of the page being repaired, as an offset into its plain text
 
 
-def loose_end(text, words):
+def loose_end(text, words, nospace=False):
     """where `words` ends in `text`, matched without vowel signs, with ׳ for ' and any run of spaces as one (one
-    match only), else None"""
+    match only), else None. Failing that, matched with no spaces at all: records taken when a space was missing
+    ("f.same.", which build2 now spaces, 5 Nov)"""
     def norm(t):
         out, pos = [], []
         for i, ch in enumerate(t):
             if "\u0591" <= ch <= "\u05c7": continue
             if ch.isspace():
-                if out and out[-1] == " ": continue
+                if nospace or (out and out[-1] == " "): continue
                 ch = " "
             out.append("\u05f3" if ch == "'" else ch); pos.append(i)
         return "".join(out), pos
     a, pa = norm(text)
     w = norm(words)[0].strip()
-    if not w or a.count(w) != 1: return None
+    if not w or a.count(w) != 1:
+        return None if nospace else loose_end(text, words, True)
     return pa[a.index(w) + len(w) - 1] + 1
 
 
@@ -251,6 +253,9 @@ def head_2026(eid, old):
     return span % join([hw] + alts)
 
 
+SPACE_HAD = []
+
+
 def insert_space(h, before, after, pid):
     """put a space between `before` and `after` (plain text, which must occur once on the page), wherever the
     markup falls between them"""
@@ -265,6 +270,9 @@ def insert_space(h, before, after, pid):
             plain.append(ch); ends.append(m.start() + k + 1)
     text = "".join(plain).replace("\u0307", "\u05C4")
     key = (before + after).replace("\u0307", "\u05C4")
+    if text.count(key) == 0 and text.count((before + " " + after).replace("\u0307", "\u05C4")) == 1:
+        SPACE_HAD.append((pid, before, after))   # build2 now keeps Sefaria's space before a link (5 Nov)
+        return h
     assert text.count(key) == 1, (pid, before, after, text.count(key))
     j = text.index(key) + len(before)
     at = ends[j - 1]               # right after the last character before the gap, so the space stays outside the next link
@@ -454,4 +462,5 @@ for p_i, p in enumerate(pages):
 json.dump({"chunk": CHUNK, "pages": meta}, open(os.path.join(OUT, "data", "pages.json"), "w"),
           ensure_ascii=False, separators=(",", ":"))
 json.dump(hw, open(os.path.join(OUT, "data", "hw.json"), "w"), ensure_ascii=False, separators=(",", ":"))
+if SPACE_HAD: print(len(SPACE_HAD), "space records already had their space")
 print(len(pages), "pages,", len(hw), "headword rows,", (len(pages) + CHUNK - 1) // CHUNK, "chunks")

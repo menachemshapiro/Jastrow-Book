@@ -199,6 +199,8 @@ def emit_html(frag, R):
     if not frag:
         return
     node = lxml.html.fragment_fromstring(frag, create_parent="div")
+    if node.text is None and frag[:1].isspace() and not R.last.isspace():
+        node.text = " "  # lxml drops a leading space before a tag: " <a>preced.</a>" (the user's marks, pp. 1601-1700)
     def rec(n):
         for c in n:
             tag = c.tag if isinstance(c.tag, str) else None

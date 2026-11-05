@@ -5796,9 +5796,9 @@
   "entry": "M01210",
   "headword": "מִינָא",
   "kind": "space",
-  "before": "ָיא  ch. = h. מִין I",
-  "after": "IIBer. 58a",
-  "why": "A homonym’s number runs into the next word (“כְּרוּב ITarg.”). We believe this is a typo in the digital text, not in the 1903 printing."
+  "before": "ָיא  ch. = h. מִין III",
+  "after": "Ber. 58a",
+  "why": "The homonym number runs into the next word (“מִין IIIBer.”); the space goes after “III” (Sefaria: language_reference “מִין III”). Corrected 5 Nov 2026: this record had put the space inside the number (“מִין I IIBer.”). We believe this is a typo in the digital text, not in the 1903 printing."
  },
  {
   "page": 808,
