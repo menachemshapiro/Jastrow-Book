@@ -115,6 +115,19 @@ Pages 1–20 (31 Oct): columns 14 likely / 3 check. Each of the 14 (7 breaks, bo
 - Whether the browser *shows* a headword correctly is checked from the site's markup (`unicode-bidi` islands, spacing), not by rendering the page.
 - Thresholds live in `compare.CFG`. They were tuned on synthetic pages (`tests/make_synthetic.py`) and will need adjusting on the real scans.
 
+## Line review: training and test lines for OCR engines
+
+`linereview.py` makes a page for checking the scan line by line (KRAKEN_PLAN.md, "Line review"). Each card is one of kraken's lines: the scan crop; the site's text for that line, divided where the book divides it (the audit's alignment puts each matched word on its line; the words between are shared out, and a line whose ends were only estimated is flagged); and, with the words that differ marked, the readings of Tesseract, of the PDF's own OCR layer, and of kraken. Vowel points are not compared. You mark each line Right, Edit (correct it), Bad line or Skip, and Export `jastrow-lines-<name>-<time>.json`: these become kraken's hand-checked training lines and, from held-out pages, the gold lines that measure every engine.
+
+```
+source ~/jastrow/kraken-venv/bin/activate          # kraken's lines, once per page (about a minute a page)
+M=~/.local/share/htrmopo/78d7d26e-50b3-55f8-b839-c7a882ea2053/McCATMuS_nfd_nofix_V1.mlmodel
+for p in 0013 0151; do kraken --threads 3 -x -i work/audit/pages/p$p/page.png work/audit/pages/p$p/kraken_mccatmus.xml segment -bl ocr -m $M; done
+source ~/jastrow/venv/bin/activate
+python3 build/audit/linereview.py --pages 13,151 --site ~/jastrow/jb-site --name NAME
+xdg-open work/audit/lines/NAME/index.html
+```
+
 ## Measuring it
 
 `tests/measure.py` says whether a change to the audit makes it better (AUDIT_PLAN.md, "How we know it is getting better"). It plants errors of the kinds Sefaria's text has in a copy of `data/` (`tests/plant.py`: typos rn/m, c/e, n/u, u/n, h/b; one or two words missing; a phrase doubled; two Hebrew words swapped; a headword letter changed for a look-alike; a folio digit), audits the unchanged site and the copy, and counts:
