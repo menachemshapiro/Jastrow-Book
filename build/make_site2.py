@@ -63,7 +63,18 @@ VERSE119 = ('<div class="verse" dir="rtl" lang="he"><span>ויאמרו לאמר<
             '<p class="ep" data-c="1">Ib. <span class="h">א׳ ע״ג א׳ וכ׳</span> small brick (lath) above small brick and brick above brick; e.g. (Esth. IX, 7 sq.)</p>'
             '<div class="verse v2" dir="rtl" lang="he"><span>פרשנדתא</span><span>ואת</span><span>דלפון.</span><span>ואת</span></div>')
 import difflib as _dl, html as _H
-def _pt(h): return "".join(_H.unescape(x) for x in re.split(r"(<[^>]+>)", h) if not x.startswith("<"))
+_TAGS = re.compile(r"<[^>]+>")
+def _pt(h): return _H.unescape(_TAGS.sub("", h))      # an entity never spans a tag, so one unescape does (5 Nov: faster)
+
+
+def _common(a, b, n):
+    """length of the common beginning of a and b, at most n (binary search on slices: fast in C)"""
+    lo, hi = 0, n
+    while lo < hi:
+        m = (lo + hi + 1) // 2
+        if a[:m] == b[:m]: lo = m
+        else: hi = m - 1
+    return lo
 BRK = [None]      # the column break of the page being repaired, as an offset into its plain text
 
 
@@ -92,10 +103,9 @@ def _step(old, new):
     local change, so only the stretch between the common beginning and end of the two texts is compared."""
     if BRK[0] is None or old == new: return
     a_, b_ = _pt(old), _pt(new); k = BRK[0]
-    n = min(len(a_), len(b_)); i = 0
-    while i < n and a_[i] == b_[i]: i += 1
-    j = 0
-    while j < n - i and a_[-1 - j] == b_[-1 - j]: j += 1
+    n = min(len(a_), len(b_))
+    i = _common(a_, b_, n)
+    j = _common(a_[::-1], b_[::-1], n - i)
     if k < i: return
     if k > len(a_) - j: BRK[0] = k + len(b_) - len(a_); return
     i = max(0, i - 40)     # a little context either side, so the comparison aligns as a whole-page one would
@@ -200,6 +210,23 @@ def fix_special(pid, h):
             if h == h0: break
             PL_N.append(pid)
             _step(h0, h)
+    # "Bab. ib." as the book prints it: Sefaria's current text named the tractate in 266 of the 541 (build/bab_ib.json
+    # keeps its names and links). The link goes with the name; the Citations finder reads "ib." itself (the user, 5 Nov).
+    for eid in re.findall(r'<div class="e[^"]*" id="(\w+)"', h):
+      for it in BAB_IB.get(eid, []):
+        if it.get("_done"): continue
+        k = h.find('id="%s"' % eid)          # within this entry's part on this page only
+        end = h.find('<div class="e', k + 5)
+        m = it["_rx"].search(h, k, end if end > 0 else len(h))
+        if not m: continue
+        h0 = h
+        if m.group(1):
+            e = h.index("</a>", m.end())
+            h = h[:m.start()] + "Bab. ib. " + h[m.end():e] + h[e + 4:]
+        else:
+            h = h[:m.start()] + "Bab. ib. " + h[m.end():]
+        it["_done"] = True
+        _step(h0, h)
     # a closing parenthesis ran into the definition after it ("(b. h. נְחִירַיִם; נָחַר)nostrils"): the book has a space
     # (M03077, N00491, O00220, Q01454; the user approved all 160, groupc_review.html, 5 Nov). One at a time, for _step.
     while True:
@@ -211,6 +238,10 @@ def fix_special(pid, h):
     return h
 
 
+BAB_IB = {}
+for _it in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "bab_ib.json"), encoding="utf-8"))["items"]:
+    _it["_rx"] = re.compile(r'Bab\. (<a class="r"[^>]*>)?(' + re.escape(_it["tractate"]) + r') ')
+    BAB_IB.setdefault(_it["entry"], []).append(_it)
 PAREN_SP = re.compile(r'\)((?:</a>)?(?:</span>)?)(?=<i>[A-Za-z]|same\. )')
 PAREN_N = []
 
@@ -514,6 +545,8 @@ for p_i, p in enumerate(pages):
 json.dump({"chunk": CHUNK, "pages": meta}, open(os.path.join(OUT, "data", "pages.json"), "w"),
           ensure_ascii=False, separators=(",", ":"))
 json.dump(hw, open(os.path.join(OUT, "data", "hw.json"), "w"), ensure_ascii=False, separators=(",", ":"))
+_bab_left = [it["entry"] for v in BAB_IB.values() for it in v if not it.get("_done")]
+assert not _bab_left, ("Bab. ib. not restored", _bab_left)
 if PAREN_N: print(len(PAREN_N), "spaces added after \")\"")
 if PL_N: print(len(PL_N), "plurals moved after the language key")
 if SAME_DUP_N: print(len(SAME_DUP_N), "doubled \"1) same. ch.\" removed")

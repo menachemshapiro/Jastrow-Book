@@ -11804,5 +11804,820 @@
   "old": " <span class=\"pl\">pl.; עָטַשׁ</span> <span class=\"lk\">(b. h. </span><span class=\"ss\"><span class=\"s\"><span class=\"d\"> ) ",
   "new": " <span class=\"lk\">(b. h. </span><span class=\"ss\"><span class=\"s\"><span class=\"d\"><i>pl.</i>; עָטַשׁ) ",
   "why": "Checked against the scan by the user (groupc_review.html, 5 Nov). The book: “f. (b. h. pl.; עָטַשׁ) sneezing.” (b. h. has the word in the plural only). The digital text has “pl.; עָטַשׁ” before an empty “(b. h. )”."
+ },
+ {
+  "page": 1641,
+  "entry": "V00011",
+  "headword": "",
+  "kind": "letters",
+  "old": "Kob. R. to XII, 5",
+  "new": "Koh. R. to XII, 5",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book has “Koh. R.” (Koheleth Rabbah); “Kob.” is a typo in the digital text (h read as b)."
+ },
+ {
+  "page": 1644,
+  "entry": "V00050",
+  "headword": "",
+  "kind": "letters",
+  "old": "they turned and denied themselves",
+  "new": "they turned and defiled themselves",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book has “defiled”; “denied” is a typo in the digital text."
+ },
+ {
+  "page": 1666,
+  "entry": "V00507",
+  "headword": "",
+  "kind": "letters",
+  "old": "it is thb must",
+  "new": "it is thy must",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book has “thy must”; “thb” is a typo in the digital text."
+ },
+ {
+  "page": 1684,
+  "entry": "V00783",
+  "headword": "",
+  "kind": "letters",
+  "old": "<i>t’ʿalah</i>",
+  "new": "<i>t’alah</i>",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book has “t’alah”, with no ʿ; the ʿ is a stray mark in the digital text."
+ },
+ {
+  "page": 1689,
+  "entry": "V00853",
+  "headword": "",
+  "kind": "letters",
+  "old": "<i>Bar Tafkòan</i>",
+  "new": "<i>Bar Tafkan</i>",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book has “Bar Tafkan.”; the “ò” is a stray mark in the digital text."
+ },
+ {
+  "page": 1700,
+  "entry": "V01030",
+  "headword": "",
+  "kind": "letters",
+  "old": "\">Jdg. VI, 30</a>",
+  "new": "\">Jud. VI, 30</a>",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book abbreviates Judges “Jud.” (397 times on the site); “Jdg.” is the digital text’s (only here, twice). 1 of 2."
+ },
+ {
+  "page": 1700,
+  "entry": "V01030",
+  "headword": "",
+  "kind": "letters",
+  "old": "\">Jdg. VI, 28</a>",
+  "new": "\">Jud. VI, 28</a>",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). As above, 2 of 2."
+ },
+ {
+  "page": 1650,
+  "entry": "V00142",
+  "headword": "",
+  "kind": "letters",
+  "old": "\">Targ. Ob. I, 15</a>",
+  "new": "\">Targ. Ob. 15</a>",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book has “Targ. Ob. 15” (Obadiah has one chapter); the digital text added “I,”."
+ },
+ {
+  "page": 1628,
+  "entry": "U01935",
+  "headword": "",
+  "kind": "letters",
+  "old": "Abraham convented the men",
+  "new": "Abraham converted the men",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book has “converted” (the audit's OCR read it “conveited”); “convented” is a typo in the digital text."
+ },
+ {
+  "page": 1670,
+  "entry": "V00573",
+  "headword": "",
+  "kind": "punct",
+  "old": " (v.<a class=\"x\" href=\"#V00574\">next",
+  "new": " (v. <a class=\"x\" href=\"#V00574\">next",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book has “(v. next w.)”; the digital text lost the space."
+ },
+ {
+  "page": 1695,
+  "entry": "V00943",
+  "headword": "תִּרְגֵּם",
+  "kind": "missing",
+  "old": " (late b. h.;<i>to speak aloud</i>",
+  "new": " (late b. h.; רגם <i>to speak aloud</i>",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book has “(late b. h.; רגם to speak aloud, Assyr.)”; the digital text lost the Hebrew רגם (Sefaria's 2018 text has it)."
+ },
+ {
+  "page": 1626,
+  "entry": "U01893",
+  "headword": "שָׁקַר",
+  "kind": "doubled",
+  "old": "<a class=\"x\" href=\"#U01892\">same</a>, <a class=\"x\" href=\"#U01892\">same</a>, <i>to lie",
+  "new": "<a class=\"x\" href=\"#U01892\">same</a>, <i>to lie",
+  "why": "The user's marks of pp. 1601-1700, checked against the scan (4 Nov; approved for the site 5 Nov). The book has “Pi. שִׁיקֵּר 1) same, to lie; to defraud.”; the digital text repeats “same,”."
+ },
+ {
+  "page": 27,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. אוֹמָנוּתָא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “אומנון , v. אוּמַן” (A00706)."
+ },
+ {
+  "page": 33,
+  "entry": "",
+  "kind": "break",
+  "break_after": "II a. אֻרְוָה.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “אוּרְוָותָא , v. אוּרְיָא II ch., a. אֵד” (A00864)."
+ },
+ {
+  "page": 47,
+  "entry": "",
+  "kind": "break",
+  "break_after": "גּוּבְתָּא). V. טְנִי.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “אִיטֵּר v. אִטֵּר” (A01225)."
+ },
+ {
+  "page": 67,
+  "entry": "",
+  "kind": "break",
+  "break_after": "אֱלוֹהוֹת , v. אֱלוֹהַּ",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “אַלְוָוא, אַלְוָוה , v. אַלְוָא, אַלְוָה” (A01801)."
+ },
+ {
+  "page": 82,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Cmp. אַרְנוֹן, אַרְנוֹנָא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “אנונים, אנונית, אנונס , v. preced.” (A02146)."
+ },
+ {
+  "page": 89,
+  "entry": "",
+  "kind": "break",
+  "break_after": "3; v. אֵיסַר.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “אִסּוּרָא , v. אִיסּוּרָא” (A02339)."
+ },
+ {
+  "page": 90,
+  "entry": "",
+  "kind": "break",
+  "break_after": "sense, v. גִּלְגַּלִּין.]",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “אִסְטֵל , pl. אִסִטלִים m., v. אִסְטַלִּ” (A02375)."
+ },
+ {
+  "page": 101,
+  "entry": "",
+  "kind": "break",
+  "break_after": "זרעא until seed-time.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “אפוקלוס, אפוקליס , v. אַפִּיקוֹרִין” (A02642)."
+ },
+ {
+  "page": 116,
+  "entry": "",
+  "kind": "break",
+  "break_after": "I, 16 לְטוּסָאֵי).",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “אַרְוָוסָא , v. אַרְוִיסָא” (A03023)."
+ },
+ {
+  "page": 122,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", read אָרְכֵיסְטֵיס.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “ארכקפאן , v. אַרְטְקָפָא” (A03161)."
+ },
+ {
+  "page": 136,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Yeb. 16b sq.).",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “בָּבָא I, v. בָּב I a. בָּבִיתָא.” (B00051)."
+ },
+ {
+  "page": 144,
+  "entry": "",
+  "kind": "break",
+  "break_after": "(ed. Berl. בּוּהְקָא).",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “בּוֹהֲקָנִי, בּוֹהֲקָנִית , v. בֹּהֲקָ׳” (B00218)."
+ },
+ {
+  "page": 162,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. בִּימוֹס",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “בִּימְסָא ch. = h. בִּימוֹס. Ab. Zar. 53” (B00634)."
+ },
+ {
+  "page": 164,
+  "entry": "",
+  "kind": "break",
+  "break_after": "egg, v. בֵּיעָא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “בִּיעֲתָא rejoicing, v. בּוּעֲתָא II. Ta” (B00674)."
+ },
+ {
+  "page": 175,
+  "entry": "",
+  "kind": "break",
+  "break_after": "and כַּלַּקְטֵירִין (χαρακτῆρες).",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “בלקיא , v. גְּלַבְקְיָא” (B00910)."
+ },
+ {
+  "page": 176,
+  "entry": "",
+  "kind": "break",
+  "break_after": "פיקרין, v. בְּנִיפיקָרִין.]",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “בְּנָא , v. בני” (B00933)."
+ },
+ {
+  "page": 211,
+  "entry": "",
+  "kind": "break",
+  "break_after": "ib. 133 גידורא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “גדורקרי , v. גורזקי” (C00189)."
+ },
+ {
+  "page": 212,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Ar., read אִגְּרִין.]",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “גַּדִּיפִין , v. גִּידּוּפָא” (C00212)."
+ },
+ {
+  "page": 221,
+  "entry": "",
+  "kind": "break",
+  "break_after": "S. a. l.).",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “גּוּלְגָּא , v. גַּלְגָּא” (C00375)."
+ },
+ {
+  "page": 236,
+  "entry": "",
+  "kind": "break",
+  "break_after": "קליגולס = Καλιγούλας).",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “גַּיּוֹפָא , v. גַּיָּיפָא” (C00664)."
+ },
+ {
+  "page": 262,
+  "entry": "",
+  "kind": "break",
+  "break_after": "in some ed.).",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “גָּפָה , part. גּוֹפֶה, v. גּוּף I” (C01200)."
+ },
+ {
+  "page": 302,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. דִּיסְקַנְסְ",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “דִּיסְטוֹרִין , v. דִּיסְתֹּורָא” (D00653)."
+ },
+ {
+  "page": 309,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. דְּלוּב",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “דלופקי , v. דְּלִפְקִי” (D00823)."
+ },
+ {
+  "page": 326,
+  "entry": "",
+  "kind": "break",
+  "break_after": "ר׳). V. דָּשַׁשׁ.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “דְּשִׁישׁ, דַּשֵּׁישׁ , v. דְּשַׁשׁ” (D01145)."
+ },
+ {
+  "page": 346,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. אִלְיַסְטוֹן",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “הֵילֵין , v. הָלֵין” (E00399)."
+ },
+ {
+  "page": 352,
+  "entry": "",
+  "kind": "break",
+  "break_after": "ערער legal protest.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “הַלֵּזוּ , v. הַלָּז” (E00546)."
+ },
+ {
+  "page": 356,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Koh. 976 המסס׳.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “הַמְעִיסָה, הַמְעָסָה , v. מְעִיסָה” (E00638)."
+ },
+ {
+  "page": 357,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. הִנְדְּקָא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “הִנְדִּיקִי , v. הִינְדִּיקִי” (E00662)."
+ },
+ {
+  "page": 359,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. הֶסֵּבָּה",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “הֶסֵּיחַ , v. הֶיסֵּ׳” (E00706)."
+ },
+ {
+  "page": 391,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. זָדוֹן ch.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “זַיְדָּל , v. זַיְידָּל” (G00281)."
+ },
+ {
+  "page": 416,
+  "entry": "",
+  "kind": "break",
+  "break_after": "ימא, v. חֲבֵיל.]",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “חִבּוּל, חִבּוּלָא , v. חִיבּ׳” (H00025)."
+ },
+ {
+  "page": 430,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. חֲבַרְבָּרָא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “חֲוַורְוָור , v. חֲוַרְוָור a. next w.” (H00274)."
+ },
+ {
+  "page": 525,
+  "entry": "",
+  "kind": "break",
+  "break_after": "דהדא. read: סוֹפָא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “טְוָפָא , pl. טְוָפֵי, v. טְיָפָא.” (I00197)."
+ },
+ {
+  "page": 534,
+  "entry": "",
+  "kind": "break",
+  "break_after": "(h. text טִירֹתָם).",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “*טִירוּנָא, טִרוּנָא m. (τύραννος) imper” (I00436)."
+ },
+ {
+  "page": 555,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. טְרַשׁ I.]",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “טֶרֶס m., pl. טְרָסִין, v. טֶרֶשׁ” (I00846)."
+ },
+ {
+  "page": 576,
+  "entry": "",
+  "kind": "break",
+  "break_after": "הַיְידָא a. לַיְידָא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “יִיח־ , v. יִח׳” (J00328)."
+ },
+ {
+  "page": 583,
+  "entry": "",
+  "kind": "break",
+  "break_after": "with fever &c.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “*יָסַת (cmp. אֲסִי a. עָשָׂה) to do habi” (J00472)."
+ },
+ {
+  "page": 608,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. כִּיבּוּשׁ h.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “כְּבִישְׁתָּא , v. כְּבִישׁ” (K00058)."
+ },
+ {
+  "page": 623,
+  "entry": "",
+  "kind": "break",
+  "break_after": "executioner; v. קוּסְטִינָר.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “כוסיא , Targ. Y. Ex. XXII, 8, a. e., v.” (K00323)."
+ },
+ {
+  "page": 637,
+  "entry": "",
+  "kind": "break",
+  "break_after": "band, v. כִּתָּא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “כִּיתָּה f. same, v. כַּתְּ” (K00645)."
+ },
+ {
+  "page": 645,
+  "entry": "",
+  "kind": "break",
+  "break_after": "19; not ב׳).",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “כַּלְנִיתָא , v. כּוּלְנִי׳” (K00772)."
+ },
+ {
+  "page": 675,
+  "entry": "",
+  "kind": "break",
+  "break_after": "כַּשְׂדִּיּוֹת. Snh. 92b",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “כִּשּׁוּף , v. כִּישּׁוּף” (K01299)."
+ },
+ {
+  "page": 685,
+  "entry": "",
+  "kind": "break",
+  "break_after": "M’bo, p. 75b.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “לאגרא, לאגרה , Koh. R. to VII, 11 end,—m” (L00007)."
+ },
+ {
+  "page": 686,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. אָן",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “לָאעִי , part. of לְעִי.” (L00026)."
+ },
+ {
+  "page": 692,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Ul’kaḥ., p. 182a",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “לגיטיין , v. לֶגְטוֹן” (L00129)."
+ },
+ {
+  "page": 705,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. הַלְטָאָה",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “לְטוֹם m. (b. h. לֹט) gum-mastich (Ladan” (L00382)."
+ },
+ {
+  "page": 706,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. sub לִגְ׳.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “ליגנין , Tanḥ., ed. Bub., B’resh. 24, v.” (L00428)."
+ },
+ {
+  "page": 765,
+  "entry": "",
+  "kind": "break",
+  "break_after": "bot., v. אַלְבִּינָא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “מַטָּארָאתָא, מַטָּארָתָא , v. מַטַּרְתָ” (M00962)."
+ },
+ {
+  "page": 789,
+  "entry": "",
+  "kind": "break",
+  "break_after": "מִלְטִין, v. מַלְטֵט",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “מלטוכים , v. מִילוֹטוֹמְיָא” (M01536)."
+ },
+ {
+  "page": 803,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. מְסַחֲרַיָּא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “מסאחתא , v. מְסַחְתָּא” (M01830)."
+ },
+ {
+  "page": 805,
+  "entry": "",
+  "kind": "break",
+  "break_after": "bath-house; v. מְסוּתָא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “מַסְחֵיט m. (סָחַט) squeezing appliance,” (M01890)."
+ },
+ {
+  "page": 813,
+  "entry": "",
+  "kind": "break",
+  "break_after": "matting; v. מַדֵּן.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “מַעֲדֵן II, מַעֲדַנִּים, מַעֲדַנִּין (b.” (M02067)."
+ },
+ {
+  "page": 827,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. מִיצַּע",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “מַצָּע m. (b. h.; יָצַע) mattress, bed.” (M02342)."
+ },
+ {
+  "page": 835,
+  "entry": "",
+  "kind": "break",
+  "break_after": "מַרְבִּיעוֹת , v. מוּרְבִּית II",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “מַרְבִּיעֲתָא , v. מַרְבַּעְתָּא” (M02500)."
+ },
+ {
+  "page": 877,
+  "entry": "",
+  "kind": "break",
+  "break_after": "(Ms. M. נדבר).",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “נִדְבוּתָא f. (נְדַב) willingness, devot” (N00206)."
+ },
+ {
+  "page": 885,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. נִימוֹס II.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “נוורתוק , v. נַרְתֵּיק” (N00334)."
+ },
+ {
+  "page": 931,
+  "entry": "",
+  "kind": "break",
+  "break_after": "clean, v. נקי.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “נָקוּב m., pl. נְקוּבִים, v. נָקַב a. נֶ” (N01172)."
+ },
+ {
+  "page": 953,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. סְגַד",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “סְגוּד, סְגוּרָא m. = סִגְדָּא, idol-wor” (O00108)."
+ },
+ {
+  "page": 972,
+  "entry": "",
+  "kind": "break",
+  "break_after": "רון), v. אִיסְטַטְיוֹן.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “סטטירין, סטיטירין , v. לִיסְטֵירִין” (O00479)."
+ },
+ {
+  "page": 977,
+  "entry": "",
+  "kind": "break",
+  "break_after": "אספי); v. סוֹף.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “סְיוּרָא , v. סְוֵירָא” (O00597)."
+ },
+ {
+  "page": 1020,
+  "entry": "",
+  "kind": "break",
+  "break_after": "סְקִיפַּסְטִי , v. אִסְקְפַסְטִי",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “סַקֵּיפְתָּא , v. סְקוּפְתָּא” (O01483)."
+ },
+ {
+  "page": 1028,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. חֲמִיסִין",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “סרנא, סרני, סרנייא , v. סַדָּן ch.” (O01642)."
+ },
+ {
+  "page": 1075,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Dehr., v. עֵרָיִין",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “עִירְבָא, עִירְבֵּב, עִירְבּוּב, עִירְבּ” (P00676)."
+ },
+ {
+  "page": 1077,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. קוֹבְעַיָּא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “עיתור , Y. Ab. Zar. I, 39d, read: עִיטּו” (P00710)."
+ },
+ {
+  "page": 1087,
+  "entry": "",
+  "kind": "break",
+  "break_after": "מוֹאָבִי; a. fr.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “עמּוּם , v. עִימְעוּם I” (P00871)."
+ },
+ {
+  "page": 1105,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. עוּקְצָא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “עִקּוּר , v. עִיקּוּר” (P01165)."
+ },
+ {
+  "page": 1114,
+  "entry": "",
+  "kind": "break",
+  "break_after": "willow-day, v. עֲרַבְתָּא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “עֲרוּבְתָּא II f. pledge, v. עַרְבוּתָא.” (P01314)."
+ },
+ {
+  "page": 1140,
+  "entry": "",
+  "kind": "break",
+  "break_after": "e., v. פָּטַם.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “פּוֹטְיָא f. (φωτία) brightness, v. פּוֹ” (Q00187)."
+ },
+ {
+  "page": 1155,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. פְּטִילִיק",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “פַּטִּיר, פַּטִּירָא, פַּטִּירָא, פַּטִּ” (Q00523)."
+ },
+ {
+  "page": 1173,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. פֶּתַח",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “פִּיתְחָא, פִּיתְחוֹן , v. sub פִּתְח׳.” (Q00901)."
+ },
+ {
+  "page": 1182,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Kings 208 פפי.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “פליריכוס, פלירכוס , Yalk. Deut. 813, a c” (Q01069)."
+ },
+ {
+  "page": 1183,
+  "entry": "",
+  "kind": "break",
+  "break_after": "= h. פְּלוֹנִי. Y. Kidd.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with the rest of the entry, after “= h. פְּלוֹנִי. Y. Kidd.”."
+ },
+ {
+  "page": 1217,
+  "entry": "",
+  "kind": "break",
+  "break_after": "פרוזבטה , v. פְּרִיבָטָא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “פרובי , v. פּוּרְבִּי” (Q01615)."
+ },
+ {
+  "page": 1269,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Is. VIII, 19) המְצַוְּוצִין",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with the rest of the entry, after “Is. VIII, 19) המְצַוְּוצִין”."
+ },
+ {
+  "page": 1273,
+  "entry": "",
+  "kind": "break",
+  "break_after": "5, v. צְחֵי.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “צַחֲנָא , v. צַחַנְתָּא” (R00277)."
+ },
+ {
+  "page": 1336,
+  "entry": "",
+  "kind": "break",
+  "break_after": "קוּסְטַאנְטִינ׳ v. קוּסְטַנְטִינ׳",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קוסטברי׳ v. קוּסְטִינָר” (S00463)."
+ },
+ {
+  "page": 1346,
+  "entry": "",
+  "kind": "break",
+  "break_after": "top, v. קָטַע.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קְטָה ch., v. קְטָא” (S00705)."
+ },
+ {
+  "page": 1352,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. קָטָפְרקְטוֹס",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קָטָפְרֵיס, קָטָפְרֵס m. (καταφέρης) slo” (S00819)."
+ },
+ {
+  "page": 1366,
+  "entry": "",
+  "kind": "break",
+  "break_after": "קִיפְלַי , v. קִיבְלַי",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קִיפָלִין , v. next w.” (S01111)."
+ },
+ {
+  "page": 1373,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. קְלוּסַנְטְרִין",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קלוסים, קלוסין , Lev. R. s. 7, v. קְלִוְ” (S01281)."
+ },
+ {
+  "page": 1377,
+  "entry": "",
+  "kind": "break",
+  "break_after": "84a, v. כנתי",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קָלִישׁ, קְלִישָׁא, קַלִּ׳ , v. קְלַשׁ” (S01352)."
+ },
+ {
+  "page": 1383,
+  "entry": "",
+  "kind": "break",
+  "break_after": "קריתא), v. הֵינוּמָא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קַלָּתָה , v. קַלָּת” (S01432)."
+ },
+ {
+  "page": 1389,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. קִינוֹנְיָא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קִנּוֹף, קִנּוּפָא , v. sub קִינּ׳.” (S01546)."
+ },
+ {
+  "page": 1390,
+  "entry": "",
+  "kind": "break",
+  "break_after": "1037, read: קַסְטְרָה.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קַנְטְרוֹפּוֹס , v. גַּנְדְּרוֹפּוֹס” (S01564)."
+ },
+ {
+  "page": 1397,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. קְרַסְטְלִין",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קִסְרִי, קֵסַרְיוֹן, קִסְרָיָא, קִסרִין” (S01682)."
+ },
+ {
+  "page": 1409,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. אַקּוּבִּיטוֹן",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קָקוֹ, ק׳ פדיפטי , v. פְּדִיפְטֵי” (S01862)."
+ },
+ {
+  "page": 1431,
+  "entry": "",
+  "kind": "break",
+  "break_after": "10; a. e.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “קְשִׂיטָא , v. כְּסִיתָּא” (S02245)."
+ },
+ {
+  "page": 1466,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. טְפִיחַ II",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “רִחֵיץ, רָחֵיץ , v. רְחֵץ” (T00504)."
+ },
+ {
+  "page": 1476,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. רָפוֹ",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “רִיפְקָא , v. רִפְקָא” (T00684)."
+ },
+ {
+  "page": 1485,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. רֵיעַ",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “רְעָא , v. רְעֵי” (T00868)."
+ },
+ {
+  "page": 1487,
+  "entry": "",
+  "kind": "break",
+  "break_after": "v. רְעֵי II.]",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “רָעַיְיתָא, רַעֲיָיתָא (רַעֲיָיתֵי) , v.” (T00903)."
+ },
+ {
+  "page": 1569,
+  "entry": "",
+  "kind": "break",
+  "break_after": "שִׁירַיָּא); v. שִׁרְייָנָא.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “שִׁירְיוֹן, שִׁירְיוֹנָא , v. sub שִׁרְ׳” (U01075)."
+ },
+ {
+  "page": 1573,
+  "entry": "",
+  "kind": "break",
+  "break_after": ", v. שְׁכַן",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “שַׂכִּין, שַׂכִּינָא , v. סַכִּין” (U01150)."
+ },
+ {
+  "page": 1608,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Rabad, v. שָׁצַף.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “שִׁסְקִי , v. שִׁיסְקֵי” (U01623)."
+ },
+ {
+  "page": 1620,
+  "entry": "",
+  "kind": "break",
+  "break_after": "על ש׳, quid?",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “שְׂפָתוֹת, שְׂפָתַיִם , v. שָׂפָה” (U01815)."
+ },
+ {
+  "page": 1650,
+  "entry": "",
+  "kind": "break",
+  "break_after": "Beck, v. תּוּרְבְּיָינָא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “תּוֹבִילָא , v. תּוּבְלְיָיא” (V00148)."
+ },
+ {
+  "page": 1664,
+  "entry": "",
+  "kind": "break",
+  "break_after": "וְאַתְיָא, v. אֲתָא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “תִּיָּיה , v. תִּיאָה” (V00435)."
+ },
+ {
+  "page": 1670,
+  "entry": "",
+  "kind": "break",
+  "break_after": "תְּלָה , v. תלי, תְּלֵי.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “תְּלַהּ, תִּלְהָא , v. תְּלַח, תִּלְחָא.” (V00577)."
+ },
+ {
+  "page": 1678,
+  "entry": "",
+  "kind": "break",
+  "break_after": "תַּמְנַיְיתָא , v. תּוֹמַנְתָּא",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “תַּמְנֵיסַר, תַּמְנֵיסְרָאָה, תַּמְנֵיסְ” (V00697)."
+ },
+ {
+  "page": 1685,
+  "entry": "",
+  "kind": "break",
+  "break_after": "manipulation, v. תְּפִיסָה.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “תָּפוּת , v. תָּפִית” (V00807)."
+ },
+ {
+  "page": 1696,
+  "entry": "",
+  "kind": "break",
+  "break_after": "(or young) cabbage.",
+  "why": "Column break as in the 1903 printing, read on the scan (5 Nov 2026; the user asked for the 102 pages that had no fixed break to be set). No change to the text. The book's second column begins with “תְּרוֹג, תְּרוֹגָא m. = h. אֶתְרוֹג.—Pl.” (V00956)."
  }
 ]

@@ -1,0 +1,2133 @@
+{
+ "_about": "\"Bab. ib.\" restored as the book prints it (541 times in the book and in Sefaria's 2018 text). Sefaria's current text replaced 266 of them with a tractate name; these are those 266, with Sefaria's name and link, kept so that they can be used again later if wanted (the user, 5 Nov 2026). make_site2.py restores \"Bab. ib.\" in each (BAB_IB). Known wrong in Sefaria: p. 1255 (Snh. for Shabbat), p. 1128 (Ber. for Avodah Zarah, already a text_fixes record).",
+ "items": [
+  {
+   "page": "7",
+   "entry": "A00169",
+   "sefaria": "Bab. Snh. 64",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.64a.13",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "10",
+   "entry": "A00229",
+   "sefaria": "Bab. Sabb. 120",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.120a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "21",
+   "entry": "A00539",
+   "sefaria": "Bab. Ab. Zar. 31",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.31a.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "22",
+   "entry": "A00568",
+   "sefaria": "Bab. Sabb. 67",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.67a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "25",
+   "entry": "A00654",
+   "sefaria": "Bab. Erub. 16",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.16a.1",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "51",
+   "entry": "A01350",
+   "sefaria": "Bab. Snh. 11",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.11b.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "52",
+   "entry": "A01375",
+   "sefaria": "Bab. Git. 87",
+   "tractate": "Git.",
+   "link": "https://www.sefaria.org/Gittin.87b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "62",
+   "entry": "A01674",
+   "sefaria": "Bab. Sot. 37",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.37b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "65",
+   "entry": "A01739",
+   "sefaria": "Bab. Ber. 63",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.63b.23",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "85",
+   "entry": "A02240",
+   "sefaria": "Bab. Succ. 12",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.12b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "89",
+   "entry": "A02341",
+   "sefaria": "Bab. B. Bath. 67",
+   "tractate": "B. Bath.",
+   "link": "https://www.sefaria.org/Bava_Batra.67b.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "90",
+   "entry": "A02379",
+   "sefaria": "Bab. Sot. 35",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.35b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "116",
+   "entry": "A03011",
+   "sefaria": "Bab. Erub. 29",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.29a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "129",
+   "entry": "A03329",
+   "sefaria": "Bab. Ber. 3",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.3a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "149",
+   "entry": "B00346",
+   "sefaria": "Bab. Ab. Zar. 31",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.31a.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "156",
+   "entry": "B00491",
+   "sefaria": "Bab. Ab. Zar. 75",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.75a.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "169",
+   "entry": "B00784",
+   "sefaria": "Bab. Taan. 29",
+   "tractate": "Taan.",
+   "link": "https://www.sefaria.org/Taanit.29a.7",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "181",
+   "entry": "B01045",
+   "sefaria": "Bab. B. Kam. 27",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.27b.10",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "184",
+   "entry": "B01087",
+   "sefaria": "Bab. B. Bath. 36",
+   "tractate": "B. Bath.",
+   "link": "https://www.sefaria.org/Bava_Batra.36b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "190",
+   "entry": "B01173",
+   "sefaria": "Bab. M. Kat. 17",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.17a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "192",
+   "entry": "B01232",
+   "sefaria": "Bab. B. Kam. 20",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.20a.1",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "197",
+   "entry": "B01335",
+   "sefaria": "Bab. Ned. 10",
+   "tractate": "Ned.",
+   "link": "https://www.sefaria.org/Nedarim.10b.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "214",
+   "entry": "C00244",
+   "sefaria": "Bab. Sabb. 73",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.73b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "217",
+   "entry": "C00278",
+   "sefaria": "Bab. Sabb. 137",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.137b.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "218",
+   "entry": "C00311",
+   "sefaria": "Bab. B. Mets. 25",
+   "tractate": "B. Mets.",
+   "link": "https://www.sefaria.org/Bava_Metzia.25a.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "220",
+   "entry": "C00352",
+   "sefaria": "Bab. Sab. 130",
+   "tractate": "Sab.",
+   "link": "",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "221",
+   "entry": "C00364",
+   "sefaria": "Bab. M. Kat. 26",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.26a.19",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "226",
+   "entry": "C00487",
+   "sefaria": "Bab. Gitt. 58",
+   "tractate": "Gitt.",
+   "link": "https://www.sefaria.org/Gittin.58b.12",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "235",
+   "entry": "C00636",
+   "sefaria": "Bab. B. Bath. 39",
+   "tractate": "B. Bath.",
+   "link": "https://www.sefaria.org/Bava_Batra.39b.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "235",
+   "entry": "C00639",
+   "sefaria": "Bab. Ab. Zar. 45",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.45b.10",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "236",
+   "entry": "C00663",
+   "sefaria": "Bab. Sot. 33",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.33a.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "245",
+   "entry": "C00874",
+   "sefaria": "Bab. Naz. 51",
+   "tractate": "Naz.",
+   "link": "https://www.sefaria.org/Nazir.51a.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "246",
+   "entry": "C00883",
+   "sefaria": "Bab. Sabb. 138",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.138a.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "258",
+   "entry": "C01107",
+   "sefaria": "Bab. Ber. 16",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.16a.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "276",
+   "entry": "D00038",
+   "sefaria": "Bab. Ab. Zar. 33",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.33a.7",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "281",
+   "entry": "D00137",
+   "sefaria": "Bab. R. Hash. 23",
+   "tractate": "R. Hash.",
+   "link": "https://www.sefaria.org/Rosh_Hashanah.23a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "294",
+   "entry": "D00459",
+   "sefaria": "Bab. B. Bath. 152",
+   "tractate": "B. Bath.",
+   "link": "https://www.sefaria.org/Bava_Batra.152b.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "297",
+   "entry": "D00543",
+   "sefaria": "Bab. Snh. 71",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.71a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "301",
+   "entry": "D00635",
+   "sefaria": "Bab. Kidd. 4",
+   "tractate": "Kidd.",
+   "link": "https://www.sefaria.org/Kiddushin.4b.10",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "322",
+   "entry": "D01057",
+   "sefaria": "Bab. Taan. 29",
+   "tractate": "Taan.",
+   "link": "https://www.sefaria.org/Taanit.29b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "322",
+   "entry": "D01067",
+   "sefaria": "Bab. Kidd. 12",
+   "tractate": "Kidd.",
+   "link": "https://www.sefaria.org/Kiddushin.12a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "323",
+   "entry": "D01089",
+   "sefaria": "Bab. Sabb. 20",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.20b.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "333",
+   "entry": "E00119",
+   "sefaria": "Bab. Sabb. 121",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.121b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "335",
+   "entry": "E00151",
+   "sefaria": "Bab. Pes. 36",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.36b.13",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "339",
+   "entry": "E00234",
+   "sefaria": "Bab. Nidd. 16",
+   "tractate": "Nidd.",
+   "link": "https://www.sefaria.org/Niddah.16b.30",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "340",
+   "entry": "E00252",
+   "sefaria": "Bab. Sabb. 117",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.117b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "340",
+   "entry": "E00263",
+   "sefaria": "Bab. Sabb. 78",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.78b.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "348",
+   "entry": "E00458",
+   "sefaria": "Bab. B. Mets. 21",
+   "tractate": "B. Mets.",
+   "link": "https://www.sefaria.org/Bava_Metzia.21a.12",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "366",
+   "entry": "E00835",
+   "sefaria": "Bab. B. Kam. 49",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.49a.14",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "371",
+   "entry": "E00949",
+   "sefaria": "Bab. Sabb. 21",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.21a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "371",
+   "entry": "E00957",
+   "sefaria": "Bab. Sabb. 123",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.123b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "374",
+   "entry": "F00061",
+   "sefaria": "Bab. Keth. 72",
+   "tractate": "Keth.",
+   "link": "https://www.sefaria.org/Ketubot.72b.5",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "380",
+   "entry": "G00062",
+   "sefaria": "Bab. Nidd. 25",
+   "tractate": "Nidd.",
+   "link": "https://www.sefaria.org/Niddah.25b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "382",
+   "entry": "G00102",
+   "sefaria": "Bab. Nidd. 65",
+   "tractate": "Nidd.",
+   "link": "https://www.sefaria.org/Niddah.65b.56",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "389",
+   "entry": "G00223",
+   "sefaria": "Bab. Sot. 33",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.33b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "393",
+   "entry": "G00321",
+   "sefaria": "Bab. Sabb. 106",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.106b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "397",
+   "entry": "G00431",
+   "sefaria": "Bab. Pes. 85",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.85b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "421",
+   "entry": "H00109",
+   "sefaria": "Bab. B. Bath. 158",
+   "tractate": "B. Bath.",
+   "link": "https://www.sefaria.org/Bava_Batra.158b.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "424",
+   "entry": "H00157",
+   "sefaria": "Bab. Ned. 49",
+   "tractate": "Ned.",
+   "link": "https://www.sefaria.org/Nedarim.49b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "430",
+   "entry": "H00256",
+   "sefaria": "Bab. Ab. Zar. 19",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.19b.13",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "430",
+   "entry": "H00278",
+   "sefaria": "Bab. M. Kat. 3",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.3b.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "437",
+   "entry": "H00423",
+   "sefaria": "Bab. Succ. 25",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.25b.10",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "447",
+   "entry": "H00571",
+   "sefaria": "Bab. Sabb. 38",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.38a.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "450",
+   "entry": "H00639",
+   "sefaria": "Bab. Ber. 47",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.47a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "456",
+   "entry": "H00772",
+   "sefaria": "Bab. Sabb. 70",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.70a.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "460",
+   "entry": "H00868",
+   "sefaria": "Bab. Pes. 3",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.3b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "475",
+   "entry": "H01138",
+   "sefaria": "Bab. Erub. 65",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.65b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "481",
+   "entry": "H01244",
+   "sefaria": "Bab. Meg. 6",
+   "tractate": "Meg.",
+   "link": "https://www.sefaria.org/Megillah.6a.1",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "495",
+   "entry": "H01513",
+   "sefaria": "Bab. Sabb. 35",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.35b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "514",
+   "entry": "H01904",
+   "sefaria": "Bab. Ned. 32",
+   "tractate": "Ned.",
+   "link": "https://www.sefaria.org/Nedarim.32a.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "515",
+   "entry": "I00012",
+   "sefaria": "Bab. Sabb. 70",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.70a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "516",
+   "entry": "I00034",
+   "sefaria": "Bab. Sabb. 57",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.57b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "518",
+   "entry": "I00068",
+   "sefaria": "Bab. Erub. 86",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.86a.5",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "541",
+   "entry": "I00573",
+   "sefaria": "Bab. Sot. 48",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.48b.10",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "567",
+   "entry": "J00149",
+   "sefaria": "Bab. Hor. 11",
+   "tractate": "Hor.",
+   "link": "https://www.sefaria.org/Horayot.11b.10",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "572",
+   "entry": "J00266",
+   "sefaria": "Bab. Kidd. 71",
+   "tractate": "Kidd.",
+   "link": "https://www.sefaria.org/Kiddushin.71b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "574",
+   "entry": "J00278",
+   "sefaria": "Bab. B. Kam. 59",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.59a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "576",
+   "entry": "J00316",
+   "sefaria": "Bab. Ber. 13",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.13b.19",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "583",
+   "entry": "J00471",
+   "sefaria": "Bab. Taan. 12",
+   "tractate": "Taan.",
+   "link": "https://www.sefaria.org/Taanit.12a.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "583",
+   "entry": "J00476",
+   "sefaria": "Bab. Kidd. 6",
+   "tractate": "Kidd.",
+   "link": "https://www.sefaria.org/Kiddushin.6a.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "587",
+   "entry": "J00515",
+   "sefaria": "Bab. Ned. 17",
+   "tractate": "Ned.",
+   "link": "https://www.sefaria.org/Nedarim.17a.1",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "590",
+   "entry": "J00552",
+   "sefaria": "Bab. B. Kam. 22",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.22b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "594",
+   "entry": "J00597",
+   "sefaria": "Bab. B. Kam. 38",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.38a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "594",
+   "entry": "J00599",
+   "sefaria": "Bab. Sabb. 83",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.83b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "599",
+   "entry": "J00675",
+   "sefaria": "Bab. Ber. 30",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.30a.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "606",
+   "entry": "K00030",
+   "sefaria": "Bab. Nidd. 56",
+   "tractate": "Nidd.",
+   "link": "https://www.sefaria.org/Niddah.56a.75",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "607",
+   "entry": "K00040",
+   "sefaria": "Bab. Pes. 51",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.51a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "613",
+   "entry": "K00118",
+   "sefaria": "Bab. Ber. 59",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.59b.1",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "618",
+   "entry": "K00243",
+   "sefaria": "Bab. Ber. 16",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.16b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "620",
+   "entry": "K00286",
+   "sefaria": "Bab. Sabb. 64",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.64a.21",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "632",
+   "entry": "K00531",
+   "sefaria": "Bab. Pes. 42",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.42b.15",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "635",
+   "entry": "K00603",
+   "sefaria": "Bab. Gitt. 20",
+   "tractate": "Gitt.",
+   "link": "https://www.sefaria.org/Gittin.20a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "635",
+   "entry": "K00605",
+   "sefaria": "Bab. Ber. 58",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.58b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "636",
+   "entry": "K00621",
+   "sefaria": "Bab. Bets. 20",
+   "tractate": "Bets.",
+   "link": "https://www.sefaria.org/Beitzah.20b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "637",
+   "entry": "K00655",
+   "sefaria": "Bab. Snh. 66",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.66b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "661",
+   "entry": "K01039",
+   "sefaria": "Bab. B. Kam. 59",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.59b.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "675",
+   "entry": "K01287",
+   "sefaria": "Bab. Sabb. 110",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.110b.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "676",
+   "entry": "K01310",
+   "sefaria": "Bab. B. Kam. 19",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.19b.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "711",
+   "entry": "L00553",
+   "sefaria": "Bab. B. Kam. 30",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.30a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "732",
+   "entry": "M00252",
+   "sefaria": "Bab. B. Kam. 27",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.27b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "739",
+   "entry": "M00431",
+   "sefaria": "Bab. Keth. 10",
+   "tractate": "Keth.",
+   "link": "https://www.sefaria.org/Ketubot.10a.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "759",
+   "entry": "M00850",
+   "sefaria": "Bab. B. Kam. 119",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.119b.13",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "761",
+   "entry": "M00877",
+   "sefaria": "Bab. Sot. 18",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.18a.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "762",
+   "entry": "M00890",
+   "sefaria": "Bab. Snh. 88",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.88b.7",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "774",
+   "entry": "M01174",
+   "sefaria": "Bab. Succ. 54",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.54a.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "777",
+   "entry": "M01226",
+   "sefaria": "Bab. Nidd. 36",
+   "tractate": "Nidd.",
+   "link": "https://www.sefaria.org/Niddah.36a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "779",
+   "entry": "M01317",
+   "sefaria": "Bab. Erub. 43",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.43b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "784",
+   "entry": "M01437",
+   "sefaria": "Bab. Gitt. 30",
+   "tractate": "Gitt.",
+   "link": "https://www.sefaria.org/Gittin.30a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "805",
+   "entry": "M01882",
+   "sefaria": "Bab. Sot. 49",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.49b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "805",
+   "entry": "M01884",
+   "sefaria": "Bab. Meg. 3",
+   "tractate": "Meg.",
+   "link": "https://www.sefaria.org/Megillah.3a.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "805",
+   "entry": "M01897",
+   "sefaria": "Bab. Pes. 65",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.65b.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "810",
+   "entry": "M01995",
+   "sefaria": "Bab. M. Kat. 17",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.17b.16",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "811",
+   "entry": "M02009",
+   "sefaria": "Bab. Succ. 34",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.34a.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "813",
+   "entry": "M02070",
+   "sefaria": "Bab. Kidd. 12",
+   "tractate": "Kidd.",
+   "link": "https://www.sefaria.org/Kiddushin.12a.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "863",
+   "entry": "M03082",
+   "sefaria": "Bab. Erub. 100",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.100a.16",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "879",
+   "entry": "N00231",
+   "sefaria": "Bab. Snh. 108",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.108a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "895",
+   "entry": "N00505",
+   "sefaria": "Bab. Ber. 31",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.31a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "899",
+   "entry": "N00556",
+   "sefaria": "Bab. Ber. 13",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.13b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "899",
+   "entry": "N00560",
+   "sefaria": "Bab. Sabb. 75",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.75a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "900",
+   "entry": "N00573",
+   "sefaria": "Bab. Sabb. 40",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.40b.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "909",
+   "entry": "N00786",
+   "sefaria": "Bab. Sabb. 54",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.54b.15",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "919",
+   "entry": "N00962",
+   "sefaria": "Bab. Sabb. 40",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.40a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "920",
+   "entry": "N00995",
+   "sefaria": "Bab. M. Kat. 26",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.26a.20",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "922",
+   "entry": "N01025",
+   "sefaria": "Bab. Sabb. 75",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.75b.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "928",
+   "entry": "N01109",
+   "sefaria": "Bab. Sot. 33",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.33a.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "939",
+   "entry": "N01312",
+   "sefaria": "Bab. B. Kam. 2",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.2b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "953",
+   "entry": "O00115",
+   "sefaria": "Bab. Ab. Zar. 18",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.18b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "954",
+   "entry": "O00136",
+   "sefaria": "Bab. Ab. Zar. 18",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.18b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "964",
+   "entry": "O00321",
+   "sefaria": "Bab. M. Kat. 26",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.26b.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "977",
+   "entry": "O00600",
+   "sefaria": "Bab. Gitt. 89",
+   "tractate": "Gitt.",
+   "link": "https://www.sefaria.org/Gittin.89a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "984",
+   "entry": "O00771",
+   "sefaria": "Bab. Keth. 15",
+   "tractate": "Keth.",
+   "link": "https://www.sefaria.org/Ketubot.15a.1",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "987",
+   "entry": "O00835",
+   "sefaria": "Bab. Ber. 34",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.34a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "987",
+   "entry": "O00836",
+   "sefaria": "Bab. M. Kat. 27",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.27a.14",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "989",
+   "entry": "O00891",
+   "sefaria": "Bab. M. Kat. 4",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.4b.17",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "996",
+   "entry": "O01024",
+   "sefaria": "Bab. Ab. Zar. 40",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.40a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1000",
+   "entry": "O01097",
+   "sefaria": "Bab. Sabb. 38",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.38b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1013",
+   "entry": "O01366",
+   "sefaria": "Bab. Kidd. 30",
+   "tractate": "Kidd.",
+   "link": "https://www.sefaria.org/Kiddushin.30b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1017",
+   "entry": "O01422",
+   "sefaria": "Bab. Sot. 49",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.49b.16",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1021",
+   "entry": "O01497",
+   "sefaria": "Bab. Nidd. 23",
+   "tractate": "Nidd.",
+   "link": "https://www.sefaria.org/Niddah.23a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1034",
+   "entry": "O01720",
+   "sefaria": "Bab. B. Mets. 118",
+   "tractate": "B. Mets.",
+   "link": "https://www.sefaria.org/Bava_Metzia.118b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1037",
+   "entry": "P00035",
+   "sefaria": "Bab. Succ. 32",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.32b.21",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1037",
+   "entry": "P00047",
+   "sefaria": "Bab. B. Kam. 115",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.115a.2-14",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1046",
+   "entry": "P00167",
+   "sefaria": "Bab. Snh. 18",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.18b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1046",
+   "entry": "P00171",
+   "sefaria": "Bab. Ab. Zar. 75",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.75a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1050",
+   "entry": "P00248",
+   "sefaria": "Bab. M. Kat. 26",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.26a.23",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1050",
+   "entry": "P00248",
+   "sefaria": "Bab. Gitt. 55",
+   "tractate": "Gitt.",
+   "link": "https://www.sefaria.org/Gittin.55a.13",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1054",
+   "entry": "P00294",
+   "sefaria": "Bab. Ab. Zar. 75",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.75a.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1060",
+   "entry": "P00390",
+   "sefaria": "Bab. B. Bath. 158",
+   "tractate": "B. Bath.",
+   "link": "https://www.sefaria.org/Bava_Batra.158b.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1061",
+   "entry": "P00397",
+   "sefaria": "Bab. Ab. Zar. 11",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.11b.12",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1065",
+   "entry": "P00490",
+   "sefaria": "Bab. Sabb. 75",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.75b.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1075",
+   "entry": "P00680",
+   "sefaria": "Bab. Pes. 43",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.43a.13",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1076",
+   "entry": "P00692",
+   "sefaria": "Bab. Meg. 25",
+   "tractate": "Meg.",
+   "link": "https://www.sefaria.org/Megillah.25a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1078",
+   "entry": "P00720",
+   "sefaria": "Bab. Sabb. 121",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.121b.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1084",
+   "entry": "P00820",
+   "sefaria": "Bab. Pes. 66",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.66a.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1087",
+   "entry": "P00866",
+   "sefaria": "Bab. Ber. 28",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.28b.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1087",
+   "entry": "P00870",
+   "sefaria": "Bab. Snh. 106",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.106a.10",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1089",
+   "entry": "P00903",
+   "sefaria": "Bab. Snh. 42",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.42a.12",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1090",
+   "entry": "P00927",
+   "sefaria": "Bab. Ber. 58",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.58a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1105",
+   "entry": "P01161",
+   "sefaria": "Bab. Meg. 24",
+   "tractate": "Meg.",
+   "link": "https://www.sefaria.org/Megillah.24b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1118",
+   "entry": "P01375",
+   "sefaria": "Bab. Keth. 52",
+   "tractate": "Keth.",
+   "link": "https://www.sefaria.org/Ketubot.52b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1118",
+   "entry": "P01377",
+   "sefaria": "Bab. Sot. 43",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.43b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1128",
+   "entry": "P01527",
+   "sefaria": "Bab. Sabb. 53",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.53b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1133",
+   "entry": "Q00061",
+   "sefaria": "Bab. Shebu. 25",
+   "tractate": "Shebu.",
+   "link": "https://www.sefaria.org/Shevuot.25b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1133",
+   "entry": "Q00066",
+   "sefaria": "Bab. B. Mets. 33",
+   "tractate": "B. Mets.",
+   "link": "https://www.sefaria.org/Bava_Metzia.33a.5",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1134",
+   "entry": "Q00076",
+   "sefaria": "Bab. B. Kam. 93",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.93a.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1145",
+   "entry": "Q00311",
+   "sefaria": "Bab. Snh. 16",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.16b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1149",
+   "entry": "Q00401",
+   "sefaria": "Bab. Succ. 5",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.5b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1160",
+   "entry": "Q00601",
+   "sefaria": "Bab. Snh. 90",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.90a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1167",
+   "entry": "Q00753",
+   "sefaria": "Bab. Keth. 19",
+   "tractate": "Keth.",
+   "link": "https://www.sefaria.org/Ketubot.19b.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1178",
+   "entry": "Q00991",
+   "sefaria": "Bab. Ab. Zar. 11",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.11a.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1181",
+   "entry": "Q01045",
+   "sefaria": "Bab. Sabb. 120",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.120a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1185",
+   "entry": "Q01126",
+   "sefaria": "Bab. Succ. 36",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.36a.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1191",
+   "entry": "Q01214",
+   "sefaria": "Bab. Ab. Zar. 38",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.38b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1194",
+   "entry": "Q01281",
+   "sefaria": "Bab. B. Kam. 55",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.55a.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1195",
+   "entry": "Q01292",
+   "sefaria": "Bab. Sabb. 74",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.74a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1203",
+   "entry": "Q01392",
+   "sefaria": "Bab. Erub. 28",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.28a.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1211",
+   "entry": "Q01514",
+   "sefaria": "Bab. Sabb. 64",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.64b.17",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1222",
+   "entry": "Q01738",
+   "sefaria": "Bab. Sot. 22",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.22b.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1230",
+   "entry": "Q01881",
+   "sefaria": "Bab. Keth. 67",
+   "tractate": "Keth.",
+   "link": "https://www.sefaria.org/Ketubot.67a.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1255",
+   "entry": "Q02195",
+   "sefaria": "Bab. Snh. 18",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.18a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1261",
+   "entry": "R00085",
+   "sefaria": "Bab. Sabb. 154",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.154b.17",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1264",
+   "entry": "R00126",
+   "sefaria": "Bab. Snh. 112",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.112a.16",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1265",
+   "entry": "R00151",
+   "sefaria": "Bab. Snh. 44",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.44b.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1266",
+   "entry": "R00170",
+   "sefaria": "Bab. M. Kat. 24",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.24b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1269",
+   "entry": "R00219",
+   "sefaria": "Bab. Meg. 14",
+   "tractate": "Meg.",
+   "link": "https://www.sefaria.org/Megillah.14a.10",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1270",
+   "entry": "R00234",
+   "sefaria": "Bab. Kidd. 72",
+   "tractate": "Kidd.",
+   "link": "https://www.sefaria.org/Kiddushin.72a.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1280",
+   "entry": "R00446",
+   "sefaria": "Bab. Pes. 82",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.82a.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1281",
+   "entry": "R00475",
+   "sefaria": "Bab. Ab. Zar. 48",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.48b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1293",
+   "entry": "R00656",
+   "sefaria": "Bab. Meg. 9",
+   "tractate": "Meg.",
+   "link": "https://www.sefaria.org/Megillah.9b.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1302",
+   "entry": "R00783",
+   "sefaria": "Bab. Kidd. 71",
+   "tractate": "Kidd.",
+   "link": "https://www.sefaria.org/Kiddushin.71a.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1303",
+   "entry": "R00794",
+   "sefaria": "Bab. Sabb. 121",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.121b.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1303",
+   "entry": "R00797",
+   "sefaria": "Bab. B. Mets. 52",
+   "tractate": "B. Mets.",
+   "link": "https://www.sefaria.org/Bava_Metzia.52b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1305",
+   "entry": "R00804",
+   "sefaria": "Bab. Snh. 106",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.106a.10",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1322",
+   "entry": "S00209",
+   "sefaria": "Bab. Hor. 3",
+   "tractate": "Hor.",
+   "link": "https://www.sefaria.org/Horayot.3a.20",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1323",
+   "entry": "S00222",
+   "sefaria": "Bab. Ab. Zar. 38",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.38b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1338",
+   "entry": "S00503",
+   "sefaria": "Bab. Sabb. 91",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.91b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1341",
+   "entry": "S00562",
+   "sefaria": "Bab. Ber. 43",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.43b.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1342",
+   "entry": "S00591",
+   "sefaria": "Bab. Sabb. 47",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.47a.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1342",
+   "entry": "S00603",
+   "sefaria": "Bab. Ab. Zar. 14",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.14b.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1349",
+   "entry": "S00785",
+   "sefaria": "Bab. Sabb. 74",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.74b.7",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1350",
+   "entry": "S00787",
+   "sefaria": "Bab. Sabb. 37",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.37a.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1356",
+   "entry": "S00884",
+   "sefaria": "Bab. Sabb. 68",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.68a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1358",
+   "entry": "S00909",
+   "sefaria": "Bab. Erub. 86",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.86b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1360",
+   "entry": "S00972",
+   "sefaria": "Bab. Sabb. 108",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.108b.12",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1363",
+   "entry": "S01029",
+   "sefaria": "Bab. B. Mets. 13",
+   "tractate": "B. Mets.",
+   "link": "https://www.sefaria.org/Bava_Metzia.13a.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1370",
+   "entry": "S01212",
+   "sefaria": "Bab. Nidd. 66",
+   "tractate": "Nidd.",
+   "link": "https://www.sefaria.org/Niddah.66a.53",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1370",
+   "entry": "S01215",
+   "sefaria": "Bab. Sabb. 66",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.66b.7",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1393",
+   "entry": "S01604",
+   "sefaria": "Bab. B. Kam. 30",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.30b.10",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1407",
+   "entry": "S01839",
+   "sefaria": "Bab. Keth. 28",
+   "tractate": "Keth.",
+   "link": "https://www.sefaria.org/Ketubot.28b.13",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1422",
+   "entry": "S02097",
+   "sefaria": "Bab. Pes. 35",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.35a.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1423",
+   "entry": "S02120",
+   "sefaria": "Bab. Sabb. 94",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.94b.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1424",
+   "entry": "S02130",
+   "sefaria": "Bab. Gitt. 19",
+   "tractate": "Gitt.",
+   "link": "https://www.sefaria.org/Gittin.19b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1431",
+   "entry": "S02256",
+   "sefaria": "Bab. Taan. 22",
+   "tractate": "Taan.",
+   "link": "https://www.sefaria.org/Taanit.22b.17",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1434",
+   "entry": "S02285",
+   "sefaria": "Bab. Succ. 51",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.51b.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1437",
+   "entry": "T00031",
+   "sefaria": "Bab. R. Hash. 22",
+   "tractate": "R. Hash.",
+   "link": "https://www.sefaria.org/Rosh_Hashanah.22a.1",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1438",
+   "entry": "T00039",
+   "sefaria": "Bab. Keth. 77",
+   "tractate": "Keth.",
+   "link": "https://www.sefaria.org/Ketubot.77b.13",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1438",
+   "entry": "T00040",
+   "sefaria": "Bab. Meg. 28",
+   "tractate": "Meg.",
+   "link": "https://www.sefaria.org/Megillah.28b.1",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1444",
+   "entry": "T00128",
+   "sefaria": "Bab. Erub. 19",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.19b.21",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1445",
+   "entry": "T00137",
+   "sefaria": "Bab. R. Hash. 22",
+   "tractate": "R. Hash.",
+   "link": "https://www.sefaria.org/Rosh_Hashanah.22b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1445",
+   "entry": "T00137",
+   "sefaria": "Bab. M. Kat. 6",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.6b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1445",
+   "entry": "T00137",
+   "sefaria": "Bab. Sabb. 95",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.95a.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1461",
+   "entry": "T00383",
+   "sefaria": "Bab. Erub. 51",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.51b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1461",
+   "entry": "T00397",
+   "sefaria": "Bab. Sabb. 47",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.47a.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1463",
+   "entry": "T00433",
+   "sefaria": "Bab. Sabb. 108",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.108b.11",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1483",
+   "entry": "T00813",
+   "sefaria": "Bab. Kidd. 58",
+   "tractate": "Kidd.",
+   "link": "https://www.sefaria.org/Kiddushin.58b.14",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1484",
+   "entry": "T00847",
+   "sefaria": "Bab. Ber. 27",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.27b.19",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1486",
+   "entry": "T00879",
+   "sefaria": "Bab. Ber. 30",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.30b.20",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1494",
+   "entry": "T00990",
+   "sefaria": "Bab. Nidd. 25",
+   "tractate": "Nidd.",
+   "link": "https://www.sefaria.org/Niddah.25b.39",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1499",
+   "entry": "T01075",
+   "sefaria": "Bab. Nidd. 25",
+   "tractate": "Nidd.",
+   "link": "https://www.sefaria.org/Niddah.25a.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1502",
+   "entry": "T01122",
+   "sefaria": "Bab. Pes. 76",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.76a.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1506",
+   "entry": "U00030",
+   "sefaria": "Bab. Pes. 6",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.6a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1520",
+   "entry": "U00204",
+   "sefaria": "Bab. Snh. 69",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.69a.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1528",
+   "entry": "U00311",
+   "sefaria": "Bab. Gitt. 83",
+   "tractate": "Gitt.",
+   "link": "https://www.sefaria.org/Gittin.83a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1544",
+   "entry": "U00585",
+   "sefaria": "Bab. B. Bath. 42",
+   "tractate": "B. Bath.",
+   "link": "https://www.sefaria.org/Bava_Batra.42b.5",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1552",
+   "entry": "U00723",
+   "sefaria": "Bab. Succ. 53",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.53b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1562",
+   "entry": "U00928",
+   "sefaria": "Bab. Sot. 22",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.22b.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1577",
+   "entry": "U01204",
+   "sefaria": "Bab. Succ. 12",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.12b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1582",
+   "entry": "U01299",
+   "sefaria": "Bab. Erub. 77",
+   "tractate": "Erub.",
+   "link": "https://www.sefaria.org/Eruvin.77b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1582",
+   "entry": "U01299",
+   "sefaria": "Bab. Sabb. 60",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.60a.1",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1585",
+   "entry": "U01348",
+   "sefaria": "Bab. Hor. 11",
+   "tractate": "Hor.",
+   "link": "https://www.sefaria.org/Horayot.11b.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1591",
+   "entry": "U01409",
+   "sefaria": "Bab. Ab. Zar. 8",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.8a.7",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1591",
+   "entry": "U01419",
+   "sefaria": "Bab. Succ. 56",
+   "tractate": "Succ.",
+   "link": "https://www.sefaria.org/Sukkah.56b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1596",
+   "entry": "U01489",
+   "sefaria": "Bab. Ab. Zar. 36",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.36a.5",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1597",
+   "entry": "U01496",
+   "sefaria": "Bab. B. Kam. 65",
+   "tractate": "B. Kam.",
+   "link": "https://www.sefaria.org/Bava_Kamma.65a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1598",
+   "entry": "U01505",
+   "sefaria": "Bab. Bets. 28",
+   "tractate": "Bets.",
+   "link": "https://www.sefaria.org/Beitzah.28a.14",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1614",
+   "entry": "U01729",
+   "sefaria": "Bab. Kidd. 18",
+   "tractate": "Kidd.",
+   "link": "https://www.sefaria.org/Kiddushin.18b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1616",
+   "entry": "U01757",
+   "sefaria": "Bab. Nidd. 25",
+   "tractate": "Nidd.",
+   "link": "https://www.sefaria.org/Niddah.25a.54",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1619",
+   "entry": "U01792",
+   "sefaria": "Bab. Sabb. 125",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.125b.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1621",
+   "entry": "U01827",
+   "sefaria": "Bab. Ber. 58",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.58a.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1624",
+   "entry": "U01877",
+   "sefaria": "Bab. Ab. Zar. 43",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.43b",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1627",
+   "entry": "U01913",
+   "sefaria": "Bab. Sabb. 106",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.106b.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1630",
+   "entry": "U01961",
+   "sefaria": "Bab. Snh. 99",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.99a.4",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1640",
+   "entry": "U02134",
+   "sefaria": "Bab. Snh. 43",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.43a",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1644",
+   "entry": "V00054",
+   "sefaria": "Bab. Pes. 116",
+   "tractate": "Pes.",
+   "link": "https://www.sefaria.org/Pesachim.116a.13",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1654",
+   "entry": "V00229",
+   "sefaria": "Bab. Sot. 8",
+   "tractate": "Sot.",
+   "link": "https://www.sefaria.org/Sotah.8b.16",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1654",
+   "entry": "V00246",
+   "sefaria": "Bab. Keth. 90",
+   "tractate": "Keth.",
+   "link": "https://www.sefaria.org/Ketubot.90a.3",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1656",
+   "entry": "V00275",
+   "sefaria": "Bab. Snh. 18",
+   "tractate": "Snh.",
+   "link": "https://www.sefaria.org/Sanhedrin.18b.12",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1658",
+   "entry": "V00312",
+   "sefaria": "Bab. Gitt. 21",
+   "tractate": "Gitt.",
+   "link": "https://www.sefaria.org/Gittin.21b.13",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1660",
+   "entry": "V00348",
+   "sefaria": "Bab. Sabb. 123",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.123a.9",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1664",
+   "entry": "V00431",
+   "sefaria": "Bab. B. Bath. 19",
+   "tractate": "B. Bath.",
+   "link": "https://www.sefaria.org/Bava_Batra.19b.2",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1667",
+   "entry": "V00521",
+   "sefaria": "Bab. Sabb. 57",
+   "tractate": "Sabb.",
+   "link": "https://www.sefaria.org/Shabbat.57a.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1668",
+   "entry": "V00534",
+   "sefaria": "Bab. Ber. 42",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.42a.7",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1669",
+   "entry": "V00555",
+   "sefaria": "Bab. Ber. 42",
+   "tractate": "Ber.",
+   "link": "https://www.sefaria.org/Berakhot.42a.8",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1687",
+   "entry": "V00834",
+   "sefaria": "Bab. M. Kat. 22",
+   "tractate": "M. Kat.",
+   "link": "https://www.sefaria.org/Moed_Katan.22b.15",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1692",
+   "entry": "V00903",
+   "sefaria": "Bab. R. Hash. 31",
+   "tractate": "R. Hash.",
+   "link": "https://www.sefaria.org/Rosh_Hashanah.31b.6",
+   "book": "Bab. ib."
+  },
+  {
+   "page": "1694",
+   "entry": "V00914",
+   "sefaria": "Bab. Ab. Zar. 32",
+   "tractate": "Ab. Zar.",
+   "link": "https://www.sefaria.org/Avodah_Zarah.32b.6",
+   "book": "Bab. ib."
+  }
+ ]
+}
