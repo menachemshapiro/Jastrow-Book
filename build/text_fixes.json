@@ -11741,5 +11741,68 @@
   "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">וַארְךּוּנְיָא</span>",
   "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">וַארְדּוּנְיָא</span>",
   "why": "The digital text has a final kaf (ךּ) where the 1903 printing has a dalet: “וַארְדּוּנְיָא” (the user, checked against the scan, 2 Nov). We believe this is a typo in the digital text."
+ },
+ {
+  "page": 169,
+  "entry": "B00781",
+  "headword": "בְּכָי",
+  "kind": "order",
+  "old": " <span class=\"pl\">Pl. בְּכָיִים</span> <span class=\"lk\">(b. h. </span>",
+  "new": " <span class=\"lk\">(b. h. </span>",
+  "why": "Checked against the scan by the user (groupc_review.html, 5 Nov). The book: “… (cmp. LXX a. Vulg. I Chr. XIV, 15). Pl. בְּכָיִים. Y. Kil. I, 27ª.” The digital text has the plural at the front and its period left behind (“. .”). Part 1 of 3."
+ },
+ {
+  "page": 169,
+  "entry": "B00781",
+  "headword": "בְּכָי",
+  "kind": "order",
+  "old": "XIV, 15</a>). . <a ",
+  "new": "XIV, 15</a>). <span class=\"pl\">Pl. בְּכָיִים</span>. <a ",
+  "why": "Checked against the scan by the user (groupc_review.html, 5 Nov). The plural where the book has it (part 2 of 3)."
+ },
+ {
+  "page": 169,
+  "entry": "B00781",
+  "headword": "בְּכָי",
+  "kind": "punct",
+  "old": "Kil. I, 27<sup>a</sup></a></span>",
+  "new": "Kil. I, 27<sup>a</sup></a>.</span>",
+  "why": "Checked against the scan by the user (groupc_review.html, 5 Nov). The book ends the entry with a period: “Y. Kil. I, 27ª.” (part 3 of 3)."
+ },
+ {
+  "page": 716,
+  "entry": "L00659",
+  "headword": "לֵץ, לֵיץ",
+  "kind": "order",
+  "old": " <span class=\"pl\">Pl. לֵצִים, לֵי'</span> <span class=\"lk\">(b. h.;</span>",
+  "new": " <span class=\"lk\">(b. h.;</span>",
+  "why": "Checked against the scan by the user (groupc_review.html, 5 Nov). The book: “… frivolous person. Pl. לֵצִים, לֵי'. Sot. 42ª”. The digital text has the plural at the front and its period left behind (“. .”). Part 1 of 2."
+ },
+ {
+  "page": 716,
+  "entry": "L00659",
+  "headword": "לֵץ, לֵיץ",
+  "kind": "order",
+  "old": "frivolous person</i>. . <a ",
+  "new": "frivolous person</i>. <span class=\"pl\">Pl. לֵצִים, לֵי'</span>. <a ",
+  "why": "Checked against the scan by the user (groupc_review.html, 5 Nov). The plural where the book has it (part 2 of 2)."
+ },
+ {
+  "page": 1046,
+  "entry": "P00171",
+  "headword": "עֲדָשָׁה",
+  "kind": "order",
+  "old": " <span class=\"pl\">pl. עֲדָשִׁים</span> <span class=\"lk\">(b. h. </span><span class=\"ss\"><span class=\"s\"><span class=\"d\"> ) </span>",
+  "new": " <span class=\"lk\">(b. h. </span><span class=\"ss\"><span class=\"s\"><span class=\"d\"><i>pl.</i> עֲדָשִׁים) </span>",
+  "why": "Checked against the scan by the user (groupc_review.html, 5 Nov). The book: “f. (b. h. pl. עֲדָשִׁים) 1) lentil.” The digital text has “pl. עֲדָשִׁים” before an empty “(b. h. )”."
+ },
+ {
+  "page": 1063,
+  "entry": "P00454",
+  "headword": "עֲטִישָׁה",
+  "kind": "order",
+  "old": " <span class=\"pl\">pl.; עָטַשׁ</span> <span class=\"lk\">(b. h. </span><span class=\"ss\"><span class=\"s\"><span class=\"d\"> ) ",
+  "new": " <span class=\"lk\">(b. h. </span><span class=\"ss\"><span class=\"s\"><span class=\"d\"><i>pl.</i>; עָטַשׁ) ",
+  "why": "Checked against the scan by the user (groupc_review.html, 5 Nov). The book: “f. (b. h. pl.; עָטַשׁ) sneezing.” (b. h. has the word in the plural only). The digital text has “pl.; עָטַשׁ” before an empty “(b. h. )”."
  }
 ]

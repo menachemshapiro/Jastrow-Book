@@ -200,7 +200,19 @@ def fix_special(pid, h):
             if h == h0: break
             PL_N.append(pid)
             _step(h0, h)
+    # a closing parenthesis ran into the definition after it ("(b. h. נְחִירַיִם; נָחַר)nostrils"): the book has a space
+    # (M03077, N00491, O00220, Q01454; the user approved all 160, groupc_review.html, 5 Nov). One at a time, for _step.
+    while True:
+        h0 = h
+        h = PAREN_SP.sub(r")\1 ", h, count=1)
+        if h == h0: break
+        PAREN_N.append(pid)
+        _step(h0, h)
     return h
+
+
+PAREN_SP = re.compile(r'\)((?:</a>)?(?:</span>)?)(?=<i>[A-Za-z]|same\. )')
+PAREN_N = []
 
 
 _PL_LABEL = r'(<span class="lk">[^<]*</span> ?<span class="lr">(?:[^<]|<(?!span class="ss">|/p>))*?</span><span class="ss"><span class="s"><span class="d">)'
@@ -456,6 +468,13 @@ def ltr_forms(h):
         if len(HEB_WORD.findall(c)) < 2 and "," not in c: return m.group(0)
         return '<span class="bf">%s' % words(c, ' class="h"')       # the bf span's own closing tag follows
     h = re.sub(r'<span class="bf"><span class="h">([^<]*)</span>', bf, h)
+    # a list of plural forms likewise ("Pl. לֵצִים, לֵי'": the first form on the left, the geresh with its word;
+    # the user, L00659, 5 Nov)
+    def pl(m):
+        c = m.group(2)
+        if len(HEB_WORD.findall(c)) < 2 or "," not in c: return m.group(0)
+        return '%s<span dir="ltr">%s</span>' % (m.group(1), words(c, ' class="h"'))
+    h = re.sub(r'(<span class="pl">[^<]*)<span class="h">([^<]*)</span>', pl, h)
     return h
 
 
@@ -495,6 +514,7 @@ for p_i, p in enumerate(pages):
 json.dump({"chunk": CHUNK, "pages": meta}, open(os.path.join(OUT, "data", "pages.json"), "w"),
           ensure_ascii=False, separators=(",", ":"))
 json.dump(hw, open(os.path.join(OUT, "data", "hw.json"), "w"), ensure_ascii=False, separators=(",", ":"))
+if PAREN_N: print(len(PAREN_N), "spaces added after \")\"")
 if PL_N: print(len(PL_N), "plurals moved after the language key")
 if SAME_DUP_N: print(len(SAME_DUP_N), "doubled \"1) same. ch.\" removed")
 if SPACE_HAD: print(len(SPACE_HAD), "space records already had their space")
