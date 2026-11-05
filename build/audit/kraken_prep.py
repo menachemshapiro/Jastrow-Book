@@ -6,8 +6,8 @@ Each line of the review gets one of these:
   agree     no word of the site's read otherwise by two readers or more, no word two readers see that the site
             lacks, no flag on the line or on the lines next to it: the site's text, as printed (below), admitted by
             machine (gold lines: 115 of 116 right; the one wrong was next to a flagged line, now held back)
-  gemini    the readers differ, but Gemini (examples, low thinking) reads exactly the site's letters: admitted
-            (on the gold lines of pp. 151, 155 this held for 66 of 66 such lines; it never held where the site was wrong)
+  gemini    the readers differ, but Gemini (examples, low thinking) reads the site's words (same_reading): admitted
+            (on the gold lines of pp. 151, 155: 119 of 202 such lines, all right; never where the site was wrong)
   check     the rest: for the user, on check.html, the site's text as printed proposed, Gemini shown as a reader
   dots      the text has "…": the book's number of dots is not known, so the user writes it (also on check.html)
 
@@ -56,6 +56,20 @@ def letters(s):
     return re.sub(r"[֑-ׇ\s]", "", G.norm(s))
 
 
+def same_reading(site, gem):
+    """Gemini read the site's line: the same English words in the same order, the same Hebrew words in any order
+    (its order of Hebrew in a mixed line often differs from the site's), the same punctuation marks; vowel points
+    and Gemini's markdown (*word*, _word_) left out. On the gold lines: 119 of 202 admitted, all right"""
+    from collections import Counter
+
+    def sig(t):
+        w = LR.words(t)
+        return ([LR.norm_word(x) for x in w if not LR.HEB_LETTER.search(x)],
+                Counter(LR.norm_word(x) for x in w if LR.HEB_LETTER.search(x)),
+                Counter(re.sub(r"[^.,;:()\[\]]", "", t)))
+    return sig(G.norm(site)) == sig(re.sub(r"[*_]", "", G.norm(gem)))
+
+
 def nz(s):
     return re.sub(r"\s+", " ", (s or "")).strip()
 
@@ -101,7 +115,7 @@ def classify(recs, marks, gem):
         most = max([n for *_, n in r["sitew"]] or [0])
         if not flags and most < 2 and not r["extra"]:
             r["tier"] = "agree"; continue
-        if "gemini" in r["readers"] and letters(r["readers"]["gemini"]) == letters(r["text"]):
+        if "gemini" in r["readers"] and same_reading(r["text"], r["readers"]["gemini"]):
             r["tier"] = "gemini"; continue
         r["tier"] = "check" if "gemini" in r["readers"] else "disputed"
         r["two"] = not flags and not r["extra"]          # only two readers read a word otherwise: Gemini first
