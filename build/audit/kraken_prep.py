@@ -213,6 +213,9 @@ def cmd_gemini(a):
 def cmd_review(a):
     rv, recs = setup(a)
     show = [r for r in recs if r["tier"] in ("check", "dots", "disputed")]
+    # first the lines Gemini disputed, then the dots, then the Hebrew lines (what the model most needs), page order within
+    order = {"check": 0, "dots": 1, "disputed": 2}
+    show.sort(key=lambda r: (order[r["tier"]], not has_heb(r["text"]), int(r["page"]), r["rank"]))
     for r in show:
         r["site_orig"], r["site"] = r["site"], r["text"]     # the card proposes the training text
         if r["tier"] == "dots": r["flags"] = sorted(set(r["flags"]) | {"dots"})
