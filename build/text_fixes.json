@@ -13081,5 +13081,37 @@
   "old": "<span class=\"d\"> (<b>קַלְקַנְתּוּם</b>, <b>קַלְקַנְתּוֹס</b>, <b>קַנְ׳</b> m. (κάλκανθος",
   "new": "<span class=\"d\"> (κάλκανθος",
   "why": "The user's headword reading on the scan (review_nov5b.html, 5 Nov); the 2018 XML repeats the head group in bold at the start of the definition; the book does not."
+ },
+ {
+  "page": 53,
+  "entry": "A01394",
+  "kind": "order",
+  "old": "<span class=\"lr\"><a class=\"x\" href=\"#A02149\">אֱנֹושׁ</a>, <a class=\"x\" href=\"#A01615\">אִישׁ</a>)</span>",
+  "new": "<span class=\"lr\"><span dir=\"ltr\"><a class=\"x\" href=\"#A02149\"><span dir=\"rtl\">אֱנֹושׁ</span></a>, <a class=\"x\" href=\"#A01615\"><span dir=\"rtl\">אִישׁ</span></a></span>)</span>",
+  "why": "The user, on the scan (review_nov5c.html, 5 Nov): “h. אֱנוֹשׁ, אִישׁ)” showed in the wrong order: set left to right, first form on the left."
+ },
+ {
+  "page": 1269,
+  "entry": "R00217",
+  "kind": "paragraph",
+  "old": "<span class=\"ss\"><span class=\"s\"><span class=\"d\"><a class=\"x\" href=\"#R00216\"></a></span></span><span class=\"s\"><span class=\"d\"> <b>Ithpe.</b> - <b>אִצְטַיֵּיף</b> ",
+  "new": "</p><p class=\"bin\"><i class=\"bn\">Ithpe.</i> <span class=\"bf\">אִצְטַיֵּיף</span> <span class=\"s\"><span class=\"d\">",
+  "why": "The user, on the scan (review_nov5c.html, 5 Nov): “Ithpe. אִצְטַיֵּיף” begins a new paragraph, as the book's binyan lines do. Part 1 of 2."
+ },
+ {
+  "page": 1269,
+  "entry": "R00217",
+  "kind": "paragraph",
+  "old": "ונשקפה).</span></span></span></p></div>",
+  "new": "ונשקפה).</span></span></p></div>",
+  "why": "The user, on the scan (review_nov5c.html, 5 Nov): Part 2 of 2 (the closing tag of the part moved)."
+ },
+ {
+  "page": 713,
+  "entry": "L00587",
+  "kind": "punct",
+  "old": "<div class=\"e\" id=\"L00587\"><p class=\"ep\"><span class=\"hw\" lang=\"he\" dir=\"rtl\">(לִסְטֵם, ,) , לִסְטֵס</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\">, (denom.",
+  "new": "<div class=\"e\" id=\"L00587\"><p class=\"ep\"><span class=\"hw\" lang=\"he\" dir=\"rtl\">(לִסְטֵם, ,) , לִסְטֵס</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\">(denom.",
+  "why": "The user's reading on the scan (review_nov5c.html, 5 Nov): “(לִסְטֵם,) לִסְטֵס, (denom.”: the comma belongs to the head group (headwords_scan.json), so the definition's own leading comma goes."
  }
 ]
