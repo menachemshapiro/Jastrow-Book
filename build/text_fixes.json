@@ -13169,5 +13169,37 @@
   "old": "<span class=\"d\"> [1] <i>to be disordered",
   "new": "<span class=\"d\"> [1) <i>to be disordered",
   "why": "As printed: “[1) to be disordered, sick; whence בּוֹחַל q. v.].” The bracket opens before “1)” and closes after “q. v.” (the user's line review, pilot p. 155, 5 Nov; checked on the scan)."
+ },
+ {
+  "page": 720,
+  "entry": "L00711",
+  "kind": "missing",
+  "old": "lightly (of the Israelites, Ex. IV, </span>",
+  "new": "lightly (of the Israelites, Ex. IV, 1); a. fr.</span>",
+  "why": "Missing in the digital text (Sefaria's 2018 XML stops at \"Ex. IV,\"). The book: \"(of the Israelites, Ex. IV, 1); a. fr.\" (the user, review_nov5f, 6 Nov; checked on the scan)."
+ },
+ {
+  "page": 92,
+  "entry": "A02420",
+  "kind": "punct",
+  "old": ", read גוֹס …</span>",
+  "new": ", read גוֹס ......</span>",
+  "why": "Typo in the digital text: \"…\" for the book's six dots. The dots stand for the letters of the headword that stay as they are (אסטרטי-), so their number matters (the user, review_nov5f, 6 Nov; checked on the scan)."
+ },
+ {
+  "page": 133,
+  "entry": "A03443",
+  "kind": "punct",
+  "old": "objection raised by …</span>",
+  "new": "objection raised by . . . .</span>",
+  "why": "Typo in the digital text: \"…\" for the book's four dots (the user, review_nov5f, 6 Nov; checked on the scan)."
+ },
+ {
+  "page": 1667,
+  "entry": "V00522",
+  "kind": "punct",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">תֻּכָּא, תַּכָּא</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\"> I), v.",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">תֻּכָּא</span>, (<span class=\"hw\" lang=\"he\" dir=\"rtl\">תַּכָּא</span> <span class=\"hn\">I</span>)<span class=\"ss\"><span class=\"s\"><span class=\"d\">, v.",
+  "why": "The opening bracket is missing in the digital text. The book prints \"תֻּכָּא, (תַּכָּא I), v. תּוּכָּא.\" (the user, review_nov6a, 6 Nov; checked on the scan)."
  }
 ]

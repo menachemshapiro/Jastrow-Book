@@ -260,7 +260,52 @@ def fix_special(pid, h):
         if h == h0: break
         PAREN_N.append(pid)
         _step(h0, h)
+    # the full stop at an entry's end, which Sefaria's text often drops (mostly after a cross-reference link):
+    # added where the scan shows it (build/final_stops.json; the user, 5 Nov: keep the book's own final stops)
+    for eid in FINAL_STOPS_BY_PAGE.get(pid, ()):
+        h0 = h
+        h = final_stop(h, eid)
+        if h == h0: continue
+        FINAL_STOPS_DONE.add(eid)
+        a_, b_ = _pt(h0), _pt(h)
+        if BRK[0] is not None and _common(a_, b_, len(a_)) == BRK[0]:
+            BRK[0] += 1         # the entry ends the column: its stop goes with it, not to the top of the next column
+        else:
+            _step(h0, h)
     return h
+
+
+_VOID = re.compile(r"<(br|img|hr|wbr)\b|/>$")
+
+
+def final_stop(h, eid):
+    """the stop after the entry's last character, outside a link, italics or Hebrew span that ends there, but inside
+    the definition (the span "d"), as the site's own final stops are"""
+    k = h.rfind('<div class="e" id="%s"' % eid)
+    k2 = h.rfind('<div class="e cont" id="%s"' % eid)
+    k = max(k, k2)
+    if k < 0: return h
+    end = h.find('<div class="e', k + 5); end = end if end > 0 else len(h)
+    seg = h[k:end]
+    toks = re.findall(r"<[^>]+>|&[#\w]+;|[^<&]", seg)
+    last = max((n for n, t in enumerate(toks) if not t.startswith("<") and not t.isspace()), default=None)
+    if last is None: return h
+    if _H.unescape(toks[last]) in ".?!": return h
+    if toks[last] == "]":       # the book: "… q. v.]", the stop inside the bracket
+        if _H.unescape(toks[last - 1]) in ".?!…": return h      # "…]" stays: the book prints dots there
+        return h[:k] + "".join(toks[:last]) + "." + "".join(toks[last:]) + h[end:]
+    stack = []
+    for t in toks[:last + 1]:
+        if not t.startswith("<") or _VOID.search(t): continue
+        if t.startswith("</"): stack and stack.pop()
+        else: stack.append(t)
+    n = last + 1
+    while n < len(toks) and (toks[n].isspace() or toks[n].startswith("</")) and stack:
+        if toks[n].isspace(): break
+        top = stack[-1]
+        if re.match(r'<(p|div)\b|<span class="(d|s|ss)"', top): break
+        stack.pop(); n += 1
+    return h[:k] + "".join(toks[:n]) + "." + "".join(toks[n:]) + h[end:]
 
 
 BAB_IB = {}
@@ -269,6 +314,10 @@ for _it in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)
     BAB_IB.setdefault(_it["entry"], []).append(_it)
 DOUBLED = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "doubled.json"), encoding="utf-8"))["items"]
 DOUBLED_DONE = set()
+FINAL_STOPS_BY_PAGE = {}
+for _e, _p in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "final_stops.json"), encoding="utf-8"))["items"].items():
+    FINAL_STOPS_BY_PAGE.setdefault(_p, []).append(_e)
+FINAL_STOPS_DONE = set()
 PAREN_SP = re.compile(r'\)((?:</a>)?(?:</span>)?)(?=<i>[A-Za-z]|same\. )')
 PAREN_N = []
 
@@ -446,6 +495,12 @@ for p in pages:
                 if k is None:
                     raise AssertionError("column break record does not match the page: %s %r" % (p["id"], fx["break_after"]))
                 BREAKS[p["id"]] = k
+    if BREAKS.get(p["id"]) and p["id"] in FINAL_STOPS_BY_PAGE:
+        # a break record's words can now be followed by an added final stop: the stop stays in its column
+        b_ = _pt(p["html"]); k = BREAKS[p["id"]]
+        j = k
+        while j < len(b_) and "\u0591" <= b_[j] <= "\u05c7": j += 1      # a point the break had cut off its letter
+        if b_[j:j + 1] == ".": BREAKS[p["id"]] = j + 1
     p["html"] += AFTER.get(p["id"], "")
     newpages.append(p)
     if p["id"] == "683":
@@ -611,6 +666,8 @@ _bab_left = [it["entry"] for v in BAB_IB.values() for it in v if not it.get("_do
 assert not _bab_left, ("Bab. ib. not restored", _bab_left)
 _dbl_left = sorted(set(DOUBLED) - DOUBLED_DONE)
 if _dbl_left: print("doubled phrases not found:", _dbl_left)
+_fs_all = {e for v in FINAL_STOPS_BY_PAGE.values() for e in v}
+print(len(FINAL_STOPS_DONE), "final stops added;", len(_fs_all - FINAL_STOPS_DONE), "listed entries already had one or were not found")
 if PAREN_N: print(len(PAREN_N), "spaces added after \")\"")
 if PL_N: print(len(PL_N), "plurals moved after the language key")
 if SAME_DUP_N: print(len(SAME_DUP_N), "doubled \"1) same. ch.\" removed")
