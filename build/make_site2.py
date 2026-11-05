@@ -389,11 +389,21 @@ def insert_space(h, before, after, pid):
     at = ends[j - 1]               # right after the last character before the gap, so the space stays outside the next link
     return h[:at] + " " + h[at:]
 
-HEB_PAREN = re.compile(r'<span class="h">([^<]*)</span>(\s*[(\[]\s*)<span class="h">([^<]*)</span>(\s*[)\]])')
+# only when more Hebrew follows the bracket: a bracket in the middle of a quotation is part of its right-to-left run, but
+# a variant in brackets after a phrase ("esp. אַגְמַת נפש (עַגְ׳) grief", p. 13) stands on its own, to the right of the
+# phrase, in the line's left-to-right flow (the user's line review, 5 Nov)
+HEB_PAREN = re.compile(r'<span class="h">([^<]*)</span>(\s*[(\[]\s*)<span class="h">([^<]*)</span>(\s*[)\]])(?=\s*(?:<a class="x"[^>]*>)?<span class="h">)')
 HEB_AFTER = re.compile(r'([)\]])</span>(\s+)<span class="h">')
 # a cross-reference link on a Hebrew word inside a quotation ("וכל פ׳ ופ׳ עשרין (העיר) וכ׳") is part of the same
 # right-to-left run; take the linked word, with any parentheses around it, into the phrase
 HEB_LINK = re.compile(r'<span class="h">([^<]*)</span>(\s*[(\[]?\s*)(<a class="x"[^>]*>)<span class="h">([^<]*)</span></a>(\s*[)\]]?)(?:(\s+)<span class="h">([^<]*)</span>)?')
+
+
+def heb_link(m):
+    if "(" in m.group(2) + m.group(5) or "[" in m.group(2) + m.group(5):
+        if m.group(7) is None:
+            return m.group(0)        # a bracketed link after a phrase, with no Hebrew after it: left as it is (see HEB_PAREN)
+    return '<span class="h">%s%s%s%s</a>%s%s%s</span>' % (m.group(1), m.group(2), m.group(3), m.group(4), m.group(5), m.group(6) or "", m.group(7) or "")
 
 TEXT_FIXES = {}
 _tf = os.path.join(os.path.dirname(os.path.abspath(__file__)), "text_fixes.json")
@@ -484,7 +494,7 @@ def transform(h):
     while True:
         h2 = HEB_PAREN.sub(r'<span class="h">\1\2\3\4</span>', h)
         h2 = HEB_AFTER.sub(r"\1\2", h2)
-        h2 = HEB_LINK.sub(lambda m: '<span class="h">%s%s%s%s</a>%s%s%s</span>' % (m.group(1), m.group(2), m.group(3), m.group(4), m.group(5), m.group(6) or "", m.group(7) or ""), h2)
+        h2 = HEB_LINK.sub(heb_link, h2)
         if h2 == h: break
         h = h2
     return h.replace('href="#e=', 'href="#')
@@ -545,10 +555,35 @@ def ltr_forms(h):
     return h
 
 
+HEB_ITEM = r"[\u05d0-\u05ea\u0591-\u05c7'\u05f3\"\u05f4*]+"
+HEB_LIST = re.compile(r'<span class="h">(' + HEB_ITEM + r'(?:,\s?' + HEB_ITEM + r')+)</span>')
+
+
+def heb_runs(h):
+    """Hebrew as the 1903 printing sets it, beyond the headword and binyan forms (ltr_forms). From the audit branch
+    (44ba276, 30 Oct), brought to the site 5 Nov at the user's request.
+    1. A phrase Sefaria's markup splits in two ("תנא (ו)" + "בגבולין ובלשון אגא") is one phrase. As two right-to-left
+       islands the browser set the second to the right of the first, the wrong way round. They are joined.
+    2. A list of single Hebrew words separated by commas (plurals after "Pl.", variants after "Var." or "ed.",
+       roots in "(cmp. בזר, פזר)") runs left to right in the book, the first word on the left, like the forms of a
+       headword. Set as one right-to-left island it came out the other way round, and a list that wrapped put its
+       comma on the wrong side (p. 13 "Pl. אֲגָמִין, אַגְמַיָּא"). Each word is now isolated on its own, in a
+       left-to-right list."""
+    while True:
+        h2 = re.sub(r'(<span class="h">[^<]*)</span><span class="h">', r'\1', h)
+        if h2 == h: break
+        h = h2
+    def lst(m):
+        parts = re.split(r'(,\s?)', m.group(1))
+        return '<span class="hl" dir="ltr">%s</span>' % "".join(
+            ('<span class="h">%s</span>' % x) if k % 2 == 0 else x for k, x in enumerate(parts))
+    return HEB_LIST.sub(lst, h)
+
+
 for c in range(0, len(pages), CHUNK):
     chunk = []
     for p in pages[c:c + CHUNK]:
-        h = ltr_forms(transform(p["html"]))
+        h = heb_runs(ltr_forms(transform(p["html"])))
         if p["id"] == "1706":     # the Addenda's title and the line under it run across the top of both columns, as in the book
             h = h.replace('<p class="fm">Addenda et Corrigenda.</p><p class="fm">(Articles', '<p class="fm hd">Addenda et Corrigenda.</p><p class="fm hd">(Articles', 1)
             assert 'class="fm hd"' in h

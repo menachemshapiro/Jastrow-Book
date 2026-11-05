@@ -13113,5 +13113,21 @@
   "old": "<div class=\"e\" id=\"L00587\"><p class=\"ep\"><span class=\"hw\" lang=\"he\" dir=\"rtl\">(לִסְטֵם, ,) , לִסְטֵס</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\">, (denom.",
   "new": "<div class=\"e\" id=\"L00587\"><p class=\"ep\"><span class=\"hw\" lang=\"he\" dir=\"rtl\">(לִסְטֵם, ,) , לִסְטֵס</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\">(denom.",
   "why": "The user's reading on the scan (review_nov5c.html, 5 Nov): “(לִסְטֵם,) לִסְטֵס, (denom.”: the comma belongs to the head group (headwords_scan.json), so the definition's own leading comma goes."
+ },
+ {
+  "page": 13,
+  "entry": "A00312",
+  "kind": "word",
+  "old": "(Ar. אגמא דוקירי;",
+  "new": "(Ar. אגמא דיקורי;",
+  "why": "Typo in the digital text: the 1903 printing has “(Ar. אגמא דיקורי;”, not דוקירי (the user's line review, pilot p. 13, 5 Nov; checked on the scan)."
+ },
+ {
+  "page": 13,
+  "entry": "A00319",
+  "kind": "order",
+  "old": "(קונגטיס) <a class=\"x\" href=\"#E00250\">הונגטוס</a>",
+  "new": "<a class=\"x\" href=\"#E00250\">הונגטוס</a> (קונגטיס)",
+  "why": "Order only, no letter changed. The 1903 printing sets “Num. R. s. 4 הונגטוס (קונגטיס);” with the bracketed variant to the right of the form; the digital text put the bracket first, so the site showed it on the left (the user's line review, pilot p. 13, 5 Nov; checked on the scan)."
  }
 ]
