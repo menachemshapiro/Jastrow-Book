@@ -666,7 +666,7 @@ function card(r){
    <input class="edit" dir="ltr" style="display:none" value="${esc(lrmText(shown))}"><div class="prev" style="display:none"></div>
    ${flags?"<div>"+flags+"</div>":""}${changed(r)?'<span class="flag chg">our text for this line changed since you marked it: check again</span>':""}
    ${r.extra.length?'<div class="miss">two readers or more also see, not in our text: <b>'+r.extra.map(w=>wspan(w,"")).join(", ")+'</b></div>':""}${agree}
-   ${["tesseract","pdf","kraken","gemini","vision"].map(rd=>readerHTML(r,rd)).join("")}
+   ${["tesseract","pdf","kraken","kraken_b1","gemini","vision"].map(rd=>readerHTML(r,rd)).join("")}
    <div class="btns"><button class="b-ok ${st=="ok"?"on":""}" data-s="ok">Right</button>
    <button class="b-fixed ${st=="fixed"?"on":""}" data-s="edit">Edit</button>
    <button class="b-bad ${st=="bad"?"on":""}" data-s="bad">Bad line</button>

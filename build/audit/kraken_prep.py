@@ -6,6 +6,8 @@ Each line of the review gets one of these:
   agree     no word of the site's read otherwise by two readers or more, no word two readers see that the site
             lacks, no flag on the line or on the lines next to it: the site's text, as printed (below), admitted by
             machine (gold lines: 115 of 116 right; the one wrong was next to a flagged line, now held back)
+  kraken    the readers differ, but our own kraken model (KRAKEN_READER, read by the model trained on the other
+            half of the pages) reads the site's words (same_reading): admitted (gold: 125 of 125 right, b1_odd)
   gemini    the readers differ, but Gemini (examples, low thinking) reads the site's words (same_reading): admitted
             (on the gold lines of pp. 151, 155: 119 of 202 such lines, all right; never where the site was wrong)
   vision    the same with Google Cloud Vision's reading (vision_lines.py), once its gold-line test says it is safe
@@ -38,6 +40,9 @@ import gemini_lines as G  # noqa: E402
 
 HELD = set(range(151, 161))
 DISPUTE_FLAGS = {"estimated", "two_lines", "crosses_gutter", "no_site_text", "hyphen_guess", "divided_word"}
+KRAKEN_READER = "kraken_b1.xml"   # our own model's reading of a page (kraken_eval.py read --into), read by the
+                                  # model trained on the other half of the pages; gold: 125 of 125 right where it
+                                  # reads the site's words (b1_odd)
 TRUST_VISION = False   # Vision admits lines only once its gold-line test (vision_lines.py score) has been seen
 MODEL, THINKING, VARIANT = "gemini-3.5-flash", "low", "examples"
 CACHE = os.path.join(paths.report("gemini_lines"), "%s@%s" % (MODEL, THINKING), "train.json")
@@ -119,9 +124,10 @@ def gkey(r):
     return "%s:%s" % (r["page"], r["kid"])
 
 
-def classify(recs, marks, gem, vis=None):
-    vis = vis or {}
+def classify(recs, marks, gem, vis=None, kr=None):
+    vis, kr = vis or {}, kr or {}
     for r in recs:
+        if r["page"] in kr: r["readers"]["kraken_b1"] = kr[r["page"]].get(r["kid"], "")
         if r["page"] in vis: r["readers"]["vision"] = vis[r["page"]].get(r["kid"], "")
         r["text"] = printed(r["site"])
         r["why"] = ""
@@ -144,6 +150,8 @@ def classify(recs, marks, gem, vis=None):
         most = max([n for *_, n in r["sitew"]] or [0])
         if not flags and most < 2 and not r["extra"]:
             r["tier"] = "agree"; continue
+        if r["readers"].get("kraken_b1") and same_reading(r["text"], r["readers"]["kraken_b1"]):
+            r["tier"] = "kraken"; continue
         if "gemini" in r["readers"] and same_reading(r["text"], r["readers"]["gemini"]):
             r["tier"] = "gemini"; continue
         if TRUST_VISION and r["readers"].get("vision") and same_reading(r["text"], r["readers"]["vision"]):
@@ -175,7 +183,11 @@ def setup(a):
     for p in {r["page"] for r in rv["lines"]}:
         v = VL.page_readings(p, os.path.basename(rv["lines"][0]["xml"]))
         if v: vis[p] = v
-    return rv, classify(rv["lines"], marks, load_cache(), vis)
+    kr = {}
+    for p in {r["page"] for r in rv["lines"]}:
+        f = os.path.join(paths.WORK, "audit", "pages", "p%04d" % int(p), KRAKEN_READER)
+        if os.path.exists(f): kr[p] = {k["id"]: k["kraken"] for k in LR.kraken_lines(f)}
+    return rv, classify(rv["lines"], marks, load_cache(), vis, kr)
 
 
 def has_heb(s): return bool(LR.HEB_LETTER.search(s))
@@ -187,17 +199,18 @@ def cmd_plan(a):
     c = Counter(r["tier"] for r in recs)
     pages = sorted({int(r["page"]) for r in recs})
     print("%d lines on %d pages (%s-%s)" % (len(recs), len(pages), pages[0], pages[-1]))
-    for t in ("checked", "agree", "gemini", "vision", "disputed", "check", "dots", "out", "held"):
+    for t in ("checked", "agree", "kraken", "gemini", "vision", "disputed", "check", "dots", "out", "held"):
         if c[t]:
             n = [r for r in recs if r["tier"] == t]
             print("  %-9s %5d  (with Hebrew %d)" % (t, len(n), sum(1 for r in n if has_heb(r["text"]))))
-    adm = sum(c[t] for t in ("checked", "agree", "gemini", "vision"))
+    adm = sum(c[t] for t in ("checked", "agree", "kraken", "gemini", "vision"))
     print("admitted for training now: %d; for the user to check: %d" % (adm, c["check"] + c["dots"] + c["disputed"]))
-    two = sum(1 for r in recs if r["tier"] == "disputed" and r.get("two"))
-    for what, n in (("--on two (two readers differ, nothing flagged)", two), ("--on all (every disputed line)", c["disputed"])):
-        if n:
-            lo, hi = (n * x / 100 for x in AGOROT_PER_LINE)
-            print("Gemini %s: %d lines, about %.1f-%.1f NIS" % (what, n, lo, hi))
+    if a.gemini_estimate:
+        two = sum(1 for r in recs if r["tier"] == "disputed" and r.get("two"))
+        for what, n in (("--on two (two readers differ, nothing flagged)", two), ("--on all (every disputed line)", c["disputed"])):
+            if n:     # NB the 6 Nov trial cost several times this (₪46.50 used in all)
+                lo, hi = (n * x / 100 for x in AGOROT_PER_LINE)
+                print("Gemini %s: %d lines, about %.1f-%.1f NIS by the old estimate (too low)" % (what, n, lo, hi))
 
 
 def cmd_gemini(a):
@@ -305,11 +318,12 @@ def main():
     ap.add_argument("--review", required=True, help="linereview.py's lines.json")
     ap.add_argument("--marks", nargs="*", default=[], help="line review exports (jastrow-lines-*.json; globs allowed)")
     ap.add_argument("--yes", action="store_true", help="gemini: spend the credit")
+    ap.add_argument("--gemini-estimate", action="store_true", help="plan: print the (too low) Gemini estimate")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--on", choices=["two", "all"], default="two",
                     help="gemini: only lines where just two readers differ and nothing is flagged (default), or all disputed")
     ap.add_argument("--threads", type=int, default=6)
-    ap.add_argument("--tiers", default="checked,agree,gemini,vision", help="export: which tiers go in")
+    ap.add_argument("--tiers", default="checked,agree,kraken,gemini,vision", help="export: which tiers go in")
     ap.add_argument("--xml", default="kraken_mccatmus.xml")
     ap.add_argument("--logical", dest="visual", action="store_false",
                     help="export: labels in reading order (for ketos --reorder) instead of display order")
