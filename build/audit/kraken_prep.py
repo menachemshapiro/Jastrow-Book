@@ -8,6 +8,7 @@ Each line of the review gets one of these:
             machine (gold lines: 115 of 116 right; the one wrong was next to a flagged line, now held back)
   gemini    the readers differ, but Gemini (examples, low thinking) reads the site's words (same_reading): admitted
             (on the gold lines of pp. 151, 155: 119 of 202 such lines, all right; never where the site was wrong)
+  vision    the same with Google Cloud Vision's reading (vision_lines.py), once its gold-line test says it is safe
   check     the rest: for the user, on check.html, the site's text as printed proposed, Gemini shown as a reader
   dots      the text has "…": the book's number of dots is not known, so the user writes it (also on check.html)
 
@@ -37,6 +38,7 @@ import gemini_lines as G  # noqa: E402
 
 HELD = set(range(151, 161))
 DISPUTE_FLAGS = {"estimated", "two_lines", "crosses_gutter", "no_site_text", "hyphen_guess", "divided_word"}
+TRUST_VISION = False   # Vision admits lines only once its gold-line test (vision_lines.py score) has been seen
 MODEL, THINKING, VARIANT = "gemini-3.5-flash", "low", "examples"
 CACHE = os.path.join(paths.report("gemini_lines"), "%s@%s" % (MODEL, THINKING), "train.json")
 PILOT = os.path.join(paths.WORK, "audit", "lines", "pilot", "lines.json")      # the worked examples' boxes
@@ -117,8 +119,10 @@ def gkey(r):
     return "%s:%s" % (r["page"], r["kid"])
 
 
-def classify(recs, marks, gem):
+def classify(recs, marks, gem, vis=None):
+    vis = vis or {}
     for r in recs:
+        if r["page"] in vis: r["readers"]["vision"] = vis[r["page"]].get(r["kid"], "")
         r["text"] = printed(r["site"])
         r["why"] = ""
         g = gem.get(gkey(r))
@@ -142,6 +146,8 @@ def classify(recs, marks, gem):
             r["tier"] = "agree"; continue
         if "gemini" in r["readers"] and same_reading(r["text"], r["readers"]["gemini"]):
             r["tier"] = "gemini"; continue
+        if TRUST_VISION and r["readers"].get("vision") and same_reading(r["text"], r["readers"]["vision"]):
+            r["tier"] = "vision"; continue
         r["tier"] = "check" if "gemini" in r["readers"] else "disputed"
         r["two"] = not flags and not r["extra"]          # only two readers read a word otherwise: Gemini first
         r["why"] = ",".join(sorted(flags)) or "readers differ"
@@ -164,7 +170,12 @@ def setup(a):
     rv = json.load(open(a.review))
     marks = load_marks(sum((glob.glob(os.path.expanduser(f)) for f in a.marks), []))
     mark_neighbours(rv["lines"])
-    return rv, classify(rv["lines"], marks, load_cache())
+    import vision_lines as VL          # Google Cloud Vision's readings, for the pages read so far (vision_lines.py)
+    vis = {}
+    for p in {r["page"] for r in rv["lines"]}:
+        v = VL.page_readings(p, os.path.basename(rv["lines"][0]["xml"]))
+        if v: vis[p] = v
+    return rv, classify(rv["lines"], marks, load_cache(), vis)
 
 
 def has_heb(s): return bool(LR.HEB_LETTER.search(s))
@@ -176,11 +187,11 @@ def cmd_plan(a):
     c = Counter(r["tier"] for r in recs)
     pages = sorted({int(r["page"]) for r in recs})
     print("%d lines on %d pages (%s-%s)" % (len(recs), len(pages), pages[0], pages[-1]))
-    for t in ("checked", "agree", "gemini", "disputed", "check", "dots", "out", "held"):
+    for t in ("checked", "agree", "gemini", "vision", "disputed", "check", "dots", "out", "held"):
         if c[t]:
             n = [r for r in recs if r["tier"] == t]
             print("  %-9s %5d  (with Hebrew %d)" % (t, len(n), sum(1 for r in n if has_heb(r["text"]))))
-    adm = sum(c[t] for t in ("checked", "agree", "gemini"))
+    adm = sum(c[t] for t in ("checked", "agree", "gemini", "vision"))
     print("admitted for training now: %d; for the user to check: %d" % (adm, c["check"] + c["dots"] + c["disputed"]))
     two = sum(1 for r in recs if r["tier"] == "disputed" and r.get("two"))
     for what, n in (("--on two (two readers differ, nothing flagged)", two), ("--on all (every disputed line)", c["disputed"])):
@@ -298,7 +309,7 @@ def main():
     ap.add_argument("--on", choices=["two", "all"], default="two",
                     help="gemini: only lines where just two readers differ and nothing is flagged (default), or all disputed")
     ap.add_argument("--threads", type=int, default=6)
-    ap.add_argument("--tiers", default="checked,agree,gemini", help="export: which tiers go in")
+    ap.add_argument("--tiers", default="checked,agree,gemini,vision", help="export: which tiers go in")
     ap.add_argument("--xml", default="kraken_mccatmus.xml")
     ap.add_argument("--logical", dest="visual", action="store_false",
                     help="export: labels in reading order (for ketos --reorder) instead of display order")
