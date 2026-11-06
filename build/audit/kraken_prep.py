@@ -64,7 +64,7 @@ def printed(site):
 # a Hebrew phrase as linereview's page sets it (its HW / HSEP / HPH): a comma list of single words runs left to
 # right, as the book prints form lists (GUIDELINES 2.9); anything else is one right-to-left run
 HW = "[\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05EA\u05F3\u05F4'\"\u2019*\u05BE-]*"
-HPH = re.compile(HW + "(?:(?: +|, ?| *\\( *" + HW + "(?: +" + HW + ")* *\\) *)" + HW + ")*")
+HPH = re.compile(HW + "(?:(?: +|, ?| *\u2026 *| *\\( *" + HW + "(?: +" + HW + ")* *\\) *)" + HW + ")*")
 LRM = "\u200e"
 
 
@@ -187,7 +187,26 @@ def setup(a):
     for p in {r["page"] for r in rv["lines"]}:
         f = os.path.join(paths.WORK, "audit", "pages", "p%04d" % int(p), KRAKEN_READER)
         if os.path.exists(f): kr[p] = {k["id"]: k["kraken"] for k in LR.kraken_lines(f)}
-    return rv, classify(rv["lines"], marks, load_cache(), vis, kr)
+    return rv, edge_dups(classify(rv["lines"], marks, load_cache(), vis, kr))
+
+
+ADMITTED = ("checked", "agree", "kraken", "gemini", "vision")
+
+
+def edge_dups(recs):
+    """the same word at the end of one line and the start of the next (same page and column): one of them is wrong
+    (b1 1:70 "—Pl." marked Right, 1:71 "Pl. אָבוֹת־" fixed). Both lines go back to the check page."""
+    by = {}
+    for r in recs: by.setdefault((r["page"], r["col"]), []).append(r)
+    for ls in by.values():
+        ls.sort(key=lambda r: r["rank"])
+        for r1, r2 in zip(ls, ls[1:]):
+            w1, w2 = LR.words(r1["text"]), LR.words(r2["text"])
+            if w1 and w2 and LR.norm_word(w1[-1]) == LR.norm_word(w2[0]) and len(LR.norm_word(w1[-1])) >= 2:
+                for r in (r1, r2):
+                    r["flags"] = sorted(set(r["flags"]) | {"edge_dup"})
+                    if r["tier"] in ADMITTED: r["tier"], r["why"] = "check", "edge_dup"
+    return recs
 
 
 def has_heb(s): return bool(LR.HEB_LETTER.search(s))

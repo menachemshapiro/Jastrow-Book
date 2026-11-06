@@ -553,6 +553,7 @@ FLAG_TEXT = {
     "two_lines": "kraken took two of the audit's lines as one",
     "crosses_gutter": "kraken's line crosses the gutter: mark it Bad",
     "no_site_text": "no site text found for this line",
+    "edge_dup": "the same word ends one line and starts the next: one of the two is wrong",
 }
 
 PAGE = r"""<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Line review %(name)s</title>
@@ -621,7 +622,7 @@ function marked(s,spans){  // the text with the given [start, end, class] stretc
 // left-to-right line; a bracket is part of a phrase only when more Hebrew follows it; a comma list of single words
 // runs left to right, the first word on the left. Plain text in the browser reversed both (the user, 5 Nov).
 const HW="[\u05D0-\u05EA][\u0591-\u05C7\u05D0-\u05EA\u05F3\u05F4'\"\u2019*\u05BE-]*";
-const HSEP="(?: +|, ?| *\\( *"+HW+"(?: +"+HW+")* *\\) *)";
+const HSEP="(?: +|, ?| *\u2026 *| *\\( *"+HW+"(?: +"+HW+")* *\\) *)";
 const HPH=new RegExp(HW+"(?:"+HSEP+HW+")*","g");
 function hebCls(s,spans){const c=new Array(s.length).fill(""); for(const [a,b,k] of spans) for(let i=a;i<b;i++) c[i]=k; return c}
 function hebRun(s,c,a,b){let out="",i=a; while(i<b){let j=i; while(j<b&&c[j]==c[i]) j++; const t=esc(s.slice(i,j));
