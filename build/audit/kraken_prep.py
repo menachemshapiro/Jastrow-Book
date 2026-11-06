@@ -174,9 +174,21 @@ def mark_neighbours(recs):
             r["near_flag"] = any(set(n["flags"]) & DISPUTE_FLAGS for n in nb)
 
 
+FIXES = os.path.join(HERE, "kraken_fixes.json")
+
+
+def load_fixes():
+    """Claude's corrections of single lines, made at the user's request (kraken_fixes.json): (page, kid) -> text"""
+    if not os.path.exists(FIXES): return {}
+    return {(f["page"], f["kid"]): f["text"] for f in json.load(open(FIXES))["lines"]}
+
+
 def setup(a):
     rv = json.load(open(a.review))
     marks = load_marks(sum((glob.glob(os.path.expanduser(f)) for f in a.marks), []))
+    for (pg, kid), t in load_fixes().items():      # applied as a mark of their own, after the user's
+        site = next((r["site"] for r in rv["lines"] if r["page"] == pg and r["kid"] == kid), None)
+        if site is not None: marks[(pg, kid)] = {"page": pg, "kid": kid, "status": "fixed", "site": site, "text": t}
     mark_neighbours(rv["lines"])
     import vision_lines as VL          # Google Cloud Vision's readings, for the pages read so far (vision_lines.py)
     vis = {}

@@ -1,0 +1,26 @@
+{
+ "about": "Claude's corrections of training lines, made at the user's request (marks the check page can't express, e.g. vowel points); applied after the user's marks by kraken_prep.py",
+ "lines": [
+  {
+   "page": "1",
+   "rank": 70,
+   "kid": "_b949431f-dc77-4361-b6f2-655b3984952d",
+   "text": "penalty is stoning to death); a. fr.; v. also בֵּית אב.—",
+   "why": "the book ends this line with \"בֵּית אב.—\"; \"Pl.\" begins 1:71 (scan; the user's Right of 6 Nov kept it)"
+  },
+  {
+   "page": "1",
+   "rank": 71,
+   "kid": "_354ae0ac-bae2-4ca4-ba31-8bb044659f74",
+   "text": "Pl. אָבוֹת־, const. אֲבוֹת, 1) fathers, ancestors, patriarchs &c.",
+   "why": "\"Pl.\" begins the line (the user's fix), with the space the book sets between words (the maqaf touches it)"
+  },
+  {
+   "page": "3",
+   "rank": 73,
+   "kid": "_96fc6b4b-fbf8-4b8c-a1be-97b66a14b989",
+   "text": "אִיבּוּב אַבּוּב m. (=אנב׳, נבב to be hollow; cmp.",
+   "why": "no comma between the two headwords (the user's fix, scan); the site's points kept (the edit had lost the patah)"
+  }
+ ]
+}
