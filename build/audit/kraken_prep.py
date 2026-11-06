@@ -12,7 +12,8 @@ Each line of the review gets one of these:
             (on the gold lines of pp. 151, 155: 119 of 202 such lines, all right; never where the site was wrong)
   vision    the same with Google Cloud Vision's reading (vision_lines.py), once its gold-line test says it is safe
   check     the rest: for the user, on check.html, the site's text as printed proposed, Gemini shown as a reader
-  dots      the text has "…": the book's number of dots is not known, so the user writes it (also on check.html)
+  dots      the text has "…": the book's number of dots is not known, so the user writes it (also on check.html);
+            an "…" the user leaves in a line marked Right or Fixed is three dots (user_text)
 
 The training text is the site's as the book prints it: no space before a comma ("X, v.", the site has "X , v.");
 "=" without spaces, a divided word with its hyphen and raised folio letters (done by linereview.py). Final stops
@@ -102,6 +103,14 @@ def same_reading(site, gem):
     return sig(G.norm(site)) == sig(re.sub(r"[*_]", "", G.norm(gem)))
 
 
+def user_text(t):
+    """a line as the user marked it: an "…" left in a line marked Right or Fixed is the book's three dots, set close
+    (the user writes other counts and spacings out: "..", ". .", "....", 6 Nov); an apostrophe typed after a Hebrew
+    letter is a geresh"""
+    t = re.sub(r"([\u05D0-\u05EA][\u0591-\u05C7]*)['\u2019]", "\\1\u05F3", printed(t))
+    return t.replace("\u2026", "...")
+
+
 def nz(s):
     return re.sub(r"\s+", " ", (s or "")).strip()
 
@@ -138,8 +147,7 @@ def classify(recs, marks, gem, vis=None, kr=None):
         m = marks.get((r["page"], r["kid"]))
         if m and nz(m.get("site")) in (nz(r["site"]), nz(r["text"])):
             if m["status"] in ("ok", "fixed"):
-                r["tier"], r["text"] = "checked", printed(m["text"])
-                if "…" in r["text"]: r["tier"], r["why"] = "dots", "marked, but still has …"
+                r["tier"], r["text"] = "checked", user_text(m["text"])
             else:
                 r["tier"] = "out"
             continue
@@ -207,13 +215,15 @@ ADMITTED = ("checked", "agree", "kraken", "gemini", "vision")
 
 def edge_dups(recs):
     """the same word at the end of one line and the start of the next (same page and column): one of them is wrong
-    (b1 1:70 "—Pl." marked Right, 1:71 "Pl. אָבוֹת־" fixed). Both lines go back to the check page."""
+    (b1 1:70 "—Pl." marked Right, 1:71 "Pl. אָבוֹת־" fixed). Both lines go back to the check page, unless the user
+    has marked both since (the book does repeat a word: 16:4-5 "Edomite, / Edomite nation", both Right on 6 Nov)."""
     by = {}
     for r in recs: by.setdefault((r["page"], r["col"]), []).append(r)
     for ls in by.values():
         ls.sort(key=lambda r: r["rank"])
         for r1, r2 in zip(ls, ls[1:]):
             w1, w2 = LR.words(r1["text"]), LR.words(r2["text"])
+            if r1["tier"] == r2["tier"] == "checked": continue
             if w1 and w2 and LR.norm_word(w1[-1]) == LR.norm_word(w2[0]) and len(LR.norm_word(w1[-1])) >= 2:
                 for r in (r1, r2):
                     r["flags"] = sorted(set(r["flags"]) | {"edge_dup"})
