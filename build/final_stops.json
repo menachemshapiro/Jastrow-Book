@@ -2,6 +2,7 @@
 "_note": "Entries the book ends with a full stop where Sefaria's text has none: the scan line where the entry ends, read by Tesseract and the PDF layer, shows the stop (Jastrow-Book audit build/audit/final_stops.py, 5 Nov 2026). eid -> page. make_site2.py adds the stop after the entry's last word, or before a closing bracket. Removed after a check on the scan: A03092 (p. 119, after the last cell of the brick-layout example). The 1,163 entries where the readers saw no stop or could not tell were added on 5 Nov by the rule 'every entry ends with a stop' and taken out again on 6 Nov (the user: entries can also end with a comma, colon or dots, and a line may lack text), until each is checked on the scan. Added 6 Nov: 129 entries the user saw with the stop on the scan (review_nov6a, of 149 where both readers saw none; 19 have no stop in the book).",
 "items": {
 "A00002": "1",
+"A00011": "1",
 "A00015": "2",
 "A00018": "2",
 "A00026": "2",
@@ -18,6 +19,7 @@
 "A00059": "3",
 "A00060": "3",
 "A00061": "3",
+"A00062": "3",
 "A00063": "3",
 "A00072": "4",
 "A00073": "4",

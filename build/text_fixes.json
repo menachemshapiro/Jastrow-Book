@@ -13273,5 +13273,85 @@
   "old": "so did she slight me. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Shemot_Rabbah.3\">Ex. R. s. 3</a> beg.;",
   "new": "so did she slight me. Ib. s. 3 beg.;",
   "why": "Sefaria's current text names the work where the book prints \"Ib. s. 3\" (2018 text: \"Ib. s. 3\"); Sefaria had \"Ex. R. s. 3\", link https://www.sefaria.org/Shemot_Rabbah.3. Restored as printed, the link dropped as for the other Ib. places (build/ib_named.json, \"manual\"; the user, 7 Nov)."
+ },
+ {
+  "page": 2,
+  "entry": "A00030",
+  "kind": "punct",
+  "old": "prob. לאַבְרָּן;",
+  "new": "prob. לאַבְדָּן;",
+  "why": "Typo in the digital text: ר for the book's ד (the user, review_nov7a, 7 Nov; checked on the scan; found in the kraken line check 2 Nov)."
+ },
+ {
+  "page": 2,
+  "entry": "A00030",
+  "kind": "punct",
+  "old": "Ms. Zer. Abr. 3 לֵיאָבֵר)",
+  "new": "Ms. Zer. Abr. 3 לֵיאָבֵד)",
+  "why": "Typo in the digital text: ר for the book's ד (the user, review_nov7a, 7 Nov; checked on the scan)."
+ },
+ {
+  "page": 21,
+  "entry": "A00543",
+  "kind": "order",
+  "old": " <span class=\"pl\">Pl. אוּגְיוֹת</span><span class=\"ss\"><span class=\"s\"><span class=\"d\"> (<a class=\"x\" href=\"#A00542\">foreg.</a>) <i>rounded ditch, hole dug around the grape-vine</i>. ",
+  "new": "<span class=\"ss\"><span class=\"s\"><span class=\"d\"> (<a class=\"x\" href=\"#A00542\">foreg.</a>) <i>rounded ditch, hole dug around the grape-vine</i>. <span class=\"pl\">Pl. אוּגְיוֹת</span> ",
+  "why": "The plural is misplaced in the digital text: the book prints \"grape-vine. Pl. אוגיות M. Kat. I, 1\" (the user, review_nov7a, 7 Nov; checked on the scan)."
+ },
+ {
+  "page": 21,
+  "entry": "A00544",
+  "kind": "punct",
+  "old": "<a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Chullin.25a.13\">Ḥull. 25<sup>a</sup></a>; <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Chullin.25b.1\">25<sup>b</sup></a>;",
+  "new": "<a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Chullin.25a.13\">Ḥull. 25<sup>ab</sup></a>;",
+  "why": "Sefaria's current text splits the book's \"Ḥull. 25ᵃᵇ\" (2018 text: \"25ab\") into two references (the user, review_nov7a, 7 Nov; checked on the scan)."
+ },
+ {
+  "page": 22,
+  "entry": "A00556",
+  "kind": "letters",
+  "old": "<a class=\"x\" href=\"#A01602\">אִירָּא</a> a.",
+  "new": "<a class=\"x\" href=\"#A01156\">אִידָּא</a> a.",
+  "why": "Typo in the digital text: ר for the book's ד; the cross-reference now goes to אִידָּא (A01156) (the user, review_nov7a, 7 Nov; checked on the scan)."
+ },
+ {
+  "page": 76,
+  "entry": "A02002",
+  "kind": "dup",
+  "old": "<span class=\"d\"> *<b>כְּפַר א׳ אָמוּס</b> , <a",
+  "new": "<span class=\"d\">, <a",
+  "why": "The headword is repeated in the digital text; the book prints it once (the user, review_nov7a, 7 Nov; checked on the scan)."
+ },
+ {
+  "page": 88,
+  "entry": "A02304",
+  "kind": "punct",
+  "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">אַנְשׁוּן, .</span>",
+  "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">אַנְשׁוּן</span>.",
+  "why": "The book prints a full stop after the headword (the user, review_nov7a, 7 Nov; checked on the scan)."
+ },
+ {
+  "page": 88,
+  "entry": "A02304",
+  "kind": "punct",
+  "old": "<a class=\"x\" href=\"#N01301\">נְשִׁי</a><i>to forget</i>",
+  "new": "<a class=\"x\" href=\"#N01301\">נְשִׁי</a> <i>to forget</i>",
+  "why": "No space in the digital text: \"נְשִׁי to forget\" (the user, review_nov7a, 7 Nov; checked on the scan)."
+ },
+ {
+  "page": 850,
+  "entry": "M02826",
+  "kind": "punct",
+  "old": "<span class=\"pl\">Pl. מְשֹׁוטִין</span>.</span><span class=\"nt\">. Ib. 6.",
+  "new": "<span class=\"pl\">Pl. מְשֹׁוטִין</span>.</span><span class=\"nt\"> Ib. 6.",
+  "why": "Two full stops in the digital text; the book prints one (the user, review_nov7a, 7 Nov; checked on the scan)."
+ },
+ {
+  "page": 1678,
+  "entry": "V00704",
+  "kind": "dup",
+  "old": "<i>Tamar</i>, 1) Judah’s daughter-in-law.</span><span class=\"nt\">, </span></span>",
+  "new": "<i>Tamar</i>,</span></span> ",
+  "why": "\"1) Judah's daughter-in-law.\" is repeated in the digital text; the book prints it once (the user, review_nov7a, 7 Nov; checked on the scan)."
  }
 ]
