@@ -227,6 +227,29 @@ def fix_special(pid, h):
             h = h[:m.start()] + "Bab. ib. " + h[m.end():]
         it["_done"] = True
         _step(h0, h)
+    # "Ib."/"ib." as the book prints it where Sefaria's current text named the work (build/ib_named.json keeps the
+    # names and links; the 2018 text has "Ib."). The link goes with the name, as for "Bab. ib." (the user, 7 Nov).
+    # Each place is the occ-th match of "<name> <next>" in its entry, counted across the entry's pages.
+    for eid in re.findall(r'<div class="e[^"]*" id="(\w+)"', h):
+        if eid not in IB_NAMED: continue
+        k = h.find('id="%s"' % eid)
+        end = h.find('<div class="e', k + 5)
+        end = end if end > 0 else len(h)
+        todo = []
+        for key, group in IB_NAMED[eid].items():
+            ms = list(group[0]["_rx"].finditer(h, k, end))
+            seen = IB_SEEN.get((eid, key), 0)
+            todo += [(ms[it["occ"] - seen], it) for it in group if not it.get("_done") and seen <= it["occ"] < seen + len(ms)]
+            IB_SEEN[(eid, key)] = seen + len(ms)
+        for m, it in sorted(todo, key=lambda x: -x[0].start()):
+            h0 = h
+            if m.group(1):
+                e = h.index("</a>", m.end())
+                h = h[:m.start()] + it["book"] + h[m.end():e] + h[e + 4:]
+            else:
+                h = h[:m.start()] + it["book"] + h[m.end():]
+            it["_done"] = True
+            _step(h0, h)
     # a phrase repeated in the digital text ("insep. insep.", "ch. same. ch. same."): the second copy and the space
     # before it are removed, character by character, so the markup around them stays (build/doubled.json; the user's
     # marks on the scans, 5 Nov)
@@ -312,6 +335,18 @@ BAB_IB = {}
 for _it in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "bab_ib.json"), encoding="utf-8"))["items"]:
     _it["_rx"] = re.compile(r'Bab\. (<a class="r"[^>]*>)?(' + re.escape(_it["tractate"]) + r') ')
     BAB_IB.setdefault(_it["entry"], []).append(_it)
+IB_NAMED, IB_SEEN = {}, {}
+
+
+def _ib_core(nxt):
+    core = re.match(r"[\w.]*?(?=[,;:)\]]|$)|[\w]+", nxt).group(0) or nxt[:1]
+    return re.sub(r"(?<=\d)[a-d]$", "", core)
+
+
+for _it in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "ib_named.json"), encoding="utf-8"))["items"]:
+    _it["_rx"] = re.compile(r'(<a class="r"[^>]*>)?' + r"\s+".join(map(re.escape, _it["sefaria"].split()))
+                            + r"(?=(?:\s|<[^>]+>)+" + re.escape(_ib_core(_it["next"])) + ")")
+    IB_NAMED.setdefault(_it["entry"], {}).setdefault((_it["sefaria"], _it["next"]), []).append(_it)
 DOUBLED = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "doubled.json"), encoding="utf-8"))["items"]
 DOUBLED_DONE = set()
 FINAL_STOPS_BY_PAGE = {}
@@ -664,6 +699,9 @@ json.dump({"chunk": CHUNK, "pages": meta}, open(os.path.join(OUT, "data", "pages
 json.dump(hw, open(os.path.join(OUT, "data", "hw.json"), "w"), ensure_ascii=False, separators=(",", ":"))
 _bab_left = [it["entry"] for v in BAB_IB.values() for it in v if not it.get("_done")]
 assert not _bab_left, ("Bab. ib. not restored", _bab_left)
+_ib_left = [(it["entry"], it["sefaria"]) for v in IB_NAMED.values() for g in v.values() for it in g if not it.get("_done")]
+assert not _ib_left, ("Ib. not restored", _ib_left)
+print(sum(len(g) for v in IB_NAMED.values() for g in v.values()), "\"Ib.\" restored")
 _dbl_left = sorted(set(DOUBLED) - DOUBLED_DONE)
 if _dbl_left: print("doubled phrases not found:", _dbl_left)
 _fs_all = {e for v in FINAL_STOPS_BY_PAGE.values() for e in v}

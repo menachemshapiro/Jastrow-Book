@@ -13201,5 +13201,77 @@
   "old": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">תֻּכָּא, תַּכָּא</span> <span class=\"ss\"><span class=\"s\"><span class=\"d\"> I), v.",
   "new": "<span class=\"hw\" lang=\"he\" dir=\"rtl\">תֻּכָּא</span>, (<span class=\"hw\" lang=\"he\" dir=\"rtl\">תַּכָּא</span> <span class=\"hn\">I</span>)<span class=\"ss\"><span class=\"s\"><span class=\"d\">, v.",
   "why": "The opening bracket is missing in the digital text. The book prints \"תֻּכָּא, (תַּכָּא I), v. תּוּכָּא.\" (the user, review_nov6a, 6 Nov; checked on the scan)."
+ },
+ {
+  "page": 151,
+  "entry": "B00404",
+  "kind": "ib",
+  "old": "<a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Targum_Jerusalem,_Deuteronomy.1\">I</a>b. I a. II, XXXIII, 22.",
+  "new": "Ib. I a. II, XXXIII, 22.",
+  "why": "Sefaria's current text names the work where the book prints \"Ib. I a. II, XXXIII, 22\" (2018 text: \"Ib. I a. II, XXXIII, 22\"); Sefaria had \"I b. (link on \"I\")\", link https://www.sefaria.org/Targum_Jerusalem,_Deuteronomy.1. Restored as printed, the link dropped as for the other Ib. places (build/ib_named.json, \"manual\"; the user, 7 Nov)."
+ },
+ {
+  "page": 674,
+  "entry": "K01280",
+  "kind": "ib",
+  "old": "(ref. to <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Exodus.34.10\">Ex. XXXIV, 10</a>).—Trnsf.",
+  "new": "(ref. to Ex. ib. 10).—Trnsf.",
+  "why": "Sefaria's current text names the work where the book prints \"Ex. ib. 10\" (2018 text: \"Ex. ib. 10\"); Sefaria had \"Ex. XXXIV, 10\", link https://www.sefaria.org/Exodus.34.10. Restored as printed, the link dropped as for the other Ib. places (build/ib_named.json, \"manual\"; the user, 7 Nov)."
+ },
+ {
+  "page": 678,
+  "entry": "K01326",
+  "kind": "ib",
+  "old": "top (ref. to Mish. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Mishnah_Demai.6.6\">Dem. VI, 6</a> צנועי בית הלל)",
+  "new": "top (ref. to Mish. ib. 6 צנועי בית הלל)",
+  "why": "Sefaria's current text names the work where the book prints \"Mish. ib. 6\" (2018 text: \"Mish. ib. 6\"); Sefaria had \"Mish. Dem. VI, 6\", link https://www.sefaria.org/Mishnah_Demai.6.6. Restored as printed, the link dropped as for the other Ib. places (build/ib_named.json, \"manual\"; the user, 7 Nov)."
+ },
+ {
+  "page": 874,
+  "entry": "N00159",
+  "kind": "ib",
+  "old": "that <i>nagaf</i> (<a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Exodus.21.35\">Ex. XXI, 35</a>)",
+  "new": "that <i>nagaf</i> (Ex. ib. 35)",
+  "why": "Sefaria's current text names the work where the book prints \"Ex. ib. 35\" (2018 text: \"Ex. ib. 35\"); Sefaria had \"Ex. XXI, 35\", link https://www.sefaria.org/Exodus.21.35. Restored as printed, the link dropped as for the other Ib. places (build/ib_named.json, \"manual\"; the user, 7 Nov)."
+ },
+ {
+  "page": 977,
+  "entry": "O00594",
+  "kind": "ib",
+  "old": "מסעדין, Mish. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Mishnah_Shabbat.18.3\">Sabb. XVIII, 3</a>)",
+  "new": "מסעדין, Mish. ib. 3)",
+  "why": "Sefaria's current text names the work where the book prints \"Mish. ib. 3\" (2018 text: \"Mish. ib. 3\"); Sefaria had \"Mish. Sabb. XVIII, 3\", link https://www.sefaria.org/Mishnah_Shabbat.18.3. Restored as printed, the link dropped as for the other Ib. places (build/ib_named.json, \"manual\"; the user, 7 Nov)."
+ },
+ {
+  "page": 1265,
+  "entry": "R00157",
+  "kind": "ib",
+  "old": "משולשים, Mish. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Mishnah_Eruvin.5.3\">Erub. V, 3</a>)",
+  "new": "משולשים, Mish. ib. 3)",
+  "why": "Sefaria's current text names the work where the book prints \"Mish. ib. 3\" (2018 text: \"Mish. ib. 3\"); Sefaria had \"Mish. Erub. V, 3\", link https://www.sefaria.org/Mishnah_Eruvin.5.3. Restored as printed, the link dropped as for the other Ib. places (build/ib_named.json, \"manual\"; the user, 7 Nov)."
+ },
+ {
+  "page": 1291,
+  "entry": "R00611",
+  "kind": "ib",
+  "old": "(ref. to צְנוּעֵי Mish. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Mishnah_Demai.6.6\">Dem. VI, 6</a>)",
+  "new": "(ref. to צְנוּעֵי Mish. ib. 6)",
+  "why": "Sefaria's current text names the work where the book prints \"Mish. ib. 6\" (2018 text: \"Mish. ib. 6\"); Sefaria had \"Mish. Dem. VI, 6\", link https://www.sefaria.org/Mishnah_Demai.6.6. Restored as printed, the link dropped as for the other Ib. places (build/ib_named.json, \"manual\"; the user, 7 Nov)."
+ },
+ {
+  "page": 1501,
+  "entry": "T01098",
+  "kind": "ib",
+  "old": "Ib. (ref. to <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Exodus.22.3\">Ex. XXII, 3</a>)",
+  "new": "Ib. (ref. to Ex. ib. 3)",
+  "why": "Sefaria's current text names the work where the book prints \"Ex. ib. 3\" (2018 text: \"Ex. ib. 3\"); Sefaria had \"Ex. XXII, 3\", link https://www.sefaria.org/Exodus.22.3. Restored as printed, the link dropped as for the other Ib. places (build/ib_named.json, \"manual\"; the user, 7 Nov)."
+ },
+ {
+  "page": 180,
+  "entry": "B01010",
+  "kind": "ib",
+  "old": "so did she slight me. <a class=\"r\" target=\"_blank\" rel=\"noopener\" href=\"https://www.sefaria.org/Shemot_Rabbah.3\">Ex. R. s. 3</a> beg.;",
+  "new": "so did she slight me. Ib. s. 3 beg.;",
+  "why": "Sefaria's current text names the work where the book prints \"Ib. s. 3\" (2018 text: \"Ib. s. 3\"); Sefaria had \"Ex. R. s. 3\", link https://www.sefaria.org/Shemot_Rabbah.3. Restored as printed, the link dropped as for the other Ib. places (build/ib_named.json, \"manual\"; the user, 7 Nov)."
  }
 ]

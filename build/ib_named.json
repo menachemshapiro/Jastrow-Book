@@ -1,0 +1,4931 @@
+{
+ "_about": "\"Ib.\"/\"ib.\" restored as the book prints it. Sefaria's 2018 text has the book's \"Ib.\" here; its current text names the work instead (Gen. R., Kel. in \"Tosef. ib. B. Kam.\", Midr. Till. …). These are those places, with Sefaria's name and link, kept so that they can be used again later if wanted (the user, 7 Nov 2026). make_site2.py restores \"Ib.\" in each (IB_NAMED): \"occ\" counts the matches of \"<sefaria> <next>\" in the entry before this one. \"manual\": places where Sefaria changed more than the \"Ib.\" (e.g. \"Ex. ib. 35\" -> \"Ex. XXI, 35\"), restored by text_fixes records instead.",
+ "items": [
+  {
+   "page": "2",
+   "entry": "A00021",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.53.13",
+   "context": "fever, has vomiting (spasms)? Ib. s. 53 חמה ואכאבית."
+  },
+  {
+   "page": "13",
+   "entry": "A00328",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.5.4",
+   "context": "Midr. Till. to Ps. LXXXIV. Ib. to Ps. LXXXVI, 1."
+  },
+  {
+   "page": "13",
+   "entry": "A00328",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.27.3",
+   "context": "Ib. to Ps. LXXXVI, 1. Ib. to Ps. XXVII. Pesik."
+  },
+  {
+   "page": "18",
+   "entry": "A00450",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.23",
+   "context": "[Comment.—Perh. to be read אַרְדִּיכְלִין.] Ib. s. 23 ארדיכולין וכ'"
+  },
+  {
+   "page": "29",
+   "entry": "A00764",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Mish. ed. אוּנְקְלִיּוֹת). Tosef. ib. B. Mets. II, 4"
+  },
+  {
+   "page": "30",
+   "entry": "A00775",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "fr.—Kel. l. c.; Tosef. ib. B. Mets. II, 4;"
+  },
+  {
+   "page": "38",
+   "entry": "A00988",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.99.8",
+   "context": "brotherly to each other. Ib. s. 99 אחים דפחתא"
+  },
+  {
+   "page": "47",
+   "entry": "A01215",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.67.6",
+   "context": "R. s. 37 beg. Ib. s. 67 איטאליה.—Targ. Ezek."
+  },
+  {
+   "page": "48",
+   "entry": "A01263",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.118.19",
+   "context": "Till. to Ps. LXXXVIII, 5. Ib. to Ps. CIV, 29"
+  },
+  {
+   "page": "49",
+   "entry": "A01277",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.31.1",
+   "context": "aside (cancel) your verdict. Ib. s. 31 אל'. [Corr."
+  },
+  {
+   "page": "62",
+   "entry": "A01683",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.9.18",
+   "context": "א' the divine justice. Ib. s. 9, v. אַכְזָרִי.—Esth."
+  },
+  {
+   "page": "64",
+   "entry": "A01724",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.102.3",
+   "context": "receive my petition thyself. Ib. to Ps. CII אל"
+  },
+  {
+   "page": "67",
+   "entry": "A01787",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.66.3",
+   "context": "his divinity; a. e. Ib. s. 66 ויתן לך"
+  },
+  {
+   "page": "77",
+   "entry": "A02030",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.78",
+   "context": "that Jacob was truthful? Ib. s. 78. [In later"
+  },
+  {
+   "page": "82",
+   "entry": "A02145",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.87",
+   "context": "granted him a pension. Ib. s. 87 אני חותכת"
+  },
+  {
+   "page": "82",
+   "entry": "A02145",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.10",
+   "context": "are collected from them. Ib. s. 10 אַנֹּונִים Ar."
+  },
+  {
+   "page": "92",
+   "entry": "A02415",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.37",
+   "context": "(cmp. Gen. R. s. 58). Ib. s. 37, beg.; a."
+  },
+  {
+   "page": "92",
+   "entry": "A02419",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.78",
+   "context": "a. fr. (corr. acc.). Ib. s. 78 אסטרטלי, read"
+  },
+  {
+   "page": "94",
+   "entry": "A02450",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.20.1",
+   "context": "text). Ex. R. s. 9. Ib. s. 20, beg.— Pl."
+  },
+  {
+   "page": "95",
+   "entry": "A02500",
+   "book": "ib.",
+   "sefaria": "Sabb.",
+   "next": "I,",
+   "occ": 1,
+   "link": "",
+   "context": "spreads a plaster. Tosef. ib. I, 23; a. fr.—Pesik."
+  },
+  {
+   "page": "101",
+   "entry": "A02638",
+   "book": "Ib.",
+   "sefaria": "Pesik. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Pesikta_Rabbati.46.1",
+   "context": "איספוסין, אפוספיס (corr. acc.). Ib. s. 46 (ed. Fr."
+  },
+  {
+   "page": "103",
+   "entry": "A02702",
+   "book": "ib.",
+   "sefaria": "Sot.",
+   "next": "XV,",
+   "occ": 0,
+   "link": "",
+   "context": "end, 24 c; Tosef. ib. XV, 9 אבל עושה"
+  },
+  {
+   "page": "114",
+   "entry": "A02976",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.12.4",
+   "context": "(pleaded in his behalf). Ib. s. 12 (same play"
+  },
+  {
+   "page": "121",
+   "entry": "A03134",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "מפתח של א' וכ' (Tosef. ib. B. Mets. IV, 15"
+  },
+  {
+   "page": "130",
+   "entry": "A03348",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.28.9",
+   "context": "best stores of all. Ib. s. 28.—Snh. 22 a"
+  },
+  {
+   "page": "133",
+   "entry": "A03422",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.22.9",
+   "context": "להַ').— Pl. אַתְלִיטִין . Ib. s. 22.—אַתְלִיטִים Ex. R."
+  },
+  {
+   "page": "133",
+   "entry": "A03423",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.5.7",
+   "context": "that things were created? Ib. s. 5. Pesik. R."
+  },
+  {
+   "page": "143",
+   "entry": "B00184",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.40.5",
+   "context": "מַבְהֶקֶת (of glistening jewels). Ib. s. 40 הבהיקה כל"
+  },
+  {
+   "page": "164",
+   "entry": "B00679",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.11",
+   "context": "top. Lev. R. s. 26. Ib. s. 11; Ruth R."
+  },
+  {
+   "page": "171",
+   "entry": "B00821",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.78.12",
+   "context": "Tyre? Gen. R. s. 10. Ib. s. 78; a. e.—"
+  },
+  {
+   "page": "172",
+   "entry": "B00854",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.19.2",
+   "context": "soul survives the body. Ib. s. 19 (play on"
+  },
+  {
+   "page": "172",
+   "entry": "B00855",
+   "book": "ib.",
+   "sefaria": "Targ.",
+   "next": "Y.",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Targum_Jonathan_on_Deuteronomy.29.4",
+   "context": "same. Targ. Deut. VIII, 4; ib. Y. XXIX, 4 בלמו,"
+  },
+  {
+   "page": "174",
+   "entry": "B00898",
+   "book": "ib.",
+   "sefaria": "Sabb.",
+   "next": "XII",
+   "occ": 0,
+   "link": "",
+   "context": "14 d top; Tosef. ib. XII (XIII), 9 but"
+  },
+  {
+   "page": "193",
+   "entry": "B01242",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.17",
+   "context": "creation of the world. Ib. s. 17 man looks"
+  },
+  {
+   "page": "209",
+   "entry": "C00137",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.45",
+   "context": "גְּבִרְתָּהּ her mistress’ son. Ib. s. 45 (גְּבִירְ') גְּבִרְתִּי"
+  },
+  {
+   "page": "215",
+   "entry": "C00246",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.24.6",
+   "context": "the way to lawlessness). Ib. s. 24, a. fr."
+  },
+  {
+   "page": "224",
+   "entry": "C00454",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.12.6",
+   "context": "Gen. 55 ינמוק), v. צָמַק. Ib. s. 12 גזעה; s."
+  },
+  {
+   "page": "226",
+   "entry": "C00476",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.98.10",
+   "context": "went into the ark. Ib. s. 98 גבורה של"
+  },
+  {
+   "page": "240",
+   "entry": "C00778",
+   "book": "ib.",
+   "sefaria": "Sot.",
+   "next": "IX,",
+   "occ": 1,
+   "link": "",
+   "context": "expiatory heifer died; Tosef. ib. IX, 1 גִּיזָתָהּ."
+  },
+  {
+   "page": "247",
+   "entry": "C00926",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.2",
+   "context": "&c.; Ex. R. s. 3. Ib. s. 2, end בכ\"מ"
+  },
+  {
+   "page": "249",
+   "entry": "C00949",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "הג' Galilean flasks; Tosef. ib. B. Kam. II, 2"
+  },
+  {
+   "page": "253",
+   "entry": "C01033",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.47",
+   "context": "testify to their alliance. Ib. s. 47 כתב לה"
+  },
+  {
+   "page": "254",
+   "entry": "C01054",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 2,
+   "link": "",
+   "context": "the bottom remained); Tosef. ib. B. Mets. VI, 9"
+  },
+  {
+   "page": "256",
+   "entry": "C01073",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "as foreign land; Tosef. ib. IV, 11 גיניא דא';"
+  },
+  {
+   "page": "262",
+   "entry": "C01194",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "and G. itself; Tosef. ib. IV, 11 ריש מיא"
+  },
+  {
+   "page": "262",
+   "entry": "C01196",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. VIII, 3. Tosef. ib. B. Mets. X, 5;"
+  },
+  {
+   "page": "262",
+   "entry": "C01206",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "G. (ed. שגְּפָתָן); Tosef. ib. B. Kam. VII, 7"
+  },
+  {
+   "page": "267",
+   "entry": "C01313",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "an olive tree; Tosef. ib. B. Mets. II, 19"
+  },
+  {
+   "page": "271",
+   "entry": "C01382",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XII, 4; Tosef. ib. B. Mets. II, 11"
+  },
+  {
+   "page": "272",
+   "entry": "C01392",
+   "book": "ib.",
+   "sefaria": "Bets.",
+   "next": "אין",
+   "occ": 0,
+   "link": "",
+   "context": "10 (23 b) אינה נִגְרֶרֶת; ib. אין נִגְרָרִין must not"
+  },
+  {
+   "page": "272",
+   "entry": "C01392",
+   "book": "Ib.",
+   "sefaria": "Pes.",
+   "next": "I,",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Mishnah_Pesachim.1.2",
+   "context": "a bed of ropes. Ib. I, 2 (9 a);"
+  },
+  {
+   "page": "273",
+   "entry": "C01408",
+   "book": "ib.",
+   "sefaria": "Bets.",
+   "next": "IV,",
+   "occ": 1,
+   "link": "",
+   "context": "c bot. קרטי'; Tosef. ib. IV, 10 קירטון ed."
+  },
+  {
+   "page": "285",
+   "entry": "D00244",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.4.20",
+   "context": "נשיא נשיאי Num. III, 32). Ib. s. 4, end [read:]"
+  },
+  {
+   "page": "293",
+   "entry": "D00444",
+   "book": "Ib.",
+   "sefaria": "B. Kam.",
+   "next": "ור\"ט",
+   "occ": 0,
+   "link": "",
+   "context": "go beyond the latter. Ib. ור\"ט לית ליה דיו"
+  },
+  {
+   "page": "297",
+   "entry": "D00520",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XX, 3; Tosef. ib. B. Mets. XI, 5"
+  },
+  {
+   "page": "300",
+   "entry": "D00622",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.8.8",
+   "context": "Gen. R. s. 1 דמוסיות. Ib. s. 8; a. fr.—Y."
+  },
+  {
+   "page": "301",
+   "entry": "D00635",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.22.7",
+   "context": "נטלו דִינָם suffered punishment Ib. s. 22 לתבוע דִּינוֹ"
+  },
+  {
+   "page": "302",
+   "entry": "D00657",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.11",
+   "context": "דדהב a golden plate. Ib. s. 11 דיוסקום אחד"
+  },
+  {
+   "page": "303",
+   "entry": "D00663",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.93.3",
+   "context": "acc.).— Pl. דִּיסְקְרִין . Ib. s. 93 (translat. משכיות,"
+  },
+  {
+   "page": "306",
+   "entry": "D00765",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. VII, 2. Tosef. ib. B. Kam. V, 7"
+  },
+  {
+   "page": "311",
+   "entry": "D00855",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Ib. XXII, 1; Tosef. ib. B. Bath. I, 9"
+  },
+  {
+   "page": "313",
+   "entry": "D00900",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.91.9",
+   "context": "thee in the grave. Ib. s. 91, a. fr."
+  },
+  {
+   "page": "315",
+   "entry": "D00918",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.8.1",
+   "context": "verse (it is proven). Ib. s. 8 ד' אמר"
+  },
+  {
+   "page": "315",
+   "entry": "D00932",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.31",
+   "context": "טוס … (corr. acc.). Ib. s. 31, beg. דיוסטוס"
+  },
+  {
+   "page": "320",
+   "entry": "D01033",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "2, v. מַרְדֵּעַ. Tosef. ib. B. Mets. IV, 4."
+  },
+  {
+   "page": "321",
+   "entry": "D01039",
+   "book": "ib.",
+   "sefaria": "Sabb.",
+   "next": "VII",
+   "occ": 0,
+   "link": "",
+   "context": "bot., read with Tosef. ib. VII (VIII), 2 דגן"
+  },
+  {
+   "page": "323",
+   "entry": "D01096",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.22.6",
+   "context": "R. s. 18, end. Ib. s. 22, beg.—Ib. s."
+  },
+  {
+   "page": "324",
+   "entry": "D01113",
+   "book": "Ib.",
+   "sefaria": "Ḥull.",
+   "next": "III,",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Mishnah_Chullin.3.1",
+   "context": "substance in the body). Ib. III, 1 (42 a)"
+  },
+  {
+   "page": "324",
+   "entry": "D01113",
+   "book": "Ib.",
+   "sefaria": "Ḥull.",
+   "next": "52b",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Chullin.52b.10",
+   "context": "one attacked by &c. Ib. 52 b; a. fr. —4) to"
+  },
+  {
+   "page": "325",
+   "entry": "D01129",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.8",
+   "context": "הַדֹּ' Abba, the lecturer. Ib. s. 8, end, v."
+  },
+  {
+   "page": "333",
+   "entry": "E00117",
+   "book": "Ib.",
+   "sefaria": "Snh.",
+   "next": "21b",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Sanhedrin.21b.19",
+   "context": "and four private persons. Ib. 21 b bot. לה' for the"
+  },
+  {
+   "page": "347",
+   "entry": "E00413",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.38.13",
+   "context": "of it (the bed). Ib. s. 38 ויצילך הימנו"
+  },
+  {
+   "page": "360",
+   "entry": "E00717",
+   "book": "ib.",
+   "sefaria": "Ker.",
+   "next": "III,",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Mishnah_Keritot.3.2",
+   "context": "2 (17 b) בה' אחת; ib. III, 2 בה' אחד."
+  },
+  {
+   "page": "363",
+   "entry": "E00775",
+   "book": "Ib.",
+   "sefaria": "Ab. Zar.",
+   "next": "40b",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Avodah_Zarah.40b.7",
+   "context": "front of the counter. Ib. 40 b מן הה' מן האוצר"
+  },
+  {
+   "page": "364",
+   "entry": "E00804",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.20.8",
+   "context": "הקריב is used &c. Ib. s. 20 they died"
+  },
+  {
+   "page": "369",
+   "entry": "E00919",
+   "book": "ib.",
+   "sefaria": "Ab. Zar.",
+   "next": "II,",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Mishnah_Avodah_Zarah.2.8",
+   "context": "(ref. to השיאו, Mish. ib. II, 8) he ought"
+  },
+  {
+   "page": "373",
+   "entry": "F00041",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "curtain (or sail); Tosef. ib. B. Mets. XI, 8."
+  },
+  {
+   "page": "376",
+   "entry": "F00115",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "I,",
+   "occ": 1,
+   "link": "",
+   "context": "the festive month; Tosef. ib. I, 7 מְוַתְּרִין; ib."
+  },
+  {
+   "page": "380",
+   "entry": "G00057",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.25",
+   "context": "ז' a glass-dealer’s shop. Ib. s. 25; a. fr.—"
+  },
+  {
+   "page": "383",
+   "entry": "G00121",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.7.4",
+   "context": "Israel be thy match. Ib. s. 7 בהמות יש"
+  },
+  {
+   "page": "387",
+   "entry": "G00190",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "in Ar. זומניסטרה). Tosef. ib. B. Bath. III, 6"
+  },
+  {
+   "page": "387",
+   "entry": "G00191",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.23",
+   "context": "at the Divine Majesty. Ib. s. 23, end ואינו"
+  },
+  {
+   "page": "403",
+   "entry": "G00533",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.75.13",
+   "context": "muzzle on thy mouth. Ib. s. 75 (ref. to"
+  },
+  {
+   "page": "410",
+   "entry": "G00652",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.42",
+   "context": "in communication with woman. Ib. s. 42; Pesik. R."
+  },
+  {
+   "page": "410",
+   "entry": "G00652",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.5",
+   "context": "at, to harm . Ib. s. 5 בקש להִזְדּקֵּק"
+  },
+  {
+   "page": "413",
+   "entry": "G00692",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.75.4",
+   "context": "Pl. זַרְזִירִים, זַרְזִירִין . Ib. s. 75 אין שני"
+  },
+  {
+   "page": "417",
+   "entry": "H00040",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.70",
+   "context": "ref. to Gen. XLII, 21). Ib. s. 70; Num. R."
+  },
+  {
+   "page": "418",
+   "entry": "H00060",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. II, 2; Tosef. ib. B. Kam. II, 2"
+  },
+  {
+   "page": "419",
+   "entry": "H00083",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "of the staff); Tosef. ib. B. Mets. IV, 5"
+  },
+  {
+   "page": "420",
+   "entry": "H00085",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.26.2",
+   "context": "and cannot be replaced! Ib. s. 26; Mekh. B’shall.,"
+  },
+  {
+   "page": "427",
+   "entry": "H00218",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.13",
+   "context": "the patriarchs; a. fr.—Fem. חֲדָשָׁה. Ib. s. 13 תורה ח'"
+  },
+  {
+   "page": "435",
+   "entry": "H00370",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.48",
+   "context": "b; Gen. R. s. 34. Ib. s. 48 בארבע …"
+  },
+  {
+   "page": "435",
+   "entry": "H00390",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.92",
+   "context": "Pl. קַלִּים וַחֲמורִים (fr. חָמוּר). Ib. s. 92, end אחד"
+  },
+  {
+   "page": "437",
+   "entry": "H00423",
+   "book": "ib.",
+   "sefaria": "Sot.",
+   "next": "XV,",
+   "occ": 0,
+   "link": "",
+   "context": "end, 24 c; Tosef. ib. XV, 9 אלו הן"
+  },
+  {
+   "page": "437",
+   "entry": "H00430",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "a. Diaphane Heimata; Tosef. ib. B. Bath. V, 14"
+  },
+  {
+   "page": "439",
+   "entry": "H00447",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "XIII, 5 חֲרִירָהּ; Tosef. ib. B. Mets. III, 9"
+  },
+  {
+   "page": "449",
+   "entry": "H00634",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "to be used; Tosef. ib. B. Mets. IV, 1"
+  },
+  {
+   "page": "451",
+   "entry": "H00665",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "as a protection); Tosef. ib. B. Kam. III, 3"
+  },
+  {
+   "page": "465",
+   "entry": "H00990",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "ה' became rusty; Tosef. ib. B. Mets. III, 10;"
+  },
+  {
+   "page": "466",
+   "entry": "H01013",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XII, 1; Tosef. ib. B. Mets. II, 3."
+  },
+  {
+   "page": "471",
+   "entry": "H01088",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "ed. Dehrenb. חלמה); Tosef. ib. B. Mets. I, 4,"
+  },
+  {
+   "page": "474",
+   "entry": "H01124",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.75.11",
+   "context": "Take thy clothes off. Ib. s. 75 ח' פורפירא"
+  },
+  {
+   "page": "474",
+   "entry": "H01125",
+   "book": "Ib.",
+   "sefaria": "Sabb.",
+   "next": "149b",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Shabbat.149b.5",
+   "context": "of sacred meat &c. Ib. 149 b מאי משמע דהאי ח'"
+  },
+  {
+   "page": "478",
+   "entry": "H01205",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.65",
+   "context": "because thou seest &c. Ib. s. 65, beg. מלכות"
+  },
+  {
+   "page": "478",
+   "entry": "H01207",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.65.13",
+   "context": "e.— Pl. חֲמָסִים . Ib. s. 65 … שלא"
+  },
+  {
+   "page": "482",
+   "entry": "H01273",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "which formed fruits. Tosef. ib. IV, 20; a. fr."
+  },
+  {
+   "page": "484",
+   "entry": "H01307",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.11.6",
+   "context": "an undeserved gift . Ib. s. 11; a. fr.—שִׂנְאַת"
+  },
+  {
+   "page": "490",
+   "entry": "H01424",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Ib. XXVI, 6. Tosef. ib. B. Bath. IV, 11;"
+  },
+  {
+   "page": "491",
+   "entry": "H01448",
+   "book": "ib.",
+   "sefaria": "Maas. Sh.",
+   "next": "II,",
+   "occ": 1,
+   "link": "",
+   "context": "53 c top; Tosef. ib. II, 1 חֲפִיפָתָהּ when"
+  },
+  {
+   "page": "494",
+   "entry": "H01492",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. II, 2; Tosef. ib. B. Kam. II, 2."
+  },
+  {
+   "page": "498",
+   "entry": "H01581",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XXI, 2. Tosef. ib. B. Bath. I, 7.—"
+  },
+  {
+   "page": "499",
+   "entry": "H01612",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "VI, 36 c; Tosef. ib. IV, 11 (v. Hildesh."
+  },
+  {
+   "page": "501",
+   "entry": "H01653",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "2, v. תָּוֶךְ. Tosef. ib. B. Mets. III, 7."
+  },
+  {
+   "page": "501",
+   "entry": "H01653",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "Mets. III, 7. Tosef. ib. B. Bath. III, 5."
+  },
+  {
+   "page": "505",
+   "entry": "H01739",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.18.4",
+   "context": "is reviled and blasphemed. Ib. to Ps. XVIII, 1"
+  },
+  {
+   "page": "507",
+   "entry": "H01779",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.86.5",
+   "context": "to practice witchcraft . Ib. s. 86 באתר דחרשין"
+  },
+  {
+   "page": "521",
+   "entry": "I00107",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.83",
+   "context": "R. s. 26, v. טַבָּת. Ib. s. 83 (play on"
+  },
+  {
+   "page": "536",
+   "entry": "I00490",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.38.1",
+   "context": "from place to place. Ib. s. 38 (expl. הניעמו,"
+  },
+  {
+   "page": "541",
+   "entry": "I00585",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "other plating material; Tosef. ib. B. Bath. V, 16."
+  },
+  {
+   "page": "546",
+   "entry": "I00648",
+   "book": "Ib.",
+   "sefaria": "Sabb.",
+   "next": "XXIV,",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Mishnah_Shabbat.24.5",
+   "context": "6 (125 b), v. זְמוֹרָה. Ib. XXIV, 5, v. פָּקַק."
+  },
+  {
+   "page": "548",
+   "entry": "I00665",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Ib. 8; 11. Tosef. ib. B. Kam. IV, 18;"
+  },
+  {
+   "page": "550",
+   "entry": "I00712",
+   "book": "Ib.",
+   "sefaria": "Deut. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Devarim_Rabbah.6",
+   "context": "be sent into exile. Ib. s. 6 תִּיטָּרֵד וכ';"
+  },
+  {
+   "page": "552",
+   "entry": "I00759",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XXIX, 1; Tosef. ib. B. Bath. VII, 5"
+  },
+  {
+   "page": "555",
+   "entry": "I00859",
+   "book": "ib.",
+   "sefaria": "Taan.",
+   "next": "14a",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Taanit.14a.12",
+   "context": "to be tossed about; ib. 14 a המְטוֹרֶפֶת (v. supra; Ar."
+  },
+  {
+   "page": "559",
+   "entry": "J00007",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.9.11",
+   "context": "silurus). Ex. R. s. 1. Ib. s. 9 המים ששמרוך"
+  },
+  {
+   "page": "561",
+   "entry": "J00055",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "(ed. Dehr. יְבָלִית); Tosef. ib. B. Kam. III, 2"
+  },
+  {
+   "page": "563",
+   "entry": "J00088",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.18.28",
+   "context": "but with your words. Ib. to Ps. XVIII, 36"
+  },
+  {
+   "page": "570",
+   "entry": "J00203",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.44.14",
+   "context": "flies with the other. Ib. s. 44 (expl. גוזל,"
+  },
+  {
+   "page": "571",
+   "entry": "J00226",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XXVIII, 9; Tosef. ib. B. Bath. V, 14,"
+  },
+  {
+   "page": "574",
+   "entry": "J00278",
+   "book": "ib.",
+   "sefaria": "Maasr.",
+   "next": "III,",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Mishnah_Maasrot.3.10",
+   "context": "court (ref. to Mish. ib. III, 10); a. e.—"
+  },
+  {
+   "page": "579",
+   "entry": "J00403",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "the mill. Kel. XV, 3; (Tosef. ib. B. Mets. V, 5"
+  },
+  {
+   "page": "587",
+   "entry": "J00515",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.6.6",
+   "context": "in his memory, v. מוֹנִיטוֹן. Ib. s. 6 בשעה שהוא"
+  },
+  {
+   "page": "588",
+   "entry": "J00527",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.39.11",
+   "context": "(Yalk. l. c. מפני הוצאה). Ib. s. 39 ממעטת את"
+  },
+  {
+   "page": "589",
+   "entry": "J00538",
+   "book": "ib.",
+   "sefaria": "B. Mets.",
+   "next": "VIII,",
+   "occ": 1,
+   "link": "",
+   "context": "היוצרה (corr. acc.); Tosef. ib. VIII, 27 וי' אין"
+  },
+  {
+   "page": "598",
+   "entry": "J00669",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.44.9",
+   "context": "to him with limitation. Ib. s. 44 ליוֹרְשֵׁנִי to"
+  },
+  {
+   "page": "599",
+   "entry": "J00681",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.19.5",
+   "context": "of mind, calmness . Ib. s. 19 בי' הדעת"
+  },
+  {
+   "page": "601",
+   "entry": "J00705",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.25.14",
+   "context": "of the firm believers. Ib. to Ps. XXV, 14"
+  },
+  {
+   "page": "603",
+   "entry": "J00716",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.62.3",
+   "context": "(Abraham, Isaac and Jacob). Ib. s. 62 נתגרו בהן"
+  },
+  {
+   "page": "603",
+   "entry": "J00716",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "the land measurers. Tosef. ib. B. Bath. I, 7"
+  },
+  {
+   "page": "603",
+   "entry": "J00725",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.19.1",
+   "context": "Pl. יַתּוּשִׁין, יַתּוּשַׁיָּא . Ib. s. 19, beg. וצואה"
+  },
+  {
+   "page": "603",
+   "entry": "J00732",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "יַיתִּי' (ed. יַתּוּ'); Tosef. ib. B. Mets. II, 10,"
+  },
+  {
+   "page": "608",
+   "entry": "K00059",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "as a receptacle). Tosef. ib. B. Kam. II, 5"
+  },
+  {
+   "page": "616",
+   "entry": "K00179",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.24.4",
+   "context": "XXX, 5) = Biblical שׁוּר. Ib. s. 24; Yalk. ib."
+  },
+  {
+   "page": "616",
+   "entry": "K00184",
+   "book": "ib.",
+   "sefaria": "Ab. Zar.",
+   "next": "I,",
+   "occ": 1,
+   "link": "",
+   "context": "39 d top; Tosef. ib. I, 2 שואל בשלומו"
+  },
+  {
+   "page": "617",
+   "entry": "K00220",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Ib. VIII, 1; Tosef. ib. B. Kam. VI, 3"
+  },
+  {
+   "page": "624",
+   "entry": "K00357",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "wall (v. נִדְבָּךְ; Tosef. ib. B. Mets. XI, 6"
+  },
+  {
+   "page": "624",
+   "entry": "K00357",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "כסא … בבנין). Tosef. ib. B. Bath. II, 1"
+  },
+  {
+   "page": "626",
+   "entry": "K00398",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "of a reed. Tosef. ib. B. Mets. VI, 12"
+  },
+  {
+   "page": "627",
+   "entry": "K00418",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XIII, 2; Tosef. ib. B. Mets. III, 4;"
+  },
+  {
+   "page": "628",
+   "entry": "K00452",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.20.20",
+   "context": "הִכְחִיד to destroy . Ib. s. 20 לקללן ולהַכְחִידָן"
+  },
+  {
+   "page": "629",
+   "entry": "K00463",
+   "book": "Ib.",
+   "sefaria": "Sabb.",
+   "next": "80a",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Shabbat.80a.7",
+   "context": "for painting one eye. Ib. 80 a צנועות כּוֹחֲלוֹת וכ' chaste"
+  },
+  {
+   "page": "630",
+   "entry": "K00482",
+   "book": "ib.",
+   "sefaria": "Nidd.",
+   "next": "3a",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Niddah.3a.24",
+   "context": "the time of sweeping; ib. 3 a עד שעת הכי'. Treat."
+  },
+  {
+   "page": "633",
+   "entry": "K00568",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.84",
+   "context": "retirement for prayer . Ib. s. 84, beg. (ref."
+  },
+  {
+   "page": "634",
+   "entry": "K00581",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "3, v. טְנִי. Tosef. ib. B. Mets. IV, 11"
+  },
+  {
+   "page": "635",
+   "entry": "K00603",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.4.5",
+   "context": "R. s. 48, beg. Ib. s. 4 הרקיע …"
+  },
+  {
+   "page": "636",
+   "entry": "K00621",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "of two stones; Tosef. ib. B. Kam. V, 3"
+  },
+  {
+   "page": "637",
+   "entry": "K00632",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Gaon quotes a Var. כידון); [Tosef. ib. B. Bath. VII, 12"
+  },
+  {
+   "page": "638",
+   "entry": "K00660",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "the entire marrow; Tosef. ib. B. Mets. VII, 12"
+  },
+  {
+   "page": "640",
+   "entry": "K00708",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "of a beam; Tosef. ib. B. Mets. XI, 5."
+  },
+  {
+   "page": "641",
+   "entry": "K00714",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.89.7",
+   "context": "כלידרין, corrupt. of כלי ידים). Ib. s. 89 שאין עבד"
+  },
+  {
+   "page": "641",
+   "entry": "K00715",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.3.3",
+   "context": "destroyed from the world. Ib. s. 3 לא נ'"
+  },
+  {
+   "page": "642",
+   "entry": "K00731",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.49",
+   "context": "courses after Adam’s sin). Ib. s. 49 (expl. כלה,"
+  },
+  {
+   "page": "643",
+   "entry": "K00752",
+   "book": "ib.",
+   "sefaria": "B. Bath.",
+   "next": "III,",
+   "occ": 0,
+   "link": "",
+   "context": "to בית היורות Tosef. ib. III, 3) the copper"
+  },
+  {
+   "page": "647",
+   "entry": "K00828",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "Ib. XII, 8; Tosef. ib. B. Bath. VII, 12"
+  },
+  {
+   "page": "650",
+   "entry": "K00864",
+   "book": "ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.88.4",
+   "context": "Midr. Till. to Ps. XIX; ib. to Ps. LXXXVIII, end"
+  },
+  {
+   "page": "656",
+   "entry": "K00974",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 3,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.45.6",
+   "context": "appeared repulsive to him. Ib. s. 45 מִתְכָּעֶרֶת ומתעזבת"
+  },
+  {
+   "page": "657",
+   "entry": "K00980",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "the thorn-pickers’ glove. Tosef. ib. B. Bath. IV, 5"
+  },
+  {
+   "page": "670",
+   "entry": "K01208",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.20",
+   "context": "pale, abashed, grieved . Ib. s. 20 נִתְכַּרְכְּמוּ פניו"
+  },
+  {
+   "page": "671",
+   "entry": "K01228",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "(to press them); Tosef. ib. B. Bath. II, 9"
+  },
+  {
+   "page": "672",
+   "entry": "K01257",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.67.8",
+   "context": "s. 75, beg., v. כָּרַח. Ib. s. 67 מה אני"
+  },
+  {
+   "page": "673",
+   "entry": "K01276",
+   "book": "ib.",
+   "sefaria": "Bekh.",
+   "next": "37b",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Bekhorot.37b.16",
+   "context": "of a carshinah ; ib. 37 b, expl. הינדא; Tosef. ib."
+  },
+  {
+   "page": "681",
+   "entry": "K01375",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XXVI, 5; Tosef. ib. B. Bath. IV, 8"
+  },
+  {
+   "page": "683",
+   "entry": "K01392",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.22",
+   "context": "making peace between them. Ib. s. 22 פשושין מכתשין"
+  },
+  {
+   "page": "686",
+   "entry": "L00031",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.28.1",
+   "context": "Law in their hearts. Ib. to Ps. XXVIII, end"
+  },
+  {
+   "page": "688",
+   "entry": "L00061",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "(ed. Dehr. לִיזְבֵּיזִין); Tosef. ib. B. Mets. VIII, 1"
+  },
+  {
+   "page": "688",
+   "entry": "L00066",
+   "book": "ib.",
+   "sefaria": "Sabb.",
+   "next": "III,",
+   "occ": 1,
+   "link": "",
+   "context": "for the Sabbath; Tosef. ib. III, 2 הדליקו). Nithpa."
+  },
+  {
+   "page": "691",
+   "entry": "L00112",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "1 (Var. לפס); Tosef. ib. B. Mets. IV, 1"
+  },
+  {
+   "page": "692",
+   "entry": "L00133",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "wickerwork for flasks; Tosef. ib. B. Mets. V, 13"
+  },
+  {
+   "page": "698",
+   "entry": "L00262",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.22.10",
+   "context": "R. s. 13, v. בְּהֵמוֹת. Ib. s. 22, end. Ab."
+  },
+  {
+   "page": "703",
+   "entry": "L00358",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.61",
+   "context": "age combined with vitality. Ib. s. 61, beg. (ref."
+  },
+  {
+   "page": "704",
+   "entry": "L00367",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "Kel. II, 2; Tosef. ib. B. Kam. II, 2."
+  },
+  {
+   "page": "705",
+   "entry": "L00394",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "(Hai G.: לטיסא); Tosef. ib. B. Mets. IV, 1."
+  },
+  {
+   "page": "705",
+   "entry": "L00410",
+   "book": "ib.",
+   "sefaria": "Sabb.",
+   "next": "חמרא",
+   "occ": 0,
+   "link": "",
+   "context": "(51 b) לובדקים, expl. ib. חמרא לובא. Kil. VIII,"
+  },
+  {
+   "page": "708",
+   "entry": "L00480",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "frame was removed; Tosef. ib. B. Kam. IV, 12."
+  },
+  {
+   "page": "711",
+   "entry": "L00553",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.27",
+   "context": "but not be answered. Ib. s. 27, end מל'"
+  },
+  {
+   "page": "714",
+   "entry": "L00608",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.34.15",
+   "context": "right (Tanḥ. Emor 24 ליענות). Ib. s. 34 לית את"
+  },
+  {
+   "page": "720",
+   "entry": "L00705",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.33.1",
+   "context": "fr.— Pl. לְשׁוֹנוֹת . Ib. s. 33, beg.; a."
+  },
+  {
+   "page": "724",
+   "entry": "M00061",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.34.7",
+   "context": "perish)?; Gen. R. s. 23. Ib. s. 34.—Sifra Thazr., Par."
+  },
+  {
+   "page": "726",
+   "entry": "M00120",
+   "book": "ib.",
+   "sefaria": "B. Bath.",
+   "next": "III,",
+   "occ": 0,
+   "link": "",
+   "context": "14 c bot.; Tosef. ib. III, 3 המ' the"
+  },
+  {
+   "page": "727",
+   "entry": "M00138",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "in a chest. Tosef. ib. B. Kam. II, 7"
+  },
+  {
+   "page": "727",
+   "entry": "M00162",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "(ed. Dehr. המגיס; Tosef. ib. B. Mets. V, 10"
+  },
+  {
+   "page": "728",
+   "entry": "M00171",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.6.3",
+   "context": "with thee, my neighbor! Ib. s. 6; a. fr.—"
+  },
+  {
+   "page": "729",
+   "entry": "M00181",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.10",
+   "context": "מ' five afflictions . Ib. s. 10, beg.; Lev."
+  },
+  {
+   "page": "730",
+   "entry": "M00205",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XI, 8; Tosef. ib. B. Mets. III, 1"
+  },
+  {
+   "page": "738",
+   "entry": "M00392",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.70",
+   "context": "his load (to market). Ib. s. 70 ואם הוות"
+  },
+  {
+   "page": "745",
+   "entry": "M00548",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "around the stove; Tosef. ib. B. Kam. IV, 18."
+  },
+  {
+   "page": "755",
+   "entry": "M00765",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "off, v. זוֹמִילִיסְטְרוֹן; Tosef. ib. B. Mets. III, 6.—Sabb."
+  },
+  {
+   "page": "756",
+   "entry": "M00786",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Ib. 5, sq.; Tosef. ib. B. Mets. IX, 6."
+  },
+  {
+   "page": "757",
+   "entry": "M00801",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.20.20",
+   "context": ". Num. R. s. 14. Ib. s. 20; a. e."
+  },
+  {
+   "page": "765",
+   "entry": "M00963",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "e.—Kel. XV, 6; Tosef. ib. B. Mets. V, 7,"
+  },
+  {
+   "page": "766",
+   "entry": "M00977",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Talm. ed. מטולטלת); Tosef. ib. B. Bath. VII, 12"
+  },
+  {
+   "page": "769",
+   "entry": "M01055",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.52.13",
+   "context": "beg., a. e., v. טוֹלְמִיסִין. Ib. s. 52 עשאה מ'"
+  },
+  {
+   "page": "772",
+   "entry": "M01119",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XIV, 1; Tosef. ib. B. Mets. IV, 1"
+  },
+  {
+   "page": "777",
+   "entry": "M01233",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "of the cane. Tosef. ib. B. Mets. IV, 5"
+  },
+  {
+   "page": "780",
+   "entry": "M01326",
+   "book": "Ib.",
+   "sefaria": "Snh.",
+   "next": "5",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Sanhedrin.5a",
+   "context": "hand of the court. Ib. 5 מִיתָתוֹ בידי אדם"
+  },
+  {
+   "page": "781",
+   "entry": "M01350",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "wood), v. מְכַוֵּון; Tosef. ib. B. Bath. I, 8"
+  },
+  {
+   "page": "782",
+   "entry": "M01372",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "is broken off; Tosef. ib. B. Mets. III, 5,"
+  },
+  {
+   "page": "785",
+   "entry": "M01448",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XIII, 2; Tosef. ib. B. Mets. III, 4"
+  },
+  {
+   "page": "786",
+   "entry": "M01482",
+   "book": "ib.",
+   "sefaria": "Sabb.",
+   "next": "XIII",
+   "occ": 0,
+   "link": "",
+   "context": "be called building). Tosef. ib. XIII (XIV), 15 מ'"
+  },
+  {
+   "page": "786",
+   "entry": "M01482",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 2,
+   "link": "",
+   "context": "of the Levites; Tosef. ib. B. Mets. V, 9"
+  },
+  {
+   "page": "789",
+   "entry": "M01547",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.14.5",
+   "context": "created in perfect condition. Ib. s. 14 על מְלֵיאָתָהּ"
+  },
+  {
+   "page": "795",
+   "entry": "M01675",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "c מ' דאבהתא; Tosef. ib. IV, 11 מ' דעכתא"
+  },
+  {
+   "page": "804",
+   "entry": "M01855",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.14.5",
+   "context": "drop of m’so . Ib. s. 14; Lev. R."
+  },
+  {
+   "page": "806",
+   "entry": "M01905",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.98",
+   "context": "מ' secret-keeping, discreet men. Ib. s. 98; Tanḥ. Vayḥi"
+  },
+  {
+   "page": "806",
+   "entry": "M01910",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.6.7",
+   "context": "cause to flow . Ib. to Ps. VI, 7"
+  },
+  {
+   "page": "809",
+   "entry": "M01969",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "מ' שהתקינו וכ'; Tosef. ib. B. Mets. II, 14"
+  },
+  {
+   "page": "810",
+   "entry": "M01996",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "ed. Dehr. מספרת). Tosef. ib. B. Mets. III, 4"
+  },
+  {
+   "page": "811",
+   "entry": "M02009",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XXI, 3; Tosef. ib. B. Bath. I, 8"
+  },
+  {
+   "page": "811",
+   "entry": "M02009",
+   "book": "ib.",
+   "sefaria": "Succ.",
+   "next": "II,",
+   "occ": 1,
+   "link": "",
+   "context": "saw, v. מַגָּל; Tosef. ib. II, 7; Bab. ib."
+  },
+  {
+   "page": "811",
+   "entry": "M02028",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "מ' של צרצור; Tosef. ib. B. Kam. II, 8"
+  },
+  {
+   "page": "813",
+   "entry": "M02068",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "7, v. מַעְבָּר. Tosef. ib. B. Mets. III, 14;"
+  },
+  {
+   "page": "813",
+   "entry": "M02068",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "IX, 3 מעדיר. Tosef. ib. B. Bath. I, 7,"
+  },
+  {
+   "page": "818",
+   "entry": "M02159",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "of the legions. Tosef. ib. B. Bath. I, 7"
+  },
+  {
+   "page": "824",
+   "entry": "M02285",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.3.1",
+   "context": "that he is charitable. Ib. s. 3 רעותיה דמתקרי"
+  },
+  {
+   "page": "824",
+   "entry": "M02293",
+   "book": "ib.",
+   "sefaria": "Erub.",
+   "next": "VI",
+   "occ": 0,
+   "link": "",
+   "context": "v. מֵישַׁר (cmp. Tosef. ib. VI (V), 13). Y."
+  },
+  {
+   "page": "824",
+   "entry": "M02294",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XI, 7; Tosef. ib. B. Mets. I, 7"
+  },
+  {
+   "page": "831",
+   "entry": "M02422",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XVII, 16; Tosef. ib. B. Mets. VII, 9"
+  },
+  {
+   "page": "835",
+   "entry": "M02485",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.73.8",
+   "context": "— Pl. as ab. Ib. s. 73 היה לך"
+  },
+  {
+   "page": "837",
+   "entry": "M02544",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.1.1",
+   "context": "צריכים they need chastisement. Ib. s. 1 כל המונע"
+  },
+  {
+   "page": "837",
+   "entry": "M02555",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XXV, 2; Tosef. ib. B. Bath. III, 5."
+  },
+  {
+   "page": "840",
+   "entry": "M02630",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "clay over it; Tosef. ib. B. Kam. IV, 10;"
+  },
+  {
+   "page": "841",
+   "entry": "M02641",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "VI, 36 c; Tosef. ib. IV, 11 מחר' ed."
+  },
+  {
+   "page": "844",
+   "entry": "M02705",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "accompaniment of songs; Tosef. ib. B. Mets. V, 10."
+  },
+  {
+   "page": "849",
+   "entry": "M02823",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "their measuring chains; Tosef. ib. B. Mets. II, 3"
+  },
+  {
+   "page": "851",
+   "entry": "M02855",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XVII, 17; Tosef. ib. B. Mets. VII, 10"
+  },
+  {
+   "page": "854",
+   "entry": "M02900",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.35.4",
+   "context": "dwelling’ but ‘my pledge’. Ib. s. 35 (play on"
+  },
+  {
+   "page": "854",
+   "entry": "M02905",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.35.4",
+   "context": "for their sins, v. מַשְׁכּוֹן. Ib. s. 35; Tanḥ. Vayakh."
+  },
+  {
+   "page": "856",
+   "entry": "M02923",
+   "book": "ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.19.4",
+   "context": "touch of thy fingers; ib. to Ps. XIX כדי"
+  },
+  {
+   "page": "857",
+   "entry": "M02937",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.18",
+   "context": "be inclined to steal. Ib. s. 18 ממש'; Yalk."
+  },
+  {
+   "page": "857",
+   "entry": "M02955",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XIX, 10. Tosef. ib. B. Mets. VI, 9;"
+  },
+  {
+   "page": "866",
+   "entry": "N00030",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.6",
+   "context": "groaning of the wounded. Ib. s. 6; a. e.—Esp."
+  },
+  {
+   "page": "870",
+   "entry": "N00101",
+   "book": "ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.1",
+   "context": "poured forth wisdom &c.; ib. to Ps. I; Gen."
+  },
+  {
+   "page": "887",
+   "entry": "N00365",
+   "book": "ib.",
+   "sefaria": "Naz.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "נִימָּא (fr. נמא); Tosef. ib. IV, 7 נם; Sifré"
+  },
+  {
+   "page": "896",
+   "entry": "N00522",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.20.2",
+   "context": "(the seducer of Eve). Ib. s. 20 נ' זה"
+  },
+  {
+   "page": "896",
+   "entry": "N00522",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 3,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.84.16",
+   "context": "fr.— Pl. נְחָשִׁים . Ib. s. 84 נ' ועקרבים"
+  },
+  {
+   "page": "898",
+   "entry": "N00555",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. IV, 3; Tosef. ib. B. Kam. III, 10"
+  },
+  {
+   "page": "904",
+   "entry": "N00664",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "made of papyrus; Tosef. ib. B. Kam. II, 5"
+  },
+  {
+   "page": "905",
+   "entry": "N00681",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.67.7",
+   "context": "in codes &c., v. פַּנִּיקְטִין. Ib. s. 67. Num. R."
+  },
+  {
+   "page": "907",
+   "entry": "N00750",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.74.3",
+   "context": "(of the poorest kind). Ib. s. 74 (ref. to"
+  },
+  {
+   "page": "914",
+   "entry": "N00907",
+   "book": "Ib.",
+   "sefaria": "Pesik. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Pesikta_Rabbati.37",
+   "context": "l. c., v. supra. Ib. s. 37; Yalk. ib."
+  },
+  {
+   "page": "916",
+   "entry": "N00927",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.34",
+   "context": "and knocked it down. Ib. s. 34, end נסאתיה"
+  },
+  {
+   "page": "921",
+   "entry": "N01007",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "emptying the pot. Tosef. ib. B. Mets. II, 10"
+  },
+  {
+   "page": "935",
+   "entry": "N01251",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.92",
+   "context": "(Nebuchadnezzar) and this idol? Ib. to Ps. XCII, end"
+  },
+  {
+   "page": "939",
+   "entry": "N01304",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.3.11",
+   "context": "be the first &c.? Ib. s. 3; a. v."
+  },
+  {
+   "page": "939",
+   "entry": "N01307",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.16.20",
+   "context": "of carrying the Ark. Ib. s. 16 (ref. to"
+  },
+  {
+   "page": "948",
+   "entry": "O00030",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "places) to another; Tosef. ib. B. Kam. I, 14"
+  },
+  {
+   "page": "950",
+   "entry": "O00068",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "Kel. XXIV, 16; Tosef. ib. B. Bath. II, 10"
+  },
+  {
+   "page": "952",
+   "entry": "O00090",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.53",
+   "context": "s. 68 סִבְרִי, v. בָּרְיָיא. Ib. s. 53 את לא"
+  },
+  {
+   "page": "957",
+   "entry": "O00185",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "to Levitical purity. Tosef. ib. B. Mets. I, 14"
+  },
+  {
+   "page": "957",
+   "entry": "O00189",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.42.5",
+   "context": "e.— Pl. סַדָּנִים . Ib. s. 42 (expl. עמק"
+  },
+  {
+   "page": "961",
+   "entry": "O00244",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "l. Var. סוֹאִין; Tosef. ib. B. Mets. V, 3;"
+  },
+  {
+   "page": "963",
+   "entry": "O00291",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Var. (ed. סוּגִים); Tosef. ib. B. Mets. V, 1;"
+  },
+  {
+   "page": "967",
+   "entry": "O00384",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.22.3",
+   "context": "2); Ex. R. s. 1. Ib. s. 22 קריעת ים"
+  },
+  {
+   "page": "967",
+   "entry": "O00386",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.42.8",
+   "context": "of the field? &c. Ib. s. 42 מה אתה"
+  },
+  {
+   "page": "969",
+   "entry": "O00412",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.74.17",
+   "context": "ways (to heathenism); v. סִיאוּר. Ib. s. 74, end (expl."
+  },
+  {
+   "page": "973",
+   "entry": "O00497",
+   "book": "Ib.",
+   "sefaria": "Pesik. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Pesikta_Rabbati.12",
+   "context": "is given to you. Ib. s. 12; a. e."
+  },
+  {
+   "page": "976",
+   "entry": "O00579",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.5",
+   "context": "— Pl. סִידּוּרִים . Ib. s. 5 ס' של"
+  },
+  {
+   "page": "978",
+   "entry": "O00620",
+   "book": "ib.",
+   "sefaria": "B. Mets.",
+   "next": "II,",
+   "occ": 1,
+   "link": "",
+   "context": "feed the others). Tosef. ib. II, 20. Lev. R."
+  },
+  {
+   "page": "979",
+   "entry": "O00659",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. II, 3; Tosef. ib. B. Kam. II, 3."
+  },
+  {
+   "page": "982",
+   "entry": "O00720",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "a bagpipe ); Tosef. ib. B. Mets. I, 7."
+  },
+  {
+   "page": "987",
+   "entry": "O00830",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.8.2",
+   "context": "R. s. 73, end. Ib. s. 8; Y. Ḥag."
+  },
+  {
+   "page": "987",
+   "entry": "O00844",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.84.15",
+   "context": "is put upon her. Ib. s. 84 ואין הס'"
+  },
+  {
+   "page": "998",
+   "entry": "O01043",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "סלתית, corr. acc.). Tosef. ib. B. Mets. V, 5"
+  },
+  {
+   "page": "1008",
+   "entry": "O01256",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "VI, 36 c; Tosef. ib. IV, 11 סְנִיפְ' ed."
+  },
+  {
+   "page": "1009",
+   "entry": "O01267",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.78.3",
+   "context": "appointed him my associate. Ib. s. 78 רון …"
+  },
+  {
+   "page": "1009",
+   "entry": "O01275",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.78.7",
+   "context": "appetite, to satiate . Ib. to Ps. CIV, 15"
+  },
+  {
+   "page": "1010",
+   "entry": "O01309",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.105",
+   "context": "before them (the frogs). Ib. to Ps. CV, 30"
+  },
+  {
+   "page": "1015",
+   "entry": "O01397",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "its ends (supports). Tosef. ib. B. Bath. I, 12"
+  },
+  {
+   "page": "1019",
+   "entry": "O01466",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "the sack-makers’ needle. Tosef. ib. B. Mets. VII, 1;"
+  },
+  {
+   "page": "1022",
+   "entry": "O01526",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "meshes of girthing. Tosef. ib. B. Bath. I, 12"
+  },
+  {
+   "page": "1024",
+   "entry": "O01563",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XII, 2; Tosef. ib. B. Mets. II, 4"
+  },
+  {
+   "page": "1024",
+   "entry": "O01569",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "aromatic unguent out). Tosef. ib. B. Bath. VII, 10"
+  },
+  {
+   "page": "1024",
+   "entry": "O01573",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.42.8",
+   "context": "mischief, and thou criest? Ib. s. 42 לא היה"
+  },
+  {
+   "page": "1026",
+   "entry": "O01610",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.28.4",
+   "context": "where garbage is deposited. Ib. s. 28 ומלאו …"
+  },
+  {
+   "page": "1031",
+   "entry": "O01698",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "surrounding the lid); Tosef. ib. B. Kam. VI, 15"
+  },
+  {
+   "page": "1038",
+   "entry": "P00059",
+   "book": "ib.",
+   "sefaria": "Ber.",
+   "next": "VI",
+   "occ": 1,
+   "link": "",
+   "context": "a pregnant woman; Tosef. ib. VI (V), 1; a."
+  },
+  {
+   "page": "1040",
+   "entry": "P00061",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.37.7",
+   "context": "of Shem and Eber. Ib. s. 37 נביא גדול"
+  },
+  {
+   "page": "1040",
+   "entry": "P00071",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.1.36",
+   "context": "(on going to Egypt). Ib. s. 1. Pesik. R."
+  },
+  {
+   "page": "1041",
+   "entry": "P00102",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.34",
+   "context": "soul within him grieved. Ib. s. 34 שנפשן ע'"
+  },
+  {
+   "page": "1042",
+   "entry": "P00111",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.12.1",
+   "context": "today, for our benefit? Ib. to Ps. XII שאל"
+  },
+  {
+   "page": "1043",
+   "entry": "P00127",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.45",
+   "context": "the seat of virginity. Ib. s. 45; s. 51"
+  },
+  {
+   "page": "1045",
+   "entry": "P00154",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.16.5",
+   "context": "larger than Eden, v. גַּן. Ib. s. 16 מכל אילני"
+  },
+  {
+   "page": "1045",
+   "entry": "P00158",
+   "book": "ib.",
+   "sefaria": "Dem.",
+   "next": "VIII,",
+   "occ": 0,
+   "link": "",
+   "context": "more than one-tenth; Tosef. ib. VIII, 13 המרבה במעשרות);"
+  },
+  {
+   "page": "1046",
+   "entry": "P00173",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "עוּבִּים, constr. עוּבֵּי. Tosef. ib. B. Bath. IV, 9."
+  },
+  {
+   "page": "1049",
+   "entry": "P00222",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.7.5",
+   "context": "U. became a leper. Ib. s. 7 זה ע'"
+  },
+  {
+   "page": "1051",
+   "entry": "P00261",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.121.1",
+   "context": "heart of their parents. Ib. to Ps. CXXI אני"
+  },
+  {
+   "page": "1057",
+   "entry": "P00342",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.9.6",
+   "context": "up against them &c. Ib. s. 9 (ref. to"
+  },
+  {
+   "page": "1059",
+   "entry": "P00368",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "l. reads: אָשְׁפֹּו). Tosef. ib. B. Mets. I, 3"
+  },
+  {
+   "page": "1060",
+   "entry": "P00393",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.92.5",
+   "context": "forsaken and forgotten me. Ib. to Ps. XCII מי"
+  },
+  {
+   "page": "1063",
+   "entry": "P00469",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.73.2",
+   "context": "(his heart) is faint. Ib. to Ps. LXXIII, 6"
+  },
+  {
+   "page": "1063",
+   "entry": "P00469",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.102.2",
+   "context": "ref. to Gen. XXX, 42). Ib. to Ps. CII, 1"
+  },
+  {
+   "page": "1071",
+   "entry": "P00601",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "hame (cmp. עוֹנָתָא). Tosef. ib. B. Bath. I, 7"
+  },
+  {
+   "page": "1075",
+   "entry": "P00678",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "shoot back again. Tosef. ib. B. Bath. I, 4"
+  },
+  {
+   "page": "1076",
+   "entry": "P00692",
+   "book": "ib.",
+   "sefaria": "Meg.",
+   "next": "IV,",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Mishnah_Megillah.4.9",
+   "context": "(expl. המכנה בעריות, Mish. ib. IV, 9) בעריי' דאבוי"
+  },
+  {
+   "page": "1080",
+   "entry": "P00767",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.60",
+   "context": "humiliation of the humbled. Ib. s. 60 (ref. to"
+  },
+  {
+   "page": "1081",
+   "entry": "P00790",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.16.4",
+   "context": "price, bid for . Ib. s. 16 (ref. to"
+  },
+  {
+   "page": "1081",
+   "entry": "P00790",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 4,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.93.6",
+   "context": "to become angry . Ib. s. 93 בשעה שהיה"
+  },
+  {
+   "page": "1082",
+   "entry": "P00793",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.56.8",
+   "context": "s. 60, v. חַיְּיתָא II. Ib. s. 56 ברא דעלו',"
+  },
+  {
+   "page": "1097",
+   "entry": "P01032",
+   "book": "ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.109",
+   "context": "the rest of nations?; ib. to Ps. CIX, end"
+  },
+  {
+   "page": "1099",
+   "entry": "P01057",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.22.4",
+   "context": "A. used to experiment. Ib. s. 22 ר\"ש הוה"
+  },
+  {
+   "page": "1104",
+   "entry": "P01145",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.92.8",
+   "context": "Ps. IV, 7, שׁוּף II. Ib. to Ps. XCII, v."
+  },
+  {
+   "page": "1108",
+   "entry": "P01213",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.42.3",
+   "context": "to tear loose &c. Ib. s. 42 מְעַקַּר בגפנים"
+  },
+  {
+   "page": "1108",
+   "entry": "P01216",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.53.15",
+   "context": "and they were visited. Ib. s. 53 הרבה ע'"
+  },
+  {
+   "page": "1117",
+   "entry": "P01355",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "lorum, goad ?]. Tosef. ib. B. Mets. IV, 6"
+  },
+  {
+   "page": "1123",
+   "entry": "P01444",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XVI, 3; Tosef. ib. B. Mets. V, 13."
+  },
+  {
+   "page": "1125",
+   "entry": "P01482",
+   "book": "ib.",
+   "sefaria": "Shek.",
+   "next": "II,",
+   "occ": 1,
+   "link": "",
+   "context": "end, 47 c; Tosef. ib. II, 4; a. e.—"
+  },
+  {
+   "page": "1132",
+   "entry": "Q00055",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XIII, 1; Tosef. ib. B. Mets. III, 1"
+  },
+  {
+   "page": "1135",
+   "entry": "Q00090",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.10.5",
+   "context": "את בניך (ed. Bub. והרגו). Ib. to Ps. X והצדיקים"
+  },
+  {
+   "page": "1136",
+   "entry": "Q00099",
+   "book": "ib.",
+   "sefaria": "Ab. Zar.",
+   "next": "VI",
+   "occ": 0,
+   "link": "",
+   "context": "V, 44 d. Tosef. ib. VI (VII), 8 כפר"
+  },
+  {
+   "page": "1136",
+   "entry": "Q00107",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.28.6",
+   "context": "(expl. אמון, Prov. VIII, 30). Ib. s. 28 למלך שמסר"
+  },
+  {
+   "page": "1142",
+   "entry": "Q00245",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.49.4",
+   "context": "to him for three. Ib. s. 49, v. עִיגּוּלָא."
+  },
+  {
+   "page": "1145",
+   "entry": "Q00304",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.68.14",
+   "context": "אין הוה פּוֹעֲלָה), v. פּוֹלָר. Ib. s. 68 סב פ'"
+  },
+  {
+   "page": "1147",
+   "entry": "Q00363",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "an earthen oven; Tosef. ib. B. Kam. VI, 17"
+  },
+  {
+   "page": "1152",
+   "entry": "Q00477",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "פוחלץ (corr. acc.). Tosef. ib. B. Mets. VI, 6"
+  },
+  {
+   "page": "1152",
+   "entry": "Q00478",
+   "book": "ib.",
+   "sefaria": "Maas. Sh.",
+   "next": "V,",
+   "occ": 1,
+   "link": "",
+   "context": "beg. 55 d; Tosef. ib. V, 13 בית ע\"ז"
+  },
+  {
+   "page": "1152",
+   "entry": "Q00478",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.19",
+   "context": "had become black &c. Ib. s. 19, beg. ככלי"
+  },
+  {
+   "page": "1154",
+   "entry": "Q00489",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.99",
+   "context": "father of the degraded. Ib. s. 99 (ref. to"
+  },
+  {
+   "page": "1155",
+   "entry": "Q00532",
+   "book": "ib.",
+   "sefaria": "Maas. Sh.",
+   "next": "I,",
+   "occ": 1,
+   "link": "",
+   "context": "Pl. פְּטַלְיָאוֹת . Tosef. ib. I, 10 פ' ודרוסות"
+  },
+  {
+   "page": "1156",
+   "entry": "Q00541",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "on the ground); Tosef. ib. B. Kam. IV, 20."
+  },
+  {
+   "page": "1158",
+   "entry": "Q00566",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.98.6",
+   "context": "would not refuse me. Ib. s. 98 (ref. to"
+  },
+  {
+   "page": "1160",
+   "entry": "Q00601",
+   "book": "ib.",
+   "sefaria": "Snh.",
+   "next": "XIV,",
+   "occ": 0,
+   "link": "",
+   "context": "פוטרין אותו; v. Tosef. ib. XIV, 13, a. Bab."
+  },
+  {
+   "page": "1163",
+   "entry": "Q00662",
+   "book": "ib.",
+   "sefaria": "Sabb.",
+   "next": "XIV",
+   "occ": 0,
+   "link": "",
+   "context": "XVIII, 16 c; Tosef. ib. XIV (XV), 8; a."
+  },
+  {
+   "page": "1164",
+   "entry": "Q00686",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.61.7",
+   "context": "wise as Balaam &c. Ib. s. 61 ישבו פ'"
+  },
+  {
+   "page": "1165",
+   "entry": "Q00712",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.30",
+   "context": "put her in prison. Ib. s. 30, v. בָּעַט"
+  },
+  {
+   "page": "1165",
+   "entry": "Q00712",
+   "book": "Ib.",
+   "sefaria": "Pesik. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Pesikta_Rabbati.42.1",
+   "context": "a; Pesik. R. s. 17. Ib. s. 42 (ref. to"
+  },
+  {
+   "page": "1167",
+   "entry": "Q00756",
+   "book": "ib.",
+   "sefaria": "Maasr.",
+   "next": "I,",
+   "occ": 1,
+   "link": "",
+   "context": "איפסט' (v. אַפִּסְטְקִין; Tosef. ib. I, 1 הפרסקין (corr."
+  },
+  {
+   "page": "1170",
+   "entry": "Q00843",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.12",
+   "context": "they were put up. Ib. s. 12, v. עֲמִידָה;"
+  },
+  {
+   "page": "1175",
+   "entry": "Q00934",
+   "book": "ib.",
+   "sefaria": "Ab. Zar.",
+   "next": "III,",
+   "occ": 0,
+   "link": "",
+   "context": "Jacob to Esau; Tosef. ib. III, 4 מַפְלִיגוֹ. Tosef."
+  },
+  {
+   "page": "1180",
+   "entry": "Q01020",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.5.9",
+   "context": "body-guard in the Temple). Ib. s. 5 אע\"פ שהיתה"
+  },
+  {
+   "page": "1181",
+   "entry": "Q01037",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.91",
+   "context": "R. s. 42, v. מְרֵי. Ib. s. 91 למה אַפְלְיַית"
+  },
+  {
+   "page": "1181",
+   "entry": "Q01051",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.38.6",
+   "context": "pray) for them &c. Ib. s. 38 נשתיירה מהן"
+  },
+  {
+   "page": "1183",
+   "entry": "Q01101",
+   "book": "ib.",
+   "sefaria": "B. Mets.",
+   "next": "VI,",
+   "occ": 0,
+   "link": "",
+   "context": "Moses a fool; Tosef. ib. VI, 17 פלסטר; (Bab."
+  },
+  {
+   "page": "1190",
+   "entry": "Q01206",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "receptacle for oil; Tosef. ib. B. Bath. VII, 11"
+  },
+  {
+   "page": "1190",
+   "entry": "Q01206",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.25.6",
+   "context": "(ref. to Ex. XIII, 21). Ib. s. 25 בשר ודם"
+  },
+  {
+   "page": "1196",
+   "entry": "Q01312",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.5.4",
+   "context": "a purse for him. Ib. s. 5 עביד פְּסִיקָה"
+  },
+  {
+   "page": "1201",
+   "entry": "Q01374",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.44.1",
+   "context": "workers of good deeds? Ib. to Ps. XLIV ראשונים"
+  },
+  {
+   "page": "1202",
+   "entry": "Q01383",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.4.2",
+   "context": "and take his reward. Ib. s. 4 כל מה"
+  },
+  {
+   "page": "1203",
+   "entry": "Q01401",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.33",
+   "context": "אָפּוֹבַּלְסְמוֹן. Gen. R. s. 34. Ib. s. 33 Ar. (ed."
+  },
+  {
+   "page": "1206",
+   "entry": "Q01441",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.23.7",
+   "context": "wounds (with a stone). Ib. s. 23 שיבואו עלי"
+  },
+  {
+   "page": "1208",
+   "entry": "Q01477",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.3",
+   "context": "man walking together &c. Ib. s. 3 (ref. to"
+  },
+  {
+   "page": "1211",
+   "entry": "Q01514",
+   "book": "ib.",
+   "sefaria": "Ter.",
+   "next": "VII,",
+   "occ": 1,
+   "link": "",
+   "context": "but not stopped; Tosef. ib. VII, 16 [read:] מכוסין"
+  },
+  {
+   "page": "1212",
+   "entry": "Q01516",
+   "book": "ib.",
+   "sefaria": "Ter.",
+   "next": "VII,",
+   "occ": 1,
+   "link": "",
+   "context": "bottle) is tight; Tosef. ib. VII, 16 (correct version"
+  },
+  {
+   "page": "1212",
+   "entry": "Q01526",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.55.4",
+   "context": "(Lev. IV, 2 sq.). Ib. s. 55; a. fr.—"
+  },
+  {
+   "page": "1215",
+   "entry": "Q01572",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.16",
+   "context": "to branch off . Ib. s. 16 מפְרִיד ‘Rashi’;"
+  },
+  {
+   "page": "1215",
+   "entry": "Q01583",
+   "book": "ib.",
+   "sefaria": "Bets.",
+   "next": "II,",
+   "occ": 1,
+   "link": "",
+   "context": "they opened them; Tosef. ib. II, 14 פַּרְטַסְקָאוֹת (Var."
+  },
+  {
+   "page": "1220",
+   "entry": "Q01681",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.12.4",
+   "context": "bore fruit (v. Yoma 21 b). Ib. s. 12; Cant. R."
+  },
+  {
+   "page": "1223",
+   "entry": "Q01754",
+   "book": "ib.",
+   "sefaria": "Ḥull.",
+   "next": "141a",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Chullin.141a",
+   "context": "אפרוחים מַפְרִיחִין full-fledged birds; ib. 141 a. B. Mets. l. c.;"
+  },
+  {
+   "page": "1225",
+   "entry": "Q01786",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.8.8",
+   "context": "Gen. R. s. l. Ib. s. 8; Yalk. Gen."
+  },
+  {
+   "page": "1229",
+   "entry": "Q01847",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XII, 3; Tosef. ib. B. Mets. II, 10."
+  },
+  {
+   "page": "1234",
+   "entry": "Q01936",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.45",
+   "context": "פַּרְדָּנִית.— Pl. פַּרְסָנִיּוֹת . Ib. s. 45 Ar. (ed."
+  },
+  {
+   "page": "1235",
+   "entry": "Q01943",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.19.15",
+   "context": "ראש, פְּרוּעֵי ראש bareheaded. Ib. s. 19 ונראו כאשה"
+  },
+  {
+   "page": "1241",
+   "entry": "Q02006",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "[comment.: gloves ); Tosef. ib. B. Bath. II, 11"
+  },
+  {
+   "page": "1241",
+   "entry": "Q02017",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.16",
+   "context": "ib. שה' לאדונתו, v. אֲדוֹנָה. Ib. s. 16 (play on"
+  },
+  {
+   "page": "1248",
+   "entry": "Q02091",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.49.10",
+   "context": "him; Gen. R. s. 10. Ib. s. 49 זיל פַּשְׁפֵּש"
+  },
+  {
+   "page": "1250",
+   "entry": "Q02118",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.16.11",
+   "context": "as פתאים (Prov. XXII, 3). Ib. s. 16 אני משלח"
+  },
+  {
+   "page": "1252",
+   "entry": "Q02147",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.38.9",
+   "context": "prayed to the Lord). Ib. s. 38 פתח …"
+  },
+  {
+   "page": "1255",
+   "entry": "Q02195",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.51",
+   "context": "a. e. Pi. פִּיתֵּק same. Ib. s. 51, end (ref."
+  },
+  {
+   "page": "1257",
+   "entry": "R00010",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.42.3",
+   "context": "של לבן Laban’s flock. Ib. s. 42 אם אין"
+  },
+  {
+   "page": "1259",
+   "entry": "R00059",
+   "book": "ib.",
+   "sefaria": "Sabb.",
+   "next": "IX",
+   "occ": 0,
+   "link": "",
+   "context": "a special art; Tosef. ib. IX (X), 18; a."
+  },
+  {
+   "page": "1262",
+   "entry": "R00113",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.63.8",
+   "context": "that pious woman (Sarah). Ib. s. 63 הצ' הזו"
+  },
+  {
+   "page": "1265",
+   "entry": "R00161",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.67.2",
+   "context": "v. ‘Rashi’ a. l.). Ib. s. 67 היה עשו"
+  },
+  {
+   "page": "1275",
+   "entry": "R00311",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Dehr. (ed. הצדוניים); Tosef. ib. B. Kam. III, 11"
+  },
+  {
+   "page": "1275",
+   "entry": "R00321",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.19.9",
+   "context": "and followed my command? Ib. s. 19 עברו על"
+  },
+  {
+   "page": "1275",
+   "entry": "R00324",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.87.3",
+   "context": "the city of Zion. Ib. to Ps. LXXXVII צ'"
+  },
+  {
+   "page": "1286",
+   "entry": "R00553",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.22.10",
+   "context": "the thirsty, enter thereby. Ib. to Ps. XXII וכשצ'"
+  },
+  {
+   "page": "1290",
+   "entry": "R00602",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.22",
+   "context": "s. 98 למצמתא (not צמצ'). Ib. s. 22 עד …"
+  },
+  {
+   "page": "1290",
+   "entry": "R00607",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.35.2",
+   "context": "with a cuirass &c.’ Ib. to Ps. XXXV, 2"
+  },
+  {
+   "page": "1290",
+   "entry": "R00608",
+   "book": "ib.",
+   "sefaria": "B. Mets.",
+   "next": "II,",
+   "occ": 1,
+   "link": "",
+   "context": "and olive trees; Tosef. ib. II, 22 צנם ed."
+  },
+  {
+   "page": "1291",
+   "entry": "R00616",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "(detached) is clean; Tosef. ib. B. Mets. I, 9"
+  },
+  {
+   "page": "1292",
+   "entry": "R00638",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.20",
+   "context": "herself in retirement (chastity). Ib. s. 20 הִצְנִיעוּ עצמן"
+  },
+  {
+   "page": "1297",
+   "entry": "R00699",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "(as a rim); Tosef. ib. B. Mets. V, 13"
+  },
+  {
+   "page": "1300",
+   "entry": "R00750",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "is bound up; Tosef. ib. B. Bath. IV, 3."
+  },
+  {
+   "page": "1303",
+   "entry": "R00795",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.17.3",
+   "context": "was smitten with leprosy. Ib. s. 17 (ref. to"
+  },
+  {
+   "page": "1303",
+   "entry": "R00797",
+   "book": "ib.",
+   "sefaria": "Keth.",
+   "next": "VII,",
+   "occ": 1,
+   "link": "",
+   "context": "end, 31 d; Tosef. ib. VII, 11 צוֹרֵף נחשת,"
+  },
+  {
+   "page": "1303",
+   "entry": "R00797",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "in the kiln; Tosef. ib. B. Kam. III, 13"
+  },
+  {
+   "page": "1304",
+   "entry": "R00802",
+   "book": "Ib.",
+   "sefaria": "Pesik. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Pesikta_Rabbati.4",
+   "context": "209; Pesik. R. s. 3. Ib. s. 4, v. כִּלְכֵּל."
+  },
+  {
+   "page": "1305",
+   "entry": "R00804",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "of a cooler; Tosef. ib. B. Kam. II, 8;"
+  },
+  {
+   "page": "1308",
+   "entry": "S00045",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "[Ar. reads: קְבוּתִיִּים]; Tosef. ib. B. Kam. VII, 7"
+  },
+  {
+   "page": "1308",
+   "entry": "S00057",
+   "book": "ib.",
+   "sefaria": "Sot.",
+   "next": "VII,",
+   "occ": 0,
+   "link": "",
+   "context": "18 d bot.; Tosef. ib. VII, 9, והקבילו פני"
+  },
+  {
+   "page": "1323",
+   "entry": "S00222",
+   "book": "ib.",
+   "sefaria": "Ab. Zar.",
+   "next": "IV",
+   "occ": 0,
+   "link": "",
+   "context": "prepared by gentiles; Tosef. ib. IV (V), 11 קַפְטָאוֹת"
+  },
+  {
+   "page": "1324",
+   "entry": "S00242",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "used as receptacles); Tosef. ib. B. Kam. III, 11"
+  },
+  {
+   "page": "1333",
+   "entry": "S00401",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.90.5",
+   "context": "back to the earth)? Ib. s. 90 אין בה"
+  },
+  {
+   "page": "1336",
+   "entry": "S00457",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "הצידוניים Sidonian cups; Tosef. ib. B. Kam. III, 11"
+  },
+  {
+   "page": "1338",
+   "entry": "S00497",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.63.10",
+   "context": "a piece of roast. Ib. s. 63 (expl. כי"
+  },
+  {
+   "page": "1343",
+   "entry": "S00631",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "קַרְפָּאוֹת; Ar. קִירְפָּ'); Tosef. ib. B. Kam. III, 11"
+  },
+  {
+   "page": "1345",
+   "entry": "S00691",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.30",
+   "context": "him as his patron. Ib. s. 30 [read:] נתן"
+  },
+  {
+   "page": "1347",
+   "entry": "S00738",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.30",
+   "context": "the Lord) arose &c. Ib. s. 30; a. fr.—[Ab."
+  },
+  {
+   "page": "1358",
+   "entry": "S00919",
+   "book": "ib.",
+   "sefaria": "Ter.",
+   "next": "III,",
+   "occ": 0,
+   "link": "",
+   "context": "separate the gift); Tosef. ib. III, 6 על מה"
+  },
+  {
+   "page": "1359",
+   "entry": "S00946",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "fruit-pickers (v. פְּרַקְלִימִין); Tosef. ib. B. Bath. II, 11"
+  },
+  {
+   "page": "1369",
+   "entry": "S01181",
+   "book": "Ib.",
+   "sefaria": "Pesik. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Pesikta_Rabbati.8.1",
+   "context": "agents in the palace. Ib. s. 8 כשם שלמלכי"
+  },
+  {
+   "page": "1376",
+   "entry": "S01327",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "tooth &c. (v. Tosef. ib. B. Mets. III, 7,"
+  },
+  {
+   "page": "1381",
+   "entry": "S01402",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "standing by itself; Tosef. ib. B. Kam. VII, 8"
+  },
+  {
+   "page": "1383",
+   "entry": "S01433",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. VII, 1; Tosef. ib. B. Kam. V, 5.—*"
+  },
+  {
+   "page": "1386",
+   "entry": "S01482",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.31.4",
+   "context": "14; Lev. R. s. 6. Ib. s. 31 יהו מחזירין"
+  },
+  {
+   "page": "1388",
+   "entry": "S01520",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "(of leather implements). Tosef. ib. B. Mets. VII, 11"
+  },
+  {
+   "page": "1389",
+   "entry": "S01544",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XVI, 3; Tosef. ib. B. Mets. V, 13"
+  },
+  {
+   "page": "1390",
+   "entry": "S01561",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "builder’s ḳanṭar ; Tosef. ib. B. Mets. IV, 5"
+  },
+  {
+   "page": "1395",
+   "entry": "S01619",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "c (not קנח); Tosef. ib. IV, 11 (v. ed."
+  },
+  {
+   "page": "1395",
+   "entry": "S01635",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "ed. Koh. קַסִּידָא). Tosef. ib. B. Mets. III, 1."
+  },
+  {
+   "page": "1399",
+   "entry": "S01723",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.87",
+   "context": "Ar. (ed. קְפֵזִים), v. אָפֵז. Ib. s. 87 Ar. (ed."
+  },
+  {
+   "page": "1399",
+   "entry": "S01726",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.87",
+   "context": "began to rob him. Ib. s. 87 הא …"
+  },
+  {
+   "page": "1399",
+   "entry": "S01726",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.30",
+   "context": "coming to rob me. Ib. s. 30 קַפְּחֵיה ונסב"
+  },
+  {
+   "page": "1404",
+   "entry": "S01796",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "(ed. Dehr. קְצוֹצֶת); Tosef. ib. B. Mets. I, 1."
+  },
+  {
+   "page": "1408",
+   "entry": "S01846",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.119.24",
+   "context": "not have to economize. Ib. to Ps. CXIX, 81"
+  },
+  {
+   "page": "1413",
+   "entry": "S01940",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. III, 5; Tosef. ib. B. Kam. III, 3,"
+  },
+  {
+   "page": "1417",
+   "entry": "S02015",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.74",
+   "context": "his capers (ed. השטן מקטרג). Ib. s. 74 מְקַרְטְעִים בו"
+  },
+  {
+   "page": "1425",
+   "entry": "S02141",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "dough on it; Tosef. ib. B. Mets. V, 4;"
+  },
+  {
+   "page": "1425",
+   "entry": "S02143",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.32",
+   "context": "and do work late. Ib. s. 32 ק' נוגש"
+  },
+  {
+   "page": "1426",
+   "entry": "S02173",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.80",
+   "context": "קרקיסיאות). Gen. R. s. 67. Ib. s. 80 צריכין אנו"
+  },
+  {
+   "page": "1427",
+   "entry": "S02185",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "II, 2 קַרְקְרוֹתֵיהֶן. Tosef. ib. B. Kam. II, 2"
+  },
+  {
+   "page": "1427",
+   "entry": "S02195",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.2",
+   "context": "pacified, feel satisfied . Ib. s. 2 נ' בצילו"
+  },
+  {
+   "page": "1429",
+   "entry": "S02221",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.71.2",
+   "context": "generation of the flood. Ib. s. 71 ק' היא"
+  },
+  {
+   "page": "1437",
+   "entry": "T00022",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.22.22",
+   "context": "in all directions &c. Ib. to Ps. XXII מצא"
+  },
+  {
+   "page": "1441",
+   "entry": "T00082",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.20.12",
+   "context": "voluptuous looks); v. preced. Ib. s. 20 דרָבוּן עמיה"
+  },
+  {
+   "page": "1446",
+   "entry": "T00144",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.63.10",
+   "context": "into Abraham’s house &c. Ib. s. 63 ראויה היתה"
+  },
+  {
+   "page": "1450",
+   "entry": "T00224",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.15.1-8",
+   "context": "not have noticed it. Ib. s. 15 הביא …"
+  },
+  {
+   "page": "1451",
+   "entry": "T00241",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.8.12",
+   "context": "subjugate, rule, govern . Ib. s. 8 (ref. to"
+  },
+  {
+   "page": "1451",
+   "entry": "T00241",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.1",
+   "context": "—2) to chastise . Ib. s. 1 לא רִידָּהוּ"
+  },
+  {
+   "page": "1458",
+   "entry": "T00345",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.2.4",
+   "context": "the soul of Adam. Ib. s. 2 ורוח אלהים"
+  },
+  {
+   "page": "1462",
+   "entry": "T00409",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "it (the lid); Tosef. ib. B. Kam. II, 5"
+  },
+  {
+   "page": "1464",
+   "entry": "T00443",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "body) by itself; Tosef. ib. B. Mets. III, 9"
+  },
+  {
+   "page": "1464",
+   "entry": "T00444",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "c שינא דר'; Tosef. ib. IV, 10 שורא דר';"
+  },
+  {
+   "page": "1466",
+   "entry": "T00508",
+   "book": "ib.",
+   "sefaria": "Ned.",
+   "next": "XI,",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Mishnah_Nedarim.11.12",
+   "context": "שמים ביני לבינך Mish. ib. XI, 12) [read:] כמא"
+  },
+  {
+   "page": "1472",
+   "entry": "T00579",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.18",
+   "context": "for drinking (resorbing liquids). Ib. s. 18; Koh. R."
+  },
+  {
+   "page": "1485",
+   "entry": "T00870",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.146.3",
+   "context": "who fed the hungry. Ib. to Ps. CXLVI, 7"
+  },
+  {
+   "page": "1489",
+   "entry": "T00925",
+   "book": "ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.18.10",
+   "context": "Till. to Ps. CIV, 29; ib. to Ps. XVIII, 8"
+  },
+  {
+   "page": "1490",
+   "entry": "T00948",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "c ר' דחגרא; Tosef. ib. IV, 11 Var. רפח"
+  },
+  {
+   "page": "1491",
+   "entry": "T00957",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 5,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.20",
+   "context": "vacillating in mind . Ib. s. 20 לפי שרִפְרְפָה"
+  },
+  {
+   "page": "1496",
+   "entry": "T01018",
+   "book": "ib.",
+   "sefaria": "Ber.",
+   "next": "VII",
+   "occ": 0,
+   "link": "",
+   "context": "13 c top; Tosef. ib. VII (VI), 2. Y."
+  },
+  {
+   "page": "1496",
+   "entry": "T01032",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.38.6",
+   "context": "sq. Gen. R. s. 4. Ib. s. 38.—Hag. 12 b;"
+  },
+  {
+   "page": "1499",
+   "entry": "T01075",
+   "book": "ib.",
+   "sefaria": "Nidd.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "a rashon ; Tosef. ib. IV, 10 ברושם (Var."
+  },
+  {
+   "page": "1500",
+   "entry": "T01082",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.68.3",
+   "context": "top; Gen. R. s. 8. Ib. s. 68 מהיכן ה'"
+  },
+  {
+   "page": "1504",
+   "entry": "T01146",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.27",
+   "context": "‘open unto me &c.’ Ib. s. 27 כשנגלה …"
+  },
+  {
+   "page": "1504",
+   "entry": "T01148",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.27",
+   "context": "and the Israelites trembled. Ib. s. 27 והיה …"
+  },
+  {
+   "page": "1505",
+   "entry": "U00003",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.70",
+   "context": "for him from above. Ib. s. 70 (ref. to"
+  },
+  {
+   "page": "1511",
+   "entry": "U00096",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.41.1",
+   "context": "to be praised . Ib. s. 41 הקב\"ה יִשְׁתַּבַּח"
+  },
+  {
+   "page": "1521",
+   "entry": "U00221",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 2,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.7.2",
+   "context": "LXXX, 9 (corr. acc.). Ib. to Ps. VII (ref."
+  },
+  {
+   "page": "1522",
+   "entry": "U00224",
+   "book": "Ib.",
+   "sefaria": "Midr. Till.",
+   "next": "to",
+   "occ": 0,
+   "link": "https://www.sefaria.org/Midrash_Tehillim.19.16",
+   "context": "I may have committed. Ib. to Ps. XIX שגיאותיו"
+  },
+  {
+   "page": "1534",
+   "entry": "U00425",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.82",
+   "context": "Pl. שׁוּלְטָנִיּוֹת, שָׁלְ' . Ib. s. 82 היו מלכיות"
+  },
+  {
+   "page": "1571",
+   "entry": "U01128",
+   "book": "ib.",
+   "sefaria": "B. Bath.",
+   "next": "III,",
+   "occ": 0,
+   "link": "",
+   "context": "read: השִׁיחִין (v. Tosef. ib. III, 2)."
+  },
+  {
+   "page": "1571",
+   "entry": "U01133",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.64.3",
+   "context": "this means, thy settlement. Ib. s. 64, v. נָצִיב;"
+  },
+  {
+   "page": "1575",
+   "entry": "U01170",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.97.6",
+   "context": "סִבָּלוֹן) portion, share . Ib. s. 97, end (ref."
+  },
+  {
+   "page": "1584",
+   "entry": "U01337",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.4",
+   "context": "2. Gen. R. s. 3. Ib. s. 4; a. v."
+  },
+  {
+   "page": "1590",
+   "entry": "U01401",
+   "book": "Ib.",
+   "sefaria": "Num. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bamidbar_Rabbah.4.8",
+   "context": "genealogical chain is continued. Ib. s. 4 8 צפה"
+  },
+  {
+   "page": "1593",
+   "entry": "U01450",
+   "book": "Ib.",
+   "sefaria": "Pesik. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Pesikta_Rabbati.21.1",
+   "context": "Pl. שְׂמֵחוֹת, שְׂמֵי' . Ib. s. 21 בפנים ש'"
+  },
+  {
+   "page": "1597",
+   "entry": "U01496",
+   "book": "ib.",
+   "sefaria": "B. Kam.",
+   "next": "VII,",
+   "occ": 0,
+   "link": "",
+   "context": "(in his possession); Tosef. ib. VII, 17; Bab. ib."
+  },
+  {
+   "page": "1603",
+   "entry": "U01557",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "c (not דרור); Tosef. ib. IV, 11 שורא דרור"
+  },
+  {
+   "page": "1609",
+   "entry": "U01630",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.44.20",
+   "context": "servitude; Gen. R. s. 45. Ib. s. 44 אף אני"
+  },
+  {
+   "page": "1610",
+   "entry": "U01637",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.91.11",
+   "context": "רפה כש', v. שׁוּעַ I. Ib. s. 91, end (expl."
+  },
+  {
+   "page": "1611",
+   "entry": "U01666",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "of shaʿam . Tosef. ib. B. Bath. IV, 14;"
+  },
+  {
+   "page": "1617",
+   "entry": "U01771",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.19",
+   "context": "be humble, gentle . Ib. s. 19 (ref. to"
+  },
+  {
+   "page": "1619",
+   "entry": "U01798",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.99.12",
+   "context": "he pacified (the Hittites). Ib. s. 99, end (ref."
+  },
+  {
+   "page": "1624",
+   "entry": "U01877",
+   "book": "ib.",
+   "sefaria": "Ab. Zar.",
+   "next": "V",
+   "occ": 0,
+   "link": "",
+   "context": "engraven, opp. בולט; Tosef. ib. V (VI), 2; Bab."
+  },
+  {
+   "page": "1624",
+   "entry": "U01878",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.17.3",
+   "context": "back) in his tenancy. Ib. s. 17 שָׁקִיעַ ביתא,"
+  },
+  {
+   "page": "1625",
+   "entry": "U01891",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.17.3",
+   "context": "Gen. R. s. 79 שוק. Ib. s. 17 שְׁקָקֵיה דר'"
+  },
+  {
+   "page": "1627",
+   "entry": "U01913",
+   "book": "Ib.",
+   "sefaria": "Lev. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Vayikra_Rabbah.16",
+   "context": "time of the day. Ib. s. 16 תשעים ותשע"
+  },
+  {
+   "page": "1634",
+   "entry": "U02023",
+   "book": "ib.",
+   "sefaria": "Sabb.",
+   "next": "IX",
+   "occ": 0,
+   "link": "",
+   "context": "with it; v. Tosef. ib. IX (X), 13, quot."
+  },
+  {
+   "page": "1636",
+   "entry": "U02057",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.12.4",
+   "context": "and beast were created. Ib. s. 12. Taan. IV,"
+  },
+  {
+   "page": "1644",
+   "entry": "V00050",
+   "book": "ib.",
+   "sefaria": "Pes.",
+   "next": "I",
+   "occ": 0,
+   "link": "",
+   "context": "like spiced wine. Tosef. ib. I (II), 33 מצה"
+  },
+  {
+   "page": "1644",
+   "entry": "V00057",
+   "book": "ib.",
+   "sefaria": "Pes.",
+   "next": "VIII,",
+   "occ": 0,
+   "link": "",
+   "context": "the Passover sacrifice; Tosef. ib. VIII, 11 פסח מצרים"
+  },
+  {
+   "page": "1650",
+   "entry": "V00152",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Hai G. תּוֹפְרוֹת); Tosef. ib. B. Bath. III, 1"
+  },
+  {
+   "page": "1654",
+   "entry": "V00246",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.61.4",
+   "context": "conceived simultaneously with Cain). Ib. s. 61 תּוֹסָפָתוֹ של"
+  },
+  {
+   "page": "1655",
+   "entry": "V00266",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.100.7",
+   "context": "to be for ever. Ib. s. 100 כל תקפו"
+  },
+  {
+   "page": "1656",
+   "entry": "V00270",
+   "book": "ib.",
+   "sefaria": "Shebi.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "VI, 36 c; Tosef. ib. IV, 11 (Var. תקרא,"
+  },
+  {
+   "page": "1657",
+   "entry": "V00288",
+   "book": "Ib.",
+   "sefaria": "Gen. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Bereishit_Rabbah.65.11",
+   "context": "R. H. the Turg’man. Ib. s. 65 חזקיהו תורגמינא"
+  },
+  {
+   "page": "1657",
+   "entry": "V00303",
+   "book": "ib.",
+   "sefaria": "Maas. Sh.",
+   "next": "I,",
+   "occ": 1,
+   "link": "",
+   "context": "the bather (v. Tosef. ib. I, 4). Y. Ber."
+  },
+  {
+   "page": "1662",
+   "entry": "V00397",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "of the blacksmiths’; Tosef. ib. B. Mets. VII, 10"
+  },
+  {
+   "page": "1670",
+   "entry": "V00578",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 0,
+   "link": "",
+   "context": "Kel. XII, 6; Tosef. ib. B. Mets. II, 12"
+  },
+  {
+   "page": "1670",
+   "entry": "V00578",
+   "book": "ib.",
+   "sefaria": "Kel.",
+   "next": "B.",
+   "occ": 1,
+   "link": "",
+   "context": "those of &c.; Tosef. ib. B. Mets. V, 6"
+  },
+  {
+   "page": "1678",
+   "entry": "V00702",
+   "book": "ib.",
+   "sefaria": "Sot.",
+   "next": "IX,",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Mishnah_Sotah.9.15",
+   "context": "righteous and pious; Mish. ib. IX, 15 Y. ed."
+  },
+  {
+   "page": "1682",
+   "entry": "V00759",
+   "book": "Ib.",
+   "sefaria": "Pesik. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Pesikta_Rabbati.10.1",
+   "context": "thesaurarum). Pesik. R. s. 6. Ib. s. 10. Gen. R."
+  },
+  {
+   "page": "1683",
+   "entry": "V00765",
+   "book": "ib.",
+   "sefaria": "Ter.",
+   "next": "VII,",
+   "occ": 1,
+   "link": "",
+   "context": "45 d sq.; Tosef. ib. VII, 15. Ib. וכמה"
+  },
+  {
+   "page": "1690",
+   "entry": "V00870",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.42.1",
+   "context": "Lord has rejected them, Ib. s. 42 אם מניח"
+  },
+  {
+   "page": "1691",
+   "entry": "V00899",
+   "book": "ib.",
+   "sefaria": "Dem.",
+   "next": "IV,",
+   "occ": 0,
+   "link": "",
+   "context": "d’mai (v. דְּמַאי). Tosef. ib. IV, 5 ודאי שתִּיקְּנָהּ"
+  },
+  {
+   "page": "1703",
+   "entry": "V01076",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "occ": 1,
+   "link": "https://www.sefaria.org/Shemot_Rabbah.19.7",
+   "context": "in that very night. Ib. s. 19, end ועשה"
+  }
+ ],
+ "manual": [
+  {
+   "page": "151",
+   "entry": "B00404",
+   "book": "14. Ib.",
+   "sefaria": "14 . I b.",
+   "context": "Y. II Deut. XXXII, 14. Ib. I a. II, XXXIII,",
+   "restored_by": "text_fixes.json (kind \"ib\")"
+  },
+  {
+   "page": "674",
+   "entry": "K01280",
+   "book": "ib. 10).—Trnsf.",
+   "sefaria": "XXXIV, 10 ).—Trnsf.",
+   "context": "effect (ref. to Ex. ib. 10).—Trnsf. ב' כ' it is",
+   "restored_by": "text_fixes.json (kind \"ib\")"
+  },
+  {
+   "page": "677",
+   "entry": "K01326",
+   "book": "ib.",
+   "sefaria": "Dem. VI,",
+   "context": "top (ref. to Mish. ib. 6 צנועי בית הלל)",
+   "restored_by": "text_fixes.json (kind \"ib\")"
+  },
+  {
+   "page": "874",
+   "entry": "N00159",
+   "book": "(Ex. ib. 35)",
+   "sefaria": "( Ex. XXI, 35 )",
+   "context": "נגיפה נ'היא that nagaf (Ex. ib. 35) means injury through goring.",
+   "restored_by": "text_fixes.json (kind \"ib\")"
+  },
+  {
+   "page": "977",
+   "entry": "O00594",
+   "book": "ib. 3)",
+   "sefaria": "Sabb. XVIII, 3 )",
+   "context": "(ref. to מסעדין, Mish. ib. 3) אי זהו הס' wherein",
+   "restored_by": "text_fixes.json (kind \"ib\")"
+  },
+  {
+   "page": "1265",
+   "entry": "R00157",
+   "book": "ib. 3)",
+   "sefaria": "Erub. V, 3 )",
+   "context": "bot. (expl. משולשים, Mish. ib. 3) בעשויים צ' when the",
+   "restored_by": "text_fixes.json (kind \"ib\")"
+  },
+  {
+   "page": "1290",
+   "entry": "R00611",
+   "book": "ib. 6)",
+   "sefaria": "Dem. VI, 6 )",
+   "context": "(ref. to צְנוּעֵי Mish. ib. 6) שהכשר נקרא צ' the",
+   "restored_by": "text_fixes.json (kind \"ib\")"
+  },
+  {
+   "page": "1501",
+   "entry": "T01098",
+   "book": "ib. 3)",
+   "sefaria": "XXII, 3 )",
+   "context": "Ib. (ref. to Ex. ib. 3) פרט למרשיע וכ' to",
+   "restored_by": "text_fixes.json (kind \"ib\")"
+  },
+  {
+   "page": "179",
+   "entry": "B01010",
+   "book": "Ib.",
+   "sefaria": "Ex. R.",
+   "next": "s.",
+   "context": "did she slight me. Ib. s. 3 beg.; s.",
+   "why": "match count 2 vs 3",
+   "restored_by": "text_fixes.json (kind \"ib\")"
+  }
+ ]
+}
