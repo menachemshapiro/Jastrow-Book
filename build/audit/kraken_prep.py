@@ -322,12 +322,19 @@ def cmd_review(a):
     print("%d lines to check (%d batches of 20)\n%s" % (len(show), -(-len(show) // 20), out))
 
 
+# Vowel points, dagesh, shin/sin dots, meteg, rafe and accents (user, 7 Nov: train and test on letters and
+# punctuation first; Sefaria's points are assumed right). Maqaf 05BE, paseq 05C0, sof pasuq 05C3 and
+# nun hafukha 05C6 are punctuation and stay; geresh/gershayim (05F3/05F4) are not in this range.
+POINTS = re.compile("[\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7]")
+
+
 def cmd_export(a):
     rv, recs = setup(a)
     keep = {}
     for r in recs:
         if r["tier"] in a.tiers.split(","):
-            keep.setdefault(r["page"], {})[r["kid"]] = display(r["text"]) if a.visual else unicodedata.normalize("NFD", r["text"])
+            t = display(r["text"]) if a.visual else unicodedata.normalize("NFD", r["text"])
+            keep.setdefault(r["page"], {})[r["kid"]] = t if a.points else POINTS.sub("", t)
     pdir = os.path.join(paths.WORK, "audit", "pages")
     n = {"even": [0, 0], "odd": [0, 0]}
     for pg, lines in sorted(keep.items(), key=lambda x: int(x[0])):
@@ -368,6 +375,8 @@ def main():
     ap.add_argument("--xml", default="kraken_mccatmus.xml")
     ap.add_argument("--logical", dest="visual", action="store_false",
                     help="export: labels in reading order (for ketos --reorder) instead of display order")
+    ap.add_argument("--points", action="store_true",
+                    help="export: keep vowel points in the labels (default: letters and punctuation only)")
     ap.add_argument("--out", default=os.path.join(paths.WORK, "kraken", "train"))
     a = ap.parse_args()
     {"plan": cmd_plan, "gemini": cmd_gemini, "review": cmd_review, "export": cmd_export}[a.cmd](a)
