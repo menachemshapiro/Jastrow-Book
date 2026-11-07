@@ -13353,5 +13353,13 @@
   "old": "<i>Tamar</i>, 1) Judah’s daughter-in-law.</span><span class=\"nt\">, </span></span>",
   "new": "<i>Tamar</i>,</span></span> ",
   "why": "\"1) Judah's daughter-in-law.\" is repeated in the digital text; the book prints it once (the user, review_nov7a, 7 Nov; checked on the scan)."
+ },
+ {
+  "page": 850,
+  "entry": "M02826",
+  "kind": "dup",
+  "old": "<span class=\"d\">, מְשֹׁוטָא<span class=\"lk\"> ch. </span>1) same.",
+  "new": "<span class=\"d\"><span class=\"lk\"> ch. </span>1) same.",
+  "why": "The second form is repeated in the digital text (\"מְשֹׁוטָא , מְשֹׁוטָא\"); the book prints \"מָשׁוֹט, מְשׁוֹטָא ch. 1) same.\" (the user, review_nov7a, 7 Nov; checked on the scan)."
  }
 ]
