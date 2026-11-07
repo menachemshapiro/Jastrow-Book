@@ -324,8 +324,13 @@ def cmd_review(a):
 
 # Vowel points, dagesh, shin/sin dots, meteg, rafe and accents (user, 7 Nov: train and test on letters and
 # punctuation first; Sefaria's points are assumed right). Maqaf 05BE, paseq 05C0, sof pasuq 05C3 and
-# nun hafukha 05C6 are punctuation and stay; geresh/gershayim (05F3/05F4) are not in this range.
-POINTS = re.compile("[\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7]")
+# nun hafukha 05C6 are punctuation and stay, as do the dots above/below a letter (05C4/05C5: the book
+# marks letters read as numbers or initials, 30:1 "(קׄ)"); geresh/gershayim (05F3/05F4) are outside the range.
+POINTS = re.compile("[\u0591-\u05BD\u05BF\u05C1\u05C2\u05C7]")
+# A run of dots: the book sets them evenly with thin spaces (scan, pp. 23-38); the user types them both
+# ways ("...." and ". . . ."). Labels close them up, as "…" already is (three dots). A run starts after a
+# space, a bracket or the line's start, so an abbreviation's own stop stays ("R. . ." -> "R. ..").
+DOTS = re.compile(r"(?<![^\s(\[])\.(?: ?\.)+")
 
 
 def cmd_export(a):
@@ -334,6 +339,7 @@ def cmd_export(a):
     for r in recs:
         if r["tier"] in a.tiers.split(","):
             t = display(r["text"]) if a.visual else unicodedata.normalize("NFD", r["text"])
+            t = DOTS.sub(lambda m: m.group().replace(" ", ""), t)
             keep.setdefault(r["page"], {})[r["kid"]] = t if a.points else POINTS.sub("", t)
     pdir = os.path.join(paths.WORK, "audit", "pages")
     n = {"even": [0, 0], "odd": [0, 0]}
