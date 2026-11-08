@@ -470,6 +470,26 @@ def build_all(out, datadir):
     return files
 
 
+GREEK = re.compile("[\u0370-\u03ff\u1f00-\u1fff]")
+LOOKALIKE = set("xXkKoOaAeEiIuUvVpPtTnNyYhHbBmMcC")
+
+
+def greek_standins(site, text):
+    """the user can't type Greek on the phone and types a Latin look-alike (x for the x-shaped ϰ, i.e. kappa) where
+    the site already has a Greek letter: wherever the user's text differs from the site only by Latin look-alikes
+    standing in Greek letters, the site's Greek letters are kept"""
+    import difflib
+    out = []
+    for op, a0, a1, b0, b1 in difflib.SequenceMatcher(None, site, text, autojunk=False).get_opcodes():
+        seg_s, seg_t = site[a0:a1], text[b0:b1]
+        if (op == "replace" and len(seg_s) == len(seg_t) and all(GREEK.match(c) for c in seg_s)
+                and all(c in LOOKALIKE for c in seg_t)):
+            out.append(seg_s)
+        else:
+            out.append(seg_t)
+    return "".join(out)
+
+
 def marks(rows, run, out):
     """the database rows (ArtifactData list output, a list of {id, data} or of bodies) as an export"""
     d = json.load(open(rows))
@@ -479,8 +499,10 @@ def marks(rows, run, out):
         b = x.get("data", x)
         if b.get("deleted") or not b.get("status") or (run != "all" and b.get("run", run) != run): continue
         lines.append({"run": b.get("run", run), "page": b["page"], "rank": b["rank"], "kid": b.get("kid"), "xml": b.get("xml"), "eids": b.get("eids", []),
-                      "status": b["status"], "site": b["site"], "text": b.get("text", b["site"]), "note": b.get("note", ""),
+                      "status": b["status"], "site": b["site"], "text": greek_standins(b["site"], b.get("text", b["site"])), "note": b.get("note", ""),
                       "time": b.get("time")})
+    for m in lines:          # an edit that only typed Greek letters as Latin look-alikes is the site's text: Right
+        if m["status"] == "fixed" and m["text"] == m["site"]: m["status"] = "ok"
     lines.sort(key=lambda m: (int(m["page"]), m["rank"]))
     runs = sorted({m["run"] for m in lines}) if run == "all" else [run]
     for rn in runs:
