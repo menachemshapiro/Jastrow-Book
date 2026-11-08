@@ -30,19 +30,32 @@ main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px
 #ssbtn{font-size:13px;padding:3px 10px;border:1px solid #2f6fd0;background:#eef4ff;color:#1d4f9c;border-radius:4px}
 #slide{padding-block:45vh 55vh}
 #slidecard .card{margin:0}
-.core{display:flex;flex-direction:column;gap:6px}
+.core{display:flex;flex-direction:column;gap:4px}
 .core .scan{margin:0}
-.sstop{display:flex;gap:8px;align-items:center;font-size:13px;color:#555}
-.sstop .pos{margin-right:auto}
-.syncmini{font-size:12px;padding:1px 7px;border-radius:9px;background:#eee;color:#444}
-.syncmini.ok{background:#e2f2e2;color:#245c24}.syncmini.wait{background:#fff4d6;color:#7a5a00}.syncmini.err{background:#ffe0e0;color:#8a1f1f}
-.ssnav{display:flex;gap:6px;flex-wrap:wrap}
-.ssnav button{font-size:14px;padding:7px 12px;border:1px solid #bbb;background:#fbfbfb;border-radius:6px;color:#333}
+.core .btns{margin-top:4px;row-gap:6px}
+.ssnav{display:inline-flex;gap:6px;margin-left:auto}
+.ssnav button{font-size:13px!important;padding:6px 10px!important;border:1px solid #bbb;background:#fbfbfb;border-radius:6px;color:#444}
 .ssnav button:disabled{opacity:.4}
-.ssnav [data-ss=next]{margin-left:auto}
-.more{margin-top:12px;border-top:1px dashed #ddd;padding-top:8px}
+.cfm{font-size:14px;color:#1d4f9c;font-weight:600;flex-basis:100%}
+.btns button.cfmok{background:#2f6fd0;color:#fff;border-color:#2f6fd0;font-weight:600}
+.more{margin-top:10px;border-top:1px dashed #ddd;padding-top:8px}
 .more .note{width:100%;box-sizing:border-box;margin:6px 0}
 #slidetip{font-size:13px;color:#666;line-height:1.4;margin-top:10px}
+#slide.fit1 .core .txt,#slide.fit1 .core .prev{font-size:18px;line-height:1.35}#slide.fit1 .core .txt [lang=he]{font-size:20px}
+#slide.fit1 .core .rd{font-size:13px;margin:0 0 0 4px}
+#slide.fit2 .core .txt,#slide.fit2 .core .prev{font-size:17px;line-height:1.3}#slide.fit2 .core .txt [lang=he]{font-size:19px}
+#slide.fit2 .core .rd{font-size:12px;line-height:1.3;margin:0 0 0 4px}#slide.fit2 .core .rd b{width:66px}
+#slide.fit2 .core .flag,#slide.fit2 .core .agree,#slide.fit2 .core .miss{font-size:11px;margin:0}
+#slide.fit2 .core{gap:2px}#slide.fit2 #slidecard .card{padding:6px 10px}
+#slide.fit3 .core .txt,#slide.fit3 .core .prev{font-size:16px;line-height:1.25}#slide.fit3 .core .txt [lang=he]{font-size:18px}
+#slide.fit3 .core .rd{font-size:11px;line-height:1.2;margin:0 0 0 2px}#slide.fit3 .core .rd b{width:60px}
+#slide.fit3 .core .flag,#slide.fit3 .core .agree,#slide.fit3 .core .miss{font-size:10px;margin:0;padding:0 4px}
+#slide.fit3 .core{gap:1px}#slide.fit3 #slidecard .card{padding:4px 8px}#slide.fit3 .core .btns button{padding:6px 12px}
+#slide.fit4 .core .txt,#slide.fit4 .core .prev{font-size:15px;line-height:1.2}#slide.fit4 .core .txt [lang=he]{font-size:17px}
+#slide.fit4 .core .rd{font-size:10px;line-height:1.15;margin:0}#slide.fit4 .core .rd b{width:54px}
+#slide.fit4 .core .flag,#slide.fit4 .core .agree,#slide.fit4 .core .miss{font-size:10px;margin:0;padding:0 3px}
+#slide.fit4 .core{gap:0}#slide.fit4 #slidecard .card{padding:3px 6px}#slide.fit4 .core .btns{margin-top:2px}#slide.fit4 .core .btns button{padding:5px 10px;font-size:14px}
+#slide.fit4 .core .scan{max-height:46px;width:auto;max-width:100%}
 #railtab{display:none}
 @media (orientation:landscape) and (max-height:600px){
  header{position:fixed;top:0;bottom:0;left:0;width:240px;box-sizing:border-box;flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:12px;overflow:auto;
@@ -75,8 +88,8 @@ HEADER_TOOLS = ('<button id="ssbtn" type="button">One at a time</button>'
                 '<span id="sync">loading…</span><button id="dbgbtn" type="button">Debug</button>')
 
 SLIDE_HTML = """<div id="slide" hidden><div id="slidecard"></div><div id="slidetip">Right, Bad line and Skip move on to the next line
-by themselves; so does an edit once you press Enter or tap outside the box. <b>Next</b> moves on without marking; <b>Undo</b> takes back the
-last mark and returns to that line. The readers, flags and the note box are below each card. In landscape the menu is behind the tab
+by themselves. After an edit (Enter or tap outside the box) the card stays so you can look at it; <b>Yes, next line</b> moves on. <b>Next</b> moves on without marking; <b>Undo</b> takes back the
+last mark and returns to that line. The page and entry and the note box are below each card; the position is in the menu. In landscape the menu is behind the tab
 on the left edge.</div></div>"""
 
 RAILTAB = '<button id="railtab" type="button" aria-label="Menu">&#9776;</button>'
@@ -96,19 +109,22 @@ function rebuild(at){SS.list=visible().map(id);
   let i=at?SS.list.indexOf(at):-1;
   if(i<0) i=SS.list.findIndex(c=>!(M[c]&&M[c].status));
   SS.i=Math.max(0,i)}
-const NAV='<div class="ssnav"><button type="button" data-ss="back">&lsaquo; Back</button><button type="button" data-ss="undo">Undo</button>'+
-  '<button type="button" data-ss="next">Next &rsaquo;</button></div>';
+const NAV='<span class="ssnav"><button type="button" data-ss="back">&lsaquo; Back</button><button type="button" data-ss="undo">Undo</button>'+
+  '<button type="button" data-ss="next">Next &rsaquo;</button></span>';
+let confirmCid=null, fitLevel=0;
 const TOP='<div class="sstop"><span class="pos"></span><span class="syncmini"></span></div>';
 function structure(){const c=el("slidecard").querySelector(".card[data-id]"); if(!c) return;
-  const pick=q=>c.querySelector(":scope > "+q);
-  const parts=[pick(".scan"),pick(".txt"),pick(".edit"),pick(".prev"),pick(".btns")].filter(Boolean);
-  const note=c.querySelector(".btns .note"), rest=[...c.children].filter(x=>!parts.includes(x));
-  const core=document.createElement("div"); core.className="core"; core.innerHTML=TOP;
-  core.append(...parts); core.insertAdjacentHTML("beforeend",NAV);
+  const meta=c.querySelector(":scope > .meta"), note=c.querySelector(".btns .note");
+  const parts=[...c.children].filter(x=>x!==meta);
+  const core=document.createElement("div"); core.className="core";
+  core.append(...parts); const btns=core.querySelector(".btns");
+  if(confirmCid==c.dataset.id){btns.querySelectorAll("button[data-s=ok],button[data-s=bad],button[data-s=skip]").forEach(b=>b.hidden=true);
+    btns.insertAdjacentHTML("afterbegin",'<span class="cfm">Your edit is above. Is it right?</span><button type="button" data-ss="confirm" class="cfmok">Yes, next line &rsaquo;</button>')}
+  btns.insertAdjacentHTML("beforeend",NAV); const rest=meta?[meta]:[];
   const more=document.createElement("div"); more.className="more"; if(note) more.append(note); more.append(...rest);
   c.append(core,more); const im=core.querySelector("img"); if(im) im.loading="eager"; fill()}
 function fill(){const n=SS.list.length, marked=SS.list.filter(c=>M[c]&&M[c].status).length;
-  document.querySelectorAll("#slidecard .pos").forEach(p=>p.textContent=(SS.i<n?"Line "+(SS.i+1)+" of "+n:"End")+" · "+marked+" marked");
+  el("where").textContent=(SS.i<n?"Line "+(SS.i+1)+" of "+n:"End of "+n);
   document.querySelectorAll("#slidecard [data-ss=back]").forEach(b=>b.disabled=SS.i==0);
   document.querySelectorAll("#slidecard [data-ss=undo]").forEach(b=>b.disabled=!UNDO.length);
   document.querySelectorAll("#slidecard [data-ss=next]").forEach(b=>b.disabled=SS.i>=n);
@@ -117,7 +133,10 @@ function mirror(){const s=el("sync"); document.querySelectorAll(".syncmini").for
 new MutationObserver(mirror).observe(el("sync"),{childList:true,characterData:true,subtree:true,attributes:true});
 function hdrH(){return LAND.matches?0:document.querySelector("header").getBoundingClientRect().height}
 function center(tag){const core=document.querySelector("#slidecard .core"); if(!core) return;
-  const im=core.querySelector("img"), go=()=>{const h=hdrH(), r=core.getBoundingClientRect(), avail=innerHeight-h;
+  const im=core.querySelector("img"), go=()=>{const h=hdrH(), avail=innerHeight-h, sl=el("slide");
+    for(fitLevel=0;fitLevel<=4;fitLevel++){sl.className="fit"+fitLevel; if(core.getBoundingClientRect().height<=avail-4) break}
+    if(fitLevel>4) fitLevel=4; sl.className="fit"+fitLevel;
+    const r=core.getBoundingClientRect();
     scrollTo(0,Math.max(0,scrollY+r.top-h-Math.max(0,(avail-r.height)/2)));
     requestAnimationFrame(()=>report(tag,false))};
   (im&&!im.complete&&im.decode?im.decode().catch(()=>{}):Promise.resolve()).then(go)}
@@ -128,15 +147,15 @@ function report(tag,force){const core=document.querySelector("#slidecard .core")
   if(!force&&fit&&reports>=3) return; reports++;
   dlog(fit?"":"w","layout "+tag+": "+(LAND.matches?"landscape, side menu":"portrait or tall, top bar")+"; view "+innerWidth+"x"+innerHeight+
     (vv?" (visible "+Math.round(vv.width)+"x"+Math.round(vv.height)+")":"")+"; screen "+screen.width+"x"+screen.height+" "+(screen.orientation?screen.orientation.type:"")+
-    "; top bar "+Math.round(h)+"px; card core "+Math.round(r.top)+" to "+Math.round(r.bottom)+" ("+Math.round(r.height)+"px), mark buttons end at "+Math.round(b.bottom)+
+    "; top bar "+Math.round(h)+"px; size step "+fitLevel+"; card core "+Math.round(r.top)+" to "+Math.round(r.bottom)+" ("+Math.round(r.height)+"px), mark buttons end at "+Math.round(b.bottom)+
     "; scrolled "+Math.round(scrollY)+" of "+Math.round(document.documentElement.scrollHeight-innerHeight)+"; "+(fit?"fits on screen":"DOES NOT FIT ON SCREEN"))}
 function show(tag){const n=SS.list.length;
   if(!n||SS.i>=n){const left=SS.list.some(c=>!(M[c]&&M[c].status));
-    el("slidecard").innerHTML='<div class="card"><div class="core">'+TOP+'<p>'+(!n?'No lines in this view. Choose another in the menu.':'<b>End of the list.</b> '+
-      (left?'Some lines are still unmarked. <button id="ssfirst" type="button">Go to the first unmarked line</button>':'Every line here is marked.'))+'</p>'+NAV+'</div></div>';
+    el("slidecard").innerHTML='<div class="card"><div class="core"><p>'+(!n?'No lines in this view. Choose another in the menu.':'<b>End of the list.</b> '+
+      (left?'Some lines are still unmarked. <button id="ssfirst" type="button">Go to the first unmarked line</button>':'Every line here is marked.'))+'</p><div class="btns">'+NAV+'</div></div></div>';
     const b=el("ssfirst"); if(b) b.onclick=()=>{rebuild(); show("first unmarked")}}
-  else{const cid=SS.list[SS.i]; slideCid=cid; slidePrev=clone(M[cid]); el("slidecard").innerHTML=card(rec(cid)); structure()}
-  fill(); el("where").textContent=""; count(); keep(); center(tag||"card")}
+  else{const cid=SS.list[SS.i]; if(cid!=slideCid) confirmCid=null; slideCid=cid; slidePrev=clone(M[cid]); el("slidecard").innerHTML=card(rec(cid)); structure()}
+  fill(); count(); keep(); center(tag||"card")}
 function go(i,tag){SS.i=Math.max(0,Math.min(SS.list.length,i)); show(tag)}
 function mode(on){SS.on=on; el("ssbtn").textContent=on?"Show the list":"One at a time";
   document.querySelector(".intro").hidden=on; el("cards").hidden=on; el("slide").hidden=!on;
@@ -145,13 +164,15 @@ function mode(on){SS.on=on; el("ssbtn").textContent=on?"Show the list":"One at a
   dlog("","one at a time: "+(on?"on":"off"))}
 const _render=render; render=function(){if(SS.on){rebuild(SS.list[SS.i]); show("redraw")} else _render()};
 const _rerender=rerender; rerender=function(cid){if(SS.on&&cid==slideCid){el("slidecard").innerHTML=card(rec(cid)); structure()} else _rerender(cid)};
+document.addEventListener("click",e=>{const b=e.target.closest("button[data-s=reset]"); if(b&&SS.on) confirmCid=null},true);
 const _set=set; set=function(cid,st){const prev=clone(M[cid]); _set(cid,st);
   if(SS.on&&cid==slideCid){UNDO.push({cid,prev}); go(SS.i+1,"next")}};
 document.addEventListener("change",e=>{if(!SS.on||!e.target.classList.contains("edit")) return;
   const c=e.target.closest(".card"), cid=c&&c.dataset.id; if(cid!=slideCid) return;
-  const m=M[cid]; if(m&&m.status=="fixed"&&JSON.stringify(m)!=JSON.stringify(slidePrev)){UNDO.push({cid,prev:slidePrev}); go(SS.i+1,"next")}});
+  const m=M[cid]; if(m&&m.status=="fixed"&&JSON.stringify(m)!=JSON.stringify(slidePrev)){confirmCid=cid; rerender(cid); center("edit to confirm")}});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-ss]");
   if(b){const a=b.dataset.ss;
+    if(a=="confirm"){UNDO.push({cid:slideCid,prev:slidePrev}); confirmCid=null; go(SS.i+1,"next"); return}
     if(a=="back") go(SS.i-1,"back"); else if(a=="next") go(SS.i+1,"next");
     else if(a=="undo"){const u=UNDO.pop(); if(!u) return; if(u.prev) M[u.cid]=u.prev; else delete M[u.cid];
       save(u.cid); const i=SS.list.indexOf(u.cid); if(i<0) rebuild(u.cid); else SS.i=i; show("undo")}
