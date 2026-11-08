@@ -39,7 +39,8 @@ main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px
 .cfm{font-size:14px;color:#1d4f9c;font-weight:600;flex-basis:100%}
 .btns button.cfmok{background:#2f6fd0;color:#fff;border-color:#2f6fd0;font-weight:600}
 .more{margin-top:10px;border-top:1px dashed #ddd;padding-top:8px}
-.more .note{width:100%;box-sizing:border-box;margin:6px 0}
+.core .btns .note{flex:1 1 80px;min-width:70px;width:auto;box-sizing:border-box;margin:0;font-size:14px;padding:6px;transition:flex-basis .15s}
+.core .btns .note:focus,.core .btns .note.has{flex-basis:260px}
 #slidetip{font-size:13px;color:#666;line-height:1.4;margin-top:10px}
 #slide.fit1 .core .txt,#slide.fit1 .core .prev{font-size:18px;line-height:1.35}#slide.fit1 .core .txt [lang=he]{font-size:20px}
 #slide.fit1 .core .rd{font-size:13px;margin:0 0 0 4px}
@@ -64,8 +65,12 @@ main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px
  body.railopen header{transform:none}
  header nav{flex-wrap:wrap}
  header button,header select{font-size:15px;padding:7px 10px}
- #railtab{display:block;position:fixed;left:env(safe-area-inset-left,0px);top:50%;transform:translateY(-50%);z-index:4;width:30px;height:70px;padding:0;
-  border:1px solid #bbb;border-left:0;border-radius:0 9px 9px 0;background:rgba(255,255,255,.92);font-size:18px;color:#444}
+ #railtab{display:flex;flex-direction:column;align-items:center;gap:7px;position:fixed;left:env(safe-area-inset-left,0px);top:50%;transform:translateY(-50%);z-index:4;
+  width:30px;padding:9px 0;border:1px solid #bbb;border-left:0;border-radius:0 9px 9px 0;background:rgba(255,255,255,.92);color:#444}
+ #railtab .ico{font-size:18px;line-height:1}
+ #tabcount{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;color:#777;white-space:nowrap;font-variant-numeric:tabular-nums}
+ #tabsync{width:8px;height:8px;border-radius:50%;background:#bbb}
+ #tabsync.ok{background:#3a8d3a}#tabsync.wait{background:#d9a400}#tabsync.err{background:#c33}
  main{padding-left:max(42px,calc(env(safe-area-inset-left,0px) + 34px))}
  .btns button{font-size:15px;padding:9px 18px}
 }
@@ -92,7 +97,8 @@ by themselves. After an edit (Enter or tap outside the box) the card stays so yo
 last mark and returns to that line. The note box is below each card; the position is in the menu. In landscape the menu is behind the tab
 on the left edge.</div></div>"""
 
-RAILTAB = '<button id="railtab" type="button" aria-label="Menu">&#9776;</button>'
+RAILTAB = ('<button id="railtab" type="button" aria-label="Menu"><span class="ico">&#9776;</span>'
+           '<span id="tabsync"></span><span id="tabcount"></span></button>')
 
 # one card at a time: the page's own render(), set() and rerender() wrapped, so its keys, buttons and edits all work as before.
 # Each card is split into a core (scan, text, mark buttons, Back / Undo / Next), centred on the screen, and the rest below it.
@@ -121,7 +127,8 @@ function structure(){const c=el("slidecard").querySelector(".card[data-id]"); if
   if(confirmCid==c.dataset.id){btns.querySelectorAll("button[data-s=ok],button[data-s=bad],button[data-s=skip]").forEach(b=>b.hidden=true);
     btns.insertAdjacentHTML("afterbegin",'<span class="cfm">Your edit is above. Is it right?</span><button type="button" data-ss="confirm" class="cfmok">Yes, next line &rsaquo;</button>')}
   btns.insertAdjacentHTML("beforeend",NAV); const rest=[];
-  const more=document.createElement("div"); more.className="more"; if(note) more.append(note); more.append(...rest);
+  const more=document.createElement("div"); more.className="more"; more.append(...rest);
+  if(note){note.classList.toggle("has",!!note.value)}
   c.append(core,more); const im=core.querySelector("img"); if(im) im.loading="eager"; fill()}
 function fill(){const n=SS.list.length, marked=SS.list.filter(c=>M[c]&&M[c].status).length;
   el("where").textContent=(SS.i<n?"Line "+(SS.i+1)+" of "+n:"End of "+n);
@@ -129,7 +136,7 @@ function fill(){const n=SS.list.length, marked=SS.list.filter(c=>M[c]&&M[c].stat
   document.querySelectorAll("#slidecard [data-ss=undo]").forEach(b=>b.disabled=!UNDO.length);
   document.querySelectorAll("#slidecard [data-ss=next]").forEach(b=>b.disabled=SS.i>=n);
   mirror()}
-function mirror(){const s=el("sync"); document.querySelectorAll(".syncmini").forEach(m=>{m.className="syncmini "+s.className; m.textContent=s.textContent})}
+function mirror(){const s=el("sync"); const ts=el("tabsync"); if(ts){ts.className=s.className; ts.title=s.textContent} document.querySelectorAll(".syncmini").forEach(m=>{m.className="syncmini "+s.className; m.textContent=s.textContent})}
 new MutationObserver(mirror).observe(el("sync"),{childList:true,characterData:true,subtree:true,attributes:true});
 function hdrH(){return LAND.matches?0:document.querySelector("header").getBoundingClientRect().height}
 function center(tag){const core=document.querySelector("#slidecard .core"); if(!core) return;
@@ -146,10 +153,16 @@ function report(tag,force){const core=document.querySelector("#slidecard .core")
   const fit=r.top>=h-1&&r.bottom<=innerHeight+1;
   if(!force&&fit&&reports>=3) return; reports++;
   dlog(fit?"":"w","layout "+tag+": "+(LAND.matches?"landscape, side menu":"portrait or tall, top bar")+"; view "+innerWidth+"x"+innerHeight+
-    (vv?" (visible "+Math.round(vv.width)+"x"+Math.round(vv.height)+")":"")+"; screen "+screen.width+"x"+screen.height+" "+(screen.orientation?screen.orientation.type:"")+
+    (vv?" (visible "+Math.round(vv.width)+"x"+Math.round(vv.height)+", zoom "+vv.scale.toFixed(2)+")":"")+"; screen "+screen.width+"x"+screen.height+" "+(screen.orientation?screen.orientation.type:"")+
     "; top bar "+Math.round(h)+"px; size step "+fitLevel+"; card core "+Math.round(r.top)+" to "+Math.round(r.bottom)+" ("+Math.round(r.height)+"px), mark buttons end at "+Math.round(b.bottom)+
     "; scrolled "+Math.round(scrollY)+" of "+Math.round(document.documentElement.scrollHeight-innerHeight)+"; "+(fit?"fits on screen":"DOES NOT FIT ON SCREEN"))}
-function show(tag){const n=SS.list.length;
+const VP=document.querySelector('meta[name="viewport"]');
+function zoom(){const v=window.visualViewport; return v?v.scale:1}
+function resetZoom(){const z=zoom(); if(z<=1.02) return;
+  if(!VP){dlog("w","zoomed "+z.toFixed(2)+"x but the page has no viewport setting to reset"); return}
+  const c=VP.content; VP.content=c.replace(/,\s*(maximum|minimum)-scale=[^,]*/g,"")+", maximum-scale=1, minimum-scale=1";
+  setTimeout(()=>{VP.content=c; dlog(zoom()>1.02?"w":"","zoom was "+z.toFixed(2)+"x; now "+zoom().toFixed(2)+"x")},350)}
+function show(tag){const n=SS.list.length; if(tag=="next"||tag=="back"||tag=="undo"||tag=="first unmarked") resetZoom();
   if(!n||SS.i>=n){const left=SS.list.some(c=>!(M[c]&&M[c].status));
     el("slidecard").innerHTML='<div class="card"><div class="core"><p>'+(!n?'No lines in this view. Choose another in the menu.':'<b>End of the list.</b> '+
       (left?'Some lines are still unmarked. <button id="ssfirst" type="button">Go to the first unmarked line</button>':'Every line here is marked.'))+'</p><div class="btns">'+NAV+'</div></div></div>';
@@ -165,6 +178,10 @@ function mode(on){SS.on=on; el("ssbtn").textContent=on?"Show the list":"One at a
 const _render=render; render=function(){if(SS.on){rebuild(SS.list[SS.i]); show("redraw")} else _render()};
 const _rerender=rerender; rerender=function(cid){if(SS.on&&cid==slideCid){el("slidecard").innerHTML=card(rec(cid)); structure()} else _rerender(cid)};
 document.addEventListener("click",e=>{const b=e.target.closest("button[data-s=reset]"); if(b&&SS.on) confirmCid=null},true);
+function tabCount(){const t=el("tabcount"); if(!t) return; const m=L.filter(r=>M[id(r)]&&M[id(r)].status).length;
+  t.textContent=m+" marked · "+(L.length-m)+" left"}
+const _count=count; count=function(){_count(); tabCount()};
+document.addEventListener("input",e=>{if(e.target.classList.contains("note")) e.target.classList.toggle("has",!!e.target.value)});
 const _set=set; set=function(cid,st){const prev=clone(M[cid]); _set(cid,st);
   if(SS.on&&cid==slideCid){UNDO.push({cid,prev}); go(SS.i+1,"next")}};
 document.addEventListener("change",e=>{if(!SS.on||!e.target.classList.contains("edit")) return;
@@ -177,7 +194,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-ss]");
     else if(a=="undo"){const u=UNDO.pop(); if(!u) return; if(u.prev) M[u.cid]=u.prev; else delete M[u.cid];
       save(u.cid); const i=SS.list.indexOf(u.cid); if(i<0) rebuild(u.cid); else SS.i=i; show("undo")}
     return}
-  if(e.target.id=="railtab"){document.body.classList.toggle("railopen"); return}
+  if(e.target.closest("#railtab")){document.body.classList.toggle("railopen"); return}
   if(document.body.classList.contains("railopen")&&!e.target.closest("header")) document.body.classList.remove("railopen")});
 el("ssbtn").onclick=()=>mode(!SS.on);
 el("dbglayout").onclick=()=>report("check",true);
@@ -185,6 +202,7 @@ let rt; addEventListener("resize",()=>{clearTimeout(rt); rt=setTimeout(()=>{
   if(!LAND.matches) document.body.classList.remove("railopen");
   const a=document.activeElement; if(!SS.on) return; if(a&&(a.tagName=="INPUT"||a.tagName=="SELECT")) return report("after resize (typing, not moved)",true);
   center("after resize"); setTimeout(()=>report("after resize",true),400)},300)});
+tabCount(); mirror();
 if(SS.on) mode(true);
 })();
 </script>"""
