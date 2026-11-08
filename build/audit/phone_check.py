@@ -306,8 +306,14 @@ window.claude.use("db").then(async db=>{
 </script>"""
 
 
-def build(run, out):
+def build(run, out, pages_=None):
     src = open(os.path.join(LINES, run, "check.html"), encoding="utf-8").read()
+    if pages_:                                             # only these pages (a page over 16 MB is split by pages)
+        lo, hi = (int(x) for x in pages_.split("-"))
+        i = src.index(", L=") + 4
+        L, end = json.JSONDecoder().raw_decode(src, i)
+        L = [r for r in L if lo <= int(r["page"]) <= hi]
+        src = src[:i] + json.dumps(L, ensure_ascii=False) + src[end:]
     pages = sorted({int(p) for p in re.findall(r'"page": "(\d+)"', src)})
     title = "Line Check pp. %d–%d" % (pages[0], pages[-1]) if pages else "Line Check " + run
     # the publish wraps the page in its own skeleton
@@ -379,6 +385,7 @@ if __name__ == "__main__":
     ap.add_argument("rows", nargs="?")
     ap.add_argument("--run", dest="mrun")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--pages", help="build: only pages lo-hi")
     a = ap.parse_args()
     if a.run == "marks": marks(a.rows, a.mrun, a.out)
-    else: build(a.run, a.out)
+    else: build(a.run, a.out, a.pages)
