@@ -29,9 +29,9 @@ main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px
 #dbg .e{color:#ff9a8a}#dbg .w{color:#ffd27a}#dbg .k{color:#9ad59a}
 #ssbtn{font-size:13px;padding:3px 10px;border:1px solid #2f6fd0;background:#eef4ff;color:#1d4f9c;border-radius:4px}
 #slide{padding-block:45vh 55vh}
-#slidecard{overflow-x:auto}
 #slidecard .card{margin:0}
-.core{display:flex;flex-direction:column;gap:4px}
+.core{overflow:hidden;position:relative}
+.zin{display:flex;flex-direction:column;gap:4px;transform-origin:0 0}
 .core .scan{margin:0}
 .core .btns{margin-top:4px;row-gap:6px}
 .ssnav{display:inline-flex;gap:6px;margin-left:auto}
@@ -48,15 +48,15 @@ main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px
 #slide.fit2 .core .txt,#slide.fit2 .core .prev{font-size:17px;line-height:1.3}#slide.fit2 .core .txt [lang=he]{font-size:19px}
 #slide.fit2 .core .rd{font-size:12px;line-height:1.3;margin:0 0 0 4px}#slide.fit2 .core .rd b{width:66px}
 #slide.fit2 .core .flag,#slide.fit2 .core .agree,#slide.fit2 .core .miss{font-size:11px;margin:0}
-#slide.fit2 .core{gap:2px}#slide.fit2 #slidecard .card{padding:6px 10px}
+#slide.fit2 .zin{gap:2px}#slide.fit2 #slidecard .card{padding:6px 10px}
 #slide.fit3 .core .txt,#slide.fit3 .core .prev{font-size:16px;line-height:1.25}#slide.fit3 .core .txt [lang=he]{font-size:18px}
 #slide.fit3 .core .rd{font-size:11px;line-height:1.2;margin:0 0 0 2px}#slide.fit3 .core .rd b{width:60px}
 #slide.fit3 .core .flag,#slide.fit3 .core .agree,#slide.fit3 .core .miss{font-size:10px;margin:0;padding:0 4px}
-#slide.fit3 .core{gap:1px}#slide.fit3 #slidecard .card{padding:4px 8px}#slide.fit3 .core .btns button{padding:6px 12px}
+#slide.fit3 .zin{gap:1px}#slide.fit3 #slidecard .card{padding:4px 8px}#slide.fit3 .core .btns button{padding:6px 12px}
 #slide.fit4 .core .txt,#slide.fit4 .core .prev{font-size:15px;line-height:1.2}#slide.fit4 .core .txt [lang=he]{font-size:17px}
 #slide.fit4 .core .rd{font-size:10px;line-height:1.15;margin:0}#slide.fit4 .core .rd b{width:54px}
 #slide.fit4 .core .flag,#slide.fit4 .core .agree,#slide.fit4 .core .miss{font-size:10px;margin:0;padding:0 3px}
-#slide.fit4 .core{gap:0}#slide.fit4 #slidecard .card{padding:3px 6px}#slide.fit4 .core .btns{margin-top:2px}#slide.fit4 .core .btns button{padding:5px 10px;font-size:14px}
+#slide.fit4 .zin{gap:0}#slide.fit4 #slidecard .card{padding:3px 6px}#slide.fit4 .core .btns{margin-top:2px}#slide.fit4 .core .btns button{padding:5px 10px;font-size:14px}
 #slide.fit4 .core .scan{max-height:46px;width:auto;max-width:100%}
 #railtab{display:none}
 @media (orientation:landscape) and (max-height:600px){
@@ -123,14 +123,14 @@ const TOP='<div class="sstop"><span class="pos"></span><span class="syncmini"></
 function structure(){const c=el("slidecard").querySelector(".card[data-id]"); if(!c) return;
   const meta=c.querySelector(":scope > .meta"), note=c.querySelector(".btns .note");
   const parts=[...c.children];
-  const core=document.createElement("div"); core.className="core";
-  core.append(...parts); const btns=core.querySelector(".btns");
+  const core=document.createElement("div"); core.className="core"; const zi=document.createElement("div"); zi.className="zin"; core.append(zi);
+  zi.append(...parts); const btns=core.querySelector(".btns");
   if(confirmCid==c.dataset.id){btns.querySelectorAll("button[data-s=ok],button[data-s=bad],button[data-s=skip]").forEach(b=>b.hidden=true);
     btns.insertAdjacentHTML("afterbegin",'<span class="cfm">Your edit is above. Is it right?</span><button type="button" data-ss="confirm" class="cfmok">Yes, next line &rsaquo;</button>')}
   btns.insertAdjacentHTML("beforeend",NAV); const rest=[];
   const more=document.createElement("div"); more.className="more"; more.append(...rest);
   if(note){note.classList.toggle("has",!!note.value)}
-  c.append(core,more); const im=core.querySelector("img"); if(im) im.loading="eager"; applyZoom(pz); fill()}
+  c.append(core,more); const im=core.querySelector("img"); if(im) im.loading="eager"; applyZ(); fill()}
 function fill(){const n=SS.list.length, marked=SS.list.filter(c=>M[c]&&M[c].status).length;
   el("where").textContent=(SS.i<n?"Line "+(SS.i+1)+" of "+n:"End of "+n);
   document.querySelectorAll("#slidecard [data-ss=back]").forEach(b=>b.disabled=SS.i==0);
@@ -155,7 +155,7 @@ function report(tag,force){const core=document.querySelector("#slidecard .core")
   if(!force&&fit&&reports>=3) return; reports++;
   dlog(fit?"":"w","layout "+tag+": "+(LAND.matches?"landscape, side menu":"portrait or tall, top bar")+"; view "+innerWidth+"x"+innerHeight+
     (vv?" (visible "+Math.round(vv.width)+"x"+Math.round(vv.height)+", zoom "+vv.scale.toFixed(2)+")":"")+"; screen "+screen.width+"x"+screen.height+" "+(screen.orientation?screen.orientation.type:"")+
-    "; top bar "+Math.round(h)+"px; size step "+fitLevel+"; card zoom "+pz.toFixed(2)+"; card core "+Math.round(r.top)+" to "+Math.round(r.bottom)+" ("+Math.round(r.height)+"px), mark buttons end at "+Math.round(b.bottom)+
+    "; top bar "+Math.round(h)+"px; size step "+fitLevel+"; card magnified "+Z.s.toFixed(2)+"; card core "+Math.round(r.top)+" to "+Math.round(r.bottom)+" ("+Math.round(r.height)+"px), mark buttons end at "+Math.round(b.bottom)+
     "; scrolled "+Math.round(scrollY)+" of "+Math.round(document.documentElement.scrollHeight-innerHeight)+"; "+(fit?"fits on screen":"DOES NOT FIT ON SCREEN"))}
 const VP=document.querySelector('meta[name="viewport"]');
 function zoom(){const v=window.visualViewport; return v?v.scale:1}
@@ -163,23 +163,33 @@ function resetZoom(){const z=zoom(); if(z<=1.02) return;
   if(!VP){dlog("w","zoomed "+z.toFixed(2)+"x but the page has no viewport setting to reset"); return}
   const c=VP.content; VP.content=c.replace(/,\s*(maximum|minimum)-scale=[^,]*/g,"")+", maximum-scale=1, minimum-scale=1";
   setTimeout(()=>{VP.content=c; dlog(zoom()>1.02?"w":"","zoom was "+z.toFixed(2)+"x; now "+zoom().toFixed(2)+"x")},350)}
-let pz=1, pz0=1, pd0=0, pinchSeen=false;
-const HASG="ongesturestart" in window;
-function applyZoom(z){pz=Math.max(1,Math.min(3.5,z)); const c=el("slidecard").querySelector(".core"); if(c) c.style.zoom=pz>1.01?String(pz):""}
-function pinched(how){if(!pinchSeen){pinchSeen=true; dlog("k","pinch caught by the page ("+how+"): the card zooms, the app does not")}}
-document.addEventListener("gesturestart",e=>{if(!SS.on) return; e.preventDefault(); pz0=pz; pinched("gesture")},{passive:false});
-document.addEventListener("gesturechange",e=>{if(!SS.on) return; e.preventDefault(); applyZoom(pz0*e.scale)},{passive:false});
-document.addEventListener("gestureend",e=>{if(!SS.on) return; e.preventDefault(); dlog("","card zoom "+pz.toFixed(2)+"x")},{passive:false});
+// the page's own magnifier on the card: pinch scales the card like a photo around the fingers, one finger drags it
+// while magnified; the Claude app's zoom is held off (its zoom can't be reset from the page); every new card at 1x
+let Z={s:1,x:0,y:0}, P=null, pinchSeen=false;
+const zbox=()=>el("slidecard").querySelector(".core"), zin=()=>el("slidecard").querySelector(".zin");
+function applyZ(){const z=zin(), b=zbox(); if(!z||!b) return; const w=b.clientWidth, h=b.clientHeight;
+  Z.s=Math.max(1,Math.min(4,Z.s)); Z.x=Math.min(0,Math.max(w-w*Z.s,Z.x)); Z.y=Math.min(0,Math.max(h-h*Z.s,Z.y));
+  z.style.transform=Z.s>1.001?"translate("+Z.x+"px,"+Z.y+"px) scale("+Z.s+")":""}
+for(const g of ["gesturestart","gesturechange","gestureend"]) document.addEventListener(g,e=>{if(SS.on) e.preventDefault()},{passive:false});
+const mid=(e,r)=>[(e.touches[0].clientX+e.touches[1].clientX)/2-r.left,(e.touches[0].clientY+e.touches[1].clientY)/2-r.top];
 const tdist=e=>Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-document.addEventListener("touchstart",e=>{if(SS.on&&e.touches.length==2){pd0=tdist(e); pz0=pz}},{passive:true});
-document.addEventListener("touchmove",e=>{if(!SS.on||e.touches.length!=2||!pd0) return; e.preventDefault(); if(!HASG){pinched("touch"); applyZoom(pz0*tdist(e)/pd0)}},{passive:false});
-document.addEventListener("touchend",e=>{if(pd0&&e.touches.length<2){pd0=0; if(!HASG) dlog("","card zoom "+pz.toFixed(2)+"x")}},{passive:true});
+document.addEventListener("touchstart",e=>{const b=zbox(); if(!SS.on||!b||!b.contains(e.target)) return;
+  if(e.touches.length==2){const r=b.getBoundingClientRect(), [mx,my]=mid(e,r); P={pinch:true,d0:tdist(e),s0:Z.s,cx:(mx-Z.x)/Z.s,cy:(my-Z.y)/Z.s};
+    if(!pinchSeen){pinchSeen=true; dlog("k","pinch caught by the page: the card is magnified, the app does not zoom")}}
+  else if(e.touches.length==1&&Z.s>1.01) P={pinch:false,x0:e.touches[0].clientX,y0:e.touches[0].clientY,zx:Z.x,zy:Z.y,moved:false}},{passive:true});
+document.addEventListener("touchmove",e=>{if(!P) return; const b=zbox(); if(!b) return;
+  if(P.pinch&&e.touches.length==2){e.preventDefault(); const r=b.getBoundingClientRect(), [mx,my]=mid(e,r), s2=P.s0*tdist(e)/P.d0;
+    Z.s=s2; Z.x=mx-P.cx*s2; Z.y=my-P.cy*s2; applyZ()}
+  else if(!P.pinch&&e.touches.length==1){const dx=e.touches[0].clientX-P.x0, dy=e.touches[0].clientY-P.y0;
+    if(P.moved||Math.abs(dx)+Math.abs(dy)>6){P.moved=true; e.preventDefault(); Z.x=P.zx+dx; Z.y=P.zy+dy; applyZ()}}},{passive:false});
+document.addEventListener("touchend",e=>{if(!P) return; if(P.pinch&&e.touches.length<2){dlog("","card magnified "+Z.s.toFixed(2)+"x"); P=null}
+  else if(!P.pinch&&!e.touches.length) P=null},{passive:true});
 function show(tag){const n=SS.list.length; if(tag=="next"||tag=="back"||tag=="undo"||tag=="first unmarked") resetZoom();
   if(!n||SS.i>=n){const left=SS.list.some(c=>!(M[c]&&M[c].status));
     el("slidecard").innerHTML='<div class="card"><div class="core"><p>'+(!n?'No lines in this view. Choose another in the menu.':'<b>End of the list.</b> '+
       (left?'Some lines are still unmarked. <button id="ssfirst" type="button">Go to the first unmarked line</button>':'Every line here is marked.'))+'</p><div class="btns">'+NAV+'</div></div></div>';
     const b=el("ssfirst"); if(b) b.onclick=()=>{rebuild(); show("first unmarked")}}
-  else{const cid=SS.list[SS.i]; if(cid!=slideCid){confirmCid=null; if(pz>1.01) dlog("","card zoom reset from "+pz.toFixed(2)+"x"); pz=1} slideCid=cid; slidePrev=clone(M[cid]); el("slidecard").innerHTML=card(rec(cid)); structure()}
+  else{const cid=SS.list[SS.i]; if(cid!=slideCid){confirmCid=null; if(Z.s>1.01) dlog("","card back to 1x from "+Z.s.toFixed(2)+"x"); Z={s:1,x:0,y:0}} slideCid=cid; slidePrev=clone(M[cid]); el("slidecard").innerHTML=card(rec(cid)); structure()}
   fill(); count(); keep(); center(tag||"card")}
 function go(i,tag){SS.i=Math.max(0,Math.min(SS.list.length,i)); show(tag)}
 function mode(on){SS.on=on; el("ssbtn").textContent=on?"Show the list":"One at a time";
