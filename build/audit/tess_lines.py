@@ -11,6 +11,8 @@ lines on the other half; pp. 151 and 155 (the gold lines) are never in it.
   python3 build/audit/tess_lines.py bench [--start heb]        a few minutes of training: seconds per iteration
   python3 build/audit/tess_lines.py train [--start heb] [--iterations N]
   python3 build/audit/tess_lines.py score [--model NAME]       the gold lines read and scored beside the others
+  python3 build/audit/tess_lines.py read [--pages 1-100]       every kraken line read by the other half's model
+  python3 build/audit/tess_lines.py compare [--batches b1,b2]  what it would admit and what it doubts, per batch
 
 Runs in ~/jastrow/kraken-venv (the labels go through kraken's own bidi, as for kraken). The training is capped like kraken's (train_tess.sh).
 """
@@ -32,6 +34,7 @@ BATCHES = [  # review, marks (globs)
     ("b1", ["jastrow-lines-pilot-2026-11-052122.json", "jastrow-lines-b1-check-*.json"], "jastrow-lines-b1-check-phone-*.json"),
     ("b2", ["jastrow-lines-b2-check-*.json"], "jastrow-lines-b2-check-phone-*.json"),
     ("b3", ["jastrow-lines-b3-check-*.json"], "jastrow-lines-b3-check-phone-*.json"),
+    ("b4", ["jastrow-lines-b4-check-*.json"], "jastrow-lines-b4-check-phone-*.json"),
 ]
 PAD = 4
 
@@ -219,9 +222,88 @@ def score(model):
     for k in keys[:5]: print("  %s:%d\n    gold %s\n    read %s" % (k[0], k[1], gold[k], got[k]))
 
 
+def model_for(page):
+    """the model that never saw this page: odd pages are read by the even model and the reverse; a page neither
+    trained on (over 100) by the other half's model too, so both halves are used"""
+    want = "jline_%s_eng" % ("even" if int(page) % 2 else "odd")
+    if os.path.exists(os.path.join(ROOT, "models", want + ".traineddata")): return want
+    return None
+
+
+def read_pages(spec, threads):
+    """every kraken line of these pages read by the trained Tesseract of the other half, in printed order:
+    work/audit/pages/pNNNN/tess_line.json {"model", "lines": {line id: text}}"""
+    from PIL import Image
+    from concurrent.futures import ThreadPoolExecutor
+    pages = []
+    for part in spec.split(","):
+        lo, _, hi = part.partition("-"); pages += list(range(int(lo), int(hi or lo) + 1))
+    td = os.path.join(ROOT, "models"); os.environ["OMP_THREAD_LIMIT"] = "1"      # many single-line reads side by side
+    tmp = os.path.join(ROOT, "read_tmp"); os.makedirs(tmp, exist_ok=True)
+    done = 0
+    for pg in pages:
+        d = os.path.join(PAGES, "p%04d" % pg); xml = os.path.join(d, "kraken_mccatmus.xml")
+        model = model_for(pg)
+        if not os.path.exists(xml): print("p. %d: no kraken lines (not segmented)" % pg); continue
+        if not model: print("p. %d: no trained model for it" % pg); continue
+        _, lines = lines_of(xml)
+        img = Image.open(os.path.join(d, "page.png")).convert("L")
+        jobs = []
+        for k, (lid, pts, _) in enumerate(lines):
+            f = os.path.join(tmp, "%04d_%03d.png" % (pg, k)); crop_line(img, pts).save(f); jobs.append((lid, f))
+        def one(j): return j[0], read_visual(j[1], model, td)
+        with ThreadPoolExecutor(threads) as ex: got = dict(ex.map(one, jobs))
+        for _, f in jobs: os.remove(f)
+        json.dump({"model": model, "lines": got}, open(os.path.join(d, "tess_line.json"), "w"), ensure_ascii=False)
+        done += 1
+        print("p. %d: %d lines read by %s" % (pg, len(got), model), flush=True)
+    print("%d pages read" % done)
+
+
+def compare(batches):
+    """how the trained Tesseract would change the check pages: per batch, the lines it reads as the site has them,
+    against the tiers kraken_prep gives today. 'would admit': disputed lines it agrees with the site on; 'doubts':
+    lines admitted without the user (agree / kraken) that it reads otherwise"""
+    import argparse as AP
+    import kraken_prep as KP
+    for b, dlg, ph in BATCHES:
+        if batches and b not in batches: continue
+        rev = os.path.join(LREV, b, "lines.json")
+        if not os.path.exists(rev): continue
+        a = AP.Namespace(review=rev, marks=marks_for(dlg, ph), xml="kraken_mccatmus.xml")
+        rv, recs = KP.setup(a)
+        tl = {}
+        for p in {r["page"] for r in recs}:
+            f = os.path.join(PAGES, "p%04d" % int(p), "tess_line.json")
+            if os.path.exists(f): tl[p] = json.load(open(f))["lines"]
+        from collections import Counter
+        c = Counter(); ex = {"admit": [], "doubt": []}
+        for r in recs:
+            t = tl.get(r["page"], {}).get(r["kid"])
+            if t is None: c["not read"] += 1; continue
+            same = bool(t.strip()) and KP.same_reading(r["text"], word_logical(t))
+            tier = r["tier"]
+            c[(tier, same)] += 1
+            if not same and tier in ("agree", "kraken"): ex["doubt"].append((r["page"], r["rank"], tier, r["text"], t))
+            if same and tier not in KP.ADMITTED and tier not in ("held", "out"): ex["admit"].append((r["page"], r["rank"], tier, r["text"]))
+        tiers = sorted({k[0] for k in c if isinstance(k, tuple)})
+        print("== %s: %d lines" % (b, len(recs)))
+        for t in tiers:
+            y, n = c[(t, True)], c[(t, False)]
+            print("  %-9s %5d   trained Tesseract reads it as the site: %5d (%4.1f%%)" % (t, y + n, y, 100.0 * y / max(1, y + n)))
+        if c["not read"]: print("  not read by Tesseract: %d" % c["not read"])
+        print("  would admit (now to check, Tesseract agrees with the site): %d" % len(ex["admit"]))
+        print("  doubts (admitted without you, Tesseract reads otherwise): %d" % len(ex["doubt"]))
+        for x in ex["doubt"][:4]: print("    %s:%d %s\n      site %s\n      tess %s" % x)
+        json.dump(ex, open(os.path.join(ROOT, "compare_%s.json" % b), "w"), ensure_ascii=False, indent=0)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0], epilog=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["prepare", "bench", "train", "score"])
+    ap.add_argument("cmd", choices=["prepare", "bench", "train", "score", "read", "compare"])
+    ap.add_argument("--pages", default="1-100")
+    ap.add_argument("--threads", type=int, default=8)
+    ap.add_argument("--batches", default="")
     ap.add_argument("--half", default="odd", choices=["odd", "even"])
     ap.add_argument("--start", default="heb", choices=["heb", "eng"])
     ap.add_argument("--iterations", type=int, default=20000)
@@ -230,6 +312,8 @@ def main():
     if a.cmd == "prepare": prepare(a.half)
     elif a.cmd == "bench": bench(a.start, a.half)
     elif a.cmd == "train": train(a.start, a.half, a.iterations)
+    elif a.cmd == "read": read_pages(a.pages, a.threads)
+    elif a.cmd == "compare": compare([x for x in a.batches.split(",") if x])
     else: score(a.model or "jline_%s_%s" % (a.half, a.start))
 
 
