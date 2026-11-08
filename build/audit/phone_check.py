@@ -27,6 +27,11 @@ main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px
 #dbgbtn{font-size:12px;padding:2px 8px;border:1px solid #bbb;background:#fafafa;border-radius:4px;color:#555}
 #dbg{background:#1e1e1e;color:#d6d6d6;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;padding:10px 12px;border-radius:6px;margin-top:14px;white-space:pre-wrap;word-break:break-word;max-height:60vh;overflow:auto}
 #dbg .e{color:#ff9a8a}#dbg .w{color:#ffd27a}#dbg .k{color:#9ad59a}
+#ssbtn{font-size:13px;padding:3px 10px;border:1px solid #2f6fd0;background:#eef4ff;color:#1d4f9c;border-radius:4px}
+#slidepos{font-size:14px;color:#555;margin:10px 0 0}
+#slidenav{display:flex;gap:8px;margin:6px 0}#slidenav button{flex:1;font-size:15px;padding:10px 8px;border:1px solid #aaa;background:#f7f7f7;border-radius:6px}
+#slidenav button:disabled{opacity:.45}
+#slidetip{font-size:13px;color:#666;line-height:1.4;margin-top:8px}
 #dbgbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}#dbgbar button{font-size:13px;padding:4px 10px}
 @media (max-width:640px){
  header{gap:8px;padding-block:6px}
@@ -41,7 +46,62 @@ main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px
 }
 """
 
-HEADER_TOOLS = ('<span id="sync">loading…</span><button id="dbgbtn" type="button">Debug</button>')
+HEADER_TOOLS = ('<button id="ssbtn" type="button">One at a time</button>'
+                '<span id="sync">loading…</span><button id="dbgbtn" type="button">Debug</button>')
+
+SLIDE_HTML = """<div id="slide" hidden><div id="slidepos"></div><div id="slidecard"></div>
+<div id="slidenav"><button id="ssback" type="button">&lsaquo; Back</button><button id="ssundo" type="button">Undo last mark</button>
+<button id="ssnext" type="button">Next &rsaquo;</button></div><div id="slidetip">Right, Bad line and Skip move on to the next line by themselves;
+so does an edit once you press Enter or tap outside the box. <b>Next</b> moves on without marking; <b>Undo last mark</b> takes back
+the last mark and returns to that line.</div></div>"""
+
+# one card at a time: the page's own render() and set() wrapped, so its keys, buttons and edits all work as before
+SS_JS = r"""<script>
+(function(){
+const SKEY=KEY+"-slides", el=id=>document.getElementById(id);
+const SS={on:false,list:[],i:0}, UNDO=[];
+let slidePrev, slideCid;
+const clone=m=>m?JSON.parse(JSON.stringify(m)):undefined;
+try{const v=JSON.parse(LS.get(SKEY)||"{}"); SS.on=!!v.on; SS.at=v.at}catch(e){}
+function keep(){LS.set(SKEY,JSON.stringify({on:SS.on,at:SS.list[SS.i]}))}
+function rebuild(at){SS.list=visible().map(id);
+  let i=at?SS.list.indexOf(at):-1;
+  if(i<0) i=SS.list.findIndex(c=>!(M[c]&&M[c].status));
+  SS.i=Math.max(0,i)}
+function show(){const n=SS.list.length;
+  el("slidenav").hidden=!n;
+  if(SS.i>=n){el("slidecard").innerHTML='<div class="card"><p><b>End of the list.</b> '+
+      (SS.list.some(c=>!(M[c]&&M[c].status))?'Some lines are still unmarked. <button id="ssfirst" type="button">Go to the first unmarked line</button>':'Every line here is marked.')+'</p></div>';
+    el("slidepos").textContent=n+" of "+n; el("where").textContent=""; const b=el("ssfirst"); if(b) b.onclick=()=>{rebuild(); show()}; keep(); return}
+  if(!n){el("slidecard").innerHTML='<div class="card"><p>No lines in this view. Choose another in the list above.</p></div>'; el("slidepos").textContent=""; return}
+  const cid=SS.list[SS.i]; slideCid=cid; slidePrev=clone(M[cid]);
+  el("slidecard").innerHTML=card(rec(cid));
+  const marked=SS.list.filter(c=>M[c]&&M[c].status).length;
+  el("slidepos").textContent="Line "+(SS.i+1)+" of "+n+" · "+marked+" marked";
+  el("where").textContent=""; el("ssback").disabled=SS.i==0; el("ssundo").disabled=!UNDO.length;
+  count(); keep();
+  const top=el("slide").getBoundingClientRect().top+scrollY-70; scrollTo(0,Math.max(0,top))}
+function go(i){SS.i=Math.max(0,Math.min(SS.list.length,i)); show()}
+function mode(on){SS.on=on; el("ssbtn").textContent=on?"Show the list":"One at a time";
+  document.querySelector(".intro").hidden=on; el("cards").hidden=on; el("slide").hidden=!on;
+  el("prev").hidden=on; el("next").hidden=on;
+  if(on){rebuild(SS.at); show()} else {_render(); keep()}
+  dlog("","one at a time: "+(on?"on":"off"))}
+const _render=render; render=function(){if(SS.on){rebuild(SS.list[SS.i]); show()} else _render()};
+const _set=set; set=function(cid,st){const prev=clone(M[cid]); _set(cid,st);
+  if(SS.on&&cid==slideCid){UNDO.push({cid,prev}); go(SS.i+1)}};
+document.addEventListener("change",e=>{if(!SS.on||!e.target.classList.contains("edit")) return;
+  const c=e.target.closest(".card"), cid=c&&c.dataset.id; if(cid!=slideCid) return;
+  const m=M[cid]; if(m&&m.status=="fixed"&&JSON.stringify(m)!=JSON.stringify(slidePrev)){UNDO.push({cid,prev:slidePrev}); go(SS.i+1)}});
+el("ssbtn").onclick=()=>mode(!SS.on);
+el("ssback").onclick=()=>go(SS.i-1);
+el("ssnext").onclick=()=>go(SS.i+1);
+el("ssundo").onclick=()=>{const u=UNDO.pop(); if(!u) return;
+  if(u.prev) M[u.cid]=u.prev; else delete M[u.cid];
+  save(u.cid); const i=SS.list.indexOf(u.cid); if(i<0) rebuild(u.cid); else SS.i=i; show()};
+if(SS.on) mode(true);
+})();
+</script>"""
 
 DEBUG_HTML = """<div id="dbgwrap" hidden><div id="dbg"></div><div id="dbgbar">
 <button id="dbgcopy" type="button">Copy log</button><button id="dbgping" type="button">Test online save</button>
@@ -128,7 +188,7 @@ def build(run, out):
     src = src.replace("Marks are kept in this browser; <b>Export</b> saves them to a file",
                       "Marks are saved online as you go (the badge at the top says so), and Claude reads them from there; "
                       "<b>Debug</b> shows what the page is doing", 1).replace(" (send it, or keep it for the training export)", "", 1)
-    src = src.replace("</div></main>", "</div>" + DEBUG_HTML + "</main>", 1)
+    src = src.replace("</div></main>", "</div>" + SLIDE_HTML + DEBUG_HTML + "</main>", 1)
     # the line images, built in
     n = [0, 0]
 
@@ -156,7 +216,7 @@ def build(run, out):
     # Export / Import handlers go (their buttons are gone)
     src, k = re.subn(r'document\.getElementById\("export"\)\.onclick=.*?\n  save\(\); render\(\)\}\)\};\n', "", src, flags=re.S)
     if k != 1: sys.exit("phone_check: export/import handlers not found")
-    src = src.replace("render();\n</script>", 'render(); dlog("","first page drawn: "+L.length+" lines");\n</script>' + POST_JS, 1)
+    src = src.replace("render();\n</script>", 'render(); dlog("","first page drawn: "+L.length+" lines");\n</script>' + POST_JS + SS_JS, 1)
     open(out, "w", encoding="utf-8").write(src)
     print("%s: %d lines, %d images (%.1f MB), page %.1f MB -> %s" % (
         run, src.count('"rank":'), n[0], n[1] / 1e6, len(src.encode()) / 1e6, out))
