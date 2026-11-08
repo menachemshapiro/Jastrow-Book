@@ -173,7 +173,9 @@ function applyZ(){const z=zin(), b=zbox(); if(!z||!b) return; const w=b.clientWi
 for(const g of ["gesturestart","gesturechange","gestureend"]) document.addEventListener(g,e=>{if(SS.on) e.preventDefault()},{passive:false});
 const mid=(e,r)=>[(e.touches[0].clientX+e.touches[1].clientX)/2-r.left,(e.touches[0].clientY+e.touches[1].clientY)/2-r.top];
 const tdist=e=>Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+const typing=t=>!!(t&&t.closest&&t.closest("input,textarea,select,[contenteditable]"));
 document.addEventListener("touchstart",e=>{const b=zbox(); if(!SS.on||!b||!b.contains(e.target)) return;
+  if(e.touches.length==1&&(typing(e.target)||typing(document.activeElement))){P=null; return}   // text boxes: the touch moves the cursor or selection
   if(e.touches.length==2){const r=b.getBoundingClientRect(), [mx,my]=mid(e,r); P={pinch:true,d0:tdist(e),s0:Z.s,cx:(mx-Z.x)/Z.s,cy:(my-Z.y)/Z.s};
     if(!pinchSeen){pinchSeen=true; dlog("k","pinch caught by the page: the card is magnified, the app does not zoom")}}
   else if(e.touches.length==1&&Z.s>1.01) P={pinch:false,x0:e.touches[0].clientX,y0:e.touches[0].clientY,zx:Z.x,zy:Z.y,moved:false}},{passive:true});
