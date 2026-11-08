@@ -383,7 +383,7 @@ async function getJSON(f){
   for(const u of cands){if(tried.has(u)) continue; tried.add(u);
     try{const r=await fetch(u,{credentials:"include"}), ct=r.headers.get("content-type")||"", t=await r.text();
       if(r.ok&&t.charAt(0)=="{"){const j=JSON.parse(t);
-        if(!GOOD){const i=u.indexOf(f), pre=u.slice(0,i), post=u.slice(i+f.length); GOOD=x=>pre+x+post; dlog("k","image files found at "+u.replace(/^https?:\/\/[^/]+/,"")+" (page at "+location.href.replace(/^https?:\/\/[^/]+/,"").slice(0,80)+")")}
+        if(!GOOD){const i=u.indexOf(f), pre=u.slice(0,i), post=u.slice(i+f.length); GOOD=x=>pre+x+post; dlog("k","image files found (with the page's key: "+(post?"yes":"no")+")")}
         return j}
       last=u+": "+r.status+" "+ct+" "+JSON.stringify(t.slice(0,60))}
     catch(e){last=u+": "+e}
