@@ -29,6 +29,7 @@ main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px
 #dbg .e{color:#ff9a8a}#dbg .w{color:#ffd27a}#dbg .k{color:#9ad59a}
 #ssbtn{font-size:13px;padding:3px 10px;border:1px solid #2f6fd0;background:#eef4ff;color:#1d4f9c;border-radius:4px}
 #slide{padding-block:45vh 55vh}
+#slidecard{overflow-x:auto}
 #slidecard .card{margin:0}
 .core{display:flex;flex-direction:column;gap:4px}
 .core .scan{margin:0}
@@ -129,7 +130,7 @@ function structure(){const c=el("slidecard").querySelector(".card[data-id]"); if
   btns.insertAdjacentHTML("beforeend",NAV); const rest=[];
   const more=document.createElement("div"); more.className="more"; more.append(...rest);
   if(note){note.classList.toggle("has",!!note.value)}
-  c.append(core,more); const im=core.querySelector("img"); if(im) im.loading="eager"; fill()}
+  c.append(core,more); const im=core.querySelector("img"); if(im) im.loading="eager"; applyZoom(pz); fill()}
 function fill(){const n=SS.list.length, marked=SS.list.filter(c=>M[c]&&M[c].status).length;
   el("where").textContent=(SS.i<n?"Line "+(SS.i+1)+" of "+n:"End of "+n);
   document.querySelectorAll("#slidecard [data-ss=back]").forEach(b=>b.disabled=SS.i==0);
@@ -154,7 +155,7 @@ function report(tag,force){const core=document.querySelector("#slidecard .core")
   if(!force&&fit&&reports>=3) return; reports++;
   dlog(fit?"":"w","layout "+tag+": "+(LAND.matches?"landscape, side menu":"portrait or tall, top bar")+"; view "+innerWidth+"x"+innerHeight+
     (vv?" (visible "+Math.round(vv.width)+"x"+Math.round(vv.height)+", zoom "+vv.scale.toFixed(2)+")":"")+"; screen "+screen.width+"x"+screen.height+" "+(screen.orientation?screen.orientation.type:"")+
-    "; top bar "+Math.round(h)+"px; size step "+fitLevel+"; card core "+Math.round(r.top)+" to "+Math.round(r.bottom)+" ("+Math.round(r.height)+"px), mark buttons end at "+Math.round(b.bottom)+
+    "; top bar "+Math.round(h)+"px; size step "+fitLevel+"; card zoom "+pz.toFixed(2)+"; card core "+Math.round(r.top)+" to "+Math.round(r.bottom)+" ("+Math.round(r.height)+"px), mark buttons end at "+Math.round(b.bottom)+
     "; scrolled "+Math.round(scrollY)+" of "+Math.round(document.documentElement.scrollHeight-innerHeight)+"; "+(fit?"fits on screen":"DOES NOT FIT ON SCREEN"))}
 const VP=document.querySelector('meta[name="viewport"]');
 function zoom(){const v=window.visualViewport; return v?v.scale:1}
@@ -162,12 +163,23 @@ function resetZoom(){const z=zoom(); if(z<=1.02) return;
   if(!VP){dlog("w","zoomed "+z.toFixed(2)+"x but the page has no viewport setting to reset"); return}
   const c=VP.content; VP.content=c.replace(/,\s*(maximum|minimum)-scale=[^,]*/g,"")+", maximum-scale=1, minimum-scale=1";
   setTimeout(()=>{VP.content=c; dlog(zoom()>1.02?"w":"","zoom was "+z.toFixed(2)+"x; now "+zoom().toFixed(2)+"x")},350)}
+let pz=1, pz0=1, pd0=0, pinchSeen=false;
+const HASG="ongesturestart" in window;
+function applyZoom(z){pz=Math.max(1,Math.min(3.5,z)); const c=el("slidecard").querySelector(".core"); if(c) c.style.zoom=pz>1.01?String(pz):""}
+function pinched(how){if(!pinchSeen){pinchSeen=true; dlog("k","pinch caught by the page ("+how+"): the card zooms, the app does not")}}
+document.addEventListener("gesturestart",e=>{if(!SS.on) return; e.preventDefault(); pz0=pz; pinched("gesture")},{passive:false});
+document.addEventListener("gesturechange",e=>{if(!SS.on) return; e.preventDefault(); applyZoom(pz0*e.scale)},{passive:false});
+document.addEventListener("gestureend",e=>{if(!SS.on) return; e.preventDefault(); dlog("","card zoom "+pz.toFixed(2)+"x")},{passive:false});
+const tdist=e=>Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+document.addEventListener("touchstart",e=>{if(SS.on&&e.touches.length==2){pd0=tdist(e); pz0=pz}},{passive:true});
+document.addEventListener("touchmove",e=>{if(!SS.on||e.touches.length!=2||!pd0) return; e.preventDefault(); if(!HASG){pinched("touch"); applyZoom(pz0*tdist(e)/pd0)}},{passive:false});
+document.addEventListener("touchend",e=>{if(pd0&&e.touches.length<2){pd0=0; if(!HASG) dlog("","card zoom "+pz.toFixed(2)+"x")}},{passive:true});
 function show(tag){const n=SS.list.length; if(tag=="next"||tag=="back"||tag=="undo"||tag=="first unmarked") resetZoom();
   if(!n||SS.i>=n){const left=SS.list.some(c=>!(M[c]&&M[c].status));
     el("slidecard").innerHTML='<div class="card"><div class="core"><p>'+(!n?'No lines in this view. Choose another in the menu.':'<b>End of the list.</b> '+
       (left?'Some lines are still unmarked. <button id="ssfirst" type="button">Go to the first unmarked line</button>':'Every line here is marked.'))+'</p><div class="btns">'+NAV+'</div></div></div>';
     const b=el("ssfirst"); if(b) b.onclick=()=>{rebuild(); show("first unmarked")}}
-  else{const cid=SS.list[SS.i]; if(cid!=slideCid) confirmCid=null; slideCid=cid; slidePrev=clone(M[cid]); el("slidecard").innerHTML=card(rec(cid)); structure()}
+  else{const cid=SS.list[SS.i]; if(cid!=slideCid){confirmCid=null; if(pz>1.01) dlog("","card zoom reset from "+pz.toFixed(2)+"x"); pz=1} slideCid=cid; slidePrev=clone(M[cid]); el("slidecard").innerHTML=card(rec(cid)); structure()}
   fill(); count(); keep(); center(tag||"card")}
 function go(i,tag){SS.i=Math.max(0,Math.min(SS.list.length,i)); show(tag)}
 function mode(on){SS.on=on; el("ssbtn").textContent=on?"Show the list":"One at a time";
@@ -216,7 +228,8 @@ PRE_JS = r"""<script>
 const T0=Date.now(), LOG=[];
 function dlog(kind,msg){const s="+"+((Date.now()-T0)/1000).toFixed(1)+"s "+msg; LOG.push([kind,s]);
   const el=document.getElementById("dbg"); if(el){const d=document.createElement("div"); if(kind) d.className=kind; d.textContent=s; el.appendChild(d)}
-  if(kind=="e"){const w=document.getElementById("dbgwrap"); if(w) w.hidden=false}}
+  if(kind=="e"){const w=document.getElementById("dbgwrap"); if(w) w.hidden=false}
+  if(window.logOnline) window.logOnline()}
 addEventListener("error",e=>{if(e.target&&e.target!==window&&e.target.tagName) return; dlog("e","error: "+(e.message||e.type)+(e.filename?" at "+e.filename.split("/").pop()+":"+e.lineno:""))},true);
 addEventListener("unhandledrejection",e=>dlog("e","unhandled rejection: "+(e.reason&&(e.reason.code||e.reason.message)||e.reason)));
 const LS={get(k){try{return localStorage.getItem(k)}catch(e){dlog("w","browser storage unreadable: "+e.name); return null}},
@@ -247,6 +260,10 @@ async function flush(){if(!DB||busy) return; busy=true;
       status()}}
   finally{busy=false; status()}}
 window.flushOnline=flush;
+let lt=null, lbusy=false;
+window.logOnline=()=>{if(!DB||lt) return; lt=setTimeout(async()=>{lt=null; if(lbusy) return; lbusy=true;
+  try{await DB.doc("debug/log").set({updated:new Date().toISOString(),ua:navigator.userAgent,lines:LOG.slice(-400).map(x=>x[1])})}
+  catch(e){} finally{lbusy=false}},4000)};
 document.getElementById("dbgbtn").onclick=()=>{const w=document.getElementById("dbgwrap"); w.hidden=!w.hidden; if(!w.hidden) w.scrollIntoView({block:"start"})};
 document.getElementById("dbgcopy").onclick=()=>{const t=LOG.map(x=>x[1]).join("\n");
   navigator.clipboard.writeText(t).then(()=>dlog("k","log copied"),()=>{const r=document.createRange(); r.selectNodeContents(document.getElementById("dbg")); const s=getSelection(); s.removeAllRanges(); s.addRange(r); dlog("w","copy refused: the log is selected, copy it by hand")})};
@@ -270,7 +287,7 @@ window.claude.use("db").then(async db=>{
       if(x.deleted){delete M[cid]; took++; continue}
       M[cid]={status:x.status,site:x.site,time:x.time}; if(x.text!=null) M[cid].text=x.text; if(x.note) M[cid].note=x.note; took++}
     dlog("k","read "+snap.size+" saved marks ("+(Date.now()-t)+" ms"+(snap.metadata&&snap.metadata.fromCache?", from cache":"")+"); "+took+" taken in");
-    LS.set(KEY,JSON.stringify(M)); DB=db; render(); status(); flush()}
+    LS.set(KEY,JSON.stringify(M)); DB=db; render(); status(); flush(); window.logOnline()}
   catch(e){clearTimeout(timer); lastErr=(e&&(e.code||e.message))||String(e); dlog("e","reading saved marks failed: "+lastErr+" "+(e&&e.message||"")); DB=db; status(); flush()}
 },e=>{clearTimeout(timer); lastErr=String(e); dlog("e","claude.use(\"db\") rejected: "+e); status()});
 })();
