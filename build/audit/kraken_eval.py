@@ -77,7 +77,9 @@ def cmd_score(a):
         c = json.load(open(cf))
         if sum(1 for k in keys if c.get("%s:%d" % k)) < 0.9 * len(keys): continue      # a short trial run
         R["gemini " + os.path.basename(os.path.dirname(cf))] = {k: c.get("%s:%d" % k, "") for k in keys}
+    MODELS = set()                                   # our own models: their output is display order already
     for name in [n for n in a.names.split(",") if n]:
+        MODELS.add("kraken " + name)
         got = {}
         for p in a.pages.split(","):
             f = os.path.join(EVAL, name, "p%04d.xml" % int(p))
@@ -89,7 +91,7 @@ def cmd_score(a):
     print("(all in display order, left to right as printed, as the training labels are)")
     for name, ans in R.items():
         print("%-36s %5.1f%% %7.1f%% %6.1f%% %6.1f%% %5.1f%%" % (
-            name, *score_one(gold, ans, keys, raw=name.startswith("kraken b"))))
+            name, *score_one(gold, ans, keys, raw=name in MODELS)))
     if a.show:
         for name in [n for n in a.names.split(",") if n]:
             ans = R["kraken " + name]
