@@ -7,7 +7,7 @@ as well as in the browser, and a debug log (the user, 8 Nov: artifacts have been
   python3 build/audit/phone_check.py marks <rows.json> --run b2 --out <export.json>   # database rows -> an export
                                                                                      # kraken_prep.py --marks reads
 """
-import argparse, base64, json, os, re, sys
+import argparse, base64, glob, json, os, re, sys, unicodedata
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
@@ -202,8 +202,8 @@ function mode(on){SS.on=on; el("ssbtn").textContent=on?"Show the list":"One at a
 const _render=render; render=function(){if(SS.on){rebuild(SS.list[SS.i]); show("redraw")} else _render()};
 const _rerender=rerender; rerender=function(cid){if(SS.on&&cid==slideCid){el("slidecard").innerHTML=card(rec(cid)); structure()} else _rerender(cid)};
 document.addEventListener("click",e=>{const b=e.target.closest("button[data-s=reset]"); if(b&&SS.on) confirmCid=null},true);
-function tabCount(){const t=el("tabcount"); if(!t) return; const m=L.filter(r=>M[id(r)]&&M[id(r)].status).length;
-  t.textContent=m+" marked · "+(L.length-m)+" left"}
+function tabCount(){const t=el("tabcount"); if(!t) return; const VL=typeof inView=="function"?L.filter(inView):L, m=VL.filter(r=>M[id(r)]&&M[id(r)].status).length;
+  t.textContent=m+" marked · "+(VL.length-m)+" left"}
 const _count=count; count=function(){_count(); tabCount()};
 document.addEventListener("input",e=>{if(e.target.classList.contains("note")) e.target.classList.toggle("has",!!e.target.value)});
 const _set=set; set=function(cid,st){const prev=clone(M[cid]); _set(cid,st);
@@ -222,6 +222,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-ss]");
   if(document.body.classList.contains("railopen")&&!e.target.closest("header")) document.body.classList.remove("railopen")});
 el("ssbtn").onclick=()=>mode(!SS.on);
 el("dbglayout").onclick=()=>report("check",true);
+window.recenter=()=>{if(SS.on) center("images loaded")};
 let rt; addEventListener("resize",()=>{clearTimeout(rt); rt=setTimeout(()=>{
   if(!LAND.matches) document.body.classList.remove("railopen");
   const a=document.activeElement; if(!SS.on) return; if(a&&(a.tagName=="INPUT"||a.tagName=="SELECT")) return report("after resize (typing, not moved)",true);
@@ -265,7 +266,7 @@ function status(){const n=DIRTY.size;
 window.syncStatus=status;
 async function flush(){if(!DB||busy) return; busy=true;
   try{for(const cid of [...DIRTY]){const r=rec(cid), m=M[cid];
-      const body=m?Object.assign({},m,{page:r.page,rank:r.rank,kid:r.kid,xml:r.xml,eids:r.eids,site:r.site,run:RUN}):{deleted:true,page:r.page,rank:r.rank,run:RUN};
+      const body=m?Object.assign({},m,{page:r.page,rank:r.rank,kid:r.kid,xml:r.xml,eids:r.eids,site:r.site,run:(r.run||RUN)}):{deleted:true,page:r.page,rank:r.rank,run:(r.run||RUN)};
       for(const k of Object.keys(body)) if(body[k]===undefined) delete body[k];
       try{await DB.collection("marks").doc(docId(cid)).set(body); DIRTY.delete(cid); keepDirty(); lastErr=""}
       catch(e){lastErr=(e&&(e.code||e.message))||String(e); dlog("e","save "+cid+" failed: "+lastErr+(e&&e.message?" ("+e.message+")":"")); break}
@@ -306,8 +307,8 @@ window.claude.use("db").then(async db=>{
 </script>"""
 
 
-def build(run, out, pages_=None):
-    src = open(os.path.join(LINES, run, "check.html"), encoding="utf-8").read()
+def build(run, out, pages_=None, src=None, title=None, view_js=""):
+    src = src or open(os.path.join(LINES, run, "check.html"), encoding="utf-8").read()
     if pages_:                                             # only these pages (a page over 16 MB is split by pages)
         lo, hi = (int(x) for x in pages_.split("-"))
         i = src.index(", L=") + 4
@@ -315,7 +316,7 @@ def build(run, out, pages_=None):
         L = [r for r in L if lo <= int(r["page"]) <= hi]
         src = src[:i] + json.dumps(L, ensure_ascii=False) + src[end:]
     pages = sorted({int(p) for p in re.findall(r'"page": "(\d+)"', src)})
-    title = "Line Check pp. %d–%d" % (pages[0], pages[-1]) if pages else "Line Check " + run
+    title = title or ("Line Check pp. %d–%d" % (pages[0], pages[-1]) if pages else "Line Check " + run)
     # the publish wraps the page in its own skeleton
     src = re.sub(r'^<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>[^<]*</title>',
                  '<title>%s</title>\n<meta name="claude:viewport-fit-sides" content="cover">' % title, src)
@@ -356,10 +357,101 @@ def build(run, out, pages_=None):
     # Export / Import handlers go (their buttons are gone)
     src, k = re.subn(r'document\.getElementById\("export"\)\.onclick=.*?\n  save\(\); render\(\)\}\)\};\n', "", src, flags=re.S)
     if k != 1: sys.exit("phone_check: export/import handlers not found")
-    src = src.replace("render();\n</script>", 'render(); dlog("","first page drawn: "+L.length+" lines");\n</script>' + POST_JS + SS_JS, 1)
+    src = src.replace("render();\n</script>", view_js + 'render(); dlog("","first page drawn: "+L.length+" lines");\n</script>' + POST_JS + SS_JS, 1)
     open(out, "w", encoding="utf-8").write(src)
     print("%s: %d lines, %d images (%.1f MB), page %.1f MB -> %s" % (
         run, src.count('"rank":'), n[0], n[1] / 1e6, len(src.encode()) / 1e6, out))
+
+
+VIEW_JS = r"""
+const BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+const VIEWS=__VIEWS__;
+const IDX=new Map(L.map(r=>[id(r),r])); rec=cid=>IDX.get(cid);
+const vtest=v=>r=>v.hard?r.hard>0:(r.run==v.run&&(!v.pages||(+r.page>=v.pages[0]&&+r.page<=v.pages[1])));
+let VIEW=(()=>{const v=LS.get(KEY+"-view"); return VIEWS.some(x=>x.id==v)?v:VIEWS[0].id})();
+function curView(){return VIEWS.find(x=>x.id==VIEW)}
+function inView(r){return vtest(curView())(r)}
+const _visible=visible; visible=function(){let V=_visible().filter(inView); if(curView().hard) V=V.slice().sort((a,b)=>b.hard-a.hard); return V};
+const LOADED={};
+async function loadImgs(){for(const f of curView().files){if(LOADED[f]) continue; LOADED[f]="loading"; const t=Date.now();
+  try{const j=await (await fetch(f)).json(); let n=0; for(const k in j){const r=rec(k); if(r){r.img=j[k]; n++}} LOADED[f]=true;
+    dlog("","images "+f+": "+n+" lines, "+(Date.now()-t)+" ms");
+    document.querySelectorAll("img.scan[data-cid]").forEach(im=>{const r=rec(im.dataset.cid); if(r&&r.img&&im.getAttribute("src")!=r.img) im.src=r.img});
+    if(window.recenter) window.recenter()}
+  catch(e){LOADED[f]=false; dlog("e","images "+f+" did not load: "+e)}}}
+const vsel=document.getElementById("view");
+function viewOpts(){vsel.innerHTML=VIEWS.map(v=>{const V=L.filter(vtest(v)), left=V.filter(r=>!(M[id(r)]&&M[id(r)].status)).length;
+  return '<option value="'+v.id+'"'+(v.id==VIEW?" selected":"")+'>'+v.name+' ('+left+' left)</option>'}).join("")}
+vsel.onchange=()=>{VIEW=vsel.value; LS.set(KEY+"-view",VIEW); start=0; dlog("","view: "+VIEW); loadImgs(); render()};
+const _count0=count; count=function(){_count0(); viewOpts()};
+viewOpts(); loadImgs();
+"""
+
+
+def build_all(out, datadir):
+    """one page for every batch (pp. 1-100) and a view of the hard lines, so that a line is marked once whichever
+    view it is in; the line images in data files beside the page, fetched for the view on screen"""
+    tr = {}
+    for f in glob.glob(os.path.join(paths.WORK, "ocrtrain", "lines", "*", "*.gt.txt")):
+        for c in unicodedata.normalize("NFC", open(f, encoding="utf-8").read().strip()): tr[c] = tr.get(c, 0) + 1
+    POINTS = re.compile("[֑-ׇ]")
+    L, FL, PRIOR, RECHECK, MADE = [], {}, [], [], ""
+    imgs = {}
+    for b in ("b1", "b2", "b3"):
+        s = open(os.path.join(LINES, b, "check.html"), encoding="utf-8").read()
+        line = s.split("\n")[42]
+        run = re.search(r'const RUN="([^"]+)"', line).group(1)
+        i = line.index(", L=") + 4
+        Lb, end = json.JSONDecoder().raw_decode(line, i)
+        rest = line[end:]
+        FL.update(json.JSONDecoder().raw_decode(rest, rest.index("FLAGS=") + 6)[0])
+        PRIOR += json.JSONDecoder().raw_decode(rest, rest.index("PRIOR=") + 6)[0]
+        RECHECK += json.JSONDecoder().raw_decode(rest, rest.index("RECHECK=") + 8)[0]
+        MADE = max(MADE, re.search(r'MADE="([^"]*)"', rest).group(1))
+        for r in Lb:
+            r["run"] = run
+            imgs["%s:%d" % (r["page"], r["rank"])] = (b, r["img"]); r["img"] = ""
+            text = unicodedata.normalize("NFC", POINTS.sub("", unicodedata.normalize("NFD", r["site"])))
+            rare = sorted({c for c in text if not c.isspace() and tr.get(c, 0) < 30})
+            r["hard"] = round(sum(100.0 / (tr.get(c, 0) + 1) for c in rare), 2)
+            if rare: r["flags"] = r["flags"] + ["rare in the training: " + " ".join(rare)]
+        L += Lb
+    tmpl = open(os.path.join(LINES, "b2", "check.html"), encoding="utf-8").read().split("\n")
+    tmpl[42] = 'const RUN="all", L=%s, FLAGS=%s, PRIOR=%s, RECHECK=%s, MADE="%s";' % (
+        json.dumps(L, ensure_ascii=False), json.dumps(FL, ensure_ascii=False), json.dumps(PRIOR, ensure_ascii=False),
+        json.dumps(RECHECK), MADE)
+    src = "\n".join(tmpl)
+    a = '<img class="scan" src="${r.img}" loading="lazy">'
+    if src.count(a) != 1: sys.exit("phone_check: the card's image changed")
+    src = src.replace(a, '<img class="scan" src="${r.img||BLANK}" data-cid="${id(r)}" loading="lazy">')
+    views = [{"id": "b1", "name": "pp. 1–20", "run": "b1-check", "files": ["img-b1.json"]},
+             {"id": "b2", "name": "pp. 21–40", "run": "b2-check", "files": ["img-b2.json"]},
+             {"id": "b3a", "name": "pp. 41–60", "run": "b3-check", "pages": [41, 60], "files": ["img-b3-41.json"]},
+             {"id": "b3b", "name": "pp. 61–80", "run": "b3-check", "pages": [61, 80], "files": ["img-b3-61.json"]},
+             {"id": "b3c", "name": "pp. 81–100", "run": "b3-check", "pages": [81, 100], "files": ["img-b3-81.json"]},
+             {"id": "hard", "name": "Hard lines (all pages)", "hard": True, "files": ["img-hard.json"]}]
+    order = ["b2", "hard", "b1", "b3a", "b3b", "b3c"]
+    views.sort(key=lambda v: order.index(v["id"]))
+    os.makedirs(datadir, exist_ok=True)
+    files = {}
+    for v in views:
+        keep = {}
+        for r in L:
+            k = "%s:%d" % (r["page"], r["rank"])
+            if v.get("hard"):
+                if r["hard"] <= 0: continue
+            elif r["run"] != v["run"] or ("pages" in v and not v["pages"][0] <= int(r["page"]) <= v["pages"][1]): continue
+            b, rel = imgs[k]
+            keep[k] = "data:image/jpeg;base64," + base64.b64encode(open(os.path.join(LINES, b, rel), "rb").read()).decode()
+        f = os.path.join(datadir, v["files"][0])
+        json.dump(keep, open(f, "w"))
+        files[v["files"][0]] = f
+        print("  %-24s %4d lines, images %.1f MB" % (v["name"], len(keep), os.path.getsize(f) / 1e6))
+    tools = '<select id="view" aria-label="Which lines"></select>'
+    build("all", out, src=src.replace('<button id="export">Export</button>', tools + '<button id="export">Export</button>', 1),
+          title="Line Check pp. 1–100", view_js=VIEW_JS.replace("__VIEWS__", json.dumps(views, ensure_ascii=False)))
+    print("hard lines: %d (ranked by how rare their characters are in the training)" % sum(1 for r in L if r["hard"] > 0))
+    return files
 
 
 def marks(rows, run, out):
@@ -369,14 +461,18 @@ def marks(rows, run, out):
     lines = []
     for x in d:
         b = x.get("data", x)
-        if b.get("deleted") or not b.get("status") or b.get("run", run) != run: continue
-        lines.append({"page": b["page"], "rank": b["rank"], "kid": b.get("kid"), "xml": b.get("xml"), "eids": b.get("eids", []),
+        if b.get("deleted") or not b.get("status") or (run != "all" and b.get("run", run) != run): continue
+        lines.append({"run": b.get("run", run), "page": b["page"], "rank": b["rank"], "kid": b.get("kid"), "xml": b.get("xml"), "eids": b.get("eids", []),
                       "status": b["status"], "site": b["site"], "text": b.get("text", b["site"]), "note": b.get("note", ""),
                       "time": b.get("time")})
     lines.sort(key=lambda m: (int(m["page"]), m["rank"]))
-    json.dump({"run": run, "exported": max([m["time"] or "" for m in lines] or [""]), "source": "phone artifact",
-               "lines": lines}, open(out, "w"), ensure_ascii=False, indent=1)
-    print("%d marks -> %s" % (len(lines), out))
+    runs = sorted({m["run"] for m in lines}) if run == "all" else [run]
+    for rn in runs:
+        part = [m for m in lines if run != "all" or m["run"] == rn]
+        o = out if run != "all" else out.replace("RUN", rn)
+        json.dump({"run": rn, "exported": max([m["time"] or "" for m in part] or [""]), "source": "phone artifact",
+                   "lines": part}, open(o, "w"), ensure_ascii=False, indent=1)
+        print("%s: %d marks -> %s" % (rn, len(part), o))
 
 
 if __name__ == "__main__":
@@ -386,6 +482,8 @@ if __name__ == "__main__":
     ap.add_argument("--run", dest="mrun")
     ap.add_argument("--out", required=True)
     ap.add_argument("--pages", help="build: only pages lo-hi")
+    ap.add_argument("--data", help="all: the folder for the image files")
     a = ap.parse_args()
     if a.run == "marks": marks(a.rows, a.mrun, a.out)
+    elif a.run == "all": build_all(a.out, a.data or os.path.join(os.path.dirname(os.path.abspath(a.out)), "phone-all"))
     else: build(a.run, a.out, a.pages)
