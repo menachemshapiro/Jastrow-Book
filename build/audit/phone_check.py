@@ -376,12 +376,14 @@ const LOADED={};
 let GOOD=null;   // the address form that worked, kept for the other files
 async function getJSON(f){
   const dir=location.href.replace(/[?#].*$/,"").replace(/[^/]*$/,"");
-  const cands=[...(GOOD?[GOOD(f)]:[]), f, "./"+f, dir+f, location.href.replace(/[?#].*$/,"").replace(/\/?$/,"/")+f, new URL(f,document.baseURI).href];
+  const q=location.search||"";
+  if(!getJSON.said){getJSON.said=1; dlog("","page address: query part "+(q?q.length+" characters, keys "+[...new URLSearchParams(q).keys()].join(","):"none")+"; referrer "+(document.referrer?"set":"none"))}
+  const cands=[...(GOOD?[GOOD(f)]:[]), ...(q?[f+q, dir+f+q]:[]), f, dir+f];
   const tried=new Set(); let last="";
   for(const u of cands){if(tried.has(u)) continue; tried.add(u);
-    try{const r=await fetch(u), ct=r.headers.get("content-type")||"", t=await r.text();
+    try{const r=await fetch(u,{credentials:"include"}), ct=r.headers.get("content-type")||"", t=await r.text();
       if(r.ok&&t.charAt(0)=="{"){const j=JSON.parse(t);
-        if(!GOOD){const pre=u.slice(0,u.length-f.length); GOOD=x=>pre+x; dlog("k","image files found at "+u.replace(/^https?:\/\/[^/]+/,"")+" (page at "+location.href.replace(/^https?:\/\/[^/]+/,"").slice(0,80)+")")}
+        if(!GOOD){const i=u.indexOf(f), pre=u.slice(0,i), post=u.slice(i+f.length); GOOD=x=>pre+x+post; dlog("k","image files found at "+u.replace(/^https?:\/\/[^/]+/,"")+" (page at "+location.href.replace(/^https?:\/\/[^/]+/,"").slice(0,80)+")")}
         return j}
       last=u+": "+r.status+" "+ct+" "+JSON.stringify(t.slice(0,60))}
     catch(e){last=u+": "+e}
