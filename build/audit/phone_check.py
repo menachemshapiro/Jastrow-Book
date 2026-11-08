@@ -89,7 +89,7 @@ HEADER_TOOLS = ('<button id="ssbtn" type="button">One at a time</button>'
 
 SLIDE_HTML = """<div id="slide" hidden><div id="slidecard"></div><div id="slidetip">Right, Bad line and Skip move on to the next line
 by themselves. After an edit (Enter or tap outside the box) the card stays so you can look at it; <b>Yes, next line</b> moves on. <b>Next</b> moves on without marking; <b>Undo</b> takes back the
-last mark and returns to that line. The page and entry and the note box are below each card; the position is in the menu. In landscape the menu is behind the tab
+last mark and returns to that line. The note box is below each card; the position is in the menu. In landscape the menu is behind the tab
 on the left edge.</div></div>"""
 
 RAILTAB = '<button id="railtab" type="button" aria-label="Menu">&#9776;</button>'
@@ -115,12 +115,12 @@ let confirmCid=null, fitLevel=0;
 const TOP='<div class="sstop"><span class="pos"></span><span class="syncmini"></span></div>';
 function structure(){const c=el("slidecard").querySelector(".card[data-id]"); if(!c) return;
   const meta=c.querySelector(":scope > .meta"), note=c.querySelector(".btns .note");
-  const parts=[...c.children].filter(x=>x!==meta);
+  const parts=[...c.children];
   const core=document.createElement("div"); core.className="core";
   core.append(...parts); const btns=core.querySelector(".btns");
   if(confirmCid==c.dataset.id){btns.querySelectorAll("button[data-s=ok],button[data-s=bad],button[data-s=skip]").forEach(b=>b.hidden=true);
     btns.insertAdjacentHTML("afterbegin",'<span class="cfm">Your edit is above. Is it right?</span><button type="button" data-ss="confirm" class="cfmok">Yes, next line &rsaquo;</button>')}
-  btns.insertAdjacentHTML("beforeend",NAV); const rest=meta?[meta]:[];
+  btns.insertAdjacentHTML("beforeend",NAV); const rest=[];
   const more=document.createElement("div"); more.className="more"; if(note) more.append(note); more.append(...rest);
   c.append(core,more); const im=core.querySelector("img"); if(im) im.loading="eager"; fill()}
 function fill(){const n=SS.list.length, marked=SS.list.filter(c=>M[c]&&M[c].status).length;
