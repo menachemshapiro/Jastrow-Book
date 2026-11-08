@@ -373,8 +373,22 @@ function curView(){return VIEWS.find(x=>x.id==VIEW)}
 function inView(r){return vtest(curView())(r)}
 const _visible=visible; visible=function(){let V=_visible().filter(inView); if(curView().hard) V=V.slice().sort((a,b)=>b.hard-a.hard); return V};
 const LOADED={};
+let GOOD=null;   // the address form that worked, kept for the other files
+async function getJSON(f){
+  const dir=location.href.replace(/[?#].*$/,"").replace(/[^/]*$/,"");
+  const cands=[...(GOOD?[GOOD(f)]:[]), f, "./"+f, dir+f, location.href.replace(/[?#].*$/,"").replace(/\/?$/,"/")+f, new URL(f,document.baseURI).href];
+  const tried=new Set(); let last="";
+  for(const u of cands){if(tried.has(u)) continue; tried.add(u);
+    try{const r=await fetch(u), ct=r.headers.get("content-type")||"", t=await r.text();
+      if(r.ok&&t.charAt(0)=="{"){const j=JSON.parse(t);
+        if(!GOOD){const pre=u.slice(0,u.length-f.length); GOOD=x=>pre+x; dlog("k","image files found at "+u.replace(/^https?:\/\/[^/]+/,"")+" (page at "+location.href.replace(/^https?:\/\/[^/]+/,"").slice(0,80)+")")}
+        return j}
+      last=u+": "+r.status+" "+ct+" "+JSON.stringify(t.slice(0,60))}
+    catch(e){last=u+": "+e}
+    dlog("w","tried "+last.slice(0,200))}
+  throw new Error("no address worked; base "+document.baseURI.slice(0,80))}
 async function loadImgs(){for(const f of curView().files){if(LOADED[f]) continue; LOADED[f]="loading"; const t=Date.now();
-  try{const j=await (await fetch(f)).json(); let n=0; for(const k in j){const r=rec(k); if(r){r.img=j[k]; n++}} LOADED[f]=true;
+  try{const j=await getJSON(f); let n=0; for(const k in j){const r=rec(k); if(r){r.img=j[k]; n++}} LOADED[f]=true;
     dlog("","images "+f+": "+n+" lines, "+(Date.now()-t)+" ms");
     document.querySelectorAll("img.scan[data-cid]").forEach(im=>{const r=rec(im.dataset.cid); if(r&&r.img&&im.getAttribute("src")!=r.img) im.src=r.img});
     if(window.recenter) window.recenter()}
