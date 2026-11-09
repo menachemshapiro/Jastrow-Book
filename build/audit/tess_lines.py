@@ -298,9 +298,52 @@ def compare(batches):
         json.dump(ex, open(os.path.join(ROOT, "compare_%s.json" % b), "w"), ensure_ascii=False, indent=0)
 
 
+GREEK_CH = re.compile("[\u0370-\u03ff\u1f00-\u1fff]")
+GREEK_OCR = os.path.join(LREV, "phone", "greek_ocr.json")
+
+
+def greek(batches, threads):
+    """the lines with Greek (in the site's text) read by Tesseract's own Greek model (grc, with eng for the rest),
+    for the check pages' "Greek OCR" reader: work/audit/lines/phone/greek_ocr.json {"page:rank": {"t", "n"}}.
+    Lines already there (with notes made on claude.ai, 9 Nov) are kept. Needs work/ocrtrain/tessdata_grc
+    (grc.traineddata from tessdata_best, eng from the system)"""
+    import subprocess
+    from PIL import Image
+    from concurrent.futures import ThreadPoolExecutor
+    td = os.path.join(ROOT, "tessdata_grc")
+    got = json.load(open(GREEK_OCR, encoding="utf-8")) if os.path.exists(GREEK_OCR) else {}
+    tmp = os.path.join(ROOT, "read_tmp"); os.makedirs(tmp, exist_ok=True)
+    env = dict(os.environ, OMP_THREAD_LIMIT="1")
+    jobs = []
+    for b, _, _ in BATCHES:
+        if batches and b not in batches: continue
+        rev = os.path.join(LREV, b, "lines.json")
+        if not os.path.exists(rev): continue
+        rv = json.load(open(rev, encoding="utf-8")); recs = rv["lines"] if isinstance(rv, dict) else rv
+        want = {}
+        for r in recs:
+            k = "%s:%s" % (r["page"], r["rank"])
+            if k not in got and GREEK_CH.search(r["site"]): want.setdefault(str(r["page"]), []).append((k, r["kid"]))
+        for pg, ks in sorted(want.items(), key=lambda x: int(x[0])):
+            d = os.path.join(PAGES, "p%04d" % int(pg)); _, lines = lines_of(os.path.join(d, "kraken_mccatmus.xml"))
+            pts = {lid: p for lid, p, _ in lines}
+            img = Image.open(os.path.join(d, "page.png")).convert("L")
+            for k, kid in ks:
+                if kid not in pts: continue
+                f = os.path.join(tmp, "grc_%s.png" % k.replace(":", "_")); crop_line(img, pts[kid]).save(f); jobs.append((k, f))
+    def one(j):
+        out = subprocess.run(["tesseract", j[1], "-", "--tessdata-dir", td, "-l", "grc+eng", "--psm", "7"],
+                             capture_output=True, text=True, env=env).stdout
+        os.remove(j[1]); return j[0], " ".join(out.split())
+    with ThreadPoolExecutor(threads) as ex:
+        for k, t in ex.map(one, jobs): got[k] = {"t": t, "n": []}
+    json.dump(got, open(GREEK_OCR, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+    print("%d lines with Greek read (%d in all) -> %s" % (len(jobs), len(got), GREEK_OCR))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0], epilog=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["prepare", "bench", "train", "score", "read", "compare"])
+    ap.add_argument("cmd", choices=["prepare", "bench", "train", "score", "read", "compare", "greek"])
     ap.add_argument("--pages", default="1-100")
     ap.add_argument("--threads", type=int, default=8)
     ap.add_argument("--batches", default="")
@@ -313,6 +356,7 @@ def main():
     elif a.cmd == "bench": bench(a.start, a.half)
     elif a.cmd == "train": train(a.start, a.half, a.iterations)
     elif a.cmd == "read": read_pages(a.pages, a.threads)
+    elif a.cmd == "greek": greek([x for x in a.batches.split(",") if x], a.threads)
     elif a.cmd == "compare": compare([x for x in a.batches.split(",") if x])
     else: score(a.model or "jline_%s_%s" % (a.half, a.start))
 

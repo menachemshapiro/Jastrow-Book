@@ -306,6 +306,34 @@ window.claude.use("db").then(async db=>{
 })();
 </script>"""
 
+# A "Use" button on each reader's line (and on a Greek OCR line), added on claude.ai on 9 Nov and brought here:
+# when a reader read the line right and the site is wrong, one tap puts that reading in the edit box, to look at,
+# change if need be, and keep as the line's text (marked Fixed). The Greek OCR lines (Tesseract with Greek, for
+# lines with Greek; notes on what it got wrong) are in work/audit/lines/phone/greek_ocr.json, {"page:rank": {t, n}}.
+GREEK_OCR = os.path.join(paths.WORK, "audit", "lines", "phone", "greek_ocr.json")
+USE_CSS = ".rd .use{font-size:12px;padding:1px 9px;margin-left:8px;border:1px solid #9ab;border-radius:6px;background:#f4f8fb;color:#246;vertical-align:1px}"
+USE_JS = r"""document.addEventListener("click",e=>{const b=e.target.closest("button[data-use]"); if(!b) return; e.preventDefault(); const el=b.closest(".card"), cid=el.dataset.id, r=rec(cid), rd=b.dataset.use;
+  const t=rd=="greek"?(GREEK[r.page+":"+r.rank]||{}).t:r.readers[rd]; if(!t||!t.trim()) return;
+  startEdit(el); const inp=el.querySelector(".edit"); inp.value=lrmText(t.trim()); showPrev(el); inp.dispatchEvent(new Event("change",{bubbles:true}))});
+"""
+GREEK_JS = """greekHTML=r=>{const g=GREEK[r.page+":"+r.rank]; if(!g) return ""; return '<div class="rd"><b>Greek OCR</b><span>'+esc(g.t)+'</span><button class="use" data-use="greek" title="use this reading as the line\\'s text">Use</button></div>'+(g.n&&g.n.length?'<div class="miss">'+g.n.map(esc).join("; ")+'</div>':"")}"""
+
+
+def use_buttons(src):
+    def rep(old, new):
+        nonlocal src
+        if old not in src: sys.exit("use_buttons: the check page has changed (no %r)" % old[:60])
+        src = src.replace(old, new, 1)
+    if 'data-use="' in src: return src
+    rep(".rd .x{background:#ffd6cc}", ".rd .x{background:#ffd6cc}\n" + USE_CSS)
+    rep("""+'</span></div>';""", """+'</span><button class="use" data-use="'+rd+'" title="use this reading as the line\\'s text">Use</button></div>';""")
+    rep('.map(rd=>readerHTML(r,rd)).join("")}', '.map(rd=>readerHTML(r,rd)).join("")}${greekHTML(r)}')
+    g = json.load(open(GREEK_OCR, encoding="utf-8")) if os.path.exists(GREEK_OCR) else {}
+    rep(", FLAGS={", ", GREEK=" + json.dumps(g, ensure_ascii=False) + ", " + GREEK_JS + ", FLAGS={")
+    rep('document.addEventListener("click",e=>{const b=e.target.closest("button[data-s]")',
+        USE_JS + 'document.addEventListener("click",e=>{const b=e.target.closest("button[data-s]")')
+    return src
+
 
 def build(run, out, pages_=None, src=None, title=None, view_js=""):
     src = src or open(os.path.join(LINES, run, "check.html"), encoding="utf-8").read()
@@ -323,6 +351,7 @@ def build(run, out, pages_=None, src=None, title=None, view_js=""):
     # typed-out dots ("....", ". . . .", "….") keep a Hebrew phrase in one right-to-left run, as "…" does
     # (check pages built before 9 Nov; linereview has it since)
     src = src.replace('| *\\u2026 *|', '| *\\u2026 *| *[.\\u2026](?: ?[.\\u2026])+ *|', 1)
+    src = use_buttons(src)
     src = src.replace("</style></head><body>", CSS_EXTRA + "</style>\n" + PRE_JS, 1)
     src = re.sub(r"</body></html>\s*$", "", src)
     # header: Export / Import give way to the save status (downloads are blocked in the viewer; Claude reads the marks)
