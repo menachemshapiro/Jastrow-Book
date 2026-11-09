@@ -503,7 +503,9 @@ def build_all(out, datadir):
         ids = [k for k in tv["against"] if lo <= int(k.split(":")[0]) <= lo + 99]
         if ids: views.append({"id": "ag%d" % lo, "name": "Kraken + Tesseract vs site, pp. %d–%d" % (lo, lo + 99),
                               "ids": ids, "files": ["img-ag%d.json" % lo]})
-    order = ["spot", "ag1", "ag101", "ag201", "b2", "hard", "b1", "b3a", "b3b", "b3c"]
+    if tv.get("greek"):
+        views.append({"id": "greek4", "name": "Greek lines, pp. 101–300", "ids": tv["greek"], "files": ["img-greek4.json"]})
+    order = ["greek4", "spot", "ag1", "ag101", "ag201", "b2", "hard", "b1", "b3a", "b3b", "b3c"]
     views.sort(key=lambda v: order.index(v["id"]))
     os.makedirs(datadir, exist_ok=True)
     files = {}
