@@ -123,7 +123,22 @@ def user_text(t):
     (the user writes other counts and spacings out: "..", ". .", "....", 6 Nov); an apostrophe typed after a Hebrew
     letter is a geresh"""
     t = re.sub(r"([\u05D0-\u05EA][\u0591-\u05C7]*)['\u2019]", "\\1\u05F3", printed(t))
+    t = curly(t)
     return t.replace("\u2026", "...")
+
+
+def curly(t):
+    """straight double quotes typed on the phone as the book's curly ones (the user, 9 Nov: "I don't know how to do
+    any other kind"): one opening a word (at the start, after a space or bracket) is \u201c, any other \u201d; a " with a
+    Hebrew letter on its right side and its left is gershayim (\u05D0"\u05E4) and stays"""
+    out = []
+    for i, c in enumerate(t):
+        if c == '"':
+            heb = lambda x: bool(re.match("[\u05D0-\u05EA\u0591-\u05C7]", x))
+            if i and i + 1 < len(t) and heb(t[i - 1]) and heb(t[i + 1]): out.append(c); continue
+            out.append("\u201c" if i == 0 or t[i - 1] in " ([\u2014" else "\u201d"); continue
+        out.append(c)
+    return "".join(out)
 
 
 def nz(s):
