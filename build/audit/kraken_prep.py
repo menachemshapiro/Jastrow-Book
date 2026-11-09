@@ -53,9 +53,22 @@ AGOROT_PER_LINE = (0.8, 1.5)   # examples @low: ~4,340 tokens in, ~820 out with 
                                # priced from the 6 Nov spend (~30 NIS for ~750 lines at ~4,500 thinking tokens)
 
 
+SUP, SUB = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹"), str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
+
+
+def fractions(s):
+    """the book's small fractions (raised numerator, slash, lowered denominator: 1/24, 1 2/5; scans 57:25, 70:69,
+    270:80) as Unicode writes any fraction: superscript digits, fraction slash U+2044, subscript digits ("¹⁄₂₄",
+    "1²⁄₅"). A whole number before the fraction loses its space ("1 2/5" -> "1²⁄₅"); the site's "½4"
+    (270:80, a 1/24 read wrong) is 1/24 (user, 9 Nov)"""
+    s = re.sub(r"½(\d)", lambda m: "1/2" + m.group(1), s)
+    return re.sub(r"(?:(?<=\d) )?(?<![\d/])(\d+)/(\d+)(?![\d/])",
+                  lambda m: m.group(1).translate(SUP) + "⁄" + m.group(2).translate(SUB), s)
+
+
 def printed(site):
     """the site's text for a line as the book prints it"""
-    s = site.strip()
+    s = fractions(site.strip())
     s = re.sub(r"\s+,", ",", s)                       # "X , v." -> "X, v."
     s = re.sub(r"^-(?=\w)", "", s)                    # a word divided at a hyphen: the site repeats the hyphen at the
                                                        # next line's start; the book prints it once, at the end (user, 9 Nov)

@@ -90,7 +90,8 @@ main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px
 }
 """
 
-HEADER_TOOLS = ('<button id="ssbtn" type="button">One at a time</button>'
+HEADER_TOOLS = ('<input id="goto" type="text" inputmode="numeric" placeholder="Go to page:line" aria-label="Go to a line (page:line, as Claude names them)" style="width:9.5em;font-size:14px;padding:3px 6px">'
+                '<button id="ssbtn" type="button">One at a time</button>'
                 '<span id="sync">loading…</span><button id="dbgbtn" type="button">Debug</button>')
 
 SLIDE_HTML = """<div id="slide" hidden><div id="slidecard"></div><div id="slidetip">Right, Bad line and Skip move on to the next line
@@ -194,6 +195,7 @@ function show(tag){const n=SS.list.length; if(tag=="next"||tag=="back"||tag=="un
   else{const cid=SS.list[SS.i]; if(cid!=slideCid){confirmCid=null; if(Z.s>1.01) dlog("","card back to 1x from "+Z.s.toFixed(2)+"x"); Z={s:1,x:0,y:0}} slideCid=cid; slidePrev=clone(M[cid]); el("slidecard").innerHTML=card(rec(cid)); structure()}
   fill(); count(); keep(); center(tag||"card")}
 function go(i,tag){SS.i=Math.max(0,Math.min(SS.list.length,i)); show(tag)}
+window.ssGoto=cid=>{if(!SS.on) return false; rebuild(cid); show("goto"); return true};
 function mode(on){SS.on=on; el("ssbtn").textContent=on?"Show the list":"One at a time";
   document.querySelector(".intro").hidden=on; el("cards").hidden=on; el("slide").hidden=!on;
   el("prev").hidden=on; el("next").hidden=on; document.body.classList.remove("railopen");
@@ -434,6 +436,19 @@ function viewOpts(){vsel.innerHTML=VIEWS.map(v=>{const V=L.filter(vtest(v)), lef
 vsel.onchange=()=>{VIEW=vsel.value; LS.set(KEY+"-view",VIEW); start=0; dlog("","view: "+VIEW); loadImgs(); render()};
 const _count0=count; count=function(){_count0(); viewOpts()};
 viewOpts(); loadImgs();
+// "Go to page:line" (9 Nov): the line ids Claude uses (page:rank, rank from 0; the card says line rank+1); the
+// view switches to one holding the line (the current one if it does), every line is shown, the card comes up
+function gotoLine(q){q=(q||"").trim().replace(/\s+/g,"").replace(/[.,;\/-]/g,":"); const r=rec(q);
+  if(!r){dlog("w","go to "+q+": no such line on this page"); alert("No line "+q+" on this page (page:line, e.g. 8:35)"); return}
+  const v=vtest(curView())(r)?curView():VIEWS.find(x=>vtest(x)(r));
+  if(v.id!=VIEW){VIEW=v.id; LS.set(KEY+"-view",VIEW); start=0; loadImgs()}
+  const f=document.getElementById("filter"); if(!visible().includes(r)) f.value="all";
+  const V=visible(); start=Math.floor(Math.max(0,V.indexOf(r))/20)*20; render(); viewOpts();
+  dlog("","go to "+q+" (view "+VIEW+")");
+  if(!(window.ssGoto&&window.ssGoto(q))){const c=document.querySelector('.card[data-id="'+q+'"]'); if(c) c.scrollIntoView({block:"center"})}}
+const gbox=document.getElementById("goto");
+if(gbox) gbox.addEventListener("keydown",e=>{if(e.key=="Enter"){e.preventDefault(); gotoLine(gbox.value); gbox.blur()}});
+if(gbox) gbox.addEventListener("change",()=>gotoLine(gbox.value));
 """
 
 
