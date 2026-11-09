@@ -187,6 +187,15 @@ def word_logical(v):
     return " ".join(w[::-1].translate(MIRROR) if HEBL.search(w) else w for w in v.split())
 
 
+def logical(v):
+    """a reading in printed order (left to right, as read_visual gives it) in logical order, for showing and using
+    on a check card: the bidi algorithm with a left-to-right base turns each right-to-left run round, words and
+    letters (word_logical turns only the letters, enough for same_reading; the user saw Hebrew phrases backwards,
+    9 Nov)"""
+    from kraken.lib.bidi import get_display
+    return get_display(v, base_dir="L")
+
+
 def score(model):
     """the gold lines cut along kraken's polygons, read by the model (psm 13), scored as kraken_eval does: the reading
     taken as display order, and as logical order put through display(); the better of the two is reported"""
@@ -377,14 +386,20 @@ def views(n_spot=60, seed=9):
             if tk and not ts: pick = "against"
             elif ts and not ks and int(p) > 100 and "…" not in r["site"] and r["tier"] != "checked": pick = "spot"
             if not pick: continue
-            r["readers"]["tess_trained"] = tL
+            r["readers"]["tess_trained"] = logical(t)
             r["site_orig"], r["site"] = r["site"], r["text"]
             if "…" in r["site"]: r["flags"] = sorted(set(r["flags"]) | {"dots"})
             LR.mark_readers(r)
             r["run"] = rv["run"] + "-check"; r["batch"] = b; r["hard"] = 0
             cards[key] = r
             (against if pick == "against" else spot_pool).append(key)
-    spot = random.Random(seed).sample(spot_pool, min(n_spot, len(spot_pool)))
+    old = json.load(open(VIEWS_OUT, encoding="utf-8")) if os.path.exists(VIEWS_OUT) else {}
+    if old.get("spot"):                                   # the spot check already made (and marked) stays as it was
+        spot = old["spot"]
+        for c in old["lines"]:
+            k = "%s:%d" % (c["page"], c["rank"])
+            if k in spot and k not in cards: cards[k] = c
+    else: spot = random.Random(seed).sample(spot_pool, min(n_spot, len(spot_pool)))
     keep = set(spot) | set(against)
     order = lambda k: (int(k.split(":")[0]), int(k.split(":")[1]))
     json.dump({"lines": [cards[k] for k in sorted(keep, key=order)], "spot": sorted(spot, key=order),

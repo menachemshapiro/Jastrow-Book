@@ -57,6 +57,8 @@ def printed(site):
     """the site's text for a line as the book prints it"""
     s = site.strip()
     s = re.sub(r"\s+,", ",", s)                       # "X , v." -> "X, v."
+    s = re.sub(r"^-(?=\w)", "", s)                    # a word divided at a hyphen: the site repeats the hyphen at the
+                                                       # next line's start; the book prints it once, at the end (user, 9 Nov)
     s = re.sub(r"\be\.g\.", "e. g.", s)                # the book spaces these (the user, 6 Nov; scan p. 1)
     s = re.sub(r"\bi\.e\.", "i. e.", s)
     return re.sub(r"\s+", " ", s)
