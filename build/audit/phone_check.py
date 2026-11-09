@@ -320,6 +320,9 @@ def build(run, out, pages_=None, src=None, title=None, view_js=""):
     # the publish wraps the page in its own skeleton
     src = re.sub(r'^<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>[^<]*</title>',
                  '<title>%s</title>\n<meta name="claude:viewport-fit-sides" content="cover">' % title, src)
+    # typed-out dots ("....", ". . . .", "….") keep a Hebrew phrase in one right-to-left run, as "…" does
+    # (check pages built before 9 Nov; linereview has it since)
+    src = src.replace('| *\\u2026 *|', '| *\\u2026 *| *[.\\u2026](?: ?[.\\u2026])+ *|', 1)
     src = src.replace("</style></head><body>", CSS_EXTRA + "</style>\n" + PRE_JS, 1)
     src = re.sub(r"</body></html>\s*$", "", src)
     # header: Export / Import give way to the save status (downloads are blocked in the viewer; Claude reads the marks)
@@ -482,12 +485,16 @@ def greek_standins(site, text):
     out = []
     for op, a0, a1, b0, b1 in difflib.SequenceMatcher(None, site, text, autojunk=False).get_opcodes():
         seg_s, seg_t = site[a0:a1], text[b0:b1]
-        if (op == "replace" and len(seg_s) == len(seg_t) and all(GREEK.match(c) for c in seg_s)
-                and all(c in LOOKALIKE for c in seg_t)):
+        bare = re.sub("[\u2018\u2019'` ]", "", seg_t)      # a breathing typed as a quote before the letter: "\u2018 A" for "\u1f08"
+        if (op == "replace" and all(GREEK.match(c) for c in seg_s) and all(c in LOOKALIKE for c in bare)
+                and (len(seg_s) == len(seg_t) or len(seg_s) == len(bare))):
             out.append(seg_s)
         else:
             out.append(seg_t)
     return "".join(out)
+
+
+CUT = re.compile(r"cut ?off|missing from (the )?scan", re.I)
 
 
 def marks(rows, run, out):
@@ -503,6 +510,9 @@ def marks(rows, run, out):
                       "time": b.get("time")})
     for m in lines:          # an edit that only typed Greek letters as Latin look-alikes is the site's text: Right
         if m["status"] == "fixed" and m["text"] == m["site"]: m["status"] = "ok"
+        # a line whose scan is cut off (the user's note, 9 Nov: "Beg cut off", "Star is missing from scan") has a right
+        # text but an image without all of it: kept out of the training like a bad line
+        if m["status"] in ("ok", "fixed") and CUT.search(m["note"] or ""): m["status"], m["was"] = "bad", m["status"]
     lines.sort(key=lambda m: (int(m["page"]), m["rank"]))
     runs = sorted({m["run"] for m in lines}) if run == "all" else [run]
     for rn in runs:
