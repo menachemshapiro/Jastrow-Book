@@ -399,11 +399,12 @@ VIEW_JS = r"""
 const BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 const VIEWS=__VIEWS__;
 const IDX=new Map(L.map(r=>[id(r),r])); rec=cid=>IDX.get(cid);
-const vtest=v=>r=>v.hard?r.hard>0:(r.run==v.run&&(!v.pages||(+r.page>=v.pages[0]&&+r.page<=v.pages[1])));
+const IDS={}; VIEWS.forEach(v=>{if(v.ids) IDS[v.id]=new Set(v.ids)});
+const vtest=v=>r=>v.ids?IDS[v.id].has(id(r)):v.hard?r.hard>0:(!r.xv&&r.run==v.run&&(!v.pages||(+r.page>=v.pages[0]&&+r.page<=v.pages[1])));
 let VIEW=(()=>{const v=LS.get(KEY+"-view"); return VIEWS.some(x=>x.id==v)?v:VIEWS[0].id})();
 function curView(){return VIEWS.find(x=>x.id==VIEW)}
 function inView(r){return vtest(curView())(r)}
-const _visible=visible; visible=function(){let V=_visible().filter(inView); if(curView().hard) V=V.slice().sort((a,b)=>b.hard-a.hard); return V};
+const _visible=visible; visible=function(){let V=_visible().filter(inView); if(curView().hard) V=V.slice().sort((a,b)=>b.hard-a.hard); else if(curView().ids) V=V.slice().sort((a,b)=>(+a.page-+b.page)||(a.rank-b.rank)); return V};
 const LOADED={};
 let GOOD=null;   // the address form that worked, kept for the other files
 async function getJSON(f){
@@ -436,6 +437,9 @@ viewOpts(); loadImgs();
 """
 
 
+TESS_VIEWS = os.path.join(paths.WORK, "audit", "lines", "phone", "tess_views.json")
+
+
 def build_all(out, datadir):
     """one page for every batch (pp. 1-100) and a view of the hard lines, so that a line is marked once whichever
     view it is in; the line images in data files beside the page, fetched for the view on screen"""
@@ -464,11 +468,26 @@ def build_all(out, datadir):
             r["hard"] = round(sum(100.0 / (tr.get(c, 0) + 1) for c in rare), 2)
             if rare: r["flags"] = r["flags"] + ["rare in the training: " + " ".join(rare)]
         L += Lb
+    # the views of tess_lines.py views (9 Nov): a spot check of the lines a Tesseract tier would admit, and the lines
+    # where kraken and the trained Tesseract read alike against the site; lines not on a check page are added
+    # (marked xv, so the batch views leave them out); every card gets the trained Tesseract as a reader
+    tv = json.load(open(TESS_VIEWS, encoding="utf-8")) if os.path.exists(TESS_VIEWS) else {"lines": [], "spot": [], "against": []}
+    have = {"%s:%d" % (r["page"], r["rank"]): r for r in L}
+    for c in tv["lines"]:
+        k = "%s:%d" % (c["page"], c["rank"])
+        if k in have:
+            for f in ("readers", "marks", "sitew", "extra"): have[k][f] = c[f]
+            continue
+        imgs[k] = (c.pop("batch"), c["img"]); c["img"] = ""; c["xv"] = True
+        L.append(c); have[k] = c
     tmpl = open(os.path.join(LINES, "b2", "check.html"), encoding="utf-8").read().split("\n")
     tmpl[42] = 'const RUN="all", L=%s, FLAGS=%s, PRIOR=%s, RECHECK=%s, MADE="%s";' % (
         json.dumps(L, ensure_ascii=False), json.dumps(FL, ensure_ascii=False), json.dumps(PRIOR, ensure_ascii=False),
         json.dumps(RECHECK), MADE)
     src = "\n".join(tmpl)
+    rl = '["tesseract","pdf","kraken","kraken_b1","gemini","vision"]'
+    if src.count(rl) != 1: sys.exit("phone_check: the card's readers changed")
+    src = src.replace(rl, '["tesseract","pdf","kraken","kraken_b1","tess_trained","gemini","vision"]')
     a = '<img class="scan" src="${r.img}" loading="lazy">'
     if src.count(a) != 1: sys.exit("phone_check: the card's image changed")
     src = src.replace(a, '<img class="scan" src="${r.img||BLANK}" data-cid="${id(r)}" loading="lazy">')
@@ -478,7 +497,13 @@ def build_all(out, datadir):
              {"id": "b3b", "name": "pp. 61–80", "run": "b3-check", "pages": [61, 80], "files": ["img-b3-61.json"]},
              {"id": "b3c", "name": "pp. 81–100", "run": "b3-check", "pages": [81, 100], "files": ["img-b3-81.json"]},
              {"id": "hard", "name": "Hard lines (all pages)", "hard": True, "files": ["img-hard.json"]}]
-    order = ["b2", "hard", "b1", "b3a", "b3b", "b3c"]
+    if tv["spot"]:
+        views.append({"id": "spot", "name": "Spot check: Tesseract = site (pp. 101–300)", "ids": tv["spot"], "files": ["img-spot.json"]})
+    for lo in (1, 101, 201):
+        ids = [k for k in tv["against"] if lo <= int(k.split(":")[0]) <= lo + 99]
+        if ids: views.append({"id": "ag%d" % lo, "name": "Kraken + Tesseract vs site, pp. %d–%d" % (lo, lo + 99),
+                              "ids": ids, "files": ["img-ag%d.json" % lo]})
+    order = ["spot", "ag1", "ag101", "ag201", "b2", "hard", "b1", "b3a", "b3b", "b3c"]
     views.sort(key=lambda v: order.index(v["id"]))
     os.makedirs(datadir, exist_ok=True)
     files = {}
@@ -486,9 +511,11 @@ def build_all(out, datadir):
         keep = {}
         for r in L:
             k = "%s:%d" % (r["page"], r["rank"])
-            if v.get("hard"):
+            if v.get("ids"):
+                if k not in v["ids"]: continue
+            elif v.get("hard"):
                 if r["hard"] <= 0: continue
-            elif r["run"] != v["run"] or ("pages" in v and not v["pages"][0] <= int(r["page"]) <= v["pages"][1]): continue
+            elif r.get("xv") or r["run"] != v["run"] or ("pages" in v and not v["pages"][0] <= int(r["page"]) <= v["pages"][1]): continue
             b, rel = imgs[k]
             keep[k] = "data:image/jpeg;base64," + base64.b64encode(open(os.path.join(LINES, b, rel), "rb").read()).decode()
         f = os.path.join(datadir, v["files"][0])
@@ -497,7 +524,7 @@ def build_all(out, datadir):
         print("  %-24s %4d lines, images %.1f MB" % (v["name"], len(keep), os.path.getsize(f) / 1e6))
     tools = '<select id="view" aria-label="Which lines"></select>'
     build("all", out, src=src.replace('<button id="export">Export</button>', tools + '<button id="export">Export</button>', 1),
-          title="Line Check pp. 1–100", view_js=VIEW_JS.replace("__VIEWS__", json.dumps(views, ensure_ascii=False)))
+          title="Line Check pp. 1–300", view_js=VIEW_JS.replace("__VIEWS__", json.dumps(views, ensure_ascii=False)))
     print("hard lines: %d (ranked by how rare their characters are in the training)" % sum(1 for r in L if r["hard"] > 0))
     return files
 

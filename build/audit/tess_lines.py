@@ -341,9 +341,60 @@ def greek(batches, threads):
     print("%d lines with Greek read (%d in all) -> %s" % (len(jobs), len(got), GREEK_OCR))
 
 
+VIEWS_OUT = os.path.join(LREV, "phone", "tess_views.json")
+
+
+def views(n_spot=60, seed=9):
+    """two views for the phone page (9 Nov), as cards like check.html's (the site's text as the proposed text, the
+    readers' differences marked, the trained Tesseract's reading added as a reader "tess_trained"):
+      spot     n_spot lines of pp. 101-300 picked at random where the trained Tesseract reads as the site and kraken
+               reads otherwise (no "…" lines): would a Tesseract tier admit only right lines?
+      against  every line of pp. 1-300 where kraken and the trained Tesseract read alike and the site otherwise:
+               likely site errors (75 of 88 among the user's checks), in page order
+    -> work/audit/lines/phone/tess_views.json {"lines": [card], "spot": [ids], "against": [ids]}"""
+    import argparse as AP, random
+    import kraken_prep as KP, linereview as LR
+    cards, spot_pool, against = {}, [], []
+    for b, dlg, ph in BATCHES:
+        rev = os.path.join(LREV, b, "lines.json")
+        if not os.path.exists(rev): continue
+        a = AP.Namespace(review=rev, marks=marks_for(dlg, ph), xml="kraken_mccatmus.xml")
+        rv, recs = KP.setup(a)
+        tl = {}
+        for r in recs:
+            if r["tier"] in ("held", "out"): continue
+            p = r["page"]
+            if p not in tl:
+                f = os.path.join(PAGES, "p%04d" % int(p), "tess_line.json")
+                tl[p] = json.load(open(f))["lines"] if os.path.exists(f) else {}
+            t, k = tl[p].get(r["kid"]), r["readers"].get("kraken_b1")
+            if not t or not t.strip() or not k: continue
+            tL = word_logical(t)
+            st = KP.printed(r["site"])          # the site as printed (the training text evens out spacing), not the user's text
+            ts, ks, tk = KP.same_reading(st, tL), KP.same_reading(st, k), KP.same_reading(k, tL)
+            key = "%s:%d" % (p, r["rank"])
+            pick = None
+            if tk and not ts: pick = "against"
+            elif ts and not ks and int(p) > 100 and "…" not in r["site"] and r["tier"] != "checked": pick = "spot"
+            if not pick: continue
+            r["readers"]["tess_trained"] = tL
+            r["site_orig"], r["site"] = r["site"], r["text"]
+            if "…" in r["site"]: r["flags"] = sorted(set(r["flags"]) | {"dots"})
+            LR.mark_readers(r)
+            r["run"] = rv["run"] + "-check"; r["batch"] = b; r["hard"] = 0
+            cards[key] = r
+            (against if pick == "against" else spot_pool).append(key)
+    spot = random.Random(seed).sample(spot_pool, min(n_spot, len(spot_pool)))
+    keep = set(spot) | set(against)
+    order = lambda k: (int(k.split(":")[0]), int(k.split(":")[1]))
+    json.dump({"lines": [cards[k] for k in sorted(keep, key=order)], "spot": sorted(spot, key=order),
+               "against": sorted(against, key=order)}, open(VIEWS_OUT, "w", encoding="utf-8"), ensure_ascii=False)
+    print("spot check: %d of %d lines; kraken and Tesseract against the site: %d -> %s" % (len(spot), len(spot_pool), len(against), VIEWS_OUT))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0], epilog=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["prepare", "bench", "train", "score", "read", "compare", "greek"])
+    ap.add_argument("cmd", choices=["prepare", "bench", "train", "score", "read", "compare", "greek", "views"])
     ap.add_argument("--pages", default="1-100")
     ap.add_argument("--threads", type=int, default=8)
     ap.add_argument("--batches", default="")
@@ -356,6 +407,7 @@ def main():
     elif a.cmd == "bench": bench(a.start, a.half)
     elif a.cmd == "train": train(a.start, a.half, a.iterations)
     elif a.cmd == "read": read_pages(a.pages, a.threads)
+    elif a.cmd == "views": views()
     elif a.cmd == "greek": greek([x for x in a.batches.split(",") if x], a.threads)
     elif a.cmd == "compare": compare([x for x in a.batches.split(",") if x])
     else: score(a.model or "jline_%s_%s" % (a.half, a.start))
