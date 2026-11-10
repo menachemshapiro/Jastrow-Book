@@ -363,7 +363,9 @@ def views(n_spot=60, seed=9):
     -> work/audit/lines/phone/tess_views.json {"lines": [card], "spot": [ids], "against": [ids]}"""
     import argparse as AP, random
     import kraken_prep as KP, linereview as LR
-    cards, spot_pool, against, greek_ = {}, [], [], []
+    cards, spot_pool, against, greek_, backed = {}, [], [], [], []
+    bf = os.path.join(paths.WORK, "kraken", "r6_exclude_backed_doubts.json")   # 10 Nov: admitted lines the trained
+    BACKED = {"%s:%d" % (x[1], x[2]) for x in json.load(open(bf, encoding="utf-8"))} if os.path.exists(bf) else set()   # Tesseract reads otherwise, backed by the PDF layer or stock Tesseract
     for b, dlg, ph in BATCHES:
         rev = os.path.join(LREV, b, "lines.json")
         if not os.path.exists(rev): continue
@@ -386,6 +388,7 @@ def views(n_spot=60, seed=9):
             key = "%s:%d" % (p, r["rank"])
             pick = None
             if int(p) > 100 and GREEK_CH.search(r["text"]) and r["tier"] not in KP.ADMITTED: pick = "greek"
+            elif "%s:%d" % (p, r["rank"]) in BACKED and (r["tier"] in ("agree", "kraken") or r.get("why") == "tess_pdf_doubt"): pick = "backed"
             elif tk and not ts: pick = "against"
             elif ts and not ks and int(p) > 100 and "…" not in r["site"] and r["tier"] != "checked": pick = "spot"
             if not pick: continue
@@ -395,7 +398,7 @@ def views(n_spot=60, seed=9):
             LR.mark_readers(r)
             r["run"] = rv["run"] + "-check"; r["batch"] = b; r["hard"] = 0
             cards[key] = r
-            {"against": against, "spot": spot_pool, "greek": greek_}[pick].append(key)
+            {"against": against, "spot": spot_pool, "greek": greek_, "backed": backed}[pick].append(key)
     old = json.load(open(VIEWS_OUT, encoding="utf-8")) if os.path.exists(VIEWS_OUT) else {}
     if old.get("spot"):                                   # the spot check already made (and marked) stays as it was
         spot = old["spot"]
@@ -403,12 +406,12 @@ def views(n_spot=60, seed=9):
             k = "%s:%d" % (c["page"], c["rank"])
             if k in spot and k not in cards: cards[k] = c
     else: spot = random.Random(seed).sample(spot_pool, min(n_spot, len(spot_pool)))
-    keep = set(spot) | set(against) | set(greek_)
+    keep = set(spot) | set(against) | set(greek_) | set(backed)
     order = lambda k: (int(k.split(":")[0]), int(k.split(":")[1]))
     json.dump({"lines": [cards[k] for k in sorted(keep, key=order)], "spot": sorted(spot, key=order),
-               "against": sorted(against, key=order), "greek": sorted(greek_, key=order)}, open(VIEWS_OUT, "w", encoding="utf-8"), ensure_ascii=False)
-    print("spot check: %d of %d lines; kraken and Tesseract against the site: %d; Greek lines of pp. 101-300 to check: %d -> %s"
-          % (len(spot), len(spot_pool), len(against), len(greek_), VIEWS_OUT))
+               "against": sorted(against, key=order), "greek": sorted(greek_, key=order), "backed": sorted(backed, key=order)}, open(VIEWS_OUT, "w", encoding="utf-8"), ensure_ascii=False)
+    print("spot check: %d of %d lines; kraken and Tesseract against the site: %d; Greek lines of pp. 101-300 to check: %d; admitted, doubted by two readers: %d -> %s"
+          % (len(spot), len(spot_pool), len(against), len(greek_), len(backed), VIEWS_OUT))
 
 
 def main():

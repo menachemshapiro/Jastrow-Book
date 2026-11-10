@@ -520,7 +520,9 @@ def build_all(out, datadir):
                               "ids": ids, "files": ["img-ag%d.json" % lo]})
     if tv.get("greek"):
         views.append({"id": "greek4", "name": "Greek lines, pp. 101–300", "ids": tv["greek"], "files": ["img-greek4.json"]})
-    order = ["greek4", "spot", "ag1", "ag101", "ag201", "b2", "hard", "b1", "b3a", "b3b", "b3c"]
+    if tv.get("backed"):
+        views.append({"id": "backed", "name": "Admitted, but Tesseract + PDF doubt (%d, 10 Nov)" % len(tv["backed"]), "ids": tv["backed"], "files": ["img-backed.json"]})
+    order = ["greek4", "backed", "spot", "ag1", "ag101", "ag201", "b2", "hard", "b1", "b3a", "b3b", "b3c"]
     views.sort(key=lambda v: order.index(v["id"]))
     os.makedirs(datadir, exist_ok=True)
     files = {}
@@ -568,6 +570,9 @@ def greek_standins(site, text):
 
 
 CUT = re.compile(r"cut ?off|missing from (the )?scan", re.I)
+# the user's note that a word's vowel points could not be typed (10 Nov: "don't have nikkud for the word"): the
+# text lacks points the image has, so the line is kept out like a cut-off one
+NOPOINTS = re.compile(r"nikk?ud|niqq?ud", re.I)
 
 
 def marks(rows, run, out):
@@ -585,7 +590,7 @@ def marks(rows, run, out):
         if m["status"] == "fixed" and m["text"] == m["site"]: m["status"] = "ok"
         # a line whose scan is cut off (the user's note, 9 Nov: "Beg cut off", "Star is missing from scan") has a right
         # text but an image without all of it: kept out of the training like a bad line
-        if m["status"] in ("ok", "fixed") and CUT.search(m["note"] or ""): m["status"], m["was"] = "bad", m["status"]
+        if m["status"] in ("ok", "fixed") and (CUT.search(m["note"] or "") or NOPOINTS.search(m["note"] or "")): m["status"], m["was"] = "bad", m["status"]
     lines.sort(key=lambda m: (int(m["page"]), m["rank"]))
     runs = sorted({m["run"] for m in lines}) if run == "all" else [run]
     for rn in runs:

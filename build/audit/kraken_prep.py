@@ -163,6 +163,16 @@ def gkey(r):
     return "%s:%s" % (r["page"], r["kid"])
 
 
+# lines admitted by machine (agree / kraken) that the trained Tesseract reads otherwise with a second reader backing it
+# (work/kraken/doubts.py, 10 Nov): kept out of training until the user marks them (phone view "backed")
+_DF = os.path.join(paths.WORK, "kraken", "r6_exclude_backed_doubts.json")
+DOUBTED = {"%s:%d" % (x[1], x[2]) for x in json.load(open(_DF, encoding="utf-8"))} if os.path.exists(_DF) else set()
+
+
+# single lines held out as a test of their own (export --hold, a JSON list of "page:rank"; r6: the Greek test)
+HOLD_LINES = set()
+
+
 def classify(recs, marks, gem, vis=None, kr=None):
     vis, kr = vis or {}, kr or {}
     for r in recs:
@@ -172,7 +182,7 @@ def classify(recs, marks, gem, vis=None, kr=None):
         r["why"] = ""
         g = gem.get(gkey(r))
         if g and g.get("box") == r["box"]: r["readers"]["gemini"] = G.norm(g["text"])
-        if int(r["page"]) in HELD:
+        if int(r["page"]) in HELD or "%s:%d" % (r["page"], r["rank"]) in HOLD_LINES:
             r["tier"] = "held"; continue
         m = marks.get((r["page"], r["kid"]))
         if m and nz(m.get("site")) in (nz(r["site"]), nz(r["text"])):
@@ -183,6 +193,8 @@ def classify(recs, marks, gem, vis=None, kr=None):
             continue
         if "…" in r["text"]:
             r["tier"] = "dots"; continue
+        if "%s:%d" % (r["page"], r["rank"]) in DOUBTED:      # 10 Nov: admitted lines the trained Tesseract reads
+            r["tier"], r["why"] = "check", "tess_pdf_doubt"; continue   # otherwise, with the PDF layer or stock Tesseract
         flags = set(r["flags"]) & DISPUTE_FLAGS
         if r.get("near_flag"): flags.add("next_to_flagged")
         most = max([n for *_, n in r["sitew"]] or [0])
@@ -413,8 +425,10 @@ def main():
                     help="export: labels in reading order (for ketos --reorder) instead of display order")
     ap.add_argument("--points", action="store_true",
                     help="export: keep vowel points in the labels (default: letters and punctuation only)")
+    ap.add_argument("--hold", help="export: a JSON list of \"page:rank\" lines kept out of training (a test set)")
     ap.add_argument("--out", default=os.path.join(paths.WORK, "kraken", "train"))
     a = ap.parse_args()
+    if a.hold: HOLD_LINES.update(json.load(open(a.hold)))
     {"plan": cmd_plan, "gemini": cmd_gemini, "review": cmd_review, "export": cmd_export}[a.cmd](a)
 
 
